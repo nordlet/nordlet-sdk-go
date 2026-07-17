@@ -20,7 +20,7 @@ The Nordlet Go library provides convenient access to the Nordlet APIs from Go.
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/nordlet/nordlet-sdk-go/blob/main/reference.md).
 
 ## Usage
 
