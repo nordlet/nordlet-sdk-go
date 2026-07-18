@@ -604,6 +604,50 @@ func (r *RawClient) PostV1ReferenceEuVatRatesList(
 	}, nil
 }
 
+func (r *RawClient) PostV1ReferenceEuVatRatesSetOverrides(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/reference/eu-vat-rates/set-overrides"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) PostV1ReferenceVatResolve(
 	ctx context.Context,
 	request *nordlet.PostV1ReferenceVatResolveRequest,

@@ -258,6 +258,56 @@ func TestAgreementsPostV1AgreementsAgreementsListWithWireMock(
 	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsListWithWireMock", "POST", "/v1/agreements/agreements/list", nil, 1)
 }
 
+func TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsGenerateInvoiceWithWireMock", "POST", "/v1/agreements/agreements/generate-invoice", nil, 1)
+}
+
+func TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AgreementsAgreementsBillingRunRequest{}
+	_, invocationErr := client.Agreements.PostV1AgreementsAgreementsBillingRun(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAgreementsPostV1AgreementsAgreementsBillingRunWithWireMock", "POST", "/v1/agreements/agreements/billing/run", nil, 1)
+}
+
 func TestAgreementsPostV1AgreementsInsurancePoliciesCreateWithWireMock(
 	t *testing.T,
 ) {

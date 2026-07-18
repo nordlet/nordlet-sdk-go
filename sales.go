@@ -1333,6 +1333,591 @@ func (p *PostV1SalesInvoicesUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1SalesRecognitionComputeRequestFieldAsOfDate = big.NewInt(1 << 0)
+)
+
+type PostV1SalesRecognitionComputeRequest struct {
+	AsOfDate *string `json:"asOfDate,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionComputeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeRequest) SetAsOfDate(asOfDate *string) {
+	p.AsOfDate = asOfDate
+	p.require(postV1SalesRecognitionComputeRequestFieldAsOfDate)
+}
+
+func (p *PostV1SalesRecognitionComputeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionComputeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionComputeRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionComputeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionComputeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionModifyRequestFieldInvoiceLineID = big.NewInt(1 << 0)
+	postV1SalesRecognitionModifyRequestFieldApproach      = big.NewInt(1 << 1)
+	postV1SalesRecognitionModifyRequestFieldDate          = big.NewInt(1 << 2)
+	postV1SalesRecognitionModifyRequestFieldNewEndDate    = big.NewInt(1 << 3)
+	postV1SalesRecognitionModifyRequestFieldNewMilestones = big.NewInt(1 << 4)
+)
+
+type PostV1SalesRecognitionModifyRequest struct {
+	InvoiceLineID string                                                  `json:"invoiceLineId" url:"-"`
+	Approach      PostV1SalesRecognitionModifyRequestApproach             `json:"approach" url:"-"`
+	Date          *string                                                 `json:"date,omitempty" url:"-"`
+	NewEndDate    *string                                                 `json:"newEndDate,omitempty" url:"-"`
+	NewMilestones []*PostV1SalesRecognitionModifyRequestNewMilestonesItem `json:"newMilestones,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionModifyRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequest) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionModifyRequestFieldInvoiceLineID)
+}
+
+// SetApproach sets the Approach field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequest) SetApproach(approach PostV1SalesRecognitionModifyRequestApproach) {
+	p.Approach = approach
+	p.require(postV1SalesRecognitionModifyRequestFieldApproach)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1SalesRecognitionModifyRequestFieldDate)
+}
+
+// SetNewEndDate sets the NewEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequest) SetNewEndDate(newEndDate *string) {
+	p.NewEndDate = newEndDate
+	p.require(postV1SalesRecognitionModifyRequestFieldNewEndDate)
+}
+
+// SetNewMilestones sets the NewMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequest) SetNewMilestones(newMilestones []*PostV1SalesRecognitionModifyRequestNewMilestonesItem) {
+	p.NewMilestones = newMilestones
+	p.require(postV1SalesRecognitionModifyRequestFieldNewMilestones)
+}
+
+func (p *PostV1SalesRecognitionModifyRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionModifyRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionModifyRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionModifyRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionModifyRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionProgressRequestFieldInvoiceLineID   = big.NewInt(1 << 0)
+	postV1SalesRecognitionProgressRequestFieldPercentComplete = big.NewInt(1 << 1)
+	postV1SalesRecognitionProgressRequestFieldDate            = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionProgressRequest struct {
+	InvoiceLineID   string  `json:"invoiceLineId" url:"-"`
+	PercentComplete string  `json:"percentComplete" url:"-"`
+	Date            *string `json:"date,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionProgressRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressRequest) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionProgressRequestFieldInvoiceLineID)
+}
+
+// SetPercentComplete sets the PercentComplete field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressRequest) SetPercentComplete(percentComplete string) {
+	p.PercentComplete = percentComplete
+	p.require(postV1SalesRecognitionProgressRequestFieldPercentComplete)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1SalesRecognitionProgressRequestFieldDate)
+}
+
+func (p *PostV1SalesRecognitionProgressRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionProgressRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionProgressRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionProgressRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionProgressRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionRunRequestFieldAsOfDate    = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunRequestFieldPostingDate = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunRequestFieldScheduleIDs = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionRunRequest struct {
+	AsOfDate    *string  `json:"asOfDate,omitempty" url:"-"`
+	PostingDate *string  `json:"postingDate,omitempty" url:"-"`
+	ScheduleIDs []string `json:"scheduleIds,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionRunRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunRequest) SetAsOfDate(asOfDate *string) {
+	p.AsOfDate = asOfDate
+	p.require(postV1SalesRecognitionRunRequestFieldAsOfDate)
+}
+
+// SetPostingDate sets the PostingDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunRequest) SetPostingDate(postingDate *string) {
+	p.PostingDate = postingDate
+	p.require(postV1SalesRecognitionRunRequestFieldPostingDate)
+}
+
+// SetScheduleIDs sets the ScheduleIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunRequest) SetScheduleIDs(scheduleIDs []string) {
+	p.ScheduleIDs = scheduleIDs
+	p.require(postV1SalesRecognitionRunRequestFieldScheduleIDs)
+}
+
+func (p *PostV1SalesRecognitionRunRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionRunsListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunsListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunsListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1SalesRecognitionRunsListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRecognitionRunsListRequest struct {
+	Page     *int64                                             `json:"page,omitempty" url:"-"`
+	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1SalesRecognitionRunsListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1SalesRecognitionRunsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionRunsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1SalesRecognitionRunsListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRecognitionRunsListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequest) SetSort(sort []*PostV1SalesRecognitionRunsListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1SalesRecognitionRunsListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequest) SetFilter(filter []*PostV1SalesRecognitionRunsListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1SalesRecognitionRunsListRequestFieldFilter)
+}
+
+func (p *PostV1SalesRecognitionRunsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunsListRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionSchedulesListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1SalesRecognitionSchedulesListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1SalesRecognitionSchedulesListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1SalesRecognitionSchedulesListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRecognitionSchedulesListRequest struct {
+	Page     *int64                                                  `json:"page,omitempty" url:"-"`
+	PageSize *int64                                                  `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1SalesRecognitionSchedulesListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1SalesRecognitionSchedulesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1SalesRecognitionSchedulesListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRecognitionSchedulesListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequest) SetSort(sort []*PostV1SalesRecognitionSchedulesListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1SalesRecognitionSchedulesListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequest) SetFilter(filter []*PostV1SalesRecognitionSchedulesListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1SalesRecognitionSchedulesListRequestFieldFilter)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSchedulesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSchedulesListRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSchedulesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRecognitionSummaryRequestFieldInvoiceID = big.NewInt(1 << 0)
+)
+
+type PostV1SalesRecognitionSummaryRequest struct {
+	InvoiceID *string `json:"invoiceId,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRecognitionSummaryRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryRequest) SetInvoiceID(invoiceID *string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRecognitionSummaryRequestFieldInvoiceID)
+}
+
+func (p *PostV1SalesRecognitionSummaryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSummaryRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSummaryRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSummaryRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSummaryRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRefundLiabilityListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1SalesRefundLiabilityListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRefundLiabilityListRequest struct {
+	Page     *int64                                             `json:"page,omitempty" url:"-"`
+	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1SalesRefundLiabilityListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1SalesRefundLiabilityListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRefundLiabilityListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1SalesRefundLiabilityListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRefundLiabilityListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequest) SetSort(sort []*PostV1SalesRefundLiabilityListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1SalesRefundLiabilityListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequest) SetFilter(filter []*PostV1SalesRefundLiabilityListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1SalesRefundLiabilityListRequestFieldFilter)
+}
+
+func (p *PostV1SalesRefundLiabilityListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityListRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesRefundLiabilityTrueUpRequestFieldInvoiceID      = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityTrueUpRequestFieldEstimatedTotal = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityTrueUpRequestFieldDate           = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRefundLiabilityTrueUpRequest struct {
+	InvoiceID      string  `json:"invoiceId" url:"-"`
+	EstimatedTotal string  `json:"estimatedTotal" url:"-"`
+	Date           *string `json:"date,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRefundLiabilityTrueUpRequestFieldInvoiceID)
+}
+
+// SetEstimatedTotal sets the EstimatedTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) SetEstimatedTotal(estimatedTotal string) {
+	p.EstimatedTotal = estimatedTotal
+	p.require(postV1SalesRefundLiabilityTrueUpRequestFieldEstimatedTotal)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1SalesRefundLiabilityTrueUpRequestFieldDate)
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityTrueUpRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityTrueUpRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityTrueUpRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1SalesActsCancelResponseFieldID                 = big.NewInt(1 << 0)
 	postV1SalesActsCancelResponseFieldPartnerID          = big.NewInt(1 << 1)
 	postV1SalesActsCancelResponseFieldType               = big.NewInt(1 << 2)
@@ -5380,13 +5965,14 @@ var (
 	postV1SalesInvoicesApplyAdvanceResponseFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesApplyAdvanceResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesApplyAdvanceResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesApplyAdvanceResponseFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesApplyAdvanceResponseFieldLines                = big.NewInt(1 << 24)
+	postV1SalesInvoicesApplyAdvanceResponseFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesApplyAdvanceResponseFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesApplyAdvanceResponseFieldLines                = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesApplyAdvanceResponse struct {
@@ -5408,6 +5994,7 @@ type PostV1SalesInvoicesApplyAdvanceResponse struct {
 	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesApplyAdvanceResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
@@ -5547,6 +6134,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetCreditedInvoiceID() *string
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetVatScheme() *PostV1SalesInvoicesApplyAdvanceResponseVatScheme {
@@ -5738,6 +6332,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetCreditedInvoiceID(creditedI
 	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesApplyAdvanceResponseVatScheme) {
@@ -5830,37 +6431,51 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineNet           = big.NewInt(1 << 10)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineVat           = big.NewInt(1 << 11)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineGross         = big.NewInt(1 << 12)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldSortOrder         = big.NewInt(1 << 13)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineNet                = big.NewInt(1 << 10)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineVat                = big.NewInt(1 << 11)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineGross              = big.NewInt(1 << 12)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldSortOrder              = big.NewInt(1 << 13)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 14)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 15)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 16)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 17)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 18)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 19)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 20)
 )
 
 type PostV1SalesInvoicesApplyAdvanceResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                     string                                                                       `json:"id" url:"id"`
+	ItemID                 *string                                                                      `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                                       `json:"description" url:"description"`
+	Unit                   string                                                                       `json:"unit" url:"unit"`
+	Quantity               string                                                                       `json:"quantity" url:"quantity"`
+	UnitPriceExclVat       *string                                                                      `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                                      `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                                       `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                                      `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                                                      `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	LineNet                string                                                                       `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                                       `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                                       `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                                        `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *string                                                                      `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty"`
+	RecognitionEndDate     *string                                                                      `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty"`
+	RecognitionMilestones  []*PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                                      `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                                      `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                                      `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5965,6 +6580,55 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetSortOrder() int64 
 		return 0
 	}
 	return p.SortOrder
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetRecognitionMethod() PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod {
+	if p == nil {
+		return ""
+	}
+	return p.RecognitionMethod
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetRecognitionStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionStartDate
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetRecognitionEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionEndDate
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetRecognitionMilestones() []*PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionMilestones
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetAllocatedNet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedNet
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -6079,6 +6743,55 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetSortOrder(sortOrde
 	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldSortOrder)
 }
 
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetRecognitionMethod(recognitionMethod PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod) {
+	p.RecognitionMethod = recognitionMethod
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *string) {
+	p.RecognitionStartDate = recognitionStartDate
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *string) {
+	p.RecognitionEndDate = recognitionEndDate
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) {
+	p.RecognitionMilestones = recognitionMilestones
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	p.AllocatedNet = allocatedNet
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRefundEstimatePercent)
+}
+
 func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1SalesInvoicesApplyAdvanceResponseLinesItem
 	var value unmarshaler
@@ -6107,6 +6820,150 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) MarshalJSON() ([]byte
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodRatable         PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItemRecognitionMilestonesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -6207,6 +7064,7 @@ const (
 	PostV1SalesInvoicesApplyAdvanceResponseVatSchemeMarketplaceDeemed PostV1SalesInvoicesApplyAdvanceResponseVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesApplyAdvanceResponseVatSchemeExport            PostV1SalesInvoicesApplyAdvanceResponseVatScheme = "export"
 	PostV1SalesInvoicesApplyAdvanceResponseVatSchemeOutOfScope        PostV1SalesInvoicesApplyAdvanceResponseVatScheme = "out_of_scope"
+	PostV1SalesInvoicesApplyAdvanceResponseVatSchemeSmeExempt         PostV1SalesInvoicesApplyAdvanceResponseVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesApplyAdvanceResponseVatSchemeFromString(s string) (PostV1SalesInvoicesApplyAdvanceResponseVatScheme, error) {
@@ -6227,6 +7085,8 @@ func NewPostV1SalesInvoicesApplyAdvanceResponseVatSchemeFromString(s string) (Po
 		return PostV1SalesInvoicesApplyAdvanceResponseVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesApplyAdvanceResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesApplyAdvanceResponseVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesApplyAdvanceResponseVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -6237,27 +7097,33 @@ func (p PostV1SalesInvoicesApplyAdvanceResponseVatScheme) Ptr() *PostV1SalesInvo
 }
 
 var (
-	postV1SalesInvoicesCreateRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
-	postV1SalesInvoicesCreateRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
-	postV1SalesInvoicesCreateRequestLinesItemFieldUnit              = big.NewInt(1 << 2)
-	postV1SalesInvoicesCreateRequestLinesItemFieldQuantity          = big.NewInt(1 << 3)
-	postV1SalesInvoicesCreateRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
-	postV1SalesInvoicesCreateRequestLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesCreateRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 6)
-	postV1SalesInvoicesCreateRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 7)
-	postV1SalesInvoicesCreateRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
+	postV1SalesInvoicesCreateRequestLinesItemFieldItemID                 = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateRequestLinesItemFieldDescription            = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateRequestLinesItemFieldUnit                   = big.NewInt(1 << 2)
+	postV1SalesInvoicesCreateRequestLinesItemFieldQuantity               = big.NewInt(1 << 3)
+	postV1SalesInvoicesCreateRequestLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 4)
+	postV1SalesInvoicesCreateRequestLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesCreateRequestLinesItemFieldVatRatePercent         = big.NewInt(1 << 6)
+	postV1SalesInvoicesCreateRequestLinesItemFieldVatClassifierCode      = big.NewInt(1 << 7)
+	postV1SalesInvoicesCreateRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
+	postV1SalesInvoicesCreateRequestLinesItemFieldRecognition            = big.NewInt(1 << 9)
+	postV1SalesInvoicesCreateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 11)
 )
 
 type PostV1SalesInvoicesCreateRequestLinesItem struct {
-	ItemID            *string                                            `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       *string                                            `json:"description,omitempty" url:"description,omitempty"`
-	Unit              *string                                            `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity          *PostV1SalesInvoicesCreateRequestLinesItemQuantity `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPriceExclVat  *string                                            `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string                                            `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    *string                                            `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	VatClassifierCode *string                                            `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string                                            `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ItemID                 *string                                               `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            *string                                               `json:"description,omitempty" url:"description,omitempty"`
+	Unit                   *string                                               `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity               *PostV1SalesInvoicesCreateRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat       *string                                               `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                               `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         *string                                               `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode      *string                                               `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	Recognition            *PostV1SalesInvoicesCreateRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	StandaloneSellingPrice *string                                               `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	RefundEstimatePercent  *string                                               `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6327,6 +7193,27 @@ func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetCostCenterID() *string {
 		return nil
 	}
 	return p.CostCenterID
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetRecognition() *PostV1SalesInvoicesCreateRequestLinesItemRecognition {
+	if p == nil {
+		return nil
+	}
+	return p.Recognition
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -6404,6 +7291,27 @@ func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetVatClassifierCode(vatClas
 func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetCostCenterID(costCenterID *string) {
 	p.CostCenterID = costCenterID
 	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldCostCenterID)
+}
+
+// SetRecognition sets the Recognition field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetRecognition(recognition *PostV1SalesInvoicesCreateRequestLinesItemRecognition) {
+	p.Recognition = recognition
+	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldRecognition)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldRefundEstimatePercent)
 }
 
 func (p *PostV1SalesInvoicesCreateRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -6510,6 +7418,282 @@ func (p *PostV1SalesInvoicesCreateRequestLinesItemQuantity) Accept(visitor PostV
 	return fmt.Errorf("type %T does not include a non-empty union type", p)
 }
 
+var (
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldMethod     = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldStartDate  = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldEndDate    = big.NewInt(1 << 2)
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldMilestones = big.NewInt(1 << 3)
+)
+
+type PostV1SalesInvoicesCreateRequestLinesItemRecognition struct {
+	Method     *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod           `json:"method,omitempty" url:"method,omitempty"`
+	StartDate  *string                                                               `json:"startDate,omitempty" url:"startDate,omitempty"`
+	EndDate    *string                                                               `json:"endDate,omitempty" url:"endDate,omitempty"`
+	Milestones []*PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem `json:"milestones,omitempty" url:"milestones,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) GetMethod() *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod {
+	if p == nil {
+		return nil
+	}
+	return p.Method
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) GetStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StartDate
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) GetEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EndDate
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) GetMilestones() []*PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.Milestones
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetMethod sets the Method field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) SetMethod(method *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod) {
+	p.Method = method
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldMethod)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) SetStartDate(startDate *string) {
+	p.StartDate = startDate
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) SetEndDate(endDate *string) {
+	p.EndDate = endDate
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldEndDate)
+}
+
+// SetMilestones sets the Milestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) SetMilestones(milestones []*PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) {
+	p.Milestones = milestones
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionFieldMilestones)
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesCreateRequestLinesItemRecognition
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesCreateRequestLinesItemRecognition(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesCreateRequestLinesItemRecognition
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognition) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodRatable         PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItemRecognitionMilestonesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1SalesInvoicesCreateRequestType string
 
 const (
@@ -6549,6 +7733,7 @@ const (
 	PostV1SalesInvoicesCreateRequestVatSchemeMarketplaceDeemed PostV1SalesInvoicesCreateRequestVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesCreateRequestVatSchemeExport            PostV1SalesInvoicesCreateRequestVatScheme = "export"
 	PostV1SalesInvoicesCreateRequestVatSchemeOutOfScope        PostV1SalesInvoicesCreateRequestVatScheme = "out_of_scope"
+	PostV1SalesInvoicesCreateRequestVatSchemeSmeExempt         PostV1SalesInvoicesCreateRequestVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesCreateRequestVatSchemeFromString(s string) (PostV1SalesInvoicesCreateRequestVatScheme, error) {
@@ -6569,6 +7754,8 @@ func NewPostV1SalesInvoicesCreateRequestVatSchemeFromString(s string) (PostV1Sal
 		return PostV1SalesInvoicesCreateRequestVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesCreateRequestVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesCreateRequestVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesCreateRequestVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -6597,13 +7784,14 @@ var (
 	postV1SalesInvoicesCreateResponseFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesCreateResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesCreateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesCreateResponseFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesCreateResponseFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesCreateResponseFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 24)
+	postV1SalesInvoicesCreateResponseFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesCreateResponseFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesCreateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesCreateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesCreateResponse struct {
@@ -6625,6 +7813,7 @@ type PostV1SalesInvoicesCreateResponse struct {
 	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesCreateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
@@ -6764,6 +7953,13 @@ func (p *PostV1SalesInvoicesCreateResponse) GetCreditedInvoiceID() *string {
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesCreateResponse) GetVatScheme() *PostV1SalesInvoicesCreateResponseVatScheme {
@@ -6955,6 +8151,13 @@ func (p *PostV1SalesInvoicesCreateResponse) SetCreditedInvoiceID(creditedInvoice
 	p.require(postV1SalesInvoicesCreateResponseFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesCreateResponseFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesCreateResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesCreateResponseVatScheme) {
@@ -7047,37 +8250,51 @@ func (p *PostV1SalesInvoicesCreateResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesCreateResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1SalesInvoicesCreateResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesCreateResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1SalesInvoicesCreateResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1SalesInvoicesCreateResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1SalesInvoicesCreateResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesCreateResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1SalesInvoicesCreateResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1SalesInvoicesCreateResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1SalesInvoicesCreateResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineNet           = big.NewInt(1 << 10)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineVat           = big.NewInt(1 << 11)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineGross         = big.NewInt(1 << 12)
-	postV1SalesInvoicesCreateResponseLinesItemFieldSortOrder         = big.NewInt(1 << 13)
+	postV1SalesInvoicesCreateResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	postV1SalesInvoicesCreateResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	postV1SalesInvoicesCreateResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	postV1SalesInvoicesCreateResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesCreateResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
+	postV1SalesInvoicesCreateResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
+	postV1SalesInvoicesCreateResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
+	postV1SalesInvoicesCreateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineNet                = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineVat                = big.NewInt(1 << 11)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineGross              = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 13)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 14)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 15)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 16)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 17)
+	postV1SalesInvoicesCreateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 18)
+	postV1SalesInvoicesCreateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 19)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 20)
 )
 
 type PostV1SalesInvoicesCreateResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                     string                                                                 `json:"id" url:"id"`
+	ItemID                 *string                                                                `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                                 `json:"description" url:"description"`
+	Unit                   string                                                                 `json:"unit" url:"unit"`
+	Quantity               string                                                                 `json:"quantity" url:"quantity"`
+	UnitPriceExclVat       *string                                                                `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                                 `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                                 `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                                  `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *string                                                                `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty"`
+	RecognitionEndDate     *string                                                                `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty"`
+	RecognitionMilestones  []*PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                                `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                                `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                                `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7182,6 +8399,55 @@ func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetSortOrder() int64 {
 		return 0
 	}
 	return p.SortOrder
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetRecognitionMethod() PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod {
+	if p == nil {
+		return ""
+	}
+	return p.RecognitionMethod
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetRecognitionStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionStartDate
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetRecognitionEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionEndDate
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetRecognitionMilestones() []*PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionMilestones
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetAllocatedNet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedNet
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -7296,6 +8562,55 @@ func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetSortOrder(sortOrder int6
 	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldSortOrder)
 }
 
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetRecognitionMethod(recognitionMethod PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod) {
+	p.RecognitionMethod = recognitionMethod
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *string) {
+	p.RecognitionStartDate = recognitionStartDate
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *string) {
+	p.RecognitionEndDate = recognitionEndDate
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) {
+	p.RecognitionMilestones = recognitionMilestones
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	p.AllocatedNet = allocatedNet
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldRefundEstimatePercent)
+}
+
 func (p *PostV1SalesInvoicesCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1SalesInvoicesCreateResponseLinesItem
 	var value unmarshaler
@@ -7324,6 +8639,150 @@ func (p *PostV1SalesInvoicesCreateResponseLinesItem) MarshalJSON() ([]byte, erro
 }
 
 func (p *PostV1SalesInvoicesCreateResponseLinesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodRatable         PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItemRecognitionMilestonesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -7424,6 +8883,7 @@ const (
 	PostV1SalesInvoicesCreateResponseVatSchemeMarketplaceDeemed PostV1SalesInvoicesCreateResponseVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesCreateResponseVatSchemeExport            PostV1SalesInvoicesCreateResponseVatScheme = "export"
 	PostV1SalesInvoicesCreateResponseVatSchemeOutOfScope        PostV1SalesInvoicesCreateResponseVatScheme = "out_of_scope"
+	PostV1SalesInvoicesCreateResponseVatSchemeSmeExempt         PostV1SalesInvoicesCreateResponseVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesCreateResponseVatSchemeFromString(s string) (PostV1SalesInvoicesCreateResponseVatScheme, error) {
@@ -7444,6 +8904,8 @@ func NewPostV1SalesInvoicesCreateResponseVatSchemeFromString(s string) (PostV1Sa
 		return PostV1SalesInvoicesCreateResponseVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesCreateResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesCreateResponseVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesCreateResponseVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7556,13 +9018,14 @@ var (
 	postV1SalesInvoicesGetResponseFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesGetResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesGetResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesGetResponseFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesGetResponseFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesGetResponseFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesGetResponseFieldLines                = big.NewInt(1 << 24)
+	postV1SalesInvoicesGetResponseFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesGetResponseFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesGetResponseFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesGetResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesGetResponseFieldLines                = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesGetResponse struct {
@@ -7584,6 +9047,7 @@ type PostV1SalesInvoicesGetResponse struct {
 	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesGetResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
@@ -7723,6 +9187,13 @@ func (p *PostV1SalesInvoicesGetResponse) GetCreditedInvoiceID() *string {
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesGetResponse) GetVatScheme() *PostV1SalesInvoicesGetResponseVatScheme {
@@ -7914,6 +9385,13 @@ func (p *PostV1SalesInvoicesGetResponse) SetCreditedInvoiceID(creditedInvoiceID 
 	p.require(postV1SalesInvoicesGetResponseFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesGetResponseFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesGetResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesGetResponseVatScheme) {
@@ -8006,37 +9484,51 @@ func (p *PostV1SalesInvoicesGetResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesGetResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1SalesInvoicesGetResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesGetResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1SalesInvoicesGetResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1SalesInvoicesGetResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1SalesInvoicesGetResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesGetResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1SalesInvoicesGetResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1SalesInvoicesGetResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1SalesInvoicesGetResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineNet           = big.NewInt(1 << 10)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineVat           = big.NewInt(1 << 11)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineGross         = big.NewInt(1 << 12)
-	postV1SalesInvoicesGetResponseLinesItemFieldSortOrder         = big.NewInt(1 << 13)
+	postV1SalesInvoicesGetResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	postV1SalesInvoicesGetResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	postV1SalesInvoicesGetResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	postV1SalesInvoicesGetResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	postV1SalesInvoicesGetResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	postV1SalesInvoicesGetResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesGetResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
+	postV1SalesInvoicesGetResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
+	postV1SalesInvoicesGetResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
+	postV1SalesInvoicesGetResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineNet                = big.NewInt(1 << 10)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineVat                = big.NewInt(1 << 11)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineGross              = big.NewInt(1 << 12)
+	postV1SalesInvoicesGetResponseLinesItemFieldSortOrder              = big.NewInt(1 << 13)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 14)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 15)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 16)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 17)
+	postV1SalesInvoicesGetResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 18)
+	postV1SalesInvoicesGetResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 19)
+	postV1SalesInvoicesGetResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 20)
 )
 
 type PostV1SalesInvoicesGetResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                     string                                                              `json:"id" url:"id"`
+	ItemID                 *string                                                             `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                              `json:"description" url:"description"`
+	Unit                   string                                                              `json:"unit" url:"unit"`
+	Quantity               string                                                              `json:"quantity" url:"quantity"`
+	UnitPriceExclVat       *string                                                             `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                             `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                              `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                             `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                                             `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	LineNet                string                                                              `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                              `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                              `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                               `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *string                                                             `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty"`
+	RecognitionEndDate     *string                                                             `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty"`
+	RecognitionMilestones  []*PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                             `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                             `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                             `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8141,6 +9633,55 @@ func (p *PostV1SalesInvoicesGetResponseLinesItem) GetSortOrder() int64 {
 		return 0
 	}
 	return p.SortOrder
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetRecognitionMethod() PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod {
+	if p == nil {
+		return ""
+	}
+	return p.RecognitionMethod
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetRecognitionStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionStartDate
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetRecognitionEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionEndDate
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetRecognitionMilestones() []*PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionMilestones
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetAllocatedNet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedNet
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -8255,6 +9796,55 @@ func (p *PostV1SalesInvoicesGetResponseLinesItem) SetSortOrder(sortOrder int64) 
 	p.require(postV1SalesInvoicesGetResponseLinesItemFieldSortOrder)
 }
 
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetRecognitionMethod(recognitionMethod PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod) {
+	p.RecognitionMethod = recognitionMethod
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *string) {
+	p.RecognitionStartDate = recognitionStartDate
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *string) {
+	p.RecognitionEndDate = recognitionEndDate
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) {
+	p.RecognitionMilestones = recognitionMilestones
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	p.AllocatedNet = allocatedNet
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldRefundEstimatePercent)
+}
+
 func (p *PostV1SalesInvoicesGetResponseLinesItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1SalesInvoicesGetResponseLinesItem
 	var value unmarshaler
@@ -8283,6 +9873,150 @@ func (p *PostV1SalesInvoicesGetResponseLinesItem) MarshalJSON() ([]byte, error) 
 }
 
 func (p *PostV1SalesInvoicesGetResponseLinesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodRatable         PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesGetResponseLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesGetResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesGetResponseLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItemRecognitionMilestonesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -8383,6 +10117,7 @@ const (
 	PostV1SalesInvoicesGetResponseVatSchemeMarketplaceDeemed PostV1SalesInvoicesGetResponseVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesGetResponseVatSchemeExport            PostV1SalesInvoicesGetResponseVatScheme = "export"
 	PostV1SalesInvoicesGetResponseVatSchemeOutOfScope        PostV1SalesInvoicesGetResponseVatScheme = "out_of_scope"
+	PostV1SalesInvoicesGetResponseVatSchemeSmeExempt         PostV1SalesInvoicesGetResponseVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesGetResponseVatSchemeFromString(s string) (PostV1SalesInvoicesGetResponseVatScheme, error) {
@@ -8403,6 +10138,8 @@ func NewPostV1SalesInvoicesGetResponseVatSchemeFromString(s string) (PostV1Sales
 		return PostV1SalesInvoicesGetResponseVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesGetResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesGetResponseVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesGetResponseVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -8431,13 +10168,14 @@ var (
 	postV1SalesInvoicesIssueResponseFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesIssueResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesIssueResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesIssueResponseFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesIssueResponseFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesIssueResponseFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesIssueResponseFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesIssueResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesIssueResponseFieldUpdatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesIssueResponseFieldLines                = big.NewInt(1 << 24)
+	postV1SalesInvoicesIssueResponseFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesIssueResponseFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesIssueResponseFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesIssueResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesIssueResponseFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesIssueResponseFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesIssueResponseFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesIssueResponseFieldLines                = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesIssueResponse struct {
@@ -8459,6 +10197,7 @@ type PostV1SalesInvoicesIssueResponse struct {
 	JournalTransactionID *string                                       `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                       `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                       `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                       `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesIssueResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                       `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                          `json:"deemedSupplier" url:"deemedSupplier"`
@@ -8598,6 +10337,13 @@ func (p *PostV1SalesInvoicesIssueResponse) GetCreditedInvoiceID() *string {
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesIssueResponse) GetVatScheme() *PostV1SalesInvoicesIssueResponseVatScheme {
@@ -8789,6 +10535,13 @@ func (p *PostV1SalesInvoicesIssueResponse) SetCreditedInvoiceID(creditedInvoiceI
 	p.require(postV1SalesInvoicesIssueResponseFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesIssueResponseFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesIssueResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesIssueResponseVatScheme) {
@@ -8881,37 +10634,51 @@ func (p *PostV1SalesInvoicesIssueResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesIssueResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1SalesInvoicesIssueResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesIssueResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1SalesInvoicesIssueResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1SalesInvoicesIssueResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1SalesInvoicesIssueResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesIssueResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1SalesInvoicesIssueResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1SalesInvoicesIssueResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1SalesInvoicesIssueResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineNet           = big.NewInt(1 << 10)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineVat           = big.NewInt(1 << 11)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineGross         = big.NewInt(1 << 12)
-	postV1SalesInvoicesIssueResponseLinesItemFieldSortOrder         = big.NewInt(1 << 13)
+	postV1SalesInvoicesIssueResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	postV1SalesInvoicesIssueResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	postV1SalesInvoicesIssueResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	postV1SalesInvoicesIssueResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	postV1SalesInvoicesIssueResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	postV1SalesInvoicesIssueResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesIssueResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
+	postV1SalesInvoicesIssueResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
+	postV1SalesInvoicesIssueResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
+	postV1SalesInvoicesIssueResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineNet                = big.NewInt(1 << 10)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineVat                = big.NewInt(1 << 11)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineGross              = big.NewInt(1 << 12)
+	postV1SalesInvoicesIssueResponseLinesItemFieldSortOrder              = big.NewInt(1 << 13)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 14)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 15)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 16)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 17)
+	postV1SalesInvoicesIssueResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 18)
+	postV1SalesInvoicesIssueResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 19)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 20)
 )
 
 type PostV1SalesInvoicesIssueResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                     string                                                                `json:"id" url:"id"`
+	ItemID                 *string                                                               `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                                `json:"description" url:"description"`
+	Unit                   string                                                                `json:"unit" url:"unit"`
+	Quantity               string                                                                `json:"quantity" url:"quantity"`
+	UnitPriceExclVat       *string                                                               `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                               `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                                `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                               `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	LineNet                string                                                                `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                                `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                                `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                                 `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *string                                                               `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty"`
+	RecognitionEndDate     *string                                                               `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty"`
+	RecognitionMilestones  []*PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                               `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                               `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                               `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9016,6 +10783,55 @@ func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetSortOrder() int64 {
 		return 0
 	}
 	return p.SortOrder
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetRecognitionMethod() PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod {
+	if p == nil {
+		return ""
+	}
+	return p.RecognitionMethod
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetRecognitionStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionStartDate
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetRecognitionEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionEndDate
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetRecognitionMilestones() []*PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionMilestones
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetAllocatedNet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedNet
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -9130,6 +10946,55 @@ func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetSortOrder(sortOrder int64
 	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldSortOrder)
 }
 
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetRecognitionMethod(recognitionMethod PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod) {
+	p.RecognitionMethod = recognitionMethod
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *string) {
+	p.RecognitionStartDate = recognitionStartDate
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *string) {
+	p.RecognitionEndDate = recognitionEndDate
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) {
+	p.RecognitionMilestones = recognitionMilestones
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	p.AllocatedNet = allocatedNet
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldRefundEstimatePercent)
+}
+
 func (p *PostV1SalesInvoicesIssueResponseLinesItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1SalesInvoicesIssueResponseLinesItem
 	var value unmarshaler
@@ -9158,6 +11023,150 @@ func (p *PostV1SalesInvoicesIssueResponseLinesItem) MarshalJSON() ([]byte, error
 }
 
 func (p *PostV1SalesInvoicesIssueResponseLinesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodRatable         PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItemRecognitionMilestonesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -9258,6 +11267,7 @@ const (
 	PostV1SalesInvoicesIssueResponseVatSchemeMarketplaceDeemed PostV1SalesInvoicesIssueResponseVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesIssueResponseVatSchemeExport            PostV1SalesInvoicesIssueResponseVatScheme = "export"
 	PostV1SalesInvoicesIssueResponseVatSchemeOutOfScope        PostV1SalesInvoicesIssueResponseVatScheme = "out_of_scope"
+	PostV1SalesInvoicesIssueResponseVatSchemeSmeExempt         PostV1SalesInvoicesIssueResponseVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesIssueResponseVatSchemeFromString(s string) (PostV1SalesInvoicesIssueResponseVatScheme, error) {
@@ -9278,6 +11288,8 @@ func NewPostV1SalesInvoicesIssueResponseVatSchemeFromString(s string) (PostV1Sal
 		return PostV1SalesInvoicesIssueResponseVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesIssueResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesIssueResponseVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesIssueResponseVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -9876,12 +11888,13 @@ var (
 	postV1SalesInvoicesListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesListResponseRowsItemFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesListResponseRowsItemFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesListResponseRowsItemFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesListResponseRowsItemFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesListResponseRowsItemFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesListResponseRowsItemFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesListResponseRowsItemFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesListResponseRowsItemFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesListResponseRowsItemFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 24)
 )
 
 type PostV1SalesInvoicesListResponseRowsItem struct {
@@ -9903,6 +11916,7 @@ type PostV1SalesInvoicesListResponseRowsItem struct {
 	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesListResponseRowsItemVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
@@ -10041,6 +12055,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) GetCreditedInvoiceID() *string
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesListResponseRowsItem) GetVatScheme() *PostV1SalesInvoicesListResponseRowsItemVatScheme {
@@ -10225,6 +12246,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) SetCreditedInvoiceID(creditedI
 	p.require(postV1SalesInvoicesListResponseRowsItemFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesListResponseRowsItem) SetVatScheme(vatScheme *PostV1SalesInvoicesListResponseRowsItemVatScheme) {
@@ -10395,6 +12423,7 @@ const (
 	PostV1SalesInvoicesListResponseRowsItemVatSchemeMarketplaceDeemed PostV1SalesInvoicesListResponseRowsItemVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesListResponseRowsItemVatSchemeExport            PostV1SalesInvoicesListResponseRowsItemVatScheme = "export"
 	PostV1SalesInvoicesListResponseRowsItemVatSchemeOutOfScope        PostV1SalesInvoicesListResponseRowsItemVatScheme = "out_of_scope"
+	PostV1SalesInvoicesListResponseRowsItemVatSchemeSmeExempt         PostV1SalesInvoicesListResponseRowsItemVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesListResponseRowsItemVatSchemeFromString(s string) (PostV1SalesInvoicesListResponseRowsItemVatScheme, error) {
@@ -10415,6 +12444,8 @@ func NewPostV1SalesInvoicesListResponseRowsItemVatSchemeFromString(s string) (Po
 		return PostV1SalesInvoicesListResponseRowsItemVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesListResponseRowsItemVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesListResponseRowsItemVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesListResponseRowsItemVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -10971,27 +13002,33 @@ func (p *PostV1SalesInvoicesSendResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesUpdateRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldUnit              = big.NewInt(1 << 2)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldQuantity          = big.NewInt(1 << 3)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 6)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 7)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldItemID                 = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldDescription            = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldUnit                   = big.NewInt(1 << 2)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldQuantity               = big.NewInt(1 << 3)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 4)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldVatRatePercent         = big.NewInt(1 << 6)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldVatClassifierCode      = big.NewInt(1 << 7)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldRecognition            = big.NewInt(1 << 9)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 10)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 11)
 )
 
 type PostV1SalesInvoicesUpdateRequestLinesItem struct {
-	ItemID            *string                                            `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       *string                                            `json:"description,omitempty" url:"description,omitempty"`
-	Unit              *string                                            `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity          *PostV1SalesInvoicesUpdateRequestLinesItemQuantity `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPriceExclVat  *string                                            `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string                                            `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    *string                                            `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	VatClassifierCode *string                                            `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string                                            `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ItemID                 *string                                               `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            *string                                               `json:"description,omitempty" url:"description,omitempty"`
+	Unit                   *string                                               `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity               *PostV1SalesInvoicesUpdateRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat       *string                                               `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                               `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         *string                                               `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode      *string                                               `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	Recognition            *PostV1SalesInvoicesUpdateRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	StandaloneSellingPrice *string                                               `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	RefundEstimatePercent  *string                                               `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11061,6 +13098,27 @@ func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetCostCenterID() *string {
 		return nil
 	}
 	return p.CostCenterID
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetRecognition() *PostV1SalesInvoicesUpdateRequestLinesItemRecognition {
+	if p == nil {
+		return nil
+	}
+	return p.Recognition
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -11138,6 +13196,27 @@ func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetVatClassifierCode(vatClas
 func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetCostCenterID(costCenterID *string) {
 	p.CostCenterID = costCenterID
 	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldCostCenterID)
+}
+
+// SetRecognition sets the Recognition field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetRecognition(recognition *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) {
+	p.Recognition = recognition
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldRecognition)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldRefundEstimatePercent)
 }
 
 func (p *PostV1SalesInvoicesUpdateRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -11244,6 +13323,282 @@ func (p *PostV1SalesInvoicesUpdateRequestLinesItemQuantity) Accept(visitor PostV
 	return fmt.Errorf("type %T does not include a non-empty union type", p)
 }
 
+var (
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldMethod     = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldStartDate  = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldEndDate    = big.NewInt(1 << 2)
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldMilestones = big.NewInt(1 << 3)
+)
+
+type PostV1SalesInvoicesUpdateRequestLinesItemRecognition struct {
+	Method     *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod           `json:"method,omitempty" url:"method,omitempty"`
+	StartDate  *string                                                               `json:"startDate,omitempty" url:"startDate,omitempty"`
+	EndDate    *string                                                               `json:"endDate,omitempty" url:"endDate,omitempty"`
+	Milestones []*PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem `json:"milestones,omitempty" url:"milestones,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) GetMethod() *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod {
+	if p == nil {
+		return nil
+	}
+	return p.Method
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) GetStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StartDate
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) GetEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EndDate
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) GetMilestones() []*PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.Milestones
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetMethod sets the Method field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) SetMethod(method *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod) {
+	p.Method = method
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldMethod)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) SetStartDate(startDate *string) {
+	p.StartDate = startDate
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) SetEndDate(endDate *string) {
+	p.EndDate = endDate
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldEndDate)
+}
+
+// SetMilestones sets the Milestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) SetMilestones(milestones []*PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) {
+	p.Milestones = milestones
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionFieldMilestones)
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesUpdateRequestLinesItemRecognition
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesUpdateRequestLinesItemRecognition(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesUpdateRequestLinesItemRecognition
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodRatable         PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItemRecognitionMilestonesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1SalesInvoicesUpdateRequestVatScheme string
 
 const (
@@ -11255,6 +13610,7 @@ const (
 	PostV1SalesInvoicesUpdateRequestVatSchemeMarketplaceDeemed PostV1SalesInvoicesUpdateRequestVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesUpdateRequestVatSchemeExport            PostV1SalesInvoicesUpdateRequestVatScheme = "export"
 	PostV1SalesInvoicesUpdateRequestVatSchemeOutOfScope        PostV1SalesInvoicesUpdateRequestVatScheme = "out_of_scope"
+	PostV1SalesInvoicesUpdateRequestVatSchemeSmeExempt         PostV1SalesInvoicesUpdateRequestVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesUpdateRequestVatSchemeFromString(s string) (PostV1SalesInvoicesUpdateRequestVatScheme, error) {
@@ -11275,6 +13631,8 @@ func NewPostV1SalesInvoicesUpdateRequestVatSchemeFromString(s string) (PostV1Sal
 		return PostV1SalesInvoicesUpdateRequestVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesUpdateRequestVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesUpdateRequestVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesUpdateRequestVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -11303,13 +13661,14 @@ var (
 	postV1SalesInvoicesUpdateResponseFieldJournalTransactionID = big.NewInt(1 << 15)
 	postV1SalesInvoicesUpdateResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
 	postV1SalesInvoicesUpdateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesUpdateResponseFieldVatScheme            = big.NewInt(1 << 18)
-	postV1SalesInvoicesUpdateResponseFieldVatCountryCode       = big.NewInt(1 << 19)
-	postV1SalesInvoicesUpdateResponseFieldDeemedSupplier       = big.NewInt(1 << 20)
-	postV1SalesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 21)
-	postV1SalesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1SalesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 24)
+	postV1SalesInvoicesUpdateResponseFieldAgreementID          = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateResponseFieldVatScheme            = big.NewInt(1 << 19)
+	postV1SalesInvoicesUpdateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
+	postV1SalesInvoicesUpdateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
+	postV1SalesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 22)
+	postV1SalesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 23)
+	postV1SalesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesUpdateResponse struct {
@@ -11331,6 +13690,7 @@ type PostV1SalesInvoicesUpdateResponse struct {
 	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	AppliedToInvoiceID   *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID    *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID          *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
 	VatScheme            *PostV1SalesInvoicesUpdateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
 	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
@@ -11470,6 +13830,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) GetCreditedInvoiceID() *string {
 		return nil
 	}
 	return p.CreditedInvoiceID
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetAgreementID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AgreementID
 }
 
 func (p *PostV1SalesInvoicesUpdateResponse) GetVatScheme() *PostV1SalesInvoicesUpdateResponseVatScheme {
@@ -11661,6 +14028,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) SetCreditedInvoiceID(creditedInvoice
 	p.require(postV1SalesInvoicesUpdateResponseFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesUpdateResponseFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesUpdateResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesUpdateResponseVatScheme) {
@@ -11753,37 +14127,51 @@ func (p *PostV1SalesInvoicesUpdateResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesUpdateResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineNet           = big.NewInt(1 << 10)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineVat           = big.NewInt(1 << 11)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineGross         = big.NewInt(1 << 12)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldSortOrder         = big.NewInt(1 << 13)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineNet                = big.NewInt(1 << 10)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineVat                = big.NewInt(1 << 11)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineGross              = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 13)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 14)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 15)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 16)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 17)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 19)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 20)
 )
 
 type PostV1SalesInvoicesUpdateResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                     string                                                                 `json:"id" url:"id"`
+	ItemID                 *string                                                                `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                                 `json:"description" url:"description"`
+	Unit                   string                                                                 `json:"unit" url:"unit"`
+	Quantity               string                                                                 `json:"quantity" url:"quantity"`
+	UnitPriceExclVat       *string                                                                `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                                 `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                                 `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                                  `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *string                                                                `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty"`
+	RecognitionEndDate     *string                                                                `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty"`
+	RecognitionMilestones  []*PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                                `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                                `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                                `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11888,6 +14276,55 @@ func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetSortOrder() int64 {
 		return 0
 	}
 	return p.SortOrder
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetRecognitionMethod() PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod {
+	if p == nil {
+		return ""
+	}
+	return p.RecognitionMethod
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetRecognitionStartDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionStartDate
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetRecognitionEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionEndDate
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetRecognitionMilestones() []*PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem {
+	if p == nil {
+		return nil
+	}
+	return p.RecognitionMilestones
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StandaloneSellingPrice
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetAllocatedNet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedNet
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetRefundEstimatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RefundEstimatePercent
 }
 
 func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -12002,6 +14439,55 @@ func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetSortOrder(sortOrder int6
 	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldSortOrder)
 }
 
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetRecognitionMethod(recognitionMethod PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod) {
+	p.RecognitionMethod = recognitionMethod
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *string) {
+	p.RecognitionStartDate = recognitionStartDate
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *string) {
+	p.RecognitionEndDate = recognitionEndDate
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) {
+	p.RecognitionMilestones = recognitionMilestones
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	p.StandaloneSellingPrice = standaloneSellingPrice
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	p.AllocatedNet = allocatedNet
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	p.RefundEstimatePercent = refundEstimatePercent
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldRefundEstimatePercent)
+}
+
 func (p *PostV1SalesInvoicesUpdateResponseLinesItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1SalesInvoicesUpdateResponseLinesItem
 	var value unmarshaler
@@ -12030,6 +14516,150 @@ func (p *PostV1SalesInvoicesUpdateResponseLinesItem) MarshalJSON() ([]byte, erro
 }
 
 func (p *PostV1SalesInvoicesUpdateResponseLinesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod string
+
+const (
+	PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodPointInTime     PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod = "point_in_time"
+	PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodRatable         PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod = "ratable"
+	PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodMilestone       PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod = "milestone"
+	PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodPercentComplete PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewPostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodFromString(s string) (PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod) Ptr() *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMethod {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItemRecognitionMilestonesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -12130,6 +14760,7 @@ const (
 	PostV1SalesInvoicesUpdateResponseVatSchemeMarketplaceDeemed PostV1SalesInvoicesUpdateResponseVatScheme = "marketplace_deemed"
 	PostV1SalesInvoicesUpdateResponseVatSchemeExport            PostV1SalesInvoicesUpdateResponseVatScheme = "export"
 	PostV1SalesInvoicesUpdateResponseVatSchemeOutOfScope        PostV1SalesInvoicesUpdateResponseVatScheme = "out_of_scope"
+	PostV1SalesInvoicesUpdateResponseVatSchemeSmeExempt         PostV1SalesInvoicesUpdateResponseVatScheme = "sme_exempt"
 )
 
 func NewPostV1SalesInvoicesUpdateResponseVatSchemeFromString(s string) (PostV1SalesInvoicesUpdateResponseVatScheme, error) {
@@ -12150,6 +14781,8 @@ func NewPostV1SalesInvoicesUpdateResponseVatSchemeFromString(s string) (PostV1Sa
 		return PostV1SalesInvoicesUpdateResponseVatSchemeExport, nil
 	case "out_of_scope":
 		return PostV1SalesInvoicesUpdateResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1SalesInvoicesUpdateResponseVatSchemeSmeExempt, nil
 	}
 	var t PostV1SalesInvoicesUpdateResponseVatScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12157,4 +14790,4087 @@ func NewPostV1SalesInvoicesUpdateResponseVatSchemeFromString(s string) (PostV1Sa
 
 func (p PostV1SalesInvoicesUpdateResponseVatScheme) Ptr() *PostV1SalesInvoicesUpdateResponseVatScheme {
 	return &p
+}
+
+var (
+	postV1SalesRecognitionComputeResponseFieldAsOfDate    = big.NewInt(1 << 0)
+	postV1SalesRecognitionComputeResponseFieldTotalAmount = big.NewInt(1 << 1)
+	postV1SalesRecognitionComputeResponseFieldRows        = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionComputeResponse struct {
+	AsOfDate    string                                           `json:"asOfDate" url:"asOfDate"`
+	TotalAmount string                                           `json:"totalAmount" url:"totalAmount"`
+	Rows        []*PostV1SalesRecognitionComputeResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) GetAsOfDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.AsOfDate
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) GetRows() []*PostV1SalesRecognitionComputeResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponse) SetAsOfDate(asOfDate string) {
+	p.AsOfDate = asOfDate
+	p.require(postV1SalesRecognitionComputeResponseFieldAsOfDate)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponse) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1SalesRecognitionComputeResponseFieldTotalAmount)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponse) SetRows(rows []*PostV1SalesRecognitionComputeResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1SalesRecognitionComputeResponseFieldRows)
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionComputeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionComputeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionComputeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionComputeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionComputeResponseRowsItemFieldScheduleID        = big.NewInt(1 << 0)
+	postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceID         = big.NewInt(1 << 1)
+	postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceFullNumber = big.NewInt(1 << 2)
+	postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceLineID     = big.NewInt(1 << 3)
+	postV1SalesRecognitionComputeResponseRowsItemFieldLineDescription   = big.NewInt(1 << 4)
+	postV1SalesRecognitionComputeResponseRowsItemFieldScheduleDate      = big.NewInt(1 << 5)
+	postV1SalesRecognitionComputeResponseRowsItemFieldDescription       = big.NewInt(1 << 6)
+	postV1SalesRecognitionComputeResponseRowsItemFieldAmount            = big.NewInt(1 << 7)
+)
+
+type PostV1SalesRecognitionComputeResponseRowsItem struct {
+	ScheduleID        string  `json:"scheduleId" url:"scheduleId"`
+	InvoiceID         string  `json:"invoiceId" url:"invoiceId"`
+	InvoiceFullNumber *string `json:"invoiceFullNumber,omitempty" url:"invoiceFullNumber,omitempty"`
+	InvoiceLineID     string  `json:"invoiceLineId" url:"invoiceLineId"`
+	LineDescription   string  `json:"lineDescription" url:"lineDescription"`
+	ScheduleDate      *string `json:"scheduleDate,omitempty" url:"scheduleDate,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Amount            string  `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetScheduleID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ScheduleID
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetInvoiceFullNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceFullNumber
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetInvoiceLineID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceLineID
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetLineDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.LineDescription
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetScheduleDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScheduleDate
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetScheduleID sets the ScheduleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetScheduleID(scheduleID string) {
+	p.ScheduleID = scheduleID
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldScheduleID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceID)
+}
+
+// SetInvoiceFullNumber sets the InvoiceFullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetInvoiceFullNumber(invoiceFullNumber *string) {
+	p.InvoiceFullNumber = invoiceFullNumber
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceFullNumber)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldInvoiceLineID)
+}
+
+// SetLineDescription sets the LineDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetLineDescription(lineDescription string) {
+	p.LineDescription = lineDescription
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldLineDescription)
+}
+
+// SetScheduleDate sets the ScheduleDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetScheduleDate(scheduleDate *string) {
+	p.ScheduleDate = scheduleDate
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldScheduleDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1SalesRecognitionComputeResponseRowsItemFieldAmount)
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionComputeResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionComputeResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionComputeResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionComputeResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionModifyRequestApproach string
+
+const (
+	PostV1SalesRecognitionModifyRequestApproachProspective       PostV1SalesRecognitionModifyRequestApproach = "prospective"
+	PostV1SalesRecognitionModifyRequestApproachCumulativeCatchUp PostV1SalesRecognitionModifyRequestApproach = "cumulative_catch_up"
+)
+
+func NewPostV1SalesRecognitionModifyRequestApproachFromString(s string) (PostV1SalesRecognitionModifyRequestApproach, error) {
+	switch s {
+	case "prospective":
+		return PostV1SalesRecognitionModifyRequestApproachProspective, nil
+	case "cumulative_catch_up":
+		return PostV1SalesRecognitionModifyRequestApproachCumulativeCatchUp, nil
+	}
+	var t PostV1SalesRecognitionModifyRequestApproach
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionModifyRequestApproach) Ptr() *PostV1SalesRecognitionModifyRequestApproach {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionModifyRequestNewMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	postV1SalesRecognitionModifyRequestNewMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	postV1SalesRecognitionModifyRequestNewMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionModifyRequestNewMilestonesItem struct {
+	Description  string  `json:"description" url:"description"`
+	ExpectedDate *string `json:"expectedDate,omitempty" url:"expectedDate,omitempty"`
+	Percent      string  `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) GetExpectedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpectedDate
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1SalesRecognitionModifyRequestNewMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) SetExpectedDate(expectedDate *string) {
+	p.ExpectedDate = expectedDate
+	p.require(postV1SalesRecognitionModifyRequestNewMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1SalesRecognitionModifyRequestNewMilestonesItemFieldPercent)
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionModifyRequestNewMilestonesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionModifyRequestNewMilestonesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionModifyRequestNewMilestonesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionModifyRequestNewMilestonesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionModifyResponseFieldInvoiceLineID        = big.NewInt(1 << 0)
+	postV1SalesRecognitionModifyResponseFieldApproach             = big.NewInt(1 << 1)
+	postV1SalesRecognitionModifyResponseFieldCancelledCount       = big.NewInt(1 << 2)
+	postV1SalesRecognitionModifyResponseFieldNewPendingCount      = big.NewInt(1 << 3)
+	postV1SalesRecognitionModifyResponseFieldCatchUpAmount        = big.NewInt(1 << 4)
+	postV1SalesRecognitionModifyResponseFieldJournalTransactionID = big.NewInt(1 << 5)
+	postV1SalesRecognitionModifyResponseFieldNewEndDate           = big.NewInt(1 << 6)
+)
+
+type PostV1SalesRecognitionModifyResponse struct {
+	InvoiceLineID        string                                       `json:"invoiceLineId" url:"invoiceLineId"`
+	Approach             PostV1SalesRecognitionModifyResponseApproach `json:"approach" url:"approach"`
+	CancelledCount       int64                                        `json:"cancelledCount" url:"cancelledCount"`
+	NewPendingCount      int64                                        `json:"newPendingCount" url:"newPendingCount"`
+	CatchUpAmount        string                                       `json:"catchUpAmount" url:"catchUpAmount"`
+	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	NewEndDate           *string                                      `json:"newEndDate,omitempty" url:"newEndDate,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetInvoiceLineID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceLineID
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetApproach() PostV1SalesRecognitionModifyResponseApproach {
+	if p == nil {
+		return ""
+	}
+	return p.Approach
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetCancelledCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.CancelledCount
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetNewPendingCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.NewPendingCount
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetCatchUpAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.CatchUpAmount
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetJournalTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetNewEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NewEndDate
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionModifyResponseFieldInvoiceLineID)
+}
+
+// SetApproach sets the Approach field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetApproach(approach PostV1SalesRecognitionModifyResponseApproach) {
+	p.Approach = approach
+	p.require(postV1SalesRecognitionModifyResponseFieldApproach)
+}
+
+// SetCancelledCount sets the CancelledCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetCancelledCount(cancelledCount int64) {
+	p.CancelledCount = cancelledCount
+	p.require(postV1SalesRecognitionModifyResponseFieldCancelledCount)
+}
+
+// SetNewPendingCount sets the NewPendingCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetNewPendingCount(newPendingCount int64) {
+	p.NewPendingCount = newPendingCount
+	p.require(postV1SalesRecognitionModifyResponseFieldNewPendingCount)
+}
+
+// SetCatchUpAmount sets the CatchUpAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetCatchUpAmount(catchUpAmount string) {
+	p.CatchUpAmount = catchUpAmount
+	p.require(postV1SalesRecognitionModifyResponseFieldCatchUpAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetJournalTransactionID(journalTransactionID *string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRecognitionModifyResponseFieldJournalTransactionID)
+}
+
+// SetNewEndDate sets the NewEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionModifyResponse) SetNewEndDate(newEndDate *string) {
+	p.NewEndDate = newEndDate
+	p.require(postV1SalesRecognitionModifyResponseFieldNewEndDate)
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionModifyResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionModifyResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionModifyResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionModifyResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionModifyResponseApproach string
+
+const (
+	PostV1SalesRecognitionModifyResponseApproachProspective       PostV1SalesRecognitionModifyResponseApproach = "prospective"
+	PostV1SalesRecognitionModifyResponseApproachCumulativeCatchUp PostV1SalesRecognitionModifyResponseApproach = "cumulative_catch_up"
+)
+
+func NewPostV1SalesRecognitionModifyResponseApproachFromString(s string) (PostV1SalesRecognitionModifyResponseApproach, error) {
+	switch s {
+	case "prospective":
+		return PostV1SalesRecognitionModifyResponseApproachProspective, nil
+	case "cumulative_catch_up":
+		return PostV1SalesRecognitionModifyResponseApproachCumulativeCatchUp, nil
+	}
+	var t PostV1SalesRecognitionModifyResponseApproach
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionModifyResponseApproach) Ptr() *PostV1SalesRecognitionModifyResponseApproach {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionProgressResponseFieldRunID                = big.NewInt(1 << 0)
+	postV1SalesRecognitionProgressResponseFieldRunDate              = big.NewInt(1 << 1)
+	postV1SalesRecognitionProgressResponseFieldScheduleCount        = big.NewInt(1 << 2)
+	postV1SalesRecognitionProgressResponseFieldTotalAmount          = big.NewInt(1 << 3)
+	postV1SalesRecognitionProgressResponseFieldJournalTransactionID = big.NewInt(1 << 4)
+)
+
+type PostV1SalesRecognitionProgressResponse struct {
+	RunID                string `json:"runId" url:"runId"`
+	RunDate              string `json:"runDate" url:"runDate"`
+	ScheduleCount        int64  `json:"scheduleCount" url:"scheduleCount"`
+	TotalAmount          string `json:"totalAmount" url:"totalAmount"`
+	JournalTransactionID string `json:"journalTransactionId" url:"journalTransactionId"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetRunID() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunID
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetRunDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunDate
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetScheduleCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ScheduleCount
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetJournalTransactionID() string {
+	if p == nil {
+		return ""
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressResponse) SetRunID(runID string) {
+	p.RunID = runID
+	p.require(postV1SalesRecognitionProgressResponseFieldRunID)
+}
+
+// SetRunDate sets the RunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressResponse) SetRunDate(runDate string) {
+	p.RunDate = runDate
+	p.require(postV1SalesRecognitionProgressResponseFieldRunDate)
+}
+
+// SetScheduleCount sets the ScheduleCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressResponse) SetScheduleCount(scheduleCount int64) {
+	p.ScheduleCount = scheduleCount
+	p.require(postV1SalesRecognitionProgressResponseFieldScheduleCount)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressResponse) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1SalesRecognitionProgressResponseFieldTotalAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionProgressResponse) SetJournalTransactionID(journalTransactionID string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRecognitionProgressResponseFieldJournalTransactionID)
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionProgressResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionProgressResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionProgressResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionProgressResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionRunResponseFieldRunID                = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunResponseFieldRunDate              = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunResponseFieldTrigger              = big.NewInt(1 << 2)
+	postV1SalesRecognitionRunResponseFieldScheduleCount        = big.NewInt(1 << 3)
+	postV1SalesRecognitionRunResponseFieldTotalAmount          = big.NewInt(1 << 4)
+	postV1SalesRecognitionRunResponseFieldJournalTransactionID = big.NewInt(1 << 5)
+)
+
+type PostV1SalesRecognitionRunResponse struct {
+	RunID                string                                   `json:"runId" url:"runId"`
+	RunDate              string                                   `json:"runDate" url:"runDate"`
+	Trigger              PostV1SalesRecognitionRunResponseTrigger `json:"trigger" url:"trigger"`
+	ScheduleCount        int64                                    `json:"scheduleCount" url:"scheduleCount"`
+	TotalAmount          string                                   `json:"totalAmount" url:"totalAmount"`
+	JournalTransactionID string                                   `json:"journalTransactionId" url:"journalTransactionId"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetRunID() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunID
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetRunDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunDate
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetTrigger() PostV1SalesRecognitionRunResponseTrigger {
+	if p == nil {
+		return ""
+	}
+	return p.Trigger
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetScheduleCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ScheduleCount
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetJournalTransactionID() string {
+	if p == nil {
+		return ""
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRecognitionRunResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionRunResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetRunID(runID string) {
+	p.RunID = runID
+	p.require(postV1SalesRecognitionRunResponseFieldRunID)
+}
+
+// SetRunDate sets the RunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetRunDate(runDate string) {
+	p.RunDate = runDate
+	p.require(postV1SalesRecognitionRunResponseFieldRunDate)
+}
+
+// SetTrigger sets the Trigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetTrigger(trigger PostV1SalesRecognitionRunResponseTrigger) {
+	p.Trigger = trigger
+	p.require(postV1SalesRecognitionRunResponseFieldTrigger)
+}
+
+// SetScheduleCount sets the ScheduleCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetScheduleCount(scheduleCount int64) {
+	p.ScheduleCount = scheduleCount
+	p.require(postV1SalesRecognitionRunResponseFieldScheduleCount)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1SalesRecognitionRunResponseFieldTotalAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunResponse) SetJournalTransactionID(journalTransactionID string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRecognitionRunResponseFieldJournalTransactionID)
+}
+
+func (p *PostV1SalesRecognitionRunResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionRunResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionRunResponseTrigger string
+
+const (
+	PostV1SalesRecognitionRunResponseTriggerManual       PostV1SalesRecognitionRunResponseTrigger = "manual"
+	PostV1SalesRecognitionRunResponseTriggerScheduleDue  PostV1SalesRecognitionRunResponseTrigger = "schedule_due"
+	PostV1SalesRecognitionRunResponseTriggerPeriodClose  PostV1SalesRecognitionRunResponseTrigger = "period_close"
+	PostV1SalesRecognitionRunResponseTriggerDeliveryAct  PostV1SalesRecognitionRunResponseTrigger = "delivery_act"
+	PostV1SalesRecognitionRunResponseTriggerProgress     PostV1SalesRecognitionRunResponseTrigger = "progress"
+	PostV1SalesRecognitionRunResponseTriggerModification PostV1SalesRecognitionRunResponseTrigger = "modification"
+)
+
+func NewPostV1SalesRecognitionRunResponseTriggerFromString(s string) (PostV1SalesRecognitionRunResponseTrigger, error) {
+	switch s {
+	case "manual":
+		return PostV1SalesRecognitionRunResponseTriggerManual, nil
+	case "schedule_due":
+		return PostV1SalesRecognitionRunResponseTriggerScheduleDue, nil
+	case "period_close":
+		return PostV1SalesRecognitionRunResponseTriggerPeriodClose, nil
+	case "delivery_act":
+		return PostV1SalesRecognitionRunResponseTriggerDeliveryAct, nil
+	case "progress":
+		return PostV1SalesRecognitionRunResponseTriggerProgress, nil
+	case "modification":
+		return PostV1SalesRecognitionRunResponseTriggerModification, nil
+	}
+	var t PostV1SalesRecognitionRunResponseTrigger
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionRunResponseTrigger) Ptr() *PostV1SalesRecognitionRunResponseTrigger {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionRunsListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionRunsListRequestFilterItem struct {
+	Field string                                                `json:"field" url:"field"`
+	Op    PostV1SalesRecognitionRunsListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1SalesRecognitionRunsListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) GetOp() PostV1SalesRecognitionRunsListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) GetValue() *PostV1SalesRecognitionRunsListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRecognitionRunsListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) SetOp(op PostV1SalesRecognitionRunsListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1SalesRecognitionRunsListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) SetValue(value *PostV1SalesRecognitionRunsListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1SalesRecognitionRunsListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunsListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunsListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunsListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionRunsListRequestFilterItemOp string
+
+const (
+	PostV1SalesRecognitionRunsListRequestFilterItemOpEq       PostV1SalesRecognitionRunsListRequestFilterItemOp = "eq"
+	PostV1SalesRecognitionRunsListRequestFilterItemOpNe       PostV1SalesRecognitionRunsListRequestFilterItemOp = "ne"
+	PostV1SalesRecognitionRunsListRequestFilterItemOpContains PostV1SalesRecognitionRunsListRequestFilterItemOp = "contains"
+	PostV1SalesRecognitionRunsListRequestFilterItemOpGte      PostV1SalesRecognitionRunsListRequestFilterItemOp = "gte"
+	PostV1SalesRecognitionRunsListRequestFilterItemOpLte      PostV1SalesRecognitionRunsListRequestFilterItemOp = "lte"
+	PostV1SalesRecognitionRunsListRequestFilterItemOpIn       PostV1SalesRecognitionRunsListRequestFilterItemOp = "in"
+)
+
+func NewPostV1SalesRecognitionRunsListRequestFilterItemOpFromString(s string) (PostV1SalesRecognitionRunsListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1SalesRecognitionRunsListRequestFilterItemOpIn, nil
+	}
+	var t PostV1SalesRecognitionRunsListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionRunsListRequestFilterItemOp) Ptr() *PostV1SalesRecognitionRunsListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1SalesRecognitionRunsListRequestFilterItemValue struct {
+	String                                                            string
+	Double                                                            float64
+	Boolean                                                           bool
+	PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList []*PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) GetPostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList() []*PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList []*PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList"
+		p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList = valuePostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRecognitionRunsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList" || p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionRunsListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList([]*PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValue) Accept(visitor PostV1SalesRecognitionRunsListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList" || p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList(p.PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItem) Accept(visitor PostV1SalesRecognitionRunsListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1SalesRecognitionRunsListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1SalesRecognitionRunsListRequestSortItem struct {
+	Field string                                            `json:"field" url:"field"`
+	Dir   *PostV1SalesRecognitionRunsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) GetDir() *PostV1SalesRecognitionRunsListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRecognitionRunsListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) SetDir(dir *PostV1SalesRecognitionRunsListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1SalesRecognitionRunsListRequestSortItemFieldDir)
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunsListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunsListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunsListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionRunsListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionRunsListRequestSortItemDir string
+
+const (
+	PostV1SalesRecognitionRunsListRequestSortItemDirAsc  PostV1SalesRecognitionRunsListRequestSortItemDir = "asc"
+	PostV1SalesRecognitionRunsListRequestSortItemDirDesc PostV1SalesRecognitionRunsListRequestSortItemDir = "desc"
+)
+
+func NewPostV1SalesRecognitionRunsListRequestSortItemDirFromString(s string) (PostV1SalesRecognitionRunsListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1SalesRecognitionRunsListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1SalesRecognitionRunsListRequestSortItemDirDesc, nil
+	}
+	var t PostV1SalesRecognitionRunsListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionRunsListRequestSortItemDir) Ptr() *PostV1SalesRecognitionRunsListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionRunsListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunsListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunsListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1SalesRecognitionRunsListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRecognitionRunsListResponse struct {
+	Rows     []*PostV1SalesRecognitionRunsListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                             `json:"page" url:"page"`
+	PageSize int64                                             `json:"pageSize" url:"pageSize"`
+	Total    int64                                             `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) GetRows() []*PostV1SalesRecognitionRunsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponse) SetRows(rows []*PostV1SalesRecognitionRunsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1SalesRecognitionRunsListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1SalesRecognitionRunsListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRecognitionRunsListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1SalesRecognitionRunsListResponseFieldTotal)
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionRunsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionRunsListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldRunDate              = big.NewInt(1 << 1)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldTrigger              = big.NewInt(1 << 2)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldScheduleCount        = big.NewInt(1 << 3)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldTotalAmount          = big.NewInt(1 << 4)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 5)
+	postV1SalesRecognitionRunsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 6)
+)
+
+type PostV1SalesRecognitionRunsListResponseRowsItem struct {
+	ID                   string                                                `json:"id" url:"id"`
+	RunDate              string                                                `json:"runDate" url:"runDate"`
+	Trigger              PostV1SalesRecognitionRunsListResponseRowsItemTrigger `json:"trigger" url:"trigger"`
+	ScheduleCount        int64                                                 `json:"scheduleCount" url:"scheduleCount"`
+	TotalAmount          string                                                `json:"totalAmount" url:"totalAmount"`
+	JournalTransactionID string                                                `json:"journalTransactionId" url:"journalTransactionId"`
+	CreatedAt            string                                                `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetRunDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunDate
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetTrigger() PostV1SalesRecognitionRunsListResponseRowsItemTrigger {
+	if p == nil {
+		return ""
+	}
+	return p.Trigger
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetScheduleCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ScheduleCount
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetJournalTransactionID() string {
+	if p == nil {
+		return ""
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldID)
+}
+
+// SetRunDate sets the RunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetRunDate(runDate string) {
+	p.RunDate = runDate
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldRunDate)
+}
+
+// SetTrigger sets the Trigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetTrigger(trigger PostV1SalesRecognitionRunsListResponseRowsItemTrigger) {
+	p.Trigger = trigger
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldTrigger)
+}
+
+// SetScheduleCount sets the ScheduleCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetScheduleCount(scheduleCount int64) {
+	p.ScheduleCount = scheduleCount
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldScheduleCount)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldTotalAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetJournalTransactionID(journalTransactionID string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1SalesRecognitionRunsListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionRunsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionRunsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionRunsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionRunsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionRunsListResponseRowsItemTrigger string
+
+const (
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerManual       PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "manual"
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerScheduleDue  PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "schedule_due"
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerPeriodClose  PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "period_close"
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerDeliveryAct  PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "delivery_act"
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerProgress     PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "progress"
+	PostV1SalesRecognitionRunsListResponseRowsItemTriggerModification PostV1SalesRecognitionRunsListResponseRowsItemTrigger = "modification"
+)
+
+func NewPostV1SalesRecognitionRunsListResponseRowsItemTriggerFromString(s string) (PostV1SalesRecognitionRunsListResponseRowsItemTrigger, error) {
+	switch s {
+	case "manual":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerManual, nil
+	case "schedule_due":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerScheduleDue, nil
+	case "period_close":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerPeriodClose, nil
+	case "delivery_act":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerDeliveryAct, nil
+	case "progress":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerProgress, nil
+	case "modification":
+		return PostV1SalesRecognitionRunsListResponseRowsItemTriggerModification, nil
+	}
+	var t PostV1SalesRecognitionRunsListResponseRowsItemTrigger
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionRunsListResponseRowsItemTrigger) Ptr() *PostV1SalesRecognitionRunsListResponseRowsItemTrigger {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionSchedulesListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRecognitionSchedulesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1SalesRecognitionSchedulesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItem struct {
+	Field string                                                     `json:"field" url:"field"`
+	Op    PostV1SalesRecognitionSchedulesListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1SalesRecognitionSchedulesListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) GetOp() PostV1SalesRecognitionSchedulesListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) GetValue() *PostV1SalesRecognitionSchedulesListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRecognitionSchedulesListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) SetOp(op PostV1SalesRecognitionSchedulesListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1SalesRecognitionSchedulesListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) SetValue(value *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1SalesRecognitionSchedulesListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSchedulesListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSchedulesListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSchedulesListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItemOp string
+
+const (
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpEq       PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "eq"
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpNe       PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "ne"
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpContains PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "contains"
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpGte      PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "gte"
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpLte      PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "lte"
+	PostV1SalesRecognitionSchedulesListRequestFilterItemOpIn       PostV1SalesRecognitionSchedulesListRequestFilterItemOp = "in"
+)
+
+func NewPostV1SalesRecognitionSchedulesListRequestFilterItemOpFromString(s string) (PostV1SalesRecognitionSchedulesListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1SalesRecognitionSchedulesListRequestFilterItemOpIn, nil
+	}
+	var t PostV1SalesRecognitionSchedulesListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionSchedulesListRequestFilterItemOp) Ptr() *PostV1SalesRecognitionSchedulesListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItemValue struct {
+	String                                                                 string
+	Double                                                                 float64
+	Boolean                                                                bool
+	PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList []*PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) GetPostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList() []*PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList []*PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList"
+		p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList = valuePostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRecognitionSchedulesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList" || p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList([]*PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValue) Accept(visitor PostV1SalesRecognitionSchedulesListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList" || p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList(p.PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItem) Accept(visitor PostV1SalesRecognitionSchedulesListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1SalesRecognitionSchedulesListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRecognitionSchedulesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1SalesRecognitionSchedulesListRequestSortItem struct {
+	Field string                                                 `json:"field" url:"field"`
+	Dir   *PostV1SalesRecognitionSchedulesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) GetDir() *PostV1SalesRecognitionSchedulesListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRecognitionSchedulesListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) SetDir(dir *PostV1SalesRecognitionSchedulesListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1SalesRecognitionSchedulesListRequestSortItemFieldDir)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSchedulesListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSchedulesListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSchedulesListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionSchedulesListRequestSortItemDir string
+
+const (
+	PostV1SalesRecognitionSchedulesListRequestSortItemDirAsc  PostV1SalesRecognitionSchedulesListRequestSortItemDir = "asc"
+	PostV1SalesRecognitionSchedulesListRequestSortItemDirDesc PostV1SalesRecognitionSchedulesListRequestSortItemDir = "desc"
+)
+
+func NewPostV1SalesRecognitionSchedulesListRequestSortItemDirFromString(s string) (PostV1SalesRecognitionSchedulesListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1SalesRecognitionSchedulesListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1SalesRecognitionSchedulesListRequestSortItemDirDesc, nil
+	}
+	var t PostV1SalesRecognitionSchedulesListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionSchedulesListRequestSortItemDir) Ptr() *PostV1SalesRecognitionSchedulesListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionSchedulesListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1SalesRecognitionSchedulesListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1SalesRecognitionSchedulesListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1SalesRecognitionSchedulesListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRecognitionSchedulesListResponse struct {
+	Rows     []*PostV1SalesRecognitionSchedulesListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                                  `json:"page" url:"page"`
+	PageSize int64                                                  `json:"pageSize" url:"pageSize"`
+	Total    int64                                                  `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) GetRows() []*PostV1SalesRecognitionSchedulesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponse) SetRows(rows []*PostV1SalesRecognitionSchedulesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1SalesRecognitionSchedulesListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1SalesRecognitionSchedulesListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRecognitionSchedulesListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1SalesRecognitionSchedulesListResponseFieldTotal)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSchedulesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSchedulesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSchedulesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldInvoiceID            = big.NewInt(1 << 1)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldInvoiceLineID        = big.NewInt(1 << 2)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldMethod               = big.NewInt(1 << 3)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldStatus               = big.NewInt(1 << 4)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldScheduleDate         = big.NewInt(1 << 5)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldDescription          = big.NewInt(1 << 6)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldAmount               = big.NewInt(1 << 7)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 8)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldRecognizedAt         = big.NewInt(1 << 9)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldSortOrder            = big.NewInt(1 << 10)
+	postV1SalesRecognitionSchedulesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 11)
+)
+
+type PostV1SalesRecognitionSchedulesListResponseRowsItem struct {
+	ID                   string                                                    `json:"id" url:"id"`
+	InvoiceID            string                                                    `json:"invoiceId" url:"invoiceId"`
+	InvoiceLineID        string                                                    `json:"invoiceLineId" url:"invoiceLineId"`
+	Method               PostV1SalesRecognitionSchedulesListResponseRowsItemMethod `json:"method" url:"method"`
+	Status               PostV1SalesRecognitionSchedulesListResponseRowsItemStatus `json:"status" url:"status"`
+	ScheduleDate         *string                                                   `json:"scheduleDate,omitempty" url:"scheduleDate,omitempty"`
+	Description          *string                                                   `json:"description,omitempty" url:"description,omitempty"`
+	Amount               string                                                    `json:"amount" url:"amount"`
+	JournalTransactionID *string                                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	RecognizedAt         *string                                                   `json:"recognizedAt,omitempty" url:"recognizedAt,omitempty"`
+	SortOrder            int64                                                     `json:"sortOrder" url:"sortOrder"`
+	CreatedAt            string                                                    `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetInvoiceLineID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceLineID
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetMethod() PostV1SalesRecognitionSchedulesListResponseRowsItemMethod {
+	if p == nil {
+		return ""
+	}
+	return p.Method
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetStatus() PostV1SalesRecognitionSchedulesListResponseRowsItemStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetScheduleDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScheduleDate
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetJournalTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetRecognizedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RecognizedAt
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetSortOrder() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SortOrder
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldInvoiceID)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldInvoiceLineID)
+}
+
+// SetMethod sets the Method field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetMethod(method PostV1SalesRecognitionSchedulesListResponseRowsItemMethod) {
+	p.Method = method
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldMethod)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetStatus(status PostV1SalesRecognitionSchedulesListResponseRowsItemStatus) {
+	p.Status = status
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldStatus)
+}
+
+// SetScheduleDate sets the ScheduleDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetScheduleDate(scheduleDate *string) {
+	p.ScheduleDate = scheduleDate
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldScheduleDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetRecognizedAt sets the RecognizedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetRecognizedAt(recognizedAt *string) {
+	p.RecognizedAt = recognizedAt
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldRecognizedAt)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetSortOrder(sortOrder int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldSortOrder)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1SalesRecognitionSchedulesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSchedulesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSchedulesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSchedulesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSchedulesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionSchedulesListResponseRowsItemMethod string
+
+const (
+	PostV1SalesRecognitionSchedulesListResponseRowsItemMethodPointInTime     PostV1SalesRecognitionSchedulesListResponseRowsItemMethod = "point_in_time"
+	PostV1SalesRecognitionSchedulesListResponseRowsItemMethodRatable         PostV1SalesRecognitionSchedulesListResponseRowsItemMethod = "ratable"
+	PostV1SalesRecognitionSchedulesListResponseRowsItemMethodMilestone       PostV1SalesRecognitionSchedulesListResponseRowsItemMethod = "milestone"
+	PostV1SalesRecognitionSchedulesListResponseRowsItemMethodPercentComplete PostV1SalesRecognitionSchedulesListResponseRowsItemMethod = "percent_complete"
+)
+
+func NewPostV1SalesRecognitionSchedulesListResponseRowsItemMethodFromString(s string) (PostV1SalesRecognitionSchedulesListResponseRowsItemMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemMethodRatable, nil
+	case "milestone":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemMethodPercentComplete, nil
+	}
+	var t PostV1SalesRecognitionSchedulesListResponseRowsItemMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionSchedulesListResponseRowsItemMethod) Ptr() *PostV1SalesRecognitionSchedulesListResponseRowsItemMethod {
+	return &p
+}
+
+type PostV1SalesRecognitionSchedulesListResponseRowsItemStatus string
+
+const (
+	PostV1SalesRecognitionSchedulesListResponseRowsItemStatusPending    PostV1SalesRecognitionSchedulesListResponseRowsItemStatus = "pending"
+	PostV1SalesRecognitionSchedulesListResponseRowsItemStatusRecognized PostV1SalesRecognitionSchedulesListResponseRowsItemStatus = "recognized"
+	PostV1SalesRecognitionSchedulesListResponseRowsItemStatusCancelled  PostV1SalesRecognitionSchedulesListResponseRowsItemStatus = "cancelled"
+)
+
+func NewPostV1SalesRecognitionSchedulesListResponseRowsItemStatusFromString(s string) (PostV1SalesRecognitionSchedulesListResponseRowsItemStatus, error) {
+	switch s {
+	case "pending":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemStatusPending, nil
+	case "recognized":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemStatusRecognized, nil
+	case "cancelled":
+		return PostV1SalesRecognitionSchedulesListResponseRowsItemStatusCancelled, nil
+	}
+	var t PostV1SalesRecognitionSchedulesListResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionSchedulesListResponseRowsItemStatus) Ptr() *PostV1SalesRecognitionSchedulesListResponseRowsItemStatus {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionSummaryResponseFieldRows   = big.NewInt(1 << 0)
+	postV1SalesRecognitionSummaryResponseFieldTotals = big.NewInt(1 << 1)
+)
+
+type PostV1SalesRecognitionSummaryResponse struct {
+	Rows   []*PostV1SalesRecognitionSummaryResponseRowsItem `json:"rows" url:"rows"`
+	Totals *PostV1SalesRecognitionSummaryResponseTotals     `json:"totals" url:"totals"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) GetRows() []*PostV1SalesRecognitionSummaryResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) GetTotals() *PostV1SalesRecognitionSummaryResponseTotals {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponse) SetRows(rows []*PostV1SalesRecognitionSummaryResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1SalesRecognitionSummaryResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponse) SetTotals(totals *PostV1SalesRecognitionSummaryResponseTotals) {
+	p.Totals = totals
+	p.require(postV1SalesRecognitionSummaryResponseFieldTotals)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSummaryResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSummaryResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSummaryResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceID         = big.NewInt(1 << 0)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceFullNumber = big.NewInt(1 << 1)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceLineID     = big.NewInt(1 << 2)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldLineDescription   = big.NewInt(1 << 3)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldMethod            = big.NewInt(1 << 4)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldDeferredTotal     = big.NewInt(1 << 5)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldRecognizedToDate  = big.NewInt(1 << 6)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldRemaining         = big.NewInt(1 << 7)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldPendingCount      = big.NewInt(1 << 8)
+	postV1SalesRecognitionSummaryResponseRowsItemFieldNextScheduleDate  = big.NewInt(1 << 9)
+)
+
+type PostV1SalesRecognitionSummaryResponseRowsItem struct {
+	InvoiceID         string                                              `json:"invoiceId" url:"invoiceId"`
+	InvoiceFullNumber *string                                             `json:"invoiceFullNumber,omitempty" url:"invoiceFullNumber,omitempty"`
+	InvoiceLineID     string                                              `json:"invoiceLineId" url:"invoiceLineId"`
+	LineDescription   string                                              `json:"lineDescription" url:"lineDescription"`
+	Method            PostV1SalesRecognitionSummaryResponseRowsItemMethod `json:"method" url:"method"`
+	DeferredTotal     string                                              `json:"deferredTotal" url:"deferredTotal"`
+	RecognizedToDate  string                                              `json:"recognizedToDate" url:"recognizedToDate"`
+	Remaining         string                                              `json:"remaining" url:"remaining"`
+	PendingCount      int64                                               `json:"pendingCount" url:"pendingCount"`
+	NextScheduleDate  *string                                             `json:"nextScheduleDate,omitempty" url:"nextScheduleDate,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetInvoiceFullNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceFullNumber
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetInvoiceLineID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceLineID
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetLineDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.LineDescription
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetMethod() PostV1SalesRecognitionSummaryResponseRowsItemMethod {
+	if p == nil {
+		return ""
+	}
+	return p.Method
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetDeferredTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.DeferredTotal
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetRecognizedToDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.RecognizedToDate
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetRemaining() string {
+	if p == nil {
+		return ""
+	}
+	return p.Remaining
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetPendingCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PendingCount
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetNextScheduleDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextScheduleDate
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceID)
+}
+
+// SetInvoiceFullNumber sets the InvoiceFullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetInvoiceFullNumber(invoiceFullNumber *string) {
+	p.InvoiceFullNumber = invoiceFullNumber
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceFullNumber)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetInvoiceLineID(invoiceLineID string) {
+	p.InvoiceLineID = invoiceLineID
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldInvoiceLineID)
+}
+
+// SetLineDescription sets the LineDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetLineDescription(lineDescription string) {
+	p.LineDescription = lineDescription
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldLineDescription)
+}
+
+// SetMethod sets the Method field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetMethod(method PostV1SalesRecognitionSummaryResponseRowsItemMethod) {
+	p.Method = method
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldMethod)
+}
+
+// SetDeferredTotal sets the DeferredTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetDeferredTotal(deferredTotal string) {
+	p.DeferredTotal = deferredTotal
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldDeferredTotal)
+}
+
+// SetRecognizedToDate sets the RecognizedToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetRecognizedToDate(recognizedToDate string) {
+	p.RecognizedToDate = recognizedToDate
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldRecognizedToDate)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetRemaining(remaining string) {
+	p.Remaining = remaining
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldRemaining)
+}
+
+// SetPendingCount sets the PendingCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetPendingCount(pendingCount int64) {
+	p.PendingCount = pendingCount
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldPendingCount)
+}
+
+// SetNextScheduleDate sets the NextScheduleDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) SetNextScheduleDate(nextScheduleDate *string) {
+	p.NextScheduleDate = nextScheduleDate
+	p.require(postV1SalesRecognitionSummaryResponseRowsItemFieldNextScheduleDate)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSummaryResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSummaryResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSummaryResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRecognitionSummaryResponseRowsItemMethod string
+
+const (
+	PostV1SalesRecognitionSummaryResponseRowsItemMethodPointInTime     PostV1SalesRecognitionSummaryResponseRowsItemMethod = "point_in_time"
+	PostV1SalesRecognitionSummaryResponseRowsItemMethodRatable         PostV1SalesRecognitionSummaryResponseRowsItemMethod = "ratable"
+	PostV1SalesRecognitionSummaryResponseRowsItemMethodMilestone       PostV1SalesRecognitionSummaryResponseRowsItemMethod = "milestone"
+	PostV1SalesRecognitionSummaryResponseRowsItemMethodPercentComplete PostV1SalesRecognitionSummaryResponseRowsItemMethod = "percent_complete"
+)
+
+func NewPostV1SalesRecognitionSummaryResponseRowsItemMethodFromString(s string) (PostV1SalesRecognitionSummaryResponseRowsItemMethod, error) {
+	switch s {
+	case "point_in_time":
+		return PostV1SalesRecognitionSummaryResponseRowsItemMethodPointInTime, nil
+	case "ratable":
+		return PostV1SalesRecognitionSummaryResponseRowsItemMethodRatable, nil
+	case "milestone":
+		return PostV1SalesRecognitionSummaryResponseRowsItemMethodMilestone, nil
+	case "percent_complete":
+		return PostV1SalesRecognitionSummaryResponseRowsItemMethodPercentComplete, nil
+	}
+	var t PostV1SalesRecognitionSummaryResponseRowsItemMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRecognitionSummaryResponseRowsItemMethod) Ptr() *PostV1SalesRecognitionSummaryResponseRowsItemMethod {
+	return &p
+}
+
+var (
+	postV1SalesRecognitionSummaryResponseTotalsFieldDeferredTotal    = big.NewInt(1 << 0)
+	postV1SalesRecognitionSummaryResponseTotalsFieldRecognizedToDate = big.NewInt(1 << 1)
+	postV1SalesRecognitionSummaryResponseTotalsFieldRemaining        = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRecognitionSummaryResponseTotals struct {
+	DeferredTotal    string `json:"deferredTotal" url:"deferredTotal"`
+	RecognizedToDate string `json:"recognizedToDate" url:"recognizedToDate"`
+	Remaining        string `json:"remaining" url:"remaining"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) GetDeferredTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.DeferredTotal
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) GetRecognizedToDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.RecognizedToDate
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) GetRemaining() string {
+	if p == nil {
+		return ""
+	}
+	return p.Remaining
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDeferredTotal sets the DeferredTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseTotals) SetDeferredTotal(deferredTotal string) {
+	p.DeferredTotal = deferredTotal
+	p.require(postV1SalesRecognitionSummaryResponseTotalsFieldDeferredTotal)
+}
+
+// SetRecognizedToDate sets the RecognizedToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseTotals) SetRecognizedToDate(recognizedToDate string) {
+	p.RecognizedToDate = recognizedToDate
+	p.require(postV1SalesRecognitionSummaryResponseTotalsFieldRecognizedToDate)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRecognitionSummaryResponseTotals) SetRemaining(remaining string) {
+	p.Remaining = remaining
+	p.require(postV1SalesRecognitionSummaryResponseTotalsFieldRemaining)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRecognitionSummaryResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRecognitionSummaryResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRecognitionSummaryResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRecognitionSummaryResponseTotals) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRefundLiabilityListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1SalesRefundLiabilityListRequestFilterItem struct {
+	Field string                                                `json:"field" url:"field"`
+	Op    PostV1SalesRefundLiabilityListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1SalesRefundLiabilityListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) GetOp() PostV1SalesRefundLiabilityListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) GetValue() *PostV1SalesRefundLiabilityListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRefundLiabilityListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) SetOp(op PostV1SalesRefundLiabilityListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1SalesRefundLiabilityListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) SetValue(value *PostV1SalesRefundLiabilityListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1SalesRefundLiabilityListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRefundLiabilityListRequestFilterItemOp string
+
+const (
+	PostV1SalesRefundLiabilityListRequestFilterItemOpEq       PostV1SalesRefundLiabilityListRequestFilterItemOp = "eq"
+	PostV1SalesRefundLiabilityListRequestFilterItemOpNe       PostV1SalesRefundLiabilityListRequestFilterItemOp = "ne"
+	PostV1SalesRefundLiabilityListRequestFilterItemOpContains PostV1SalesRefundLiabilityListRequestFilterItemOp = "contains"
+	PostV1SalesRefundLiabilityListRequestFilterItemOpGte      PostV1SalesRefundLiabilityListRequestFilterItemOp = "gte"
+	PostV1SalesRefundLiabilityListRequestFilterItemOpLte      PostV1SalesRefundLiabilityListRequestFilterItemOp = "lte"
+	PostV1SalesRefundLiabilityListRequestFilterItemOpIn       PostV1SalesRefundLiabilityListRequestFilterItemOp = "in"
+)
+
+func NewPostV1SalesRefundLiabilityListRequestFilterItemOpFromString(s string) (PostV1SalesRefundLiabilityListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1SalesRefundLiabilityListRequestFilterItemOpIn, nil
+	}
+	var t PostV1SalesRefundLiabilityListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRefundLiabilityListRequestFilterItemOp) Ptr() *PostV1SalesRefundLiabilityListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1SalesRefundLiabilityListRequestFilterItemValue struct {
+	String                                                            string
+	Double                                                            float64
+	Boolean                                                           bool
+	PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList []*PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) GetPostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList() []*PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList []*PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList"
+		p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList = valuePostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRefundLiabilityListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList" || p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRefundLiabilityListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList([]*PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValue) Accept(visitor PostV1SalesRefundLiabilityListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList" || p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList(p.PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItem) Accept(visitor PostV1SalesRefundLiabilityListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1SalesRefundLiabilityListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1SalesRefundLiabilityListRequestSortItem struct {
+	Field string                                            `json:"field" url:"field"`
+	Dir   *PostV1SalesRefundLiabilityListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) GetDir() *PostV1SalesRefundLiabilityListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1SalesRefundLiabilityListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) SetDir(dir *PostV1SalesRefundLiabilityListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1SalesRefundLiabilityListRequestSortItemFieldDir)
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRefundLiabilityListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesRefundLiabilityListRequestSortItemDir string
+
+const (
+	PostV1SalesRefundLiabilityListRequestSortItemDirAsc  PostV1SalesRefundLiabilityListRequestSortItemDir = "asc"
+	PostV1SalesRefundLiabilityListRequestSortItemDirDesc PostV1SalesRefundLiabilityListRequestSortItemDir = "desc"
+)
+
+func NewPostV1SalesRefundLiabilityListRequestSortItemDirFromString(s string) (PostV1SalesRefundLiabilityListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1SalesRefundLiabilityListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1SalesRefundLiabilityListRequestSortItemDirDesc, nil
+	}
+	var t PostV1SalesRefundLiabilityListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesRefundLiabilityListRequestSortItemDir) Ptr() *PostV1SalesRefundLiabilityListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1SalesRefundLiabilityListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1SalesRefundLiabilityListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1SalesRefundLiabilityListResponse struct {
+	Rows     []*PostV1SalesRefundLiabilityListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                             `json:"page" url:"page"`
+	PageSize int64                                             `json:"pageSize" url:"pageSize"`
+	Total    int64                                             `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) GetRows() []*PostV1SalesRefundLiabilityListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponse) SetRows(rows []*PostV1SalesRefundLiabilityListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1SalesRefundLiabilityListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1SalesRefundLiabilityListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1SalesRefundLiabilityListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1SalesRefundLiabilityListResponseFieldTotal)
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRefundLiabilityListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRefundLiabilityListResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldInvoiceID         = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldInvoiceFullNumber = big.NewInt(1 << 2)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldEstimated         = big.NewInt(1 << 3)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldConsumed          = big.NewInt(1 << 4)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldSettlementRefunds = big.NewInt(1 << 5)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldRemaining         = big.NewInt(1 << 6)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 7)
+	postV1SalesRefundLiabilityListResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 8)
+)
+
+type PostV1SalesRefundLiabilityListResponseRowsItem struct {
+	ID                string  `json:"id" url:"id"`
+	InvoiceID         string  `json:"invoiceId" url:"invoiceId"`
+	InvoiceFullNumber *string `json:"invoiceFullNumber,omitempty" url:"invoiceFullNumber,omitempty"`
+	Estimated         string  `json:"estimated" url:"estimated"`
+	Consumed          string  `json:"consumed" url:"consumed"`
+	SettlementRefunds string  `json:"settlementRefunds" url:"settlementRefunds"`
+	Remaining         string  `json:"remaining" url:"remaining"`
+	CreatedAt         string  `json:"createdAt" url:"createdAt"`
+	UpdatedAt         string  `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetInvoiceFullNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceFullNumber
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetEstimated() string {
+	if p == nil {
+		return ""
+	}
+	return p.Estimated
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetConsumed() string {
+	if p == nil {
+		return ""
+	}
+	return p.Consumed
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetSettlementRefunds() string {
+	if p == nil {
+		return ""
+	}
+	return p.SettlementRefunds
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetRemaining() string {
+	if p == nil {
+		return ""
+	}
+	return p.Remaining
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldInvoiceID)
+}
+
+// SetInvoiceFullNumber sets the InvoiceFullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetInvoiceFullNumber(invoiceFullNumber *string) {
+	p.InvoiceFullNumber = invoiceFullNumber
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldInvoiceFullNumber)
+}
+
+// SetEstimated sets the Estimated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetEstimated(estimated string) {
+	p.Estimated = estimated
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldEstimated)
+}
+
+// SetConsumed sets the Consumed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetConsumed(consumed string) {
+	p.Consumed = consumed
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldConsumed)
+}
+
+// SetSettlementRefunds sets the SettlementRefunds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetSettlementRefunds(settlementRefunds string) {
+	p.SettlementRefunds = settlementRefunds
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldSettlementRefunds)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetRemaining(remaining string) {
+	p.Remaining = remaining
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldRemaining)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1SalesRefundLiabilityListResponseRowsItemFieldUpdatedAt)
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRefundLiabilityListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1SalesRefundLiabilityTrueUpResponseFieldInvoiceID            = big.NewInt(1 << 0)
+	postV1SalesRefundLiabilityTrueUpResponseFieldEstimated            = big.NewInt(1 << 1)
+	postV1SalesRefundLiabilityTrueUpResponseFieldConsumed             = big.NewInt(1 << 2)
+	postV1SalesRefundLiabilityTrueUpResponseFieldRemaining            = big.NewInt(1 << 3)
+	postV1SalesRefundLiabilityTrueUpResponseFieldDelta                = big.NewInt(1 << 4)
+	postV1SalesRefundLiabilityTrueUpResponseFieldJournalTransactionID = big.NewInt(1 << 5)
+)
+
+type PostV1SalesRefundLiabilityTrueUpResponse struct {
+	InvoiceID            string `json:"invoiceId" url:"invoiceId"`
+	Estimated            string `json:"estimated" url:"estimated"`
+	Consumed             string `json:"consumed" url:"consumed"`
+	Remaining            string `json:"remaining" url:"remaining"`
+	Delta                string `json:"delta" url:"delta"`
+	JournalTransactionID string `json:"journalTransactionId" url:"journalTransactionId"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetEstimated() string {
+	if p == nil {
+		return ""
+	}
+	return p.Estimated
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetConsumed() string {
+	if p == nil {
+		return ""
+	}
+	return p.Consumed
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetRemaining() string {
+	if p == nil {
+		return ""
+	}
+	return p.Remaining
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetDelta() string {
+	if p == nil {
+		return ""
+	}
+	return p.Delta
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetJournalTransactionID() string {
+	if p == nil {
+		return ""
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldInvoiceID)
+}
+
+// SetEstimated sets the Estimated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetEstimated(estimated string) {
+	p.Estimated = estimated
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldEstimated)
+}
+
+// SetConsumed sets the Consumed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetConsumed(consumed string) {
+	p.Consumed = consumed
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldConsumed)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetRemaining(remaining string) {
+	p.Remaining = remaining
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldRemaining)
+}
+
+// SetDelta sets the Delta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetDelta(delta string) {
+	p.Delta = delta
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldDelta)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) SetJournalTransactionID(journalTransactionID string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1SalesRefundLiabilityTrueUpResponseFieldJournalTransactionID)
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesRefundLiabilityTrueUpResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesRefundLiabilityTrueUpResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesRefundLiabilityTrueUpResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesRefundLiabilityTrueUpResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }

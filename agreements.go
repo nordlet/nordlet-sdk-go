@@ -10,33 +10,81 @@ import (
 )
 
 var (
-	postV1AgreementsAgreementsCreateRequestFieldTypeID    = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateRequestFieldPartnerID = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateRequestFieldNumber    = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateRequestFieldName      = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateRequestFieldStartDate = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateRequestFieldEndDate   = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateRequestFieldAutoRenew = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateRequestFieldValue     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateRequestFieldCurrency  = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateRequestFieldStatus    = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateRequestFieldNotes     = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateRequestFieldItems     = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsBillingRunRequestFieldAsOfDate = big.NewInt(1 << 0)
+)
+
+type PostV1AgreementsAgreementsBillingRunRequest struct {
+	AsOfDate *string `json:"asOfDate,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunRequest) SetAsOfDate(asOfDate *string) {
+	p.AsOfDate = asOfDate
+	p.require(postV1AgreementsAgreementsBillingRunRequestFieldAsOfDate)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsBillingRunRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsBillingRunRequest(body)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsBillingRunRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AgreementsAgreementsCreateRequestFieldTypeID        = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsCreateRequestFieldPartnerID     = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsCreateRequestFieldNumber        = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateRequestFieldName          = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateRequestFieldStartDate     = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateRequestFieldEndDate       = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsCreateRequestFieldAutoRenew     = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsCreateRequestFieldValue         = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsCreateRequestFieldBillingPeriod = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsCreateRequestFieldCurrency      = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsCreateRequestFieldStatus        = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsCreateRequestFieldNotes         = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsCreateRequestFieldItems         = big.NewInt(1 << 12)
 )
 
 type PostV1AgreementsAgreementsCreateRequest struct {
-	TypeID    *string                                             `json:"typeId,omitempty" url:"-"`
-	PartnerID string                                              `json:"partnerId" url:"-"`
-	Number    string                                              `json:"number" url:"-"`
-	Name      *string                                             `json:"name,omitempty" url:"-"`
-	StartDate string                                              `json:"startDate" url:"-"`
-	EndDate   *string                                             `json:"endDate,omitempty" url:"-"`
-	AutoRenew *bool                                               `json:"autoRenew,omitempty" url:"-"`
-	Value     *string                                             `json:"value,omitempty" url:"-"`
-	Currency  *string                                             `json:"currency,omitempty" url:"-"`
-	Status    *PostV1AgreementsAgreementsCreateRequestStatus      `json:"status,omitempty" url:"-"`
-	Notes     *string                                             `json:"notes,omitempty" url:"-"`
-	Items     []*PostV1AgreementsAgreementsCreateRequestItemsItem `json:"items,omitempty" url:"-"`
+	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
+	PartnerID     string                                                `json:"partnerId" url:"-"`
+	Number        string                                                `json:"number" url:"-"`
+	Name          *string                                               `json:"name,omitempty" url:"-"`
+	StartDate     string                                                `json:"startDate" url:"-"`
+	EndDate       *string                                               `json:"endDate,omitempty" url:"-"`
+	AutoRenew     *bool                                                 `json:"autoRenew,omitempty" url:"-"`
+	Value         *string                                               `json:"value,omitempty" url:"-"`
+	BillingPeriod *PostV1AgreementsAgreementsCreateRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
+	Currency      *string                                               `json:"currency,omitempty" url:"-"`
+	Status        *PostV1AgreementsAgreementsCreateRequestStatus        `json:"status,omitempty" url:"-"`
+	Notes         *string                                               `json:"notes,omitempty" url:"-"`
+	Items         []*PostV1AgreementsAgreementsCreateRequestItemsItem   `json:"items,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -103,6 +151,13 @@ func (p *PostV1AgreementsAgreementsCreateRequest) SetAutoRenew(autoRenew *bool) 
 func (p *PostV1AgreementsAgreementsCreateRequest) SetValue(value *string) {
 	p.Value = value
 	p.require(postV1AgreementsAgreementsCreateRequestFieldValue)
+}
+
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequest) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsCreateRequestBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsCreateRequestFieldBillingPeriod)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
@@ -191,6 +246,61 @@ func (p *PostV1AgreementsAgreementsDeleteRequest) UnmarshalJSON(data []byte) err
 
 func (p *PostV1AgreementsAgreementsDeleteRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1AgreementsAgreementsDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AgreementsAgreementsGenerateInvoiceRequestFieldID       = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsGenerateInvoiceRequestFieldAsOfDate = big.NewInt(1 << 1)
+)
+
+type PostV1AgreementsAgreementsGenerateInvoiceRequest struct {
+	ID       string  `json:"id" url:"-"`
+	AsOfDate *string `json:"asOfDate,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1AgreementsAgreementsGenerateInvoiceRequestFieldID)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) SetAsOfDate(asOfDate *string) {
+	p.AsOfDate = asOfDate
+	p.require(postV1AgreementsAgreementsGenerateInvoiceRequestFieldAsOfDate)
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsGenerateInvoiceRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsGenerateInvoiceRequest(body)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsGenerateInvoiceRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -320,25 +430,27 @@ func (p *PostV1AgreementsAgreementsListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AgreementsAgreementsUpdateRequestFieldID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateRequestFieldTypeID    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateRequestFieldName      = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateRequestFieldEndDate   = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateRequestFieldAutoRenew = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateRequestFieldValue     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateRequestFieldStatus    = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateRequestFieldNotes     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsUpdateRequestFieldID            = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsUpdateRequestFieldTypeID        = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsUpdateRequestFieldName          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsUpdateRequestFieldEndDate       = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsUpdateRequestFieldAutoRenew     = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateRequestFieldValue         = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsUpdateRequestFieldStatus        = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsUpdateRequestFieldNotes         = big.NewInt(1 << 8)
 )
 
 type PostV1AgreementsAgreementsUpdateRequest struct {
-	ID        string                                         `json:"id" url:"-"`
-	TypeID    *string                                        `json:"typeId,omitempty" url:"-"`
-	Name      *string                                        `json:"name,omitempty" url:"-"`
-	EndDate   *string                                        `json:"endDate,omitempty" url:"-"`
-	AutoRenew *bool                                          `json:"autoRenew,omitempty" url:"-"`
-	Value     *string                                        `json:"value,omitempty" url:"-"`
-	Status    *PostV1AgreementsAgreementsUpdateRequestStatus `json:"status,omitempty" url:"-"`
-	Notes     *string                                        `json:"notes,omitempty" url:"-"`
+	ID            string                                                `json:"id" url:"-"`
+	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
+	Name          *string                                               `json:"name,omitempty" url:"-"`
+	EndDate       *string                                               `json:"endDate,omitempty" url:"-"`
+	AutoRenew     *bool                                                 `json:"autoRenew,omitempty" url:"-"`
+	Value         *string                                               `json:"value,omitempty" url:"-"`
+	BillingPeriod *PostV1AgreementsAgreementsUpdateRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
+	Status        *PostV1AgreementsAgreementsUpdateRequestStatus        `json:"status,omitempty" url:"-"`
+	Notes         *string                                               `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -391,6 +503,13 @@ func (p *PostV1AgreementsAgreementsUpdateRequest) SetAutoRenew(autoRenew *bool) 
 func (p *PostV1AgreementsAgreementsUpdateRequest) SetValue(value *string) {
 	p.Value = value
 	p.require(postV1AgreementsAgreementsUpdateRequestFieldValue)
+}
+
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateRequest) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsUpdateRequestBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -785,17 +904,392 @@ func (p *PostV1AgreementsTypesListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldItemID      = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldDescription = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldQuantity    = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateRequestItemsItemFieldUnitPrice   = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsBillingRunResponseFieldGenerated = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsBillingRunResponseFieldExpired   = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsBillingRunResponseFieldErrors    = big.NewInt(1 << 2)
+)
+
+type PostV1AgreementsAgreementsBillingRunResponse struct {
+	Generated []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem `json:"generated" url:"generated"`
+	Expired   []string                                                     `json:"expired" url:"expired"`
+	Errors    []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem    `json:"errors" url:"errors"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) GetGenerated() []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem {
+	if p == nil {
+		return nil
+	}
+	return p.Generated
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) GetExpired() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Expired
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) GetErrors() []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Errors
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetGenerated sets the Generated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponse) SetGenerated(generated []*PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) {
+	p.Generated = generated
+	p.require(postV1AgreementsAgreementsBillingRunResponseFieldGenerated)
+}
+
+// SetExpired sets the Expired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponse) SetExpired(expired []string) {
+	p.Expired = expired
+	p.require(postV1AgreementsAgreementsBillingRunResponseFieldExpired)
+}
+
+// SetErrors sets the Errors field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponse) SetErrors(errors []*PostV1AgreementsAgreementsBillingRunResponseErrorsItem) {
+	p.Errors = errors
+	p.require(postV1AgreementsAgreementsBillingRunResponseFieldErrors)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsBillingRunResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsBillingRunResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsBillingRunResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldAgreementID = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldMessage     = big.NewInt(1 << 1)
+)
+
+type PostV1AgreementsAgreementsBillingRunResponseErrorsItem struct {
+	AgreementID string `json:"agreementId" url:"agreementId"`
+	Message     string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetAgreementID() string {
+	if p == nil {
+		return ""
+	}
+	return p.AgreementID
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetMessage() string {
+	if p == nil {
+		return ""
+	}
+	return p.Message
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) SetAgreementID(agreementID string) {
+	p.AgreementID = agreementID
+	p.require(postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldAgreementID)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) SetMessage(message string) {
+	p.Message = message
+	p.require(postV1AgreementsAgreementsBillingRunResponseErrorsItemFieldMessage)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsBillingRunResponseErrorsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsBillingRunResponseErrorsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsBillingRunResponseErrorsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseErrorsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldAgreementID = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldInvoiceID   = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodStart = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodEnd   = big.NewInt(1 << 3)
+)
+
+type PostV1AgreementsAgreementsBillingRunResponseGeneratedItem struct {
+	AgreementID string `json:"agreementId" url:"agreementId"`
+	InvoiceID   string `json:"invoiceId" url:"invoiceId"`
+	PeriodStart string `json:"periodStart" url:"periodStart"`
+	PeriodEnd   string `json:"periodEnd" url:"periodEnd"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetAgreementID() string {
+	if p == nil {
+		return ""
+	}
+	return p.AgreementID
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetPeriodStart() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodStart
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetPeriodEnd() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodEnd
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetAgreementID(agreementID string) {
+	p.AgreementID = agreementID
+	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldAgreementID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldInvoiceID)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetPeriodStart(periodStart string) {
+	p.PeriodStart = periodStart
+	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) SetPeriodEnd(periodEnd string) {
+	p.PeriodEnd = periodEnd
+	p.require(postV1AgreementsAgreementsBillingRunResponseGeneratedItemFieldPeriodEnd)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsBillingRunResponseGeneratedItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsBillingRunResponseGeneratedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsBillingRunResponseGeneratedItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AgreementsAgreementsBillingRunResponseGeneratedItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AgreementsAgreementsCreateRequestBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsCreateRequestBillingPeriodMonthly   PostV1AgreementsAgreementsCreateRequestBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsCreateRequestBillingPeriodQuarterly PostV1AgreementsAgreementsCreateRequestBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsCreateRequestBillingPeriodAnnual    PostV1AgreementsAgreementsCreateRequestBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsCreateRequestBillingPeriodFromString(s string) (PostV1AgreementsAgreementsCreateRequestBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsCreateRequestBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsCreateRequestBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsCreateRequestBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsCreateRequestBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsCreateRequestBillingPeriod) Ptr() *PostV1AgreementsAgreementsCreateRequestBillingPeriod {
+	return &p
+}
+
+var (
+	postV1AgreementsAgreementsCreateRequestItemsItemFieldItemID         = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsCreateRequestItemsItemFieldDescription    = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsCreateRequestItemsItemFieldQuantity       = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateRequestItemsItemFieldUnitPrice      = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateRequestItemsItemFieldVatRatePercent = big.NewInt(1 << 4)
 )
 
 type PostV1AgreementsAgreementsCreateRequestItemsItem struct {
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Quantity    *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice   *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description    string  `json:"description" url:"description"`
+	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -830,6 +1324,13 @@ func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetUnitPrice() *strin
 		return nil
 	}
 	return p.UnitPrice
+}
+
+func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatRatePercent
 }
 
 func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) GetExtraProperties() map[string]interface{} {
@@ -872,6 +1373,13 @@ func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetQuantity(quantity 
 func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetUnitPrice(unitPrice *string) {
 	p.UnitPrice = unitPrice
 	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldUnitPrice)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	p.VatRatePercent = vatRatePercent
+	p.require(postV1AgreementsAgreementsCreateRequestItemsItemFieldVatRatePercent)
 }
 
 func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) UnmarshalJSON(data []byte) error {
@@ -945,37 +1453,39 @@ func (p PostV1AgreementsAgreementsCreateRequestStatus) Ptr() *PostV1AgreementsAg
 }
 
 var (
-	postV1AgreementsAgreementsCreateResponseFieldID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateResponseFieldTypeID    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateResponseFieldPartnerID = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateResponseFieldNumber    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateResponseFieldName      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateResponseFieldStartDate = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateResponseFieldEndDate   = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateResponseFieldAutoRenew = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateResponseFieldValue     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateResponseFieldCurrency  = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateResponseFieldStatus    = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateResponseFieldNotes     = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsCreateResponseFieldCreatedAt = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsCreateResponseFieldItems     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsCreateResponseFieldID            = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsCreateResponseFieldTypeID        = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsCreateResponseFieldPartnerID     = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateResponseFieldNumber        = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateResponseFieldName          = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateResponseFieldStartDate     = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsCreateResponseFieldEndDate       = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsCreateResponseFieldAutoRenew     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsCreateResponseFieldValue         = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsCreateResponseFieldBillingPeriod = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsCreateResponseFieldCurrency      = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsCreateResponseFieldStatus        = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsCreateResponseFieldNotes         = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsCreateResponseFieldCreatedAt     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsCreateResponseFieldItems         = big.NewInt(1 << 14)
 )
 
 type PostV1AgreementsAgreementsCreateResponse struct {
-	ID        string                                               `json:"id" url:"id"`
-	TypeID    *string                                              `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID string                                               `json:"partnerId" url:"partnerId"`
-	Number    string                                               `json:"number" url:"number"`
-	Name      *string                                              `json:"name,omitempty" url:"name,omitempty"`
-	StartDate string                                               `json:"startDate" url:"startDate"`
-	EndDate   *string                                              `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew bool                                                 `json:"autoRenew" url:"autoRenew"`
-	Value     *string                                              `json:"value,omitempty" url:"value,omitempty"`
-	Currency  string                                               `json:"currency" url:"currency"`
-	Status    PostV1AgreementsAgreementsCreateResponseStatus       `json:"status" url:"status"`
-	Notes     *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt string                                               `json:"createdAt" url:"createdAt"`
-	Items     []*PostV1AgreementsAgreementsCreateResponseItemsItem `json:"items" url:"items"`
+	ID            string                                                 `json:"id" url:"id"`
+	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
+	PartnerID     string                                                 `json:"partnerId" url:"partnerId"`
+	Number        string                                                 `json:"number" url:"number"`
+	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     string                                                 `json:"startDate" url:"startDate"`
+	EndDate       *string                                                `json:"endDate,omitempty" url:"endDate,omitempty"`
+	AutoRenew     bool                                                   `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                                `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *PostV1AgreementsAgreementsCreateResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                                 `json:"currency" url:"currency"`
+	Status        PostV1AgreementsAgreementsCreateResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
+	Items         []*PostV1AgreementsAgreementsCreateResponseItemsItem   `json:"items" url:"items"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1045,6 +1555,13 @@ func (p *PostV1AgreementsAgreementsCreateResponse) GetValue() *string {
 		return nil
 	}
 	return p.Value
+}
+
+func (p *PostV1AgreementsAgreementsCreateResponse) GetBillingPeriod() *PostV1AgreementsAgreementsCreateResponseBillingPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.BillingPeriod
 }
 
 func (p *PostV1AgreementsAgreementsCreateResponse) GetCurrency() string {
@@ -1159,6 +1676,13 @@ func (p *PostV1AgreementsAgreementsCreateResponse) SetValue(value *string) {
 	p.require(postV1AgreementsAgreementsCreateResponseFieldValue)
 }
 
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsCreateResponseBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsCreateResponseFieldBillingPeriod)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AgreementsAgreementsCreateResponse) SetCurrency(currency string) {
@@ -1236,20 +1760,47 @@ func (p *PostV1AgreementsAgreementsCreateResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AgreementsAgreementsCreateResponseBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsCreateResponseBillingPeriodMonthly   PostV1AgreementsAgreementsCreateResponseBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsCreateResponseBillingPeriodQuarterly PostV1AgreementsAgreementsCreateResponseBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsCreateResponseBillingPeriodAnnual    PostV1AgreementsAgreementsCreateResponseBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsCreateResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsCreateResponseBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsCreateResponseBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsCreateResponseBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsCreateResponseBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsCreateResponseBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsCreateResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsCreateResponseBillingPeriod {
+	return &p
+}
+
 var (
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldID          = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldItemID      = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldDescription = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldQuantity    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateResponseItemsItemFieldUnitPrice   = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
 type PostV1AgreementsAgreementsCreateResponseItemsItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Quantity    *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice   *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	ID             string  `json:"id" url:"id"`
+	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description    string  `json:"description" url:"description"`
+	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1291,6 +1842,13 @@ func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetUnitPrice() *stri
 		return nil
 	}
 	return p.UnitPrice
+}
+
+func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatRatePercent
 }
 
 func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -1340,6 +1898,13 @@ func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetQuantity(quantity
 func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetUnitPrice(unitPrice *string) {
 	p.UnitPrice = unitPrice
 	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldUnitPrice)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	p.VatRatePercent = vatRatePercent
+	p.require(postV1AgreementsAgreementsCreateResponseItemsItemFieldVatRatePercent)
 }
 
 func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) UnmarshalJSON(data []byte) error {
@@ -1497,37 +2062,171 @@ func (p *PostV1AgreementsAgreementsDeleteResponse) String() string {
 }
 
 var (
-	postV1AgreementsAgreementsGetResponseFieldID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGetResponseFieldTypeID    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGetResponseFieldPartnerID = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGetResponseFieldNumber    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsGetResponseFieldName      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsGetResponseFieldStartDate = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsGetResponseFieldEndDate   = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsGetResponseFieldAutoRenew = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsGetResponseFieldValue     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsGetResponseFieldCurrency  = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsGetResponseFieldStatus    = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsGetResponseFieldNotes     = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsGetResponseFieldCreatedAt = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsGetResponseFieldItems     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsGenerateInvoiceResponseFieldInvoiceID      = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodStart    = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodEnd      = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsGenerateInvoiceResponseFieldRenewedEndDate = big.NewInt(1 << 3)
+)
+
+type PostV1AgreementsAgreementsGenerateInvoiceResponse struct {
+	InvoiceID      string  `json:"invoiceId" url:"invoiceId"`
+	PeriodStart    string  `json:"periodStart" url:"periodStart"`
+	PeriodEnd      string  `json:"periodEnd" url:"periodEnd"`
+	RenewedEndDate *string `json:"renewedEndDate,omitempty" url:"renewedEndDate,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetInvoiceID() string {
+	if p == nil {
+		return ""
+	}
+	return p.InvoiceID
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetPeriodStart() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodStart
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetPeriodEnd() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodEnd
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetRenewedEndDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RenewedEndDate
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetInvoiceID(invoiceID string) {
+	p.InvoiceID = invoiceID
+	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldInvoiceID)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetPeriodStart(periodStart string) {
+	p.PeriodStart = periodStart
+	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetPeriodEnd(periodEnd string) {
+	p.PeriodEnd = periodEnd
+	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldPeriodEnd)
+}
+
+// SetRenewedEndDate sets the RenewedEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) SetRenewedEndDate(renewedEndDate *string) {
+	p.RenewedEndDate = renewedEndDate
+	p.require(postV1AgreementsAgreementsGenerateInvoiceResponseFieldRenewedEndDate)
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AgreementsAgreementsGenerateInvoiceResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AgreementsAgreementsGenerateInvoiceResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AgreementsAgreementsGenerateInvoiceResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AgreementsAgreementsGetResponseFieldID            = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsGetResponseFieldTypeID        = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsGetResponseFieldPartnerID     = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsGetResponseFieldNumber        = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsGetResponseFieldName          = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsGetResponseFieldStartDate     = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsGetResponseFieldEndDate       = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsGetResponseFieldAutoRenew     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsGetResponseFieldValue         = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsGetResponseFieldBillingPeriod = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsGetResponseFieldCurrency      = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsGetResponseFieldStatus        = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsGetResponseFieldNotes         = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsGetResponseFieldCreatedAt     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsGetResponseFieldItems         = big.NewInt(1 << 14)
 )
 
 type PostV1AgreementsAgreementsGetResponse struct {
-	ID        string                                            `json:"id" url:"id"`
-	TypeID    *string                                           `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID string                                            `json:"partnerId" url:"partnerId"`
-	Number    string                                            `json:"number" url:"number"`
-	Name      *string                                           `json:"name,omitempty" url:"name,omitempty"`
-	StartDate string                                            `json:"startDate" url:"startDate"`
-	EndDate   *string                                           `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew bool                                              `json:"autoRenew" url:"autoRenew"`
-	Value     *string                                           `json:"value,omitempty" url:"value,omitempty"`
-	Currency  string                                            `json:"currency" url:"currency"`
-	Status    PostV1AgreementsAgreementsGetResponseStatus       `json:"status" url:"status"`
-	Notes     *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt string                                            `json:"createdAt" url:"createdAt"`
-	Items     []*PostV1AgreementsAgreementsGetResponseItemsItem `json:"items" url:"items"`
+	ID            string                                              `json:"id" url:"id"`
+	TypeID        *string                                             `json:"typeId,omitempty" url:"typeId,omitempty"`
+	PartnerID     string                                              `json:"partnerId" url:"partnerId"`
+	Number        string                                              `json:"number" url:"number"`
+	Name          *string                                             `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     string                                              `json:"startDate" url:"startDate"`
+	EndDate       *string                                             `json:"endDate,omitempty" url:"endDate,omitempty"`
+	AutoRenew     bool                                                `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                             `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *PostV1AgreementsAgreementsGetResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                              `json:"currency" url:"currency"`
+	Status        PostV1AgreementsAgreementsGetResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                              `json:"createdAt" url:"createdAt"`
+	Items         []*PostV1AgreementsAgreementsGetResponseItemsItem   `json:"items" url:"items"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1597,6 +2296,13 @@ func (p *PostV1AgreementsAgreementsGetResponse) GetValue() *string {
 		return nil
 	}
 	return p.Value
+}
+
+func (p *PostV1AgreementsAgreementsGetResponse) GetBillingPeriod() *PostV1AgreementsAgreementsGetResponseBillingPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.BillingPeriod
 }
 
 func (p *PostV1AgreementsAgreementsGetResponse) GetCurrency() string {
@@ -1711,6 +2417,13 @@ func (p *PostV1AgreementsAgreementsGetResponse) SetValue(value *string) {
 	p.require(postV1AgreementsAgreementsGetResponseFieldValue)
 }
 
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsGetResponseBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsGetResponseFieldBillingPeriod)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AgreementsAgreementsGetResponse) SetCurrency(currency string) {
@@ -1788,20 +2501,47 @@ func (p *PostV1AgreementsAgreementsGetResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AgreementsAgreementsGetResponseBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsGetResponseBillingPeriodMonthly   PostV1AgreementsAgreementsGetResponseBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsGetResponseBillingPeriodQuarterly PostV1AgreementsAgreementsGetResponseBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsGetResponseBillingPeriodAnnual    PostV1AgreementsAgreementsGetResponseBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsGetResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsGetResponseBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsGetResponseBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsGetResponseBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsGetResponseBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsGetResponseBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsGetResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsGetResponseBillingPeriod {
+	return &p
+}
+
 var (
-	postV1AgreementsAgreementsGetResponseItemsItemFieldID          = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldItemID      = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldDescription = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldQuantity    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsGetResponseItemsItemFieldUnitPrice   = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsGetResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
 type PostV1AgreementsAgreementsGetResponseItemsItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Quantity    *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice   *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	ID             string  `json:"id" url:"id"`
+	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description    string  `json:"description" url:"description"`
+	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1843,6 +2583,13 @@ func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetUnitPrice() *string 
 		return nil
 	}
 	return p.UnitPrice
+}
+
+func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatRatePercent
 }
 
 func (p *PostV1AgreementsAgreementsGetResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -1892,6 +2639,13 @@ func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetQuantity(quantity *s
 func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetUnitPrice(unitPrice *string) {
 	p.UnitPrice = unitPrice
 	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldUnitPrice)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	p.VatRatePercent = vatRatePercent
+	p.require(postV1AgreementsAgreementsGetResponseItemsItemFieldVatRatePercent)
 }
 
 func (p *PostV1AgreementsAgreementsGetResponseItemsItem) UnmarshalJSON(data []byte) error {
@@ -2535,35 +3289,37 @@ func (p *PostV1AgreementsAgreementsListResponse) String() string {
 }
 
 var (
-	postV1AgreementsAgreementsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsListResponseRowsItemFieldTypeID    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNumber    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsListResponseRowsItemFieldName      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStartDate = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsListResponseRowsItemFieldEndDate   = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsListResponseRowsItemFieldValue     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCurrency  = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStatus    = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNotes     = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsListResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsListResponseRowsItemFieldTypeID        = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID     = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsListResponseRowsItemFieldNumber        = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsListResponseRowsItemFieldName          = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsListResponseRowsItemFieldStartDate     = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsListResponseRowsItemFieldEndDate       = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsListResponseRowsItemFieldValue         = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsListResponseRowsItemFieldCurrency      = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsListResponseRowsItemFieldStatus        = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsListResponseRowsItemFieldNotes         = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 13)
 )
 
 type PostV1AgreementsAgreementsListResponseRowsItem struct {
-	ID        string                                               `json:"id" url:"id"`
-	TypeID    *string                                              `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID string                                               `json:"partnerId" url:"partnerId"`
-	Number    string                                               `json:"number" url:"number"`
-	Name      *string                                              `json:"name,omitempty" url:"name,omitempty"`
-	StartDate string                                               `json:"startDate" url:"startDate"`
-	EndDate   *string                                              `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew bool                                                 `json:"autoRenew" url:"autoRenew"`
-	Value     *string                                              `json:"value,omitempty" url:"value,omitempty"`
-	Currency  string                                               `json:"currency" url:"currency"`
-	Status    PostV1AgreementsAgreementsListResponseRowsItemStatus `json:"status" url:"status"`
-	Notes     *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt string                                               `json:"createdAt" url:"createdAt"`
+	ID            string                                                       `json:"id" url:"id"`
+	TypeID        *string                                                      `json:"typeId,omitempty" url:"typeId,omitempty"`
+	PartnerID     string                                                       `json:"partnerId" url:"partnerId"`
+	Number        string                                                       `json:"number" url:"number"`
+	Name          *string                                                      `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     string                                                       `json:"startDate" url:"startDate"`
+	EndDate       *string                                                      `json:"endDate,omitempty" url:"endDate,omitempty"`
+	AutoRenew     bool                                                         `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                                      `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                                       `json:"currency" url:"currency"`
+	Status        PostV1AgreementsAgreementsListResponseRowsItemStatus         `json:"status" url:"status"`
+	Notes         *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                                       `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2633,6 +3389,13 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetValue() *string {
 		return nil
 	}
 	return p.Value
+}
+
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetBillingPeriod() *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.BillingPeriod
 }
 
 func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetCurrency() string {
@@ -2740,6 +3503,13 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetValue(value *string)
 	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldValue)
 }
 
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetCurrency(currency string) {
@@ -2810,6 +3580,31 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodMonthly   PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodQuarterly PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodAnnual    PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsListResponseRowsItemBillingPeriodFromString(s string) (PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsListResponseRowsItemBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod {
+	return &p
+}
+
 type PostV1AgreementsAgreementsListResponseRowsItemStatus string
 
 const (
@@ -2835,6 +3630,31 @@ func NewPostV1AgreementsAgreementsListResponseRowsItemStatusFromString(s string)
 }
 
 func (p PostV1AgreementsAgreementsListResponseRowsItemStatus) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemStatus {
+	return &p
+}
+
+type PostV1AgreementsAgreementsUpdateRequestBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsUpdateRequestBillingPeriodMonthly   PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsUpdateRequestBillingPeriodQuarterly PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsUpdateRequestBillingPeriodAnnual    PostV1AgreementsAgreementsUpdateRequestBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsUpdateRequestBillingPeriodFromString(s string) (PostV1AgreementsAgreementsUpdateRequestBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsUpdateRequestBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsUpdateRequestBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsUpdateRequestBillingPeriod) Ptr() *PostV1AgreementsAgreementsUpdateRequestBillingPeriod {
 	return &p
 }
 
@@ -2867,37 +3687,39 @@ func (p PostV1AgreementsAgreementsUpdateRequestStatus) Ptr() *PostV1AgreementsAg
 }
 
 var (
-	postV1AgreementsAgreementsUpdateResponseFieldID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateResponseFieldTypeID    = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateResponseFieldPartnerID = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateResponseFieldNumber    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateResponseFieldName      = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateResponseFieldStartDate = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateResponseFieldEndDate   = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateResponseFieldAutoRenew = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsUpdateResponseFieldValue     = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsUpdateResponseFieldCurrency  = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsUpdateResponseFieldStatus    = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsUpdateResponseFieldNotes     = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsUpdateResponseFieldCreatedAt = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsUpdateResponseFieldItems     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsUpdateResponseFieldID            = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsUpdateResponseFieldTypeID        = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsUpdateResponseFieldPartnerID     = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsUpdateResponseFieldNumber        = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsUpdateResponseFieldName          = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateResponseFieldStartDate     = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsUpdateResponseFieldEndDate       = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsUpdateResponseFieldAutoRenew     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsUpdateResponseFieldValue         = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsUpdateResponseFieldCurrency      = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsUpdateResponseFieldStatus        = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsUpdateResponseFieldNotes         = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsUpdateResponseFieldCreatedAt     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsUpdateResponseFieldItems         = big.NewInt(1 << 14)
 )
 
 type PostV1AgreementsAgreementsUpdateResponse struct {
-	ID        string                                               `json:"id" url:"id"`
-	TypeID    *string                                              `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID string                                               `json:"partnerId" url:"partnerId"`
-	Number    string                                               `json:"number" url:"number"`
-	Name      *string                                              `json:"name,omitempty" url:"name,omitempty"`
-	StartDate string                                               `json:"startDate" url:"startDate"`
-	EndDate   *string                                              `json:"endDate,omitempty" url:"endDate,omitempty"`
-	AutoRenew bool                                                 `json:"autoRenew" url:"autoRenew"`
-	Value     *string                                              `json:"value,omitempty" url:"value,omitempty"`
-	Currency  string                                               `json:"currency" url:"currency"`
-	Status    PostV1AgreementsAgreementsUpdateResponseStatus       `json:"status" url:"status"`
-	Notes     *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt string                                               `json:"createdAt" url:"createdAt"`
-	Items     []*PostV1AgreementsAgreementsUpdateResponseItemsItem `json:"items" url:"items"`
+	ID            string                                                 `json:"id" url:"id"`
+	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
+	PartnerID     string                                                 `json:"partnerId" url:"partnerId"`
+	Number        string                                                 `json:"number" url:"number"`
+	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
+	StartDate     string                                                 `json:"startDate" url:"startDate"`
+	EndDate       *string                                                `json:"endDate,omitempty" url:"endDate,omitempty"`
+	AutoRenew     bool                                                   `json:"autoRenew" url:"autoRenew"`
+	Value         *string                                                `json:"value,omitempty" url:"value,omitempty"`
+	BillingPeriod *PostV1AgreementsAgreementsUpdateResponseBillingPeriod `json:"billingPeriod,omitempty" url:"billingPeriod,omitempty"`
+	Currency      string                                                 `json:"currency" url:"currency"`
+	Status        PostV1AgreementsAgreementsUpdateResponseStatus         `json:"status" url:"status"`
+	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
+	Items         []*PostV1AgreementsAgreementsUpdateResponseItemsItem   `json:"items" url:"items"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2967,6 +3789,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) GetValue() *string {
 		return nil
 	}
 	return p.Value
+}
+
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetBillingPeriod() *PostV1AgreementsAgreementsUpdateResponseBillingPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.BillingPeriod
 }
 
 func (p *PostV1AgreementsAgreementsUpdateResponse) GetCurrency() string {
@@ -3081,6 +3910,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) SetValue(value *string) {
 	p.require(postV1AgreementsAgreementsUpdateResponseFieldValue)
 }
 
+// SetBillingPeriod sets the BillingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetBillingPeriod(billingPeriod *PostV1AgreementsAgreementsUpdateResponseBillingPeriod) {
+	p.BillingPeriod = billingPeriod
+	p.require(postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AgreementsAgreementsUpdateResponse) SetCurrency(currency string) {
@@ -3158,20 +3994,47 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AgreementsAgreementsUpdateResponseBillingPeriod string
+
+const (
+	PostV1AgreementsAgreementsUpdateResponseBillingPeriodMonthly   PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "monthly"
+	PostV1AgreementsAgreementsUpdateResponseBillingPeriodQuarterly PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "quarterly"
+	PostV1AgreementsAgreementsUpdateResponseBillingPeriodAnnual    PostV1AgreementsAgreementsUpdateResponseBillingPeriod = "annual"
+)
+
+func NewPostV1AgreementsAgreementsUpdateResponseBillingPeriodFromString(s string) (PostV1AgreementsAgreementsUpdateResponseBillingPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodMonthly, nil
+	case "quarterly":
+		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodQuarterly, nil
+	case "annual":
+		return PostV1AgreementsAgreementsUpdateResponseBillingPeriodAnnual, nil
+	}
+	var t PostV1AgreementsAgreementsUpdateResponseBillingPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsUpdateResponseBillingPeriod) Ptr() *PostV1AgreementsAgreementsUpdateResponseBillingPeriod {
+	return &p
+}
+
 var (
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldID          = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldItemID      = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldDescription = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldQuantity    = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateResponseItemsItemFieldUnitPrice   = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
 )
 
 type PostV1AgreementsAgreementsUpdateResponseItemsItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Quantity    *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice   *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	ID             string  `json:"id" url:"id"`
+	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description    string  `json:"description" url:"description"`
+	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3213,6 +4076,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetUnitPrice() *stri
 		return nil
 	}
 	return p.UnitPrice
+}
+
+func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatRatePercent
 }
 
 func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -3262,6 +4132,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetQuantity(quantity
 func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetUnitPrice(unitPrice *string) {
 	p.UnitPrice = unitPrice
 	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldUnitPrice)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
+	p.VatRatePercent = vatRatePercent
+	p.require(postV1AgreementsAgreementsUpdateResponseItemsItemFieldVatRatePercent)
 }
 
 func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) UnmarshalJSON(data []byte) error {

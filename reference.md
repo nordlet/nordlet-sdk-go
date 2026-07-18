@@ -708,6 +708,20 @@ client.Reference.PostV1ReferenceVatClassifiersUpsert(
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Effective EU VAT rate mapping for this company: EC TEDB defaults, replaced per country by any company overrides. Verify the mapping fits the goods and services you sell before relying on it.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -746,6 +760,81 @@ client.Reference.PostV1ReferenceEuVatRatesList(
 <dd>
 
 **date:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSetOverrides(request) -> *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace the VAT rate mapping this company uses for one EU country. Pass an empty rates array to drop the overrides and return to the TEDB defaults. Overrides feed rate suggestions (vat/resolve) and OSS/IOSS return rate classification.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest{
+        CountryCode: "countryCode",
+        Rates: []*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
+            &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
+                Category: nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard,
+                RatePercent: "ratePercent",
+            },
+        },
+    }
+client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**countryCode:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rates:** `[]*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem` 
     
 </dd>
 </dl>
@@ -5661,6 +5750,75 @@ client.Sales.PostV1SalesInvoicesIssue(
 </dl>
 </details>
 
+<details><summary><code>client.Sales.PostV1SalesRecognitionSchedulesList(request) -> *nordlet.PostV1SalesRecognitionSchedulesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionSchedulesListRequest{}
+client.Sales.PostV1SalesRecognitionSchedulesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1SalesRecognitionSchedulesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1SalesRecognitionSchedulesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Sales.PostV1SalesInvoicesApplyAdvance(request) -> *nordlet.PostV1SalesInvoicesApplyAdvanceResponse</code></summary>
 <dl>
 <dd>
@@ -6310,6 +6468,517 @@ client.Sales.PostV1SalesActsPdf(
 <dd>
 
 **locale:** `*nordlet.PostV1SalesActsPdfRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionCompute(request) -> *nordlet.PostV1SalesRecognitionComputeResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionComputeRequest{}
+client.Sales.PostV1SalesRecognitionCompute(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionRun(request) -> *nordlet.PostV1SalesRecognitionRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionRunRequest{}
+client.Sales.PostV1SalesRecognitionRun(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postingDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduleIDs:** `[]string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionProgress(request) -> *nordlet.PostV1SalesRecognitionProgressResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionProgressRequest{
+        InvoiceLineID: "invoiceLineId",
+        PercentComplete: "percentComplete",
+    }
+client.Sales.PostV1SalesRecognitionProgress(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceLineID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**percentComplete:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionModify(request) -> *nordlet.PostV1SalesRecognitionModifyResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Apply an IFRS 15 contract modification to a deferred invoice line. Prospective: cancel the pending schedule and respread the unrecognized remainder over the new terms. Cumulative catch-up (ratable only): recompute revenue as if the new terms applied from the start and post the difference immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionModifyRequest{
+        InvoiceLineID: "invoiceLineId",
+        Approach: nordlet.PostV1SalesRecognitionModifyRequestApproachProspective,
+    }
+client.Sales.PostV1SalesRecognitionModify(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceLineID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**approach:** `*nordlet.PostV1SalesRecognitionModifyRequestApproach` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**newEndDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**newMilestones:** `[]*nordlet.PostV1SalesRecognitionModifyRequestNewMilestonesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionRunsList(request) -> *nordlet.PostV1SalesRecognitionRunsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionRunsListRequest{}
+client.Sales.PostV1SalesRecognitionRunsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1SalesRecognitionRunsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1SalesRecognitionRunsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRecognitionSummary(request) -> *nordlet.PostV1SalesRecognitionSummaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRecognitionSummaryRequest{}
+client.Sales.PostV1SalesRecognitionSummary(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRefundLiabilityList(request) -> *nordlet.PostV1SalesRefundLiabilityListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRefundLiabilityListRequest{}
+client.Sales.PostV1SalesRefundLiabilityList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1SalesRefundLiabilityListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1SalesRefundLiabilityListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesRefundLiabilityTrueUp(request) -> *nordlet.PostV1SalesRefundLiabilityTrueUpResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesRefundLiabilityTrueUpRequest{
+        InvoiceID: "invoiceId",
+        EstimatedTotal: "estimatedTotal",
+    }
+client.Sales.PostV1SalesRefundLiabilityTrueUp(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**estimatedTotal:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*string` 
     
 </dd>
 </dl>
@@ -7471,6 +8140,330 @@ client.Declarations.PostV1DeclarationsEuIossCompute(
 <dd>
 
 **month:** `int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(request) -> *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetRequest{}
+client.Declarations.PostV1DeclarationsEuDistanceSalesThresholdGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(request) -> *nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuUnionTurnoverGetRequest{}
+client.Declarations.PostV1DeclarationsEuUnionTurnoverGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(request) -> *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeRequest{
+        Year: int64(1000000),
+        Quarter: int64(1000000),
+    }
+client.Declarations.PostV1DeclarationsEuSmeCrossBorderReportCompute(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**year:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**quarter:** `int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeThresholdsList(request) -> *nordlet.PostV1DeclarationsEuSmeThresholdsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuSmeThresholdsListRequest{}
+client.Declarations.PostV1DeclarationsEuSmeThresholdsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuSmeThresholdGet(request) -> *nordlet.PostV1DeclarationsEuSmeThresholdGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuSmeThresholdGetRequest{}
+client.Declarations.PostV1DeclarationsEuSmeThresholdGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuVatReturnPacksList(request) -> *nordlet.PostV1DeclarationsEuVatReturnPacksListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuVatReturnPacksListRequest{}
+client.Declarations.PostV1DeclarationsEuVatReturnPacksList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsEuVatReturnCompute(request) -> *nordlet.PostV1DeclarationsEuVatReturnComputeResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsEuVatReturnComputeRequest{
+        CountryCode: "countryCode",
+        Year: int64(1000000),
+        Month: int64(1000000),
+    }
+client.Declarations.PostV1DeclarationsEuVatReturnCompute(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**countryCode:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**year:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**month:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**months:** `*int64` 
     
 </dd>
 </dl>
@@ -12651,6 +13644,14 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
+**billingPeriod:** `*nordlet.PostV1AgreementsAgreementsCreateRequestBillingPeriod` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **currency:** `*string` 
     
 </dd>
@@ -12817,6 +13818,14 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
+**billingPeriod:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestBillingPeriod` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **status:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestStatus` 
     
 </dd>
@@ -12942,6 +13951,106 @@ client.Agreements.PostV1AgreementsAgreementsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1AgreementsAgreementsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(request) -> *nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest{
+        ID: "id",
+    }
+client.Agreements.PostV1AgreementsAgreementsGenerateInvoice(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**asOfDate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Agreements.PostV1AgreementsAgreementsBillingRun(request) -> *nordlet.PostV1AgreementsAgreementsBillingRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AgreementsAgreementsBillingRunRequest{}
+client.Agreements.PostV1AgreementsAgreementsBillingRun(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*string` 
     
 </dd>
 </dl>
@@ -20640,6 +21749,14 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
+**smeExemptionNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **isVatPayer:** `*bool` 
     
 </dd>
@@ -20851,6 +21968,14 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dd>
 
 **vatCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**smeExemptionNumber:** `*string` 
     
 </dd>
 </dl>

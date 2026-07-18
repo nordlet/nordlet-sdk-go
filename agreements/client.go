@@ -146,6 +146,38 @@ func (c *Client) PostV1AgreementsAgreementsList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1AgreementsAgreementsGenerateInvoice(
+	ctx context.Context,
+	request *nordlet.PostV1AgreementsAgreementsGenerateInvoiceRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AgreementsAgreementsGenerateInvoiceResponse, error) {
+	response, err := c.WithRawResponse.PostV1AgreementsAgreementsGenerateInvoice(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AgreementsAgreementsBillingRun(
+	ctx context.Context,
+	request *nordlet.PostV1AgreementsAgreementsBillingRunRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AgreementsAgreementsBillingRunResponse, error) {
+	response, err := c.WithRawResponse.PostV1AgreementsAgreementsBillingRun(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1AgreementsInsurancePoliciesCreate(
 	ctx context.Context,
 	request *nordlet.PostV1AgreementsInsurancePoliciesCreateRequest,

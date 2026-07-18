@@ -226,12 +226,30 @@ func (c *Client) PostV1ReferenceVatClassifiersUpsert(
 	return response.Body, nil
 }
 
+// Effective EU VAT rate mapping for this company: EC TEDB defaults, replaced per country by any company overrides. Verify the mapping fits the goods and services you sell before relying on it.
 func (c *Client) PostV1ReferenceEuVatRatesList(
 	ctx context.Context,
 	request *nordlet.PostV1ReferenceEuVatRatesListRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1ReferenceEuVatRatesListResponse, error) {
 	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Replace the VAT rate mapping this company uses for one EU country. Pass an empty rates array to drop the overrides and return to the TEDB defaults. Overrides feed rate suggestions (vat/resolve) and OSS/IOSS return rate classification.
+func (c *Client) PostV1ReferenceEuVatRatesSetOverrides(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesSetOverrides(
 		ctx,
 		request,
 		opts...,

@@ -219,22 +219,24 @@ var (
 	postV1AccountCompaniesCreateRequestFieldName                   = big.NewInt(1 << 0)
 	postV1AccountCompaniesCreateRequestFieldCode                   = big.NewInt(1 << 1)
 	postV1AccountCompaniesCreateRequestFieldVatCode                = big.NewInt(1 << 2)
-	postV1AccountCompaniesCreateRequestFieldIsVatPayer             = big.NewInt(1 << 3)
-	postV1AccountCompaniesCreateRequestFieldAddress                = big.NewInt(1 << 4)
-	postV1AccountCompaniesCreateRequestFieldEmail                  = big.NewInt(1 << 5)
-	postV1AccountCompaniesCreateRequestFieldPhone                  = big.NewInt(1 << 6)
-	postV1AccountCompaniesCreateRequestFieldIban                   = big.NewInt(1 << 7)
-	postV1AccountCompaniesCreateRequestFieldBankName               = big.NewInt(1 << 8)
-	postV1AccountCompaniesCreateRequestFieldPeppolID               = big.NewInt(1 << 9)
-	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 10)
-	postV1AccountCompaniesCreateRequestFieldCountryCode            = big.NewInt(1 << 11)
-	postV1AccountCompaniesCreateRequestFieldIsSandbox              = big.NewInt(1 << 12)
+	postV1AccountCompaniesCreateRequestFieldSmeExemptionNumber     = big.NewInt(1 << 3)
+	postV1AccountCompaniesCreateRequestFieldIsVatPayer             = big.NewInt(1 << 4)
+	postV1AccountCompaniesCreateRequestFieldAddress                = big.NewInt(1 << 5)
+	postV1AccountCompaniesCreateRequestFieldEmail                  = big.NewInt(1 << 6)
+	postV1AccountCompaniesCreateRequestFieldPhone                  = big.NewInt(1 << 7)
+	postV1AccountCompaniesCreateRequestFieldIban                   = big.NewInt(1 << 8)
+	postV1AccountCompaniesCreateRequestFieldBankName               = big.NewInt(1 << 9)
+	postV1AccountCompaniesCreateRequestFieldPeppolID               = big.NewInt(1 << 10)
+	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 11)
+	postV1AccountCompaniesCreateRequestFieldCountryCode            = big.NewInt(1 << 12)
+	postV1AccountCompaniesCreateRequestFieldIsSandbox              = big.NewInt(1 << 13)
 )
 
 type PostV1AccountCompaniesCreateRequest struct {
 	Name                   string                                      `json:"name" url:"-"`
 	Code                   *string                                     `json:"code,omitempty" url:"-"`
 	VatCode                *string                                     `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber     *string                                     `json:"smeExemptionNumber,omitempty" url:"-"`
 	IsVatPayer             *bool                                       `json:"isVatPayer,omitempty" url:"-"`
 	Address                *PostV1AccountCompaniesCreateRequestAddress `json:"address,omitempty" url:"-"`
 	Email                  *string                                     `json:"email,omitempty" url:"-"`
@@ -278,6 +280,13 @@ func (p *PostV1AccountCompaniesCreateRequest) SetCode(code *string) {
 func (p *PostV1AccountCompaniesCreateRequest) SetVatCode(vatCode *string) {
 	p.VatCode = vatCode
 	p.require(postV1AccountCompaniesCreateRequestFieldVatCode)
+}
+
+// SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetSmeExemptionNumber(smeExemptionNumber *string) {
+	p.SmeExemptionNumber = smeExemptionNumber
+	p.require(postV1AccountCompaniesCreateRequestFieldSmeExemptionNumber)
 }
 
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
@@ -480,21 +489,23 @@ var (
 	postV1AccountCompaniesUpdateRequestFieldName                   = big.NewInt(1 << 0)
 	postV1AccountCompaniesUpdateRequestFieldCode                   = big.NewInt(1 << 1)
 	postV1AccountCompaniesUpdateRequestFieldVatCode                = big.NewInt(1 << 2)
-	postV1AccountCompaniesUpdateRequestFieldIsVatPayer             = big.NewInt(1 << 3)
-	postV1AccountCompaniesUpdateRequestFieldAddress                = big.NewInt(1 << 4)
-	postV1AccountCompaniesUpdateRequestFieldEmail                  = big.NewInt(1 << 5)
-	postV1AccountCompaniesUpdateRequestFieldPhone                  = big.NewInt(1 << 6)
-	postV1AccountCompaniesUpdateRequestFieldIban                   = big.NewInt(1 << 7)
-	postV1AccountCompaniesUpdateRequestFieldBankName               = big.NewInt(1 << 8)
-	postV1AccountCompaniesUpdateRequestFieldPeppolID               = big.NewInt(1 << 9)
-	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 10)
-	postV1AccountCompaniesUpdateRequestFieldLogo                   = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateRequestFieldSmeExemptionNumber     = big.NewInt(1 << 3)
+	postV1AccountCompaniesUpdateRequestFieldIsVatPayer             = big.NewInt(1 << 4)
+	postV1AccountCompaniesUpdateRequestFieldAddress                = big.NewInt(1 << 5)
+	postV1AccountCompaniesUpdateRequestFieldEmail                  = big.NewInt(1 << 6)
+	postV1AccountCompaniesUpdateRequestFieldPhone                  = big.NewInt(1 << 7)
+	postV1AccountCompaniesUpdateRequestFieldIban                   = big.NewInt(1 << 8)
+	postV1AccountCompaniesUpdateRequestFieldBankName               = big.NewInt(1 << 9)
+	postV1AccountCompaniesUpdateRequestFieldPeppolID               = big.NewInt(1 << 10)
+	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateRequestFieldLogo                   = big.NewInt(1 << 12)
 )
 
 type PostV1AccountCompaniesUpdateRequest struct {
 	Name                   *string                                     `json:"name,omitempty" url:"-"`
 	Code                   *string                                     `json:"code,omitempty" url:"-"`
 	VatCode                *string                                     `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber     *string                                     `json:"smeExemptionNumber,omitempty" url:"-"`
 	IsVatPayer             *bool                                       `json:"isVatPayer,omitempty" url:"-"`
 	Address                *PostV1AccountCompaniesUpdateRequestAddress `json:"address,omitempty" url:"-"`
 	Email                  *string                                     `json:"email,omitempty" url:"-"`
@@ -535,6 +546,13 @@ func (p *PostV1AccountCompaniesUpdateRequest) SetCode(code *string) {
 func (p *PostV1AccountCompaniesUpdateRequest) SetVatCode(vatCode *string) {
 	p.VatCode = vatCode
 	p.require(postV1AccountCompaniesUpdateRequestFieldVatCode)
+}
+
+// SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetSmeExemptionNumber(smeExemptionNumber *string) {
+	p.SmeExemptionNumber = smeExemptionNumber
+	p.require(postV1AccountCompaniesUpdateRequestFieldSmeExemptionNumber)
 }
 
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
@@ -2329,19 +2347,20 @@ var (
 	postV1AccountCompaniesProfileResponseFieldName                   = big.NewInt(1 << 1)
 	postV1AccountCompaniesProfileResponseFieldCode                   = big.NewInt(1 << 2)
 	postV1AccountCompaniesProfileResponseFieldVatCode                = big.NewInt(1 << 3)
-	postV1AccountCompaniesProfileResponseFieldIsVatPayer             = big.NewInt(1 << 4)
-	postV1AccountCompaniesProfileResponseFieldIsSandbox              = big.NewInt(1 << 5)
-	postV1AccountCompaniesProfileResponseFieldCountryCode            = big.NewInt(1 << 6)
-	postV1AccountCompaniesProfileResponseFieldBaseCurrency           = big.NewInt(1 << 7)
-	postV1AccountCompaniesProfileResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 8)
-	postV1AccountCompaniesProfileResponseFieldStatus                 = big.NewInt(1 << 9)
-	postV1AccountCompaniesProfileResponseFieldAddress                = big.NewInt(1 << 10)
-	postV1AccountCompaniesProfileResponseFieldEmail                  = big.NewInt(1 << 11)
-	postV1AccountCompaniesProfileResponseFieldPhone                  = big.NewInt(1 << 12)
-	postV1AccountCompaniesProfileResponseFieldIban                   = big.NewInt(1 << 13)
-	postV1AccountCompaniesProfileResponseFieldBankName               = big.NewInt(1 << 14)
-	postV1AccountCompaniesProfileResponseFieldPeppolID               = big.NewInt(1 << 15)
-	postV1AccountCompaniesProfileResponseFieldLogoFileID             = big.NewInt(1 << 16)
+	postV1AccountCompaniesProfileResponseFieldSmeExemptionNumber     = big.NewInt(1 << 4)
+	postV1AccountCompaniesProfileResponseFieldIsVatPayer             = big.NewInt(1 << 5)
+	postV1AccountCompaniesProfileResponseFieldIsSandbox              = big.NewInt(1 << 6)
+	postV1AccountCompaniesProfileResponseFieldCountryCode            = big.NewInt(1 << 7)
+	postV1AccountCompaniesProfileResponseFieldBaseCurrency           = big.NewInt(1 << 8)
+	postV1AccountCompaniesProfileResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 9)
+	postV1AccountCompaniesProfileResponseFieldStatus                 = big.NewInt(1 << 10)
+	postV1AccountCompaniesProfileResponseFieldAddress                = big.NewInt(1 << 11)
+	postV1AccountCompaniesProfileResponseFieldEmail                  = big.NewInt(1 << 12)
+	postV1AccountCompaniesProfileResponseFieldPhone                  = big.NewInt(1 << 13)
+	postV1AccountCompaniesProfileResponseFieldIban                   = big.NewInt(1 << 14)
+	postV1AccountCompaniesProfileResponseFieldBankName               = big.NewInt(1 << 15)
+	postV1AccountCompaniesProfileResponseFieldPeppolID               = big.NewInt(1 << 16)
+	postV1AccountCompaniesProfileResponseFieldLogoFileID             = big.NewInt(1 << 17)
 )
 
 type PostV1AccountCompaniesProfileResponse struct {
@@ -2349,6 +2368,7 @@ type PostV1AccountCompaniesProfileResponse struct {
 	Name                   string                                        `json:"name" url:"name"`
 	Code                   *string                                       `json:"code,omitempty" url:"code,omitempty"`
 	VatCode                *string                                       `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	SmeExemptionNumber     *string                                       `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
 	IsVatPayer             bool                                          `json:"isVatPayer" url:"isVatPayer"`
 	IsSandbox              bool                                          `json:"isSandbox" url:"isSandbox"`
 	CountryCode            string                                        `json:"countryCode" url:"countryCode"`
@@ -2396,6 +2416,13 @@ func (p *PostV1AccountCompaniesProfileResponse) GetVatCode() *string {
 		return nil
 	}
 	return p.VatCode
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetSmeExemptionNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SmeExemptionNumber
 }
 
 func (p *PostV1AccountCompaniesProfileResponse) GetIsVatPayer() bool {
@@ -2529,6 +2556,13 @@ func (p *PostV1AccountCompaniesProfileResponse) SetCode(code *string) {
 func (p *PostV1AccountCompaniesProfileResponse) SetVatCode(vatCode *string) {
 	p.VatCode = vatCode
 	p.require(postV1AccountCompaniesProfileResponseFieldVatCode)
+}
+
+// SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetSmeExemptionNumber(smeExemptionNumber *string) {
+	p.SmeExemptionNumber = smeExemptionNumber
+	p.require(postV1AccountCompaniesProfileResponseFieldSmeExemptionNumber)
 }
 
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
@@ -3159,19 +3193,20 @@ var (
 	postV1AccountCompaniesUpdateResponseFieldName                   = big.NewInt(1 << 1)
 	postV1AccountCompaniesUpdateResponseFieldCode                   = big.NewInt(1 << 2)
 	postV1AccountCompaniesUpdateResponseFieldVatCode                = big.NewInt(1 << 3)
-	postV1AccountCompaniesUpdateResponseFieldIsVatPayer             = big.NewInt(1 << 4)
-	postV1AccountCompaniesUpdateResponseFieldIsSandbox              = big.NewInt(1 << 5)
-	postV1AccountCompaniesUpdateResponseFieldCountryCode            = big.NewInt(1 << 6)
-	postV1AccountCompaniesUpdateResponseFieldBaseCurrency           = big.NewInt(1 << 7)
-	postV1AccountCompaniesUpdateResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 8)
-	postV1AccountCompaniesUpdateResponseFieldStatus                 = big.NewInt(1 << 9)
-	postV1AccountCompaniesUpdateResponseFieldAddress                = big.NewInt(1 << 10)
-	postV1AccountCompaniesUpdateResponseFieldEmail                  = big.NewInt(1 << 11)
-	postV1AccountCompaniesUpdateResponseFieldPhone                  = big.NewInt(1 << 12)
-	postV1AccountCompaniesUpdateResponseFieldIban                   = big.NewInt(1 << 13)
-	postV1AccountCompaniesUpdateResponseFieldBankName               = big.NewInt(1 << 14)
-	postV1AccountCompaniesUpdateResponseFieldPeppolID               = big.NewInt(1 << 15)
-	postV1AccountCompaniesUpdateResponseFieldLogoFileID             = big.NewInt(1 << 16)
+	postV1AccountCompaniesUpdateResponseFieldSmeExemptionNumber     = big.NewInt(1 << 4)
+	postV1AccountCompaniesUpdateResponseFieldIsVatPayer             = big.NewInt(1 << 5)
+	postV1AccountCompaniesUpdateResponseFieldIsSandbox              = big.NewInt(1 << 6)
+	postV1AccountCompaniesUpdateResponseFieldCountryCode            = big.NewInt(1 << 7)
+	postV1AccountCompaniesUpdateResponseFieldBaseCurrency           = big.NewInt(1 << 8)
+	postV1AccountCompaniesUpdateResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 9)
+	postV1AccountCompaniesUpdateResponseFieldStatus                 = big.NewInt(1 << 10)
+	postV1AccountCompaniesUpdateResponseFieldAddress                = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateResponseFieldEmail                  = big.NewInt(1 << 12)
+	postV1AccountCompaniesUpdateResponseFieldPhone                  = big.NewInt(1 << 13)
+	postV1AccountCompaniesUpdateResponseFieldIban                   = big.NewInt(1 << 14)
+	postV1AccountCompaniesUpdateResponseFieldBankName               = big.NewInt(1 << 15)
+	postV1AccountCompaniesUpdateResponseFieldPeppolID               = big.NewInt(1 << 16)
+	postV1AccountCompaniesUpdateResponseFieldLogoFileID             = big.NewInt(1 << 17)
 )
 
 type PostV1AccountCompaniesUpdateResponse struct {
@@ -3179,6 +3214,7 @@ type PostV1AccountCompaniesUpdateResponse struct {
 	Name                   string                                       `json:"name" url:"name"`
 	Code                   *string                                      `json:"code,omitempty" url:"code,omitempty"`
 	VatCode                *string                                      `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	SmeExemptionNumber     *string                                      `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
 	IsVatPayer             bool                                         `json:"isVatPayer" url:"isVatPayer"`
 	IsSandbox              bool                                         `json:"isSandbox" url:"isSandbox"`
 	CountryCode            string                                       `json:"countryCode" url:"countryCode"`
@@ -3226,6 +3262,13 @@ func (p *PostV1AccountCompaniesUpdateResponse) GetVatCode() *string {
 		return nil
 	}
 	return p.VatCode
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetSmeExemptionNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SmeExemptionNumber
 }
 
 func (p *PostV1AccountCompaniesUpdateResponse) GetIsVatPayer() bool {
@@ -3359,6 +3402,13 @@ func (p *PostV1AccountCompaniesUpdateResponse) SetCode(code *string) {
 func (p *PostV1AccountCompaniesUpdateResponse) SetVatCode(vatCode *string) {
 	p.VatCode = vatCode
 	p.require(postV1AccountCompaniesUpdateResponseFieldVatCode)
+}
+
+// SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetSmeExemptionNumber(smeExemptionNumber *string) {
+	p.SmeExemptionNumber = smeExemptionNumber
+	p.require(postV1AccountCompaniesUpdateResponseFieldSmeExemptionNumber)
 }
 
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;

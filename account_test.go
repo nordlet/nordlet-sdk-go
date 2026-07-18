@@ -253,6 +253,14 @@ func TestSettersPostV1AccountCompaniesCreateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
+		obj := &PostV1AccountCompaniesCreateRequest{}
+		var fernTestValueSmeExemptionNumber *string
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
+		assert.Equal(t, fernTestValueSmeExemptionNumber, obj.SmeExemptionNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &PostV1AccountCompaniesCreateRequest{}
 		var fernTestValueIsVatPayer *bool
@@ -406,6 +414,37 @@ func TestSettersMarkExplicitPostV1AccountCompaniesCreateRequest(t *testing.T) {
 
 		// Act
 		obj.SetVatCode(fernTestValueVatCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesCreateRequest{}
+		var fernTestValueSmeExemptionNumber *string
+
+		// Act
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -856,6 +895,14 @@ func TestSettersPostV1AccountCompaniesUpdateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
+		obj := &PostV1AccountCompaniesUpdateRequest{}
+		var fernTestValueSmeExemptionNumber *string
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
+		assert.Equal(t, fernTestValueSmeExemptionNumber, obj.SmeExemptionNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &PostV1AccountCompaniesUpdateRequest{}
 		var fernTestValueIsVatPayer *bool
@@ -1001,6 +1048,37 @@ func TestSettersMarkExplicitPostV1AccountCompaniesUpdateRequest(t *testing.T) {
 
 		// Act
 		obj.SetVatCode(fernTestValueVatCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesUpdateRequest{}
+		var fernTestValueSmeExemptionNumber *string
+
+		// Act
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3966,6 +4044,14 @@ func TestSettersPostV1AccountCompaniesProfileResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
+		obj := &PostV1AccountCompaniesProfileResponse{}
+		var fernTestValueSmeExemptionNumber *string
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
+		assert.Equal(t, fernTestValueSmeExemptionNumber, obj.SmeExemptionNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &PostV1AccountCompaniesProfileResponse{}
 		var fernTestValueIsVatPayer bool
@@ -4183,6 +4269,39 @@ func TestGettersPostV1AccountCompaniesProfileResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatCode() // Should return zero value
+	})
+
+	t.Run("GetSmeExemptionNumber", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesProfileResponse{}
+		var expected *string
+		obj.SmeExemptionNumber = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSmeExemptionNumber(), "getter should return the property value")
+	})
+
+	t.Run("GetSmeExemptionNumber_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesProfileResponse{}
+		obj.SmeExemptionNumber = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSmeExemptionNumber(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSmeExemptionNumber_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AccountCompaniesProfileResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSmeExemptionNumber() // Should return zero value
 	})
 
 	t.Run("GetIsVatPayer", func(t *testing.T) {
@@ -4658,6 +4777,37 @@ func TestSettersMarkExplicitPostV1AccountCompaniesProfileResponse(t *testing.T) 
 
 		// Act
 		obj.SetVatCode(fernTestValueVatCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesProfileResponse{}
+		var fernTestValueSmeExemptionNumber *string
+
+		// Act
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -5979,6 +6129,14 @@ func TestSettersPostV1AccountCompaniesUpdateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
+		obj := &PostV1AccountCompaniesUpdateResponse{}
+		var fernTestValueSmeExemptionNumber *string
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
+		assert.Equal(t, fernTestValueSmeExemptionNumber, obj.SmeExemptionNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &PostV1AccountCompaniesUpdateResponse{}
 		var fernTestValueIsVatPayer bool
@@ -6196,6 +6354,39 @@ func TestGettersPostV1AccountCompaniesUpdateResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatCode() // Should return zero value
+	})
+
+	t.Run("GetSmeExemptionNumber", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesUpdateResponse{}
+		var expected *string
+		obj.SmeExemptionNumber = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSmeExemptionNumber(), "getter should return the property value")
+	})
+
+	t.Run("GetSmeExemptionNumber_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesUpdateResponse{}
+		obj.SmeExemptionNumber = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSmeExemptionNumber(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSmeExemptionNumber_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AccountCompaniesUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSmeExemptionNumber() // Should return zero value
 	})
 
 	t.Run("GetIsVatPayer", func(t *testing.T) {
@@ -6671,6 +6862,37 @@ func TestSettersMarkExplicitPostV1AccountCompaniesUpdateResponse(t *testing.T) {
 
 		// Act
 		obj.SetVatCode(fernTestValueVatCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AccountCompaniesUpdateResponse{}
+		var fernTestValueSmeExemptionNumber *string
+
+		// Act
+		obj.SetSmeExemptionNumber(fernTestValueSmeExemptionNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

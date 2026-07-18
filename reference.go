@@ -471,6 +471,61 @@ func (p *PostV1ReferenceEuVatRatesListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1ReferenceEuVatRatesSetOverridesRequestFieldCountryCode = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesSetOverridesRequestFieldRates       = big.NewInt(1 << 1)
+)
+
+type PostV1ReferenceEuVatRatesSetOverridesRequest struct {
+	CountryCode string                                                   `json:"countryCode" url:"-"`
+	Rates       []*PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem `json:"rates" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1ReferenceEuVatRatesSetOverridesRequestFieldCountryCode)
+}
+
+// SetRates sets the Rates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) SetRates(rates []*PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) {
+	p.Rates = rates
+	p.require(postV1ReferenceEuVatRatesSetOverridesRequestFieldRates)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesSetOverridesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesSetOverridesRequest(body)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesSetOverridesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1ReferenceExchangeRatesListRequestFieldPage     = big.NewInt(1 << 0)
 	postV1ReferenceExchangeRatesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceExchangeRatesListRequestFieldSort     = big.NewInt(1 << 2)
@@ -4387,17 +4442,26 @@ func (p *PostV1ReferenceCurrenciesListResponseRowsItem) String() string {
 }
 
 var (
-	postV1ReferenceEuVatRatesListResponseFieldRows = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesListResponseFieldNotice = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesListResponseFieldRows   = big.NewInt(1 << 1)
 )
 
 type PostV1ReferenceEuVatRatesListResponse struct {
-	Rows []*PostV1ReferenceEuVatRatesListResponseRowsItem `json:"rows" url:"rows"`
+	Notice string                                           `json:"notice" url:"notice"`
+	Rows   []*PostV1ReferenceEuVatRatesListResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesListResponse) GetNotice() string {
+	if p == nil {
+		return ""
+	}
+	return p.Notice
 }
 
 func (p *PostV1ReferenceEuVatRatesListResponse) GetRows() []*PostV1ReferenceEuVatRatesListResponseRowsItem {
@@ -4419,6 +4483,13 @@ func (p *PostV1ReferenceEuVatRatesListResponse) require(field *big.Int) {
 		p.explicitFields = big.NewInt(0)
 	}
 	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetNotice sets the Notice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesListResponse) SetNotice(notice string) {
+	p.Notice = notice
+	p.require(postV1ReferenceEuVatRatesListResponseFieldNotice)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;
@@ -4476,6 +4547,7 @@ var (
 	postV1ReferenceEuVatRatesListResponseRowsItemFieldRatePercent = big.NewInt(1 << 2)
 	postV1ReferenceEuVatRatesListResponseRowsItemFieldValidFrom   = big.NewInt(1 << 3)
 	postV1ReferenceEuVatRatesListResponseRowsItemFieldValidTo     = big.NewInt(1 << 4)
+	postV1ReferenceEuVatRatesListResponseRowsItemFieldSource      = big.NewInt(1 << 5)
 )
 
 type PostV1ReferenceEuVatRatesListResponseRowsItem struct {
@@ -4484,6 +4556,7 @@ type PostV1ReferenceEuVatRatesListResponseRowsItem struct {
 	RatePercent string                                                `json:"ratePercent" url:"ratePercent"`
 	ValidFrom   *string                                               `json:"validFrom,omitempty" url:"validFrom,omitempty"`
 	ValidTo     *string                                               `json:"validTo,omitempty" url:"validTo,omitempty"`
+	Source      PostV1ReferenceEuVatRatesListResponseRowsItemSource   `json:"source" url:"source"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4525,6 +4598,13 @@ func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) GetValidTo() *string {
 		return nil
 	}
 	return p.ValidTo
+}
+
+func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) GetSource() PostV1ReferenceEuVatRatesListResponseRowsItemSource {
+	if p == nil {
+		return ""
+	}
+	return p.Source
 }
 
 func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -4574,6 +4654,13 @@ func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) SetValidFrom(validFrom *
 func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) SetValidTo(validTo *string) {
 	p.ValidTo = validTo
 	p.require(postV1ReferenceEuVatRatesListResponseRowsItemFieldValidTo)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) SetSource(source PostV1ReferenceEuVatRatesListResponseRowsItemSource) {
+	p.Source = source
+	p.require(postV1ReferenceEuVatRatesListResponseRowsItemFieldSource)
 }
 
 func (p *PostV1ReferenceEuVatRatesListResponseRowsItem) UnmarshalJSON(data []byte) error {
@@ -4643,6 +4730,438 @@ func NewPostV1ReferenceEuVatRatesListResponseRowsItemCategoryFromString(s string
 }
 
 func (p PostV1ReferenceEuVatRatesListResponseRowsItemCategory) Ptr() *PostV1ReferenceEuVatRatesListResponseRowsItemCategory {
+	return &p
+}
+
+type PostV1ReferenceEuVatRatesListResponseRowsItemSource string
+
+const (
+	PostV1ReferenceEuVatRatesListResponseRowsItemSourceDefault PostV1ReferenceEuVatRatesListResponseRowsItemSource = "default"
+	PostV1ReferenceEuVatRatesListResponseRowsItemSourceCompany PostV1ReferenceEuVatRatesListResponseRowsItemSource = "company"
+)
+
+func NewPostV1ReferenceEuVatRatesListResponseRowsItemSourceFromString(s string) (PostV1ReferenceEuVatRatesListResponseRowsItemSource, error) {
+	switch s {
+	case "default":
+		return PostV1ReferenceEuVatRatesListResponseRowsItemSourceDefault, nil
+	case "company":
+		return PostV1ReferenceEuVatRatesListResponseRowsItemSourceCompany, nil
+	}
+	var t PostV1ReferenceEuVatRatesListResponseRowsItemSource
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesListResponseRowsItemSource) Ptr() *PostV1ReferenceEuVatRatesListResponseRowsItemSource {
+	return &p
+}
+
+var (
+	postV1ReferenceEuVatRatesSetOverridesRequestRatesItemFieldCategory    = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesSetOverridesRequestRatesItemFieldRatePercent = big.NewInt(1 << 1)
+)
+
+type PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem struct {
+	Category    PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory `json:"category" url:"category"`
+	RatePercent string                                                        `json:"ratePercent" url:"ratePercent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) GetCategory() PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory {
+	if p == nil {
+		return ""
+	}
+	return p.Category
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) GetRatePercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.RatePercent
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) SetCategory(category PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory) {
+	p.Category = category
+	p.require(postV1ReferenceEuVatRatesSetOverridesRequestRatesItemFieldCategory)
+}
+
+// SetRatePercent sets the RatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) SetRatePercent(ratePercent string) {
+	p.RatePercent = ratePercent
+	p.require(postV1ReferenceEuVatRatesSetOverridesRequestRatesItemFieldRatePercent)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory string
+
+const (
+	PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard     PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory = "standard"
+	PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryReduced      PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory = "reduced"
+	PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategorySuperReduced PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory = "super_reduced"
+	PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryParking      PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory = "parking"
+)
+
+func NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString(s string) (PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory, error) {
+	switch s {
+	case "standard":
+		return PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard, nil
+	case "reduced":
+		return PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryReduced, nil
+	case "super_reduced":
+		return PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategorySuperReduced, nil
+	case "parking":
+		return PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryParking, nil
+	}
+	var t PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory) Ptr() *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory {
+	return &p
+}
+
+var (
+	postV1ReferenceEuVatRatesSetOverridesResponseFieldCountryCode = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesSetOverridesResponseFieldSource      = big.NewInt(1 << 1)
+	postV1ReferenceEuVatRatesSetOverridesResponseFieldNotice      = big.NewInt(1 << 2)
+	postV1ReferenceEuVatRatesSetOverridesResponseFieldRows        = big.NewInt(1 << 3)
+)
+
+type PostV1ReferenceEuVatRatesSetOverridesResponse struct {
+	CountryCode string                                                   `json:"countryCode" url:"countryCode"`
+	Source      PostV1ReferenceEuVatRatesSetOverridesResponseSource      `json:"source" url:"source"`
+	Notice      string                                                   `json:"notice" url:"notice"`
+	Rows        []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) GetSource() PostV1ReferenceEuVatRatesSetOverridesResponseSource {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) GetNotice() string {
+	if p == nil {
+		return ""
+	}
+	return p.Notice
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) GetRows() []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseFieldCountryCode)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) SetSource(source PostV1ReferenceEuVatRatesSetOverridesResponseSource) {
+	p.Source = source
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseFieldSource)
+}
+
+// SetNotice sets the Notice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) SetNotice(notice string) {
+	p.Notice = notice
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseFieldNotice)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) SetRows(rows []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseFieldRows)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesSetOverridesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesSetOverridesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesSetOverridesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceEuVatRatesSetOverridesResponseRowsItemFieldCategory    = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesSetOverridesResponseRowsItemFieldRatePercent = big.NewInt(1 << 1)
+)
+
+type PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem struct {
+	Category    PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory `json:"category" url:"category"`
+	RatePercent string                                                        `json:"ratePercent" url:"ratePercent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) GetCategory() PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory {
+	if p == nil {
+		return ""
+	}
+	return p.Category
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) GetRatePercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.RatePercent
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) SetCategory(category PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory) {
+	p.Category = category
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseRowsItemFieldCategory)
+}
+
+// SetRatePercent sets the RatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) SetRatePercent(ratePercent string) {
+	p.RatePercent = ratePercent
+	p.require(postV1ReferenceEuVatRatesSetOverridesResponseRowsItemFieldRatePercent)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory string
+
+const (
+	PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryStandard     PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory = "standard"
+	PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryReduced      PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory = "reduced"
+	PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategorySuperReduced PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory = "super_reduced"
+	PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryParking      PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory = "parking"
+)
+
+func NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString(s string) (PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory, error) {
+	switch s {
+	case "standard":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryStandard, nil
+	case "reduced":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryReduced, nil
+	case "super_reduced":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategorySuperReduced, nil
+	case "parking":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryParking, nil
+	}
+	var t PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory) Ptr() *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory {
+	return &p
+}
+
+type PostV1ReferenceEuVatRatesSetOverridesResponseSource string
+
+const (
+	PostV1ReferenceEuVatRatesSetOverridesResponseSourceDefault PostV1ReferenceEuVatRatesSetOverridesResponseSource = "default"
+	PostV1ReferenceEuVatRatesSetOverridesResponseSourceCompany PostV1ReferenceEuVatRatesSetOverridesResponseSource = "company"
+)
+
+func NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString(s string) (PostV1ReferenceEuVatRatesSetOverridesResponseSource, error) {
+	switch s {
+	case "default":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseSourceDefault, nil
+	case "company":
+		return PostV1ReferenceEuVatRatesSetOverridesResponseSourceCompany, nil
+	}
+	var t PostV1ReferenceEuVatRatesSetOverridesResponseSource
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesSetOverridesResponseSource) Ptr() *PostV1ReferenceEuVatRatesSetOverridesResponseSource {
 	return &p
 }
 
@@ -9612,6 +10131,7 @@ const (
 	PostV1ReferenceVatResolveResponseSchemeMarketplaceDeemed PostV1ReferenceVatResolveResponseScheme = "marketplace_deemed"
 	PostV1ReferenceVatResolveResponseSchemeExport            PostV1ReferenceVatResolveResponseScheme = "export"
 	PostV1ReferenceVatResolveResponseSchemeOutOfScope        PostV1ReferenceVatResolveResponseScheme = "out_of_scope"
+	PostV1ReferenceVatResolveResponseSchemeSmeExempt         PostV1ReferenceVatResolveResponseScheme = "sme_exempt"
 )
 
 func NewPostV1ReferenceVatResolveResponseSchemeFromString(s string) (PostV1ReferenceVatResolveResponseScheme, error) {
@@ -9632,6 +10152,8 @@ func NewPostV1ReferenceVatResolveResponseSchemeFromString(s string) (PostV1Refer
 		return PostV1ReferenceVatResolveResponseSchemeExport, nil
 	case "out_of_scope":
 		return PostV1ReferenceVatResolveResponseSchemeOutOfScope, nil
+	case "sme_exempt":
+		return PostV1ReferenceVatResolveResponseSchemeSmeExempt, nil
 	}
 	var t PostV1ReferenceVatResolveResponseScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

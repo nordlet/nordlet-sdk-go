@@ -210,6 +210,118 @@ func (c *Client) PostV1DeclarationsEuIossCompute(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1DeclarationsEuDistanceSalesThresholdGet(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuDistanceSalesThresholdGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuDistanceSalesThresholdGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuUnionTurnoverGet(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuUnionTurnoverGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuUnionTurnoverGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuUnionTurnoverGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuSmeCrossBorderReportCompute(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuSmeCrossBorderReportComputeResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeCrossBorderReportCompute(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuSmeThresholdsList(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuSmeThresholdsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuSmeThresholdsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeThresholdsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuSmeThresholdGet(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuSmeThresholdGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuSmeThresholdGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuSmeThresholdGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuVatReturnPacksList(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuVatReturnPacksListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuVatReturnPacksListResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuVatReturnPacksList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DeclarationsEuVatReturnCompute(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsEuVatReturnComputeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsEuVatReturnComputeResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsEuVatReturnCompute(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1DeclarationsConfigsList(
 	ctx context.Context,
 	request *nordlet.PostV1DeclarationsConfigsListRequest,

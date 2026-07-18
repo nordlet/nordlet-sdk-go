@@ -9985,6 +9985,9 @@ const (
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsCommissionRevenue PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "settlements.commissionRevenue"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsSellerPayable     PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "settlements.sellerPayable"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsSuspense          PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "settlements.suspense"
+	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueDeferredIncome        PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "revenue.deferredIncome"
+	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueContractAsset         PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "revenue.contractAsset"
+	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueRefundLiability       PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "revenue.refundLiability"
 )
 
 func NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString(s string) (PostV1LedgerPostingRulesUpdateRequestRulesItemKey, error) {
@@ -10023,6 +10026,12 @@ func NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString(s string) (P
 		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsSellerPayable, nil
 	case "settlements.suspense":
 		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsSuspense, nil
+	case "revenue.deferredIncome":
+		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueDeferredIncome, nil
+	case "revenue.contractAsset":
+		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueContractAsset, nil
+	case "revenue.refundLiability":
+		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyRevenueRefundLiability, nil
 	}
 	var t PostV1LedgerPostingRulesUpdateRequestRulesItemKey
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

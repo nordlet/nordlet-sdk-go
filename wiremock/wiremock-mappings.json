@@ -386,12 +386,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"category\": \"standard\",\n      \"ratePercent\": \"ratePercent\",\n      \"validFrom\": \"validFrom\",\n      \"validTo\": \"validTo\"\n    }\n  ]\n}",
+        "body": "{\n  \"notice\": \"notice\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"category\": \"standard\",\n      \"ratePercent\": \"ratePercent\",\n      \"validFrom\": \"validFrom\",\n      \"validTo\": \"validTo\",\n      \"source\": \"default\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "a71f623b-9266-48de-aa8a-3ca07698de0f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "cd55b812-26c0-40ec-b1ed-a5a44ab12462",
+      "name": "postV1ReferenceEuVatRatesSetOverrides - default",
+      "request": {
+        "urlPathTemplate": "/v1/reference/eu-vat-rates/set-overrides",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"source\": \"default\",\n  \"notice\": \"notice\",\n  \"rows\": [\n    {\n      \"category\": \"standard\",\n      \"ratePercent\": \"ratePercent\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "cd55b812-26c0-40ec-b1ed-a5a44ab12462",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -2215,7 +2246,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"agreementId\": \"agreementId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000,\n      \"recognitionMethod\": \"point_in_time\",\n      \"recognitionStartDate\": \"recognitionStartDate\",\n      \"recognitionEndDate\": \"recognitionEndDate\",\n      \"recognitionMilestones\": [\n        {\n          \"description\": \"description\",\n          \"expectedDate\": null,\n          \"percent\": \"percent\"\n        }\n      ],\n      \"standaloneSellingPrice\": \"standaloneSellingPrice\",\n      \"allocatedNet\": \"allocatedNet\",\n      \"refundEstimatePercent\": \"refundEstimatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2246,7 +2277,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"agreementId\": \"agreementId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000,\n      \"recognitionMethod\": \"point_in_time\",\n      \"recognitionStartDate\": \"recognitionStartDate\",\n      \"recognitionEndDate\": \"recognitionEndDate\",\n      \"recognitionMilestones\": [\n        {\n          \"description\": \"description\",\n          \"expectedDate\": null,\n          \"percent\": \"percent\"\n        }\n      ],\n      \"standaloneSellingPrice\": \"standaloneSellingPrice\",\n      \"allocatedNet\": \"allocatedNet\",\n      \"refundEstimatePercent\": \"refundEstimatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2401,7 +2432,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"agreementId\": \"agreementId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000,\n      \"recognitionMethod\": \"point_in_time\",\n      \"recognitionStartDate\": \"recognitionStartDate\",\n      \"recognitionEndDate\": \"recognitionEndDate\",\n      \"recognitionMilestones\": [\n        {\n          \"description\": \"description\",\n          \"expectedDate\": null,\n          \"percent\": \"percent\"\n        }\n      ],\n      \"standaloneSellingPrice\": \"standaloneSellingPrice\",\n      \"allocatedNet\": \"allocatedNet\",\n      \"refundEstimatePercent\": \"refundEstimatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2463,12 +2494,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"agreementId\": \"agreementId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000,\n      \"recognitionMethod\": \"point_in_time\",\n      \"recognitionStartDate\": \"recognitionStartDate\",\n      \"recognitionEndDate\": \"recognitionEndDate\",\n      \"recognitionMilestones\": [\n        {\n          \"description\": \"description\",\n          \"expectedDate\": null,\n          \"percent\": \"percent\"\n        }\n      ],\n      \"standaloneSellingPrice\": \"standaloneSellingPrice\",\n      \"allocatedNet\": \"allocatedNet\",\n      \"refundEstimatePercent\": \"refundEstimatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "cc37573e-6cbf-4df0-990b-fb852fe1cc9b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "b2a06a7a-f3f0-42a5-8866-a663c9946166",
+      "name": "postV1SalesRecognitionSchedulesList - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition-schedules/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"method\": \"point_in_time\",\n      \"status\": \"pending\",\n      \"scheduleDate\": \"scheduleDate\",\n      \"description\": \"description\",\n      \"amount\": \"amount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"recognizedAt\": \"recognizedAt\",\n      \"sortOrder\": 1000000,\n      \"createdAt\": \"createdAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b2a06a7a-f3f0-42a5-8866-a663c9946166",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -2494,7 +2556,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"issueDate\": \"issueDate\",\n  \"dueDate\": \"dueDate\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"agreementId\": \"agreementId\",\n  \"vatScheme\": \"domestic\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"deemedSupplier\": true,\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"updatedAt\": \"updatedAt\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000,\n      \"recognitionMethod\": \"point_in_time\",\n      \"recognitionStartDate\": \"recognitionStartDate\",\n      \"recognitionEndDate\": \"recognitionEndDate\",\n      \"recognitionMilestones\": [\n        {\n          \"description\": \"description\",\n          \"expectedDate\": null,\n          \"percent\": \"percent\"\n        }\n      ],\n      \"standaloneSellingPrice\": \"standaloneSellingPrice\",\n      \"allocatedNet\": \"allocatedNet\",\n      \"refundEstimatePercent\": \"refundEstimatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2525,7 +2587,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"issueDate\": \"issueDate\",\n      \"dueDate\": \"dueDate\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"vatScheme\": \"domestic\",\n      \"vatCountryCode\": \"vatCountryCode\",\n      \"deemedSupplier\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"createdAt\",\n      \"updatedAt\": \"updatedAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"issueDate\": \"issueDate\",\n      \"dueDate\": \"dueDate\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"agreementId\": \"agreementId\",\n      \"vatScheme\": \"domestic\",\n      \"vatCountryCode\": \"vatCountryCode\",\n      \"deemedSupplier\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"createdAt\",\n      \"updatedAt\": \"updatedAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2748,6 +2810,254 @@
         }
       },
       "uuid": "35559d3d-2bbd-4e76-b01b-c66d6d1b66e8",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1fe8573d-ce52-431d-86b1-ada084b33d89",
+      "name": "postV1SalesRecognitionCompute - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/compute",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"asOfDate\": \"asOfDate\",\n  \"totalAmount\": \"totalAmount\",\n  \"rows\": [\n    {\n      \"scheduleId\": \"scheduleId\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceFullNumber\": \"invoiceFullNumber\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"lineDescription\": \"lineDescription\",\n      \"scheduleDate\": \"scheduleDate\",\n      \"description\": \"description\",\n      \"amount\": \"amount\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1fe8573d-ce52-431d-86b1-ada084b33d89",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "25196516-e329-4a44-9e03-bff315d83dd0",
+      "name": "postV1SalesRecognitionRun - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/run",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"runId\": \"runId\",\n  \"runDate\": \"runDate\",\n  \"trigger\": \"manual\",\n  \"scheduleCount\": 1000000,\n  \"totalAmount\": \"totalAmount\",\n  \"journalTransactionId\": \"journalTransactionId\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "25196516-e329-4a44-9e03-bff315d83dd0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "21f95a9a-c1fc-4e83-8e9e-9b315ea49eda",
+      "name": "postV1SalesRecognitionProgress - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/progress",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"runId\": \"runId\",\n  \"runDate\": \"runDate\",\n  \"scheduleCount\": 1000000,\n  \"totalAmount\": \"totalAmount\",\n  \"journalTransactionId\": \"journalTransactionId\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "21f95a9a-c1fc-4e83-8e9e-9b315ea49eda",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "78beecb5-5bd9-4d00-9576-233030e12f15",
+      "name": "postV1SalesRecognitionModify - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/modify",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"invoiceLineId\": \"invoiceLineId\",\n  \"approach\": \"prospective\",\n  \"cancelledCount\": 1000000,\n  \"newPendingCount\": 1000000,\n  \"catchUpAmount\": \"catchUpAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"newEndDate\": \"newEndDate\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "78beecb5-5bd9-4d00-9576-233030e12f15",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "43cdd92b-c16e-466b-99b2-eb40b424e494",
+      "name": "postV1SalesRecognitionRunsList - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/runs/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"runDate\": \"runDate\",\n      \"trigger\": \"manual\",\n      \"scheduleCount\": 1000000,\n      \"totalAmount\": \"totalAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"createdAt\": \"createdAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "43cdd92b-c16e-466b-99b2-eb40b424e494",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "58f676a5-6abb-4b5d-a585-8c535b40ec24",
+      "name": "postV1SalesRecognitionSummary - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/recognition/summary",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceFullNumber\": \"invoiceFullNumber\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"lineDescription\": \"lineDescription\",\n      \"method\": \"point_in_time\",\n      \"deferredTotal\": \"deferredTotal\",\n      \"recognizedToDate\": \"recognizedToDate\",\n      \"remaining\": \"remaining\",\n      \"pendingCount\": 1000000,\n      \"nextScheduleDate\": \"nextScheduleDate\"\n    }\n  ],\n  \"totals\": {\n    \"deferredTotal\": \"deferredTotal\",\n    \"recognizedToDate\": \"recognizedToDate\",\n    \"remaining\": \"remaining\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "58f676a5-6abb-4b5d-a585-8c535b40ec24",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3ccc3228-7440-4847-92b9-b52cd59f72b3",
+      "name": "postV1SalesRefundLiabilityList - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/refund-liability/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceFullNumber\": \"invoiceFullNumber\",\n      \"estimated\": \"estimated\",\n      \"consumed\": \"consumed\",\n      \"settlementRefunds\": \"settlementRefunds\",\n      \"remaining\": \"remaining\",\n      \"createdAt\": \"createdAt\",\n      \"updatedAt\": \"updatedAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3ccc3228-7440-4847-92b9-b52cd59f72b3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "624311d1-db27-4849-8bf0-a593f1f8abd1",
+      "name": "postV1SalesRefundLiabilityTrueUp - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/refund-liability/true-up",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"invoiceId\": \"invoiceId\",\n  \"estimated\": \"estimated\",\n  \"consumed\": \"consumed\",\n  \"remaining\": \"remaining\",\n  \"delta\": \"delta\",\n  \"journalTransactionId\": \"journalTransactionId\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "624311d1-db27-4849-8bf0-a593f1f8abd1",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -3238,7 +3548,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"periodYear\": 1000000,\n  \"fromDate\": \"fromDate\",\n  \"toDate\": \"toDate\",\n  \"memberStateOfIdentification\": \"memberStateOfIdentification\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"rateType\": \"STANDARD\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"totals\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"periodQuarter\": 1000000\n}",
+        "body": "{\n  \"periodYear\": 1000000,\n  \"fromDate\": \"fromDate\",\n  \"toDate\": \"toDate\",\n  \"memberStateOfIdentification\": \"memberStateOfIdentification\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"rateType\": \"STANDARD\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"totals\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"corrections\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"periodYear\": 1000000,\n      \"periodQuarter\": 1000000,\n      \"periodMonth\": 1000000,\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"correctionsTotal\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"periodQuarter\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3269,12 +3579,229 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"periodYear\": 1000000,\n  \"fromDate\": \"fromDate\",\n  \"toDate\": \"toDate\",\n  \"memberStateOfIdentification\": \"memberStateOfIdentification\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"rateType\": \"STANDARD\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"totals\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"periodMonth\": 1000000\n}",
+        "body": "{\n  \"periodYear\": 1000000,\n  \"fromDate\": \"fromDate\",\n  \"toDate\": \"toDate\",\n  \"memberStateOfIdentification\": \"memberStateOfIdentification\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"rateType\": \"STANDARD\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"totals\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"corrections\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"periodYear\": 1000000,\n      \"periodQuarter\": 1000000,\n      \"periodMonth\": 1000000,\n      \"taxableAmount\": \"taxableAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"correctionsTotal\": {\n    \"taxableAmount\": \"taxableAmount\",\n    \"vatAmount\": \"vatAmount\"\n  },\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"periodMonth\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "5f55c057-5971-41aa-8b9a-8fb2ad2d902f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3b268db1-0b97-47eb-a4f9-4fe750eedede",
+      "name": "postV1DeclarationsEuDistanceSalesThresholdGet - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/distance-sales-threshold/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"thresholdEur\": \"thresholdEur\",\n  \"homeCountryCode\": \"homeCountryCode\",\n  \"currentYear\": {\n    \"year\": 1000000,\n    \"totalAmount\": \"totalAmount\",\n    \"documents\": 1000000\n  },\n  \"precedingYear\": {\n    \"year\": 1000000,\n    \"totalAmount\": \"totalAmount\",\n    \"documents\": 1000000\n  },\n  \"belowThreshold\": true,\n  \"headroomAmount\": \"headroomAmount\",\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3b268db1-0b97-47eb-a4f9-4fe750eedede",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "e12ab37a-9398-4096-9cd5-943e7549fab5",
+      "name": "postV1DeclarationsEuUnionTurnoverGet - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/union-turnover/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capEur\": \"capEur\",\n  \"currency\": \"currency\",\n  \"isVatPayer\": true,\n  \"currentYear\": {\n    \"year\": 1000000,\n    \"amount\": \"amount\",\n    \"documents\": 1000000\n  },\n  \"previousYear\": {\n    \"year\": 1000000,\n    \"amount\": \"amount\",\n    \"documents\": 1000000\n  },\n  \"status\": \"below\",\n  \"headroomAmount\": \"headroomAmount\",\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e12ab37a-9398-4096-9cd5-943e7549fab5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "22efc093-3561-4e46-b15f-2c02aeefa378",
+      "name": "postV1DeclarationsEuSmeCrossBorderReportCompute - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/sme-cross-border-report/compute",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"year\": 1000000,\n  \"quarter\": 1000000,\n  \"fromDate\": \"fromDate\",\n  \"toDate\": \"toDate\",\n  \"currency\": \"currency\",\n  \"rows\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"amount\": \"amount\",\n      \"documents\": 1000000\n    }\n  ],\n  \"total\": \"total\",\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "22efc093-3561-4e46-b15f-2c02aeefa378",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "51f9f88f-d695-48f4-b8d6-6da15ff4c117",
+      "name": "postV1DeclarationsEuSmeThresholdsList - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/sme-thresholds/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"nationalCapEur\": \"nationalCapEur\",\n  \"unionTurnoverCapEur\": \"unionTurnoverCapEur\",\n  \"thresholds\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"currency\": \"currency\",\n      \"nationalThreshold\": \"nationalThreshold\",\n      \"sectors\": [\n        {\n          \"label\": \"label\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"intraEuAcquisitionsTrigger\": {\n        \"amount\": \"amount\",\n        \"currency\": \"currency\",\n        \"note\": \"note\"\n      },\n      \"note\": \"note\",\n      \"source\": \"source\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "51f9f88f-d695-48f4-b8d6-6da15ff4c117",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "9da64fbb-d659-46e8-af62-9df5c6c0c0a0",
+      "name": "postV1DeclarationsEuSmeThresholdGet - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/sme-threshold/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"isVatPayer\": true,\n  \"baseCurrency\": \"baseCurrency\",\n  \"year\": 1000000,\n  \"threshold\": {\n    \"currency\": \"currency\",\n    \"nationalThreshold\": \"nationalThreshold\",\n    \"sectors\": [\n      {\n        \"label\": \"label\",\n        \"amount\": \"amount\"\n      }\n    ],\n    \"note\": \"note\",\n    \"source\": \"source\"\n  },\n  \"turnover\": {\n    \"amount\": \"amount\",\n    \"currency\": \"currency\",\n    \"documents\": 1000000\n  },\n  \"precedingTurnover\": {\n    \"year\": 1000000,\n    \"amount\": \"amount\",\n    \"documents\": 1000000\n  },\n  \"status\": \"not_applicable\",\n  \"headroomAmount\": \"headroomAmount\",\n  \"intraEu\": {\n    \"trigger\": \"trigger\",\n    \"currency\": \"currency\",\n    \"acquisitionsFromMemberStates\": \"acquisitionsFromMemberStates\",\n    \"servicesToMemberStates\": \"servicesToMemberStates\",\n    \"total\": \"total\",\n    \"status\": \"below\",\n    \"note\": \"note\"\n  },\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "9da64fbb-d659-46e8-af62-9df5c6c0c0a0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "6ad40a83-82f3-41e3-a2a9-52f80c363f2f",
+      "name": "postV1DeclarationsEuVatReturnPacksList - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/vat-return/packs/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"packs\": [\n    {\n      \"countryCode\": \"countryCode\",\n      \"formKey\": \"formKey\",\n      \"formName\": \"formName\",\n      \"frequency\": \"monthly\",\n      \"source\": \"source\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6ad40a83-82f3-41e3-a2a9-52f80c363f2f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "03786234-f616-4af6-aec6-01016ae23eec",
+      "name": "postV1DeclarationsEuVatReturnCompute - default",
+      "request": {
+        "urlPathTemplate": "/v1/declarations/eu/vat-return/compute",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"formKey\": \"formKey\",\n  \"formName\": \"formName\",\n  \"frequency\": \"monthly\",\n  \"periodStart\": \"periodStart\",\n  \"periodEnd\": \"periodEnd\",\n  \"boxes\": [\n    {\n      \"code\": \"code\",\n      \"label\": \"label\",\n      \"amount\": \"amount\"\n    }\n  ],\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"notes\": [\n    \"notes\"\n  ],\n  \"source\": \"source\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "03786234-f616-4af6-aec6-01016ae23eec",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -5563,7 +6090,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5594,7 +6121,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5625,7 +6152,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"partnerId\": \"partnerId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"startDate\",\n  \"endDate\": \"endDate\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5687,12 +6214,74 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"typeId\": \"typeId\",\n      \"partnerId\": \"partnerId\",\n      \"number\": \"number\",\n      \"name\": \"name\",\n      \"startDate\": \"startDate\",\n      \"endDate\": \"endDate\",\n      \"autoRenew\": true,\n      \"value\": \"value\",\n      \"currency\": \"currency\",\n      \"status\": \"draft\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"createdAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"typeId\": \"typeId\",\n      \"partnerId\": \"partnerId\",\n      \"number\": \"number\",\n      \"name\": \"name\",\n      \"startDate\": \"startDate\",\n      \"endDate\": \"endDate\",\n      \"autoRenew\": true,\n      \"value\": \"value\",\n      \"billingPeriod\": \"monthly\",\n      \"currency\": \"currency\",\n      \"status\": \"draft\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"createdAt\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "93d5fe31-9661-4238-8012-40efebfa9d5d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "bdaf6627-8e7d-456e-9af2-93c1ff2361e3",
+      "name": "postV1AgreementsAgreementsGenerateInvoice - default",
+      "request": {
+        "urlPathTemplate": "/v1/agreements/agreements/generate-invoice",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"invoiceId\": \"invoiceId\",\n  \"periodStart\": \"periodStart\",\n  \"periodEnd\": \"periodEnd\",\n  \"renewedEndDate\": \"renewedEndDate\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "bdaf6627-8e7d-456e-9af2-93c1ff2361e3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "8c3e5dc4-b23f-420b-aff2-000c3ba5efdc",
+      "name": "postV1AgreementsAgreementsBillingRun - default",
+      "request": {
+        "urlPathTemplate": "/v1/agreements/agreements/billing/run",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"generated\": [\n    {\n      \"agreementId\": \"agreementId\",\n      \"invoiceId\": \"invoiceId\",\n      \"periodStart\": \"periodStart\",\n      \"periodEnd\": \"periodEnd\"\n    }\n  ],\n  \"expired\": [\n    \"expired\"\n  ],\n  \"errors\": [\n    {\n      \"agreementId\": \"agreementId\",\n      \"message\": \"message\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "8c3e5dc4-b23f-420b-aff2-000c3ba5efdc",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -9469,7 +10058,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"isVatPayer\": true,\n  \"isSandbox\": true,\n  \"countryCode\": \"countryCode\",\n  \"baseCurrency\": \"baseCurrency\",\n  \"defaultInvoiceCurrency\": \"defaultInvoiceCurrency\",\n  \"status\": \"active\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"iban\": \"iban\",\n  \"bankName\": \"bankName\",\n  \"peppolId\": \"peppolId\",\n  \"logoFileId\": \"logoFileId\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"smeExemptionNumber\": \"smeExemptionNumber\",\n  \"isVatPayer\": true,\n  \"isSandbox\": true,\n  \"countryCode\": \"countryCode\",\n  \"baseCurrency\": \"baseCurrency\",\n  \"defaultInvoiceCurrency\": \"defaultInvoiceCurrency\",\n  \"status\": \"active\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"iban\": \"iban\",\n  \"bankName\": \"bankName\",\n  \"peppolId\": \"peppolId\",\n  \"logoFileId\": \"logoFileId\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9500,7 +10089,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"isVatPayer\": true,\n  \"isSandbox\": true,\n  \"countryCode\": \"countryCode\",\n  \"baseCurrency\": \"baseCurrency\",\n  \"defaultInvoiceCurrency\": \"defaultInvoiceCurrency\",\n  \"status\": \"active\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"iban\": \"iban\",\n  \"bankName\": \"bankName\",\n  \"peppolId\": \"peppolId\",\n  \"logoFileId\": \"logoFileId\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"smeExemptionNumber\": \"smeExemptionNumber\",\n  \"isVatPayer\": true,\n  \"isSandbox\": true,\n  \"countryCode\": \"countryCode\",\n  \"baseCurrency\": \"baseCurrency\",\n  \"defaultInvoiceCurrency\": \"defaultInvoiceCurrency\",\n  \"status\": \"active\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"iban\": \"iban\",\n  \"bankName\": \"bankName\",\n  \"peppolId\": \"peppolId\",\n  \"logoFileId\": \"logoFileId\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9705,6 +10294,6 @@
     }
   ],
   "meta": {
-    "total": 313
+    "total": 332
   }
 }

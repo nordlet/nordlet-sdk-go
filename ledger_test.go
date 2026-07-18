@@ -22842,6 +22842,27 @@ func TestEnumPostV1LedgerPostingRulesUpdateRequestRulesItemKey(t *testing.T) {
 		assert.Equal(t, PostV1LedgerPostingRulesUpdateRequestRulesItemKey("settlements.suspense"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_revenue_deferredIncome", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString("revenue.deferredIncome")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1LedgerPostingRulesUpdateRequestRulesItemKey("revenue.deferredIncome"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_contractAsset", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString("revenue.contractAsset")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1LedgerPostingRulesUpdateRequestRulesItemKey("revenue.contractAsset"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_revenue_refundLiability", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString("revenue.refundLiability")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1LedgerPostingRulesUpdateRequestRulesItemKey("revenue.refundLiability"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)

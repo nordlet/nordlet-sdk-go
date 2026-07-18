@@ -407,6 +407,38 @@ func TestReferencePostV1ReferenceEuVatRatesListWithWireMock(
 	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesListWithWireMock", "POST", "/v1/reference/eu-vat-rates/list", nil, 1)
 }
 
+func TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceEuVatRatesSetOverridesRequest{
+		CountryCode: "countryCode",
+		Rates: []*nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
+			&nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{
+				Category:    nordlet.PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryStandard,
+				RatePercent: "ratePercent",
+			},
+		},
+	}
+	_, invocationErr := client.Reference.PostV1ReferenceEuVatRatesSetOverrides(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock", "POST", "/v1/reference/eu-vat-rates/set-overrides", nil, 1)
+}
+
 func TestReferencePostV1ReferenceVatResolveWithWireMock(
 	t *testing.T,
 ) {

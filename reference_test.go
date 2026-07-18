@@ -870,6 +870,90 @@ func TestSettersMarkExplicitPostV1ReferenceEuVatRatesListRequest(t *testing.T) {
 
 }
 
+func TestSettersPostV1ReferenceEuVatRatesSetOverridesRequest(t *testing.T) {
+	t.Run("SetCountryCode", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequest{}
+		var fernTestValueCountryCode string
+		obj.SetCountryCode(fernTestValueCountryCode)
+		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRates", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequest{}
+		var fernTestValueRates []*PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		obj.SetRates(fernTestValueRates)
+		assert.Equal(t, fernTestValueRates, obj.Rates)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitPostV1ReferenceEuVatRatesSetOverridesRequest(t *testing.T) {
+	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequest{}
+		var fernTestValueCountryCode string
+
+		// Act
+		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRates_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequest{}
+		var fernTestValueRates []*PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+
+		// Act
+		obj.SetRates(fernTestValueRates)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersPostV1ReferenceExchangeRatesListRequest(t *testing.T) {
 	t.Run("SetPage", func(t *testing.T) {
 		obj := &PostV1ReferenceExchangeRatesListRequest{}
@@ -7594,6 +7678,14 @@ func TestSettersMarkExplicitPostV1ReferenceCurrenciesListResponseRowsItem(t *tes
 }
 
 func TestSettersPostV1ReferenceEuVatRatesListResponse(t *testing.T) {
+	t.Run("SetNotice", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesListResponse{}
+		var fernTestValueNotice string
+		obj.SetNotice(fernTestValueNotice)
+		assert.Equal(t, fernTestValueNotice, obj.Notice)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetRows", func(t *testing.T) {
 		obj := &PostV1ReferenceEuVatRatesListResponse{}
 		var fernTestValueRows []*PostV1ReferenceEuVatRatesListResponseRowsItem
@@ -7605,6 +7697,29 @@ func TestSettersPostV1ReferenceEuVatRatesListResponse(t *testing.T) {
 }
 
 func TestGettersPostV1ReferenceEuVatRatesListResponse(t *testing.T) {
+	t.Run("GetNotice", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesListResponse{}
+		var expected string
+		obj.Notice = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNotice(), "getter should return the property value")
+	})
+
+	t.Run("GetNotice_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesListResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNotice() // Should return zero value
+	})
+
 	t.Run("GetRows", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -7641,6 +7756,37 @@ func TestGettersPostV1ReferenceEuVatRatesListResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitPostV1ReferenceEuVatRatesListResponse(t *testing.T) {
+	t.Run("SetNotice_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesListResponse{}
+		var fernTestValueNotice string
+
+		// Act
+		obj.SetNotice(fernTestValueNotice)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -7712,6 +7858,14 @@ func TestSettersPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing.T) {
 		var fernTestValueValidTo *string
 		obj.SetValidTo(fernTestValueValidTo)
 		assert.Equal(t, fernTestValueValidTo, obj.ValidTo)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSource", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesListResponseRowsItem{}
+		var fernTestValueSource PostV1ReferenceEuVatRatesListResponseRowsItemSource
+		obj.SetSource(fernTestValueSource)
+		assert.Equal(t, fernTestValueSource, obj.Source)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -7853,6 +8007,29 @@ func TestGettersPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing.T) {
 		_ = obj.GetValidTo() // Should return zero value
 	})
 
+	t.Run("GetSource", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesListResponseRowsItem{}
+		var expected PostV1ReferenceEuVatRatesListResponseRowsItemSource
+		obj.Source = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSource(), "getter should return the property value")
+	})
+
+	t.Run("GetSource_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSource() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing.T) {
@@ -7988,6 +8165,570 @@ func TestSettersMarkExplicitPostV1ReferenceEuVatRatesListResponseRowsItem(t *tes
 
 		// Act
 		obj.SetValidTo(fernTestValueValidTo)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesListResponseRowsItem{}
+		var fernTestValueSource PostV1ReferenceEuVatRatesListResponseRowsItemSource
+
+		// Act
+		obj.SetSource(fernTestValueSource)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("SetCategory", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var fernTestValueCategory PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory
+		obj.SetCategory(fernTestValueCategory)
+		assert.Equal(t, fernTestValueCategory, obj.Category)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRatePercent", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var fernTestValueRatePercent string
+		obj.SetRatePercent(fernTestValueRatePercent)
+		assert.Equal(t, fernTestValueRatePercent, obj.RatePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("GetCategory", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var expected PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory
+		obj.Category = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCategory(), "getter should return the property value")
+	})
+
+	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCategory() // Should return zero value
+	})
+
+	t.Run("GetRatePercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var expected string
+		obj.RatePercent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRatePercent(), "getter should return the property value")
+	})
+
+	t.Run("GetRatePercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRatePercent() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var fernTestValueCategory PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory
+
+		// Act
+		obj.SetCategory(fernTestValueCategory)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRatePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		var fernTestValueRatePercent string
+
+		// Act
+		obj.SetRatePercent(fernTestValueRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("SetCountryCode", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueCountryCode string
+		obj.SetCountryCode(fernTestValueCountryCode)
+		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSource", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueSource PostV1ReferenceEuVatRatesSetOverridesResponseSource
+		obj.SetSource(fernTestValueSource)
+		assert.Equal(t, fernTestValueSource, obj.Source)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetNotice", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueNotice string
+		obj.SetNotice(fernTestValueNotice)
+		assert.Equal(t, fernTestValueNotice, obj.Notice)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRows", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueRows []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		obj.SetRows(fernTestValueRows)
+		assert.Equal(t, fernTestValueRows, obj.Rows)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("GetCountryCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var expected string
+		obj.CountryCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCountryCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCountryCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetSource", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var expected PostV1ReferenceEuVatRatesSetOverridesResponseSource
+		obj.Source = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSource(), "getter should return the property value")
+	})
+
+	t.Run("GetSource_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSource() // Should return zero value
+	})
+
+	t.Run("GetNotice", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var expected string
+		obj.Notice = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNotice(), "getter should return the property value")
+	})
+
+	t.Run("GetNotice_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNotice() // Should return zero value
+	})
+
+	t.Run("GetRows", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var expected []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		obj.Rows = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRows(), "getter should return the property value")
+	})
+
+	t.Run("GetRows_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		obj.Rows = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRows(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRows_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRows() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("SetCountryCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueCountryCode string
+
+		// Act
+		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueSource PostV1ReferenceEuVatRatesSetOverridesResponseSource
+
+		// Act
+		obj.SetSource(fernTestValueSource)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetNotice_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueNotice string
+
+		// Act
+		obj.SetNotice(fernTestValueNotice)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRows_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		var fernTestValueRows []*PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+
+		// Act
+		obj.SetRows(fernTestValueRows)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("SetCategory", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var fernTestValueCategory PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory
+		obj.SetCategory(fernTestValueCategory)
+		assert.Equal(t, fernTestValueCategory, obj.Category)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRatePercent", func(t *testing.T) {
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var fernTestValueRatePercent string
+		obj.SetRatePercent(fernTestValueRatePercent)
+		assert.Equal(t, fernTestValueRatePercent, obj.RatePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("GetCategory", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var expected PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory
+		obj.Category = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCategory(), "getter should return the property value")
+	})
+
+	t.Run("GetCategory_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCategory() // Should return zero value
+	})
+
+	t.Run("GetRatePercent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var expected string
+		obj.RatePercent = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRatePercent(), "getter should return the property value")
+	})
+
+	t.Run("GetRatePercent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRatePercent() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("SetCategory_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var fernTestValueCategory PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory
+
+		// Act
+		obj.SetCategory(fernTestValueCategory)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRatePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		var fernTestValueRatePercent string
+
+		// Act
+		obj.SetRatePercent(fernTestValueRatePercent)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -16289,6 +17030,105 @@ func TestJSONMarshalingPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing.
 	})
 }
 
+func TestJSONMarshalingPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled PostV1ReferenceEuVatRatesSetOverridesResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingPostV1ReferenceExchangeRatesListRequestFilterItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -17697,6 +18537,54 @@ func TestStringPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestStringPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringPostV1ReferenceExchangeRatesListRequestFilterItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -18510,6 +19398,150 @@ func TestEnumPostV1ReferenceEuVatRatesListResponseRowsItemCategory(t *testing.T)
 	})
 }
 
+func TestEnumPostV1ReferenceEuVatRatesListResponseRowsItemSource(t *testing.T) {
+	t.Run("NewFromString_default", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesListResponseRowsItemSourceFromString("default")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesListResponseRowsItemSource("default"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_company", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesListResponseRowsItemSourceFromString("company")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesListResponseRowsItemSource("company"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1ReferenceEuVatRatesListResponseRowsItemSourceFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1ReferenceEuVatRatesListResponseRowsItemSourceFromString("default")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory(t *testing.T) {
+	t.Run("NewFromString_standard", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("standard")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory("standard"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reduced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("reduced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory("reduced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_super_reduced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("super_reduced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory("super_reduced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_parking", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("parking")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategory("parking"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesRequestRatesItemCategoryFromString("standard")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory(t *testing.T) {
+	t.Run("NewFromString_standard", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("standard")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory("standard"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reduced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("reduced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory("reduced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_super_reduced", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("super_reduced")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory("super_reduced"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_parking", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("parking")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategory("parking"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseRowsItemCategoryFromString("standard")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1ReferenceEuVatRatesSetOverridesResponseSource(t *testing.T) {
+	t.Run("NewFromString_default", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString("default")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseSource("default"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_company", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString("company")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceEuVatRatesSetOverridesResponseSource("company"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString("default")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1ReferenceExchangeRatesListRequestFilterItemOp(t *testing.T) {
 	t.Run("NewFromString_eq", func(t *testing.T) {
 		t.Parallel()
@@ -19076,6 +20108,13 @@ func TestEnumPostV1ReferenceVatResolveResponseScheme(t *testing.T) {
 		assert.Equal(t, PostV1ReferenceVatResolveResponseScheme("out_of_scope"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_sme_exempt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1ReferenceVatResolveResponseSchemeFromString("sme_exempt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1ReferenceVatResolveResponseScheme("sme_exempt"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewPostV1ReferenceVatResolveResponseSchemeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -19591,6 +20630,75 @@ func TestExtraPropertiesPostV1ReferenceEuVatRatesListResponseRowsItem(t *testing
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *PostV1ReferenceEuVatRatesListResponseRowsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesPostV1ReferenceEuVatRatesSetOverridesRequestRatesItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesRequestRatesItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesPostV1ReferenceEuVatRatesSetOverridesResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesPostV1ReferenceEuVatRatesSetOverridesResponseRowsItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1ReferenceEuVatRatesSetOverridesResponseRowsItem
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

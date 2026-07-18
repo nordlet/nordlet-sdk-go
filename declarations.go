@@ -78,6 +78,52 @@ func (p *PostV1DeclarationsConfigsUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1DeclarationsEuDistanceSalesThresholdGetRequestFieldDate = big.NewInt(1 << 0)
+)
+
+type PostV1DeclarationsEuDistanceSalesThresholdGetRequest struct {
+	Date *string `json:"date,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetRequestFieldDate)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuDistanceSalesThresholdGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuDistanceSalesThresholdGetRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuDistanceSalesThresholdGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1DeclarationsEuIossComputeRequestFieldYear  = big.NewInt(1 << 0)
 	postV1DeclarationsEuIossComputeRequestFieldMonth = big.NewInt(1 << 1)
 )
@@ -185,6 +231,252 @@ func (p *PostV1DeclarationsEuOssComputeRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1DeclarationsEuSmeCrossBorderReportComputeRequestFieldYear    = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeCrossBorderReportComputeRequestFieldQuarter = big.NewInt(1 << 1)
+)
+
+type PostV1DeclarationsEuSmeCrossBorderReportComputeRequest struct {
+	Year    int64 `json:"year" url:"-"`
+	Quarter int64 `json:"quarter" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeRequest) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeRequestFieldYear)
+}
+
+// SetQuarter sets the Quarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeRequest) SetQuarter(quarter int64) {
+	p.Quarter = quarter
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeRequestFieldQuarter)
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeCrossBorderReportComputeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeCrossBorderReportComputeRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeCrossBorderReportComputeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetRequestFieldDate = big.NewInt(1 << 0)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetRequest struct {
+	Date *string `json:"date,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1DeclarationsEuSmeThresholdGetRequestFieldDate)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1DeclarationsEuSmeThresholdsListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1DeclarationsEuUnionTurnoverGetRequestFieldDate = big.NewInt(1 << 0)
+)
+
+type PostV1DeclarationsEuUnionTurnoverGetRequest struct {
+	Date *string `json:"date,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetRequest) SetDate(date *string) {
+	p.Date = date
+	p.require(postV1DeclarationsEuUnionTurnoverGetRequestFieldDate)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuUnionTurnoverGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuUnionTurnoverGetRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuUnionTurnoverGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1DeclarationsEuVatReturnComputeRequestFieldCountryCode = big.NewInt(1 << 0)
+	postV1DeclarationsEuVatReturnComputeRequestFieldYear        = big.NewInt(1 << 1)
+	postV1DeclarationsEuVatReturnComputeRequestFieldMonth       = big.NewInt(1 << 2)
+	postV1DeclarationsEuVatReturnComputeRequestFieldMonths      = big.NewInt(1 << 3)
+)
+
+type PostV1DeclarationsEuVatReturnComputeRequest struct {
+	CountryCode string `json:"countryCode" url:"-"`
+	Year        int64  `json:"year" url:"-"`
+	Month       int64  `json:"month" url:"-"`
+	Months      *int64 `json:"months,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuVatReturnComputeRequestFieldCountryCode)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuVatReturnComputeRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) SetMonth(month int64) {
+	p.Month = month
+	p.require(postV1DeclarationsEuVatReturnComputeRequestFieldMonth)
+}
+
+// SetMonths sets the Months field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) SetMonths(months *int64) {
+	p.Months = months
+	p.require(postV1DeclarationsEuVatReturnComputeRequestFieldMonths)
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuVatReturnComputeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuVatReturnComputeRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuVatReturnComputeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1DeclarationsEuVatReturnPacksListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
 }
 
 var (
@@ -1968,25 +2260,441 @@ func (p PostV1DeclarationsConfigsUpdateResponseFieldsItemKind) Ptr() *PostV1Decl
 }
 
 var (
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldThresholdEur    = big.NewInt(1 << 0)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldHomeCountryCode = big.NewInt(1 << 1)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldCurrentYear     = big.NewInt(1 << 2)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldPrecedingYear   = big.NewInt(1 << 3)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldBelowThreshold  = big.NewInt(1 << 4)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldHeadroomAmount  = big.NewInt(1 << 5)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldWarnings        = big.NewInt(1 << 6)
+)
+
+type PostV1DeclarationsEuDistanceSalesThresholdGetResponse struct {
+	ThresholdEur    string                                                              `json:"thresholdEur" url:"thresholdEur"`
+	HomeCountryCode string                                                              `json:"homeCountryCode" url:"homeCountryCode"`
+	CurrentYear     *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear   `json:"currentYear" url:"currentYear"`
+	PrecedingYear   *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear `json:"precedingYear" url:"precedingYear"`
+	BelowThreshold  bool                                                                `json:"belowThreshold" url:"belowThreshold"`
+	HeadroomAmount  string                                                              `json:"headroomAmount" url:"headroomAmount"`
+	Warnings        []string                                                            `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetThresholdEur() string {
+	if p == nil {
+		return ""
+	}
+	return p.ThresholdEur
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetHomeCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.HomeCountryCode
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetCurrentYear() *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear {
+	if p == nil {
+		return nil
+	}
+	return p.CurrentYear
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetPrecedingYear() *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear {
+	if p == nil {
+		return nil
+	}
+	return p.PrecedingYear
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetBelowThreshold() bool {
+	if p == nil {
+		return false
+	}
+	return p.BelowThreshold
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetHeadroomAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.HeadroomAmount
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetThresholdEur sets the ThresholdEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetThresholdEur(thresholdEur string) {
+	p.ThresholdEur = thresholdEur
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldThresholdEur)
+}
+
+// SetHomeCountryCode sets the HomeCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetHomeCountryCode(homeCountryCode string) {
+	p.HomeCountryCode = homeCountryCode
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldHomeCountryCode)
+}
+
+// SetCurrentYear sets the CurrentYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetCurrentYear(currentYear *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) {
+	p.CurrentYear = currentYear
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldCurrentYear)
+}
+
+// SetPrecedingYear sets the PrecedingYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetPrecedingYear(precedingYear *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) {
+	p.PrecedingYear = precedingYear
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldPrecedingYear)
+}
+
+// SetBelowThreshold sets the BelowThreshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetBelowThreshold(belowThreshold bool) {
+	p.BelowThreshold = belowThreshold
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldBelowThreshold)
+}
+
+// SetHeadroomAmount sets the HeadroomAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetHeadroomAmount(headroomAmount string) {
+	p.HeadroomAmount = headroomAmount
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldHeadroomAmount)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseFieldWarnings)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuDistanceSalesThresholdGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuDistanceSalesThresholdGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuDistanceSalesThresholdGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldYear        = big.NewInt(1 << 0)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldTotalAmount = big.NewInt(1 << 1)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldDocuments   = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear struct {
+	Year        int64  `json:"year" url:"year"`
+	TotalAmount string `json:"totalAmount" url:"totalAmount"`
+	Documents   int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldYear)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldTotalAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYearFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponseCurrentYear) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldYear        = big.NewInt(1 << 0)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldTotalAmount = big.NewInt(1 << 1)
+	postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldDocuments   = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear struct {
+	Year        int64  `json:"year" url:"year"`
+	TotalAmount string `json:"totalAmount" url:"totalAmount"`
+	Documents   int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) GetTotalAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalAmount
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldYear)
+}
+
+// SetTotalAmount sets the TotalAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) SetTotalAmount(totalAmount string) {
+	p.TotalAmount = totalAmount
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldTotalAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYearFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuDistanceSalesThresholdGetResponsePrecedingYear) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1DeclarationsEuIossComputeResponseFieldPeriodYear                  = big.NewInt(1 << 0)
 	postV1DeclarationsEuIossComputeResponseFieldFromDate                    = big.NewInt(1 << 1)
 	postV1DeclarationsEuIossComputeResponseFieldToDate                      = big.NewInt(1 << 2)
 	postV1DeclarationsEuIossComputeResponseFieldMemberStateOfIdentification = big.NewInt(1 << 3)
 	postV1DeclarationsEuIossComputeResponseFieldRows                        = big.NewInt(1 << 4)
 	postV1DeclarationsEuIossComputeResponseFieldTotals                      = big.NewInt(1 << 5)
-	postV1DeclarationsEuIossComputeResponseFieldWarnings                    = big.NewInt(1 << 6)
-	postV1DeclarationsEuIossComputeResponseFieldPeriodMonth                 = big.NewInt(1 << 7)
+	postV1DeclarationsEuIossComputeResponseFieldCorrections                 = big.NewInt(1 << 6)
+	postV1DeclarationsEuIossComputeResponseFieldCorrectionsTotal            = big.NewInt(1 << 7)
+	postV1DeclarationsEuIossComputeResponseFieldWarnings                    = big.NewInt(1 << 8)
+	postV1DeclarationsEuIossComputeResponseFieldPeriodMonth                 = big.NewInt(1 << 9)
 )
 
 type PostV1DeclarationsEuIossComputeResponse struct {
-	PeriodYear                  int64                                              `json:"periodYear" url:"periodYear"`
-	FromDate                    string                                             `json:"fromDate" url:"fromDate"`
-	ToDate                      string                                             `json:"toDate" url:"toDate"`
-	MemberStateOfIdentification string                                             `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
-	Rows                        []*PostV1DeclarationsEuIossComputeResponseRowsItem `json:"rows" url:"rows"`
-	Totals                      *PostV1DeclarationsEuIossComputeResponseTotals     `json:"totals" url:"totals"`
-	Warnings                    []string                                           `json:"warnings" url:"warnings"`
-	PeriodMonth                 int64                                              `json:"periodMonth" url:"periodMonth"`
+	PeriodYear                  int64                                                     `json:"periodYear" url:"periodYear"`
+	FromDate                    string                                                    `json:"fromDate" url:"fromDate"`
+	ToDate                      string                                                    `json:"toDate" url:"toDate"`
+	MemberStateOfIdentification string                                                    `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
+	Rows                        []*PostV1DeclarationsEuIossComputeResponseRowsItem        `json:"rows" url:"rows"`
+	Totals                      *PostV1DeclarationsEuIossComputeResponseTotals            `json:"totals" url:"totals"`
+	Corrections                 []*PostV1DeclarationsEuIossComputeResponseCorrectionsItem `json:"corrections" url:"corrections"`
+	CorrectionsTotal            *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal  `json:"correctionsTotal" url:"correctionsTotal"`
+	Warnings                    []string                                                  `json:"warnings" url:"warnings"`
+	PeriodMonth                 int64                                                     `json:"periodMonth" url:"periodMonth"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2035,6 +2743,20 @@ func (p *PostV1DeclarationsEuIossComputeResponse) GetTotals() *PostV1Declaration
 		return nil
 	}
 	return p.Totals
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponse) GetCorrections() []*PostV1DeclarationsEuIossComputeResponseCorrectionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Corrections
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponse) GetCorrectionsTotal() *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal {
+	if p == nil {
+		return nil
+	}
+	return p.CorrectionsTotal
 }
 
 func (p *PostV1DeclarationsEuIossComputeResponse) GetWarnings() []string {
@@ -2107,6 +2829,20 @@ func (p *PostV1DeclarationsEuIossComputeResponse) SetTotals(totals *PostV1Declar
 	p.require(postV1DeclarationsEuIossComputeResponseFieldTotals)
 }
 
+// SetCorrections sets the Corrections field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponse) SetCorrections(corrections []*PostV1DeclarationsEuIossComputeResponseCorrectionsItem) {
+	p.Corrections = corrections
+	p.require(postV1DeclarationsEuIossComputeResponseFieldCorrections)
+}
+
+// SetCorrectionsTotal sets the CorrectionsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponse) SetCorrectionsTotal(correctionsTotal *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) {
+	p.CorrectionsTotal = correctionsTotal
+	p.require(postV1DeclarationsEuIossComputeResponseFieldCorrectionsTotal)
+}
+
 // SetWarnings sets the Warnings field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1DeclarationsEuIossComputeResponse) SetWarnings(warnings []string) {
@@ -2149,6 +2885,286 @@ func (p *PostV1DeclarationsEuIossComputeResponse) MarshalJSON() ([]byte, error) 
 }
 
 func (p *PostV1DeclarationsEuIossComputeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldCountryCode   = big.NewInt(1 << 0)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodYear    = big.NewInt(1 << 1)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodQuarter = big.NewInt(1 << 2)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodMonth   = big.NewInt(1 << 3)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldTaxableAmount = big.NewInt(1 << 4)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldVatAmount     = big.NewInt(1 << 5)
+	postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldDocuments     = big.NewInt(1 << 6)
+)
+
+type PostV1DeclarationsEuIossComputeResponseCorrectionsItem struct {
+	CountryCode   string `json:"countryCode" url:"countryCode"`
+	PeriodYear    int64  `json:"periodYear" url:"periodYear"`
+	PeriodQuarter *int64 `json:"periodQuarter,omitempty" url:"periodQuarter,omitempty"`
+	PeriodMonth   *int64 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+	Documents     int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetPeriodQuarter() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodQuarter
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetTaxableAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxableAmount
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetVatAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatAmount
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldCountryCode)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodYear)
+}
+
+// SetPeriodQuarter sets the PeriodQuarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetPeriodQuarter(periodQuarter *int64) {
+	p.PeriodQuarter = periodQuarter
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodQuarter)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldPeriodMonth)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetTaxableAmount(taxableAmount string) {
+	p.TaxableAmount = taxableAmount
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetVatAmount(vatAmount string) {
+	p.VatAmount = vatAmount
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldVatAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsItemFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuIossComputeResponseCorrectionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuIossComputeResponseCorrectionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuIossComputeResponseCorrectionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuIossComputeResponseCorrectionsTotalFieldTaxableAmount = big.NewInt(1 << 0)
+	postV1DeclarationsEuIossComputeResponseCorrectionsTotalFieldVatAmount     = big.NewInt(1 << 1)
+)
+
+type PostV1DeclarationsEuIossComputeResponseCorrectionsTotal struct {
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) GetTaxableAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxableAmount
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) GetVatAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatAmount
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) SetTaxableAmount(taxableAmount string) {
+	p.TaxableAmount = taxableAmount
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsTotalFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) SetVatAmount(vatAmount string) {
+	p.VatAmount = vatAmount
+	p.require(postV1DeclarationsEuIossComputeResponseCorrectionsTotalFieldVatAmount)
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuIossComputeResponseCorrectionsTotal
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuIossComputeResponseCorrectionsTotal(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuIossComputeResponseCorrectionsTotal
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuIossComputeResponseCorrectionsTotal) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2456,19 +3472,23 @@ var (
 	postV1DeclarationsEuOssComputeResponseFieldMemberStateOfIdentification = big.NewInt(1 << 3)
 	postV1DeclarationsEuOssComputeResponseFieldRows                        = big.NewInt(1 << 4)
 	postV1DeclarationsEuOssComputeResponseFieldTotals                      = big.NewInt(1 << 5)
-	postV1DeclarationsEuOssComputeResponseFieldWarnings                    = big.NewInt(1 << 6)
-	postV1DeclarationsEuOssComputeResponseFieldPeriodQuarter               = big.NewInt(1 << 7)
+	postV1DeclarationsEuOssComputeResponseFieldCorrections                 = big.NewInt(1 << 6)
+	postV1DeclarationsEuOssComputeResponseFieldCorrectionsTotal            = big.NewInt(1 << 7)
+	postV1DeclarationsEuOssComputeResponseFieldWarnings                    = big.NewInt(1 << 8)
+	postV1DeclarationsEuOssComputeResponseFieldPeriodQuarter               = big.NewInt(1 << 9)
 )
 
 type PostV1DeclarationsEuOssComputeResponse struct {
-	PeriodYear                  int64                                             `json:"periodYear" url:"periodYear"`
-	FromDate                    string                                            `json:"fromDate" url:"fromDate"`
-	ToDate                      string                                            `json:"toDate" url:"toDate"`
-	MemberStateOfIdentification string                                            `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
-	Rows                        []*PostV1DeclarationsEuOssComputeResponseRowsItem `json:"rows" url:"rows"`
-	Totals                      *PostV1DeclarationsEuOssComputeResponseTotals     `json:"totals" url:"totals"`
-	Warnings                    []string                                          `json:"warnings" url:"warnings"`
-	PeriodQuarter               int64                                             `json:"periodQuarter" url:"periodQuarter"`
+	PeriodYear                  int64                                                    `json:"periodYear" url:"periodYear"`
+	FromDate                    string                                                   `json:"fromDate" url:"fromDate"`
+	ToDate                      string                                                   `json:"toDate" url:"toDate"`
+	MemberStateOfIdentification string                                                   `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
+	Rows                        []*PostV1DeclarationsEuOssComputeResponseRowsItem        `json:"rows" url:"rows"`
+	Totals                      *PostV1DeclarationsEuOssComputeResponseTotals            `json:"totals" url:"totals"`
+	Corrections                 []*PostV1DeclarationsEuOssComputeResponseCorrectionsItem `json:"corrections" url:"corrections"`
+	CorrectionsTotal            *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal  `json:"correctionsTotal" url:"correctionsTotal"`
+	Warnings                    []string                                                 `json:"warnings" url:"warnings"`
+	PeriodQuarter               int64                                                    `json:"periodQuarter" url:"periodQuarter"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2517,6 +3537,20 @@ func (p *PostV1DeclarationsEuOssComputeResponse) GetTotals() *PostV1Declarations
 		return nil
 	}
 	return p.Totals
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponse) GetCorrections() []*PostV1DeclarationsEuOssComputeResponseCorrectionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Corrections
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponse) GetCorrectionsTotal() *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal {
+	if p == nil {
+		return nil
+	}
+	return p.CorrectionsTotal
 }
 
 func (p *PostV1DeclarationsEuOssComputeResponse) GetWarnings() []string {
@@ -2589,6 +3623,20 @@ func (p *PostV1DeclarationsEuOssComputeResponse) SetTotals(totals *PostV1Declara
 	p.require(postV1DeclarationsEuOssComputeResponseFieldTotals)
 }
 
+// SetCorrections sets the Corrections field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponse) SetCorrections(corrections []*PostV1DeclarationsEuOssComputeResponseCorrectionsItem) {
+	p.Corrections = corrections
+	p.require(postV1DeclarationsEuOssComputeResponseFieldCorrections)
+}
+
+// SetCorrectionsTotal sets the CorrectionsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponse) SetCorrectionsTotal(correctionsTotal *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) {
+	p.CorrectionsTotal = correctionsTotal
+	p.require(postV1DeclarationsEuOssComputeResponseFieldCorrectionsTotal)
+}
+
 // SetWarnings sets the Warnings field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1DeclarationsEuOssComputeResponse) SetWarnings(warnings []string) {
@@ -2631,6 +3679,286 @@ func (p *PostV1DeclarationsEuOssComputeResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1DeclarationsEuOssComputeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldCountryCode   = big.NewInt(1 << 0)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodYear    = big.NewInt(1 << 1)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodQuarter = big.NewInt(1 << 2)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodMonth   = big.NewInt(1 << 3)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldTaxableAmount = big.NewInt(1 << 4)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldVatAmount     = big.NewInt(1 << 5)
+	postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldDocuments     = big.NewInt(1 << 6)
+)
+
+type PostV1DeclarationsEuOssComputeResponseCorrectionsItem struct {
+	CountryCode   string `json:"countryCode" url:"countryCode"`
+	PeriodYear    int64  `json:"periodYear" url:"periodYear"`
+	PeriodQuarter *int64 `json:"periodQuarter,omitempty" url:"periodQuarter,omitempty"`
+	PeriodMonth   *int64 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+	Documents     int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetPeriodQuarter() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodQuarter
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetTaxableAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxableAmount
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetVatAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatAmount
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldCountryCode)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodYear)
+}
+
+// SetPeriodQuarter sets the PeriodQuarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetPeriodQuarter(periodQuarter *int64) {
+	p.PeriodQuarter = periodQuarter
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodQuarter)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldPeriodMonth)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetTaxableAmount(taxableAmount string) {
+	p.TaxableAmount = taxableAmount
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetVatAmount(vatAmount string) {
+	p.VatAmount = vatAmount
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldVatAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsItemFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuOssComputeResponseCorrectionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuOssComputeResponseCorrectionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuOssComputeResponseCorrectionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuOssComputeResponseCorrectionsTotalFieldTaxableAmount = big.NewInt(1 << 0)
+	postV1DeclarationsEuOssComputeResponseCorrectionsTotalFieldVatAmount     = big.NewInt(1 << 1)
+)
+
+type PostV1DeclarationsEuOssComputeResponseCorrectionsTotal struct {
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) GetTaxableAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxableAmount
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) GetVatAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatAmount
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) SetTaxableAmount(taxableAmount string) {
+	p.TaxableAmount = taxableAmount
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsTotalFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) SetVatAmount(vatAmount string) {
+	p.VatAmount = vatAmount
+	p.require(postV1DeclarationsEuOssComputeResponseCorrectionsTotalFieldVatAmount)
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuOssComputeResponseCorrectionsTotal
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuOssComputeResponseCorrectionsTotal(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuOssComputeResponseCorrectionsTotal
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuOssComputeResponseCorrectionsTotal) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2929,6 +4257,2904 @@ func (p *PostV1DeclarationsEuOssComputeResponseTotals) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldYear     = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldQuarter  = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldFromDate = big.NewInt(1 << 2)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldToDate   = big.NewInt(1 << 3)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldCurrency = big.NewInt(1 << 4)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldRows     = big.NewInt(1 << 5)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldTotal    = big.NewInt(1 << 6)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldWarnings = big.NewInt(1 << 7)
+)
+
+type PostV1DeclarationsEuSmeCrossBorderReportComputeResponse struct {
+	Year     int64                                                              `json:"year" url:"year"`
+	Quarter  int64                                                              `json:"quarter" url:"quarter"`
+	FromDate string                                                             `json:"fromDate" url:"fromDate"`
+	ToDate   string                                                             `json:"toDate" url:"toDate"`
+	Currency string                                                             `json:"currency" url:"currency"`
+	Rows     []*PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem `json:"rows" url:"rows"`
+	Total    string                                                             `json:"total" url:"total"`
+	Warnings []string                                                           `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetQuarter() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Quarter
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetFromDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.FromDate
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetToDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.ToDate
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetRows() []*PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.Total
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldYear)
+}
+
+// SetQuarter sets the Quarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetQuarter(quarter int64) {
+	p.Quarter = quarter
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldQuarter)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetFromDate(fromDate string) {
+	p.FromDate = fromDate
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetToDate(toDate string) {
+	p.ToDate = toDate
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldToDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldCurrency)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetRows(rows []*PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldRows)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetTotal(total string) {
+	p.Total = total
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldTotal)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseFieldWarnings)
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeCrossBorderReportComputeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeCrossBorderReportComputeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeCrossBorderReportComputeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldCountryCode = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldAmount      = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldDocuments   = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem struct {
+	CountryCode string `json:"countryCode" url:"countryCode"`
+	Amount      string `json:"amount" url:"amount"`
+	Documents   int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldCountryCode)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItemFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeCrossBorderReportComputeResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponseFieldCountryCode       = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldIsVatPayer        = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldBaseCurrency      = big.NewInt(1 << 2)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldYear              = big.NewInt(1 << 3)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldThreshold         = big.NewInt(1 << 4)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldTurnover          = big.NewInt(1 << 5)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldPrecedingTurnover = big.NewInt(1 << 6)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldStatus            = big.NewInt(1 << 7)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldHeadroomAmount    = big.NewInt(1 << 8)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldIntraEu           = big.NewInt(1 << 9)
+	postV1DeclarationsEuSmeThresholdGetResponseFieldWarnings          = big.NewInt(1 << 10)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponse struct {
+	CountryCode       string                                                        `json:"countryCode" url:"countryCode"`
+	IsVatPayer        bool                                                          `json:"isVatPayer" url:"isVatPayer"`
+	BaseCurrency      string                                                        `json:"baseCurrency" url:"baseCurrency"`
+	Year              int64                                                         `json:"year" url:"year"`
+	Threshold         *PostV1DeclarationsEuSmeThresholdGetResponseThreshold         `json:"threshold,omitempty" url:"threshold,omitempty"`
+	Turnover          *PostV1DeclarationsEuSmeThresholdGetResponseTurnover          `json:"turnover" url:"turnover"`
+	PrecedingTurnover *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover `json:"precedingTurnover" url:"precedingTurnover"`
+	Status            PostV1DeclarationsEuSmeThresholdGetResponseStatus             `json:"status" url:"status"`
+	HeadroomAmount    *string                                                       `json:"headroomAmount,omitempty" url:"headroomAmount,omitempty"`
+	IntraEu           *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu           `json:"intraEu,omitempty" url:"intraEu,omitempty"`
+	Warnings          []string                                                      `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetIsVatPayer() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsVatPayer
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetBaseCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.BaseCurrency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetThreshold() *PostV1DeclarationsEuSmeThresholdGetResponseThreshold {
+	if p == nil {
+		return nil
+	}
+	return p.Threshold
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetTurnover() *PostV1DeclarationsEuSmeThresholdGetResponseTurnover {
+	if p == nil {
+		return nil
+	}
+	return p.Turnover
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetPrecedingTurnover() *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover {
+	if p == nil {
+		return nil
+	}
+	return p.PrecedingTurnover
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetStatus() PostV1DeclarationsEuSmeThresholdGetResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetHeadroomAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HeadroomAmount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetIntraEu() *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu {
+	if p == nil {
+		return nil
+	}
+	return p.IntraEu
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldCountryCode)
+}
+
+// SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetIsVatPayer(isVatPayer bool) {
+	p.IsVatPayer = isVatPayer
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldIsVatPayer)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetBaseCurrency(baseCurrency string) {
+	p.BaseCurrency = baseCurrency
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldBaseCurrency)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldYear)
+}
+
+// SetThreshold sets the Threshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetThreshold(threshold *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) {
+	p.Threshold = threshold
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldThreshold)
+}
+
+// SetTurnover sets the Turnover field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetTurnover(turnover *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) {
+	p.Turnover = turnover
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldTurnover)
+}
+
+// SetPrecedingTurnover sets the PrecedingTurnover field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetPrecedingTurnover(precedingTurnover *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) {
+	p.PrecedingTurnover = precedingTurnover
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldPrecedingTurnover)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetStatus(status PostV1DeclarationsEuSmeThresholdGetResponseStatus) {
+	p.Status = status
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldStatus)
+}
+
+// SetHeadroomAmount sets the HeadroomAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetHeadroomAmount(headroomAmount *string) {
+	p.HeadroomAmount = headroomAmount
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldHeadroomAmount)
+}
+
+// SetIntraEu sets the IntraEu field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetIntraEu(intraEu *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) {
+	p.IntraEu = intraEu
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldIntraEu)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseFieldWarnings)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldTrigger                      = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldCurrency                     = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldAcquisitionsFromMemberStates = big.NewInt(1 << 2)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldServicesToMemberStates       = big.NewInt(1 << 3)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldTotal                        = big.NewInt(1 << 4)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldStatus                       = big.NewInt(1 << 5)
+	postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldNote                         = big.NewInt(1 << 6)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponseIntraEu struct {
+	Trigger                      string                                                   `json:"trigger" url:"trigger"`
+	Currency                     string                                                   `json:"currency" url:"currency"`
+	AcquisitionsFromMemberStates string                                                   `json:"acquisitionsFromMemberStates" url:"acquisitionsFromMemberStates"`
+	ServicesToMemberStates       string                                                   `json:"servicesToMemberStates" url:"servicesToMemberStates"`
+	Total                        string                                                   `json:"total" url:"total"`
+	Status                       PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus `json:"status" url:"status"`
+	Note                         string                                                   `json:"note" url:"note"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetTrigger() string {
+	if p == nil {
+		return ""
+	}
+	return p.Trigger
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetAcquisitionsFromMemberStates() string {
+	if p == nil {
+		return ""
+	}
+	return p.AcquisitionsFromMemberStates
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetServicesToMemberStates() string {
+	if p == nil {
+		return ""
+	}
+	return p.ServicesToMemberStates
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.Total
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetStatus() PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetNote() string {
+	if p == nil {
+		return ""
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTrigger sets the Trigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetTrigger(trigger string) {
+	p.Trigger = trigger
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldTrigger)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldCurrency)
+}
+
+// SetAcquisitionsFromMemberStates sets the AcquisitionsFromMemberStates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetAcquisitionsFromMemberStates(acquisitionsFromMemberStates string) {
+	p.AcquisitionsFromMemberStates = acquisitionsFromMemberStates
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldAcquisitionsFromMemberStates)
+}
+
+// SetServicesToMemberStates sets the ServicesToMemberStates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetServicesToMemberStates(servicesToMemberStates string) {
+	p.ServicesToMemberStates = servicesToMemberStates
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldServicesToMemberStates)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetTotal(total string) {
+	p.Total = total
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldTotal)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetStatus(status PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus) {
+	p.Status = status
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldStatus)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) SetNote(note string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseIntraEuFieldNote)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponseIntraEu
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponseIntraEu(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponseIntraEu
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseIntraEu) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus string
+
+const (
+	PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusBelow       PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus = "below"
+	PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusApproaching PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus = "approaching"
+	PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusExceeded    PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus = "exceeded"
+)
+
+func NewPostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusFromString(s string) (PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus, error) {
+	switch s {
+	case "below":
+		return PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusBelow, nil
+	case "approaching":
+		return PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusApproaching, nil
+	case "exceeded":
+		return PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatusExceeded, nil
+	}
+	var t PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus) Ptr() *PostV1DeclarationsEuSmeThresholdGetResponseIntraEuStatus {
+	return &p
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldYear      = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldAmount    = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldDocuments = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover struct {
+	Year      int64  `json:"year" url:"year"`
+	Amount    string `json:"amount" url:"amount"`
+	Documents int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnoverFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponsePrecedingTurnover) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1DeclarationsEuSmeThresholdGetResponseStatus string
+
+const (
+	PostV1DeclarationsEuSmeThresholdGetResponseStatusNotApplicable PostV1DeclarationsEuSmeThresholdGetResponseStatus = "not_applicable"
+	PostV1DeclarationsEuSmeThresholdGetResponseStatusBelow         PostV1DeclarationsEuSmeThresholdGetResponseStatus = "below"
+	PostV1DeclarationsEuSmeThresholdGetResponseStatusApproaching   PostV1DeclarationsEuSmeThresholdGetResponseStatus = "approaching"
+	PostV1DeclarationsEuSmeThresholdGetResponseStatusExceeded      PostV1DeclarationsEuSmeThresholdGetResponseStatus = "exceeded"
+	PostV1DeclarationsEuSmeThresholdGetResponseStatusUnknown       PostV1DeclarationsEuSmeThresholdGetResponseStatus = "unknown"
+)
+
+func NewPostV1DeclarationsEuSmeThresholdGetResponseStatusFromString(s string) (PostV1DeclarationsEuSmeThresholdGetResponseStatus, error) {
+	switch s {
+	case "not_applicable":
+		return PostV1DeclarationsEuSmeThresholdGetResponseStatusNotApplicable, nil
+	case "below":
+		return PostV1DeclarationsEuSmeThresholdGetResponseStatusBelow, nil
+	case "approaching":
+		return PostV1DeclarationsEuSmeThresholdGetResponseStatusApproaching, nil
+	case "exceeded":
+		return PostV1DeclarationsEuSmeThresholdGetResponseStatusExceeded, nil
+	case "unknown":
+		return PostV1DeclarationsEuSmeThresholdGetResponseStatusUnknown, nil
+	}
+	var t PostV1DeclarationsEuSmeThresholdGetResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1DeclarationsEuSmeThresholdGetResponseStatus) Ptr() *PostV1DeclarationsEuSmeThresholdGetResponseStatus {
+	return &p
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldCurrency          = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldNationalThreshold = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldSectors           = big.NewInt(1 << 2)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldNote              = big.NewInt(1 << 3)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldSource            = big.NewInt(1 << 4)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponseThreshold struct {
+	Currency          string                                                             `json:"currency" url:"currency"`
+	NationalThreshold *string                                                            `json:"nationalThreshold,omitempty" url:"nationalThreshold,omitempty"`
+	Sectors           []*PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem `json:"sectors,omitempty" url:"sectors,omitempty"`
+	Note              *string                                                            `json:"note,omitempty" url:"note,omitempty"`
+	Source            string                                                             `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetNationalThreshold() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NationalThreshold
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetSectors() []*PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Sectors
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldCurrency)
+}
+
+// SetNationalThreshold sets the NationalThreshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) SetNationalThreshold(nationalThreshold *string) {
+	p.NationalThreshold = nationalThreshold
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldNationalThreshold)
+}
+
+// SetSectors sets the Sectors field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) SetSectors(sectors []*PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) {
+	p.Sectors = sectors
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldSectors)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) SetNote(note *string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldNote)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) SetSource(source string) {
+	p.Source = source
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdFieldSource)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponseThreshold
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponseThreshold(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponseThreshold
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThreshold) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldLabel  = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldAmount = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldNote   = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem struct {
+	Label  string  `json:"label" url:"label"`
+	Amount string  `json:"amount" url:"amount"`
+	Note   *string `json:"note,omitempty" url:"note,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) GetNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldLabel)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldAmount)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) SetNote(note *string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItemFieldNote)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseThresholdSectorsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldAmount    = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldCurrency  = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldDocuments = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdGetResponseTurnover struct {
+	Amount    string `json:"amount" url:"amount"`
+	Currency  string `json:"currency" url:"currency"`
+	Documents int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldCurrency)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuSmeThresholdGetResponseTurnoverFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdGetResponseTurnover
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdGetResponseTurnover(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdGetResponseTurnover
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdGetResponseTurnover) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdsListResponseFieldNationalCapEur      = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdsListResponseFieldUnionTurnoverCapEur = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdsListResponseFieldThresholds          = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdsListResponse struct {
+	NationalCapEur      string                                                         `json:"nationalCapEur" url:"nationalCapEur"`
+	UnionTurnoverCapEur string                                                         `json:"unionTurnoverCapEur" url:"unionTurnoverCapEur"`
+	Thresholds          []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem `json:"thresholds" url:"thresholds"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) GetNationalCapEur() string {
+	if p == nil {
+		return ""
+	}
+	return p.NationalCapEur
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) GetUnionTurnoverCapEur() string {
+	if p == nil {
+		return ""
+	}
+	return p.UnionTurnoverCapEur
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) GetThresholds() []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Thresholds
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetNationalCapEur sets the NationalCapEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) SetNationalCapEur(nationalCapEur string) {
+	p.NationalCapEur = nationalCapEur
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseFieldNationalCapEur)
+}
+
+// SetUnionTurnoverCapEur sets the UnionTurnoverCapEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) SetUnionTurnoverCapEur(unionTurnoverCapEur string) {
+	p.UnionTurnoverCapEur = unionTurnoverCapEur
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseFieldUnionTurnoverCapEur)
+}
+
+// SetThresholds sets the Thresholds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) SetThresholds(thresholds []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) {
+	p.Thresholds = thresholds
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseFieldThresholds)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldCountryCode                = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldCurrency                   = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldNationalThreshold          = big.NewInt(1 << 2)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldSectors                    = big.NewInt(1 << 3)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldIntraEuAcquisitionsTrigger = big.NewInt(1 << 4)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldNote                       = big.NewInt(1 << 5)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldSource                     = big.NewInt(1 << 6)
+)
+
+type PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem struct {
+	CountryCode                string                                                                                 `json:"countryCode" url:"countryCode"`
+	Currency                   string                                                                                 `json:"currency" url:"currency"`
+	NationalThreshold          *string                                                                                `json:"nationalThreshold,omitempty" url:"nationalThreshold,omitempty"`
+	Sectors                    []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem              `json:"sectors,omitempty" url:"sectors,omitempty"`
+	IntraEuAcquisitionsTrigger *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger `json:"intraEuAcquisitionsTrigger,omitempty" url:"intraEuAcquisitionsTrigger,omitempty"`
+	Note                       *string                                                                                `json:"note,omitempty" url:"note,omitempty"`
+	Source                     string                                                                                 `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetNationalThreshold() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NationalThreshold
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetSectors() []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Sectors
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetIntraEuAcquisitionsTrigger() *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger {
+	if p == nil {
+		return nil
+	}
+	return p.IntraEuAcquisitionsTrigger
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldCountryCode)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldCurrency)
+}
+
+// SetNationalThreshold sets the NationalThreshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetNationalThreshold(nationalThreshold *string) {
+	p.NationalThreshold = nationalThreshold
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldNationalThreshold)
+}
+
+// SetSectors sets the Sectors field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetSectors(sectors []*PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) {
+	p.Sectors = sectors
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldSectors)
+}
+
+// SetIntraEuAcquisitionsTrigger sets the IntraEuAcquisitionsTrigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetIntraEuAcquisitionsTrigger(intraEuAcquisitionsTrigger *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) {
+	p.IntraEuAcquisitionsTrigger = intraEuAcquisitionsTrigger
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldIntraEuAcquisitionsTrigger)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetNote(note *string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldNote)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) SetSource(source string) {
+	p.Source = source
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemFieldSource)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldAmount   = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldCurrency = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldNote     = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger struct {
+	Amount   string `json:"amount" url:"amount"`
+	Currency string `json:"currency" url:"currency"`
+	Note     string `json:"note" url:"note"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) GetNote() string {
+	if p == nil {
+		return ""
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldCurrency)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) SetNote(note string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTriggerFieldNote)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemIntraEuAcquisitionsTrigger) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldLabel  = big.NewInt(1 << 0)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldAmount = big.NewInt(1 << 1)
+	postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldNote   = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem struct {
+	Label  string  `json:"label" url:"label"`
+	Amount string  `json:"amount" url:"amount"`
+	Note   *string `json:"note,omitempty" url:"note,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) GetNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Note
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldLabel)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldAmount)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) SetNote(note *string) {
+	p.Note = note
+	p.require(postV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItemFieldNote)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuSmeThresholdsListResponseThresholdsItemSectorsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldCapEur         = big.NewInt(1 << 0)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldCurrency       = big.NewInt(1 << 1)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldIsVatPayer     = big.NewInt(1 << 2)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldCurrentYear    = big.NewInt(1 << 3)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldPreviousYear   = big.NewInt(1 << 4)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldStatus         = big.NewInt(1 << 5)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldHeadroomAmount = big.NewInt(1 << 6)
+	postV1DeclarationsEuUnionTurnoverGetResponseFieldWarnings       = big.NewInt(1 << 7)
+)
+
+type PostV1DeclarationsEuUnionTurnoverGetResponse struct {
+	CapEur         string                                                    `json:"capEur" url:"capEur"`
+	Currency       string                                                    `json:"currency" url:"currency"`
+	IsVatPayer     bool                                                      `json:"isVatPayer" url:"isVatPayer"`
+	CurrentYear    *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear  `json:"currentYear" url:"currentYear"`
+	PreviousYear   *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear `json:"previousYear" url:"previousYear"`
+	Status         PostV1DeclarationsEuUnionTurnoverGetResponseStatus        `json:"status" url:"status"`
+	HeadroomAmount *string                                                   `json:"headroomAmount,omitempty" url:"headroomAmount,omitempty"`
+	Warnings       []string                                                  `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetCapEur() string {
+	if p == nil {
+		return ""
+	}
+	return p.CapEur
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetIsVatPayer() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsVatPayer
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetCurrentYear() *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear {
+	if p == nil {
+		return nil
+	}
+	return p.CurrentYear
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetPreviousYear() *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear {
+	if p == nil {
+		return nil
+	}
+	return p.PreviousYear
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetStatus() PostV1DeclarationsEuUnionTurnoverGetResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetHeadroomAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HeadroomAmount
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCapEur sets the CapEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetCapEur(capEur string) {
+	p.CapEur = capEur
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldCapEur)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldCurrency)
+}
+
+// SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetIsVatPayer(isVatPayer bool) {
+	p.IsVatPayer = isVatPayer
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldIsVatPayer)
+}
+
+// SetCurrentYear sets the CurrentYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetCurrentYear(currentYear *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) {
+	p.CurrentYear = currentYear
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldCurrentYear)
+}
+
+// SetPreviousYear sets the PreviousYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetPreviousYear(previousYear *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) {
+	p.PreviousYear = previousYear
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldPreviousYear)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetStatus(status PostV1DeclarationsEuUnionTurnoverGetResponseStatus) {
+	p.Status = status
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldStatus)
+}
+
+// SetHeadroomAmount sets the HeadroomAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetHeadroomAmount(headroomAmount *string) {
+	p.HeadroomAmount = headroomAmount
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldHeadroomAmount)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseFieldWarnings)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuUnionTurnoverGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuUnionTurnoverGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuUnionTurnoverGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldYear      = big.NewInt(1 << 0)
+	postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldAmount    = big.NewInt(1 << 1)
+	postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldDocuments = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear struct {
+	Year      int64  `json:"year" url:"year"`
+	Amount    string `json:"amount" url:"amount"`
+	Documents int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponseCurrentYearFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponseCurrentYear) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldYear      = big.NewInt(1 << 0)
+	postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldAmount    = big.NewInt(1 << 1)
+	postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldDocuments = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear struct {
+	Year      int64  `json:"year" url:"year"`
+	Amount    string `json:"amount" url:"amount"`
+	Documents int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) GetDocuments() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Documents
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) SetDocuments(documents int64) {
+	p.Documents = documents
+	p.require(postV1DeclarationsEuUnionTurnoverGetResponsePreviousYearFieldDocuments)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuUnionTurnoverGetResponsePreviousYear) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1DeclarationsEuUnionTurnoverGetResponseStatus string
+
+const (
+	PostV1DeclarationsEuUnionTurnoverGetResponseStatusBelow         PostV1DeclarationsEuUnionTurnoverGetResponseStatus = "below"
+	PostV1DeclarationsEuUnionTurnoverGetResponseStatusApproaching   PostV1DeclarationsEuUnionTurnoverGetResponseStatus = "approaching"
+	PostV1DeclarationsEuUnionTurnoverGetResponseStatusExceeded      PostV1DeclarationsEuUnionTurnoverGetResponseStatus = "exceeded"
+	PostV1DeclarationsEuUnionTurnoverGetResponseStatusNotApplicable PostV1DeclarationsEuUnionTurnoverGetResponseStatus = "not_applicable"
+)
+
+func NewPostV1DeclarationsEuUnionTurnoverGetResponseStatusFromString(s string) (PostV1DeclarationsEuUnionTurnoverGetResponseStatus, error) {
+	switch s {
+	case "below":
+		return PostV1DeclarationsEuUnionTurnoverGetResponseStatusBelow, nil
+	case "approaching":
+		return PostV1DeclarationsEuUnionTurnoverGetResponseStatusApproaching, nil
+	case "exceeded":
+		return PostV1DeclarationsEuUnionTurnoverGetResponseStatusExceeded, nil
+	case "not_applicable":
+		return PostV1DeclarationsEuUnionTurnoverGetResponseStatusNotApplicable, nil
+	}
+	var t PostV1DeclarationsEuUnionTurnoverGetResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1DeclarationsEuUnionTurnoverGetResponseStatus) Ptr() *PostV1DeclarationsEuUnionTurnoverGetResponseStatus {
+	return &p
+}
+
+var (
+	postV1DeclarationsEuVatReturnComputeResponseFieldCountryCode = big.NewInt(1 << 0)
+	postV1DeclarationsEuVatReturnComputeResponseFieldFormKey     = big.NewInt(1 << 1)
+	postV1DeclarationsEuVatReturnComputeResponseFieldFormName    = big.NewInt(1 << 2)
+	postV1DeclarationsEuVatReturnComputeResponseFieldFrequency   = big.NewInt(1 << 3)
+	postV1DeclarationsEuVatReturnComputeResponseFieldPeriodStart = big.NewInt(1 << 4)
+	postV1DeclarationsEuVatReturnComputeResponseFieldPeriodEnd   = big.NewInt(1 << 5)
+	postV1DeclarationsEuVatReturnComputeResponseFieldBoxes       = big.NewInt(1 << 6)
+	postV1DeclarationsEuVatReturnComputeResponseFieldWarnings    = big.NewInt(1 << 7)
+	postV1DeclarationsEuVatReturnComputeResponseFieldNotes       = big.NewInt(1 << 8)
+	postV1DeclarationsEuVatReturnComputeResponseFieldSource      = big.NewInt(1 << 9)
+)
+
+type PostV1DeclarationsEuVatReturnComputeResponse struct {
+	CountryCode string                                                   `json:"countryCode" url:"countryCode"`
+	FormKey     string                                                   `json:"formKey" url:"formKey"`
+	FormName    string                                                   `json:"formName" url:"formName"`
+	Frequency   PostV1DeclarationsEuVatReturnComputeResponseFrequency    `json:"frequency" url:"frequency"`
+	PeriodStart string                                                   `json:"periodStart" url:"periodStart"`
+	PeriodEnd   string                                                   `json:"periodEnd" url:"periodEnd"`
+	Boxes       []*PostV1DeclarationsEuVatReturnComputeResponseBoxesItem `json:"boxes" url:"boxes"`
+	Warnings    []string                                                 `json:"warnings" url:"warnings"`
+	Notes       []string                                                 `json:"notes" url:"notes"`
+	Source      string                                                   `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetFormKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.FormKey
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetFormName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FormName
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetFrequency() PostV1DeclarationsEuVatReturnComputeResponseFrequency {
+	if p == nil {
+		return ""
+	}
+	return p.Frequency
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetPeriodStart() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodStart
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetPeriodEnd() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodEnd
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetBoxes() []*PostV1DeclarationsEuVatReturnComputeResponseBoxesItem {
+	if p == nil {
+		return nil
+	}
+	return p.Boxes
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetNotes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldCountryCode)
+}
+
+// SetFormKey sets the FormKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetFormKey(formKey string) {
+	p.FormKey = formKey
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldFormKey)
+}
+
+// SetFormName sets the FormName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetFormName(formName string) {
+	p.FormName = formName
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldFormName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetFrequency(frequency PostV1DeclarationsEuVatReturnComputeResponseFrequency) {
+	p.Frequency = frequency
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetPeriodStart(periodStart string) {
+	p.PeriodStart = periodStart
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetPeriodEnd(periodEnd string) {
+	p.PeriodEnd = periodEnd
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldPeriodEnd)
+}
+
+// SetBoxes sets the Boxes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetBoxes(boxes []*PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) {
+	p.Boxes = boxes
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldBoxes)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldNotes)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) SetSource(source string) {
+	p.Source = source
+	p.require(postV1DeclarationsEuVatReturnComputeResponseFieldSource)
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuVatReturnComputeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuVatReturnComputeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuVatReturnComputeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldCode   = big.NewInt(1 << 0)
+	postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldLabel  = big.NewInt(1 << 1)
+	postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsEuVatReturnComputeResponseBoxesItem struct {
+	Code   string `json:"code" url:"code"`
+	Label  string `json:"label" url:"label"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldLabel)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1DeclarationsEuVatReturnComputeResponseBoxesItemFieldAmount)
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuVatReturnComputeResponseBoxesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuVatReturnComputeResponseBoxesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuVatReturnComputeResponseBoxesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuVatReturnComputeResponseBoxesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1DeclarationsEuVatReturnComputeResponseFrequency string
+
+const (
+	PostV1DeclarationsEuVatReturnComputeResponseFrequencyMonthly   PostV1DeclarationsEuVatReturnComputeResponseFrequency = "monthly"
+	PostV1DeclarationsEuVatReturnComputeResponseFrequencyQuarterly PostV1DeclarationsEuVatReturnComputeResponseFrequency = "quarterly"
+	PostV1DeclarationsEuVatReturnComputeResponseFrequencyAnnual    PostV1DeclarationsEuVatReturnComputeResponseFrequency = "annual"
+)
+
+func NewPostV1DeclarationsEuVatReturnComputeResponseFrequencyFromString(s string) (PostV1DeclarationsEuVatReturnComputeResponseFrequency, error) {
+	switch s {
+	case "monthly":
+		return PostV1DeclarationsEuVatReturnComputeResponseFrequencyMonthly, nil
+	case "quarterly":
+		return PostV1DeclarationsEuVatReturnComputeResponseFrequencyQuarterly, nil
+	case "annual":
+		return PostV1DeclarationsEuVatReturnComputeResponseFrequencyAnnual, nil
+	}
+	var t PostV1DeclarationsEuVatReturnComputeResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1DeclarationsEuVatReturnComputeResponseFrequency) Ptr() *PostV1DeclarationsEuVatReturnComputeResponseFrequency {
+	return &p
+}
+
+var (
+	postV1DeclarationsEuVatReturnPacksListResponseFieldPacks = big.NewInt(1 << 0)
+)
+
+type PostV1DeclarationsEuVatReturnPacksListResponse struct {
+	Packs []*PostV1DeclarationsEuVatReturnPacksListResponsePacksItem `json:"packs" url:"packs"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) GetPacks() []*PostV1DeclarationsEuVatReturnPacksListResponsePacksItem {
+	if p == nil {
+		return nil
+	}
+	return p.Packs
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPacks sets the Packs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) SetPacks(packs []*PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) {
+	p.Packs = packs
+	p.require(postV1DeclarationsEuVatReturnPacksListResponseFieldPacks)
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuVatReturnPacksListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuVatReturnPacksListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuVatReturnPacksListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldCountryCode = big.NewInt(1 << 0)
+	postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFormKey     = big.NewInt(1 << 1)
+	postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFormName    = big.NewInt(1 << 2)
+	postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFrequency   = big.NewInt(1 << 3)
+	postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldSource      = big.NewInt(1 << 4)
+)
+
+type PostV1DeclarationsEuVatReturnPacksListResponsePacksItem struct {
+	CountryCode string                                                           `json:"countryCode" url:"countryCode"`
+	FormKey     string                                                           `json:"formKey" url:"formKey"`
+	FormName    string                                                           `json:"formName" url:"formName"`
+	Frequency   PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency `json:"frequency" url:"frequency"`
+	Source      string                                                           `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetFormKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.FormKey
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetFormName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FormName
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetFrequency() PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency {
+	if p == nil {
+		return ""
+	}
+	return p.Frequency
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldCountryCode)
+}
+
+// SetFormKey sets the FormKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) SetFormKey(formKey string) {
+	p.FormKey = formKey
+	p.require(postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFormKey)
+}
+
+// SetFormName sets the FormName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) SetFormName(formName string) {
+	p.FormName = formName
+	p.require(postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFormName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) SetFrequency(frequency PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency) {
+	p.Frequency = frequency
+	p.require(postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldFrequency)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) SetSource(source string) {
+	p.Source = source
+	p.require(postV1DeclarationsEuVatReturnPacksListResponsePacksItemFieldSource)
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsEuVatReturnPacksListResponsePacksItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsEuVatReturnPacksListResponsePacksItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsEuVatReturnPacksListResponsePacksItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsEuVatReturnPacksListResponsePacksItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency string
+
+const (
+	PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyMonthly   PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency = "monthly"
+	PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyQuarterly PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency = "quarterly"
+	PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyAnnual    PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency = "annual"
+)
+
+func NewPostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyFromString(s string) (PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency, error) {
+	switch s {
+	case "monthly":
+		return PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyMonthly, nil
+	case "quarterly":
+		return PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyQuarterly, nil
+	case "annual":
+		return PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequencyAnnual, nil
+	}
+	var t PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency) Ptr() *PostV1DeclarationsEuVatReturnPacksListResponsePacksItemFrequency {
+	return &p
 }
 
 var (

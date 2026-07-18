@@ -178,6 +178,22 @@ func (c *Client) PostV1SalesInvoicesIssue(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1SalesRecognitionSchedulesList(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionSchedulesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionSchedulesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionSchedulesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1SalesInvoicesApplyAdvance(
 	ctx context.Context,
 	request *nordlet.PostV1SalesInvoicesApplyAdvanceRequest,
@@ -312,6 +328,135 @@ func (c *Client) PostV1SalesActsPdf(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1SalesActsPdfResponse, error) {
 	response, err := c.WithRawResponse.PostV1SalesActsPdf(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRecognitionCompute(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionComputeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionComputeResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionCompute(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRecognitionRun(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionRunRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionRunResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionRun(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRecognitionProgress(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionProgressRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionProgressResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionProgress(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Apply an IFRS 15 contract modification to a deferred invoice line. Prospective: cancel the pending schedule and respread the unrecognized remainder over the new terms. Cumulative catch-up (ratable only): recompute revenue as if the new terms applied from the start and post the difference immediately.
+func (c *Client) PostV1SalesRecognitionModify(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionModifyRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionModifyResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionModify(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRecognitionRunsList(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionRunsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionRunsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionRunsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRecognitionSummary(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRecognitionSummaryRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRecognitionSummaryResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRecognitionSummary(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRefundLiabilityList(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRefundLiabilityListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRefundLiabilityListResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRefundLiabilityList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesRefundLiabilityTrueUp(
+	ctx context.Context,
+	request *nordlet.PostV1SalesRefundLiabilityTrueUpRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesRefundLiabilityTrueUpResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesRefundLiabilityTrueUp(
 		ctx,
 		request,
 		opts...,
