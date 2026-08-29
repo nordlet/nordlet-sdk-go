@@ -193,3 +193,179 @@ func (c *Client) PostV1InventoryStockMovementsList(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) PostV1InventoryLotsList(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLotsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLotsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLotsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryLotsGet(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLotsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLotsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLotsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryLotsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLotsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLotsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLotsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryLandedCostsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLandedCostsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLandedCostsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLandedCostsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryLandedCostsGet(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLandedCostsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLandedCostsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLandedCostsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryLandedCostsList(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryLandedCostsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryLandedCostsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryLandedCostsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryReorderRulesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryReorderRulesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryReorderRulesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryReorderRulesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryReorderRulesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryReorderRulesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryReorderRulesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryReorderRulesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryReorderRulesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryReorderRulesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryReorderRulesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryReorderRulesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryReorderRulesList(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryReorderRulesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryReorderRulesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryReorderRulesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1InventoryReorderRulesCheck(
+	ctx context.Context,
+	request *nordlet.PostV1InventoryReorderRulesCheckRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1InventoryReorderRulesCheckResponse, error) {
+	response, err := c.WithRawResponse.PostV1InventoryReorderRulesCheck(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

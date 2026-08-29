@@ -227,9 +227,10 @@ var (
 	postV1AccountCompaniesCreateRequestFieldIban                   = big.NewInt(1 << 8)
 	postV1AccountCompaniesCreateRequestFieldBankName               = big.NewInt(1 << 9)
 	postV1AccountCompaniesCreateRequestFieldPeppolID               = big.NewInt(1 << 10)
-	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 11)
-	postV1AccountCompaniesCreateRequestFieldCountryCode            = big.NewInt(1 << 12)
-	postV1AccountCompaniesCreateRequestFieldIsSandbox              = big.NewInt(1 << 13)
+	postV1AccountCompaniesCreateRequestFieldSepaCreditorID         = big.NewInt(1 << 11)
+	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 12)
+	postV1AccountCompaniesCreateRequestFieldCountryCode            = big.NewInt(1 << 13)
+	postV1AccountCompaniesCreateRequestFieldIsSandbox              = big.NewInt(1 << 14)
 )
 
 type PostV1AccountCompaniesCreateRequest struct {
@@ -244,6 +245,7 @@ type PostV1AccountCompaniesCreateRequest struct {
 	Iban                   *string                                     `json:"iban,omitempty" url:"-"`
 	BankName               *string                                     `json:"bankName,omitempty" url:"-"`
 	PeppolID               *string                                     `json:"peppolId,omitempty" url:"-"`
+	SepaCreditorID         *string                                     `json:"sepaCreditorId,omitempty" url:"-"`
 	DefaultInvoiceCurrency *string                                     `json:"defaultInvoiceCurrency,omitempty" url:"-"`
 	// Jurisdiction the company is registered in (immutable after creation)
 	CountryCode *PostV1AccountCompaniesCreateRequestCountryCode `json:"countryCode,omitempty" url:"-"`
@@ -336,6 +338,13 @@ func (p *PostV1AccountCompaniesCreateRequest) SetBankName(bankName *string) {
 func (p *PostV1AccountCompaniesCreateRequest) SetPeppolID(peppolID *string) {
 	p.PeppolID = peppolID
 	p.require(postV1AccountCompaniesCreateRequestFieldPeppolID)
+}
+
+// SetSepaCreditorID sets the SepaCreditorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetSepaCreditorID(sepaCreditorID *string) {
+	p.SepaCreditorID = sepaCreditorID
+	p.require(postV1AccountCompaniesCreateRequestFieldSepaCreditorID)
 }
 
 // SetDefaultInvoiceCurrency sets the DefaultInvoiceCurrency field and marks it as non-optional;
@@ -497,8 +506,9 @@ var (
 	postV1AccountCompaniesUpdateRequestFieldIban                   = big.NewInt(1 << 8)
 	postV1AccountCompaniesUpdateRequestFieldBankName               = big.NewInt(1 << 9)
 	postV1AccountCompaniesUpdateRequestFieldPeppolID               = big.NewInt(1 << 10)
-	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 11)
-	postV1AccountCompaniesUpdateRequestFieldLogo                   = big.NewInt(1 << 12)
+	postV1AccountCompaniesUpdateRequestFieldSepaCreditorID         = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 12)
+	postV1AccountCompaniesUpdateRequestFieldLogo                   = big.NewInt(1 << 13)
 )
 
 type PostV1AccountCompaniesUpdateRequest struct {
@@ -513,6 +523,7 @@ type PostV1AccountCompaniesUpdateRequest struct {
 	Iban                   *string                                     `json:"iban,omitempty" url:"-"`
 	BankName               *string                                     `json:"bankName,omitempty" url:"-"`
 	PeppolID               *string                                     `json:"peppolId,omitempty" url:"-"`
+	SepaCreditorID         *string                                     `json:"sepaCreditorId,omitempty" url:"-"`
 	DefaultInvoiceCurrency *string                                     `json:"defaultInvoiceCurrency,omitempty" url:"-"`
 	Logo                   *PostV1AccountCompaniesUpdateRequestLogo    `json:"logo,omitempty" url:"-"`
 
@@ -602,6 +613,13 @@ func (p *PostV1AccountCompaniesUpdateRequest) SetBankName(bankName *string) {
 func (p *PostV1AccountCompaniesUpdateRequest) SetPeppolID(peppolID *string) {
 	p.PeppolID = peppolID
 	p.require(postV1AccountCompaniesUpdateRequestFieldPeppolID)
+}
+
+// SetSepaCreditorID sets the SepaCreditorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetSepaCreditorID(sepaCreditorID *string) {
+	p.SepaCreditorID = sepaCreditorID
+	p.require(postV1AccountCompaniesUpdateRequestFieldSepaCreditorID)
 }
 
 // SetDefaultInvoiceCurrency sets the DefaultInvoiceCurrency field and marks it as non-optional;
@@ -2360,7 +2378,8 @@ var (
 	postV1AccountCompaniesProfileResponseFieldIban                   = big.NewInt(1 << 14)
 	postV1AccountCompaniesProfileResponseFieldBankName               = big.NewInt(1 << 15)
 	postV1AccountCompaniesProfileResponseFieldPeppolID               = big.NewInt(1 << 16)
-	postV1AccountCompaniesProfileResponseFieldLogoFileID             = big.NewInt(1 << 17)
+	postV1AccountCompaniesProfileResponseFieldSepaCreditorID         = big.NewInt(1 << 17)
+	postV1AccountCompaniesProfileResponseFieldLogoFileID             = big.NewInt(1 << 18)
 )
 
 type PostV1AccountCompaniesProfileResponse struct {
@@ -2381,6 +2400,7 @@ type PostV1AccountCompaniesProfileResponse struct {
 	Iban                   *string                                       `json:"iban,omitempty" url:"iban,omitempty"`
 	BankName               *string                                       `json:"bankName,omitempty" url:"bankName,omitempty"`
 	PeppolID               *string                                       `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID         *string                                       `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
 	LogoFileID             *string                                       `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2507,6 +2527,13 @@ func (p *PostV1AccountCompaniesProfileResponse) GetPeppolID() *string {
 		return nil
 	}
 	return p.PeppolID
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetSepaCreditorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SepaCreditorID
 }
 
 func (p *PostV1AccountCompaniesProfileResponse) GetLogoFileID() *string {
@@ -2647,6 +2674,13 @@ func (p *PostV1AccountCompaniesProfileResponse) SetBankName(bankName *string) {
 func (p *PostV1AccountCompaniesProfileResponse) SetPeppolID(peppolID *string) {
 	p.PeppolID = peppolID
 	p.require(postV1AccountCompaniesProfileResponseFieldPeppolID)
+}
+
+// SetSepaCreditorID sets the SepaCreditorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetSepaCreditorID(sepaCreditorID *string) {
+	p.SepaCreditorID = sepaCreditorID
+	p.require(postV1AccountCompaniesProfileResponseFieldSepaCreditorID)
 }
 
 // SetLogoFileID sets the LogoFileID field and marks it as non-optional;
@@ -3206,7 +3240,8 @@ var (
 	postV1AccountCompaniesUpdateResponseFieldIban                   = big.NewInt(1 << 14)
 	postV1AccountCompaniesUpdateResponseFieldBankName               = big.NewInt(1 << 15)
 	postV1AccountCompaniesUpdateResponseFieldPeppolID               = big.NewInt(1 << 16)
-	postV1AccountCompaniesUpdateResponseFieldLogoFileID             = big.NewInt(1 << 17)
+	postV1AccountCompaniesUpdateResponseFieldSepaCreditorID         = big.NewInt(1 << 17)
+	postV1AccountCompaniesUpdateResponseFieldLogoFileID             = big.NewInt(1 << 18)
 )
 
 type PostV1AccountCompaniesUpdateResponse struct {
@@ -3227,6 +3262,7 @@ type PostV1AccountCompaniesUpdateResponse struct {
 	Iban                   *string                                      `json:"iban,omitempty" url:"iban,omitempty"`
 	BankName               *string                                      `json:"bankName,omitempty" url:"bankName,omitempty"`
 	PeppolID               *string                                      `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID         *string                                      `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
 	LogoFileID             *string                                      `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3353,6 +3389,13 @@ func (p *PostV1AccountCompaniesUpdateResponse) GetPeppolID() *string {
 		return nil
 	}
 	return p.PeppolID
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetSepaCreditorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SepaCreditorID
 }
 
 func (p *PostV1AccountCompaniesUpdateResponse) GetLogoFileID() *string {
@@ -3493,6 +3536,13 @@ func (p *PostV1AccountCompaniesUpdateResponse) SetBankName(bankName *string) {
 func (p *PostV1AccountCompaniesUpdateResponse) SetPeppolID(peppolID *string) {
 	p.PeppolID = peppolID
 	p.require(postV1AccountCompaniesUpdateResponseFieldPeppolID)
+}
+
+// SetSepaCreditorID sets the SepaCreditorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetSepaCreditorID(sepaCreditorID *string) {
+	p.SepaCreditorID = sepaCreditorID
+	p.require(postV1AccountCompaniesUpdateResponseFieldSepaCreditorID)
 }
 
 // SetLogoFileID sets the LogoFileID field and marks it as non-optional;
@@ -5283,7 +5333,8 @@ var (
 	postV1AccountMeResponseFieldLocale          = big.NewInt(1 << 1)
 	postV1AccountMeResponseFieldActiveCompanyID = big.NewInt(1 << 2)
 	postV1AccountMeResponseFieldRole            = big.NewInt(1 << 3)
-	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 4)
+	postV1AccountMeResponseFieldBilling         = big.NewInt(1 << 4)
+	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 5)
 )
 
 type PostV1AccountMeResponse struct {
@@ -5291,6 +5342,7 @@ type PostV1AccountMeResponse struct {
 	Locale          string                                  `json:"locale" url:"locale"`
 	ActiveCompanyID *string                                 `json:"activeCompanyId,omitempty" url:"activeCompanyId,omitempty"`
 	Role            *string                                 `json:"role,omitempty" url:"role,omitempty"`
+	Billing         *PostV1AccountMeResponseBilling         `json:"billing" url:"billing"`
 	Companies       []*PostV1AccountMeResponseCompaniesItem `json:"companies" url:"companies"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5326,6 +5378,13 @@ func (p *PostV1AccountMeResponse) GetRole() *string {
 		return nil
 	}
 	return p.Role
+}
+
+func (p *PostV1AccountMeResponse) GetBilling() *PostV1AccountMeResponseBilling {
+	if p == nil {
+		return nil
+	}
+	return p.Billing
 }
 
 func (p *PostV1AccountMeResponse) GetCompanies() []*PostV1AccountMeResponseCompaniesItem {
@@ -5377,6 +5436,13 @@ func (p *PostV1AccountMeResponse) SetRole(role *string) {
 	p.require(postV1AccountMeResponseFieldRole)
 }
 
+// SetBilling sets the Billing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponse) SetBilling(billing *PostV1AccountMeResponseBilling) {
+	p.Billing = billing
+	p.require(postV1AccountMeResponseFieldBilling)
+}
+
 // SetCompanies sets the Companies field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AccountMeResponse) SetCompanies(companies []*PostV1AccountMeResponseCompaniesItem) {
@@ -5424,6 +5490,163 @@ func (p *PostV1AccountMeResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountMeResponseBillingFieldStatus       = big.NewInt(1 << 0)
+	postV1AccountMeResponseBillingFieldPlan         = big.NewInt(1 << 1)
+	postV1AccountMeResponseBillingFieldBalanceCents = big.NewInt(1 << 2)
+	postV1AccountMeResponseBillingFieldTrialEndsAt  = big.NewInt(1 << 3)
+)
+
+type PostV1AccountMeResponseBilling struct {
+	Status       PostV1AccountMeResponseBillingStatus `json:"status" url:"status"`
+	Plan         string                               `json:"plan" url:"plan"`
+	BalanceCents int64                                `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *string                              `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountMeResponseBilling) GetStatus() PostV1AccountMeResponseBillingStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1AccountMeResponseBilling) GetPlan() string {
+	if p == nil {
+		return ""
+	}
+	return p.Plan
+}
+
+func (p *PostV1AccountMeResponseBilling) GetBalanceCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.BalanceCents
+}
+
+func (p *PostV1AccountMeResponseBilling) GetTrialEndsAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TrialEndsAt
+}
+
+func (p *PostV1AccountMeResponseBilling) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountMeResponseBilling) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetStatus(status PostV1AccountMeResponseBillingStatus) {
+	p.Status = status
+	p.require(postV1AccountMeResponseBillingFieldStatus)
+}
+
+// SetPlan sets the Plan field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetPlan(plan string) {
+	p.Plan = plan
+	p.require(postV1AccountMeResponseBillingFieldPlan)
+}
+
+// SetBalanceCents sets the BalanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetBalanceCents(balanceCents int64) {
+	p.BalanceCents = balanceCents
+	p.require(postV1AccountMeResponseBillingFieldBalanceCents)
+}
+
+// SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetTrialEndsAt(trialEndsAt *string) {
+	p.TrialEndsAt = trialEndsAt
+	p.require(postV1AccountMeResponseBillingFieldTrialEndsAt)
+}
+
+func (p *PostV1AccountMeResponseBilling) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountMeResponseBilling
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountMeResponseBilling(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountMeResponseBilling) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountMeResponseBilling
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountMeResponseBilling) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountMeResponseBillingStatus string
+
+const (
+	PostV1AccountMeResponseBillingStatusTrial     PostV1AccountMeResponseBillingStatus = "trial"
+	PostV1AccountMeResponseBillingStatusActive    PostV1AccountMeResponseBillingStatus = "active"
+	PostV1AccountMeResponseBillingStatusSuspended PostV1AccountMeResponseBillingStatus = "suspended"
+)
+
+func NewPostV1AccountMeResponseBillingStatusFromString(s string) (PostV1AccountMeResponseBillingStatus, error) {
+	switch s {
+	case "trial":
+		return PostV1AccountMeResponseBillingStatusTrial, nil
+	case "active":
+		return PostV1AccountMeResponseBillingStatusActive, nil
+	case "suspended":
+		return PostV1AccountMeResponseBillingStatusSuspended, nil
+	}
+	var t PostV1AccountMeResponseBillingStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountMeResponseBillingStatus) Ptr() *PostV1AccountMeResponseBillingStatus {
+	return &p
 }
 
 var (

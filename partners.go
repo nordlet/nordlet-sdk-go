@@ -2531,6 +2531,143 @@ func (p *PostV1PartnersValidateVatRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+var (
+	postV1PartnersVatReviewsListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1PartnersVatReviewsListRequest struct {
+	Page     *int64                                           `json:"page,omitempty" url:"-"`
+	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1PartnersVatReviewsListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1PartnersVatReviewsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersVatReviewsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1PartnersVatReviewsListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1PartnersVatReviewsListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequest) SetSort(sort []*PostV1PartnersVatReviewsListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1PartnersVatReviewsListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequest) SetFilter(filter []*PostV1PartnersVatReviewsListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1PartnersVatReviewsListRequestFieldFilter)
+}
+
+func (p *PostV1PartnersVatReviewsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListRequest(body)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1PartnersVatReviewsResolveRequestFieldID         = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsResolveRequestFieldResolution = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsResolveRequestFieldNote       = big.NewInt(1 << 2)
+)
+
+type PostV1PartnersVatReviewsResolveRequest struct {
+	ID         string                                           `json:"id" url:"-"`
+	Resolution PostV1PartnersVatReviewsResolveRequestResolution `json:"resolution" url:"-"`
+	Note       *string                                          `json:"note,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersVatReviewsResolveRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersVatReviewsResolveRequestFieldID)
+}
+
+// SetResolution sets the Resolution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveRequest) SetResolution(resolution PostV1PartnersVatReviewsResolveRequestResolution) {
+	p.Resolution = resolution
+	p.require(postV1PartnersVatReviewsResolveRequestFieldResolution)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveRequest) SetNote(note *string) {
+	p.Note = note
+	p.require(postV1PartnersVatReviewsResolveRequestFieldNote)
+}
+
+func (p *PostV1PartnersVatReviewsResolveRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsResolveRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsResolveRequest(body)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsResolveRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsResolveRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
 type PostV1PartnersAddressesCreateRequestType string
 
 const (
@@ -14004,4 +14141,1539 @@ func (p *PostV1PartnersValidateVatResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersVatReviewsListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1PartnersVatReviewsListRequestFilterItem struct {
+	Field string                                              `json:"field" url:"field"`
+	Op    PostV1PartnersVatReviewsListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1PartnersVatReviewsListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) GetOp() PostV1PartnersVatReviewsListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) GetValue() *PostV1PartnersVatReviewsListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1PartnersVatReviewsListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) SetOp(op PostV1PartnersVatReviewsListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1PartnersVatReviewsListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) SetValue(value *PostV1PartnersVatReviewsListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1PartnersVatReviewsListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersVatReviewsListRequestFilterItemOp string
+
+const (
+	PostV1PartnersVatReviewsListRequestFilterItemOpEq       PostV1PartnersVatReviewsListRequestFilterItemOp = "eq"
+	PostV1PartnersVatReviewsListRequestFilterItemOpNe       PostV1PartnersVatReviewsListRequestFilterItemOp = "ne"
+	PostV1PartnersVatReviewsListRequestFilterItemOpContains PostV1PartnersVatReviewsListRequestFilterItemOp = "contains"
+	PostV1PartnersVatReviewsListRequestFilterItemOpGte      PostV1PartnersVatReviewsListRequestFilterItemOp = "gte"
+	PostV1PartnersVatReviewsListRequestFilterItemOpLte      PostV1PartnersVatReviewsListRequestFilterItemOp = "lte"
+	PostV1PartnersVatReviewsListRequestFilterItemOpIn       PostV1PartnersVatReviewsListRequestFilterItemOp = "in"
+)
+
+func NewPostV1PartnersVatReviewsListRequestFilterItemOpFromString(s string) (PostV1PartnersVatReviewsListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1PartnersVatReviewsListRequestFilterItemOpIn, nil
+	}
+	var t PostV1PartnersVatReviewsListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsListRequestFilterItemOp) Ptr() *PostV1PartnersVatReviewsListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1PartnersVatReviewsListRequestFilterItemValue struct {
+	String                                                          string
+	Double                                                          float64
+	Boolean                                                         bool
+	PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList []*PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) GetPostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList() []*PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList []*PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList"
+		p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList = valuePostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1PartnersVatReviewsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList" || p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersVatReviewsListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList([]*PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValue) Accept(visitor PostV1PartnersVatReviewsListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList" || p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList(p.PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1PartnersVatReviewsListRequestFilterItemValueThreeItem) Accept(visitor PostV1PartnersVatReviewsListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1PartnersVatReviewsListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1PartnersVatReviewsListRequestSortItem struct {
+	Field string                                          `json:"field" url:"field"`
+	Dir   *PostV1PartnersVatReviewsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) GetDir() *PostV1PartnersVatReviewsListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1PartnersVatReviewsListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequestSortItem) SetDir(dir *PostV1PartnersVatReviewsListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1PartnersVatReviewsListRequestSortItemFieldDir)
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersVatReviewsListRequestSortItemDir string
+
+const (
+	PostV1PartnersVatReviewsListRequestSortItemDirAsc  PostV1PartnersVatReviewsListRequestSortItemDir = "asc"
+	PostV1PartnersVatReviewsListRequestSortItemDirDesc PostV1PartnersVatReviewsListRequestSortItemDir = "desc"
+)
+
+func NewPostV1PartnersVatReviewsListRequestSortItemDirFromString(s string) (PostV1PartnersVatReviewsListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1PartnersVatReviewsListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1PartnersVatReviewsListRequestSortItemDirDesc, nil
+	}
+	var t PostV1PartnersVatReviewsListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsListRequestSortItemDir) Ptr() *PostV1PartnersVatReviewsListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1PartnersVatReviewsListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1PartnersVatReviewsListResponse struct {
+	Rows     []*PostV1PartnersVatReviewsListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                           `json:"page" url:"page"`
+	PageSize int64                                           `json:"pageSize" url:"pageSize"`
+	Total    int64                                           `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetRows() []*PostV1PartnersVatReviewsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponse) SetRows(rows []*PostV1PartnersVatReviewsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1PartnersVatReviewsListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1PartnersVatReviewsListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1PartnersVatReviewsListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1PartnersVatReviewsListResponseFieldTotal)
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersVatReviewsListResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListResponseRowsItemFieldPartnerID      = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsListResponseRowsItemFieldVatCode        = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsListResponseRowsItemFieldReason         = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsListResponseRowsItemFieldStatus         = big.NewInt(1 << 4)
+	postV1PartnersVatReviewsListResponseRowsItemFieldResolution     = big.NewInt(1 << 5)
+	postV1PartnersVatReviewsListResponseRowsItemFieldResolutionNote = big.NewInt(1 << 6)
+	postV1PartnersVatReviewsListResponseRowsItemFieldDetails        = big.NewInt(1 << 7)
+	postV1PartnersVatReviewsListResponseRowsItemFieldResolvedAt     = big.NewInt(1 << 8)
+	postV1PartnersVatReviewsListResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 9)
+	postV1PartnersVatReviewsListResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 10)
+)
+
+type PostV1PartnersVatReviewsListResponseRowsItem struct {
+	ID             string                                                  `json:"id" url:"id"`
+	PartnerID      string                                                  `json:"partnerId" url:"partnerId"`
+	VatCode        string                                                  `json:"vatCode" url:"vatCode"`
+	Reason         PostV1PartnersVatReviewsListResponseRowsItemReason      `json:"reason" url:"reason"`
+	Status         PostV1PartnersVatReviewsListResponseRowsItemStatus      `json:"status" url:"status"`
+	Resolution     *PostV1PartnersVatReviewsListResponseRowsItemResolution `json:"resolution,omitempty" url:"resolution,omitempty"`
+	ResolutionNote *string                                                 `json:"resolutionNote,omitempty" url:"resolutionNote,omitempty"`
+	Details        *PostV1PartnersVatReviewsListResponseRowsItemDetails    `json:"details,omitempty" url:"details,omitempty"`
+	ResolvedAt     *string                                                 `json:"resolvedAt,omitempty" url:"resolvedAt,omitempty"`
+	CreatedAt      string                                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                                                  `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetPartnerID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetVatCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatCode
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetReason() PostV1PartnersVatReviewsListResponseRowsItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetStatus() PostV1PartnersVatReviewsListResponseRowsItemStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetResolution() *PostV1PartnersVatReviewsListResponseRowsItemResolution {
+	if p == nil {
+		return nil
+	}
+	return p.Resolution
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetResolutionNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResolutionNote
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetDetails() *PostV1PartnersVatReviewsListResponseRowsItemDetails {
+	if p == nil {
+		return nil
+	}
+	return p.Details
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetResolvedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResolvedAt
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldPartnerID)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetVatCode(vatCode string) {
+	p.VatCode = vatCode
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldVatCode)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetReason(reason PostV1PartnersVatReviewsListResponseRowsItemReason) {
+	p.Reason = reason
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldReason)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetStatus(status PostV1PartnersVatReviewsListResponseRowsItemStatus) {
+	p.Status = status
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldStatus)
+}
+
+// SetResolution sets the Resolution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetResolution(resolution *PostV1PartnersVatReviewsListResponseRowsItemResolution) {
+	p.Resolution = resolution
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldResolution)
+}
+
+// SetResolutionNote sets the ResolutionNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetResolutionNote(resolutionNote *string) {
+	p.ResolutionNote = resolutionNote
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldResolutionNote)
+}
+
+// SetDetails sets the Details field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetDetails(details *PostV1PartnersVatReviewsListResponseRowsItemDetails) {
+	p.Details = details
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldDetails)
+}
+
+// SetResolvedAt sets the ResolvedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetResolvedAt(resolvedAt *string) {
+	p.ResolvedAt = resolvedAt
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldResolvedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1PartnersVatReviewsListResponseRowsItemFieldUpdatedAt)
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersVatReviewsListResponseRowsItemDetailsFieldMessage           = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsListResponseRowsItemDetailsFieldPartnerName       = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsListResponseRowsItemDetailsFieldViesName          = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsListResponseRowsItemDetailsFieldViesAddress       = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsListResponseRowsItemDetailsFieldRequestIdentifier = big.NewInt(1 << 4)
+)
+
+type PostV1PartnersVatReviewsListResponseRowsItemDetails struct {
+	Message           *string `json:"message,omitempty" url:"message,omitempty"`
+	PartnerName       *string `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	ViesName          *string `json:"viesName,omitempty" url:"viesName,omitempty"`
+	ViesAddress       *string `json:"viesAddress,omitempty" url:"viesAddress,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty" url:"requestIdentifier,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetPartnerName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerName
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetViesName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ViesName
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetViesAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ViesAddress
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetRequestIdentifier() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RequestIdentifier
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1PartnersVatReviewsListResponseRowsItemDetailsFieldMessage)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) SetPartnerName(partnerName *string) {
+	p.PartnerName = partnerName
+	p.require(postV1PartnersVatReviewsListResponseRowsItemDetailsFieldPartnerName)
+}
+
+// SetViesName sets the ViesName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) SetViesName(viesName *string) {
+	p.ViesName = viesName
+	p.require(postV1PartnersVatReviewsListResponseRowsItemDetailsFieldViesName)
+}
+
+// SetViesAddress sets the ViesAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) SetViesAddress(viesAddress *string) {
+	p.ViesAddress = viesAddress
+	p.require(postV1PartnersVatReviewsListResponseRowsItemDetailsFieldViesAddress)
+}
+
+// SetRequestIdentifier sets the RequestIdentifier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) SetRequestIdentifier(requestIdentifier *string) {
+	p.RequestIdentifier = requestIdentifier
+	p.require(postV1PartnersVatReviewsListResponseRowsItemDetailsFieldRequestIdentifier)
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsListResponseRowsItemDetails
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsListResponseRowsItemDetails(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsListResponseRowsItemDetails
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsListResponseRowsItemDetails) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersVatReviewsListResponseRowsItemReason string
+
+const (
+	PostV1PartnersVatReviewsListResponseRowsItemReasonInvalid      PostV1PartnersVatReviewsListResponseRowsItemReason = "invalid"
+	PostV1PartnersVatReviewsListResponseRowsItemReasonServiceError PostV1PartnersVatReviewsListResponseRowsItemReason = "service_error"
+	PostV1PartnersVatReviewsListResponseRowsItemReasonNameMismatch PostV1PartnersVatReviewsListResponseRowsItemReason = "name_mismatch"
+)
+
+func NewPostV1PartnersVatReviewsListResponseRowsItemReasonFromString(s string) (PostV1PartnersVatReviewsListResponseRowsItemReason, error) {
+	switch s {
+	case "invalid":
+		return PostV1PartnersVatReviewsListResponseRowsItemReasonInvalid, nil
+	case "service_error":
+		return PostV1PartnersVatReviewsListResponseRowsItemReasonServiceError, nil
+	case "name_mismatch":
+		return PostV1PartnersVatReviewsListResponseRowsItemReasonNameMismatch, nil
+	}
+	var t PostV1PartnersVatReviewsListResponseRowsItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsListResponseRowsItemReason) Ptr() *PostV1PartnersVatReviewsListResponseRowsItemReason {
+	return &p
+}
+
+type PostV1PartnersVatReviewsListResponseRowsItemResolution string
+
+const (
+	PostV1PartnersVatReviewsListResponseRowsItemResolutionConfirmedValid   PostV1PartnersVatReviewsListResponseRowsItemResolution = "confirmed_valid"
+	PostV1PartnersVatReviewsListResponseRowsItemResolutionConfirmedInvalid PostV1PartnersVatReviewsListResponseRowsItemResolution = "confirmed_invalid"
+	PostV1PartnersVatReviewsListResponseRowsItemResolutionDismissed        PostV1PartnersVatReviewsListResponseRowsItemResolution = "dismissed"
+	PostV1PartnersVatReviewsListResponseRowsItemResolutionRevalidated      PostV1PartnersVatReviewsListResponseRowsItemResolution = "revalidated"
+	PostV1PartnersVatReviewsListResponseRowsItemResolutionSuperseded       PostV1PartnersVatReviewsListResponseRowsItemResolution = "superseded"
+)
+
+func NewPostV1PartnersVatReviewsListResponseRowsItemResolutionFromString(s string) (PostV1PartnersVatReviewsListResponseRowsItemResolution, error) {
+	switch s {
+	case "confirmed_valid":
+		return PostV1PartnersVatReviewsListResponseRowsItemResolutionConfirmedValid, nil
+	case "confirmed_invalid":
+		return PostV1PartnersVatReviewsListResponseRowsItemResolutionConfirmedInvalid, nil
+	case "dismissed":
+		return PostV1PartnersVatReviewsListResponseRowsItemResolutionDismissed, nil
+	case "revalidated":
+		return PostV1PartnersVatReviewsListResponseRowsItemResolutionRevalidated, nil
+	case "superseded":
+		return PostV1PartnersVatReviewsListResponseRowsItemResolutionSuperseded, nil
+	}
+	var t PostV1PartnersVatReviewsListResponseRowsItemResolution
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsListResponseRowsItemResolution) Ptr() *PostV1PartnersVatReviewsListResponseRowsItemResolution {
+	return &p
+}
+
+type PostV1PartnersVatReviewsListResponseRowsItemStatus string
+
+const (
+	PostV1PartnersVatReviewsListResponseRowsItemStatusOpen     PostV1PartnersVatReviewsListResponseRowsItemStatus = "open"
+	PostV1PartnersVatReviewsListResponseRowsItemStatusResolved PostV1PartnersVatReviewsListResponseRowsItemStatus = "resolved"
+)
+
+func NewPostV1PartnersVatReviewsListResponseRowsItemStatusFromString(s string) (PostV1PartnersVatReviewsListResponseRowsItemStatus, error) {
+	switch s {
+	case "open":
+		return PostV1PartnersVatReviewsListResponseRowsItemStatusOpen, nil
+	case "resolved":
+		return PostV1PartnersVatReviewsListResponseRowsItemStatusResolved, nil
+	}
+	var t PostV1PartnersVatReviewsListResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsListResponseRowsItemStatus) Ptr() *PostV1PartnersVatReviewsListResponseRowsItemStatus {
+	return &p
+}
+
+type PostV1PartnersVatReviewsResolveRequestResolution string
+
+const (
+	PostV1PartnersVatReviewsResolveRequestResolutionConfirmedValid   PostV1PartnersVatReviewsResolveRequestResolution = "confirmed_valid"
+	PostV1PartnersVatReviewsResolveRequestResolutionConfirmedInvalid PostV1PartnersVatReviewsResolveRequestResolution = "confirmed_invalid"
+	PostV1PartnersVatReviewsResolveRequestResolutionDismissed        PostV1PartnersVatReviewsResolveRequestResolution = "dismissed"
+)
+
+func NewPostV1PartnersVatReviewsResolveRequestResolutionFromString(s string) (PostV1PartnersVatReviewsResolveRequestResolution, error) {
+	switch s {
+	case "confirmed_valid":
+		return PostV1PartnersVatReviewsResolveRequestResolutionConfirmedValid, nil
+	case "confirmed_invalid":
+		return PostV1PartnersVatReviewsResolveRequestResolutionConfirmedInvalid, nil
+	case "dismissed":
+		return PostV1PartnersVatReviewsResolveRequestResolutionDismissed, nil
+	}
+	var t PostV1PartnersVatReviewsResolveRequestResolution
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsResolveRequestResolution) Ptr() *PostV1PartnersVatReviewsResolveRequestResolution {
+	return &p
+}
+
+var (
+	postV1PartnersVatReviewsResolveResponseFieldID             = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsResolveResponseFieldPartnerID      = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsResolveResponseFieldVatCode        = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsResolveResponseFieldReason         = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsResolveResponseFieldStatus         = big.NewInt(1 << 4)
+	postV1PartnersVatReviewsResolveResponseFieldResolution     = big.NewInt(1 << 5)
+	postV1PartnersVatReviewsResolveResponseFieldResolutionNote = big.NewInt(1 << 6)
+	postV1PartnersVatReviewsResolveResponseFieldDetails        = big.NewInt(1 << 7)
+	postV1PartnersVatReviewsResolveResponseFieldResolvedAt     = big.NewInt(1 << 8)
+	postV1PartnersVatReviewsResolveResponseFieldCreatedAt      = big.NewInt(1 << 9)
+	postV1PartnersVatReviewsResolveResponseFieldUpdatedAt      = big.NewInt(1 << 10)
+)
+
+type PostV1PartnersVatReviewsResolveResponse struct {
+	ID             string                                             `json:"id" url:"id"`
+	PartnerID      string                                             `json:"partnerId" url:"partnerId"`
+	VatCode        string                                             `json:"vatCode" url:"vatCode"`
+	Reason         PostV1PartnersVatReviewsResolveResponseReason      `json:"reason" url:"reason"`
+	Status         PostV1PartnersVatReviewsResolveResponseStatus      `json:"status" url:"status"`
+	Resolution     *PostV1PartnersVatReviewsResolveResponseResolution `json:"resolution,omitempty" url:"resolution,omitempty"`
+	ResolutionNote *string                                            `json:"resolutionNote,omitempty" url:"resolutionNote,omitempty"`
+	Details        *PostV1PartnersVatReviewsResolveResponseDetails    `json:"details,omitempty" url:"details,omitempty"`
+	ResolvedAt     *string                                            `json:"resolvedAt,omitempty" url:"resolvedAt,omitempty"`
+	CreatedAt      string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                                             `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetPartnerID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetVatCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.VatCode
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetReason() PostV1PartnersVatReviewsResolveResponseReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetStatus() PostV1PartnersVatReviewsResolveResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetResolution() *PostV1PartnersVatReviewsResolveResponseResolution {
+	if p == nil {
+		return nil
+	}
+	return p.Resolution
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetResolutionNote() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResolutionNote
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetDetails() *PostV1PartnersVatReviewsResolveResponseDetails {
+	if p == nil {
+		return nil
+	}
+	return p.Details
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetResolvedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResolvedAt
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersVatReviewsResolveResponseFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1PartnersVatReviewsResolveResponseFieldPartnerID)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetVatCode(vatCode string) {
+	p.VatCode = vatCode
+	p.require(postV1PartnersVatReviewsResolveResponseFieldVatCode)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetReason(reason PostV1PartnersVatReviewsResolveResponseReason) {
+	p.Reason = reason
+	p.require(postV1PartnersVatReviewsResolveResponseFieldReason)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetStatus(status PostV1PartnersVatReviewsResolveResponseStatus) {
+	p.Status = status
+	p.require(postV1PartnersVatReviewsResolveResponseFieldStatus)
+}
+
+// SetResolution sets the Resolution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetResolution(resolution *PostV1PartnersVatReviewsResolveResponseResolution) {
+	p.Resolution = resolution
+	p.require(postV1PartnersVatReviewsResolveResponseFieldResolution)
+}
+
+// SetResolutionNote sets the ResolutionNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetResolutionNote(resolutionNote *string) {
+	p.ResolutionNote = resolutionNote
+	p.require(postV1PartnersVatReviewsResolveResponseFieldResolutionNote)
+}
+
+// SetDetails sets the Details field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetDetails(details *PostV1PartnersVatReviewsResolveResponseDetails) {
+	p.Details = details
+	p.require(postV1PartnersVatReviewsResolveResponseFieldDetails)
+}
+
+// SetResolvedAt sets the ResolvedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetResolvedAt(resolvedAt *string) {
+	p.ResolvedAt = resolvedAt
+	p.require(postV1PartnersVatReviewsResolveResponseFieldResolvedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1PartnersVatReviewsResolveResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1PartnersVatReviewsResolveResponseFieldUpdatedAt)
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsResolveResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsResolveResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsResolveResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersVatReviewsResolveResponseDetailsFieldMessage           = big.NewInt(1 << 0)
+	postV1PartnersVatReviewsResolveResponseDetailsFieldPartnerName       = big.NewInt(1 << 1)
+	postV1PartnersVatReviewsResolveResponseDetailsFieldViesName          = big.NewInt(1 << 2)
+	postV1PartnersVatReviewsResolveResponseDetailsFieldViesAddress       = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsResolveResponseDetailsFieldRequestIdentifier = big.NewInt(1 << 4)
+)
+
+type PostV1PartnersVatReviewsResolveResponseDetails struct {
+	Message           *string `json:"message,omitempty" url:"message,omitempty"`
+	PartnerName       *string `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	ViesName          *string `json:"viesName,omitempty" url:"viesName,omitempty"`
+	ViesAddress       *string `json:"viesAddress,omitempty" url:"viesAddress,omitempty"`
+	RequestIdentifier *string `json:"requestIdentifier,omitempty" url:"requestIdentifier,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetPartnerName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerName
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetViesName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ViesName
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetViesAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ViesAddress
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetRequestIdentifier() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RequestIdentifier
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1PartnersVatReviewsResolveResponseDetailsFieldMessage)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) SetPartnerName(partnerName *string) {
+	p.PartnerName = partnerName
+	p.require(postV1PartnersVatReviewsResolveResponseDetailsFieldPartnerName)
+}
+
+// SetViesName sets the ViesName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) SetViesName(viesName *string) {
+	p.ViesName = viesName
+	p.require(postV1PartnersVatReviewsResolveResponseDetailsFieldViesName)
+}
+
+// SetViesAddress sets the ViesAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) SetViesAddress(viesAddress *string) {
+	p.ViesAddress = viesAddress
+	p.require(postV1PartnersVatReviewsResolveResponseDetailsFieldViesAddress)
+}
+
+// SetRequestIdentifier sets the RequestIdentifier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) SetRequestIdentifier(requestIdentifier *string) {
+	p.RequestIdentifier = requestIdentifier
+	p.require(postV1PartnersVatReviewsResolveResponseDetailsFieldRequestIdentifier)
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersVatReviewsResolveResponseDetails
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersVatReviewsResolveResponseDetails(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersVatReviewsResolveResponseDetails
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersVatReviewsResolveResponseDetails) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersVatReviewsResolveResponseReason string
+
+const (
+	PostV1PartnersVatReviewsResolveResponseReasonInvalid      PostV1PartnersVatReviewsResolveResponseReason = "invalid"
+	PostV1PartnersVatReviewsResolveResponseReasonServiceError PostV1PartnersVatReviewsResolveResponseReason = "service_error"
+	PostV1PartnersVatReviewsResolveResponseReasonNameMismatch PostV1PartnersVatReviewsResolveResponseReason = "name_mismatch"
+)
+
+func NewPostV1PartnersVatReviewsResolveResponseReasonFromString(s string) (PostV1PartnersVatReviewsResolveResponseReason, error) {
+	switch s {
+	case "invalid":
+		return PostV1PartnersVatReviewsResolveResponseReasonInvalid, nil
+	case "service_error":
+		return PostV1PartnersVatReviewsResolveResponseReasonServiceError, nil
+	case "name_mismatch":
+		return PostV1PartnersVatReviewsResolveResponseReasonNameMismatch, nil
+	}
+	var t PostV1PartnersVatReviewsResolveResponseReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsResolveResponseReason) Ptr() *PostV1PartnersVatReviewsResolveResponseReason {
+	return &p
+}
+
+type PostV1PartnersVatReviewsResolveResponseResolution string
+
+const (
+	PostV1PartnersVatReviewsResolveResponseResolutionConfirmedValid   PostV1PartnersVatReviewsResolveResponseResolution = "confirmed_valid"
+	PostV1PartnersVatReviewsResolveResponseResolutionConfirmedInvalid PostV1PartnersVatReviewsResolveResponseResolution = "confirmed_invalid"
+	PostV1PartnersVatReviewsResolveResponseResolutionDismissed        PostV1PartnersVatReviewsResolveResponseResolution = "dismissed"
+	PostV1PartnersVatReviewsResolveResponseResolutionRevalidated      PostV1PartnersVatReviewsResolveResponseResolution = "revalidated"
+	PostV1PartnersVatReviewsResolveResponseResolutionSuperseded       PostV1PartnersVatReviewsResolveResponseResolution = "superseded"
+)
+
+func NewPostV1PartnersVatReviewsResolveResponseResolutionFromString(s string) (PostV1PartnersVatReviewsResolveResponseResolution, error) {
+	switch s {
+	case "confirmed_valid":
+		return PostV1PartnersVatReviewsResolveResponseResolutionConfirmedValid, nil
+	case "confirmed_invalid":
+		return PostV1PartnersVatReviewsResolveResponseResolutionConfirmedInvalid, nil
+	case "dismissed":
+		return PostV1PartnersVatReviewsResolveResponseResolutionDismissed, nil
+	case "revalidated":
+		return PostV1PartnersVatReviewsResolveResponseResolutionRevalidated, nil
+	case "superseded":
+		return PostV1PartnersVatReviewsResolveResponseResolutionSuperseded, nil
+	}
+	var t PostV1PartnersVatReviewsResolveResponseResolution
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsResolveResponseResolution) Ptr() *PostV1PartnersVatReviewsResolveResponseResolution {
+	return &p
+}
+
+type PostV1PartnersVatReviewsResolveResponseStatus string
+
+const (
+	PostV1PartnersVatReviewsResolveResponseStatusOpen     PostV1PartnersVatReviewsResolveResponseStatus = "open"
+	PostV1PartnersVatReviewsResolveResponseStatusResolved PostV1PartnersVatReviewsResolveResponseStatus = "resolved"
+)
+
+func NewPostV1PartnersVatReviewsResolveResponseStatusFromString(s string) (PostV1PartnersVatReviewsResolveResponseStatus, error) {
+	switch s {
+	case "open":
+		return PostV1PartnersVatReviewsResolveResponseStatusOpen, nil
+	case "resolved":
+		return PostV1PartnersVatReviewsResolveResponseStatusResolved, nil
+	}
+	var t PostV1PartnersVatReviewsResolveResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersVatReviewsResolveResponseStatus) Ptr() *PostV1PartnersVatReviewsResolveResponseStatus {
+	return &p
 }

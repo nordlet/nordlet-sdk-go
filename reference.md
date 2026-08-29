@@ -771,6 +771,109 @@ client.Reference.PostV1ReferenceEuVatRatesList(
 </dl>
 </details>
 
+<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesImportsList(request) -> *nordlet.PostV1ReferenceEuVatRatesImportsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+History of EU VAT rate imports from the EC TEDB VatRetrievalService: when rates were pulled, what changed, and whether the run succeeded. The initial seed run carries the built-in snapshot.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceEuVatRatesImportsListRequest{}
+client.Reference.PostV1ReferenceEuVatRatesImportsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSync(request) -> *nordlet.PostV1ReferenceEuVatRatesSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Trigger an immediate pull of EU VAT rates from the EC TEDB VatRetrievalService. Rates are shared reference data: new rates open with today as their effective date, rates that disappeared are closed with a validity end date. Returns the finished import run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceEuVatRatesSyncRequest{}
+client.Reference.PostV1ReferenceEuVatRatesSync(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSetOverrides(request) -> *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse</code></summary>
 <dl>
 <dd>
@@ -2300,6 +2403,139 @@ client.Partners.PostV1PartnersValidateVat(
 <dd>
 
 **partnerID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1PartnersVatReviewsList(request) -> *nordlet.PostV1PartnersVatReviewsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersVatReviewsListRequest{}
+client.Partners.PostV1PartnersVatReviewsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1PartnersVatReviewsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1PartnersVatReviewsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1PartnersVatReviewsResolve(request) -> *nordlet.PostV1PartnersVatReviewsResolveResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersVatReviewsResolveRequest{
+        ID: "id",
+        Resolution: nordlet.PostV1PartnersVatReviewsResolveRequestResolutionConfirmedValid,
+    }
+client.Partners.PostV1PartnersVatReviewsResolve(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resolution:** `*nordlet.PostV1PartnersVatReviewsResolveRequestResolution` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**note:** `*string` 
     
 </dd>
 </dl>
@@ -3868,6 +4104,14 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
+**tracking:** `*nordlet.PostV1CatalogItemsCreateRequestTracking` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **name:** `string` 
     
 </dd>
@@ -4107,6 +4351,14 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dd>
 
 **type_:** `*nordlet.PostV1CatalogItemsUpdateRequestType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tracking:** `*nordlet.PostV1CatalogItemsUpdateRequestTracking` 
     
 </dd>
 </dl>
@@ -5483,6 +5735,128 @@ request := &nordlet.PostV1SalesInvoicesPeppolSendRequest{
         ID: "id",
     }
 client.Sales.PostV1SalesInvoicesPeppolSend(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesEinvoiceXML(request) -> *nordlet.PostV1SalesInvoicesEinvoiceXMLResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Render an issued invoice as the national e-invoicing payload for the company country: FatturaPA (IT), KSeF FA(3) (PL) or UBL CIUS-RO (RO). Review the warnings - data the invoice does not carry is flagged, never invented.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesEinvoiceXMLRequest{
+        ID: "id",
+    }
+client.Sales.PostV1SalesInvoicesEinvoiceXML(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesEinvoiceSend(request) -> *nordlet.PostV1SalesInvoicesEinvoiceSendResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Build the national e-invoicing payload and deliver it to the bridge endpoint configured for the country gateway in compliance settings. The bridge (an accredited intermediary or connector) handles the certified national channel - SdI accreditation, KSeF sessions or ANAF SPV OAuth.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesEinvoiceSendRequest{
+        ID: "id",
+    }
+client.Sales.PostV1SalesInvoicesEinvoiceSend(
         context.TODO(),
         request,
     )
@@ -7087,6 +7461,14 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
+**purchaseOrderID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -7230,6 +7612,14 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dd>
 
 **currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purchaseOrderID:** `*string` 
     
 </dd>
 </dl>
@@ -7425,6 +7815,1303 @@ client.Purchases.PostV1PurchasesInvoicesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PurchasesInvoicesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersCreate(request) -> *nordlet.PostV1PurchasesOrdersCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersCreateRequest{
+        PartnerID: "partnerId",
+        OrderDate: "orderDate",
+        Lines: []*nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{
+            &nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{},
+        },
+    }
+client.Purchases.PostV1PurchasesOrdersCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**partnerID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expectedDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.PostV1PurchasesOrdersCreateRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersUpdate(request) -> *nordlet.PostV1PurchasesOrdersUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersUpdateRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expectedDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.PostV1PurchasesOrdersUpdateRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersGet(request) -> *nordlet.PostV1PurchasesOrdersGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersGetRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersList(request) -> *nordlet.PostV1PurchasesOrdersListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersListRequest{}
+client.Purchases.PostV1PurchasesOrdersList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1PurchasesOrdersListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1PurchasesOrdersListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersSubmit(request) -> *nordlet.PostV1PurchasesOrdersSubmitResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersSubmitRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersSubmit(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersApprove(request) -> *nordlet.PostV1PurchasesOrdersApproveResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersApproveRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersApprove(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersReject(request) -> *nordlet.PostV1PurchasesOrdersRejectResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersRejectRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersReject(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersCancel(request) -> *nordlet.PostV1PurchasesOrdersCancelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersCancelRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersCancel(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersClose(request) -> *nordlet.PostV1PurchasesOrdersCloseResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersCloseRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersClose(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesOrdersDelete(request) -> *nordlet.PostV1PurchasesOrdersDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesOrdersDeleteRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesOrdersDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesReceiptsCreate(request) -> *nordlet.PostV1PurchasesReceiptsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesReceiptsCreateRequest{
+        OrderID: "orderId",
+        ReceiptDate: "receiptDate",
+        Lines: []*nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
+            &nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
+                OrderLineID: "orderLineId",
+                Quantity: "quantity",
+            },
+        },
+    }
+client.Purchases.PostV1PurchasesReceiptsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**orderID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receiptDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesReceiptsGet(request) -> *nordlet.PostV1PurchasesReceiptsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesReceiptsGetRequest{
+        ID: "id",
+    }
+client.Purchases.PostV1PurchasesReceiptsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesReceiptsList(request) -> *nordlet.PostV1PurchasesReceiptsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesReceiptsListRequest{}
+client.Purchases.PostV1PurchasesReceiptsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1PurchasesReceiptsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1PurchasesReceiptsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.PostV1PurchasesInvoicesMatch(request) -> *nordlet.PostV1PurchasesInvoicesMatchResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PurchasesInvoicesMatchRequest{
+        InvoiceID: "invoiceId",
+    }
+client.Purchases.PostV1PurchasesInvoicesMatch(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**invoiceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priceTolerancePercent:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Capture
+<details><summary><code>client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(request) -> *nordlet.PostV1CaptureDocumentsUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsUploadRequest{
+        FileName: "fileName",
+        MimeType: "mimeType",
+        Content: "content",
+    }
+client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**fileName:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mimeType:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**content:** `string` — Base64-encoded scan, photo or PDF of the supplier document
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(request) -> *nordlet.PostV1CaptureDocumentsExtractResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsExtractRequest{
+        ID: "id",
+    }
+client.Capture.ReReadAStoredCaptureReplacingThePreviousDraft(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.PostV1CaptureDocumentsGet(request) -> *nordlet.PostV1CaptureDocumentsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsGetRequest{
+        ID: "id",
+    }
+client.Capture.PostV1CaptureDocumentsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.PostV1CaptureDocumentsList(request) -> *nordlet.PostV1CaptureDocumentsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsListRequest{}
+client.Capture.PostV1CaptureDocumentsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1CaptureDocumentsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1CaptureDocumentsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.PostV1CaptureDocumentsDelete(request) -> *nordlet.PostV1CaptureDocumentsDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsDeleteRequest{
+        ID: "id",
+    }
+client.Capture.PostV1CaptureDocumentsDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(request) -> *nordlet.PostV1CaptureDocumentsConfirmResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureDocumentsConfirmRequest{
+        ID: "id",
+        DocumentNumber: "documentNumber",
+        DocumentDate: "documentDate",
+        Lines: []*nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{
+            &nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem{},
+        },
+    }
+client.Capture.SaveTheReviewedDraftAsAPurchaseInvoiceAndAttachTheOriginalDocument(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**newSupplier:** `*nordlet.PostV1CaptureDocumentsConfirmRequestNewSupplier` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentNumber:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dueDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.PostV1CaptureDocumentsConfirmRequestLinesItem` 
     
 </dd>
 </dl>
@@ -8464,6 +10151,102 @@ client.Declarations.PostV1DeclarationsEuVatReturnCompute(
 <dd>
 
 **months:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(request) -> *nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate the Polish JPK_V7M(3) file (VAT declaration with evidence) for a month, per the MF schema in force since February 2026. Amounts must already be in PLN; rows are marked BFK until a KSeF integration supplies invoice numbers. Review the warnings before submitting via e-dokumenty.mf.gov.pl.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest{
+        Year: int64(1000000),
+        Month: int64(1000000),
+        KodUrzedu: "kodUrzedu",
+        Email: "email",
+    }
+client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**year:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**month:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kodUrzedu:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**celZlozenia:** `*int64` 
     
 </dd>
 </dl>
@@ -12754,6 +14537,689 @@ client.Hr.PostV1HrTimesheetsDelete(
 </dl>
 </details>
 
+## Fleet
+<details><summary><code>client.Fleet.PostV1FleetVehiclesCreate(request) -> *nordlet.PostV1FleetVehiclesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetVehiclesCreateRequest{
+        PlateNumber: "plateNumber",
+        Make: "make",
+        Model: "model",
+    }
+client.Fleet.PostV1FleetVehiclesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**plateNumber:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**make_:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**year:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vin:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fuelType:** `*nordlet.PostV1FleetVehiclesCreateRequestFuelType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acquisitionDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**marketValue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fixedAssetID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**technicalInspectionDue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**insuranceDue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetVehiclesUpdate(request) -> *nordlet.PostV1FleetVehiclesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetVehiclesUpdateRequest{
+        ID: "id",
+    }
+client.Fleet.PostV1FleetVehiclesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plateNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**make_:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**year:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vin:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fuelType:** `*nordlet.PostV1FleetVehiclesUpdateRequestFuelType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acquisitionDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**marketValue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fixedAssetID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**technicalInspectionDue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**insuranceDue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `*nordlet.PostV1FleetVehiclesUpdateRequestStatus` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetVehiclesGet(request) -> *nordlet.PostV1FleetVehiclesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetVehiclesGetRequest{
+        ID: "id",
+    }
+client.Fleet.PostV1FleetVehiclesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetVehiclesList(request) -> *nordlet.PostV1FleetVehiclesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetVehiclesListRequest{}
+client.Fleet.PostV1FleetVehiclesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1FleetVehiclesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1FleetVehiclesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetAssignmentsCreate(request) -> *nordlet.PostV1FleetAssignmentsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetAssignmentsCreateRequest{
+        VehicleID: "vehicleId",
+        EmployeeID: "employeeId",
+        FromDate: "fromDate",
+    }
+client.Fleet.PostV1FleetAssignmentsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**vehicleID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**employeeID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fromDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**privateUse:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**employerPaysFuel:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetAssignmentsEnd(request) -> *nordlet.PostV1FleetAssignmentsEndResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetAssignmentsEndRequest{
+        ID: "id",
+        ToDate: "toDate",
+    }
+client.Fleet.PostV1FleetAssignmentsEnd(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toDate:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetAssignmentsList(request) -> *nordlet.PostV1FleetAssignmentsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetAssignmentsListRequest{}
+client.Fleet.PostV1FleetAssignmentsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1FleetAssignmentsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1FleetAssignmentsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Fleet.PostV1FleetNaturaPreview(request) -> *nordlet.PostV1FleetNaturaPreviewResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1FleetNaturaPreviewRequest{
+        Year: int64(1000000),
+        Month: int64(1000000),
+    }
+client.Fleet.PostV1FleetNaturaPreview(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**year:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**month:** `int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Payroll
 <details><summary><code>client.Payroll.PostV1PayrollDepartmentsCreate(request) -> *nordlet.PostV1PayrollDepartmentsCreateResponse</code></summary>
 <dl>
@@ -13068,6 +15534,14 @@ client.Payroll.PostV1PayrollRunsCreate(
 <dd>
 
 **month:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeNatura:** `*bool` 
     
 </dd>
 </dl>
@@ -14574,6 +17048,22 @@ client.Inventory.PostV1InventoryStockReceive(
 <dl>
 <dd>
 
+**lotNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiryDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -14649,6 +17139,14 @@ client.Inventory.PostV1InventoryStockWriteOff(
 <dd>
 
 **quantity:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lotNumber:** `*string` 
     
 </dd>
 </dl>
@@ -14756,6 +17254,14 @@ client.Inventory.PostV1InventoryStockTransfer(
 <dd>
 
 **quantity:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lotNumber:** `*string` 
     
 </dd>
 </dl>
@@ -14982,7 +17488,1443 @@ client.Inventory.PostV1InventoryStockMovementsList(
 </dl>
 </details>
 
+<details><summary><code>client.Inventory.PostV1InventoryLotsList(request) -> *nordlet.PostV1InventoryLotsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLotsListRequest{}
+client.Inventory.PostV1InventoryLotsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1InventoryLotsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1InventoryLotsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryLotsGet(request) -> *nordlet.PostV1InventoryLotsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLotsGetRequest{
+        ID: "id",
+    }
+client.Inventory.PostV1InventoryLotsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryLotsUpdate(request) -> *nordlet.PostV1InventoryLotsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLotsUpdateRequest{
+        ID: "id",
+    }
+client.Inventory.PostV1InventoryLotsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expiryDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryLandedCostsCreate(request) -> *nordlet.PostV1InventoryLandedCostsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLandedCostsCreateRequest{
+        Date: "date",
+        Amount: "amount",
+    }
+client.Inventory.PostV1InventoryLandedCostsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**date:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**method:** `*nordlet.PostV1InventoryLandedCostsCreateRequestMethod` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**goodsReceiptID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**movementIDs:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sourceInvoiceID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryLandedCostsGet(request) -> *nordlet.PostV1InventoryLandedCostsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLandedCostsGetRequest{
+        ID: "id",
+    }
+client.Inventory.PostV1InventoryLandedCostsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryLandedCostsList(request) -> *nordlet.PostV1InventoryLandedCostsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryLandedCostsListRequest{}
+client.Inventory.PostV1InventoryLandedCostsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1InventoryLandedCostsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1InventoryLandedCostsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryReorderRulesCreate(request) -> *nordlet.PostV1InventoryReorderRulesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryReorderRulesCreateRequest{
+        ItemID: "itemId",
+        MinQty: "minQty",
+    }
+client.Inventory.PostV1InventoryReorderRulesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**itemID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minQty:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reorderQty:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryReorderRulesUpdate(request) -> *nordlet.PostV1InventoryReorderRulesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryReorderRulesUpdateRequest{
+        ID: "id",
+    }
+client.Inventory.PostV1InventoryReorderRulesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minQty:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reorderQty:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryReorderRulesDelete(request) -> *nordlet.PostV1InventoryReorderRulesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryReorderRulesDeleteRequest{
+        ID: "id",
+    }
+client.Inventory.PostV1InventoryReorderRulesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryReorderRulesList(request) -> *nordlet.PostV1InventoryReorderRulesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryReorderRulesListRequest{}
+client.Inventory.PostV1InventoryReorderRulesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1InventoryReorderRulesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1InventoryReorderRulesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Inventory.PostV1InventoryReorderRulesCheck(request) -> *nordlet.PostV1InventoryReorderRulesCheckResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1InventoryReorderRulesCheckRequest{}
+client.Inventory.PostV1InventoryReorderRulesCheck(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Production
+<details><summary><code>client.Production.PostV1ProductionWorkCentersCreate(request) -> *nordlet.PostV1ProductionWorkCentersCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionWorkCentersCreateRequest{
+        Code: "code",
+        Name: "name",
+    }
+client.Production.PostV1ProductionWorkCentersCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costPerHour:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maintenanceIntervalDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionWorkCentersUpdate(request) -> *nordlet.PostV1ProductionWorkCentersUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionWorkCentersUpdateRequest{
+        ID: "id",
+    }
+client.Production.PostV1ProductionWorkCentersUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costPerHour:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maintenanceIntervalDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionWorkCentersList(request) -> *nordlet.PostV1ProductionWorkCentersListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionWorkCentersListRequest{}
+client.Production.PostV1ProductionWorkCentersList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProductionWorkCentersListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProductionWorkCentersListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionRoutingsCreate(request) -> *nordlet.PostV1ProductionRoutingsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionRoutingsCreateRequest{
+        Code: "code",
+        Name: "name",
+        Operations: []*nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem{
+            &nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem{
+                Sequence: int64(1000000),
+                Name: "name",
+                WorkCenterID: "workCenterId",
+            },
+        },
+    }
+client.Production.PostV1ProductionRoutingsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operations:** `[]*nordlet.PostV1ProductionRoutingsCreateRequestOperationsItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionRoutingsGet(request) -> *nordlet.PostV1ProductionRoutingsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionRoutingsGetRequest{
+        ID: "id",
+    }
+client.Production.PostV1ProductionRoutingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionRoutingsList(request) -> *nordlet.PostV1ProductionRoutingsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionRoutingsListRequest{}
+client.Production.PostV1ProductionRoutingsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProductionRoutingsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProductionRoutingsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionMaintenanceCreate(request) -> *nordlet.PostV1ProductionMaintenanceCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionMaintenanceCreateRequest{
+        WorkCenterID: "workCenterId",
+        Type: nordlet.PostV1ProductionMaintenanceCreateRequestTypePreventive,
+        PlannedDate: "plannedDate",
+    }
+client.Production.PostV1ProductionMaintenanceCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**workCenterID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `*nordlet.PostV1ProductionMaintenanceCreateRequestType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plannedDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionMaintenanceComplete(request) -> *nordlet.PostV1ProductionMaintenanceCompleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionMaintenanceCompleteRequest{
+        ID: "id",
+        CompletedDate: "completedDate",
+    }
+client.Production.PostV1ProductionMaintenanceComplete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**completedDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**downtimeHours:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cost:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionMaintenanceCancel(request) -> *nordlet.PostV1ProductionMaintenanceCancelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionMaintenanceCancelRequest{
+        ID: "id",
+    }
+client.Production.PostV1ProductionMaintenanceCancel(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionMaintenanceList(request) -> *nordlet.PostV1ProductionMaintenanceListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionMaintenanceListRequest{}
+client.Production.PostV1ProductionMaintenanceList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProductionMaintenanceListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProductionMaintenanceListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Production.PostV1ProductionBomsCreate(request) -> *nordlet.PostV1ProductionBomsCreateResponse</code></summary>
 <dl>
 <dd>
@@ -15051,6 +18993,14 @@ client.Production.PostV1ProductionBomsCreate(
 <dd>
 
 **outputQuantity:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**routingID:** `*string` 
     
 </dd>
 </dl>
@@ -15248,6 +19198,14 @@ client.Production.PostV1ProductionOrdersCreate(
 <dl>
 <dd>
 
+**routingID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **quantity:** `string` 
     
 </dd>
@@ -15265,6 +19223,259 @@ client.Production.PostV1ProductionOrdersCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionOrdersRecordOperation(request) -> *nordlet.PostV1ProductionOrdersRecordOperationResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionOrdersRecordOperationRequest{
+        ID: "id",
+        ActualMinutes: "actualMinutes",
+    }
+client.Production.PostV1ProductionOrdersRecordOperation(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**actualMinutes:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionQualityChecksAdd(request) -> *nordlet.PostV1ProductionQualityChecksAddResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionQualityChecksAddRequest{
+        OrderID: "orderId",
+        Name: "name",
+    }
+client.Production.PostV1ProductionQualityChecksAdd(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**orderID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionQualityChecksRecord(request) -> *nordlet.PostV1ProductionQualityChecksRecordResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionQualityChecksRecordRequest{
+        ID: "id",
+        Result: nordlet.PostV1ProductionQualityChecksRecordRequestResultPassed,
+    }
+client.Production.PostV1ProductionQualityChecksRecord(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**result:** `*nordlet.PostV1ProductionQualityChecksRecordRequestResult` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Production.PostV1ProductionQualityChecksList(request) -> *nordlet.PostV1ProductionQualityChecksListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProductionQualityChecksListRequest{}
+client.Production.PostV1ProductionQualityChecksList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProductionQualityChecksListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProductionQualityChecksListRequestFilterItem` 
     
 </dd>
 </dl>
@@ -15312,6 +19523,14 @@ client.Production.PostV1ProductionOrdersComplete(
 <dd>
 
 **id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scrappedQuantity:** `*string` 
     
 </dd>
 </dl>
@@ -16305,6 +20524,770 @@ client.Cash.PostV1CashAdvanceHoldersBalances(
     )
 }
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects
+<details><summary><code>client.Projects.PostV1ProjectsCreate(request) -> *nordlet.PostV1ProjectsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsCreateRequest{
+        Code: "code",
+        Name: "name",
+    }
+client.Projects.PostV1ProjectsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsUpdate(request) -> *nordlet.PostV1ProjectsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsUpdateRequest{
+        ID: "id",
+    }
+client.Projects.PostV1ProjectsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `*nordlet.PostV1ProjectsUpdateRequestStatus` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsGet(request) -> *nordlet.PostV1ProjectsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsGetRequest{
+        ID: "id",
+    }
+client.Projects.PostV1ProjectsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsList(request) -> *nordlet.PostV1ProjectsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsListRequest{}
+client.Projects.PostV1ProjectsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProjectsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProjectsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesCreate(request) -> *nordlet.PostV1ProjectsTimeEntriesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsTimeEntriesCreateRequest{
+        ProjectID: "projectId",
+        Date: "date",
+        Hours: "hours",
+    }
+client.Projects.PostV1ProjectsTimeEntriesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**employeeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hours:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billable:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hourlyRate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesUpdate(request) -> *nordlet.PostV1ProjectsTimeEntriesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsTimeEntriesUpdateRequest{
+        ID: "id",
+    }
+client.Projects.PostV1ProjectsTimeEntriesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hours:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**billable:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hourlyRate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesDelete(request) -> *nordlet.PostV1ProjectsTimeEntriesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsTimeEntriesDeleteRequest{
+        ID: "id",
+    }
+client.Projects.PostV1ProjectsTimeEntriesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesList(request) -> *nordlet.PostV1ProjectsTimeEntriesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsTimeEntriesListRequest{}
+client.Projects.PostV1ProjectsTimeEntriesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1ProjectsTimeEntriesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1ProjectsTimeEntriesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsTimeEntriesBill(request) -> *nordlet.PostV1ProjectsTimeEntriesBillResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsTimeEntriesBillRequest{
+        ProjectID: "projectId",
+    }
+client.Projects.PostV1ProjectsTimeEntriesBill(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**itemID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**hourlyRate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatRatePercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatClassifierCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issueDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dueDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**groupBy:** `*nordlet.PostV1ProjectsTimeEntriesBillRequestGroupBy` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Projects.PostV1ProjectsReport(request) -> *nordlet.PostV1ProjectsReportResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ProjectsReportRequest{}
+client.Projects.PostV1ProjectsReport(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateTo:** `*string` 
+    
 </dd>
 </dl>
 </dd>
@@ -18402,6 +23385,419 @@ client.Bank.PostV1BankPaymentsExport(
 </dl>
 </details>
 
+<details><summary><code>client.Bank.PostV1BankMandatesCreate(request) -> *nordlet.PostV1BankMandatesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMandatesCreateRequest{
+        PartnerID: "partnerId",
+        Iban: "iban",
+        SignatureDate: "signatureDate",
+    }
+client.Bank.PostV1BankMandatesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**partnerID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**iban:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bic:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheme:** `*nordlet.PostV1BankMandatesCreateRequestScheme` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sequenceType:** `*nordlet.PostV1BankMandatesCreateRequestSequenceType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**signatureDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reference:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debtorName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMandatesUpdate(request) -> *nordlet.PostV1BankMandatesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMandatesUpdateRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankMandatesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**bic:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debtorName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMandatesCancel(request) -> *nordlet.PostV1BankMandatesCancelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMandatesCancelRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankMandatesCancel(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMandatesGet(request) -> *nordlet.PostV1BankMandatesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMandatesGetRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankMandatesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMandatesList(request) -> *nordlet.PostV1BankMandatesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMandatesListRequest{}
+client.Bank.PostV1BankMandatesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1BankMandatesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1BankMandatesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankDirectDebitsExport(request) -> *nordlet.PostV1BankDirectDebitsExportResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankDirectDebitsExportRequest{
+        BankAccountID: "bankAccountId",
+        SaleInvoiceIDs: []string{
+            "saleInvoiceIds",
+        },
+    }
+client.Bank.PostV1BankDirectDebitsExport(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**bankAccountID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saleInvoiceIDs:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**collectionDate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Bank.PostV1BankTransactionsSuggestMatches(request) -> *nordlet.PostV1BankTransactionsSuggestMatchesResponse</code></summary>
 <dl>
 <dd>
@@ -18744,6 +24140,500 @@ client.Bank.PostV1BankSettlementsPost(
 <dd>
 
 **commissionPercent:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(request) -> *nordlet.PostV1BankFeedsBanksListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsBanksListRequest{}
+client.Bank.ListThePsd2BanksAspsPsAvailableToConnect(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**country:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(request) -> *nordlet.PostV1BankFeedsConnectionsStartResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsConnectionsStartRequest{
+        AspspName: "aspspName",
+        AspspCountry: "aspspCountry",
+    }
+client.Bank.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**aspspName:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**aspspCountry:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**psuType:** `*nordlet.PostV1BankFeedsConnectionsStartRequestPsuType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirectURL:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validForDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**language:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(request) -> *nordlet.PostV1BankFeedsConnectionsCompleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsConnectionsCompleteRequest{
+        Reference: "reference",
+        Code: "code",
+    }
+client.Bank.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**reference:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankFeedsConnectionsGet(request) -> *nordlet.PostV1BankFeedsConnectionsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsConnectionsGetRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankFeedsConnectionsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankFeedsConnectionsList(request) -> *nordlet.PostV1BankFeedsConnectionsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsConnectionsListRequest{}
+client.Bank.PostV1BankFeedsConnectionsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1BankFeedsConnectionsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1BankFeedsConnectionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(request) -> *nordlet.PostV1BankFeedsConnectionsDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsConnectionsDeleteRequest{
+        ID: "id",
+    }
+client.Bank.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(request) -> *nordlet.PostV1BankFeedsAccountsLinkResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsAccountsLinkRequest{
+        ID: "id",
+    }
+client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**createBankAccount:** `*nordlet.PostV1BankFeedsAccountsLinkRequestCreateBankAccount` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**syncFrom:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(request) -> *nordlet.PostV1BankFeedsSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsSyncRequest{
+        ConnectionID: "connectionId",
+    }
+client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**feedAccountID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateTo:** `*string` 
     
 </dd>
 </dl>
@@ -20925,6 +26815,328 @@ client.Consolidation.PostV1ConsolidationMembersRemove(
 </dl>
 </details>
 
+<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyCandidates(request) -> *nordlet.PostV1ConsolidationIntercompanyCandidatesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Partners in member companies that look like other members of the same group (matched on company code or VAT code), with any existing intercompany link. Confirming a candidate via intercompany/links/set enables invoice mirroring.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ConsolidationIntercompanyCandidatesRequest{
+        GroupID: "groupId",
+    }
+client.Consolidation.PostV1ConsolidationIntercompanyCandidates(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**groupID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksSetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Confirm that a partner record in one member company represents another member company of the group. Once links exist in both directions, issuing an intercompany sale invoice automatically creates the matching draft purchase invoice in the counterparty.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ConsolidationIntercompanyLinksSetRequest{
+        GroupID: "groupId",
+        PartnerID: "partnerId",
+        CounterpartyCompanyID: "counterpartyCompanyId",
+    }
+client.Consolidation.PostV1ConsolidationIntercompanyLinksSet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**groupID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**counterpartyCompanyID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksList(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ConsolidationIntercompanyLinksListRequest{
+        GroupID: "groupId",
+    }
+client.Consolidation.PostV1ConsolidationIntercompanyLinksList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**groupID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(request) -> *nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest{
+        GroupID: "groupId",
+        ID: "id",
+    }
+client.Consolidation.PostV1ConsolidationIntercompanyLinksRemove(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**groupID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Consolidation.PostV1ConsolidationIntercompanyReport(request) -> *nordlet.PostV1ConsolidationIntercompanyReportResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Intercompany reconciliation for a period: every issued intercompany sale invoice with its mirrored or manually recorded counterpart, unmatched documents on both sides, and per-currency totals with differences. Confirmed pairs are the basis for consolidation eliminations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ConsolidationIntercompanyReportRequest{
+        GroupID: "groupId",
+        FromDate: "fromDate",
+        ToDate: "toDate",
+    }
+client.Consolidation.PostV1ConsolidationIntercompanyReport(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**groupID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fromDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toDate:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Consolidation.PostV1ConsolidationReport(request) -> *nordlet.PostV1ConsolidationReportResponse</code></summary>
 <dl>
 <dd>
@@ -21085,6 +27297,240 @@ client.Public.PostV1PublicIntegrationRequests(
 <dd>
 
 **website:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Billing
+<details><summary><code>client.Billing.PostV1BillingAccountGet(request) -> *nordlet.PostV1BillingAccountGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingAccountGetRequest{}
+client.Billing.PostV1BillingAccountGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.PostV1BillingAccountSetPlan(request) -> *nordlet.PostV1BillingAccountSetPlanResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingAccountSetPlanRequest{
+        Plan: nordlet.PostV1BillingAccountSetPlanRequestPlanStarter,
+    }
+client.Billing.PostV1BillingAccountSetPlan(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**plan:** `*nordlet.PostV1BillingAccountSetPlanRequestPlan` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.PostV1BillingTopupCreate(request) -> *nordlet.PostV1BillingTopupCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingTopupCreateRequest{
+        AmountCents: int64(1000000),
+    }
+client.Billing.PostV1BillingTopupCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**amountCents:** `int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.PostV1BillingTopupCreateRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.PostV1BillingTransactionsList(request) -> *nordlet.PostV1BillingTransactionsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingTransactionsListRequest{}
+client.Billing.PostV1BillingTransactionsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**limit:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.PostV1BillingUsageList(request) -> *nordlet.PostV1BillingUsageListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingUsageListRequest{
+        From: "from",
+        To: "to",
+    }
+client.Billing.PostV1BillingUsageList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**from:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `string` 
     
 </dd>
 </dl>
@@ -21813,6 +28259,14 @@ client.Account.PostV1AccountCompaniesCreate(
 <dl>
 <dd>
 
+**sepaCreditorID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **defaultInvoiceCurrency:** `*string` 
     
 </dd>
@@ -22032,6 +28486,14 @@ client.Account.PostV1AccountCompaniesUpdate(
 <dd>
 
 **peppolID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sepaCreditorID:** `*string` 
     
 </dd>
 </dl>

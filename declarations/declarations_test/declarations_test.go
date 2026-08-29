@@ -551,6 +551,35 @@ func TestDeclarationsPostV1DeclarationsEuVatReturnComputeWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsEuVatReturnComputeWithWireMock", "POST", "/v1/declarations/eu/vat-return/compute", nil, 1)
 }
 
+func TestDeclarationsPostV1DeclarationsPlJpkV7MGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest{
+		Year:      int64(1000000),
+		Month:     int64(1000000),
+		KodUrzedu: "kodUrzedu",
+		Email:     "email",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlJpkV7MGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlJpkV7MGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlJpkV7MGenerateWithWireMock", "POST", "/v1/declarations/pl/jpk-v7m/generate", nil, 1)
+}
+
 func TestDeclarationsPostV1DeclarationsConfigsListWithWireMock(
 	t *testing.T,
 ) {

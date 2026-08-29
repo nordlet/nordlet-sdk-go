@@ -348,6 +348,14 @@ func TestSettersPostV1CatalogItemsCreateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsCreateRequest{}
+		var fernTestValueTracking *PostV1CatalogItemsCreateRequestTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsCreateRequest{}
 		var fernTestValueName string
@@ -503,6 +511,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsCreateRequest(t *testing.T) {
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsCreateRequest{}
+		var fernTestValueTracking *PostV1CatalogItemsCreateRequestTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1724,6 +1763,14 @@ func TestSettersPostV1CatalogItemsUpdateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsUpdateRequest{}
+		var fernTestValueTracking *PostV1CatalogItemsUpdateRequestTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsUpdateRequest{}
 		var fernTestValueName *string
@@ -1910,6 +1957,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsUpdateRequest(t *testing.T) {
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsUpdateRequest{}
+		var fernTestValueTracking *PostV1CatalogItemsUpdateRequestTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4501,6 +4579,14 @@ func TestSettersPostV1CatalogItemsCreateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsCreateResponse{}
+		var fernTestValueTracking PostV1CatalogItemsCreateResponseTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsCreateResponse{}
 		var fernTestValueName string
@@ -4708,6 +4794,29 @@ func TestGettersPostV1CatalogItemsCreateResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetTracking", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsCreateResponse{}
+		var expected PostV1CatalogItemsCreateResponseTracking
+		obj.Tracking = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTracking(), "getter should return the property value")
+	})
+
+	t.Run("GetTracking_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1CatalogItemsCreateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTracking() // Should return zero value
 	})
 
 	t.Run("GetName", func(t *testing.T) {
@@ -5372,6 +5481,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsCreateResponse(t *testing.T) {
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsCreateResponse{}
+		var fernTestValueTracking PostV1CatalogItemsCreateResponseTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6443,6 +6583,14 @@ func TestSettersPostV1CatalogItemsGetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsGetResponse{}
+		var fernTestValueTracking PostV1CatalogItemsGetResponseTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsGetResponse{}
 		var fernTestValueName string
@@ -6650,6 +6798,29 @@ func TestGettersPostV1CatalogItemsGetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetTracking", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsGetResponse{}
+		var expected PostV1CatalogItemsGetResponseTracking
+		obj.Tracking = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTracking(), "getter should return the property value")
+	})
+
+	t.Run("GetTracking_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1CatalogItemsGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTracking() // Should return zero value
 	})
 
 	t.Run("GetName", func(t *testing.T) {
@@ -7314,6 +7485,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsGetResponse(t *testing.T) {
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsGetResponse{}
+		var fernTestValueTracking PostV1CatalogItemsGetResponseTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -9083,6 +9285,14 @@ func TestSettersPostV1CatalogItemsListResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsListResponseRowsItem{}
+		var fernTestValueTracking PostV1CatalogItemsListResponseRowsItemTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsListResponseRowsItem{}
 		var fernTestValueName string
@@ -9290,6 +9500,29 @@ func TestGettersPostV1CatalogItemsListResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetTracking", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsListResponseRowsItem{}
+		var expected PostV1CatalogItemsListResponseRowsItemTracking
+		obj.Tracking = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTracking(), "getter should return the property value")
+	})
+
+	t.Run("GetTracking_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1CatalogItemsListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTracking() // Should return zero value
 	})
 
 	t.Run("GetName", func(t *testing.T) {
@@ -9954,6 +10187,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsListResponseRowsItem(t *testing.T)
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsListResponseRowsItem{}
+		var fernTestValueTracking PostV1CatalogItemsListResponseRowsItemTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -12576,6 +12840,14 @@ func TestSettersPostV1CatalogItemsUpdateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTracking", func(t *testing.T) {
+		obj := &PostV1CatalogItemsUpdateResponse{}
+		var fernTestValueTracking PostV1CatalogItemsUpdateResponseTracking
+		obj.SetTracking(fernTestValueTracking)
+		assert.Equal(t, fernTestValueTracking, obj.Tracking)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1CatalogItemsUpdateResponse{}
 		var fernTestValueName string
@@ -12783,6 +13055,29 @@ func TestGettersPostV1CatalogItemsUpdateResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetType() // Should return zero value
+	})
+
+	t.Run("GetTracking", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsUpdateResponse{}
+		var expected PostV1CatalogItemsUpdateResponseTracking
+		obj.Tracking = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTracking(), "getter should return the property value")
+	})
+
+	t.Run("GetTracking_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1CatalogItemsUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTracking() // Should return zero value
 	})
 
 	t.Run("GetName", func(t *testing.T) {
@@ -13447,6 +13742,37 @@ func TestSettersMarkExplicitPostV1CatalogItemsUpdateResponse(t *testing.T) {
 
 		// Act
 		obj.SetType(fernTestValueType)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTracking_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1CatalogItemsUpdateResponse{}
+		var fernTestValueTracking PostV1CatalogItemsUpdateResponseTracking
+
+		// Act
+		obj.SetTracking(fernTestValueTracking)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -18139,6 +18465,42 @@ func TestStringPostV1CatalogPriceListsUpdateResponse(t *testing.T) {
 	})
 }
 
+func TestEnumPostV1CatalogItemsCreateRequestTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateRequestTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateRequestTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateRequestTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateRequestTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateRequestTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateRequestTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsCreateRequestTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsCreateRequestTrackingFromString("none")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1CatalogItemsCreateRequestType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
@@ -18175,6 +18537,42 @@ func TestEnumPostV1CatalogItemsCreateRequestType(t *testing.T) {
 	})
 }
 
+func TestEnumPostV1CatalogItemsCreateResponseTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateResponseTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateResponseTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateResponseTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateResponseTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsCreateResponseTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsCreateResponseTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsCreateResponseTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsCreateResponseTrackingFromString("none")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1CatalogItemsCreateResponseType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
@@ -18204,6 +18602,42 @@ func TestEnumPostV1CatalogItemsCreateResponseType(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewPostV1CatalogItemsCreateResponseTypeFromString("product")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1CatalogItemsGetResponseTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsGetResponseTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsGetResponseTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsGetResponseTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsGetResponseTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsGetResponseTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsGetResponseTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsGetResponseTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsGetResponseTrackingFromString("none")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -18333,6 +18767,42 @@ func TestEnumPostV1CatalogItemsListRequestSortItemDir(t *testing.T) {
 	})
 }
 
+func TestEnumPostV1CatalogItemsListResponseRowsItemTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsListResponseRowsItemTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsListResponseRowsItemTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsListResponseRowsItemTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsListResponseRowsItemTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsListResponseRowsItemTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsListResponseRowsItemTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsListResponseRowsItemTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsListResponseRowsItemTrackingFromString("none")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1CatalogItemsListResponseRowsItemType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
@@ -18369,6 +18839,42 @@ func TestEnumPostV1CatalogItemsListResponseRowsItemType(t *testing.T) {
 	})
 }
 
+func TestEnumPostV1CatalogItemsUpdateRequestTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateRequestTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateRequestTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateRequestTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateRequestTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateRequestTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateRequestTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsUpdateRequestTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsUpdateRequestTrackingFromString("none")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1CatalogItemsUpdateRequestType(t *testing.T) {
 	t.Run("NewFromString_product", func(t *testing.T) {
 		t.Parallel()
@@ -18398,6 +18904,42 @@ func TestEnumPostV1CatalogItemsUpdateRequestType(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewPostV1CatalogItemsUpdateRequestTypeFromString("product")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1CatalogItemsUpdateResponseTracking(t *testing.T) {
+	t.Run("NewFromString_none", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateResponseTrackingFromString("none")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateResponseTracking("none"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lot", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateResponseTrackingFromString("lot")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateResponseTracking("lot"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_serial", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogItemsUpdateResponseTrackingFromString("serial")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogItemsUpdateResponseTracking("serial"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1CatalogItemsUpdateResponseTrackingFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1CatalogItemsUpdateResponseTrackingFromString("none")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

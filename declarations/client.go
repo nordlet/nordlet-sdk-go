@@ -322,6 +322,23 @@ func (c *Client) PostV1DeclarationsEuVatReturnCompute(
 	return response.Body, nil
 }
 
+// Generate the Polish JPK_V7M(3) file (VAT declaration with evidence) for a month, per the MF schema in force since February 2026. Amounts must already be in PLN; rows are marked BFK until a KSeF integration supplies invoice numbers. Review the warnings before submitting via e-dokumenty.mf.gov.pl.
+func (c *Client) PostV1DeclarationsPlJpkV7MGenerate(
+	ctx context.Context,
+	request *nordlet.PostV1DeclarationsPlJpkV7MGenerateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DeclarationsPlJpkV7MGenerateResponse, error) {
+	response, err := c.WithRawResponse.PostV1DeclarationsPlJpkV7MGenerate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1DeclarationsConfigsList(
 	ctx context.Context,
 	request *nordlet.PostV1DeclarationsConfigsListRequest,

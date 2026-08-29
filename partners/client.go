@@ -242,6 +242,38 @@ func (c *Client) PostV1PartnersValidateVat(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1PartnersVatReviewsList(
+	ctx context.Context,
+	request *nordlet.PostV1PartnersVatReviewsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PartnersVatReviewsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1PartnersVatReviewsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PartnersVatReviewsResolve(
+	ctx context.Context,
+	request *nordlet.PostV1PartnersVatReviewsResolveRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PartnersVatReviewsResolveResponse, error) {
+	response, err := c.WithRawResponse.PostV1PartnersVatReviewsResolve(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1PartnersCreate(
 	ctx context.Context,
 	request *nordlet.PostV1PartnersCreateRequest,

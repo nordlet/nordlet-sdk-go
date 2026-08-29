@@ -8,6 +8,8 @@ import (
 	assets "github.com/nordlet/nordlet-sdk-go/assets"
 	audit "github.com/nordlet/nordlet-sdk-go/audit"
 	bank "github.com/nordlet/nordlet-sdk-go/bank"
+	billing "github.com/nordlet/nordlet-sdk-go/billing"
+	capture "github.com/nordlet/nordlet-sdk-go/capture"
 	cash "github.com/nordlet/nordlet-sdk-go/cash"
 	catalog "github.com/nordlet/nordlet-sdk-go/catalog"
 	consolidation "github.com/nordlet/nordlet-sdk-go/consolidation"
@@ -15,6 +17,7 @@ import (
 	declarations "github.com/nordlet/nordlet-sdk-go/declarations"
 	ecommerce "github.com/nordlet/nordlet-sdk-go/ecommerce"
 	files "github.com/nordlet/nordlet-sdk-go/files"
+	fleet "github.com/nordlet/nordlet-sdk-go/fleet"
 	hr "github.com/nordlet/nordlet-sdk-go/hr"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	inventory "github.com/nordlet/nordlet-sdk-go/inventory"
@@ -24,6 +27,7 @@ import (
 	payroll "github.com/nordlet/nordlet-sdk-go/payroll"
 	pos "github.com/nordlet/nordlet-sdk-go/pos"
 	production "github.com/nordlet/nordlet-sdk-go/production"
+	projects "github.com/nordlet/nordlet-sdk-go/projects"
 	public "github.com/nordlet/nordlet-sdk-go/public"
 	purchases "github.com/nordlet/nordlet-sdk-go/purchases"
 	reference "github.com/nordlet/nordlet-sdk-go/reference"
@@ -39,16 +43,19 @@ type Client struct {
 	Catalog       *catalog.Client
 	Sales         *sales.Client
 	Purchases     *purchases.Client
+	Capture       *capture.Client
 	Declarations  *declarations.Client
 	Ledger        *ledger.Client
 	Assets        *assets.Client
 	Hr            *hr.Client
+	Fleet         *fleet.Client
 	Payroll       *payroll.Client
 	Agreements    *agreements.Client
 	Inventory     *inventory.Client
 	Production    *production.Client
 	Ecommerce     *ecommerce.Client
 	Cash          *cash.Client
+	Projects      *projects.Client
 	Transport     *transport.Client
 	Pos           *pos.Client
 	Audit         *audit.Client
@@ -58,6 +65,7 @@ type Client struct {
 	Reports       *reports.Client
 	Consolidation *consolidation.Client
 	Public        *public.Client
+	Billing       *billing.Client
 	Account       *account.Client
 
 	options *core.RequestOptions
@@ -73,16 +81,19 @@ func NewClient(opts ...option.RequestOption) *Client {
 		Catalog:       catalog.NewClient(options),
 		Sales:         sales.NewClient(options),
 		Purchases:     purchases.NewClient(options),
+		Capture:       capture.NewClient(options),
 		Declarations:  declarations.NewClient(options),
 		Ledger:        ledger.NewClient(options),
 		Assets:        assets.NewClient(options),
 		Hr:            hr.NewClient(options),
+		Fleet:         fleet.NewClient(options),
 		Payroll:       payroll.NewClient(options),
 		Agreements:    agreements.NewClient(options),
 		Inventory:     inventory.NewClient(options),
 		Production:    production.NewClient(options),
 		Ecommerce:     ecommerce.NewClient(options),
 		Cash:          cash.NewClient(options),
+		Projects:      projects.NewClient(options),
 		Transport:     transport.NewClient(options),
 		Pos:           pos.NewClient(options),
 		Audit:         audit.NewClient(options),
@@ -92,6 +103,7 @@ func NewClient(opts ...option.RequestOption) *Client {
 		Reports:       reports.NewClient(options),
 		Consolidation: consolidation.NewClient(options),
 		Public:        public.NewClient(options),
+		Billing:       billing.NewClient(options),
 		Account:       account.NewClient(options),
 		options:       options,
 		baseURL:       options.BaseURL,

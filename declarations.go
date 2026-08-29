@@ -1083,6 +1083,88 @@ func (p *PostV1DeclarationsLtSdGenerateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1DeclarationsPlJpkV7MGenerateRequestFieldYear        = big.NewInt(1 << 0)
+	postV1DeclarationsPlJpkV7MGenerateRequestFieldMonth       = big.NewInt(1 << 1)
+	postV1DeclarationsPlJpkV7MGenerateRequestFieldKodUrzedu   = big.NewInt(1 << 2)
+	postV1DeclarationsPlJpkV7MGenerateRequestFieldEmail       = big.NewInt(1 << 3)
+	postV1DeclarationsPlJpkV7MGenerateRequestFieldCelZlozenia = big.NewInt(1 << 4)
+)
+
+type PostV1DeclarationsPlJpkV7MGenerateRequest struct {
+	Year        int64  `json:"year" url:"-"`
+	Month       int64  `json:"month" url:"-"`
+	KodUrzedu   string `json:"kodUrzedu" url:"-"`
+	Email       string `json:"email" url:"-"`
+	CelZlozenia *int64 `json:"celZlozenia,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1DeclarationsPlJpkV7MGenerateRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) SetMonth(month int64) {
+	p.Month = month
+	p.require(postV1DeclarationsPlJpkV7MGenerateRequestFieldMonth)
+}
+
+// SetKodUrzedu sets the KodUrzedu field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) SetKodUrzedu(kodUrzedu string) {
+	p.KodUrzedu = kodUrzedu
+	p.require(postV1DeclarationsPlJpkV7MGenerateRequestFieldKodUrzedu)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) SetEmail(email string) {
+	p.Email = email
+	p.require(postV1DeclarationsPlJpkV7MGenerateRequestFieldEmail)
+}
+
+// SetCelZlozenia sets the CelZlozenia field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) SetCelZlozenia(celZlozenia *int64) {
+	p.CelZlozenia = celZlozenia
+	p.require(postV1DeclarationsPlJpkV7MGenerateRequestFieldCelZlozenia)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsPlJpkV7MGenerateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsPlJpkV7MGenerateRequest(body)
+	return nil
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsPlJpkV7MGenerateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1DeclarationsSubmissionsCreateRequestFieldObligation = big.NewInt(1 << 0)
 	postV1DeclarationsSubmissionsCreateRequestFieldYear       = big.NewInt(1 << 1)
 	postV1DeclarationsSubmissionsCreateRequestFieldMonth      = big.NewInt(1 << 2)
@@ -11689,6 +11771,418 @@ func NewPostV1DeclarationsLtSdGenerateResponseTypeFromString(s string) (PostV1De
 
 func (p PostV1DeclarationsLtSdGenerateResponseType) Ptr() *PostV1DeclarationsLtSdGenerateResponseType {
 	return &p
+}
+
+var (
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldFileName    = big.NewInt(1 << 0)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldXML         = big.NewInt(1 << 1)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldPeriodStart = big.NewInt(1 << 2)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldPeriodEnd   = big.NewInt(1 << 3)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldDeclaration = big.NewInt(1 << 4)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldCounts      = big.NewInt(1 << 5)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldWarnings    = big.NewInt(1 << 6)
+	postV1DeclarationsPlJpkV7MGenerateResponseFieldNotes       = big.NewInt(1 << 7)
+)
+
+type PostV1DeclarationsPlJpkV7MGenerateResponse struct {
+	FileName    string                                                       `json:"fileName" url:"fileName"`
+	XML         string                                                       `json:"xml" url:"xml"`
+	PeriodStart string                                                       `json:"periodStart" url:"periodStart"`
+	PeriodEnd   string                                                       `json:"periodEnd" url:"periodEnd"`
+	Declaration []*PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem `json:"declaration" url:"declaration"`
+	Counts      *PostV1DeclarationsPlJpkV7MGenerateResponseCounts            `json:"counts" url:"counts"`
+	Warnings    []string                                                     `json:"warnings" url:"warnings"`
+	Notes       []string                                                     `json:"notes" url:"notes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetXML() string {
+	if p == nil {
+		return ""
+	}
+	return p.XML
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetPeriodStart() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodStart
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetPeriodEnd() string {
+	if p == nil {
+		return ""
+	}
+	return p.PeriodEnd
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetDeclaration() []*PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem {
+	if p == nil {
+		return nil
+	}
+	return p.Declaration
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetCounts() *PostV1DeclarationsPlJpkV7MGenerateResponseCounts {
+	if p == nil {
+		return nil
+	}
+	return p.Counts
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetNotes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldFileName)
+}
+
+// SetXML sets the XML field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetXML(xml string) {
+	p.XML = xml
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldXML)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetPeriodStart(periodStart string) {
+	p.PeriodStart = periodStart
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetPeriodEnd(periodEnd string) {
+	p.PeriodEnd = periodEnd
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldPeriodEnd)
+}
+
+// SetDeclaration sets the Declaration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetDeclaration(declaration []*PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) {
+	p.Declaration = declaration
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldDeclaration)
+}
+
+// SetCounts sets the Counts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetCounts(counts *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) {
+	p.Counts = counts
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldCounts)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseFieldNotes)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsPlJpkV7MGenerateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsPlJpkV7MGenerateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsPlJpkV7MGenerateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsPlJpkV7MGenerateResponseCountsFieldSalesRows    = big.NewInt(1 << 0)
+	postV1DeclarationsPlJpkV7MGenerateResponseCountsFieldPurchaseRows = big.NewInt(1 << 1)
+)
+
+type PostV1DeclarationsPlJpkV7MGenerateResponseCounts struct {
+	SalesRows    int64 `json:"salesRows" url:"salesRows"`
+	PurchaseRows int64 `json:"purchaseRows" url:"purchaseRows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) GetSalesRows() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SalesRows
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) GetPurchaseRows() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PurchaseRows
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetSalesRows sets the SalesRows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) SetSalesRows(salesRows int64) {
+	p.SalesRows = salesRows
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseCountsFieldSalesRows)
+}
+
+// SetPurchaseRows sets the PurchaseRows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) SetPurchaseRows(purchaseRows int64) {
+	p.PurchaseRows = purchaseRows
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseCountsFieldPurchaseRows)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsPlJpkV7MGenerateResponseCounts
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsPlJpkV7MGenerateResponseCounts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsPlJpkV7MGenerateResponseCounts
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseCounts) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldField = big.NewInt(1 << 0)
+	postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldLabel = big.NewInt(1 << 1)
+	postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem struct {
+	Field string `json:"field" url:"field"`
+	Label string `json:"label" url:"label"`
+	Value string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) GetValue() string {
+	if p == nil {
+		return ""
+	}
+	return p.Value
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldField)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldLabel)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) SetValue(value string) {
+	p.Value = value
+	p.require(postV1DeclarationsPlJpkV7MGenerateResponseDeclarationItemFieldValue)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1DeclarationsPlJpkV7MGenerateResponseDeclarationItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }
 
 type PostV1DeclarationsSubmissionsCreateRequestDataType string

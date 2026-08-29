@@ -409,6 +409,57 @@ func TestPartnersPostV1PartnersValidateVatWithWireMock(
 	VerifyRequestCount(t, "TestPartnersPostV1PartnersValidateVatWithWireMock", "POST", "/v1/partners/validate-vat", nil, 1)
 }
 
+func TestPartnersPostV1PartnersVatReviewsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PartnersVatReviewsListRequest{}
+	_, invocationErr := client.Partners.PostV1PartnersVatReviewsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersPostV1PartnersVatReviewsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersPostV1PartnersVatReviewsListWithWireMock", "POST", "/v1/partners/vat-reviews/list", nil, 1)
+}
+
+func TestPartnersPostV1PartnersVatReviewsResolveWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PartnersVatReviewsResolveRequest{
+		ID:         "id",
+		Resolution: nordlet.PostV1PartnersVatReviewsResolveRequestResolutionConfirmedValid,
+	}
+	_, invocationErr := client.Partners.PostV1PartnersVatReviewsResolve(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersPostV1PartnersVatReviewsResolveWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersPostV1PartnersVatReviewsResolveWithWireMock", "POST", "/v1/partners/vat-reviews/resolve", nil, 1)
+}
+
 func TestPartnersPostV1PartnersCreateWithWireMock(
 	t *testing.T,
 ) {

@@ -416,6 +416,52 @@ func (p *PostV1ReferenceCurrenciesListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1ReferenceEuVatRatesImportsListRequestFieldLimit = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceEuVatRatesImportsListRequest struct {
+	Limit *int64 `json:"limit,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListRequest) SetLimit(limit *int64) {
+	p.Limit = limit
+	p.require(postV1ReferenceEuVatRatesImportsListRequestFieldLimit)
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesImportsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesImportsListRequest(body)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesImportsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1ReferenceEuVatRatesListRequestFieldCountryCode = big.NewInt(1 << 0)
 	postV1ReferenceEuVatRatesListRequestFieldDate        = big.NewInt(1 << 1)
 )
@@ -523,6 +569,19 @@ func (p *PostV1ReferenceEuVatRatesSetOverridesRequest) MarshalJSON() ([]byte, er
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1ReferenceEuVatRatesSyncRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
 }
 
 var (
@@ -4442,6 +4501,368 @@ func (p *PostV1ReferenceCurrenciesListResponseRowsItem) String() string {
 }
 
 var (
+	postV1ReferenceEuVatRatesImportsListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceEuVatRatesImportsListResponse struct {
+	Rows []*PostV1ReferenceEuVatRatesImportsListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) GetRows() []*PostV1ReferenceEuVatRatesImportsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) SetRows(rows []*PostV1ReferenceEuVatRatesImportsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ReferenceEuVatRatesImportsListResponseFieldRows)
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesImportsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesImportsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesImportsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldSituationOn   = big.NewInt(1 << 1)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldStatus        = big.NewInt(1 << 2)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldTrigger       = big.NewInt(1 << 3)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesFetched  = big.NewInt(1 << 4)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesInserted = big.NewInt(1 << 5)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesClosed   = big.NewInt(1 << 6)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldError         = big.NewInt(1 << 7)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldStartedAt     = big.NewInt(1 << 8)
+	postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldFinishedAt    = big.NewInt(1 << 9)
+)
+
+type PostV1ReferenceEuVatRatesImportsListResponseRowsItem struct {
+	ID            string                                                      `json:"id" url:"id"`
+	SituationOn   string                                                      `json:"situationOn" url:"situationOn"`
+	Status        PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus  `json:"status" url:"status"`
+	Trigger       PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger `json:"trigger" url:"trigger"`
+	RatesFetched  int64                                                       `json:"ratesFetched" url:"ratesFetched"`
+	RatesInserted int64                                                       `json:"ratesInserted" url:"ratesInserted"`
+	RatesClosed   int64                                                       `json:"ratesClosed" url:"ratesClosed"`
+	Error         *string                                                     `json:"error,omitempty" url:"error,omitempty"`
+	StartedAt     string                                                      `json:"startedAt" url:"startedAt"`
+	FinishedAt    *string                                                     `json:"finishedAt,omitempty" url:"finishedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetSituationOn() string {
+	if p == nil {
+		return ""
+	}
+	return p.SituationOn
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetStatus() PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetTrigger() PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger {
+	if p == nil {
+		return ""
+	}
+	return p.Trigger
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetRatesFetched() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesFetched
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetRatesInserted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesInserted
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetRatesClosed() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesClosed
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Error
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetStartedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.StartedAt
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetFinishedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FinishedAt
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldID)
+}
+
+// SetSituationOn sets the SituationOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetSituationOn(situationOn string) {
+	p.SituationOn = situationOn
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldSituationOn)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetStatus(status PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus) {
+	p.Status = status
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldStatus)
+}
+
+// SetTrigger sets the Trigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetTrigger(trigger PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger) {
+	p.Trigger = trigger
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldTrigger)
+}
+
+// SetRatesFetched sets the RatesFetched field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetRatesFetched(ratesFetched int64) {
+	p.RatesFetched = ratesFetched
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesFetched)
+}
+
+// SetRatesInserted sets the RatesInserted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetRatesInserted(ratesInserted int64) {
+	p.RatesInserted = ratesInserted
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesInserted)
+}
+
+// SetRatesClosed sets the RatesClosed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetRatesClosed(ratesClosed int64) {
+	p.RatesClosed = ratesClosed
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldRatesClosed)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetError(error_ *string) {
+	p.Error = error_
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldError)
+}
+
+// SetStartedAt sets the StartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetStartedAt(startedAt string) {
+	p.StartedAt = startedAt
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldStartedAt)
+}
+
+// SetFinishedAt sets the FinishedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) SetFinishedAt(finishedAt *string) {
+	p.FinishedAt = finishedAt
+	p.require(postV1ReferenceEuVatRatesImportsListResponseRowsItemFieldFinishedAt)
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesImportsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesImportsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesImportsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesImportsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus string
+
+const (
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusRunning   PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus = "running"
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusSucceeded PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus = "succeeded"
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusFailed    PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus = "failed"
+)
+
+func NewPostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusFromString(s string) (PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus, error) {
+	switch s {
+	case "running":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusRunning, nil
+	case "succeeded":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusSucceeded, nil
+	case "failed":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatusFailed, nil
+	}
+	var t PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus) Ptr() *PostV1ReferenceEuVatRatesImportsListResponseRowsItemStatus {
+	return &p
+}
+
+type PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger string
+
+const (
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerSeed      PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger = "seed"
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerScheduled PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger = "scheduled"
+	PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerManual    PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger = "manual"
+)
+
+func NewPostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerFromString(s string) (PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger, error) {
+	switch s {
+	case "seed":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerSeed, nil
+	case "scheduled":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerScheduled, nil
+	case "manual":
+		return PostV1ReferenceEuVatRatesImportsListResponseRowsItemTriggerManual, nil
+	}
+	var t PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger) Ptr() *PostV1ReferenceEuVatRatesImportsListResponseRowsItemTrigger {
+	return &p
+}
+
+var (
 	postV1ReferenceEuVatRatesListResponseFieldNotice = big.NewInt(1 << 0)
 	postV1ReferenceEuVatRatesListResponseFieldRows   = big.NewInt(1 << 1)
 )
@@ -5162,6 +5583,195 @@ func NewPostV1ReferenceEuVatRatesSetOverridesResponseSourceFromString(s string) 
 }
 
 func (p PostV1ReferenceEuVatRatesSetOverridesResponseSource) Ptr() *PostV1ReferenceEuVatRatesSetOverridesResponseSource {
+	return &p
+}
+
+var (
+	postV1ReferenceEuVatRatesSyncResponseFieldID            = big.NewInt(1 << 0)
+	postV1ReferenceEuVatRatesSyncResponseFieldSituationOn   = big.NewInt(1 << 1)
+	postV1ReferenceEuVatRatesSyncResponseFieldStatus        = big.NewInt(1 << 2)
+	postV1ReferenceEuVatRatesSyncResponseFieldRatesFetched  = big.NewInt(1 << 3)
+	postV1ReferenceEuVatRatesSyncResponseFieldRatesInserted = big.NewInt(1 << 4)
+	postV1ReferenceEuVatRatesSyncResponseFieldRatesClosed   = big.NewInt(1 << 5)
+)
+
+type PostV1ReferenceEuVatRatesSyncResponse struct {
+	ID            string                                      `json:"id" url:"id"`
+	SituationOn   string                                      `json:"situationOn" url:"situationOn"`
+	Status        PostV1ReferenceEuVatRatesSyncResponseStatus `json:"status" url:"status"`
+	RatesFetched  int64                                       `json:"ratesFetched" url:"ratesFetched"`
+	RatesInserted int64                                       `json:"ratesInserted" url:"ratesInserted"`
+	RatesClosed   int64                                       `json:"ratesClosed" url:"ratesClosed"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetSituationOn() string {
+	if p == nil {
+		return ""
+	}
+	return p.SituationOn
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetStatus() PostV1ReferenceEuVatRatesSyncResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetRatesFetched() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesFetched
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetRatesInserted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesInserted
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetRatesClosed() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.RatesClosed
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldID)
+}
+
+// SetSituationOn sets the SituationOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetSituationOn(situationOn string) {
+	p.SituationOn = situationOn
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldSituationOn)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetStatus(status PostV1ReferenceEuVatRatesSyncResponseStatus) {
+	p.Status = status
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldStatus)
+}
+
+// SetRatesFetched sets the RatesFetched field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetRatesFetched(ratesFetched int64) {
+	p.RatesFetched = ratesFetched
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldRatesFetched)
+}
+
+// SetRatesInserted sets the RatesInserted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetRatesInserted(ratesInserted int64) {
+	p.RatesInserted = ratesInserted
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldRatesInserted)
+}
+
+// SetRatesClosed sets the RatesClosed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceEuVatRatesSyncResponse) SetRatesClosed(ratesClosed int64) {
+	p.RatesClosed = ratesClosed
+	p.require(postV1ReferenceEuVatRatesSyncResponseFieldRatesClosed)
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceEuVatRatesSyncResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceEuVatRatesSyncResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceEuVatRatesSyncResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceEuVatRatesSyncResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ReferenceEuVatRatesSyncResponseStatus string
+
+const (
+	PostV1ReferenceEuVatRatesSyncResponseStatusRunning   PostV1ReferenceEuVatRatesSyncResponseStatus = "running"
+	PostV1ReferenceEuVatRatesSyncResponseStatusSucceeded PostV1ReferenceEuVatRatesSyncResponseStatus = "succeeded"
+	PostV1ReferenceEuVatRatesSyncResponseStatusFailed    PostV1ReferenceEuVatRatesSyncResponseStatus = "failed"
+)
+
+func NewPostV1ReferenceEuVatRatesSyncResponseStatusFromString(s string) (PostV1ReferenceEuVatRatesSyncResponseStatus, error) {
+	switch s {
+	case "running":
+		return PostV1ReferenceEuVatRatesSyncResponseStatusRunning, nil
+	case "succeeded":
+		return PostV1ReferenceEuVatRatesSyncResponseStatusSucceeded, nil
+	case "failed":
+		return PostV1ReferenceEuVatRatesSyncResponseStatusFailed, nil
+	}
+	var t PostV1ReferenceEuVatRatesSyncResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ReferenceEuVatRatesSyncResponseStatus) Ptr() *PostV1ReferenceEuVatRatesSyncResponseStatus {
 	return &p
 }
 

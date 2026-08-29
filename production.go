@@ -14,7 +14,8 @@ var (
 	postV1ProductionBomsCreateRequestFieldName           = big.NewInt(1 << 1)
 	postV1ProductionBomsCreateRequestFieldFinishedItemID = big.NewInt(1 << 2)
 	postV1ProductionBomsCreateRequestFieldOutputQuantity = big.NewInt(1 << 3)
-	postV1ProductionBomsCreateRequestFieldLines          = big.NewInt(1 << 4)
+	postV1ProductionBomsCreateRequestFieldRoutingID      = big.NewInt(1 << 4)
+	postV1ProductionBomsCreateRequestFieldLines          = big.NewInt(1 << 5)
 )
 
 type PostV1ProductionBomsCreateRequest struct {
@@ -22,6 +23,7 @@ type PostV1ProductionBomsCreateRequest struct {
 	Name           string                                        `json:"name" url:"-"`
 	FinishedItemID string                                        `json:"finishedItemId" url:"-"`
 	OutputQuantity *string                                       `json:"outputQuantity,omitempty" url:"-"`
+	RoutingID      *string                                       `json:"routingId,omitempty" url:"-"`
 	Lines          []*PostV1ProductionBomsCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -61,6 +63,13 @@ func (p *PostV1ProductionBomsCreateRequest) SetFinishedItemID(finishedItemID str
 func (p *PostV1ProductionBomsCreateRequest) SetOutputQuantity(outputQuantity *string) {
 	p.OutputQuantity = outputQuantity
 	p.require(postV1ProductionBomsCreateRequestFieldOutputQuantity)
+}
+
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsCreateRequest) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionBomsCreateRequestFieldRoutingID)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -211,13 +220,298 @@ func (p *PostV1ProductionBomsListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1ProductionMaintenanceCancelRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1ProductionMaintenanceCancelRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionMaintenanceCancelRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceCancelRequestFieldID)
+}
+
+func (p *PostV1ProductionMaintenanceCancelRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCancelRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCancelRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCancelRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCancelRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionMaintenanceCompleteRequestFieldID            = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceCompleteRequestFieldCompletedDate = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceCompleteRequestFieldDowntimeHours = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceCompleteRequestFieldCost          = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceCompleteRequestFieldNotes         = big.NewInt(1 << 4)
+)
+
+type PostV1ProductionMaintenanceCompleteRequest struct {
+	ID            string  `json:"id" url:"-"`
+	CompletedDate string  `json:"completedDate" url:"-"`
+	DowntimeHours *string `json:"downtimeHours,omitempty" url:"-"`
+	Cost          *string `json:"cost,omitempty" url:"-"`
+	Notes         *string `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionMaintenanceCompleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceCompleteRequestFieldID)
+}
+
+// SetCompletedDate sets the CompletedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteRequest) SetCompletedDate(completedDate string) {
+	p.CompletedDate = completedDate
+	p.require(postV1ProductionMaintenanceCompleteRequestFieldCompletedDate)
+}
+
+// SetDowntimeHours sets the DowntimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteRequest) SetDowntimeHours(downtimeHours *string) {
+	p.DowntimeHours = downtimeHours
+	p.require(postV1ProductionMaintenanceCompleteRequestFieldDowntimeHours)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteRequest) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionMaintenanceCompleteRequestFieldCost)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceCompleteRequestFieldNotes)
+}
+
+func (p *PostV1ProductionMaintenanceCompleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCompleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCompleteRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCompleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCompleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionMaintenanceCreateRequestFieldWorkCenterID = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceCreateRequestFieldType         = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceCreateRequestFieldPlannedDate  = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceCreateRequestFieldDescription  = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceCreateRequestFieldNotes        = big.NewInt(1 << 4)
+)
+
+type PostV1ProductionMaintenanceCreateRequest struct {
+	WorkCenterID string                                       `json:"workCenterId" url:"-"`
+	Type         PostV1ProductionMaintenanceCreateRequestType `json:"type" url:"-"`
+	PlannedDate  string                                       `json:"plannedDate" url:"-"`
+	Description  *string                                      `json:"description,omitempty" url:"-"`
+	Notes        *string                                      `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionMaintenanceCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateRequest) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionMaintenanceCreateRequestFieldWorkCenterID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateRequest) SetType(type_ PostV1ProductionMaintenanceCreateRequestType) {
+	p.Type = type_
+	p.require(postV1ProductionMaintenanceCreateRequestFieldType)
+}
+
+// SetPlannedDate sets the PlannedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateRequest) SetPlannedDate(plannedDate string) {
+	p.PlannedDate = plannedDate
+	p.require(postV1ProductionMaintenanceCreateRequestFieldPlannedDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateRequest) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1ProductionMaintenanceCreateRequestFieldDescription)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceCreateRequestFieldNotes)
+}
+
+func (p *PostV1ProductionMaintenanceCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionMaintenanceListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionMaintenanceListRequest struct {
+	Page     *int64                                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1ProductionMaintenanceListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1ProductionMaintenanceListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionMaintenanceListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1ProductionMaintenanceListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionMaintenanceListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequest) SetSort(sort []*PostV1ProductionMaintenanceListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1ProductionMaintenanceListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequest) SetFilter(filter []*PostV1ProductionMaintenanceListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1ProductionMaintenanceListRequestFieldFilter)
+}
+
+func (p *PostV1ProductionMaintenanceListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceListRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1ProductionOrdersCompleteRequestFieldID                    = big.NewInt(1 << 0)
-	postV1ProductionOrdersCompleteRequestFieldComponentsAccountCode = big.NewInt(1 << 1)
-	postV1ProductionOrdersCompleteRequestFieldFinishedAccountCode   = big.NewInt(1 << 2)
+	postV1ProductionOrdersCompleteRequestFieldScrappedQuantity      = big.NewInt(1 << 1)
+	postV1ProductionOrdersCompleteRequestFieldComponentsAccountCode = big.NewInt(1 << 2)
+	postV1ProductionOrdersCompleteRequestFieldFinishedAccountCode   = big.NewInt(1 << 3)
 )
 
 type PostV1ProductionOrdersCompleteRequest struct {
 	ID                    string  `json:"id" url:"-"`
+	ScrappedQuantity      *string `json:"scrappedQuantity,omitempty" url:"-"`
 	ComponentsAccountCode *string `json:"componentsAccountCode,omitempty" url:"-"`
 	FinishedAccountCode   *string `json:"finishedAccountCode,omitempty" url:"-"`
 
@@ -237,6 +531,13 @@ func (p *PostV1ProductionOrdersCompleteRequest) require(field *big.Int) {
 func (p *PostV1ProductionOrdersCompleteRequest) SetID(id string) {
 	p.ID = id
 	p.require(postV1ProductionOrdersCompleteRequestFieldID)
+}
+
+// SetScrappedQuantity sets the ScrappedQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteRequest) SetScrappedQuantity(scrappedQuantity *string) {
+	p.ScrappedQuantity = scrappedQuantity
+	p.require(postV1ProductionOrdersCompleteRequestFieldScrappedQuantity)
 }
 
 // SetComponentsAccountCode sets the ComponentsAccountCode field and marks it as non-optional;
@@ -278,15 +579,17 @@ var (
 	postV1ProductionOrdersCreateRequestFieldType        = big.NewInt(1 << 0)
 	postV1ProductionOrdersCreateRequestFieldBomID       = big.NewInt(1 << 1)
 	postV1ProductionOrdersCreateRequestFieldWarehouseID = big.NewInt(1 << 2)
-	postV1ProductionOrdersCreateRequestFieldQuantity    = big.NewInt(1 << 3)
-	postV1ProductionOrdersCreateRequestFieldDate        = big.NewInt(1 << 4)
-	postV1ProductionOrdersCreateRequestFieldNotes       = big.NewInt(1 << 5)
+	postV1ProductionOrdersCreateRequestFieldRoutingID   = big.NewInt(1 << 3)
+	postV1ProductionOrdersCreateRequestFieldQuantity    = big.NewInt(1 << 4)
+	postV1ProductionOrdersCreateRequestFieldDate        = big.NewInt(1 << 5)
+	postV1ProductionOrdersCreateRequestFieldNotes       = big.NewInt(1 << 6)
 )
 
 type PostV1ProductionOrdersCreateRequest struct {
 	Type        *PostV1ProductionOrdersCreateRequestType `json:"type,omitempty" url:"-"`
 	BomID       string                                   `json:"bomId" url:"-"`
 	WarehouseID string                                   `json:"warehouseId" url:"-"`
+	RoutingID   *string                                  `json:"routingId,omitempty" url:"-"`
 	Quantity    string                                   `json:"quantity" url:"-"`
 	Date        string                                   `json:"date" url:"-"`
 	Notes       *string                                  `json:"notes,omitempty" url:"-"`
@@ -321,6 +624,13 @@ func (p *PostV1ProductionOrdersCreateRequest) SetBomID(bomID string) {
 func (p *PostV1ProductionOrdersCreateRequest) SetWarehouseID(warehouseID string) {
 	p.WarehouseID = warehouseID
 	p.require(postV1ProductionOrdersCreateRequestFieldWarehouseID)
+}
+
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateRequest) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionOrdersCreateRequestFieldRoutingID)
 }
 
 // SetQuantity sets the Quantity field and marks it as non-optional;
@@ -485,13 +795,736 @@ func (p *PostV1ProductionOrdersListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1ProductionOrdersRecordOperationRequestFieldID            = big.NewInt(1 << 0)
+	postV1ProductionOrdersRecordOperationRequestFieldActualMinutes = big.NewInt(1 << 1)
+)
+
+type PostV1ProductionOrdersRecordOperationRequest struct {
+	ID            string `json:"id" url:"-"`
+	ActualMinutes string `json:"actualMinutes" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionOrdersRecordOperationRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersRecordOperationRequestFieldID)
+}
+
+// SetActualMinutes sets the ActualMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationRequest) SetActualMinutes(actualMinutes string) {
+	p.ActualMinutes = actualMinutes
+	p.require(postV1ProductionOrdersRecordOperationRequestFieldActualMinutes)
+}
+
+func (p *PostV1ProductionOrdersRecordOperationRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersRecordOperationRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersRecordOperationRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersRecordOperationRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersRecordOperationRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionQualityChecksAddRequestFieldOrderID = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksAddRequestFieldName    = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksAddRequestFieldNotes   = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionQualityChecksAddRequest struct {
+	OrderID string  `json:"orderId" url:"-"`
+	Name    string  `json:"name" url:"-"`
+	Notes   *string `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionQualityChecksAddRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddRequest) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionQualityChecksAddRequestFieldOrderID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionQualityChecksAddRequestFieldName)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionQualityChecksAddRequestFieldNotes)
+}
+
+func (p *PostV1ProductionQualityChecksAddRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksAddRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksAddRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksAddRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksAddRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionQualityChecksListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1ProductionQualityChecksListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionQualityChecksListRequest struct {
+	Page     *int64                                                `json:"page,omitempty" url:"-"`
+	PageSize *int64                                                `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1ProductionQualityChecksListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1ProductionQualityChecksListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionQualityChecksListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1ProductionQualityChecksListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionQualityChecksListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequest) SetSort(sort []*PostV1ProductionQualityChecksListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1ProductionQualityChecksListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequest) SetFilter(filter []*PostV1ProductionQualityChecksListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1ProductionQualityChecksListRequestFieldFilter)
+}
+
+func (p *PostV1ProductionQualityChecksListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksListRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionQualityChecksRecordRequestFieldID     = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksRecordRequestFieldResult = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksRecordRequestFieldNotes  = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionQualityChecksRecordRequest struct {
+	ID     string                                           `json:"id" url:"-"`
+	Result PostV1ProductionQualityChecksRecordRequestResult `json:"result" url:"-"`
+	Notes  *string                                          `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionQualityChecksRecordRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionQualityChecksRecordRequestFieldID)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordRequest) SetResult(result PostV1ProductionQualityChecksRecordRequestResult) {
+	p.Result = result
+	p.require(postV1ProductionQualityChecksRecordRequestFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionQualityChecksRecordRequestFieldNotes)
+}
+
+func (p *PostV1ProductionQualityChecksRecordRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksRecordRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksRecordRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksRecordRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksRecordRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionRoutingsCreateRequestFieldCode       = big.NewInt(1 << 0)
+	postV1ProductionRoutingsCreateRequestFieldName       = big.NewInt(1 << 1)
+	postV1ProductionRoutingsCreateRequestFieldNotes      = big.NewInt(1 << 2)
+	postV1ProductionRoutingsCreateRequestFieldOperations = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionRoutingsCreateRequest struct {
+	Code       string                                                 `json:"code" url:"-"`
+	Name       string                                                 `json:"name" url:"-"`
+	Notes      *string                                                `json:"notes,omitempty" url:"-"`
+	Operations []*PostV1ProductionRoutingsCreateRequestOperationsItem `json:"operations" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionRoutingsCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequest) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionRoutingsCreateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsCreateRequestFieldName)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsCreateRequestFieldNotes)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequest) SetOperations(operations []*PostV1ProductionRoutingsCreateRequestOperationsItem) {
+	p.Operations = operations
+	p.require(postV1ProductionRoutingsCreateRequestFieldOperations)
+}
+
+func (p *PostV1ProductionRoutingsCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionRoutingsGetRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1ProductionRoutingsGetRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionRoutingsGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsGetRequestFieldID)
+}
+
+func (p *PostV1ProductionRoutingsGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsGetRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionRoutingsListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1ProductionRoutingsListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1ProductionRoutingsListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1ProductionRoutingsListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionRoutingsListRequest struct {
+	Page     *int64                                           `json:"page,omitempty" url:"-"`
+	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1ProductionRoutingsListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1ProductionRoutingsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionRoutingsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1ProductionRoutingsListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionRoutingsListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequest) SetSort(sort []*PostV1ProductionRoutingsListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1ProductionRoutingsListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequest) SetFilter(filter []*PostV1ProductionRoutingsListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1ProductionRoutingsListRequestFieldFilter)
+}
+
+func (p *PostV1ProductionRoutingsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsListRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionWorkCentersCreateRequestFieldCode                    = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersCreateRequestFieldName                    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersCreateRequestFieldCostPerHour             = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersCreateRequestFieldCostAccountCode         = big.NewInt(1 << 3)
+	postV1ProductionWorkCentersCreateRequestFieldMaintenanceIntervalDays = big.NewInt(1 << 4)
+	postV1ProductionWorkCentersCreateRequestFieldNotes                   = big.NewInt(1 << 5)
+)
+
+type PostV1ProductionWorkCentersCreateRequest struct {
+	Code                    string  `json:"code" url:"-"`
+	Name                    string  `json:"name" url:"-"`
+	CostPerHour             *string `json:"costPerHour,omitempty" url:"-"`
+	CostAccountCode         *string `json:"costAccountCode,omitempty" url:"-"`
+	MaintenanceIntervalDays *int64  `json:"maintenanceIntervalDays,omitempty" url:"-"`
+	Notes                   *string `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionWorkCentersCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionWorkCentersCreateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionWorkCentersCreateRequestFieldName)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetCostPerHour(costPerHour *string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionWorkCentersCreateRequestFieldCostPerHour)
+}
+
+// SetCostAccountCode sets the CostAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetCostAccountCode(costAccountCode *string) {
+	p.CostAccountCode = costAccountCode
+	p.require(postV1ProductionWorkCentersCreateRequestFieldCostAccountCode)
+}
+
+// SetMaintenanceIntervalDays sets the MaintenanceIntervalDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetMaintenanceIntervalDays(maintenanceIntervalDays *int64) {
+	p.MaintenanceIntervalDays = maintenanceIntervalDays
+	p.require(postV1ProductionWorkCentersCreateRequestFieldMaintenanceIntervalDays)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionWorkCentersCreateRequestFieldNotes)
+}
+
+func (p *PostV1ProductionWorkCentersCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionWorkCentersListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionWorkCentersListRequest struct {
+	Page     *int64                                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1ProductionWorkCentersListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1ProductionWorkCentersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionWorkCentersListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1ProductionWorkCentersListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionWorkCentersListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequest) SetSort(sort []*PostV1ProductionWorkCentersListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1ProductionWorkCentersListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequest) SetFilter(filter []*PostV1ProductionWorkCentersListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1ProductionWorkCentersListRequestFieldFilter)
+}
+
+func (p *PostV1ProductionWorkCentersListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersListRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ProductionWorkCentersUpdateRequestFieldID                      = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersUpdateRequestFieldCode                    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersUpdateRequestFieldName                    = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersUpdateRequestFieldCostPerHour             = big.NewInt(1 << 3)
+	postV1ProductionWorkCentersUpdateRequestFieldCostAccountCode         = big.NewInt(1 << 4)
+	postV1ProductionWorkCentersUpdateRequestFieldMaintenanceIntervalDays = big.NewInt(1 << 5)
+	postV1ProductionWorkCentersUpdateRequestFieldIsActive                = big.NewInt(1 << 6)
+	postV1ProductionWorkCentersUpdateRequestFieldNotes                   = big.NewInt(1 << 7)
+)
+
+type PostV1ProductionWorkCentersUpdateRequest struct {
+	ID                      string  `json:"id" url:"-"`
+	Code                    *string `json:"code,omitempty" url:"-"`
+	Name                    *string `json:"name,omitempty" url:"-"`
+	CostPerHour             *string `json:"costPerHour,omitempty" url:"-"`
+	CostAccountCode         *string `json:"costAccountCode,omitempty" url:"-"`
+	MaintenanceIntervalDays *int64  `json:"maintenanceIntervalDays,omitempty" url:"-"`
+	IsActive                *bool   `json:"isActive,omitempty" url:"-"`
+	Notes                   *string `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ProductionWorkCentersUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldName)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetCostPerHour(costPerHour *string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldCostPerHour)
+}
+
+// SetCostAccountCode sets the CostAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetCostAccountCode(costAccountCode *string) {
+	p.CostAccountCode = costAccountCode
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldCostAccountCode)
+}
+
+// SetMaintenanceIntervalDays sets the MaintenanceIntervalDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetMaintenanceIntervalDays(maintenanceIntervalDays *int64) {
+	p.MaintenanceIntervalDays = maintenanceIntervalDays
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldMaintenanceIntervalDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionWorkCentersUpdateRequestFieldNotes)
+}
+
+func (p *PostV1ProductionWorkCentersUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1ProductionBomsCreateRequestLinesItemFieldComponentItemID = big.NewInt(1 << 0)
 	postV1ProductionBomsCreateRequestLinesItemFieldQuantity        = big.NewInt(1 << 1)
+	postV1ProductionBomsCreateRequestLinesItemFieldScrapPercent    = big.NewInt(1 << 2)
 )
 
 type PostV1ProductionBomsCreateRequestLinesItem struct {
-	ComponentItemID string `json:"componentItemId" url:"componentItemId"`
-	Quantity        string `json:"quantity" url:"quantity"`
+	ComponentItemID string  `json:"componentItemId" url:"componentItemId"`
+	Quantity        string  `json:"quantity" url:"quantity"`
+	ScrapPercent    *string `json:"scrapPercent,omitempty" url:"scrapPercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -512,6 +1545,13 @@ func (p *PostV1ProductionBomsCreateRequestLinesItem) GetQuantity() string {
 		return ""
 	}
 	return p.Quantity
+}
+
+func (p *PostV1ProductionBomsCreateRequestLinesItem) GetScrapPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrapPercent
 }
 
 func (p *PostV1ProductionBomsCreateRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -540,6 +1580,13 @@ func (p *PostV1ProductionBomsCreateRequestLinesItem) SetComponentItemID(componen
 func (p *PostV1ProductionBomsCreateRequestLinesItem) SetQuantity(quantity string) {
 	p.Quantity = quantity
 	p.require(postV1ProductionBomsCreateRequestLinesItemFieldQuantity)
+}
+
+// SetScrapPercent sets the ScrapPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsCreateRequestLinesItem) SetScrapPercent(scrapPercent *string) {
+	p.ScrapPercent = scrapPercent
+	p.require(postV1ProductionBomsCreateRequestLinesItemFieldScrapPercent)
 }
 
 func (p *PostV1ProductionBomsCreateRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -590,8 +1637,9 @@ var (
 	postV1ProductionBomsCreateResponseFieldName           = big.NewInt(1 << 2)
 	postV1ProductionBomsCreateResponseFieldFinishedItemID = big.NewInt(1 << 3)
 	postV1ProductionBomsCreateResponseFieldOutputQuantity = big.NewInt(1 << 4)
-	postV1ProductionBomsCreateResponseFieldIsActive       = big.NewInt(1 << 5)
-	postV1ProductionBomsCreateResponseFieldLines          = big.NewInt(1 << 6)
+	postV1ProductionBomsCreateResponseFieldRoutingID      = big.NewInt(1 << 5)
+	postV1ProductionBomsCreateResponseFieldIsActive       = big.NewInt(1 << 6)
+	postV1ProductionBomsCreateResponseFieldLines          = big.NewInt(1 << 7)
 )
 
 type PostV1ProductionBomsCreateResponse struct {
@@ -600,6 +1648,7 @@ type PostV1ProductionBomsCreateResponse struct {
 	Name           string                                         `json:"name" url:"name"`
 	FinishedItemID string                                         `json:"finishedItemId" url:"finishedItemId"`
 	OutputQuantity string                                         `json:"outputQuantity" url:"outputQuantity"`
+	RoutingID      *string                                        `json:"routingId,omitempty" url:"routingId,omitempty"`
 	IsActive       bool                                           `json:"isActive" url:"isActive"`
 	Lines          []*PostV1ProductionBomsCreateResponseLinesItem `json:"lines" url:"lines"`
 
@@ -643,6 +1692,13 @@ func (p *PostV1ProductionBomsCreateResponse) GetOutputQuantity() string {
 		return ""
 	}
 	return p.OutputQuantity
+}
+
+func (p *PostV1ProductionBomsCreateResponse) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
 }
 
 func (p *PostV1ProductionBomsCreateResponse) GetIsActive() bool {
@@ -708,6 +1764,13 @@ func (p *PostV1ProductionBomsCreateResponse) SetOutputQuantity(outputQuantity st
 	p.require(postV1ProductionBomsCreateResponseFieldOutputQuantity)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsCreateResponse) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionBomsCreateResponseFieldRoutingID)
+}
+
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionBomsCreateResponse) SetIsActive(isActive bool) {
@@ -768,12 +1831,14 @@ var (
 	postV1ProductionBomsCreateResponseLinesItemFieldID              = big.NewInt(1 << 0)
 	postV1ProductionBomsCreateResponseLinesItemFieldComponentItemID = big.NewInt(1 << 1)
 	postV1ProductionBomsCreateResponseLinesItemFieldQuantity        = big.NewInt(1 << 2)
+	postV1ProductionBomsCreateResponseLinesItemFieldScrapPercent    = big.NewInt(1 << 3)
 )
 
 type PostV1ProductionBomsCreateResponseLinesItem struct {
 	ID              string `json:"id" url:"id"`
 	ComponentItemID string `json:"componentItemId" url:"componentItemId"`
 	Quantity        string `json:"quantity" url:"quantity"`
+	ScrapPercent    string `json:"scrapPercent" url:"scrapPercent"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -801,6 +1866,13 @@ func (p *PostV1ProductionBomsCreateResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return p.Quantity
+}
+
+func (p *PostV1ProductionBomsCreateResponseLinesItem) GetScrapPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.ScrapPercent
 }
 
 func (p *PostV1ProductionBomsCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -836,6 +1908,13 @@ func (p *PostV1ProductionBomsCreateResponseLinesItem) SetComponentItemID(compone
 func (p *PostV1ProductionBomsCreateResponseLinesItem) SetQuantity(quantity string) {
 	p.Quantity = quantity
 	p.require(postV1ProductionBomsCreateResponseLinesItemFieldQuantity)
+}
+
+// SetScrapPercent sets the ScrapPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsCreateResponseLinesItem) SetScrapPercent(scrapPercent string) {
+	p.ScrapPercent = scrapPercent
+	p.require(postV1ProductionBomsCreateResponseLinesItemFieldScrapPercent)
 }
 
 func (p *PostV1ProductionBomsCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -886,8 +1965,9 @@ var (
 	postV1ProductionBomsGetResponseFieldName           = big.NewInt(1 << 2)
 	postV1ProductionBomsGetResponseFieldFinishedItemID = big.NewInt(1 << 3)
 	postV1ProductionBomsGetResponseFieldOutputQuantity = big.NewInt(1 << 4)
-	postV1ProductionBomsGetResponseFieldIsActive       = big.NewInt(1 << 5)
-	postV1ProductionBomsGetResponseFieldLines          = big.NewInt(1 << 6)
+	postV1ProductionBomsGetResponseFieldRoutingID      = big.NewInt(1 << 5)
+	postV1ProductionBomsGetResponseFieldIsActive       = big.NewInt(1 << 6)
+	postV1ProductionBomsGetResponseFieldLines          = big.NewInt(1 << 7)
 )
 
 type PostV1ProductionBomsGetResponse struct {
@@ -896,6 +1976,7 @@ type PostV1ProductionBomsGetResponse struct {
 	Name           string                                      `json:"name" url:"name"`
 	FinishedItemID string                                      `json:"finishedItemId" url:"finishedItemId"`
 	OutputQuantity string                                      `json:"outputQuantity" url:"outputQuantity"`
+	RoutingID      *string                                     `json:"routingId,omitempty" url:"routingId,omitempty"`
 	IsActive       bool                                        `json:"isActive" url:"isActive"`
 	Lines          []*PostV1ProductionBomsGetResponseLinesItem `json:"lines" url:"lines"`
 
@@ -939,6 +2020,13 @@ func (p *PostV1ProductionBomsGetResponse) GetOutputQuantity() string {
 		return ""
 	}
 	return p.OutputQuantity
+}
+
+func (p *PostV1ProductionBomsGetResponse) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
 }
 
 func (p *PostV1ProductionBomsGetResponse) GetIsActive() bool {
@@ -1004,6 +2092,13 @@ func (p *PostV1ProductionBomsGetResponse) SetOutputQuantity(outputQuantity strin
 	p.require(postV1ProductionBomsGetResponseFieldOutputQuantity)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsGetResponse) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionBomsGetResponseFieldRoutingID)
+}
+
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionBomsGetResponse) SetIsActive(isActive bool) {
@@ -1064,12 +2159,14 @@ var (
 	postV1ProductionBomsGetResponseLinesItemFieldID              = big.NewInt(1 << 0)
 	postV1ProductionBomsGetResponseLinesItemFieldComponentItemID = big.NewInt(1 << 1)
 	postV1ProductionBomsGetResponseLinesItemFieldQuantity        = big.NewInt(1 << 2)
+	postV1ProductionBomsGetResponseLinesItemFieldScrapPercent    = big.NewInt(1 << 3)
 )
 
 type PostV1ProductionBomsGetResponseLinesItem struct {
 	ID              string `json:"id" url:"id"`
 	ComponentItemID string `json:"componentItemId" url:"componentItemId"`
 	Quantity        string `json:"quantity" url:"quantity"`
+	ScrapPercent    string `json:"scrapPercent" url:"scrapPercent"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1097,6 +2194,13 @@ func (p *PostV1ProductionBomsGetResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return p.Quantity
+}
+
+func (p *PostV1ProductionBomsGetResponseLinesItem) GetScrapPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.ScrapPercent
 }
 
 func (p *PostV1ProductionBomsGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1132,6 +2236,13 @@ func (p *PostV1ProductionBomsGetResponseLinesItem) SetComponentItemID(componentI
 func (p *PostV1ProductionBomsGetResponseLinesItem) SetQuantity(quantity string) {
 	p.Quantity = quantity
 	p.require(postV1ProductionBomsGetResponseLinesItemFieldQuantity)
+}
+
+// SetScrapPercent sets the ScrapPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsGetResponseLinesItem) SetScrapPercent(scrapPercent string) {
+	p.ScrapPercent = scrapPercent
+	p.require(postV1ProductionBomsGetResponseLinesItemFieldScrapPercent)
 }
 
 func (p *PostV1ProductionBomsGetResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -1752,16 +2863,18 @@ var (
 	postV1ProductionBomsListResponseRowsItemFieldName           = big.NewInt(1 << 2)
 	postV1ProductionBomsListResponseRowsItemFieldFinishedItemID = big.NewInt(1 << 3)
 	postV1ProductionBomsListResponseRowsItemFieldOutputQuantity = big.NewInt(1 << 4)
-	postV1ProductionBomsListResponseRowsItemFieldIsActive       = big.NewInt(1 << 5)
+	postV1ProductionBomsListResponseRowsItemFieldRoutingID      = big.NewInt(1 << 5)
+	postV1ProductionBomsListResponseRowsItemFieldIsActive       = big.NewInt(1 << 6)
 )
 
 type PostV1ProductionBomsListResponseRowsItem struct {
-	ID             string `json:"id" url:"id"`
-	Code           string `json:"code" url:"code"`
-	Name           string `json:"name" url:"name"`
-	FinishedItemID string `json:"finishedItemId" url:"finishedItemId"`
-	OutputQuantity string `json:"outputQuantity" url:"outputQuantity"`
-	IsActive       bool   `json:"isActive" url:"isActive"`
+	ID             string  `json:"id" url:"id"`
+	Code           string  `json:"code" url:"code"`
+	Name           string  `json:"name" url:"name"`
+	FinishedItemID string  `json:"finishedItemId" url:"finishedItemId"`
+	OutputQuantity string  `json:"outputQuantity" url:"outputQuantity"`
+	RoutingID      *string `json:"routingId,omitempty" url:"routingId,omitempty"`
+	IsActive       bool    `json:"isActive" url:"isActive"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1803,6 +2916,13 @@ func (p *PostV1ProductionBomsListResponseRowsItem) GetOutputQuantity() string {
 		return ""
 	}
 	return p.OutputQuantity
+}
+
+func (p *PostV1ProductionBomsListResponseRowsItem) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
 }
 
 func (p *PostV1ProductionBomsListResponseRowsItem) GetIsActive() bool {
@@ -1861,6 +2981,13 @@ func (p *PostV1ProductionBomsListResponseRowsItem) SetOutputQuantity(outputQuant
 	p.require(postV1ProductionBomsListResponseRowsItemFieldOutputQuantity)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionBomsListResponseRowsItem) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionBomsListResponseRowsItemFieldRoutingID)
+}
+
 // SetIsActive sets the IsActive field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionBomsListResponseRowsItem) SetIsActive(isActive bool) {
@@ -1911,17 +3038,1778 @@ func (p *PostV1ProductionBomsListResponseRowsItem) String() string {
 }
 
 var (
+	postV1ProductionMaintenanceCancelResponseFieldID            = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceCancelResponseFieldWorkCenterID  = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceCancelResponseFieldType          = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceCancelResponseFieldStatus        = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceCancelResponseFieldPlannedDate   = big.NewInt(1 << 4)
+	postV1ProductionMaintenanceCancelResponseFieldCompletedDate = big.NewInt(1 << 5)
+	postV1ProductionMaintenanceCancelResponseFieldDescription   = big.NewInt(1 << 6)
+	postV1ProductionMaintenanceCancelResponseFieldDowntimeHours = big.NewInt(1 << 7)
+	postV1ProductionMaintenanceCancelResponseFieldCost          = big.NewInt(1 << 8)
+	postV1ProductionMaintenanceCancelResponseFieldNotes         = big.NewInt(1 << 9)
+	postV1ProductionMaintenanceCancelResponseFieldCreatedAt     = big.NewInt(1 << 10)
+)
+
+type PostV1ProductionMaintenanceCancelResponse struct {
+	ID            string                                          `json:"id" url:"id"`
+	WorkCenterID  string                                          `json:"workCenterId" url:"workCenterId"`
+	Type          PostV1ProductionMaintenanceCancelResponseType   `json:"type" url:"type"`
+	Status        PostV1ProductionMaintenanceCancelResponseStatus `json:"status" url:"status"`
+	PlannedDate   string                                          `json:"plannedDate" url:"plannedDate"`
+	CompletedDate *string                                         `json:"completedDate,omitempty" url:"completedDate,omitempty"`
+	Description   *string                                         `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours *string                                         `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost          *string                                         `json:"cost,omitempty" url:"cost,omitempty"`
+	Notes         *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                          `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetType() PostV1ProductionMaintenanceCancelResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetStatus() PostV1ProductionMaintenanceCancelResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetPlannedDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedDate
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetCompletedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompletedDate
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetDowntimeHours() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DowntimeHours
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceCancelResponseFieldID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionMaintenanceCancelResponseFieldWorkCenterID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetType(type_ PostV1ProductionMaintenanceCancelResponseType) {
+	p.Type = type_
+	p.require(postV1ProductionMaintenanceCancelResponseFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetStatus(status PostV1ProductionMaintenanceCancelResponseStatus) {
+	p.Status = status
+	p.require(postV1ProductionMaintenanceCancelResponseFieldStatus)
+}
+
+// SetPlannedDate sets the PlannedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetPlannedDate(plannedDate string) {
+	p.PlannedDate = plannedDate
+	p.require(postV1ProductionMaintenanceCancelResponseFieldPlannedDate)
+}
+
+// SetCompletedDate sets the CompletedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetCompletedDate(completedDate *string) {
+	p.CompletedDate = completedDate
+	p.require(postV1ProductionMaintenanceCancelResponseFieldCompletedDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1ProductionMaintenanceCancelResponseFieldDescription)
+}
+
+// SetDowntimeHours sets the DowntimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetDowntimeHours(downtimeHours *string) {
+	p.DowntimeHours = downtimeHours
+	p.require(postV1ProductionMaintenanceCancelResponseFieldDowntimeHours)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionMaintenanceCancelResponseFieldCost)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceCancelResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCancelResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionMaintenanceCancelResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCancelResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCancelResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCancelResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceCancelResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceCancelResponseStatus string
+
+const (
+	PostV1ProductionMaintenanceCancelResponseStatusPlanned   PostV1ProductionMaintenanceCancelResponseStatus = "planned"
+	PostV1ProductionMaintenanceCancelResponseStatusCompleted PostV1ProductionMaintenanceCancelResponseStatus = "completed"
+	PostV1ProductionMaintenanceCancelResponseStatusCancelled PostV1ProductionMaintenanceCancelResponseStatus = "cancelled"
+)
+
+func NewPostV1ProductionMaintenanceCancelResponseStatusFromString(s string) (PostV1ProductionMaintenanceCancelResponseStatus, error) {
+	switch s {
+	case "planned":
+		return PostV1ProductionMaintenanceCancelResponseStatusPlanned, nil
+	case "completed":
+		return PostV1ProductionMaintenanceCancelResponseStatusCompleted, nil
+	case "cancelled":
+		return PostV1ProductionMaintenanceCancelResponseStatusCancelled, nil
+	}
+	var t PostV1ProductionMaintenanceCancelResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCancelResponseStatus) Ptr() *PostV1ProductionMaintenanceCancelResponseStatus {
+	return &p
+}
+
+type PostV1ProductionMaintenanceCancelResponseType string
+
+const (
+	PostV1ProductionMaintenanceCancelResponseTypePreventive PostV1ProductionMaintenanceCancelResponseType = "preventive"
+	PostV1ProductionMaintenanceCancelResponseTypeCorrective PostV1ProductionMaintenanceCancelResponseType = "corrective"
+)
+
+func NewPostV1ProductionMaintenanceCancelResponseTypeFromString(s string) (PostV1ProductionMaintenanceCancelResponseType, error) {
+	switch s {
+	case "preventive":
+		return PostV1ProductionMaintenanceCancelResponseTypePreventive, nil
+	case "corrective":
+		return PostV1ProductionMaintenanceCancelResponseTypeCorrective, nil
+	}
+	var t PostV1ProductionMaintenanceCancelResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCancelResponseType) Ptr() *PostV1ProductionMaintenanceCancelResponseType {
+	return &p
+}
+
+var (
+	postV1ProductionMaintenanceCompleteResponseFieldID            = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceCompleteResponseFieldWorkCenterID  = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceCompleteResponseFieldType          = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceCompleteResponseFieldStatus        = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceCompleteResponseFieldPlannedDate   = big.NewInt(1 << 4)
+	postV1ProductionMaintenanceCompleteResponseFieldCompletedDate = big.NewInt(1 << 5)
+	postV1ProductionMaintenanceCompleteResponseFieldDescription   = big.NewInt(1 << 6)
+	postV1ProductionMaintenanceCompleteResponseFieldDowntimeHours = big.NewInt(1 << 7)
+	postV1ProductionMaintenanceCompleteResponseFieldCost          = big.NewInt(1 << 8)
+	postV1ProductionMaintenanceCompleteResponseFieldNotes         = big.NewInt(1 << 9)
+	postV1ProductionMaintenanceCompleteResponseFieldCreatedAt     = big.NewInt(1 << 10)
+)
+
+type PostV1ProductionMaintenanceCompleteResponse struct {
+	ID            string                                            `json:"id" url:"id"`
+	WorkCenterID  string                                            `json:"workCenterId" url:"workCenterId"`
+	Type          PostV1ProductionMaintenanceCompleteResponseType   `json:"type" url:"type"`
+	Status        PostV1ProductionMaintenanceCompleteResponseStatus `json:"status" url:"status"`
+	PlannedDate   string                                            `json:"plannedDate" url:"plannedDate"`
+	CompletedDate *string                                           `json:"completedDate,omitempty" url:"completedDate,omitempty"`
+	Description   *string                                           `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours *string                                           `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost          *string                                           `json:"cost,omitempty" url:"cost,omitempty"`
+	Notes         *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetType() PostV1ProductionMaintenanceCompleteResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetStatus() PostV1ProductionMaintenanceCompleteResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetPlannedDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedDate
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetCompletedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompletedDate
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetDowntimeHours() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DowntimeHours
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldWorkCenterID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetType(type_ PostV1ProductionMaintenanceCompleteResponseType) {
+	p.Type = type_
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetStatus(status PostV1ProductionMaintenanceCompleteResponseStatus) {
+	p.Status = status
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldStatus)
+}
+
+// SetPlannedDate sets the PlannedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetPlannedDate(plannedDate string) {
+	p.PlannedDate = plannedDate
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldPlannedDate)
+}
+
+// SetCompletedDate sets the CompletedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetCompletedDate(completedDate *string) {
+	p.CompletedDate = completedDate
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldCompletedDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldDescription)
+}
+
+// SetDowntimeHours sets the DowntimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetDowntimeHours(downtimeHours *string) {
+	p.DowntimeHours = downtimeHours
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldDowntimeHours)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldCost)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCompleteResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionMaintenanceCompleteResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCompleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCompleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCompleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceCompleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceCompleteResponseStatus string
+
+const (
+	PostV1ProductionMaintenanceCompleteResponseStatusPlanned   PostV1ProductionMaintenanceCompleteResponseStatus = "planned"
+	PostV1ProductionMaintenanceCompleteResponseStatusCompleted PostV1ProductionMaintenanceCompleteResponseStatus = "completed"
+	PostV1ProductionMaintenanceCompleteResponseStatusCancelled PostV1ProductionMaintenanceCompleteResponseStatus = "cancelled"
+)
+
+func NewPostV1ProductionMaintenanceCompleteResponseStatusFromString(s string) (PostV1ProductionMaintenanceCompleteResponseStatus, error) {
+	switch s {
+	case "planned":
+		return PostV1ProductionMaintenanceCompleteResponseStatusPlanned, nil
+	case "completed":
+		return PostV1ProductionMaintenanceCompleteResponseStatusCompleted, nil
+	case "cancelled":
+		return PostV1ProductionMaintenanceCompleteResponseStatusCancelled, nil
+	}
+	var t PostV1ProductionMaintenanceCompleteResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCompleteResponseStatus) Ptr() *PostV1ProductionMaintenanceCompleteResponseStatus {
+	return &p
+}
+
+type PostV1ProductionMaintenanceCompleteResponseType string
+
+const (
+	PostV1ProductionMaintenanceCompleteResponseTypePreventive PostV1ProductionMaintenanceCompleteResponseType = "preventive"
+	PostV1ProductionMaintenanceCompleteResponseTypeCorrective PostV1ProductionMaintenanceCompleteResponseType = "corrective"
+)
+
+func NewPostV1ProductionMaintenanceCompleteResponseTypeFromString(s string) (PostV1ProductionMaintenanceCompleteResponseType, error) {
+	switch s {
+	case "preventive":
+		return PostV1ProductionMaintenanceCompleteResponseTypePreventive, nil
+	case "corrective":
+		return PostV1ProductionMaintenanceCompleteResponseTypeCorrective, nil
+	}
+	var t PostV1ProductionMaintenanceCompleteResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCompleteResponseType) Ptr() *PostV1ProductionMaintenanceCompleteResponseType {
+	return &p
+}
+
+type PostV1ProductionMaintenanceCreateRequestType string
+
+const (
+	PostV1ProductionMaintenanceCreateRequestTypePreventive PostV1ProductionMaintenanceCreateRequestType = "preventive"
+	PostV1ProductionMaintenanceCreateRequestTypeCorrective PostV1ProductionMaintenanceCreateRequestType = "corrective"
+)
+
+func NewPostV1ProductionMaintenanceCreateRequestTypeFromString(s string) (PostV1ProductionMaintenanceCreateRequestType, error) {
+	switch s {
+	case "preventive":
+		return PostV1ProductionMaintenanceCreateRequestTypePreventive, nil
+	case "corrective":
+		return PostV1ProductionMaintenanceCreateRequestTypeCorrective, nil
+	}
+	var t PostV1ProductionMaintenanceCreateRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCreateRequestType) Ptr() *PostV1ProductionMaintenanceCreateRequestType {
+	return &p
+}
+
+var (
+	postV1ProductionMaintenanceCreateResponseFieldID            = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceCreateResponseFieldWorkCenterID  = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceCreateResponseFieldType          = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceCreateResponseFieldStatus        = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceCreateResponseFieldPlannedDate   = big.NewInt(1 << 4)
+	postV1ProductionMaintenanceCreateResponseFieldCompletedDate = big.NewInt(1 << 5)
+	postV1ProductionMaintenanceCreateResponseFieldDescription   = big.NewInt(1 << 6)
+	postV1ProductionMaintenanceCreateResponseFieldDowntimeHours = big.NewInt(1 << 7)
+	postV1ProductionMaintenanceCreateResponseFieldCost          = big.NewInt(1 << 8)
+	postV1ProductionMaintenanceCreateResponseFieldNotes         = big.NewInt(1 << 9)
+	postV1ProductionMaintenanceCreateResponseFieldCreatedAt     = big.NewInt(1 << 10)
+)
+
+type PostV1ProductionMaintenanceCreateResponse struct {
+	ID            string                                          `json:"id" url:"id"`
+	WorkCenterID  string                                          `json:"workCenterId" url:"workCenterId"`
+	Type          PostV1ProductionMaintenanceCreateResponseType   `json:"type" url:"type"`
+	Status        PostV1ProductionMaintenanceCreateResponseStatus `json:"status" url:"status"`
+	PlannedDate   string                                          `json:"plannedDate" url:"plannedDate"`
+	CompletedDate *string                                         `json:"completedDate,omitempty" url:"completedDate,omitempty"`
+	Description   *string                                         `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours *string                                         `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost          *string                                         `json:"cost,omitempty" url:"cost,omitempty"`
+	Notes         *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                          `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetType() PostV1ProductionMaintenanceCreateResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetStatus() PostV1ProductionMaintenanceCreateResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetPlannedDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedDate
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetCompletedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompletedDate
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetDowntimeHours() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DowntimeHours
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceCreateResponseFieldID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionMaintenanceCreateResponseFieldWorkCenterID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetType(type_ PostV1ProductionMaintenanceCreateResponseType) {
+	p.Type = type_
+	p.require(postV1ProductionMaintenanceCreateResponseFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetStatus(status PostV1ProductionMaintenanceCreateResponseStatus) {
+	p.Status = status
+	p.require(postV1ProductionMaintenanceCreateResponseFieldStatus)
+}
+
+// SetPlannedDate sets the PlannedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetPlannedDate(plannedDate string) {
+	p.PlannedDate = plannedDate
+	p.require(postV1ProductionMaintenanceCreateResponseFieldPlannedDate)
+}
+
+// SetCompletedDate sets the CompletedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetCompletedDate(completedDate *string) {
+	p.CompletedDate = completedDate
+	p.require(postV1ProductionMaintenanceCreateResponseFieldCompletedDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1ProductionMaintenanceCreateResponseFieldDescription)
+}
+
+// SetDowntimeHours sets the DowntimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetDowntimeHours(downtimeHours *string) {
+	p.DowntimeHours = downtimeHours
+	p.require(postV1ProductionMaintenanceCreateResponseFieldDowntimeHours)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionMaintenanceCreateResponseFieldCost)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceCreateResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionMaintenanceCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceCreateResponseStatus string
+
+const (
+	PostV1ProductionMaintenanceCreateResponseStatusPlanned   PostV1ProductionMaintenanceCreateResponseStatus = "planned"
+	PostV1ProductionMaintenanceCreateResponseStatusCompleted PostV1ProductionMaintenanceCreateResponseStatus = "completed"
+	PostV1ProductionMaintenanceCreateResponseStatusCancelled PostV1ProductionMaintenanceCreateResponseStatus = "cancelled"
+)
+
+func NewPostV1ProductionMaintenanceCreateResponseStatusFromString(s string) (PostV1ProductionMaintenanceCreateResponseStatus, error) {
+	switch s {
+	case "planned":
+		return PostV1ProductionMaintenanceCreateResponseStatusPlanned, nil
+	case "completed":
+		return PostV1ProductionMaintenanceCreateResponseStatusCompleted, nil
+	case "cancelled":
+		return PostV1ProductionMaintenanceCreateResponseStatusCancelled, nil
+	}
+	var t PostV1ProductionMaintenanceCreateResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCreateResponseStatus) Ptr() *PostV1ProductionMaintenanceCreateResponseStatus {
+	return &p
+}
+
+type PostV1ProductionMaintenanceCreateResponseType string
+
+const (
+	PostV1ProductionMaintenanceCreateResponseTypePreventive PostV1ProductionMaintenanceCreateResponseType = "preventive"
+	PostV1ProductionMaintenanceCreateResponseTypeCorrective PostV1ProductionMaintenanceCreateResponseType = "corrective"
+)
+
+func NewPostV1ProductionMaintenanceCreateResponseTypeFromString(s string) (PostV1ProductionMaintenanceCreateResponseType, error) {
+	switch s {
+	case "preventive":
+		return PostV1ProductionMaintenanceCreateResponseTypePreventive, nil
+	case "corrective":
+		return PostV1ProductionMaintenanceCreateResponseTypeCorrective, nil
+	}
+	var t PostV1ProductionMaintenanceCreateResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceCreateResponseType) Ptr() *PostV1ProductionMaintenanceCreateResponseType {
+	return &p
+}
+
+var (
+	postV1ProductionMaintenanceListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionMaintenanceListRequestFilterItem struct {
+	Field string                                                 `json:"field" url:"field"`
+	Op    PostV1ProductionMaintenanceListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1ProductionMaintenanceListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) GetOp() PostV1ProductionMaintenanceListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) GetValue() *PostV1ProductionMaintenanceListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionMaintenanceListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) SetOp(op PostV1ProductionMaintenanceListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1ProductionMaintenanceListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) SetValue(value *PostV1ProductionMaintenanceListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1ProductionMaintenanceListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceListRequestFilterItemOp string
+
+const (
+	PostV1ProductionMaintenanceListRequestFilterItemOpEq       PostV1ProductionMaintenanceListRequestFilterItemOp = "eq"
+	PostV1ProductionMaintenanceListRequestFilterItemOpNe       PostV1ProductionMaintenanceListRequestFilterItemOp = "ne"
+	PostV1ProductionMaintenanceListRequestFilterItemOpContains PostV1ProductionMaintenanceListRequestFilterItemOp = "contains"
+	PostV1ProductionMaintenanceListRequestFilterItemOpGte      PostV1ProductionMaintenanceListRequestFilterItemOp = "gte"
+	PostV1ProductionMaintenanceListRequestFilterItemOpLte      PostV1ProductionMaintenanceListRequestFilterItemOp = "lte"
+	PostV1ProductionMaintenanceListRequestFilterItemOpIn       PostV1ProductionMaintenanceListRequestFilterItemOp = "in"
+)
+
+func NewPostV1ProductionMaintenanceListRequestFilterItemOpFromString(s string) (PostV1ProductionMaintenanceListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1ProductionMaintenanceListRequestFilterItemOpIn, nil
+	}
+	var t PostV1ProductionMaintenanceListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceListRequestFilterItemOp) Ptr() *PostV1ProductionMaintenanceListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1ProductionMaintenanceListRequestFilterItemValue struct {
+	String                                                             string
+	Double                                                             float64
+	Boolean                                                            bool
+	PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList []*PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) GetPostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList() []*PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList []*PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList"
+		p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList = valuePostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionMaintenanceListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList" || p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionMaintenanceListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList([]*PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValue) Accept(visitor PostV1ProductionMaintenanceListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList" || p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList(p.PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1ProductionMaintenanceListRequestFilterItemValueThreeItem) Accept(visitor PostV1ProductionMaintenanceListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1ProductionMaintenanceListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1ProductionMaintenanceListRequestSortItem struct {
+	Field string                                             `json:"field" url:"field"`
+	Dir   *PostV1ProductionMaintenanceListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) GetDir() *PostV1ProductionMaintenanceListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionMaintenanceListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListRequestSortItem) SetDir(dir *PostV1ProductionMaintenanceListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1ProductionMaintenanceListRequestSortItemFieldDir)
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceListRequestSortItemDir string
+
+const (
+	PostV1ProductionMaintenanceListRequestSortItemDirAsc  PostV1ProductionMaintenanceListRequestSortItemDir = "asc"
+	PostV1ProductionMaintenanceListRequestSortItemDirDesc PostV1ProductionMaintenanceListRequestSortItemDir = "desc"
+)
+
+func NewPostV1ProductionMaintenanceListRequestSortItemDirFromString(s string) (PostV1ProductionMaintenanceListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1ProductionMaintenanceListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1ProductionMaintenanceListRequestSortItemDirDesc, nil
+	}
+	var t PostV1ProductionMaintenanceListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceListRequestSortItemDir) Ptr() *PostV1ProductionMaintenanceListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1ProductionMaintenanceListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionMaintenanceListResponse struct {
+	Rows     []*PostV1ProductionMaintenanceListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                              `json:"page" url:"page"`
+	PageSize int64                                              `json:"pageSize" url:"pageSize"`
+	Total    int64                                              `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) GetRows() []*PostV1ProductionMaintenanceListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponse) SetRows(rows []*PostV1ProductionMaintenanceListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ProductionMaintenanceListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1ProductionMaintenanceListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionMaintenanceListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1ProductionMaintenanceListResponseFieldTotal)
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionMaintenanceListResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	postV1ProductionMaintenanceListResponseRowsItemFieldWorkCenterID  = big.NewInt(1 << 1)
+	postV1ProductionMaintenanceListResponseRowsItemFieldType          = big.NewInt(1 << 2)
+	postV1ProductionMaintenanceListResponseRowsItemFieldStatus        = big.NewInt(1 << 3)
+	postV1ProductionMaintenanceListResponseRowsItemFieldPlannedDate   = big.NewInt(1 << 4)
+	postV1ProductionMaintenanceListResponseRowsItemFieldCompletedDate = big.NewInt(1 << 5)
+	postV1ProductionMaintenanceListResponseRowsItemFieldDescription   = big.NewInt(1 << 6)
+	postV1ProductionMaintenanceListResponseRowsItemFieldDowntimeHours = big.NewInt(1 << 7)
+	postV1ProductionMaintenanceListResponseRowsItemFieldCost          = big.NewInt(1 << 8)
+	postV1ProductionMaintenanceListResponseRowsItemFieldNotes         = big.NewInt(1 << 9)
+	postV1ProductionMaintenanceListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 10)
+)
+
+type PostV1ProductionMaintenanceListResponseRowsItem struct {
+	ID            string                                                `json:"id" url:"id"`
+	WorkCenterID  string                                                `json:"workCenterId" url:"workCenterId"`
+	Type          PostV1ProductionMaintenanceListResponseRowsItemType   `json:"type" url:"type"`
+	Status        PostV1ProductionMaintenanceListResponseRowsItemStatus `json:"status" url:"status"`
+	PlannedDate   string                                                `json:"plannedDate" url:"plannedDate"`
+	CompletedDate *string                                               `json:"completedDate,omitempty" url:"completedDate,omitempty"`
+	Description   *string                                               `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours *string                                               `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost          *string                                               `json:"cost,omitempty" url:"cost,omitempty"`
+	Notes         *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt     string                                                `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetType() PostV1ProductionMaintenanceListResponseRowsItemType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetStatus() PostV1ProductionMaintenanceListResponseRowsItemStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetPlannedDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedDate
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetCompletedDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompletedDate
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetDowntimeHours() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DowntimeHours
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldWorkCenterID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetType(type_ PostV1ProductionMaintenanceListResponseRowsItemType) {
+	p.Type = type_
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetStatus(status PostV1ProductionMaintenanceListResponseRowsItemStatus) {
+	p.Status = status
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldStatus)
+}
+
+// SetPlannedDate sets the PlannedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetPlannedDate(plannedDate string) {
+	p.PlannedDate = plannedDate
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldPlannedDate)
+}
+
+// SetCompletedDate sets the CompletedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetCompletedDate(completedDate *string) {
+	p.CompletedDate = completedDate
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldCompletedDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldDescription)
+}
+
+// SetDowntimeHours sets the DowntimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetDowntimeHours(downtimeHours *string) {
+	p.DowntimeHours = downtimeHours
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldDowntimeHours)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldCost)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionMaintenanceListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionMaintenanceListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionMaintenanceListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionMaintenanceListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionMaintenanceListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionMaintenanceListResponseRowsItemStatus string
+
+const (
+	PostV1ProductionMaintenanceListResponseRowsItemStatusPlanned   PostV1ProductionMaintenanceListResponseRowsItemStatus = "planned"
+	PostV1ProductionMaintenanceListResponseRowsItemStatusCompleted PostV1ProductionMaintenanceListResponseRowsItemStatus = "completed"
+	PostV1ProductionMaintenanceListResponseRowsItemStatusCancelled PostV1ProductionMaintenanceListResponseRowsItemStatus = "cancelled"
+)
+
+func NewPostV1ProductionMaintenanceListResponseRowsItemStatusFromString(s string) (PostV1ProductionMaintenanceListResponseRowsItemStatus, error) {
+	switch s {
+	case "planned":
+		return PostV1ProductionMaintenanceListResponseRowsItemStatusPlanned, nil
+	case "completed":
+		return PostV1ProductionMaintenanceListResponseRowsItemStatusCompleted, nil
+	case "cancelled":
+		return PostV1ProductionMaintenanceListResponseRowsItemStatusCancelled, nil
+	}
+	var t PostV1ProductionMaintenanceListResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceListResponseRowsItemStatus) Ptr() *PostV1ProductionMaintenanceListResponseRowsItemStatus {
+	return &p
+}
+
+type PostV1ProductionMaintenanceListResponseRowsItemType string
+
+const (
+	PostV1ProductionMaintenanceListResponseRowsItemTypePreventive PostV1ProductionMaintenanceListResponseRowsItemType = "preventive"
+	PostV1ProductionMaintenanceListResponseRowsItemTypeCorrective PostV1ProductionMaintenanceListResponseRowsItemType = "corrective"
+)
+
+func NewPostV1ProductionMaintenanceListResponseRowsItemTypeFromString(s string) (PostV1ProductionMaintenanceListResponseRowsItemType, error) {
+	switch s {
+	case "preventive":
+		return PostV1ProductionMaintenanceListResponseRowsItemTypePreventive, nil
+	case "corrective":
+		return PostV1ProductionMaintenanceListResponseRowsItemTypeCorrective, nil
+	}
+	var t PostV1ProductionMaintenanceListResponseRowsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionMaintenanceListResponseRowsItemType) Ptr() *PostV1ProductionMaintenanceListResponseRowsItemType {
+	return &p
+}
+
+var (
 	postV1ProductionOrdersCompleteResponseFieldID                   = big.NewInt(1 << 0)
 	postV1ProductionOrdersCompleteResponseFieldType                 = big.NewInt(1 << 1)
 	postV1ProductionOrdersCompleteResponseFieldBomID                = big.NewInt(1 << 2)
 	postV1ProductionOrdersCompleteResponseFieldWarehouseID          = big.NewInt(1 << 3)
-	postV1ProductionOrdersCompleteResponseFieldQuantity             = big.NewInt(1 << 4)
-	postV1ProductionOrdersCompleteResponseFieldDate                 = big.NewInt(1 << 5)
-	postV1ProductionOrdersCompleteResponseFieldStatus               = big.NewInt(1 << 6)
-	postV1ProductionOrdersCompleteResponseFieldTotalCost            = big.NewInt(1 << 7)
-	postV1ProductionOrdersCompleteResponseFieldJournalTransactionID = big.NewInt(1 << 8)
-	postV1ProductionOrdersCompleteResponseFieldNotes                = big.NewInt(1 << 9)
-	postV1ProductionOrdersCompleteResponseFieldCreatedAt            = big.NewInt(1 << 10)
+	postV1ProductionOrdersCompleteResponseFieldRoutingID            = big.NewInt(1 << 4)
+	postV1ProductionOrdersCompleteResponseFieldQuantity             = big.NewInt(1 << 5)
+	postV1ProductionOrdersCompleteResponseFieldDate                 = big.NewInt(1 << 6)
+	postV1ProductionOrdersCompleteResponseFieldStatus               = big.NewInt(1 << 7)
+	postV1ProductionOrdersCompleteResponseFieldScrappedQuantity     = big.NewInt(1 << 8)
+	postV1ProductionOrdersCompleteResponseFieldMaterialCost         = big.NewInt(1 << 9)
+	postV1ProductionOrdersCompleteResponseFieldLaborCost            = big.NewInt(1 << 10)
+	postV1ProductionOrdersCompleteResponseFieldScrapCost            = big.NewInt(1 << 11)
+	postV1ProductionOrdersCompleteResponseFieldTotalCost            = big.NewInt(1 << 12)
+	postV1ProductionOrdersCompleteResponseFieldJournalTransactionID = big.NewInt(1 << 13)
+	postV1ProductionOrdersCompleteResponseFieldNotes                = big.NewInt(1 << 14)
+	postV1ProductionOrdersCompleteResponseFieldCreatedAt            = big.NewInt(1 << 15)
 )
 
 type PostV1ProductionOrdersCompleteResponse struct {
@@ -1929,9 +4817,14 @@ type PostV1ProductionOrdersCompleteResponse struct {
 	Type                 PostV1ProductionOrdersCompleteResponseType   `json:"type" url:"type"`
 	BomID                string                                       `json:"bomId" url:"bomId"`
 	WarehouseID          string                                       `json:"warehouseId" url:"warehouseId"`
+	RoutingID            *string                                      `json:"routingId,omitempty" url:"routingId,omitempty"`
 	Quantity             string                                       `json:"quantity" url:"quantity"`
 	Date                 string                                       `json:"date" url:"date"`
 	Status               PostV1ProductionOrdersCompleteResponseStatus `json:"status" url:"status"`
+	ScrappedQuantity     *string                                      `json:"scrappedQuantity,omitempty" url:"scrappedQuantity,omitempty"`
+	MaterialCost         *string                                      `json:"materialCost,omitempty" url:"materialCost,omitempty"`
+	LaborCost            *string                                      `json:"laborCost,omitempty" url:"laborCost,omitempty"`
+	ScrapCost            *string                                      `json:"scrapCost,omitempty" url:"scrapCost,omitempty"`
 	TotalCost            *string                                      `json:"totalCost,omitempty" url:"totalCost,omitempty"`
 	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
@@ -1972,6 +4865,13 @@ func (p *PostV1ProductionOrdersCompleteResponse) GetWarehouseID() string {
 	return p.WarehouseID
 }
 
+func (p *PostV1ProductionOrdersCompleteResponse) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
+}
+
 func (p *PostV1ProductionOrdersCompleteResponse) GetQuantity() string {
 	if p == nil {
 		return ""
@@ -1991,6 +4891,34 @@ func (p *PostV1ProductionOrdersCompleteResponse) GetStatus() PostV1ProductionOrd
 		return ""
 	}
 	return p.Status
+}
+
+func (p *PostV1ProductionOrdersCompleteResponse) GetScrappedQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrappedQuantity
+}
+
+func (p *PostV1ProductionOrdersCompleteResponse) GetMaterialCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaterialCost
+}
+
+func (p *PostV1ProductionOrdersCompleteResponse) GetLaborCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LaborCost
+}
+
+func (p *PostV1ProductionOrdersCompleteResponse) GetScrapCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrapCost
 }
 
 func (p *PostV1ProductionOrdersCompleteResponse) GetTotalCost() *string {
@@ -2063,6 +4991,13 @@ func (p *PostV1ProductionOrdersCompleteResponse) SetWarehouseID(warehouseID stri
 	p.require(postV1ProductionOrdersCompleteResponseFieldWarehouseID)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteResponse) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionOrdersCompleteResponseFieldRoutingID)
+}
+
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionOrdersCompleteResponse) SetQuantity(quantity string) {
@@ -2082,6 +5017,34 @@ func (p *PostV1ProductionOrdersCompleteResponse) SetDate(date string) {
 func (p *PostV1ProductionOrdersCompleteResponse) SetStatus(status PostV1ProductionOrdersCompleteResponseStatus) {
 	p.Status = status
 	p.require(postV1ProductionOrdersCompleteResponseFieldStatus)
+}
+
+// SetScrappedQuantity sets the ScrappedQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteResponse) SetScrappedQuantity(scrappedQuantity *string) {
+	p.ScrappedQuantity = scrappedQuantity
+	p.require(postV1ProductionOrdersCompleteResponseFieldScrappedQuantity)
+}
+
+// SetMaterialCost sets the MaterialCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteResponse) SetMaterialCost(materialCost *string) {
+	p.MaterialCost = materialCost
+	p.require(postV1ProductionOrdersCompleteResponseFieldMaterialCost)
+}
+
+// SetLaborCost sets the LaborCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteResponse) SetLaborCost(laborCost *string) {
+	p.LaborCost = laborCost
+	p.require(postV1ProductionOrdersCompleteResponseFieldLaborCost)
+}
+
+// SetScrapCost sets the ScrapCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCompleteResponse) SetScrapCost(scrapCost *string) {
+	p.ScrapCost = scrapCost
+	p.require(postV1ProductionOrdersCompleteResponseFieldScrapCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
@@ -2225,27 +5188,41 @@ var (
 	postV1ProductionOrdersCreateResponseFieldType                 = big.NewInt(1 << 1)
 	postV1ProductionOrdersCreateResponseFieldBomID                = big.NewInt(1 << 2)
 	postV1ProductionOrdersCreateResponseFieldWarehouseID          = big.NewInt(1 << 3)
-	postV1ProductionOrdersCreateResponseFieldQuantity             = big.NewInt(1 << 4)
-	postV1ProductionOrdersCreateResponseFieldDate                 = big.NewInt(1 << 5)
-	postV1ProductionOrdersCreateResponseFieldStatus               = big.NewInt(1 << 6)
-	postV1ProductionOrdersCreateResponseFieldTotalCost            = big.NewInt(1 << 7)
-	postV1ProductionOrdersCreateResponseFieldJournalTransactionID = big.NewInt(1 << 8)
-	postV1ProductionOrdersCreateResponseFieldNotes                = big.NewInt(1 << 9)
-	postV1ProductionOrdersCreateResponseFieldCreatedAt            = big.NewInt(1 << 10)
+	postV1ProductionOrdersCreateResponseFieldRoutingID            = big.NewInt(1 << 4)
+	postV1ProductionOrdersCreateResponseFieldQuantity             = big.NewInt(1 << 5)
+	postV1ProductionOrdersCreateResponseFieldDate                 = big.NewInt(1 << 6)
+	postV1ProductionOrdersCreateResponseFieldStatus               = big.NewInt(1 << 7)
+	postV1ProductionOrdersCreateResponseFieldScrappedQuantity     = big.NewInt(1 << 8)
+	postV1ProductionOrdersCreateResponseFieldMaterialCost         = big.NewInt(1 << 9)
+	postV1ProductionOrdersCreateResponseFieldLaborCost            = big.NewInt(1 << 10)
+	postV1ProductionOrdersCreateResponseFieldScrapCost            = big.NewInt(1 << 11)
+	postV1ProductionOrdersCreateResponseFieldTotalCost            = big.NewInt(1 << 12)
+	postV1ProductionOrdersCreateResponseFieldJournalTransactionID = big.NewInt(1 << 13)
+	postV1ProductionOrdersCreateResponseFieldNotes                = big.NewInt(1 << 14)
+	postV1ProductionOrdersCreateResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1ProductionOrdersCreateResponseFieldOperations           = big.NewInt(1 << 16)
+	postV1ProductionOrdersCreateResponseFieldQualityChecks        = big.NewInt(1 << 17)
 )
 
 type PostV1ProductionOrdersCreateResponse struct {
-	ID                   string                                     `json:"id" url:"id"`
-	Type                 PostV1ProductionOrdersCreateResponseType   `json:"type" url:"type"`
-	BomID                string                                     `json:"bomId" url:"bomId"`
-	WarehouseID          string                                     `json:"warehouseId" url:"warehouseId"`
-	Quantity             string                                     `json:"quantity" url:"quantity"`
-	Date                 string                                     `json:"date" url:"date"`
-	Status               PostV1ProductionOrdersCreateResponseStatus `json:"status" url:"status"`
-	TotalCost            *string                                    `json:"totalCost,omitempty" url:"totalCost,omitempty"`
-	JournalTransactionID *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
+	ID                   string                                                   `json:"id" url:"id"`
+	Type                 PostV1ProductionOrdersCreateResponseType                 `json:"type" url:"type"`
+	BomID                string                                                   `json:"bomId" url:"bomId"`
+	WarehouseID          string                                                   `json:"warehouseId" url:"warehouseId"`
+	RoutingID            *string                                                  `json:"routingId,omitempty" url:"routingId,omitempty"`
+	Quantity             string                                                   `json:"quantity" url:"quantity"`
+	Date                 string                                                   `json:"date" url:"date"`
+	Status               PostV1ProductionOrdersCreateResponseStatus               `json:"status" url:"status"`
+	ScrappedQuantity     *string                                                  `json:"scrappedQuantity,omitempty" url:"scrappedQuantity,omitempty"`
+	MaterialCost         *string                                                  `json:"materialCost,omitempty" url:"materialCost,omitempty"`
+	LaborCost            *string                                                  `json:"laborCost,omitempty" url:"laborCost,omitempty"`
+	ScrapCost            *string                                                  `json:"scrapCost,omitempty" url:"scrapCost,omitempty"`
+	TotalCost            *string                                                  `json:"totalCost,omitempty" url:"totalCost,omitempty"`
+	JournalTransactionID *string                                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            string                                                   `json:"createdAt" url:"createdAt"`
+	Operations           []*PostV1ProductionOrdersCreateResponseOperationsItem    `json:"operations" url:"operations"`
+	QualityChecks        []*PostV1ProductionOrdersCreateResponseQualityChecksItem `json:"qualityChecks" url:"qualityChecks"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2282,6 +5259,13 @@ func (p *PostV1ProductionOrdersCreateResponse) GetWarehouseID() string {
 	return p.WarehouseID
 }
 
+func (p *PostV1ProductionOrdersCreateResponse) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
+}
+
 func (p *PostV1ProductionOrdersCreateResponse) GetQuantity() string {
 	if p == nil {
 		return ""
@@ -2301,6 +5285,34 @@ func (p *PostV1ProductionOrdersCreateResponse) GetStatus() PostV1ProductionOrder
 		return ""
 	}
 	return p.Status
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetScrappedQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrappedQuantity
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetMaterialCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaterialCost
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetLaborCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LaborCost
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetScrapCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrapCost
 }
 
 func (p *PostV1ProductionOrdersCreateResponse) GetTotalCost() *string {
@@ -2329,6 +5341,20 @@ func (p *PostV1ProductionOrdersCreateResponse) GetCreatedAt() string {
 		return ""
 	}
 	return p.CreatedAt
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetOperations() []*PostV1ProductionOrdersCreateResponseOperationsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Operations
+}
+
+func (p *PostV1ProductionOrdersCreateResponse) GetQualityChecks() []*PostV1ProductionOrdersCreateResponseQualityChecksItem {
+	if p == nil {
+		return nil
+	}
+	return p.QualityChecks
 }
 
 func (p *PostV1ProductionOrdersCreateResponse) GetExtraProperties() map[string]interface{} {
@@ -2373,6 +5399,13 @@ func (p *PostV1ProductionOrdersCreateResponse) SetWarehouseID(warehouseID string
 	p.require(postV1ProductionOrdersCreateResponseFieldWarehouseID)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionOrdersCreateResponseFieldRoutingID)
+}
+
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionOrdersCreateResponse) SetQuantity(quantity string) {
@@ -2392,6 +5425,34 @@ func (p *PostV1ProductionOrdersCreateResponse) SetDate(date string) {
 func (p *PostV1ProductionOrdersCreateResponse) SetStatus(status PostV1ProductionOrdersCreateResponseStatus) {
 	p.Status = status
 	p.require(postV1ProductionOrdersCreateResponseFieldStatus)
+}
+
+// SetScrappedQuantity sets the ScrappedQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetScrappedQuantity(scrappedQuantity *string) {
+	p.ScrappedQuantity = scrappedQuantity
+	p.require(postV1ProductionOrdersCreateResponseFieldScrappedQuantity)
+}
+
+// SetMaterialCost sets the MaterialCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetMaterialCost(materialCost *string) {
+	p.MaterialCost = materialCost
+	p.require(postV1ProductionOrdersCreateResponseFieldMaterialCost)
+}
+
+// SetLaborCost sets the LaborCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetLaborCost(laborCost *string) {
+	p.LaborCost = laborCost
+	p.require(postV1ProductionOrdersCreateResponseFieldLaborCost)
+}
+
+// SetScrapCost sets the ScrapCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetScrapCost(scrapCost *string) {
+	p.ScrapCost = scrapCost
+	p.require(postV1ProductionOrdersCreateResponseFieldScrapCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
@@ -2420,6 +5481,20 @@ func (p *PostV1ProductionOrdersCreateResponse) SetNotes(notes *string) {
 func (p *PostV1ProductionOrdersCreateResponse) SetCreatedAt(createdAt string) {
 	p.CreatedAt = createdAt
 	p.require(postV1ProductionOrdersCreateResponseFieldCreatedAt)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetOperations(operations []*PostV1ProductionOrdersCreateResponseOperationsItem) {
+	p.Operations = operations
+	p.require(postV1ProductionOrdersCreateResponseFieldOperations)
+}
+
+// SetQualityChecks sets the QualityChecks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponse) SetQualityChecks(qualityChecks []*PostV1ProductionOrdersCreateResponseQualityChecksItem) {
+	p.QualityChecks = qualityChecks
+	p.require(postV1ProductionOrdersCreateResponseFieldQualityChecks)
 }
 
 func (p *PostV1ProductionOrdersCreateResponse) UnmarshalJSON(data []byte) error {
@@ -2462,6 +5537,455 @@ func (p *PostV1ProductionOrdersCreateResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionOrdersCreateResponseOperationsItemFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldRoutingOperationID = big.NewInt(1 << 1)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldWorkCenterID       = big.NewInt(1 << 2)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldSequence           = big.NewInt(1 << 3)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldName               = big.NewInt(1 << 4)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldPlannedMinutes     = big.NewInt(1 << 5)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldActualMinutes      = big.NewInt(1 << 6)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldCostPerHour        = big.NewInt(1 << 7)
+	postV1ProductionOrdersCreateResponseOperationsItemFieldCost               = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionOrdersCreateResponseOperationsItem struct {
+	ID                 string  `json:"id" url:"id"`
+	RoutingOperationID *string `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	WorkCenterID       string  `json:"workCenterId" url:"workCenterId"`
+	Sequence           int64   `json:"sequence" url:"sequence"`
+	Name               string  `json:"name" url:"name"`
+	PlannedMinutes     string  `json:"plannedMinutes" url:"plannedMinutes"`
+	ActualMinutes      *string `json:"actualMinutes,omitempty" url:"actualMinutes,omitempty"`
+	CostPerHour        string  `json:"costPerHour" url:"costPerHour"`
+	Cost               *string `json:"cost,omitempty" url:"cost,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetPlannedMinutes() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedMinutes
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetActualMinutes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ActualMinutes
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldRoutingOperationID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldWorkCenterID)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldName)
+}
+
+// SetPlannedMinutes sets the PlannedMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetPlannedMinutes(plannedMinutes string) {
+	p.PlannedMinutes = plannedMinutes
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldPlannedMinutes)
+}
+
+// SetActualMinutes sets the ActualMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetActualMinutes(actualMinutes *string) {
+	p.ActualMinutes = actualMinutes
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldActualMinutes)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldCostPerHour)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionOrdersCreateResponseOperationsItemFieldCost)
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersCreateResponseOperationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersCreateResponseOperationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersCreateResponseOperationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionOrdersCreateResponseOperationsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldOrderID            = big.NewInt(1 << 1)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldRoutingOperationID = big.NewInt(1 << 2)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldName               = big.NewInt(1 << 3)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldResult             = big.NewInt(1 << 4)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldNotes              = big.NewInt(1 << 5)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldCheckedAt          = big.NewInt(1 << 6)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldCheckedBy          = big.NewInt(1 << 7)
+	postV1ProductionOrdersCreateResponseQualityChecksItemFieldCreatedAt          = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionOrdersCreateResponseQualityChecksItem struct {
+	ID                 string                                                      `json:"id" url:"id"`
+	OrderID            string                                                      `json:"orderId" url:"orderId"`
+	RoutingOperationID *string                                                     `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	Name               string                                                      `json:"name" url:"name"`
+	Result             PostV1ProductionOrdersCreateResponseQualityChecksItemResult `json:"result" url:"result"`
+	Notes              *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CheckedAt          *string                                                     `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	CheckedBy          *string                                                     `json:"checkedBy,omitempty" url:"checkedBy,omitempty"`
+	CreatedAt          string                                                      `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetOrderID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OrderID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetResult() PostV1ProductionOrdersCreateResponseQualityChecksItemResult {
+	if p == nil {
+		return ""
+	}
+	return p.Result
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetCheckedBy() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedBy
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldID)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldOrderID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldRoutingOperationID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldName)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetResult(result PostV1ProductionOrdersCreateResponseQualityChecksItemResult) {
+	p.Result = result
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldNotes)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldCheckedAt)
+}
+
+// SetCheckedBy sets the CheckedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetCheckedBy(checkedBy *string) {
+	p.CheckedBy = checkedBy
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldCheckedBy)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionOrdersCreateResponseQualityChecksItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersCreateResponseQualityChecksItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersCreateResponseQualityChecksItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersCreateResponseQualityChecksItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionOrdersCreateResponseQualityChecksItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionOrdersCreateResponseQualityChecksItemResult string
+
+const (
+	PostV1ProductionOrdersCreateResponseQualityChecksItemResultPending PostV1ProductionOrdersCreateResponseQualityChecksItemResult = "pending"
+	PostV1ProductionOrdersCreateResponseQualityChecksItemResultPassed  PostV1ProductionOrdersCreateResponseQualityChecksItemResult = "passed"
+	PostV1ProductionOrdersCreateResponseQualityChecksItemResultFailed  PostV1ProductionOrdersCreateResponseQualityChecksItemResult = "failed"
+)
+
+func NewPostV1ProductionOrdersCreateResponseQualityChecksItemResultFromString(s string) (PostV1ProductionOrdersCreateResponseQualityChecksItemResult, error) {
+	switch s {
+	case "pending":
+		return PostV1ProductionOrdersCreateResponseQualityChecksItemResultPending, nil
+	case "passed":
+		return PostV1ProductionOrdersCreateResponseQualityChecksItemResultPassed, nil
+	case "failed":
+		return PostV1ProductionOrdersCreateResponseQualityChecksItemResultFailed, nil
+	}
+	var t PostV1ProductionOrdersCreateResponseQualityChecksItemResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionOrdersCreateResponseQualityChecksItemResult) Ptr() *PostV1ProductionOrdersCreateResponseQualityChecksItemResult {
+	return &p
 }
 
 type PostV1ProductionOrdersCreateResponseStatus string
@@ -2513,27 +6037,41 @@ var (
 	postV1ProductionOrdersGetResponseFieldType                 = big.NewInt(1 << 1)
 	postV1ProductionOrdersGetResponseFieldBomID                = big.NewInt(1 << 2)
 	postV1ProductionOrdersGetResponseFieldWarehouseID          = big.NewInt(1 << 3)
-	postV1ProductionOrdersGetResponseFieldQuantity             = big.NewInt(1 << 4)
-	postV1ProductionOrdersGetResponseFieldDate                 = big.NewInt(1 << 5)
-	postV1ProductionOrdersGetResponseFieldStatus               = big.NewInt(1 << 6)
-	postV1ProductionOrdersGetResponseFieldTotalCost            = big.NewInt(1 << 7)
-	postV1ProductionOrdersGetResponseFieldJournalTransactionID = big.NewInt(1 << 8)
-	postV1ProductionOrdersGetResponseFieldNotes                = big.NewInt(1 << 9)
-	postV1ProductionOrdersGetResponseFieldCreatedAt            = big.NewInt(1 << 10)
+	postV1ProductionOrdersGetResponseFieldRoutingID            = big.NewInt(1 << 4)
+	postV1ProductionOrdersGetResponseFieldQuantity             = big.NewInt(1 << 5)
+	postV1ProductionOrdersGetResponseFieldDate                 = big.NewInt(1 << 6)
+	postV1ProductionOrdersGetResponseFieldStatus               = big.NewInt(1 << 7)
+	postV1ProductionOrdersGetResponseFieldScrappedQuantity     = big.NewInt(1 << 8)
+	postV1ProductionOrdersGetResponseFieldMaterialCost         = big.NewInt(1 << 9)
+	postV1ProductionOrdersGetResponseFieldLaborCost            = big.NewInt(1 << 10)
+	postV1ProductionOrdersGetResponseFieldScrapCost            = big.NewInt(1 << 11)
+	postV1ProductionOrdersGetResponseFieldTotalCost            = big.NewInt(1 << 12)
+	postV1ProductionOrdersGetResponseFieldJournalTransactionID = big.NewInt(1 << 13)
+	postV1ProductionOrdersGetResponseFieldNotes                = big.NewInt(1 << 14)
+	postV1ProductionOrdersGetResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1ProductionOrdersGetResponseFieldOperations           = big.NewInt(1 << 16)
+	postV1ProductionOrdersGetResponseFieldQualityChecks        = big.NewInt(1 << 17)
 )
 
 type PostV1ProductionOrdersGetResponse struct {
-	ID                   string                                  `json:"id" url:"id"`
-	Type                 PostV1ProductionOrdersGetResponseType   `json:"type" url:"type"`
-	BomID                string                                  `json:"bomId" url:"bomId"`
-	WarehouseID          string                                  `json:"warehouseId" url:"warehouseId"`
-	Quantity             string                                  `json:"quantity" url:"quantity"`
-	Date                 string                                  `json:"date" url:"date"`
-	Status               PostV1ProductionOrdersGetResponseStatus `json:"status" url:"status"`
-	TotalCost            *string                                 `json:"totalCost,omitempty" url:"totalCost,omitempty"`
-	JournalTransactionID *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                  `json:"createdAt" url:"createdAt"`
+	ID                   string                                                `json:"id" url:"id"`
+	Type                 PostV1ProductionOrdersGetResponseType                 `json:"type" url:"type"`
+	BomID                string                                                `json:"bomId" url:"bomId"`
+	WarehouseID          string                                                `json:"warehouseId" url:"warehouseId"`
+	RoutingID            *string                                               `json:"routingId,omitempty" url:"routingId,omitempty"`
+	Quantity             string                                                `json:"quantity" url:"quantity"`
+	Date                 string                                                `json:"date" url:"date"`
+	Status               PostV1ProductionOrdersGetResponseStatus               `json:"status" url:"status"`
+	ScrappedQuantity     *string                                               `json:"scrappedQuantity,omitempty" url:"scrappedQuantity,omitempty"`
+	MaterialCost         *string                                               `json:"materialCost,omitempty" url:"materialCost,omitempty"`
+	LaborCost            *string                                               `json:"laborCost,omitempty" url:"laborCost,omitempty"`
+	ScrapCost            *string                                               `json:"scrapCost,omitempty" url:"scrapCost,omitempty"`
+	TotalCost            *string                                               `json:"totalCost,omitempty" url:"totalCost,omitempty"`
+	JournalTransactionID *string                                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            string                                                `json:"createdAt" url:"createdAt"`
+	Operations           []*PostV1ProductionOrdersGetResponseOperationsItem    `json:"operations" url:"operations"`
+	QualityChecks        []*PostV1ProductionOrdersGetResponseQualityChecksItem `json:"qualityChecks" url:"qualityChecks"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2570,6 +6108,13 @@ func (p *PostV1ProductionOrdersGetResponse) GetWarehouseID() string {
 	return p.WarehouseID
 }
 
+func (p *PostV1ProductionOrdersGetResponse) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
+}
+
 func (p *PostV1ProductionOrdersGetResponse) GetQuantity() string {
 	if p == nil {
 		return ""
@@ -2589,6 +6134,34 @@ func (p *PostV1ProductionOrdersGetResponse) GetStatus() PostV1ProductionOrdersGe
 		return ""
 	}
 	return p.Status
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetScrappedQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrappedQuantity
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetMaterialCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaterialCost
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetLaborCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LaborCost
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetScrapCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrapCost
 }
 
 func (p *PostV1ProductionOrdersGetResponse) GetTotalCost() *string {
@@ -2617,6 +6190,20 @@ func (p *PostV1ProductionOrdersGetResponse) GetCreatedAt() string {
 		return ""
 	}
 	return p.CreatedAt
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetOperations() []*PostV1ProductionOrdersGetResponseOperationsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Operations
+}
+
+func (p *PostV1ProductionOrdersGetResponse) GetQualityChecks() []*PostV1ProductionOrdersGetResponseQualityChecksItem {
+	if p == nil {
+		return nil
+	}
+	return p.QualityChecks
 }
 
 func (p *PostV1ProductionOrdersGetResponse) GetExtraProperties() map[string]interface{} {
@@ -2661,6 +6248,13 @@ func (p *PostV1ProductionOrdersGetResponse) SetWarehouseID(warehouseID string) {
 	p.require(postV1ProductionOrdersGetResponseFieldWarehouseID)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionOrdersGetResponseFieldRoutingID)
+}
+
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionOrdersGetResponse) SetQuantity(quantity string) {
@@ -2680,6 +6274,34 @@ func (p *PostV1ProductionOrdersGetResponse) SetDate(date string) {
 func (p *PostV1ProductionOrdersGetResponse) SetStatus(status PostV1ProductionOrdersGetResponseStatus) {
 	p.Status = status
 	p.require(postV1ProductionOrdersGetResponseFieldStatus)
+}
+
+// SetScrappedQuantity sets the ScrappedQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetScrappedQuantity(scrappedQuantity *string) {
+	p.ScrappedQuantity = scrappedQuantity
+	p.require(postV1ProductionOrdersGetResponseFieldScrappedQuantity)
+}
+
+// SetMaterialCost sets the MaterialCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetMaterialCost(materialCost *string) {
+	p.MaterialCost = materialCost
+	p.require(postV1ProductionOrdersGetResponseFieldMaterialCost)
+}
+
+// SetLaborCost sets the LaborCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetLaborCost(laborCost *string) {
+	p.LaborCost = laborCost
+	p.require(postV1ProductionOrdersGetResponseFieldLaborCost)
+}
+
+// SetScrapCost sets the ScrapCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetScrapCost(scrapCost *string) {
+	p.ScrapCost = scrapCost
+	p.require(postV1ProductionOrdersGetResponseFieldScrapCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
@@ -2708,6 +6330,20 @@ func (p *PostV1ProductionOrdersGetResponse) SetNotes(notes *string) {
 func (p *PostV1ProductionOrdersGetResponse) SetCreatedAt(createdAt string) {
 	p.CreatedAt = createdAt
 	p.require(postV1ProductionOrdersGetResponseFieldCreatedAt)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetOperations(operations []*PostV1ProductionOrdersGetResponseOperationsItem) {
+	p.Operations = operations
+	p.require(postV1ProductionOrdersGetResponseFieldOperations)
+}
+
+// SetQualityChecks sets the QualityChecks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponse) SetQualityChecks(qualityChecks []*PostV1ProductionOrdersGetResponseQualityChecksItem) {
+	p.QualityChecks = qualityChecks
+	p.require(postV1ProductionOrdersGetResponseFieldQualityChecks)
 }
 
 func (p *PostV1ProductionOrdersGetResponse) UnmarshalJSON(data []byte) error {
@@ -2750,6 +6386,455 @@ func (p *PostV1ProductionOrdersGetResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionOrdersGetResponseOperationsItemFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionOrdersGetResponseOperationsItemFieldRoutingOperationID = big.NewInt(1 << 1)
+	postV1ProductionOrdersGetResponseOperationsItemFieldWorkCenterID       = big.NewInt(1 << 2)
+	postV1ProductionOrdersGetResponseOperationsItemFieldSequence           = big.NewInt(1 << 3)
+	postV1ProductionOrdersGetResponseOperationsItemFieldName               = big.NewInt(1 << 4)
+	postV1ProductionOrdersGetResponseOperationsItemFieldPlannedMinutes     = big.NewInt(1 << 5)
+	postV1ProductionOrdersGetResponseOperationsItemFieldActualMinutes      = big.NewInt(1 << 6)
+	postV1ProductionOrdersGetResponseOperationsItemFieldCostPerHour        = big.NewInt(1 << 7)
+	postV1ProductionOrdersGetResponseOperationsItemFieldCost               = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionOrdersGetResponseOperationsItem struct {
+	ID                 string  `json:"id" url:"id"`
+	RoutingOperationID *string `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	WorkCenterID       string  `json:"workCenterId" url:"workCenterId"`
+	Sequence           int64   `json:"sequence" url:"sequence"`
+	Name               string  `json:"name" url:"name"`
+	PlannedMinutes     string  `json:"plannedMinutes" url:"plannedMinutes"`
+	ActualMinutes      *string `json:"actualMinutes,omitempty" url:"actualMinutes,omitempty"`
+	CostPerHour        string  `json:"costPerHour" url:"costPerHour"`
+	Cost               *string `json:"cost,omitempty" url:"cost,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetPlannedMinutes() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedMinutes
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetActualMinutes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ActualMinutes
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldRoutingOperationID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldWorkCenterID)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldName)
+}
+
+// SetPlannedMinutes sets the PlannedMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetPlannedMinutes(plannedMinutes string) {
+	p.PlannedMinutes = plannedMinutes
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldPlannedMinutes)
+}
+
+// SetActualMinutes sets the ActualMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetActualMinutes(actualMinutes *string) {
+	p.ActualMinutes = actualMinutes
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldActualMinutes)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldCostPerHour)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionOrdersGetResponseOperationsItemFieldCost)
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersGetResponseOperationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersGetResponseOperationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersGetResponseOperationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionOrdersGetResponseOperationsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldOrderID            = big.NewInt(1 << 1)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldRoutingOperationID = big.NewInt(1 << 2)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldName               = big.NewInt(1 << 3)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldResult             = big.NewInt(1 << 4)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldNotes              = big.NewInt(1 << 5)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldCheckedAt          = big.NewInt(1 << 6)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldCheckedBy          = big.NewInt(1 << 7)
+	postV1ProductionOrdersGetResponseQualityChecksItemFieldCreatedAt          = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionOrdersGetResponseQualityChecksItem struct {
+	ID                 string                                                   `json:"id" url:"id"`
+	OrderID            string                                                   `json:"orderId" url:"orderId"`
+	RoutingOperationID *string                                                  `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	Name               string                                                   `json:"name" url:"name"`
+	Result             PostV1ProductionOrdersGetResponseQualityChecksItemResult `json:"result" url:"result"`
+	Notes              *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	CheckedAt          *string                                                  `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	CheckedBy          *string                                                  `json:"checkedBy,omitempty" url:"checkedBy,omitempty"`
+	CreatedAt          string                                                   `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetOrderID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OrderID
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetResult() PostV1ProductionOrdersGetResponseQualityChecksItemResult {
+	if p == nil {
+		return ""
+	}
+	return p.Result
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetCheckedBy() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedBy
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldID)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldOrderID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldRoutingOperationID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldName)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetResult(result PostV1ProductionOrdersGetResponseQualityChecksItemResult) {
+	p.Result = result
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldNotes)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldCheckedAt)
+}
+
+// SetCheckedBy sets the CheckedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetCheckedBy(checkedBy *string) {
+	p.CheckedBy = checkedBy
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldCheckedBy)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionOrdersGetResponseQualityChecksItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersGetResponseQualityChecksItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersGetResponseQualityChecksItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersGetResponseQualityChecksItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionOrdersGetResponseQualityChecksItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionOrdersGetResponseQualityChecksItemResult string
+
+const (
+	PostV1ProductionOrdersGetResponseQualityChecksItemResultPending PostV1ProductionOrdersGetResponseQualityChecksItemResult = "pending"
+	PostV1ProductionOrdersGetResponseQualityChecksItemResultPassed  PostV1ProductionOrdersGetResponseQualityChecksItemResult = "passed"
+	PostV1ProductionOrdersGetResponseQualityChecksItemResultFailed  PostV1ProductionOrdersGetResponseQualityChecksItemResult = "failed"
+)
+
+func NewPostV1ProductionOrdersGetResponseQualityChecksItemResultFromString(s string) (PostV1ProductionOrdersGetResponseQualityChecksItemResult, error) {
+	switch s {
+	case "pending":
+		return PostV1ProductionOrdersGetResponseQualityChecksItemResultPending, nil
+	case "passed":
+		return PostV1ProductionOrdersGetResponseQualityChecksItemResultPassed, nil
+	case "failed":
+		return PostV1ProductionOrdersGetResponseQualityChecksItemResultFailed, nil
+	}
+	var t PostV1ProductionOrdersGetResponseQualityChecksItemResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionOrdersGetResponseQualityChecksItemResult) Ptr() *PostV1ProductionOrdersGetResponseQualityChecksItemResult {
+	return &p
 }
 
 type PostV1ProductionOrdersGetResponseStatus string
@@ -3371,13 +7456,18 @@ var (
 	postV1ProductionOrdersListResponseRowsItemFieldType                 = big.NewInt(1 << 1)
 	postV1ProductionOrdersListResponseRowsItemFieldBomID                = big.NewInt(1 << 2)
 	postV1ProductionOrdersListResponseRowsItemFieldWarehouseID          = big.NewInt(1 << 3)
-	postV1ProductionOrdersListResponseRowsItemFieldQuantity             = big.NewInt(1 << 4)
-	postV1ProductionOrdersListResponseRowsItemFieldDate                 = big.NewInt(1 << 5)
-	postV1ProductionOrdersListResponseRowsItemFieldStatus               = big.NewInt(1 << 6)
-	postV1ProductionOrdersListResponseRowsItemFieldTotalCost            = big.NewInt(1 << 7)
-	postV1ProductionOrdersListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 8)
-	postV1ProductionOrdersListResponseRowsItemFieldNotes                = big.NewInt(1 << 9)
-	postV1ProductionOrdersListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 10)
+	postV1ProductionOrdersListResponseRowsItemFieldRoutingID            = big.NewInt(1 << 4)
+	postV1ProductionOrdersListResponseRowsItemFieldQuantity             = big.NewInt(1 << 5)
+	postV1ProductionOrdersListResponseRowsItemFieldDate                 = big.NewInt(1 << 6)
+	postV1ProductionOrdersListResponseRowsItemFieldStatus               = big.NewInt(1 << 7)
+	postV1ProductionOrdersListResponseRowsItemFieldScrappedQuantity     = big.NewInt(1 << 8)
+	postV1ProductionOrdersListResponseRowsItemFieldMaterialCost         = big.NewInt(1 << 9)
+	postV1ProductionOrdersListResponseRowsItemFieldLaborCost            = big.NewInt(1 << 10)
+	postV1ProductionOrdersListResponseRowsItemFieldScrapCost            = big.NewInt(1 << 11)
+	postV1ProductionOrdersListResponseRowsItemFieldTotalCost            = big.NewInt(1 << 12)
+	postV1ProductionOrdersListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 13)
+	postV1ProductionOrdersListResponseRowsItemFieldNotes                = big.NewInt(1 << 14)
+	postV1ProductionOrdersListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 15)
 )
 
 type PostV1ProductionOrdersListResponseRowsItem struct {
@@ -3385,9 +7475,14 @@ type PostV1ProductionOrdersListResponseRowsItem struct {
 	Type                 PostV1ProductionOrdersListResponseRowsItemType   `json:"type" url:"type"`
 	BomID                string                                           `json:"bomId" url:"bomId"`
 	WarehouseID          string                                           `json:"warehouseId" url:"warehouseId"`
+	RoutingID            *string                                          `json:"routingId,omitempty" url:"routingId,omitempty"`
 	Quantity             string                                           `json:"quantity" url:"quantity"`
 	Date                 string                                           `json:"date" url:"date"`
 	Status               PostV1ProductionOrdersListResponseRowsItemStatus `json:"status" url:"status"`
+	ScrappedQuantity     *string                                          `json:"scrappedQuantity,omitempty" url:"scrappedQuantity,omitempty"`
+	MaterialCost         *string                                          `json:"materialCost,omitempty" url:"materialCost,omitempty"`
+	LaborCost            *string                                          `json:"laborCost,omitempty" url:"laborCost,omitempty"`
+	ScrapCost            *string                                          `json:"scrapCost,omitempty" url:"scrapCost,omitempty"`
 	TotalCost            *string                                          `json:"totalCost,omitempty" url:"totalCost,omitempty"`
 	JournalTransactionID *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
@@ -3428,6 +7523,13 @@ func (p *PostV1ProductionOrdersListResponseRowsItem) GetWarehouseID() string {
 	return p.WarehouseID
 }
 
+func (p *PostV1ProductionOrdersListResponseRowsItem) GetRoutingID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingID
+}
+
 func (p *PostV1ProductionOrdersListResponseRowsItem) GetQuantity() string {
 	if p == nil {
 		return ""
@@ -3447,6 +7549,34 @@ func (p *PostV1ProductionOrdersListResponseRowsItem) GetStatus() PostV1Productio
 		return ""
 	}
 	return p.Status
+}
+
+func (p *PostV1ProductionOrdersListResponseRowsItem) GetScrappedQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrappedQuantity
+}
+
+func (p *PostV1ProductionOrdersListResponseRowsItem) GetMaterialCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaterialCost
+}
+
+func (p *PostV1ProductionOrdersListResponseRowsItem) GetLaborCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LaborCost
+}
+
+func (p *PostV1ProductionOrdersListResponseRowsItem) GetScrapCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ScrapCost
 }
 
 func (p *PostV1ProductionOrdersListResponseRowsItem) GetTotalCost() *string {
@@ -3519,6 +7649,13 @@ func (p *PostV1ProductionOrdersListResponseRowsItem) SetWarehouseID(warehouseID 
 	p.require(postV1ProductionOrdersListResponseRowsItemFieldWarehouseID)
 }
 
+// SetRoutingID sets the RoutingID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersListResponseRowsItem) SetRoutingID(routingID *string) {
+	p.RoutingID = routingID
+	p.require(postV1ProductionOrdersListResponseRowsItemFieldRoutingID)
+}
+
 // SetQuantity sets the Quantity field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1ProductionOrdersListResponseRowsItem) SetQuantity(quantity string) {
@@ -3538,6 +7675,34 @@ func (p *PostV1ProductionOrdersListResponseRowsItem) SetDate(date string) {
 func (p *PostV1ProductionOrdersListResponseRowsItem) SetStatus(status PostV1ProductionOrdersListResponseRowsItemStatus) {
 	p.Status = status
 	p.require(postV1ProductionOrdersListResponseRowsItemFieldStatus)
+}
+
+// SetScrappedQuantity sets the ScrappedQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersListResponseRowsItem) SetScrappedQuantity(scrappedQuantity *string) {
+	p.ScrappedQuantity = scrappedQuantity
+	p.require(postV1ProductionOrdersListResponseRowsItemFieldScrappedQuantity)
+}
+
+// SetMaterialCost sets the MaterialCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersListResponseRowsItem) SetMaterialCost(materialCost *string) {
+	p.MaterialCost = materialCost
+	p.require(postV1ProductionOrdersListResponseRowsItemFieldMaterialCost)
+}
+
+// SetLaborCost sets the LaborCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersListResponseRowsItem) SetLaborCost(laborCost *string) {
+	p.LaborCost = laborCost
+	p.require(postV1ProductionOrdersListResponseRowsItemFieldLaborCost)
+}
+
+// SetScrapCost sets the ScrapCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersListResponseRowsItem) SetScrapCost(scrapCost *string) {
+	p.ScrapCost = scrapCost
+	p.require(postV1ProductionOrdersListResponseRowsItemFieldScrapCost)
 }
 
 // SetTotalCost sets the TotalCost field and marks it as non-optional;
@@ -3652,4 +7817,4439 @@ func NewPostV1ProductionOrdersListResponseRowsItemTypeFromString(s string) (Post
 
 func (p PostV1ProductionOrdersListResponseRowsItemType) Ptr() *PostV1ProductionOrdersListResponseRowsItemType {
 	return &p
+}
+
+var (
+	postV1ProductionOrdersRecordOperationResponseFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionOrdersRecordOperationResponseFieldRoutingOperationID = big.NewInt(1 << 1)
+	postV1ProductionOrdersRecordOperationResponseFieldWorkCenterID       = big.NewInt(1 << 2)
+	postV1ProductionOrdersRecordOperationResponseFieldSequence           = big.NewInt(1 << 3)
+	postV1ProductionOrdersRecordOperationResponseFieldName               = big.NewInt(1 << 4)
+	postV1ProductionOrdersRecordOperationResponseFieldPlannedMinutes     = big.NewInt(1 << 5)
+	postV1ProductionOrdersRecordOperationResponseFieldActualMinutes      = big.NewInt(1 << 6)
+	postV1ProductionOrdersRecordOperationResponseFieldCostPerHour        = big.NewInt(1 << 7)
+	postV1ProductionOrdersRecordOperationResponseFieldCost               = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionOrdersRecordOperationResponse struct {
+	ID                 string  `json:"id" url:"id"`
+	RoutingOperationID *string `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	WorkCenterID       string  `json:"workCenterId" url:"workCenterId"`
+	Sequence           int64   `json:"sequence" url:"sequence"`
+	Name               string  `json:"name" url:"name"`
+	PlannedMinutes     string  `json:"plannedMinutes" url:"plannedMinutes"`
+	ActualMinutes      *string `json:"actualMinutes,omitempty" url:"actualMinutes,omitempty"`
+	CostPerHour        string  `json:"costPerHour" url:"costPerHour"`
+	Cost               *string `json:"cost,omitempty" url:"cost,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetPlannedMinutes() string {
+	if p == nil {
+		return ""
+	}
+	return p.PlannedMinutes
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetActualMinutes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ActualMinutes
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetCost() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Cost
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldRoutingOperationID)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldWorkCenterID)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldName)
+}
+
+// SetPlannedMinutes sets the PlannedMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetPlannedMinutes(plannedMinutes string) {
+	p.PlannedMinutes = plannedMinutes
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldPlannedMinutes)
+}
+
+// SetActualMinutes sets the ActualMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetActualMinutes(actualMinutes *string) {
+	p.ActualMinutes = actualMinutes
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldActualMinutes)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldCostPerHour)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionOrdersRecordOperationResponse) SetCost(cost *string) {
+	p.Cost = cost
+	p.require(postV1ProductionOrdersRecordOperationResponseFieldCost)
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionOrdersRecordOperationResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionOrdersRecordOperationResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionOrdersRecordOperationResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionOrdersRecordOperationResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionQualityChecksAddResponseFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksAddResponseFieldOrderID            = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksAddResponseFieldRoutingOperationID = big.NewInt(1 << 2)
+	postV1ProductionQualityChecksAddResponseFieldName               = big.NewInt(1 << 3)
+	postV1ProductionQualityChecksAddResponseFieldResult             = big.NewInt(1 << 4)
+	postV1ProductionQualityChecksAddResponseFieldNotes              = big.NewInt(1 << 5)
+	postV1ProductionQualityChecksAddResponseFieldCheckedAt          = big.NewInt(1 << 6)
+	postV1ProductionQualityChecksAddResponseFieldCheckedBy          = big.NewInt(1 << 7)
+	postV1ProductionQualityChecksAddResponseFieldCreatedAt          = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionQualityChecksAddResponse struct {
+	ID                 string                                         `json:"id" url:"id"`
+	OrderID            string                                         `json:"orderId" url:"orderId"`
+	RoutingOperationID *string                                        `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	Name               string                                         `json:"name" url:"name"`
+	Result             PostV1ProductionQualityChecksAddResponseResult `json:"result" url:"result"`
+	Notes              *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	CheckedAt          *string                                        `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	CheckedBy          *string                                        `json:"checkedBy,omitempty" url:"checkedBy,omitempty"`
+	CreatedAt          string                                         `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetOrderID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OrderID
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetResult() PostV1ProductionQualityChecksAddResponseResult {
+	if p == nil {
+		return ""
+	}
+	return p.Result
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetCheckedBy() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedBy
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionQualityChecksAddResponseFieldID)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionQualityChecksAddResponseFieldOrderID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionQualityChecksAddResponseFieldRoutingOperationID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionQualityChecksAddResponseFieldName)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetResult(result PostV1ProductionQualityChecksAddResponseResult) {
+	p.Result = result
+	p.require(postV1ProductionQualityChecksAddResponseFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionQualityChecksAddResponseFieldNotes)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1ProductionQualityChecksAddResponseFieldCheckedAt)
+}
+
+// SetCheckedBy sets the CheckedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetCheckedBy(checkedBy *string) {
+	p.CheckedBy = checkedBy
+	p.require(postV1ProductionQualityChecksAddResponseFieldCheckedBy)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksAddResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionQualityChecksAddResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksAddResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksAddResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksAddResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksAddResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionQualityChecksAddResponseResult string
+
+const (
+	PostV1ProductionQualityChecksAddResponseResultPending PostV1ProductionQualityChecksAddResponseResult = "pending"
+	PostV1ProductionQualityChecksAddResponseResultPassed  PostV1ProductionQualityChecksAddResponseResult = "passed"
+	PostV1ProductionQualityChecksAddResponseResultFailed  PostV1ProductionQualityChecksAddResponseResult = "failed"
+)
+
+func NewPostV1ProductionQualityChecksAddResponseResultFromString(s string) (PostV1ProductionQualityChecksAddResponseResult, error) {
+	switch s {
+	case "pending":
+		return PostV1ProductionQualityChecksAddResponseResultPending, nil
+	case "passed":
+		return PostV1ProductionQualityChecksAddResponseResultPassed, nil
+	case "failed":
+		return PostV1ProductionQualityChecksAddResponseResultFailed, nil
+	}
+	var t PostV1ProductionQualityChecksAddResponseResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksAddResponseResult) Ptr() *PostV1ProductionQualityChecksAddResponseResult {
+	return &p
+}
+
+var (
+	postV1ProductionQualityChecksListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionQualityChecksListRequestFilterItem struct {
+	Field string                                                   `json:"field" url:"field"`
+	Op    PostV1ProductionQualityChecksListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1ProductionQualityChecksListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) GetOp() PostV1ProductionQualityChecksListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) GetValue() *PostV1ProductionQualityChecksListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionQualityChecksListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) SetOp(op PostV1ProductionQualityChecksListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1ProductionQualityChecksListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) SetValue(value *PostV1ProductionQualityChecksListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1ProductionQualityChecksListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionQualityChecksListRequestFilterItemOp string
+
+const (
+	PostV1ProductionQualityChecksListRequestFilterItemOpEq       PostV1ProductionQualityChecksListRequestFilterItemOp = "eq"
+	PostV1ProductionQualityChecksListRequestFilterItemOpNe       PostV1ProductionQualityChecksListRequestFilterItemOp = "ne"
+	PostV1ProductionQualityChecksListRequestFilterItemOpContains PostV1ProductionQualityChecksListRequestFilterItemOp = "contains"
+	PostV1ProductionQualityChecksListRequestFilterItemOpGte      PostV1ProductionQualityChecksListRequestFilterItemOp = "gte"
+	PostV1ProductionQualityChecksListRequestFilterItemOpLte      PostV1ProductionQualityChecksListRequestFilterItemOp = "lte"
+	PostV1ProductionQualityChecksListRequestFilterItemOpIn       PostV1ProductionQualityChecksListRequestFilterItemOp = "in"
+)
+
+func NewPostV1ProductionQualityChecksListRequestFilterItemOpFromString(s string) (PostV1ProductionQualityChecksListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1ProductionQualityChecksListRequestFilterItemOpIn, nil
+	}
+	var t PostV1ProductionQualityChecksListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksListRequestFilterItemOp) Ptr() *PostV1ProductionQualityChecksListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1ProductionQualityChecksListRequestFilterItemValue struct {
+	String                                                               string
+	Double                                                               float64
+	Boolean                                                              bool
+	PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList []*PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) GetPostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList() []*PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList []*PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList"
+		p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList = valuePostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionQualityChecksListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList" || p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionQualityChecksListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList([]*PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValue) Accept(visitor PostV1ProductionQualityChecksListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList" || p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList(p.PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1ProductionQualityChecksListRequestFilterItemValueThreeItem) Accept(visitor PostV1ProductionQualityChecksListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1ProductionQualityChecksListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1ProductionQualityChecksListRequestSortItem struct {
+	Field string                                               `json:"field" url:"field"`
+	Dir   *PostV1ProductionQualityChecksListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) GetDir() *PostV1ProductionQualityChecksListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionQualityChecksListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListRequestSortItem) SetDir(dir *PostV1ProductionQualityChecksListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1ProductionQualityChecksListRequestSortItemFieldDir)
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionQualityChecksListRequestSortItemDir string
+
+const (
+	PostV1ProductionQualityChecksListRequestSortItemDirAsc  PostV1ProductionQualityChecksListRequestSortItemDir = "asc"
+	PostV1ProductionQualityChecksListRequestSortItemDirDesc PostV1ProductionQualityChecksListRequestSortItemDir = "desc"
+)
+
+func NewPostV1ProductionQualityChecksListRequestSortItemDirFromString(s string) (PostV1ProductionQualityChecksListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1ProductionQualityChecksListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1ProductionQualityChecksListRequestSortItemDirDesc, nil
+	}
+	var t PostV1ProductionQualityChecksListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksListRequestSortItemDir) Ptr() *PostV1ProductionQualityChecksListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1ProductionQualityChecksListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1ProductionQualityChecksListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionQualityChecksListResponse struct {
+	Rows     []*PostV1ProductionQualityChecksListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                                `json:"page" url:"page"`
+	PageSize int64                                                `json:"pageSize" url:"pageSize"`
+	Total    int64                                                `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) GetRows() []*PostV1ProductionQualityChecksListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponse) SetRows(rows []*PostV1ProductionQualityChecksListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ProductionQualityChecksListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1ProductionQualityChecksListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionQualityChecksListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1ProductionQualityChecksListResponseFieldTotal)
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionQualityChecksListResponseRowsItemFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksListResponseRowsItemFieldOrderID            = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksListResponseRowsItemFieldRoutingOperationID = big.NewInt(1 << 2)
+	postV1ProductionQualityChecksListResponseRowsItemFieldName               = big.NewInt(1 << 3)
+	postV1ProductionQualityChecksListResponseRowsItemFieldResult             = big.NewInt(1 << 4)
+	postV1ProductionQualityChecksListResponseRowsItemFieldNotes              = big.NewInt(1 << 5)
+	postV1ProductionQualityChecksListResponseRowsItemFieldCheckedAt          = big.NewInt(1 << 6)
+	postV1ProductionQualityChecksListResponseRowsItemFieldCheckedBy          = big.NewInt(1 << 7)
+	postV1ProductionQualityChecksListResponseRowsItemFieldCreatedAt          = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionQualityChecksListResponseRowsItem struct {
+	ID                 string                                                  `json:"id" url:"id"`
+	OrderID            string                                                  `json:"orderId" url:"orderId"`
+	RoutingOperationID *string                                                 `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	Name               string                                                  `json:"name" url:"name"`
+	Result             PostV1ProductionQualityChecksListResponseRowsItemResult `json:"result" url:"result"`
+	Notes              *string                                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	CheckedAt          *string                                                 `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	CheckedBy          *string                                                 `json:"checkedBy,omitempty" url:"checkedBy,omitempty"`
+	CreatedAt          string                                                  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetOrderID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OrderID
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetResult() PostV1ProductionQualityChecksListResponseRowsItemResult {
+	if p == nil {
+		return ""
+	}
+	return p.Result
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetCheckedBy() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedBy
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldID)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldOrderID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldRoutingOperationID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldName)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetResult(result PostV1ProductionQualityChecksListResponseRowsItemResult) {
+	p.Result = result
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldNotes)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldCheckedAt)
+}
+
+// SetCheckedBy sets the CheckedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetCheckedBy(checkedBy *string) {
+	p.CheckedBy = checkedBy
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldCheckedBy)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionQualityChecksListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionQualityChecksListResponseRowsItemResult string
+
+const (
+	PostV1ProductionQualityChecksListResponseRowsItemResultPending PostV1ProductionQualityChecksListResponseRowsItemResult = "pending"
+	PostV1ProductionQualityChecksListResponseRowsItemResultPassed  PostV1ProductionQualityChecksListResponseRowsItemResult = "passed"
+	PostV1ProductionQualityChecksListResponseRowsItemResultFailed  PostV1ProductionQualityChecksListResponseRowsItemResult = "failed"
+)
+
+func NewPostV1ProductionQualityChecksListResponseRowsItemResultFromString(s string) (PostV1ProductionQualityChecksListResponseRowsItemResult, error) {
+	switch s {
+	case "pending":
+		return PostV1ProductionQualityChecksListResponseRowsItemResultPending, nil
+	case "passed":
+		return PostV1ProductionQualityChecksListResponseRowsItemResultPassed, nil
+	case "failed":
+		return PostV1ProductionQualityChecksListResponseRowsItemResultFailed, nil
+	}
+	var t PostV1ProductionQualityChecksListResponseRowsItemResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksListResponseRowsItemResult) Ptr() *PostV1ProductionQualityChecksListResponseRowsItemResult {
+	return &p
+}
+
+type PostV1ProductionQualityChecksRecordRequestResult string
+
+const (
+	PostV1ProductionQualityChecksRecordRequestResultPassed PostV1ProductionQualityChecksRecordRequestResult = "passed"
+	PostV1ProductionQualityChecksRecordRequestResultFailed PostV1ProductionQualityChecksRecordRequestResult = "failed"
+)
+
+func NewPostV1ProductionQualityChecksRecordRequestResultFromString(s string) (PostV1ProductionQualityChecksRecordRequestResult, error) {
+	switch s {
+	case "passed":
+		return PostV1ProductionQualityChecksRecordRequestResultPassed, nil
+	case "failed":
+		return PostV1ProductionQualityChecksRecordRequestResultFailed, nil
+	}
+	var t PostV1ProductionQualityChecksRecordRequestResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksRecordRequestResult) Ptr() *PostV1ProductionQualityChecksRecordRequestResult {
+	return &p
+}
+
+var (
+	postV1ProductionQualityChecksRecordResponseFieldID                 = big.NewInt(1 << 0)
+	postV1ProductionQualityChecksRecordResponseFieldOrderID            = big.NewInt(1 << 1)
+	postV1ProductionQualityChecksRecordResponseFieldRoutingOperationID = big.NewInt(1 << 2)
+	postV1ProductionQualityChecksRecordResponseFieldName               = big.NewInt(1 << 3)
+	postV1ProductionQualityChecksRecordResponseFieldResult             = big.NewInt(1 << 4)
+	postV1ProductionQualityChecksRecordResponseFieldNotes              = big.NewInt(1 << 5)
+	postV1ProductionQualityChecksRecordResponseFieldCheckedAt          = big.NewInt(1 << 6)
+	postV1ProductionQualityChecksRecordResponseFieldCheckedBy          = big.NewInt(1 << 7)
+	postV1ProductionQualityChecksRecordResponseFieldCreatedAt          = big.NewInt(1 << 8)
+)
+
+type PostV1ProductionQualityChecksRecordResponse struct {
+	ID                 string                                            `json:"id" url:"id"`
+	OrderID            string                                            `json:"orderId" url:"orderId"`
+	RoutingOperationID *string                                           `json:"routingOperationId,omitempty" url:"routingOperationId,omitempty"`
+	Name               string                                            `json:"name" url:"name"`
+	Result             PostV1ProductionQualityChecksRecordResponseResult `json:"result" url:"result"`
+	Notes              *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	CheckedAt          *string                                           `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	CheckedBy          *string                                           `json:"checkedBy,omitempty" url:"checkedBy,omitempty"`
+	CreatedAt          string                                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetOrderID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OrderID
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetRoutingOperationID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RoutingOperationID
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetResult() PostV1ProductionQualityChecksRecordResponseResult {
+	if p == nil {
+		return ""
+	}
+	return p.Result
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetCheckedBy() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedBy
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionQualityChecksRecordResponseFieldID)
+}
+
+// SetOrderID sets the OrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetOrderID(orderID string) {
+	p.OrderID = orderID
+	p.require(postV1ProductionQualityChecksRecordResponseFieldOrderID)
+}
+
+// SetRoutingOperationID sets the RoutingOperationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetRoutingOperationID(routingOperationID *string) {
+	p.RoutingOperationID = routingOperationID
+	p.require(postV1ProductionQualityChecksRecordResponseFieldRoutingOperationID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionQualityChecksRecordResponseFieldName)
+}
+
+// SetResult sets the Result field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetResult(result PostV1ProductionQualityChecksRecordResponseResult) {
+	p.Result = result
+	p.require(postV1ProductionQualityChecksRecordResponseFieldResult)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionQualityChecksRecordResponseFieldNotes)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1ProductionQualityChecksRecordResponseFieldCheckedAt)
+}
+
+// SetCheckedBy sets the CheckedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetCheckedBy(checkedBy *string) {
+	p.CheckedBy = checkedBy
+	p.require(postV1ProductionQualityChecksRecordResponseFieldCheckedBy)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionQualityChecksRecordResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionQualityChecksRecordResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionQualityChecksRecordResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionQualityChecksRecordResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionQualityChecksRecordResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionQualityChecksRecordResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionQualityChecksRecordResponseResult string
+
+const (
+	PostV1ProductionQualityChecksRecordResponseResultPending PostV1ProductionQualityChecksRecordResponseResult = "pending"
+	PostV1ProductionQualityChecksRecordResponseResultPassed  PostV1ProductionQualityChecksRecordResponseResult = "passed"
+	PostV1ProductionQualityChecksRecordResponseResultFailed  PostV1ProductionQualityChecksRecordResponseResult = "failed"
+)
+
+func NewPostV1ProductionQualityChecksRecordResponseResultFromString(s string) (PostV1ProductionQualityChecksRecordResponseResult, error) {
+	switch s {
+	case "pending":
+		return PostV1ProductionQualityChecksRecordResponseResultPending, nil
+	case "passed":
+		return PostV1ProductionQualityChecksRecordResponseResultPassed, nil
+	case "failed":
+		return PostV1ProductionQualityChecksRecordResponseResultFailed, nil
+	}
+	var t PostV1ProductionQualityChecksRecordResponseResult
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionQualityChecksRecordResponseResult) Ptr() *PostV1ProductionQualityChecksRecordResponseResult {
+	return &p
+}
+
+var (
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldSequence          = big.NewInt(1 << 0)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldName              = big.NewInt(1 << 1)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldWorkCenterID      = big.NewInt(1 << 2)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldSetupMinutes      = big.NewInt(1 << 3)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldRunMinutesPerUnit = big.NewInt(1 << 4)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldQualityCheckName  = big.NewInt(1 << 5)
+	postV1ProductionRoutingsCreateRequestOperationsItemFieldNotes             = big.NewInt(1 << 6)
+)
+
+type PostV1ProductionRoutingsCreateRequestOperationsItem struct {
+	Sequence          int64   `json:"sequence" url:"sequence"`
+	Name              string  `json:"name" url:"name"`
+	WorkCenterID      string  `json:"workCenterId" url:"workCenterId"`
+	SetupMinutes      *string `json:"setupMinutes,omitempty" url:"setupMinutes,omitempty"`
+	RunMinutesPerUnit *string `json:"runMinutesPerUnit,omitempty" url:"runMinutesPerUnit,omitempty"`
+	QualityCheckName  *string `json:"qualityCheckName,omitempty" url:"qualityCheckName,omitempty"`
+	Notes             *string `json:"notes,omitempty" url:"notes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetSetupMinutes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SetupMinutes
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetRunMinutesPerUnit() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RunMinutesPerUnit
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetQualityCheckName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.QualityCheckName
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldName)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldWorkCenterID)
+}
+
+// SetSetupMinutes sets the SetupMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetSetupMinutes(setupMinutes *string) {
+	p.SetupMinutes = setupMinutes
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldSetupMinutes)
+}
+
+// SetRunMinutesPerUnit sets the RunMinutesPerUnit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetRunMinutesPerUnit(runMinutesPerUnit *string) {
+	p.RunMinutesPerUnit = runMinutesPerUnit
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldRunMinutesPerUnit)
+}
+
+// SetQualityCheckName sets the QualityCheckName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetQualityCheckName(qualityCheckName *string) {
+	p.QualityCheckName = qualityCheckName
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldQualityCheckName)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsCreateRequestOperationsItemFieldNotes)
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsCreateRequestOperationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsCreateRequestOperationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsCreateRequestOperationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsCreateRequestOperationsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsCreateResponseFieldID         = big.NewInt(1 << 0)
+	postV1ProductionRoutingsCreateResponseFieldCode       = big.NewInt(1 << 1)
+	postV1ProductionRoutingsCreateResponseFieldName       = big.NewInt(1 << 2)
+	postV1ProductionRoutingsCreateResponseFieldIsActive   = big.NewInt(1 << 3)
+	postV1ProductionRoutingsCreateResponseFieldNotes      = big.NewInt(1 << 4)
+	postV1ProductionRoutingsCreateResponseFieldCreatedAt  = big.NewInt(1 << 5)
+	postV1ProductionRoutingsCreateResponseFieldOperations = big.NewInt(1 << 6)
+)
+
+type PostV1ProductionRoutingsCreateResponse struct {
+	ID         string                                                  `json:"id" url:"id"`
+	Code       string                                                  `json:"code" url:"code"`
+	Name       string                                                  `json:"name" url:"name"`
+	IsActive   bool                                                    `json:"isActive" url:"isActive"`
+	Notes      *string                                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt  string                                                  `json:"createdAt" url:"createdAt"`
+	Operations []*PostV1ProductionRoutingsCreateResponseOperationsItem `json:"operations" url:"operations"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetOperations() []*PostV1ProductionRoutingsCreateResponseOperationsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Operations
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsCreateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionRoutingsCreateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsCreateResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionRoutingsCreateResponseFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsCreateResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionRoutingsCreateResponseFieldCreatedAt)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponse) SetOperations(operations []*PostV1ProductionRoutingsCreateResponseOperationsItem) {
+	p.Operations = operations
+	p.require(postV1ProductionRoutingsCreateResponseFieldOperations)
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldID                = big.NewInt(1 << 0)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldSequence          = big.NewInt(1 << 1)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldName              = big.NewInt(1 << 2)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldWorkCenterID      = big.NewInt(1 << 3)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldSetupMinutes      = big.NewInt(1 << 4)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldRunMinutesPerUnit = big.NewInt(1 << 5)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldQualityCheckName  = big.NewInt(1 << 6)
+	postV1ProductionRoutingsCreateResponseOperationsItemFieldNotes             = big.NewInt(1 << 7)
+)
+
+type PostV1ProductionRoutingsCreateResponseOperationsItem struct {
+	ID                string  `json:"id" url:"id"`
+	Sequence          int64   `json:"sequence" url:"sequence"`
+	Name              string  `json:"name" url:"name"`
+	WorkCenterID      string  `json:"workCenterId" url:"workCenterId"`
+	SetupMinutes      string  `json:"setupMinutes" url:"setupMinutes"`
+	RunMinutesPerUnit string  `json:"runMinutesPerUnit" url:"runMinutesPerUnit"`
+	QualityCheckName  *string `json:"qualityCheckName,omitempty" url:"qualityCheckName,omitempty"`
+	Notes             *string `json:"notes,omitempty" url:"notes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetSetupMinutes() string {
+	if p == nil {
+		return ""
+	}
+	return p.SetupMinutes
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetRunMinutesPerUnit() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunMinutesPerUnit
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetQualityCheckName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.QualityCheckName
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldID)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldName)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldWorkCenterID)
+}
+
+// SetSetupMinutes sets the SetupMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetSetupMinutes(setupMinutes string) {
+	p.SetupMinutes = setupMinutes
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldSetupMinutes)
+}
+
+// SetRunMinutesPerUnit sets the RunMinutesPerUnit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetRunMinutesPerUnit(runMinutesPerUnit string) {
+	p.RunMinutesPerUnit = runMinutesPerUnit
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldRunMinutesPerUnit)
+}
+
+// SetQualityCheckName sets the QualityCheckName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetQualityCheckName(qualityCheckName *string) {
+	p.QualityCheckName = qualityCheckName
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldQualityCheckName)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsCreateResponseOperationsItemFieldNotes)
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsCreateResponseOperationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsCreateResponseOperationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsCreateResponseOperationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsCreateResponseOperationsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsGetResponseFieldID         = big.NewInt(1 << 0)
+	postV1ProductionRoutingsGetResponseFieldCode       = big.NewInt(1 << 1)
+	postV1ProductionRoutingsGetResponseFieldName       = big.NewInt(1 << 2)
+	postV1ProductionRoutingsGetResponseFieldIsActive   = big.NewInt(1 << 3)
+	postV1ProductionRoutingsGetResponseFieldNotes      = big.NewInt(1 << 4)
+	postV1ProductionRoutingsGetResponseFieldCreatedAt  = big.NewInt(1 << 5)
+	postV1ProductionRoutingsGetResponseFieldOperations = big.NewInt(1 << 6)
+)
+
+type PostV1ProductionRoutingsGetResponse struct {
+	ID         string                                               `json:"id" url:"id"`
+	Code       string                                               `json:"code" url:"code"`
+	Name       string                                               `json:"name" url:"name"`
+	IsActive   bool                                                 `json:"isActive" url:"isActive"`
+	Notes      *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt  string                                               `json:"createdAt" url:"createdAt"`
+	Operations []*PostV1ProductionRoutingsGetResponseOperationsItem `json:"operations" url:"operations"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetOperations() []*PostV1ProductionRoutingsGetResponseOperationsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Operations
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsGetResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionRoutingsGetResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsGetResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionRoutingsGetResponseFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsGetResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionRoutingsGetResponseFieldCreatedAt)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponse) SetOperations(operations []*PostV1ProductionRoutingsGetResponseOperationsItem) {
+	p.Operations = operations
+	p.require(postV1ProductionRoutingsGetResponseFieldOperations)
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsGetResponseOperationsItemFieldID                = big.NewInt(1 << 0)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldSequence          = big.NewInt(1 << 1)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldName              = big.NewInt(1 << 2)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldWorkCenterID      = big.NewInt(1 << 3)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldSetupMinutes      = big.NewInt(1 << 4)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldRunMinutesPerUnit = big.NewInt(1 << 5)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldQualityCheckName  = big.NewInt(1 << 6)
+	postV1ProductionRoutingsGetResponseOperationsItemFieldNotes             = big.NewInt(1 << 7)
+)
+
+type PostV1ProductionRoutingsGetResponseOperationsItem struct {
+	ID                string  `json:"id" url:"id"`
+	Sequence          int64   `json:"sequence" url:"sequence"`
+	Name              string  `json:"name" url:"name"`
+	WorkCenterID      string  `json:"workCenterId" url:"workCenterId"`
+	SetupMinutes      string  `json:"setupMinutes" url:"setupMinutes"`
+	RunMinutesPerUnit string  `json:"runMinutesPerUnit" url:"runMinutesPerUnit"`
+	QualityCheckName  *string `json:"qualityCheckName,omitempty" url:"qualityCheckName,omitempty"`
+	Notes             *string `json:"notes,omitempty" url:"notes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetSequence() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Sequence
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetWorkCenterID() string {
+	if p == nil {
+		return ""
+	}
+	return p.WorkCenterID
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetSetupMinutes() string {
+	if p == nil {
+		return ""
+	}
+	return p.SetupMinutes
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetRunMinutesPerUnit() string {
+	if p == nil {
+		return ""
+	}
+	return p.RunMinutesPerUnit
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetQualityCheckName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.QualityCheckName
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldID)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetSequence(sequence int64) {
+	p.Sequence = sequence
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldSequence)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldName)
+}
+
+// SetWorkCenterID sets the WorkCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetWorkCenterID(workCenterID string) {
+	p.WorkCenterID = workCenterID
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldWorkCenterID)
+}
+
+// SetSetupMinutes sets the SetupMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetSetupMinutes(setupMinutes string) {
+	p.SetupMinutes = setupMinutes
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldSetupMinutes)
+}
+
+// SetRunMinutesPerUnit sets the RunMinutesPerUnit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetRunMinutesPerUnit(runMinutesPerUnit string) {
+	p.RunMinutesPerUnit = runMinutesPerUnit
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldRunMinutesPerUnit)
+}
+
+// SetQualityCheckName sets the QualityCheckName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetQualityCheckName(qualityCheckName *string) {
+	p.QualityCheckName = qualityCheckName
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldQualityCheckName)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsGetResponseOperationsItemFieldNotes)
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsGetResponseOperationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsGetResponseOperationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsGetResponseOperationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsGetResponseOperationsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionRoutingsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1ProductionRoutingsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionRoutingsListRequestFilterItem struct {
+	Field string                                              `json:"field" url:"field"`
+	Op    PostV1ProductionRoutingsListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1ProductionRoutingsListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) GetOp() PostV1ProductionRoutingsListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) GetValue() *PostV1ProductionRoutingsListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionRoutingsListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequestFilterItem) SetOp(op PostV1ProductionRoutingsListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1ProductionRoutingsListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequestFilterItem) SetValue(value *PostV1ProductionRoutingsListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1ProductionRoutingsListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionRoutingsListRequestFilterItemOp string
+
+const (
+	PostV1ProductionRoutingsListRequestFilterItemOpEq       PostV1ProductionRoutingsListRequestFilterItemOp = "eq"
+	PostV1ProductionRoutingsListRequestFilterItemOpNe       PostV1ProductionRoutingsListRequestFilterItemOp = "ne"
+	PostV1ProductionRoutingsListRequestFilterItemOpContains PostV1ProductionRoutingsListRequestFilterItemOp = "contains"
+	PostV1ProductionRoutingsListRequestFilterItemOpGte      PostV1ProductionRoutingsListRequestFilterItemOp = "gte"
+	PostV1ProductionRoutingsListRequestFilterItemOpLte      PostV1ProductionRoutingsListRequestFilterItemOp = "lte"
+	PostV1ProductionRoutingsListRequestFilterItemOpIn       PostV1ProductionRoutingsListRequestFilterItemOp = "in"
+)
+
+func NewPostV1ProductionRoutingsListRequestFilterItemOpFromString(s string) (PostV1ProductionRoutingsListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1ProductionRoutingsListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1ProductionRoutingsListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1ProductionRoutingsListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1ProductionRoutingsListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1ProductionRoutingsListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1ProductionRoutingsListRequestFilterItemOpIn, nil
+	}
+	var t PostV1ProductionRoutingsListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionRoutingsListRequestFilterItemOp) Ptr() *PostV1ProductionRoutingsListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1ProductionRoutingsListRequestFilterItemValue struct {
+	String                                                          string
+	Double                                                          float64
+	Boolean                                                         bool
+	PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList []*PostV1ProductionRoutingsListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) GetPostV1ProductionRoutingsListRequestFilterItemValueThreeItemList() []*PostV1ProductionRoutingsListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1ProductionRoutingsListRequestFilterItemValueThreeItemList []*PostV1ProductionRoutingsListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1ProductionRoutingsListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList"
+		p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList = valuePostV1ProductionRoutingsListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionRoutingsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList" || p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionRoutingsListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1ProductionRoutingsListRequestFilterItemValueThreeItemList([]*PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValue) Accept(visitor PostV1ProductionRoutingsListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList" || p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1ProductionRoutingsListRequestFilterItemValueThreeItemList(p.PostV1ProductionRoutingsListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionRoutingsListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionRoutingsListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1ProductionRoutingsListRequestFilterItemValueThreeItem) Accept(visitor PostV1ProductionRoutingsListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1ProductionRoutingsListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionRoutingsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1ProductionRoutingsListRequestSortItem struct {
+	Field string                                          `json:"field" url:"field"`
+	Dir   *PostV1ProductionRoutingsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) GetDir() *PostV1ProductionRoutingsListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionRoutingsListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListRequestSortItem) SetDir(dir *PostV1ProductionRoutingsListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1ProductionRoutingsListRequestSortItemFieldDir)
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionRoutingsListRequestSortItemDir string
+
+const (
+	PostV1ProductionRoutingsListRequestSortItemDirAsc  PostV1ProductionRoutingsListRequestSortItemDir = "asc"
+	PostV1ProductionRoutingsListRequestSortItemDirDesc PostV1ProductionRoutingsListRequestSortItemDir = "desc"
+)
+
+func NewPostV1ProductionRoutingsListRequestSortItemDirFromString(s string) (PostV1ProductionRoutingsListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1ProductionRoutingsListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1ProductionRoutingsListRequestSortItemDirDesc, nil
+	}
+	var t PostV1ProductionRoutingsListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionRoutingsListRequestSortItemDir) Ptr() *PostV1ProductionRoutingsListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1ProductionRoutingsListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1ProductionRoutingsListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1ProductionRoutingsListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1ProductionRoutingsListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionRoutingsListResponse struct {
+	Rows     []*PostV1ProductionRoutingsListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                           `json:"page" url:"page"`
+	PageSize int64                                           `json:"pageSize" url:"pageSize"`
+	Total    int64                                           `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsListResponse) GetRows() []*PostV1ProductionRoutingsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ProductionRoutingsListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1ProductionRoutingsListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1ProductionRoutingsListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1ProductionRoutingsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponse) SetRows(rows []*PostV1ProductionRoutingsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ProductionRoutingsListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1ProductionRoutingsListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionRoutingsListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1ProductionRoutingsListResponseFieldTotal)
+}
+
+func (p *PostV1ProductionRoutingsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionRoutingsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1ProductionRoutingsListResponseRowsItemFieldCode      = big.NewInt(1 << 1)
+	postV1ProductionRoutingsListResponseRowsItemFieldName      = big.NewInt(1 << 2)
+	postV1ProductionRoutingsListResponseRowsItemFieldIsActive  = big.NewInt(1 << 3)
+	postV1ProductionRoutingsListResponseRowsItemFieldNotes     = big.NewInt(1 << 4)
+	postV1ProductionRoutingsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 5)
+)
+
+type PostV1ProductionRoutingsListResponseRowsItem struct {
+	ID        string  `json:"id" url:"id"`
+	Code      string  `json:"code" url:"code"`
+	Name      string  `json:"name" url:"name"`
+	IsActive  bool    `json:"isActive" url:"isActive"`
+	Notes     *string `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionRoutingsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionRoutingsListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionRoutingsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionRoutingsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionRoutingsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionRoutingsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionWorkCentersCreateResponseFieldID                      = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersCreateResponseFieldCode                    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersCreateResponseFieldName                    = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersCreateResponseFieldCostPerHour             = big.NewInt(1 << 3)
+	postV1ProductionWorkCentersCreateResponseFieldCostAccountCode         = big.NewInt(1 << 4)
+	postV1ProductionWorkCentersCreateResponseFieldMaintenanceIntervalDays = big.NewInt(1 << 5)
+	postV1ProductionWorkCentersCreateResponseFieldNextMaintenanceDate     = big.NewInt(1 << 6)
+	postV1ProductionWorkCentersCreateResponseFieldIsActive                = big.NewInt(1 << 7)
+	postV1ProductionWorkCentersCreateResponseFieldNotes                   = big.NewInt(1 << 8)
+	postV1ProductionWorkCentersCreateResponseFieldCreatedAt               = big.NewInt(1 << 9)
+)
+
+type PostV1ProductionWorkCentersCreateResponse struct {
+	ID                      string  `json:"id" url:"id"`
+	Code                    string  `json:"code" url:"code"`
+	Name                    string  `json:"name" url:"name"`
+	CostPerHour             string  `json:"costPerHour" url:"costPerHour"`
+	CostAccountCode         *string `json:"costAccountCode,omitempty" url:"costAccountCode,omitempty"`
+	MaintenanceIntervalDays *int64  `json:"maintenanceIntervalDays,omitempty" url:"maintenanceIntervalDays,omitempty"`
+	NextMaintenanceDate     *string `json:"nextMaintenanceDate,omitempty" url:"nextMaintenanceDate,omitempty"`
+	IsActive                bool    `json:"isActive" url:"isActive"`
+	Notes                   *string `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt               string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetCostAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostAccountCode
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetMaintenanceIntervalDays() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.MaintenanceIntervalDays
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetNextMaintenanceDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextMaintenanceDate
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionWorkCentersCreateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionWorkCentersCreateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionWorkCentersCreateResponseFieldName)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionWorkCentersCreateResponseFieldCostPerHour)
+}
+
+// SetCostAccountCode sets the CostAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetCostAccountCode(costAccountCode *string) {
+	p.CostAccountCode = costAccountCode
+	p.require(postV1ProductionWorkCentersCreateResponseFieldCostAccountCode)
+}
+
+// SetMaintenanceIntervalDays sets the MaintenanceIntervalDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetMaintenanceIntervalDays(maintenanceIntervalDays *int64) {
+	p.MaintenanceIntervalDays = maintenanceIntervalDays
+	p.require(postV1ProductionWorkCentersCreateResponseFieldMaintenanceIntervalDays)
+}
+
+// SetNextMaintenanceDate sets the NextMaintenanceDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetNextMaintenanceDate(nextMaintenanceDate *string) {
+	p.NextMaintenanceDate = nextMaintenanceDate
+	p.require(postV1ProductionWorkCentersCreateResponseFieldNextMaintenanceDate)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionWorkCentersCreateResponseFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionWorkCentersCreateResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionWorkCentersCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionWorkCentersListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1ProductionWorkCentersListRequestFilterItem struct {
+	Field string                                                 `json:"field" url:"field"`
+	Op    PostV1ProductionWorkCentersListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1ProductionWorkCentersListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) GetOp() PostV1ProductionWorkCentersListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) GetValue() *PostV1ProductionWorkCentersListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionWorkCentersListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) SetOp(op PostV1ProductionWorkCentersListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1ProductionWorkCentersListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) SetValue(value *PostV1ProductionWorkCentersListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1ProductionWorkCentersListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionWorkCentersListRequestFilterItemOp string
+
+const (
+	PostV1ProductionWorkCentersListRequestFilterItemOpEq       PostV1ProductionWorkCentersListRequestFilterItemOp = "eq"
+	PostV1ProductionWorkCentersListRequestFilterItemOpNe       PostV1ProductionWorkCentersListRequestFilterItemOp = "ne"
+	PostV1ProductionWorkCentersListRequestFilterItemOpContains PostV1ProductionWorkCentersListRequestFilterItemOp = "contains"
+	PostV1ProductionWorkCentersListRequestFilterItemOpGte      PostV1ProductionWorkCentersListRequestFilterItemOp = "gte"
+	PostV1ProductionWorkCentersListRequestFilterItemOpLte      PostV1ProductionWorkCentersListRequestFilterItemOp = "lte"
+	PostV1ProductionWorkCentersListRequestFilterItemOpIn       PostV1ProductionWorkCentersListRequestFilterItemOp = "in"
+)
+
+func NewPostV1ProductionWorkCentersListRequestFilterItemOpFromString(s string) (PostV1ProductionWorkCentersListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1ProductionWorkCentersListRequestFilterItemOpIn, nil
+	}
+	var t PostV1ProductionWorkCentersListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionWorkCentersListRequestFilterItemOp) Ptr() *PostV1ProductionWorkCentersListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1ProductionWorkCentersListRequestFilterItemValue struct {
+	String                                                             string
+	Double                                                             float64
+	Boolean                                                            bool
+	PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList []*PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) GetPostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList() []*PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList []*PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList"
+		p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList = valuePostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionWorkCentersListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList" || p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionWorkCentersListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList([]*PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValue) Accept(visitor PostV1ProductionWorkCentersListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList" || p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList(p.PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1ProductionWorkCentersListRequestFilterItemValueThreeItem) Accept(visitor PostV1ProductionWorkCentersListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1ProductionWorkCentersListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1ProductionWorkCentersListRequestSortItem struct {
+	Field string                                             `json:"field" url:"field"`
+	Dir   *PostV1ProductionWorkCentersListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) GetDir() *PostV1ProductionWorkCentersListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1ProductionWorkCentersListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListRequestSortItem) SetDir(dir *PostV1ProductionWorkCentersListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1ProductionWorkCentersListRequestSortItemFieldDir)
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1ProductionWorkCentersListRequestSortItemDir string
+
+const (
+	PostV1ProductionWorkCentersListRequestSortItemDirAsc  PostV1ProductionWorkCentersListRequestSortItemDir = "asc"
+	PostV1ProductionWorkCentersListRequestSortItemDirDesc PostV1ProductionWorkCentersListRequestSortItemDir = "desc"
+)
+
+func NewPostV1ProductionWorkCentersListRequestSortItemDirFromString(s string) (PostV1ProductionWorkCentersListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1ProductionWorkCentersListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1ProductionWorkCentersListRequestSortItemDirDesc, nil
+	}
+	var t PostV1ProductionWorkCentersListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1ProductionWorkCentersListRequestSortItemDir) Ptr() *PostV1ProductionWorkCentersListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1ProductionWorkCentersListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1ProductionWorkCentersListResponse struct {
+	Rows     []*PostV1ProductionWorkCentersListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                              `json:"page" url:"page"`
+	PageSize int64                                              `json:"pageSize" url:"pageSize"`
+	Total    int64                                              `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) GetRows() []*PostV1ProductionWorkCentersListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponse) SetRows(rows []*PostV1ProductionWorkCentersListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ProductionWorkCentersListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1ProductionWorkCentersListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1ProductionWorkCentersListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1ProductionWorkCentersListResponseFieldTotal)
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionWorkCentersListResponseRowsItemFieldID                      = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersListResponseRowsItemFieldCode                    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersListResponseRowsItemFieldName                    = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersListResponseRowsItemFieldCostPerHour             = big.NewInt(1 << 3)
+	postV1ProductionWorkCentersListResponseRowsItemFieldCostAccountCode         = big.NewInt(1 << 4)
+	postV1ProductionWorkCentersListResponseRowsItemFieldMaintenanceIntervalDays = big.NewInt(1 << 5)
+	postV1ProductionWorkCentersListResponseRowsItemFieldNextMaintenanceDate     = big.NewInt(1 << 6)
+	postV1ProductionWorkCentersListResponseRowsItemFieldIsActive                = big.NewInt(1 << 7)
+	postV1ProductionWorkCentersListResponseRowsItemFieldNotes                   = big.NewInt(1 << 8)
+	postV1ProductionWorkCentersListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 9)
+)
+
+type PostV1ProductionWorkCentersListResponseRowsItem struct {
+	ID                      string  `json:"id" url:"id"`
+	Code                    string  `json:"code" url:"code"`
+	Name                    string  `json:"name" url:"name"`
+	CostPerHour             string  `json:"costPerHour" url:"costPerHour"`
+	CostAccountCode         *string `json:"costAccountCode,omitempty" url:"costAccountCode,omitempty"`
+	MaintenanceIntervalDays *int64  `json:"maintenanceIntervalDays,omitempty" url:"maintenanceIntervalDays,omitempty"`
+	NextMaintenanceDate     *string `json:"nextMaintenanceDate,omitempty" url:"nextMaintenanceDate,omitempty"`
+	IsActive                bool    `json:"isActive" url:"isActive"`
+	Notes                   *string `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt               string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetCostAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostAccountCode
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetMaintenanceIntervalDays() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.MaintenanceIntervalDays
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetNextMaintenanceDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextMaintenanceDate
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldName)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldCostPerHour)
+}
+
+// SetCostAccountCode sets the CostAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetCostAccountCode(costAccountCode *string) {
+	p.CostAccountCode = costAccountCode
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldCostAccountCode)
+}
+
+// SetMaintenanceIntervalDays sets the MaintenanceIntervalDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetMaintenanceIntervalDays(maintenanceIntervalDays *int64) {
+	p.MaintenanceIntervalDays = maintenanceIntervalDays
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldMaintenanceIntervalDays)
+}
+
+// SetNextMaintenanceDate sets the NextMaintenanceDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetNextMaintenanceDate(nextMaintenanceDate *string) {
+	p.NextMaintenanceDate = nextMaintenanceDate
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldNextMaintenanceDate)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionWorkCentersListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ProductionWorkCentersUpdateResponseFieldID                      = big.NewInt(1 << 0)
+	postV1ProductionWorkCentersUpdateResponseFieldCode                    = big.NewInt(1 << 1)
+	postV1ProductionWorkCentersUpdateResponseFieldName                    = big.NewInt(1 << 2)
+	postV1ProductionWorkCentersUpdateResponseFieldCostPerHour             = big.NewInt(1 << 3)
+	postV1ProductionWorkCentersUpdateResponseFieldCostAccountCode         = big.NewInt(1 << 4)
+	postV1ProductionWorkCentersUpdateResponseFieldMaintenanceIntervalDays = big.NewInt(1 << 5)
+	postV1ProductionWorkCentersUpdateResponseFieldNextMaintenanceDate     = big.NewInt(1 << 6)
+	postV1ProductionWorkCentersUpdateResponseFieldIsActive                = big.NewInt(1 << 7)
+	postV1ProductionWorkCentersUpdateResponseFieldNotes                   = big.NewInt(1 << 8)
+	postV1ProductionWorkCentersUpdateResponseFieldCreatedAt               = big.NewInt(1 << 9)
+)
+
+type PostV1ProductionWorkCentersUpdateResponse struct {
+	ID                      string  `json:"id" url:"id"`
+	Code                    string  `json:"code" url:"code"`
+	Name                    string  `json:"name" url:"name"`
+	CostPerHour             string  `json:"costPerHour" url:"costPerHour"`
+	CostAccountCode         *string `json:"costAccountCode,omitempty" url:"costAccountCode,omitempty"`
+	MaintenanceIntervalDays *int64  `json:"maintenanceIntervalDays,omitempty" url:"maintenanceIntervalDays,omitempty"`
+	NextMaintenanceDate     *string `json:"nextMaintenanceDate,omitempty" url:"nextMaintenanceDate,omitempty"`
+	IsActive                bool    `json:"isActive" url:"isActive"`
+	Notes                   *string `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt               string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetCostPerHour() string {
+	if p == nil {
+		return ""
+	}
+	return p.CostPerHour
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetCostAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostAccountCode
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetMaintenanceIntervalDays() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.MaintenanceIntervalDays
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetNextMaintenanceDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextMaintenanceDate
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldName)
+}
+
+// SetCostPerHour sets the CostPerHour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetCostPerHour(costPerHour string) {
+	p.CostPerHour = costPerHour
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldCostPerHour)
+}
+
+// SetCostAccountCode sets the CostAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetCostAccountCode(costAccountCode *string) {
+	p.CostAccountCode = costAccountCode
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldCostAccountCode)
+}
+
+// SetMaintenanceIntervalDays sets the MaintenanceIntervalDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetMaintenanceIntervalDays(maintenanceIntervalDays *int64) {
+	p.MaintenanceIntervalDays = maintenanceIntervalDays
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldMaintenanceIntervalDays)
+}
+
+// SetNextMaintenanceDate sets the NextMaintenanceDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetNextMaintenanceDate(nextMaintenanceDate *string) {
+	p.NextMaintenanceDate = nextMaintenanceDate
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldNextMaintenanceDate)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldIsActive)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ProductionWorkCentersUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1ProductionWorkCentersUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ProductionWorkCentersUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ProductionWorkCentersUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ProductionWorkCentersUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ProductionWorkCentersUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }

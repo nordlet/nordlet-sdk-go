@@ -146,6 +146,89 @@ func (c *Client) PostV1ConsolidationMembersRemove(
 	return response.Body, nil
 }
 
+// Partners in member companies that look like other members of the same group (matched on company code or VAT code), with any existing intercompany link. Confirming a candidate via intercompany/links/set enables invoice mirroring.
+func (c *Client) PostV1ConsolidationIntercompanyCandidates(
+	ctx context.Context,
+	request *nordlet.PostV1ConsolidationIntercompanyCandidatesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ConsolidationIntercompanyCandidatesResponse, error) {
+	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyCandidates(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Confirm that a partner record in one member company represents another member company of the group. Once links exist in both directions, issuing an intercompany sale invoice automatically creates the matching draft purchase invoice in the counterparty.
+func (c *Client) PostV1ConsolidationIntercompanyLinksSet(
+	ctx context.Context,
+	request *nordlet.PostV1ConsolidationIntercompanyLinksSetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ConsolidationIntercompanyLinksSetResponse, error) {
+	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksSet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ConsolidationIntercompanyLinksList(
+	ctx context.Context,
+	request *nordlet.PostV1ConsolidationIntercompanyLinksListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ConsolidationIntercompanyLinksListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ConsolidationIntercompanyLinksRemove(
+	ctx context.Context,
+	request *nordlet.PostV1ConsolidationIntercompanyLinksRemoveRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ConsolidationIntercompanyLinksRemoveResponse, error) {
+	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyLinksRemove(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Intercompany reconciliation for a period: every issued intercompany sale invoice with its mirrored or manually recorded counterpart, unmatched documents on both sides, and per-currency totals with differences. Confirmed pairs are the basis for consolidation eliminations.
+func (c *Client) PostV1ConsolidationIntercompanyReport(
+	ctx context.Context,
+	request *nordlet.PostV1ConsolidationIntercompanyReportRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ConsolidationIntercompanyReportResponse, error) {
+	response, err := c.WithRawResponse.PostV1ConsolidationIntercompanyReport(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1ConsolidationReport(
 	ctx context.Context,
 	request *nordlet.PostV1ConsolidationReportRequest,

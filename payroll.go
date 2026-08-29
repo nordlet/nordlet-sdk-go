@@ -379,17 +379,19 @@ func (p *PostV1PayrollRunsCancelRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PayrollRunsCreateRequestFieldYear  = big.NewInt(1 << 0)
-	postV1PayrollRunsCreateRequestFieldMonth = big.NewInt(1 << 1)
-	postV1PayrollRunsCreateRequestFieldLines = big.NewInt(1 << 2)
-	postV1PayrollRunsCreateRequestFieldNotes = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateRequestFieldYear          = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateRequestFieldMonth         = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateRequestFieldIncludeNatura = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateRequestFieldLines         = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateRequestFieldNotes         = big.NewInt(1 << 4)
 )
 
 type PostV1PayrollRunsCreateRequest struct {
-	Year  int64                                      `json:"year" url:"-"`
-	Month int64                                      `json:"month" url:"-"`
-	Lines []*PostV1PayrollRunsCreateRequestLinesItem `json:"lines,omitempty" url:"-"`
-	Notes *string                                    `json:"notes,omitempty" url:"-"`
+	Year          int64                                      `json:"year" url:"-"`
+	Month         int64                                      `json:"month" url:"-"`
+	IncludeNatura *bool                                      `json:"includeNatura,omitempty" url:"-"`
+	Lines         []*PostV1PayrollRunsCreateRequestLinesItem `json:"lines,omitempty" url:"-"`
+	Notes         *string                                    `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -414,6 +416,13 @@ func (p *PostV1PayrollRunsCreateRequest) SetYear(year int64) {
 func (p *PostV1PayrollRunsCreateRequest) SetMonth(month int64) {
 	p.Month = month
 	p.require(postV1PayrollRunsCreateRequestFieldMonth)
+}
+
+// SetIncludeNatura sets the IncludeNatura field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateRequest) SetIncludeNatura(includeNatura *bool) {
+	p.IncludeNatura = includeNatura
+	p.require(postV1PayrollRunsCreateRequestFieldIncludeNatura)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -2319,14 +2328,15 @@ var (
 	postV1PayrollRunsCreateResponseLinesItemFieldContractID    = big.NewInt(1 << 2)
 	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeName  = big.NewInt(1 << 3)
 	postV1PayrollRunsCreateResponseLinesItemFieldGross         = big.NewInt(1 << 4)
-	postV1PayrollRunsCreateResponseLinesItemFieldAdditions     = big.NewInt(1 << 5)
-	postV1PayrollRunsCreateResponseLinesItemFieldDeductions    = big.NewInt(1 << 6)
-	postV1PayrollRunsCreateResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 7)
-	postV1PayrollRunsCreateResponseLinesItemFieldNpd           = big.NewInt(1 << 8)
-	postV1PayrollRunsCreateResponseLinesItemFieldGpm           = big.NewInt(1 << 9)
-	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 10)
-	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 11)
-	postV1PayrollRunsCreateResponseLinesItemFieldNet           = big.NewInt(1 << 12)
+	postV1PayrollRunsCreateResponseLinesItemFieldNatura        = big.NewInt(1 << 5)
+	postV1PayrollRunsCreateResponseLinesItemFieldAdditions     = big.NewInt(1 << 6)
+	postV1PayrollRunsCreateResponseLinesItemFieldDeductions    = big.NewInt(1 << 7)
+	postV1PayrollRunsCreateResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 8)
+	postV1PayrollRunsCreateResponseLinesItemFieldNpd           = big.NewInt(1 << 9)
+	postV1PayrollRunsCreateResponseLinesItemFieldGpm           = big.NewInt(1 << 10)
+	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 11)
+	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 12)
+	postV1PayrollRunsCreateResponseLinesItemFieldNet           = big.NewInt(1 << 13)
 )
 
 type PostV1PayrollRunsCreateResponseLinesItem struct {
@@ -2335,6 +2345,7 @@ type PostV1PayrollRunsCreateResponseLinesItem struct {
 	ContractID    *string                                                   `json:"contractId,omitempty" url:"contractId,omitempty"`
 	EmployeeName  string                                                    `json:"employeeName" url:"employeeName"`
 	Gross         string                                                    `json:"gross" url:"gross"`
+	Natura        string                                                    `json:"natura" url:"natura"`
 	Additions     []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
 	Deductions    []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
 	TaxableBase   string                                                    `json:"taxableBase" url:"taxableBase"`
@@ -2384,6 +2395,13 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) GetGross() string {
 		return ""
 	}
 	return p.Gross
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetNatura() string {
+	if p == nil {
+		return ""
+	}
+	return p.Natura
 }
 
 func (p *PostV1PayrollRunsCreateResponseLinesItem) GetAdditions() []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem {
@@ -2489,6 +2507,13 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) SetEmployeeName(employeeName 
 func (p *PostV1PayrollRunsCreateResponseLinesItem) SetGross(gross string) {
 	p.Gross = gross
 	p.require(postV1PayrollRunsCreateResponseLinesItemFieldGross)
+}
+
+// SetNatura sets the Natura field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetNatura(natura string) {
+	p.Natura = natura
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldNatura)
 }
 
 // SetAdditions sets the Additions field and marks it as non-optional;
@@ -3141,14 +3166,15 @@ var (
 	postV1PayrollRunsGetResponseLinesItemFieldContractID    = big.NewInt(1 << 2)
 	postV1PayrollRunsGetResponseLinesItemFieldEmployeeName  = big.NewInt(1 << 3)
 	postV1PayrollRunsGetResponseLinesItemFieldGross         = big.NewInt(1 << 4)
-	postV1PayrollRunsGetResponseLinesItemFieldAdditions     = big.NewInt(1 << 5)
-	postV1PayrollRunsGetResponseLinesItemFieldDeductions    = big.NewInt(1 << 6)
-	postV1PayrollRunsGetResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 7)
-	postV1PayrollRunsGetResponseLinesItemFieldNpd           = big.NewInt(1 << 8)
-	postV1PayrollRunsGetResponseLinesItemFieldGpm           = big.NewInt(1 << 9)
-	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 10)
-	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 11)
-	postV1PayrollRunsGetResponseLinesItemFieldNet           = big.NewInt(1 << 12)
+	postV1PayrollRunsGetResponseLinesItemFieldNatura        = big.NewInt(1 << 5)
+	postV1PayrollRunsGetResponseLinesItemFieldAdditions     = big.NewInt(1 << 6)
+	postV1PayrollRunsGetResponseLinesItemFieldDeductions    = big.NewInt(1 << 7)
+	postV1PayrollRunsGetResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 8)
+	postV1PayrollRunsGetResponseLinesItemFieldNpd           = big.NewInt(1 << 9)
+	postV1PayrollRunsGetResponseLinesItemFieldGpm           = big.NewInt(1 << 10)
+	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 11)
+	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 12)
+	postV1PayrollRunsGetResponseLinesItemFieldNet           = big.NewInt(1 << 13)
 )
 
 type PostV1PayrollRunsGetResponseLinesItem struct {
@@ -3157,6 +3183,7 @@ type PostV1PayrollRunsGetResponseLinesItem struct {
 	ContractID    *string                                                `json:"contractId,omitempty" url:"contractId,omitempty"`
 	EmployeeName  string                                                 `json:"employeeName" url:"employeeName"`
 	Gross         string                                                 `json:"gross" url:"gross"`
+	Natura        string                                                 `json:"natura" url:"natura"`
 	Additions     []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
 	Deductions    []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
 	TaxableBase   string                                                 `json:"taxableBase" url:"taxableBase"`
@@ -3206,6 +3233,13 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) GetGross() string {
 		return ""
 	}
 	return p.Gross
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetNatura() string {
+	if p == nil {
+		return ""
+	}
+	return p.Natura
 }
 
 func (p *PostV1PayrollRunsGetResponseLinesItem) GetAdditions() []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem {
@@ -3311,6 +3345,13 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) SetEmployeeName(employeeName str
 func (p *PostV1PayrollRunsGetResponseLinesItem) SetGross(gross string) {
 	p.Gross = gross
 	p.require(postV1PayrollRunsGetResponseLinesItemFieldGross)
+}
+
+// SetNatura sets the Natura field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetNatura(natura string) {
+	p.Natura = natura
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldNatura)
 }
 
 // SetAdditions sets the Additions field and marks it as non-optional;

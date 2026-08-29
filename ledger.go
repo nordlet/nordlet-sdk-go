@@ -4950,14 +4950,16 @@ func (p *PostV1LedgerCostCentersUpdateResponse) String() string {
 var (
 	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldAccountCode  = big.NewInt(1 << 0)
 	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldCostCenterID = big.NewInt(1 << 1)
-	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldDebit        = big.NewInt(1 << 2)
-	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldCredit       = big.NewInt(1 << 3)
-	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldDescription  = big.NewInt(1 << 4)
+	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldProjectID    = big.NewInt(1 << 2)
+	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldDebit        = big.NewInt(1 << 3)
+	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldCredit       = big.NewInt(1 << 4)
+	postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldDescription  = big.NewInt(1 << 5)
 )
 
 type PostV1LedgerJournalTransactionsCreateRequestEntriesItem struct {
 	AccountCode  string  `json:"accountCode" url:"accountCode"`
 	CostCenterID *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID    *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Debit        *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit       *string `json:"credit,omitempty" url:"credit,omitempty"`
 	Description  *string `json:"description,omitempty" url:"description,omitempty"`
@@ -4981,6 +4983,13 @@ func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) GetCostCenterI
 		return nil
 	}
 	return p.CostCenterID
+}
+
+func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) GetProjectID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ProjectID
 }
 
 func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) GetDebit() *string {
@@ -5030,6 +5039,13 @@ func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) SetAccountCode
 func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) SetCostCenterID(costCenterID *string) {
 	p.CostCenterID = costCenterID
 	p.require(postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerJournalTransactionsCreateRequestEntriesItem) SetProjectID(projectID *string) {
+	p.ProjectID = projectID
+	p.require(postV1LedgerJournalTransactionsCreateRequestEntriesItemFieldProjectID)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
@@ -5531,9 +5547,10 @@ var (
 	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldAccountCode  = big.NewInt(1 << 2)
 	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldAccountName  = big.NewInt(1 << 3)
 	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldCostCenterID = big.NewInt(1 << 4)
-	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldDebit        = big.NewInt(1 << 5)
-	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldCredit       = big.NewInt(1 << 6)
-	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldDescription  = big.NewInt(1 << 7)
+	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldProjectID    = big.NewInt(1 << 5)
+	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldDebit        = big.NewInt(1 << 6)
+	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldCredit       = big.NewInt(1 << 7)
+	postV1LedgerJournalTransactionsGetResponseEntriesItemFieldDescription  = big.NewInt(1 << 8)
 )
 
 type PostV1LedgerJournalTransactionsGetResponseEntriesItem struct {
@@ -5542,6 +5559,7 @@ type PostV1LedgerJournalTransactionsGetResponseEntriesItem struct {
 	AccountCode  string  `json:"accountCode" url:"accountCode"`
 	AccountName  string  `json:"accountName" url:"accountName"`
 	CostCenterID *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID    *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Debit        string  `json:"debit" url:"debit"`
 	Credit       string  `json:"credit" url:"credit"`
 	Description  *string `json:"description,omitempty" url:"description,omitempty"`
@@ -5586,6 +5604,13 @@ func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) GetCostCenterID(
 		return nil
 	}
 	return p.CostCenterID
+}
+
+func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) GetProjectID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ProjectID
 }
 
 func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) GetDebit() string {
@@ -5656,6 +5681,13 @@ func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) SetAccountName(a
 func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) SetCostCenterID(costCenterID *string) {
 	p.CostCenterID = costCenterID
 	p.require(postV1LedgerJournalTransactionsGetResponseEntriesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerJournalTransactionsGetResponseEntriesItem) SetProjectID(projectID *string) {
+	p.ProjectID = projectID
+	p.require(postV1LedgerJournalTransactionsGetResponseEntriesItemFieldProjectID)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
@@ -9979,6 +10011,8 @@ const (
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyPurchasesDefaultExpense      PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "purchases.defaultExpense"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyInventoryCogs                PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "inventory.cogs"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyInventoryStock               PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "inventory.stock"
+	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyProductionLaborApplied       PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "production.laborApplied"
+	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyProductionScrap              PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "production.scrap"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyBankFxGain                   PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "bank.fxGain"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeyBankFxLoss                   PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "bank.fxLoss"
 	PostV1LedgerPostingRulesUpdateRequestRulesItemKeySettlementsFees              PostV1LedgerPostingRulesUpdateRequestRulesItemKey = "settlements.fees"
@@ -10014,6 +10048,10 @@ func NewPostV1LedgerPostingRulesUpdateRequestRulesItemKeyFromString(s string) (P
 		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyInventoryCogs, nil
 	case "inventory.stock":
 		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyInventoryStock, nil
+	case "production.laborApplied":
+		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyProductionLaborApplied, nil
+	case "production.scrap":
+		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyProductionScrap, nil
 	case "bank.fxGain":
 		return PostV1LedgerPostingRulesUpdateRequestRulesItemKeyBankFxGain, nil
 	case "bank.fxLoss":

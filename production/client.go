@@ -34,6 +34,166 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+func (c *Client) PostV1ProductionWorkCentersCreate(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionWorkCentersCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionWorkCentersCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionWorkCentersCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionWorkCentersUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionWorkCentersUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionWorkCentersUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionWorkCentersUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionWorkCentersList(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionWorkCentersListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionWorkCentersListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionWorkCentersList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionRoutingsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionRoutingsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionRoutingsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionRoutingsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionRoutingsGet(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionRoutingsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionRoutingsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionRoutingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionRoutingsList(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionRoutingsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionRoutingsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionRoutingsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionMaintenanceCreate(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionMaintenanceCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionMaintenanceCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionMaintenanceCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionMaintenanceComplete(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionMaintenanceCompleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionMaintenanceCompleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionMaintenanceComplete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionMaintenanceCancel(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionMaintenanceCancelRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionMaintenanceCancelResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionMaintenanceCancel(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionMaintenanceList(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionMaintenanceListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionMaintenanceListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionMaintenanceList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1ProductionBomsCreate(
 	ctx context.Context,
 	request *nordlet.PostV1ProductionBomsCreateRequest,
@@ -88,6 +248,70 @@ func (c *Client) PostV1ProductionOrdersCreate(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1ProductionOrdersCreateResponse, error) {
 	response, err := c.WithRawResponse.PostV1ProductionOrdersCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionOrdersRecordOperation(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionOrdersRecordOperationRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionOrdersRecordOperationResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionOrdersRecordOperation(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionQualityChecksAdd(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionQualityChecksAddRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionQualityChecksAddResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionQualityChecksAdd(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionQualityChecksRecord(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionQualityChecksRecordRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionQualityChecksRecordResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionQualityChecksRecord(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ProductionQualityChecksList(
+	ctx context.Context,
+	request *nordlet.PostV1ProductionQualityChecksListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ProductionQualityChecksListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ProductionQualityChecksList(
 		ctx,
 		request,
 		opts...,

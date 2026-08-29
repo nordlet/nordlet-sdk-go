@@ -407,6 +407,54 @@ func TestReferencePostV1ReferenceEuVatRatesListWithWireMock(
 	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesListWithWireMock", "POST", "/v1/reference/eu-vat-rates/list", nil, 1)
 }
 
+func TestReferencePostV1ReferenceEuVatRatesImportsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceEuVatRatesImportsListRequest{}
+	_, invocationErr := client.Reference.PostV1ReferenceEuVatRatesImportsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceEuVatRatesImportsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesImportsListWithWireMock", "POST", "/v1/reference/eu-vat-rates/imports/list", nil, 1)
+}
+
+func TestReferencePostV1ReferenceEuVatRatesSyncWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceEuVatRatesSyncRequest{}
+	_, invocationErr := client.Reference.PostV1ReferenceEuVatRatesSync(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceEuVatRatesSyncWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceEuVatRatesSyncWithWireMock", "POST", "/v1/reference/eu-vat-rates/sync", nil, 1)
+}
+
 func TestReferencePostV1ReferenceEuVatRatesSetOverridesWithWireMock(
 	t *testing.T,
 ) {

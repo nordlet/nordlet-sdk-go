@@ -346,3 +346,283 @@ func TestInventoryPostV1InventoryStockMovementsListWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestInventoryPostV1InventoryStockMovementsListWithWireMock", "POST", "/v1/inventory/stock/movements/list", nil, 1)
 }
+
+func TestInventoryPostV1InventoryLotsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLotsListRequest{}
+	_, invocationErr := client.Inventory.PostV1InventoryLotsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLotsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLotsListWithWireMock", "POST", "/v1/inventory/lots/list", nil, 1)
+}
+
+func TestInventoryPostV1InventoryLotsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLotsGetRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryLotsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLotsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLotsGetWithWireMock", "POST", "/v1/inventory/lots/get", nil, 1)
+}
+
+func TestInventoryPostV1InventoryLotsUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLotsUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryLotsUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLotsUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLotsUpdateWithWireMock", "POST", "/v1/inventory/lots/update", nil, 1)
+}
+
+func TestInventoryPostV1InventoryLandedCostsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLandedCostsCreateRequest{
+		Date:   "date",
+		Amount: "amount",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryLandedCostsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLandedCostsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLandedCostsCreateWithWireMock", "POST", "/v1/inventory/landed-costs/create", nil, 1)
+}
+
+func TestInventoryPostV1InventoryLandedCostsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLandedCostsGetRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryLandedCostsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLandedCostsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLandedCostsGetWithWireMock", "POST", "/v1/inventory/landed-costs/get", nil, 1)
+}
+
+func TestInventoryPostV1InventoryLandedCostsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryLandedCostsListRequest{}
+	_, invocationErr := client.Inventory.PostV1InventoryLandedCostsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryLandedCostsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryLandedCostsListWithWireMock", "POST", "/v1/inventory/landed-costs/list", nil, 1)
+}
+
+func TestInventoryPostV1InventoryReorderRulesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryReorderRulesCreateRequest{
+		ItemID: "itemId",
+		MinQty: "minQty",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryReorderRulesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryReorderRulesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryReorderRulesCreateWithWireMock", "POST", "/v1/inventory/reorder-rules/create", nil, 1)
+}
+
+func TestInventoryPostV1InventoryReorderRulesUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryReorderRulesUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryReorderRulesUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryReorderRulesUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryReorderRulesUpdateWithWireMock", "POST", "/v1/inventory/reorder-rules/update", nil, 1)
+}
+
+func TestInventoryPostV1InventoryReorderRulesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryReorderRulesDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.PostV1InventoryReorderRulesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryReorderRulesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryReorderRulesDeleteWithWireMock", "POST", "/v1/inventory/reorder-rules/delete", nil, 1)
+}
+
+func TestInventoryPostV1InventoryReorderRulesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryReorderRulesListRequest{}
+	_, invocationErr := client.Inventory.PostV1InventoryReorderRulesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryReorderRulesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryReorderRulesListWithWireMock", "POST", "/v1/inventory/reorder-rules/list", nil, 1)
+}
+
+func TestInventoryPostV1InventoryReorderRulesCheckWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1InventoryReorderRulesCheckRequest{}
+	_, invocationErr := client.Inventory.PostV1InventoryReorderRulesCheck(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryPostV1InventoryReorderRulesCheckWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryPostV1InventoryReorderRulesCheckWithWireMock", "POST", "/v1/inventory/reorder-rules/check", nil, 1)
+}

@@ -235,3 +235,374 @@ func TestPurchasesPostV1PurchasesInvoicesListWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesInvoicesListWithWireMock", "POST", "/v1/purchases/invoices/list", nil, 1)
 }
+
+func TestPurchasesPostV1PurchasesOrdersCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersCreateRequest{
+		PartnerID: "partnerId",
+		OrderDate: "orderDate",
+		Lines: []*nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{
+			&nordlet.PostV1PurchasesOrdersCreateRequestLinesItem{},
+		},
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersCreateWithWireMock", "POST", "/v1/purchases/orders/create", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersUpdateWithWireMock", "POST", "/v1/purchases/orders/update", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersGetRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersGetWithWireMock", "POST", "/v1/purchases/orders/get", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersListRequest{}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersListWithWireMock", "POST", "/v1/purchases/orders/list", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersSubmitWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersSubmitRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersSubmit(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersSubmitWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersSubmitWithWireMock", "POST", "/v1/purchases/orders/submit", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersApproveWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersApproveRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersApprove(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersApproveWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersApproveWithWireMock", "POST", "/v1/purchases/orders/approve", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersRejectWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersRejectRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersReject(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersRejectWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersRejectWithWireMock", "POST", "/v1/purchases/orders/reject", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersCancelWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersCancelRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersCancel(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersCancelWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersCancelWithWireMock", "POST", "/v1/purchases/orders/cancel", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersCloseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersCloseRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersClose(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersCloseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersCloseWithWireMock", "POST", "/v1/purchases/orders/close", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesOrdersDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesOrdersDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesOrdersDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesOrdersDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesOrdersDeleteWithWireMock", "POST", "/v1/purchases/orders/delete", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesReceiptsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesReceiptsCreateRequest{
+		OrderID:     "orderId",
+		ReceiptDate: "receiptDate",
+		Lines: []*nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
+			&nordlet.PostV1PurchasesReceiptsCreateRequestLinesItem{
+				OrderLineID: "orderLineId",
+				Quantity:    "quantity",
+			},
+		},
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesReceiptsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesReceiptsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesReceiptsCreateWithWireMock", "POST", "/v1/purchases/receipts/create", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesReceiptsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesReceiptsGetRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesReceiptsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesReceiptsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesReceiptsGetWithWireMock", "POST", "/v1/purchases/receipts/get", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesReceiptsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesReceiptsListRequest{}
+	_, invocationErr := client.Purchases.PostV1PurchasesReceiptsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesReceiptsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesReceiptsListWithWireMock", "POST", "/v1/purchases/receipts/list", nil, 1)
+}
+
+func TestPurchasesPostV1PurchasesInvoicesMatchWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PurchasesInvoicesMatchRequest{
+		InvoiceID: "invoiceId",
+	}
+	_, invocationErr := client.Purchases.PostV1PurchasesInvoicesMatch(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesPostV1PurchasesInvoicesMatchWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesPostV1PurchasesInvoicesMatchWithWireMock", "POST", "/v1/purchases/invoices/match", nil, 1)
+}

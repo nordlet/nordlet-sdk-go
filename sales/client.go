@@ -130,6 +130,40 @@ func (c *Client) PostV1SalesInvoicesPeppolSend(
 	return response.Body, nil
 }
 
+// Render an issued invoice as the national e-invoicing payload for the company country: FatturaPA (IT), KSeF FA(3) (PL) or UBL CIUS-RO (RO). Review the warnings - data the invoice does not carry is flagged, never invented.
+func (c *Client) PostV1SalesInvoicesEinvoiceXML(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesEinvoiceXMLRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesEinvoiceXMLResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceXML(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Build the national e-invoicing payload and deliver it to the bridge endpoint configured for the country gateway in compliance settings. The bridge (an accredited intermediary or connector) handles the certified national channel - SdI accreditation, KSeF sessions or ANAF SPV OAuth.
+func (c *Client) PostV1SalesInvoicesEinvoiceSend(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesEinvoiceSendRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesEinvoiceSendResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceSend(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1SalesInvoicesUpdate(
 	ctx context.Context,
 	request *nordlet.PostV1SalesInvoicesUpdateRequest,

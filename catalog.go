@@ -207,28 +207,30 @@ func (p *PostV1CatalogItemGroupsUpdateRequest) MarshalJSON() ([]byte, error) {
 
 var (
 	postV1CatalogItemsCreateRequestFieldType                    = big.NewInt(1 << 0)
-	postV1CatalogItemsCreateRequestFieldName                    = big.NewInt(1 << 1)
-	postV1CatalogItemsCreateRequestFieldCode                    = big.NewInt(1 << 2)
-	postV1CatalogItemsCreateRequestFieldBarcode                 = big.NewInt(1 << 3)
-	postV1CatalogItemsCreateRequestFieldUnit                    = big.NewInt(1 << 4)
-	postV1CatalogItemsCreateRequestFieldVatClassifierCode       = big.NewInt(1 << 5)
-	postV1CatalogItemsCreateRequestFieldVatRatePercent          = big.NewInt(1 << 6)
-	postV1CatalogItemsCreateRequestFieldSalePriceExclVat        = big.NewInt(1 << 7)
-	postV1CatalogItemsCreateRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 8)
-	postV1CatalogItemsCreateRequestFieldCnCode                  = big.NewInt(1 << 9)
-	postV1CatalogItemsCreateRequestFieldOriginCountry           = big.NewInt(1 << 10)
-	postV1CatalogItemsCreateRequestFieldNetMassKg               = big.NewInt(1 << 11)
-	postV1CatalogItemsCreateRequestFieldSupplementaryUnit       = big.NewInt(1 << 12)
-	postV1CatalogItemsCreateRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 13)
-	postV1CatalogItemsCreateRequestFieldDescription             = big.NewInt(1 << 14)
-	postV1CatalogItemsCreateRequestFieldGroupID                 = big.NewInt(1 << 15)
-	postV1CatalogItemsCreateRequestFieldAttributes              = big.NewInt(1 << 16)
-	postV1CatalogItemsCreateRequestFieldTranslations            = big.NewInt(1 << 17)
-	postV1CatalogItemsCreateRequestFieldComponents              = big.NewInt(1 << 18)
+	postV1CatalogItemsCreateRequestFieldTracking                = big.NewInt(1 << 1)
+	postV1CatalogItemsCreateRequestFieldName                    = big.NewInt(1 << 2)
+	postV1CatalogItemsCreateRequestFieldCode                    = big.NewInt(1 << 3)
+	postV1CatalogItemsCreateRequestFieldBarcode                 = big.NewInt(1 << 4)
+	postV1CatalogItemsCreateRequestFieldUnit                    = big.NewInt(1 << 5)
+	postV1CatalogItemsCreateRequestFieldVatClassifierCode       = big.NewInt(1 << 6)
+	postV1CatalogItemsCreateRequestFieldVatRatePercent          = big.NewInt(1 << 7)
+	postV1CatalogItemsCreateRequestFieldSalePriceExclVat        = big.NewInt(1 << 8)
+	postV1CatalogItemsCreateRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
+	postV1CatalogItemsCreateRequestFieldCnCode                  = big.NewInt(1 << 10)
+	postV1CatalogItemsCreateRequestFieldOriginCountry           = big.NewInt(1 << 11)
+	postV1CatalogItemsCreateRequestFieldNetMassKg               = big.NewInt(1 << 12)
+	postV1CatalogItemsCreateRequestFieldSupplementaryUnit       = big.NewInt(1 << 13)
+	postV1CatalogItemsCreateRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
+	postV1CatalogItemsCreateRequestFieldDescription             = big.NewInt(1 << 15)
+	postV1CatalogItemsCreateRequestFieldGroupID                 = big.NewInt(1 << 16)
+	postV1CatalogItemsCreateRequestFieldAttributes              = big.NewInt(1 << 17)
+	postV1CatalogItemsCreateRequestFieldTranslations            = big.NewInt(1 << 18)
+	postV1CatalogItemsCreateRequestFieldComponents              = big.NewInt(1 << 19)
 )
 
 type PostV1CatalogItemsCreateRequest struct {
 	Type                    *PostV1CatalogItemsCreateRequestType                         `json:"type,omitempty" url:"-"`
+	Tracking                *PostV1CatalogItemsCreateRequestTracking                     `json:"tracking,omitempty" url:"-"`
 	Name                    string                                                       `json:"name" url:"-"`
 	Code                    *string                                                      `json:"code,omitempty" url:"-"`
 	Barcode                 *string                                                      `json:"barcode,omitempty" url:"-"`
@@ -264,6 +266,13 @@ func (p *PostV1CatalogItemsCreateRequest) require(field *big.Int) {
 func (p *PostV1CatalogItemsCreateRequest) SetType(type_ *PostV1CatalogItemsCreateRequestType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsCreateRequestFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetTracking(tracking *PostV1CatalogItemsCreateRequestTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsCreateRequestFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -773,29 +782,31 @@ func (p *PostV1CatalogItemsSuppliersUpsertRequest) MarshalJSON() ([]byte, error)
 var (
 	postV1CatalogItemsUpdateRequestFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsUpdateRequestFieldType                    = big.NewInt(1 << 1)
-	postV1CatalogItemsUpdateRequestFieldName                    = big.NewInt(1 << 2)
-	postV1CatalogItemsUpdateRequestFieldCode                    = big.NewInt(1 << 3)
-	postV1CatalogItemsUpdateRequestFieldBarcode                 = big.NewInt(1 << 4)
-	postV1CatalogItemsUpdateRequestFieldUnit                    = big.NewInt(1 << 5)
-	postV1CatalogItemsUpdateRequestFieldVatClassifierCode       = big.NewInt(1 << 6)
-	postV1CatalogItemsUpdateRequestFieldVatRatePercent          = big.NewInt(1 << 7)
-	postV1CatalogItemsUpdateRequestFieldSalePriceExclVat        = big.NewInt(1 << 8)
-	postV1CatalogItemsUpdateRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
-	postV1CatalogItemsUpdateRequestFieldCnCode                  = big.NewInt(1 << 10)
-	postV1CatalogItemsUpdateRequestFieldOriginCountry           = big.NewInt(1 << 11)
-	postV1CatalogItemsUpdateRequestFieldNetMassKg               = big.NewInt(1 << 12)
-	postV1CatalogItemsUpdateRequestFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	postV1CatalogItemsUpdateRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	postV1CatalogItemsUpdateRequestFieldDescription             = big.NewInt(1 << 15)
-	postV1CatalogItemsUpdateRequestFieldGroupID                 = big.NewInt(1 << 16)
-	postV1CatalogItemsUpdateRequestFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsUpdateRequestFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsUpdateRequestFieldComponents              = big.NewInt(1 << 19)
+	postV1CatalogItemsUpdateRequestFieldTracking                = big.NewInt(1 << 2)
+	postV1CatalogItemsUpdateRequestFieldName                    = big.NewInt(1 << 3)
+	postV1CatalogItemsUpdateRequestFieldCode                    = big.NewInt(1 << 4)
+	postV1CatalogItemsUpdateRequestFieldBarcode                 = big.NewInt(1 << 5)
+	postV1CatalogItemsUpdateRequestFieldUnit                    = big.NewInt(1 << 6)
+	postV1CatalogItemsUpdateRequestFieldVatClassifierCode       = big.NewInt(1 << 7)
+	postV1CatalogItemsUpdateRequestFieldVatRatePercent          = big.NewInt(1 << 8)
+	postV1CatalogItemsUpdateRequestFieldSalePriceExclVat        = big.NewInt(1 << 9)
+	postV1CatalogItemsUpdateRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
+	postV1CatalogItemsUpdateRequestFieldCnCode                  = big.NewInt(1 << 11)
+	postV1CatalogItemsUpdateRequestFieldOriginCountry           = big.NewInt(1 << 12)
+	postV1CatalogItemsUpdateRequestFieldNetMassKg               = big.NewInt(1 << 13)
+	postV1CatalogItemsUpdateRequestFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	postV1CatalogItemsUpdateRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	postV1CatalogItemsUpdateRequestFieldDescription             = big.NewInt(1 << 16)
+	postV1CatalogItemsUpdateRequestFieldGroupID                 = big.NewInt(1 << 17)
+	postV1CatalogItemsUpdateRequestFieldAttributes              = big.NewInt(1 << 18)
+	postV1CatalogItemsUpdateRequestFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsUpdateRequestFieldComponents              = big.NewInt(1 << 20)
 )
 
 type PostV1CatalogItemsUpdateRequest struct {
 	ID                      string                                                       `json:"id" url:"-"`
 	Type                    *PostV1CatalogItemsUpdateRequestType                         `json:"type,omitempty" url:"-"`
+	Tracking                *PostV1CatalogItemsUpdateRequestTracking                     `json:"tracking,omitempty" url:"-"`
 	Name                    *string                                                      `json:"name,omitempty" url:"-"`
 	Code                    *string                                                      `json:"code,omitempty" url:"-"`
 	Barcode                 *string                                                      `json:"barcode,omitempty" url:"-"`
@@ -838,6 +849,13 @@ func (p *PostV1CatalogItemsUpdateRequest) SetID(id string) {
 func (p *PostV1CatalogItemsUpdateRequest) SetType(type_ *PostV1CatalogItemsUpdateRequestType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsUpdateRequestFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetTracking(tracking *PostV1CatalogItemsUpdateRequestTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsUpdateRequestFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -2023,6 +2041,31 @@ func (p *PostV1CatalogItemsCreateRequestComponentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1CatalogItemsCreateRequestTracking string
+
+const (
+	PostV1CatalogItemsCreateRequestTrackingNone   PostV1CatalogItemsCreateRequestTracking = "none"
+	PostV1CatalogItemsCreateRequestTrackingLot    PostV1CatalogItemsCreateRequestTracking = "lot"
+	PostV1CatalogItemsCreateRequestTrackingSerial PostV1CatalogItemsCreateRequestTracking = "serial"
+)
+
+func NewPostV1CatalogItemsCreateRequestTrackingFromString(s string) (PostV1CatalogItemsCreateRequestTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsCreateRequestTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsCreateRequestTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsCreateRequestTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsCreateRequestTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsCreateRequestTracking) Ptr() *PostV1CatalogItemsCreateRequestTracking {
+	return &p
+}
+
 var (
 	postV1CatalogItemsCreateRequestTranslationsValueFieldName        = big.NewInt(1 << 0)
 	postV1CatalogItemsCreateRequestTranslationsValueFieldDescription = big.NewInt(1 << 1)
@@ -2151,31 +2194,33 @@ func (p PostV1CatalogItemsCreateRequestType) Ptr() *PostV1CatalogItemsCreateRequ
 var (
 	postV1CatalogItemsCreateResponseFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsCreateResponseFieldType                    = big.NewInt(1 << 1)
-	postV1CatalogItemsCreateResponseFieldName                    = big.NewInt(1 << 2)
-	postV1CatalogItemsCreateResponseFieldCode                    = big.NewInt(1 << 3)
-	postV1CatalogItemsCreateResponseFieldBarcode                 = big.NewInt(1 << 4)
-	postV1CatalogItemsCreateResponseFieldUnit                    = big.NewInt(1 << 5)
-	postV1CatalogItemsCreateResponseFieldVatClassifierCode       = big.NewInt(1 << 6)
-	postV1CatalogItemsCreateResponseFieldVatRatePercent          = big.NewInt(1 << 7)
-	postV1CatalogItemsCreateResponseFieldSalePriceExclVat        = big.NewInt(1 << 8)
-	postV1CatalogItemsCreateResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
-	postV1CatalogItemsCreateResponseFieldCnCode                  = big.NewInt(1 << 10)
-	postV1CatalogItemsCreateResponseFieldOriginCountry           = big.NewInt(1 << 11)
-	postV1CatalogItemsCreateResponseFieldNetMassKg               = big.NewInt(1 << 12)
-	postV1CatalogItemsCreateResponseFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	postV1CatalogItemsCreateResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	postV1CatalogItemsCreateResponseFieldDescription             = big.NewInt(1 << 15)
-	postV1CatalogItemsCreateResponseFieldGroupID                 = big.NewInt(1 << 16)
-	postV1CatalogItemsCreateResponseFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsCreateResponseFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsCreateResponseFieldComponents              = big.NewInt(1 << 19)
-	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 20)
-	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsCreateResponseFieldTracking                = big.NewInt(1 << 2)
+	postV1CatalogItemsCreateResponseFieldName                    = big.NewInt(1 << 3)
+	postV1CatalogItemsCreateResponseFieldCode                    = big.NewInt(1 << 4)
+	postV1CatalogItemsCreateResponseFieldBarcode                 = big.NewInt(1 << 5)
+	postV1CatalogItemsCreateResponseFieldUnit                    = big.NewInt(1 << 6)
+	postV1CatalogItemsCreateResponseFieldVatClassifierCode       = big.NewInt(1 << 7)
+	postV1CatalogItemsCreateResponseFieldVatRatePercent          = big.NewInt(1 << 8)
+	postV1CatalogItemsCreateResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
+	postV1CatalogItemsCreateResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
+	postV1CatalogItemsCreateResponseFieldCnCode                  = big.NewInt(1 << 11)
+	postV1CatalogItemsCreateResponseFieldOriginCountry           = big.NewInt(1 << 12)
+	postV1CatalogItemsCreateResponseFieldNetMassKg               = big.NewInt(1 << 13)
+	postV1CatalogItemsCreateResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	postV1CatalogItemsCreateResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	postV1CatalogItemsCreateResponseFieldDescription             = big.NewInt(1 << 16)
+	postV1CatalogItemsCreateResponseFieldGroupID                 = big.NewInt(1 << 17)
+	postV1CatalogItemsCreateResponseFieldAttributes              = big.NewInt(1 << 18)
+	postV1CatalogItemsCreateResponseFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsCreateResponseFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 22)
 )
 
 type PostV1CatalogItemsCreateResponse struct {
 	ID                      string                                                        `json:"id" url:"id"`
 	Type                    PostV1CatalogItemsCreateResponseType                          `json:"type" url:"type"`
+	Tracking                PostV1CatalogItemsCreateResponseTracking                      `json:"tracking" url:"tracking"`
 	Name                    string                                                        `json:"name" url:"name"`
 	Code                    *string                                                       `json:"code,omitempty" url:"code,omitempty"`
 	Barcode                 *string                                                       `json:"barcode,omitempty" url:"barcode,omitempty"`
@@ -2216,6 +2261,13 @@ func (p *PostV1CatalogItemsCreateResponse) GetType() PostV1CatalogItemsCreateRes
 		return ""
 	}
 	return p.Type
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetTracking() PostV1CatalogItemsCreateResponseTracking {
+	if p == nil {
+		return ""
+	}
+	return p.Tracking
 }
 
 func (p *PostV1CatalogItemsCreateResponse) GetName() string {
@@ -2384,6 +2436,13 @@ func (p *PostV1CatalogItemsCreateResponse) SetID(id string) {
 func (p *PostV1CatalogItemsCreateResponse) SetType(type_ PostV1CatalogItemsCreateResponseType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsCreateResponseFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetTracking(tracking PostV1CatalogItemsCreateResponseTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsCreateResponseFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -2684,6 +2743,31 @@ func (p *PostV1CatalogItemsCreateResponseComponentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1CatalogItemsCreateResponseTracking string
+
+const (
+	PostV1CatalogItemsCreateResponseTrackingNone   PostV1CatalogItemsCreateResponseTracking = "none"
+	PostV1CatalogItemsCreateResponseTrackingLot    PostV1CatalogItemsCreateResponseTracking = "lot"
+	PostV1CatalogItemsCreateResponseTrackingSerial PostV1CatalogItemsCreateResponseTracking = "serial"
+)
+
+func NewPostV1CatalogItemsCreateResponseTrackingFromString(s string) (PostV1CatalogItemsCreateResponseTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsCreateResponseTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsCreateResponseTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsCreateResponseTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsCreateResponseTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsCreateResponseTracking) Ptr() *PostV1CatalogItemsCreateResponseTracking {
+	return &p
+}
+
 var (
 	postV1CatalogItemsCreateResponseTranslationsValueFieldName        = big.NewInt(1 << 0)
 	postV1CatalogItemsCreateResponseTranslationsValueFieldDescription = big.NewInt(1 << 1)
@@ -2896,31 +2980,33 @@ func (p *PostV1CatalogItemsDeleteResponse) String() string {
 var (
 	postV1CatalogItemsGetResponseFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsGetResponseFieldType                    = big.NewInt(1 << 1)
-	postV1CatalogItemsGetResponseFieldName                    = big.NewInt(1 << 2)
-	postV1CatalogItemsGetResponseFieldCode                    = big.NewInt(1 << 3)
-	postV1CatalogItemsGetResponseFieldBarcode                 = big.NewInt(1 << 4)
-	postV1CatalogItemsGetResponseFieldUnit                    = big.NewInt(1 << 5)
-	postV1CatalogItemsGetResponseFieldVatClassifierCode       = big.NewInt(1 << 6)
-	postV1CatalogItemsGetResponseFieldVatRatePercent          = big.NewInt(1 << 7)
-	postV1CatalogItemsGetResponseFieldSalePriceExclVat        = big.NewInt(1 << 8)
-	postV1CatalogItemsGetResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
-	postV1CatalogItemsGetResponseFieldCnCode                  = big.NewInt(1 << 10)
-	postV1CatalogItemsGetResponseFieldOriginCountry           = big.NewInt(1 << 11)
-	postV1CatalogItemsGetResponseFieldNetMassKg               = big.NewInt(1 << 12)
-	postV1CatalogItemsGetResponseFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	postV1CatalogItemsGetResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	postV1CatalogItemsGetResponseFieldDescription             = big.NewInt(1 << 15)
-	postV1CatalogItemsGetResponseFieldGroupID                 = big.NewInt(1 << 16)
-	postV1CatalogItemsGetResponseFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsGetResponseFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsGetResponseFieldComponents              = big.NewInt(1 << 19)
-	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 20)
-	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsGetResponseFieldTracking                = big.NewInt(1 << 2)
+	postV1CatalogItemsGetResponseFieldName                    = big.NewInt(1 << 3)
+	postV1CatalogItemsGetResponseFieldCode                    = big.NewInt(1 << 4)
+	postV1CatalogItemsGetResponseFieldBarcode                 = big.NewInt(1 << 5)
+	postV1CatalogItemsGetResponseFieldUnit                    = big.NewInt(1 << 6)
+	postV1CatalogItemsGetResponseFieldVatClassifierCode       = big.NewInt(1 << 7)
+	postV1CatalogItemsGetResponseFieldVatRatePercent          = big.NewInt(1 << 8)
+	postV1CatalogItemsGetResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
+	postV1CatalogItemsGetResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
+	postV1CatalogItemsGetResponseFieldCnCode                  = big.NewInt(1 << 11)
+	postV1CatalogItemsGetResponseFieldOriginCountry           = big.NewInt(1 << 12)
+	postV1CatalogItemsGetResponseFieldNetMassKg               = big.NewInt(1 << 13)
+	postV1CatalogItemsGetResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	postV1CatalogItemsGetResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	postV1CatalogItemsGetResponseFieldDescription             = big.NewInt(1 << 16)
+	postV1CatalogItemsGetResponseFieldGroupID                 = big.NewInt(1 << 17)
+	postV1CatalogItemsGetResponseFieldAttributes              = big.NewInt(1 << 18)
+	postV1CatalogItemsGetResponseFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsGetResponseFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 22)
 )
 
 type PostV1CatalogItemsGetResponse struct {
 	ID                      string                                                     `json:"id" url:"id"`
 	Type                    PostV1CatalogItemsGetResponseType                          `json:"type" url:"type"`
+	Tracking                PostV1CatalogItemsGetResponseTracking                      `json:"tracking" url:"tracking"`
 	Name                    string                                                     `json:"name" url:"name"`
 	Code                    *string                                                    `json:"code,omitempty" url:"code,omitempty"`
 	Barcode                 *string                                                    `json:"barcode,omitempty" url:"barcode,omitempty"`
@@ -2961,6 +3047,13 @@ func (p *PostV1CatalogItemsGetResponse) GetType() PostV1CatalogItemsGetResponseT
 		return ""
 	}
 	return p.Type
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetTracking() PostV1CatalogItemsGetResponseTracking {
+	if p == nil {
+		return ""
+	}
+	return p.Tracking
 }
 
 func (p *PostV1CatalogItemsGetResponse) GetName() string {
@@ -3129,6 +3222,13 @@ func (p *PostV1CatalogItemsGetResponse) SetID(id string) {
 func (p *PostV1CatalogItemsGetResponse) SetType(type_ PostV1CatalogItemsGetResponseType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsGetResponseFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetTracking(tracking PostV1CatalogItemsGetResponseTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsGetResponseFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -3427,6 +3527,31 @@ func (p *PostV1CatalogItemsGetResponseComponentsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsGetResponseTracking string
+
+const (
+	PostV1CatalogItemsGetResponseTrackingNone   PostV1CatalogItemsGetResponseTracking = "none"
+	PostV1CatalogItemsGetResponseTrackingLot    PostV1CatalogItemsGetResponseTracking = "lot"
+	PostV1CatalogItemsGetResponseTrackingSerial PostV1CatalogItemsGetResponseTracking = "serial"
+)
+
+func NewPostV1CatalogItemsGetResponseTrackingFromString(s string) (PostV1CatalogItemsGetResponseTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsGetResponseTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsGetResponseTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsGetResponseTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsGetResponseTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsGetResponseTracking) Ptr() *PostV1CatalogItemsGetResponseTracking {
+	return &p
 }
 
 var (
@@ -4127,31 +4252,33 @@ func (p *PostV1CatalogItemsListResponse) String() string {
 var (
 	postV1CatalogItemsListResponseRowsItemFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsListResponseRowsItemFieldType                    = big.NewInt(1 << 1)
-	postV1CatalogItemsListResponseRowsItemFieldName                    = big.NewInt(1 << 2)
-	postV1CatalogItemsListResponseRowsItemFieldCode                    = big.NewInt(1 << 3)
-	postV1CatalogItemsListResponseRowsItemFieldBarcode                 = big.NewInt(1 << 4)
-	postV1CatalogItemsListResponseRowsItemFieldUnit                    = big.NewInt(1 << 5)
-	postV1CatalogItemsListResponseRowsItemFieldVatClassifierCode       = big.NewInt(1 << 6)
-	postV1CatalogItemsListResponseRowsItemFieldVatRatePercent          = big.NewInt(1 << 7)
-	postV1CatalogItemsListResponseRowsItemFieldSalePriceExclVat        = big.NewInt(1 << 8)
-	postV1CatalogItemsListResponseRowsItemFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
-	postV1CatalogItemsListResponseRowsItemFieldCnCode                  = big.NewInt(1 << 10)
-	postV1CatalogItemsListResponseRowsItemFieldOriginCountry           = big.NewInt(1 << 11)
-	postV1CatalogItemsListResponseRowsItemFieldNetMassKg               = big.NewInt(1 << 12)
-	postV1CatalogItemsListResponseRowsItemFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	postV1CatalogItemsListResponseRowsItemFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	postV1CatalogItemsListResponseRowsItemFieldDescription             = big.NewInt(1 << 15)
-	postV1CatalogItemsListResponseRowsItemFieldGroupID                 = big.NewInt(1 << 16)
-	postV1CatalogItemsListResponseRowsItemFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsListResponseRowsItemFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsListResponseRowsItemFieldComponents              = big.NewInt(1 << 19)
-	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 20)
-	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsListResponseRowsItemFieldTracking                = big.NewInt(1 << 2)
+	postV1CatalogItemsListResponseRowsItemFieldName                    = big.NewInt(1 << 3)
+	postV1CatalogItemsListResponseRowsItemFieldCode                    = big.NewInt(1 << 4)
+	postV1CatalogItemsListResponseRowsItemFieldBarcode                 = big.NewInt(1 << 5)
+	postV1CatalogItemsListResponseRowsItemFieldUnit                    = big.NewInt(1 << 6)
+	postV1CatalogItemsListResponseRowsItemFieldVatClassifierCode       = big.NewInt(1 << 7)
+	postV1CatalogItemsListResponseRowsItemFieldVatRatePercent          = big.NewInt(1 << 8)
+	postV1CatalogItemsListResponseRowsItemFieldSalePriceExclVat        = big.NewInt(1 << 9)
+	postV1CatalogItemsListResponseRowsItemFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
+	postV1CatalogItemsListResponseRowsItemFieldCnCode                  = big.NewInt(1 << 11)
+	postV1CatalogItemsListResponseRowsItemFieldOriginCountry           = big.NewInt(1 << 12)
+	postV1CatalogItemsListResponseRowsItemFieldNetMassKg               = big.NewInt(1 << 13)
+	postV1CatalogItemsListResponseRowsItemFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	postV1CatalogItemsListResponseRowsItemFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	postV1CatalogItemsListResponseRowsItemFieldDescription             = big.NewInt(1 << 16)
+	postV1CatalogItemsListResponseRowsItemFieldGroupID                 = big.NewInt(1 << 17)
+	postV1CatalogItemsListResponseRowsItemFieldAttributes              = big.NewInt(1 << 18)
+	postV1CatalogItemsListResponseRowsItemFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsListResponseRowsItemFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 22)
 )
 
 type PostV1CatalogItemsListResponseRowsItem struct {
 	ID                      string                                                              `json:"id" url:"id"`
 	Type                    PostV1CatalogItemsListResponseRowsItemType                          `json:"type" url:"type"`
+	Tracking                PostV1CatalogItemsListResponseRowsItemTracking                      `json:"tracking" url:"tracking"`
 	Name                    string                                                              `json:"name" url:"name"`
 	Code                    *string                                                             `json:"code,omitempty" url:"code,omitempty"`
 	Barcode                 *string                                                             `json:"barcode,omitempty" url:"barcode,omitempty"`
@@ -4192,6 +4319,13 @@ func (p *PostV1CatalogItemsListResponseRowsItem) GetType() PostV1CatalogItemsLis
 		return ""
 	}
 	return p.Type
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetTracking() PostV1CatalogItemsListResponseRowsItemTracking {
+	if p == nil {
+		return ""
+	}
+	return p.Tracking
 }
 
 func (p *PostV1CatalogItemsListResponseRowsItem) GetName() string {
@@ -4360,6 +4494,13 @@ func (p *PostV1CatalogItemsListResponseRowsItem) SetID(id string) {
 func (p *PostV1CatalogItemsListResponseRowsItem) SetType(type_ PostV1CatalogItemsListResponseRowsItemType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsListResponseRowsItemFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetTracking(tracking PostV1CatalogItemsListResponseRowsItemTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsListResponseRowsItemFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -4658,6 +4799,31 @@ func (p *PostV1CatalogItemsListResponseRowsItemComponentsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsListResponseRowsItemTracking string
+
+const (
+	PostV1CatalogItemsListResponseRowsItemTrackingNone   PostV1CatalogItemsListResponseRowsItemTracking = "none"
+	PostV1CatalogItemsListResponseRowsItemTrackingLot    PostV1CatalogItemsListResponseRowsItemTracking = "lot"
+	PostV1CatalogItemsListResponseRowsItemTrackingSerial PostV1CatalogItemsListResponseRowsItemTracking = "serial"
+)
+
+func NewPostV1CatalogItemsListResponseRowsItemTrackingFromString(s string) (PostV1CatalogItemsListResponseRowsItemTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsListResponseRowsItemTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsListResponseRowsItemTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsListResponseRowsItemTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsListResponseRowsItemTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsListResponseRowsItemTracking) Ptr() *PostV1CatalogItemsListResponseRowsItemTracking {
+	return &p
 }
 
 var (
@@ -5477,6 +5643,31 @@ func (p *PostV1CatalogItemsUpdateRequestComponentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1CatalogItemsUpdateRequestTracking string
+
+const (
+	PostV1CatalogItemsUpdateRequestTrackingNone   PostV1CatalogItemsUpdateRequestTracking = "none"
+	PostV1CatalogItemsUpdateRequestTrackingLot    PostV1CatalogItemsUpdateRequestTracking = "lot"
+	PostV1CatalogItemsUpdateRequestTrackingSerial PostV1CatalogItemsUpdateRequestTracking = "serial"
+)
+
+func NewPostV1CatalogItemsUpdateRequestTrackingFromString(s string) (PostV1CatalogItemsUpdateRequestTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsUpdateRequestTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsUpdateRequestTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsUpdateRequestTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsUpdateRequestTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsUpdateRequestTracking) Ptr() *PostV1CatalogItemsUpdateRequestTracking {
+	return &p
+}
+
 var (
 	postV1CatalogItemsUpdateRequestTranslationsValueFieldName        = big.NewInt(1 << 0)
 	postV1CatalogItemsUpdateRequestTranslationsValueFieldDescription = big.NewInt(1 << 1)
@@ -5605,31 +5796,33 @@ func (p PostV1CatalogItemsUpdateRequestType) Ptr() *PostV1CatalogItemsUpdateRequ
 var (
 	postV1CatalogItemsUpdateResponseFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsUpdateResponseFieldType                    = big.NewInt(1 << 1)
-	postV1CatalogItemsUpdateResponseFieldName                    = big.NewInt(1 << 2)
-	postV1CatalogItemsUpdateResponseFieldCode                    = big.NewInt(1 << 3)
-	postV1CatalogItemsUpdateResponseFieldBarcode                 = big.NewInt(1 << 4)
-	postV1CatalogItemsUpdateResponseFieldUnit                    = big.NewInt(1 << 5)
-	postV1CatalogItemsUpdateResponseFieldVatClassifierCode       = big.NewInt(1 << 6)
-	postV1CatalogItemsUpdateResponseFieldVatRatePercent          = big.NewInt(1 << 7)
-	postV1CatalogItemsUpdateResponseFieldSalePriceExclVat        = big.NewInt(1 << 8)
-	postV1CatalogItemsUpdateResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
-	postV1CatalogItemsUpdateResponseFieldCnCode                  = big.NewInt(1 << 10)
-	postV1CatalogItemsUpdateResponseFieldOriginCountry           = big.NewInt(1 << 11)
-	postV1CatalogItemsUpdateResponseFieldNetMassKg               = big.NewInt(1 << 12)
-	postV1CatalogItemsUpdateResponseFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	postV1CatalogItemsUpdateResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	postV1CatalogItemsUpdateResponseFieldDescription             = big.NewInt(1 << 15)
-	postV1CatalogItemsUpdateResponseFieldGroupID                 = big.NewInt(1 << 16)
-	postV1CatalogItemsUpdateResponseFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsUpdateResponseFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsUpdateResponseFieldComponents              = big.NewInt(1 << 19)
-	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 20)
-	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsUpdateResponseFieldTracking                = big.NewInt(1 << 2)
+	postV1CatalogItemsUpdateResponseFieldName                    = big.NewInt(1 << 3)
+	postV1CatalogItemsUpdateResponseFieldCode                    = big.NewInt(1 << 4)
+	postV1CatalogItemsUpdateResponseFieldBarcode                 = big.NewInt(1 << 5)
+	postV1CatalogItemsUpdateResponseFieldUnit                    = big.NewInt(1 << 6)
+	postV1CatalogItemsUpdateResponseFieldVatClassifierCode       = big.NewInt(1 << 7)
+	postV1CatalogItemsUpdateResponseFieldVatRatePercent          = big.NewInt(1 << 8)
+	postV1CatalogItemsUpdateResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
+	postV1CatalogItemsUpdateResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
+	postV1CatalogItemsUpdateResponseFieldCnCode                  = big.NewInt(1 << 11)
+	postV1CatalogItemsUpdateResponseFieldOriginCountry           = big.NewInt(1 << 12)
+	postV1CatalogItemsUpdateResponseFieldNetMassKg               = big.NewInt(1 << 13)
+	postV1CatalogItemsUpdateResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	postV1CatalogItemsUpdateResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	postV1CatalogItemsUpdateResponseFieldDescription             = big.NewInt(1 << 16)
+	postV1CatalogItemsUpdateResponseFieldGroupID                 = big.NewInt(1 << 17)
+	postV1CatalogItemsUpdateResponseFieldAttributes              = big.NewInt(1 << 18)
+	postV1CatalogItemsUpdateResponseFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsUpdateResponseFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 21)
+	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 22)
 )
 
 type PostV1CatalogItemsUpdateResponse struct {
 	ID                      string                                                        `json:"id" url:"id"`
 	Type                    PostV1CatalogItemsUpdateResponseType                          `json:"type" url:"type"`
+	Tracking                PostV1CatalogItemsUpdateResponseTracking                      `json:"tracking" url:"tracking"`
 	Name                    string                                                        `json:"name" url:"name"`
 	Code                    *string                                                       `json:"code,omitempty" url:"code,omitempty"`
 	Barcode                 *string                                                       `json:"barcode,omitempty" url:"barcode,omitempty"`
@@ -5670,6 +5863,13 @@ func (p *PostV1CatalogItemsUpdateResponse) GetType() PostV1CatalogItemsUpdateRes
 		return ""
 	}
 	return p.Type
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetTracking() PostV1CatalogItemsUpdateResponseTracking {
+	if p == nil {
+		return ""
+	}
+	return p.Tracking
 }
 
 func (p *PostV1CatalogItemsUpdateResponse) GetName() string {
@@ -5838,6 +6038,13 @@ func (p *PostV1CatalogItemsUpdateResponse) SetID(id string) {
 func (p *PostV1CatalogItemsUpdateResponse) SetType(type_ PostV1CatalogItemsUpdateResponseType) {
 	p.Type = type_
 	p.require(postV1CatalogItemsUpdateResponseFieldType)
+}
+
+// SetTracking sets the Tracking field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetTracking(tracking PostV1CatalogItemsUpdateResponseTracking) {
+	p.Tracking = tracking
+	p.require(postV1CatalogItemsUpdateResponseFieldTracking)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -6136,6 +6343,31 @@ func (p *PostV1CatalogItemsUpdateResponseComponentsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsUpdateResponseTracking string
+
+const (
+	PostV1CatalogItemsUpdateResponseTrackingNone   PostV1CatalogItemsUpdateResponseTracking = "none"
+	PostV1CatalogItemsUpdateResponseTrackingLot    PostV1CatalogItemsUpdateResponseTracking = "lot"
+	PostV1CatalogItemsUpdateResponseTrackingSerial PostV1CatalogItemsUpdateResponseTracking = "serial"
+)
+
+func NewPostV1CatalogItemsUpdateResponseTrackingFromString(s string) (PostV1CatalogItemsUpdateResponseTracking, error) {
+	switch s {
+	case "none":
+		return PostV1CatalogItemsUpdateResponseTrackingNone, nil
+	case "lot":
+		return PostV1CatalogItemsUpdateResponseTrackingLot, nil
+	case "serial":
+		return PostV1CatalogItemsUpdateResponseTrackingSerial, nil
+	}
+	var t PostV1CatalogItemsUpdateResponseTracking
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsUpdateResponseTracking) Ptr() *PostV1CatalogItemsUpdateResponseTracking {
+	return &p
 }
 
 var (

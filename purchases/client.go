@@ -129,3 +129,227 @@ func (c *Client) PostV1PurchasesInvoicesList(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) PostV1PurchasesOrdersCreate(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersGet(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersList(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersListResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersSubmit(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersSubmitRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersSubmitResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersSubmit(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersApprove(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersApproveRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersApproveResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersApprove(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersReject(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersRejectRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersRejectResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersReject(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersCancel(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersCancelRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersCancelResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersCancel(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersClose(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersCloseRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersCloseResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersClose(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesOrdersDelete(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesOrdersDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesOrdersDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesOrdersDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesReceiptsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesReceiptsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesReceiptsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesReceiptsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesReceiptsGet(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesReceiptsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesReceiptsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesReceiptsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesReceiptsList(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesReceiptsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesReceiptsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesReceiptsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PurchasesInvoicesMatch(
+	ctx context.Context,
+	request *nordlet.PostV1PurchasesInvoicesMatchRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PurchasesInvoicesMatchResponse, error) {
+	response, err := c.WithRawResponse.PostV1PurchasesInvoicesMatch(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

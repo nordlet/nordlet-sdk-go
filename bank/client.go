@@ -162,6 +162,102 @@ func (c *Client) PostV1BankPaymentsExport(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1BankMandatesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1BankMandatesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMandatesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMandatesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMandatesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1BankMandatesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMandatesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMandatesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMandatesCancel(
+	ctx context.Context,
+	request *nordlet.PostV1BankMandatesCancelRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMandatesCancelResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMandatesCancel(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMandatesGet(
+	ctx context.Context,
+	request *nordlet.PostV1BankMandatesGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMandatesGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMandatesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMandatesList(
+	ctx context.Context,
+	request *nordlet.PostV1BankMandatesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMandatesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMandatesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankDirectDebitsExport(
+	ctx context.Context,
+	request *nordlet.PostV1BankDirectDebitsExportRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankDirectDebitsExportResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankDirectDebitsExport(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1BankTransactionsSuggestMatches(
 	ctx context.Context,
 	request *nordlet.PostV1BankTransactionsSuggestMatchesRequest,
@@ -248,6 +344,134 @@ func (c *Client) PostV1BankSettlementsPost(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1BankSettlementsPostResponse, error) {
 	response, err := c.WithRawResponse.PostV1BankSettlementsPost(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ListThePsd2BanksAspsPsAvailableToConnect(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsBanksListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsBanksListResponse, error) {
+	response, err := c.WithRawResponse.ListThePsd2BanksAspsPsAvailableToConnect(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsConnectionsStartRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsConnectionsStartResponse, error) {
+	response, err := c.WithRawResponse.BeginBankAuthorizationRedirectTheUserToTheReturnedURL(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsConnectionsCompleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsConnectionsCompleteResponse, error) {
+	response, err := c.WithRawResponse.ExchangeTheRedirectCodeForASessionAndStoreTheBankAccountsItExposes(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankFeedsConnectionsGet(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsConnectionsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsConnectionsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankFeedsConnectionsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankFeedsConnectionsList(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsConnectionsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsConnectionsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankFeedsConnectionsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsConnectionsDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsConnectionsDeleteResponse, error) {
+	response, err := c.WithRawResponse.RevokeTheConsentAtTheBankAndDropTheStoredConnection(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsAccountsLinkRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsAccountsLinkResponse, error) {
+	response, err := c.WithRawResponse.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsSyncRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsSyncResponse, error) {
+	response, err := c.WithRawResponse.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 		ctx,
 		request,
 		opts...,

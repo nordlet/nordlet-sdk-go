@@ -243,6 +243,40 @@ func (c *Client) PostV1ReferenceEuVatRatesList(
 	return response.Body, nil
 }
 
+// History of EU VAT rate imports from the EC TEDB VatRetrievalService: when rates were pulled, what changed, and whether the run succeeded. The initial seed run carries the built-in snapshot.
+func (c *Client) PostV1ReferenceEuVatRatesImportsList(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceEuVatRatesImportsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceEuVatRatesImportsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesImportsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Trigger an immediate pull of EU VAT rates from the EC TEDB VatRetrievalService. Rates are shared reference data: new rates open with today as their effective date, rates that disappeared are closed with a validity end date. Returns the finished import run.
+func (c *Client) PostV1ReferenceEuVatRatesSync(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceEuVatRatesSyncRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceEuVatRatesSyncResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceEuVatRatesSync(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Replace the VAT rate mapping this company uses for one EU country. Pass an empty rates array to drop the overrides and return to the TEDB defaults. Overrides feed rate suggestions (vat/resolve) and OSS/IOSS return rate classification.
 func (c *Client) PostV1ReferenceEuVatRatesSetOverrides(
 	ctx context.Context,
