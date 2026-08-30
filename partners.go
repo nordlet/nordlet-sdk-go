@@ -10,6 +10,52 @@ import (
 )
 
 var (
+	postV1PartnersAnonymizeRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1PartnersAnonymizeRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersAnonymizeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersAnonymizeRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersAnonymizeRequestFieldID)
+}
+
+func (p *PostV1PartnersAnonymizeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersAnonymizeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PartnersAnonymizeRequest(body)
+	return nil
+}
+
+func (p *PostV1PartnersAnonymizeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersAnonymizeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1PartnersAddressesCreateRequestFieldType        = big.NewInt(1 << 0)
 	postV1PartnersAddressesCreateRequestFieldStreet      = big.NewInt(1 << 1)
 	postV1PartnersAddressesCreateRequestFieldCity        = big.NewInt(1 << 2)
@@ -4000,6 +4046,106 @@ func (p *PostV1PartnersAddressesUpdateResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1PartnersAddressesUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersAnonymizeResponseFieldID         = big.NewInt(1 << 0)
+	postV1PartnersAnonymizeResponseFieldAnonymized = big.NewInt(1 << 1)
+)
+
+type PostV1PartnersAnonymizeResponse struct {
+	ID         string `json:"id" url:"id"`
+	Anonymized bool   `json:"anonymized" url:"anonymized"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersAnonymizeResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersAnonymizeResponse) GetAnonymized() bool {
+	if p == nil {
+		return false
+	}
+	return p.Anonymized
+}
+
+func (p *PostV1PartnersAnonymizeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersAnonymizeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersAnonymizeResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersAnonymizeResponseFieldID)
+}
+
+// SetAnonymized sets the Anonymized field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersAnonymizeResponse) SetAnonymized(anonymized bool) {
+	p.Anonymized = anonymized
+	p.require(postV1PartnersAnonymizeResponseFieldAnonymized)
+}
+
+func (p *PostV1PartnersAnonymizeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersAnonymizeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersAnonymizeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersAnonymizeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersAnonymizeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersAnonymizeResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}

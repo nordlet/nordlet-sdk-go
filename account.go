@@ -10,6 +10,65 @@ import (
 )
 
 var (
+	postV1AccountDeleteRequestFieldConfirmEmail = big.NewInt(1 << 0)
+)
+
+type PostV1AccountDeleteRequest struct {
+	ConfirmEmail string `json:"confirmEmail" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetConfirmEmail sets the ConfirmEmail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountDeleteRequest) SetConfirmEmail(confirmEmail string) {
+	p.ConfirmEmail = confirmEmail
+	p.require(postV1AccountDeleteRequestFieldConfirmEmail)
+}
+
+func (p *PostV1AccountDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1AccountExportRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountExportRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
 	postV1AccountAPIKeysCreateRequestFieldName   = big.NewInt(1 << 0)
 	postV1AccountAPIKeysCreateRequestFieldScopes = big.NewInt(1 << 1)
 )
@@ -658,15 +717,129 @@ func (p *PostV1AccountCompaniesUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountInvitesAcceptRequestFieldToken  = big.NewInt(1 << 0)
-	postV1AccountInvitesAcceptRequestFieldName   = big.NewInt(1 << 1)
-	postV1AccountInvitesAcceptRequestFieldLocale = big.NewInt(1 << 2)
+	postV1AccountConsentAcceptRequestFieldAcceptTerms = big.NewInt(1 << 0)
+	postV1AccountConsentAcceptRequestFieldAcceptDpa   = big.NewInt(1 << 1)
+)
+
+type PostV1AccountConsentAcceptRequest struct {
+	AcceptTerms bool `json:"acceptTerms" url:"-"`
+	AcceptDpa   bool `json:"acceptDpa" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountConsentAcceptRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAcceptTerms sets the AcceptTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptRequest) SetAcceptTerms(acceptTerms bool) {
+	p.AcceptTerms = acceptTerms
+	p.require(postV1AccountConsentAcceptRequestFieldAcceptTerms)
+}
+
+// SetAcceptDpa sets the AcceptDpa field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptRequest) SetAcceptDpa(acceptDpa bool) {
+	p.AcceptDpa = acceptDpa
+	p.require(postV1AccountConsentAcceptRequestFieldAcceptDpa)
+}
+
+func (p *PostV1AccountConsentAcceptRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountConsentAcceptRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountConsentAcceptRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountConsentAcceptRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountConsentAcceptRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AccountEmailChangeRequestRequestFieldNewEmail = big.NewInt(1 << 0)
+	postV1AccountEmailChangeRequestRequestFieldLocale   = big.NewInt(1 << 1)
+)
+
+type PostV1AccountEmailChangeRequestRequest struct {
+	NewEmail string                                        `json:"newEmail" url:"-"`
+	Locale   *PostV1AccountEmailChangeRequestRequestLocale `json:"locale,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountEmailChangeRequestRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetNewEmail sets the NewEmail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountEmailChangeRequestRequest) SetNewEmail(newEmail string) {
+	p.NewEmail = newEmail
+	p.require(postV1AccountEmailChangeRequestRequestFieldNewEmail)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountEmailChangeRequestRequest) SetLocale(locale *PostV1AccountEmailChangeRequestRequestLocale) {
+	p.Locale = locale
+	p.require(postV1AccountEmailChangeRequestRequestFieldLocale)
+}
+
+func (p *PostV1AccountEmailChangeRequestRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountEmailChangeRequestRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountEmailChangeRequestRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountEmailChangeRequestRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountEmailChangeRequestRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AccountInvitesAcceptRequestFieldToken       = big.NewInt(1 << 0)
+	postV1AccountInvitesAcceptRequestFieldName        = big.NewInt(1 << 1)
+	postV1AccountInvitesAcceptRequestFieldLocale      = big.NewInt(1 << 2)
+	postV1AccountInvitesAcceptRequestFieldAcceptTerms = big.NewInt(1 << 3)
+	postV1AccountInvitesAcceptRequestFieldAcceptDpa   = big.NewInt(1 << 4)
 )
 
 type PostV1AccountInvitesAcceptRequest struct {
-	Token  string                                   `json:"token" url:"-"`
-	Name   *string                                  `json:"name,omitempty" url:"-"`
-	Locale *PostV1AccountInvitesAcceptRequestLocale `json:"locale,omitempty" url:"-"`
+	Token       string                                   `json:"token" url:"-"`
+	Name        *string                                  `json:"name,omitempty" url:"-"`
+	Locale      *PostV1AccountInvitesAcceptRequestLocale `json:"locale,omitempty" url:"-"`
+	AcceptTerms *bool                                    `json:"acceptTerms,omitempty" url:"-"`
+	AcceptDpa   *bool                                    `json:"acceptDpa,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -698,6 +871,20 @@ func (p *PostV1AccountInvitesAcceptRequest) SetName(name *string) {
 func (p *PostV1AccountInvitesAcceptRequest) SetLocale(locale *PostV1AccountInvitesAcceptRequestLocale) {
 	p.Locale = locale
 	p.require(postV1AccountInvitesAcceptRequestFieldLocale)
+}
+
+// SetAcceptTerms sets the AcceptTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountInvitesAcceptRequest) SetAcceptTerms(acceptTerms *bool) {
+	p.AcceptTerms = acceptTerms
+	p.require(postV1AccountInvitesAcceptRequestFieldAcceptTerms)
+}
+
+// SetAcceptDpa sets the AcceptDpa field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountInvitesAcceptRequest) SetAcceptDpa(acceptDpa *bool) {
+	p.AcceptDpa = acceptDpa
+	p.require(postV1AccountInvitesAcceptRequestFieldAcceptDpa)
 }
 
 func (p *PostV1AccountInvitesAcceptRequest) UnmarshalJSON(data []byte) error {
@@ -983,13 +1170,17 @@ func (p *PostV1AccountLoginLinkConsumeRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountLoginLinkRequestRequestFieldEmail  = big.NewInt(1 << 0)
-	postV1AccountLoginLinkRequestRequestFieldLocale = big.NewInt(1 << 1)
+	postV1AccountLoginLinkRequestRequestFieldEmail       = big.NewInt(1 << 0)
+	postV1AccountLoginLinkRequestRequestFieldLocale      = big.NewInt(1 << 1)
+	postV1AccountLoginLinkRequestRequestFieldAcceptTerms = big.NewInt(1 << 2)
+	postV1AccountLoginLinkRequestRequestFieldAcceptDpa   = big.NewInt(1 << 3)
 )
 
 type PostV1AccountLoginLinkRequestRequest struct {
-	Email  string                                      `json:"email" url:"-"`
-	Locale *PostV1AccountLoginLinkRequestRequestLocale `json:"locale,omitempty" url:"-"`
+	Email       string                                      `json:"email" url:"-"`
+	Locale      *PostV1AccountLoginLinkRequestRequestLocale `json:"locale,omitempty" url:"-"`
+	AcceptTerms *bool                                       `json:"acceptTerms,omitempty" url:"-"`
+	AcceptDpa   *bool                                       `json:"acceptDpa,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1014,6 +1205,20 @@ func (p *PostV1AccountLoginLinkRequestRequest) SetEmail(email string) {
 func (p *PostV1AccountLoginLinkRequestRequest) SetLocale(locale *PostV1AccountLoginLinkRequestRequestLocale) {
 	p.Locale = locale
 	p.require(postV1AccountLoginLinkRequestRequestFieldLocale)
+}
+
+// SetAcceptTerms sets the AcceptTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountLoginLinkRequestRequest) SetAcceptTerms(acceptTerms *bool) {
+	p.AcceptTerms = acceptTerms
+	p.require(postV1AccountLoginLinkRequestRequestFieldAcceptTerms)
+}
+
+// SetAcceptDpa sets the AcceptDpa field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountLoginLinkRequestRequest) SetAcceptDpa(acceptDpa *bool) {
+	p.AcceptDpa = acceptDpa
+	p.require(postV1AccountLoginLinkRequestRequestFieldAcceptDpa)
 }
 
 func (p *PostV1AccountLoginLinkRequestRequest) UnmarshalJSON(data []byte) error {
@@ -1175,6 +1380,124 @@ func (p *PostV1AccountMembersSetRoleRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AccountProfileUpdateRequestFieldName = big.NewInt(1 << 0)
+)
+
+type PostV1AccountProfileUpdateRequest struct {
+	Name *string `json:"name,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountProfileUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountProfileUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1AccountProfileUpdateRequestFieldName)
+}
+
+func (p *PostV1AccountProfileUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountProfileUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountProfileUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountProfileUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountProfileUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1AccountSessionsListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountSessionsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1AccountSessionsRevokeRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1AccountSessionsRevokeRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountSessionsRevokeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsRevokeRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountSessionsRevokeRequestFieldID)
+}
+
+func (p *PostV1AccountSessionsRevokeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountSessionsRevokeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountSessionsRevokeRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountSessionsRevokeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountSessionsRevokeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1AccountSessionsRevokeOthersRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountSessionsRevokeOthersRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
 }
 
 var (
@@ -3751,6 +4074,1675 @@ func (p PostV1AccountCompaniesUpdateResponseStatus) Ptr() *PostV1AccountCompanie
 	return &p
 }
 
+var (
+	postV1AccountConsentAcceptResponseFieldTermsVersion        = big.NewInt(1 << 0)
+	postV1AccountConsentAcceptResponseFieldTermsAcceptedAt     = big.NewInt(1 << 1)
+	postV1AccountConsentAcceptResponseFieldDpaVersion          = big.NewInt(1 << 2)
+	postV1AccountConsentAcceptResponseFieldDpaAcceptedAt       = big.NewInt(1 << 3)
+	postV1AccountConsentAcceptResponseFieldCurrentTermsVersion = big.NewInt(1 << 4)
+	postV1AccountConsentAcceptResponseFieldCurrentDpaVersion   = big.NewInt(1 << 5)
+	postV1AccountConsentAcceptResponseFieldRequired            = big.NewInt(1 << 6)
+)
+
+type PostV1AccountConsentAcceptResponse struct {
+	TermsVersion        *string `json:"termsVersion,omitempty" url:"termsVersion,omitempty"`
+	TermsAcceptedAt     *string `json:"termsAcceptedAt,omitempty" url:"termsAcceptedAt,omitempty"`
+	DpaVersion          *string `json:"dpaVersion,omitempty" url:"dpaVersion,omitempty"`
+	DpaAcceptedAt       *string `json:"dpaAcceptedAt,omitempty" url:"dpaAcceptedAt,omitempty"`
+	CurrentTermsVersion string  `json:"currentTermsVersion" url:"currentTermsVersion"`
+	CurrentDpaVersion   string  `json:"currentDpaVersion" url:"currentDpaVersion"`
+	Required            bool    `json:"required" url:"required"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetTermsVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsVersion
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetTermsAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsAcceptedAt
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetDpaVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaVersion
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetDpaAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaAcceptedAt
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetCurrentTermsVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentTermsVersion
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetCurrentDpaVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentDpaVersion
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.Required
+}
+
+func (p *PostV1AccountConsentAcceptResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountConsentAcceptResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTermsVersion sets the TermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetTermsVersion(termsVersion *string) {
+	p.TermsVersion = termsVersion
+	p.require(postV1AccountConsentAcceptResponseFieldTermsVersion)
+}
+
+// SetTermsAcceptedAt sets the TermsAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetTermsAcceptedAt(termsAcceptedAt *string) {
+	p.TermsAcceptedAt = termsAcceptedAt
+	p.require(postV1AccountConsentAcceptResponseFieldTermsAcceptedAt)
+}
+
+// SetDpaVersion sets the DpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetDpaVersion(dpaVersion *string) {
+	p.DpaVersion = dpaVersion
+	p.require(postV1AccountConsentAcceptResponseFieldDpaVersion)
+}
+
+// SetDpaAcceptedAt sets the DpaAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetDpaAcceptedAt(dpaAcceptedAt *string) {
+	p.DpaAcceptedAt = dpaAcceptedAt
+	p.require(postV1AccountConsentAcceptResponseFieldDpaAcceptedAt)
+}
+
+// SetCurrentTermsVersion sets the CurrentTermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetCurrentTermsVersion(currentTermsVersion string) {
+	p.CurrentTermsVersion = currentTermsVersion
+	p.require(postV1AccountConsentAcceptResponseFieldCurrentTermsVersion)
+}
+
+// SetCurrentDpaVersion sets the CurrentDpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetCurrentDpaVersion(currentDpaVersion string) {
+	p.CurrentDpaVersion = currentDpaVersion
+	p.require(postV1AccountConsentAcceptResponseFieldCurrentDpaVersion)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountConsentAcceptResponse) SetRequired(required bool) {
+	p.Required = required
+	p.require(postV1AccountConsentAcceptResponseFieldRequired)
+}
+
+func (p *PostV1AccountConsentAcceptResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountConsentAcceptResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountConsentAcceptResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountConsentAcceptResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountConsentAcceptResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountConsentAcceptResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountDeleteResponseFieldDeleted = big.NewInt(1 << 0)
+)
+
+type PostV1AccountDeleteResponse struct {
+	Deleted bool `json:"deleted" url:"deleted"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountDeleteResponse) GetDeleted() bool {
+	if p == nil {
+		return false
+	}
+	return p.Deleted
+}
+
+func (p *PostV1AccountDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetDeleted sets the Deleted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountDeleteResponse) SetDeleted(deleted bool) {
+	p.Deleted = deleted
+	p.require(postV1AccountDeleteResponseFieldDeleted)
+}
+
+func (p *PostV1AccountDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountEmailChangeRequestRequestLocale string
+
+const (
+	PostV1AccountEmailChangeRequestRequestLocaleLt PostV1AccountEmailChangeRequestRequestLocale = "lt"
+	PostV1AccountEmailChangeRequestRequestLocaleEn PostV1AccountEmailChangeRequestRequestLocale = "en"
+	PostV1AccountEmailChangeRequestRequestLocaleRu PostV1AccountEmailChangeRequestRequestLocale = "ru"
+)
+
+func NewPostV1AccountEmailChangeRequestRequestLocaleFromString(s string) (PostV1AccountEmailChangeRequestRequestLocale, error) {
+	switch s {
+	case "lt":
+		return PostV1AccountEmailChangeRequestRequestLocaleLt, nil
+	case "en":
+		return PostV1AccountEmailChangeRequestRequestLocaleEn, nil
+	case "ru":
+		return PostV1AccountEmailChangeRequestRequestLocaleRu, nil
+	}
+	var t PostV1AccountEmailChangeRequestRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountEmailChangeRequestRequestLocale) Ptr() *PostV1AccountEmailChangeRequestRequestLocale {
+	return &p
+}
+
+var (
+	postV1AccountEmailChangeRequestResponseFieldSent = big.NewInt(1 << 0)
+)
+
+type PostV1AccountEmailChangeRequestResponse struct {
+	Sent bool `json:"sent" url:"sent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) GetSent() bool {
+	if p == nil {
+		return false
+	}
+	return p.Sent
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetSent sets the Sent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountEmailChangeRequestResponse) SetSent(sent bool) {
+	p.Sent = sent
+	p.require(postV1AccountEmailChangeRequestResponseFieldSent)
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountEmailChangeRequestResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountEmailChangeRequestResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountEmailChangeRequestResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountEmailChangeRequestResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseFieldGeneratedAt        = big.NewInt(1 << 0)
+	postV1AccountExportResponseFieldUser               = big.NewInt(1 << 1)
+	postV1AccountExportResponseFieldConsent            = big.NewInt(1 << 2)
+	postV1AccountExportResponseFieldMemberships        = big.NewInt(1 << 3)
+	postV1AccountExportResponseFieldSessions           = big.NewInt(1 << 4)
+	postV1AccountExportResponseFieldBilling            = big.NewInt(1 << 5)
+	postV1AccountExportResponseFieldCreditTransactions = big.NewInt(1 << 6)
+	postV1AccountExportResponseFieldAuditEntries       = big.NewInt(1 << 7)
+)
+
+type PostV1AccountExportResponse struct {
+	GeneratedAt        string                                               `json:"generatedAt" url:"generatedAt"`
+	User               *PostV1AccountExportResponseUser                     `json:"user" url:"user"`
+	Consent            *PostV1AccountExportResponseConsent                  `json:"consent" url:"consent"`
+	Memberships        []*PostV1AccountExportResponseMembershipsItem        `json:"memberships" url:"memberships"`
+	Sessions           []*PostV1AccountExportResponseSessionsItem           `json:"sessions" url:"sessions"`
+	Billing            *PostV1AccountExportResponseBilling                  `json:"billing,omitempty" url:"billing,omitempty"`
+	CreditTransactions []*PostV1AccountExportResponseCreditTransactionsItem `json:"creditTransactions" url:"creditTransactions"`
+	AuditEntries       []*PostV1AccountExportResponseAuditEntriesItem       `json:"auditEntries" url:"auditEntries"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponse) GetGeneratedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.GeneratedAt
+}
+
+func (p *PostV1AccountExportResponse) GetUser() *PostV1AccountExportResponseUser {
+	if p == nil {
+		return nil
+	}
+	return p.User
+}
+
+func (p *PostV1AccountExportResponse) GetConsent() *PostV1AccountExportResponseConsent {
+	if p == nil {
+		return nil
+	}
+	return p.Consent
+}
+
+func (p *PostV1AccountExportResponse) GetMemberships() []*PostV1AccountExportResponseMembershipsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Memberships
+}
+
+func (p *PostV1AccountExportResponse) GetSessions() []*PostV1AccountExportResponseSessionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Sessions
+}
+
+func (p *PostV1AccountExportResponse) GetBilling() *PostV1AccountExportResponseBilling {
+	if p == nil {
+		return nil
+	}
+	return p.Billing
+}
+
+func (p *PostV1AccountExportResponse) GetCreditTransactions() []*PostV1AccountExportResponseCreditTransactionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.CreditTransactions
+}
+
+func (p *PostV1AccountExportResponse) GetAuditEntries() []*PostV1AccountExportResponseAuditEntriesItem {
+	if p == nil {
+		return nil
+	}
+	return p.AuditEntries
+}
+
+func (p *PostV1AccountExportResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetGeneratedAt sets the GeneratedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetGeneratedAt(generatedAt string) {
+	p.GeneratedAt = generatedAt
+	p.require(postV1AccountExportResponseFieldGeneratedAt)
+}
+
+// SetUser sets the User field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetUser(user *PostV1AccountExportResponseUser) {
+	p.User = user
+	p.require(postV1AccountExportResponseFieldUser)
+}
+
+// SetConsent sets the Consent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetConsent(consent *PostV1AccountExportResponseConsent) {
+	p.Consent = consent
+	p.require(postV1AccountExportResponseFieldConsent)
+}
+
+// SetMemberships sets the Memberships field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetMemberships(memberships []*PostV1AccountExportResponseMembershipsItem) {
+	p.Memberships = memberships
+	p.require(postV1AccountExportResponseFieldMemberships)
+}
+
+// SetSessions sets the Sessions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetSessions(sessions []*PostV1AccountExportResponseSessionsItem) {
+	p.Sessions = sessions
+	p.require(postV1AccountExportResponseFieldSessions)
+}
+
+// SetBilling sets the Billing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetBilling(billing *PostV1AccountExportResponseBilling) {
+	p.Billing = billing
+	p.require(postV1AccountExportResponseFieldBilling)
+}
+
+// SetCreditTransactions sets the CreditTransactions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetCreditTransactions(creditTransactions []*PostV1AccountExportResponseCreditTransactionsItem) {
+	p.CreditTransactions = creditTransactions
+	p.require(postV1AccountExportResponseFieldCreditTransactions)
+}
+
+// SetAuditEntries sets the AuditEntries field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponse) SetAuditEntries(auditEntries []*PostV1AccountExportResponseAuditEntriesItem) {
+	p.AuditEntries = auditEntries
+	p.require(postV1AccountExportResponseFieldAuditEntries)
+}
+
+func (p *PostV1AccountExportResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseAuditEntriesItemFieldID        = big.NewInt(1 << 0)
+	postV1AccountExportResponseAuditEntriesItemFieldCompanyID = big.NewInt(1 << 1)
+	postV1AccountExportResponseAuditEntriesItemFieldAction    = big.NewInt(1 << 2)
+	postV1AccountExportResponseAuditEntriesItemFieldEntity    = big.NewInt(1 << 3)
+	postV1AccountExportResponseAuditEntriesItemFieldEntityID  = big.NewInt(1 << 4)
+	postV1AccountExportResponseAuditEntriesItemFieldCreatedAt = big.NewInt(1 << 5)
+)
+
+type PostV1AccountExportResponseAuditEntriesItem struct {
+	ID        int64   `json:"id" url:"id"`
+	CompanyID string  `json:"companyId" url:"companyId"`
+	Action    string  `json:"action" url:"action"`
+	Entity    string  `json:"entity" url:"entity"`
+	EntityID  *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetID() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetCompanyID() string {
+	if p == nil {
+		return ""
+	}
+	return p.CompanyID
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetAction() string {
+	if p == nil {
+		return ""
+	}
+	return p.Action
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetEntity() string {
+	if p == nil {
+		return ""
+	}
+	return p.Entity
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetEntityID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EntityID
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetID(id int64) {
+	p.ID = id
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldID)
+}
+
+// SetCompanyID sets the CompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetCompanyID(companyID string) {
+	p.CompanyID = companyID
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldCompanyID)
+}
+
+// SetAction sets the Action field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetAction(action string) {
+	p.Action = action
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldAction)
+}
+
+// SetEntity sets the Entity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetEntity(entity string) {
+	p.Entity = entity
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldEntity)
+}
+
+// SetEntityID sets the EntityID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetEntityID(entityID *string) {
+	p.EntityID = entityID
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldEntityID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseAuditEntriesItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountExportResponseAuditEntriesItemFieldCreatedAt)
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseAuditEntriesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseAuditEntriesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseAuditEntriesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseAuditEntriesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseBillingFieldStatus       = big.NewInt(1 << 0)
+	postV1AccountExportResponseBillingFieldPlan         = big.NewInt(1 << 1)
+	postV1AccountExportResponseBillingFieldBalanceCents = big.NewInt(1 << 2)
+	postV1AccountExportResponseBillingFieldTrialEndsAt  = big.NewInt(1 << 3)
+	postV1AccountExportResponseBillingFieldFirstTopUpAt = big.NewInt(1 << 4)
+)
+
+type PostV1AccountExportResponseBilling struct {
+	Status       string  `json:"status" url:"status"`
+	Plan         string  `json:"plan" url:"plan"`
+	BalanceCents int64   `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *string `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt *string `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseBilling) GetStatus() string {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1AccountExportResponseBilling) GetPlan() string {
+	if p == nil {
+		return ""
+	}
+	return p.Plan
+}
+
+func (p *PostV1AccountExportResponseBilling) GetBalanceCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.BalanceCents
+}
+
+func (p *PostV1AccountExportResponseBilling) GetTrialEndsAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TrialEndsAt
+}
+
+func (p *PostV1AccountExportResponseBilling) GetFirstTopUpAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstTopUpAt
+}
+
+func (p *PostV1AccountExportResponseBilling) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseBilling) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseBilling) SetStatus(status string) {
+	p.Status = status
+	p.require(postV1AccountExportResponseBillingFieldStatus)
+}
+
+// SetPlan sets the Plan field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseBilling) SetPlan(plan string) {
+	p.Plan = plan
+	p.require(postV1AccountExportResponseBillingFieldPlan)
+}
+
+// SetBalanceCents sets the BalanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseBilling) SetBalanceCents(balanceCents int64) {
+	p.BalanceCents = balanceCents
+	p.require(postV1AccountExportResponseBillingFieldBalanceCents)
+}
+
+// SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseBilling) SetTrialEndsAt(trialEndsAt *string) {
+	p.TrialEndsAt = trialEndsAt
+	p.require(postV1AccountExportResponseBillingFieldTrialEndsAt)
+}
+
+// SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseBilling) SetFirstTopUpAt(firstTopUpAt *string) {
+	p.FirstTopUpAt = firstTopUpAt
+	p.require(postV1AccountExportResponseBillingFieldFirstTopUpAt)
+}
+
+func (p *PostV1AccountExportResponseBilling) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseBilling
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseBilling(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseBilling) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseBilling
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseBilling) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseConsentFieldTermsVersion        = big.NewInt(1 << 0)
+	postV1AccountExportResponseConsentFieldTermsAcceptedAt     = big.NewInt(1 << 1)
+	postV1AccountExportResponseConsentFieldDpaVersion          = big.NewInt(1 << 2)
+	postV1AccountExportResponseConsentFieldDpaAcceptedAt       = big.NewInt(1 << 3)
+	postV1AccountExportResponseConsentFieldCurrentTermsVersion = big.NewInt(1 << 4)
+	postV1AccountExportResponseConsentFieldCurrentDpaVersion   = big.NewInt(1 << 5)
+	postV1AccountExportResponseConsentFieldRequired            = big.NewInt(1 << 6)
+)
+
+type PostV1AccountExportResponseConsent struct {
+	TermsVersion        *string `json:"termsVersion,omitempty" url:"termsVersion,omitempty"`
+	TermsAcceptedAt     *string `json:"termsAcceptedAt,omitempty" url:"termsAcceptedAt,omitempty"`
+	DpaVersion          *string `json:"dpaVersion,omitempty" url:"dpaVersion,omitempty"`
+	DpaAcceptedAt       *string `json:"dpaAcceptedAt,omitempty" url:"dpaAcceptedAt,omitempty"`
+	CurrentTermsVersion string  `json:"currentTermsVersion" url:"currentTermsVersion"`
+	CurrentDpaVersion   string  `json:"currentDpaVersion" url:"currentDpaVersion"`
+	Required            bool    `json:"required" url:"required"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseConsent) GetTermsVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsVersion
+}
+
+func (p *PostV1AccountExportResponseConsent) GetTermsAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsAcceptedAt
+}
+
+func (p *PostV1AccountExportResponseConsent) GetDpaVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaVersion
+}
+
+func (p *PostV1AccountExportResponseConsent) GetDpaAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaAcceptedAt
+}
+
+func (p *PostV1AccountExportResponseConsent) GetCurrentTermsVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentTermsVersion
+}
+
+func (p *PostV1AccountExportResponseConsent) GetCurrentDpaVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentDpaVersion
+}
+
+func (p *PostV1AccountExportResponseConsent) GetRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.Required
+}
+
+func (p *PostV1AccountExportResponseConsent) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseConsent) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTermsVersion sets the TermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetTermsVersion(termsVersion *string) {
+	p.TermsVersion = termsVersion
+	p.require(postV1AccountExportResponseConsentFieldTermsVersion)
+}
+
+// SetTermsAcceptedAt sets the TermsAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetTermsAcceptedAt(termsAcceptedAt *string) {
+	p.TermsAcceptedAt = termsAcceptedAt
+	p.require(postV1AccountExportResponseConsentFieldTermsAcceptedAt)
+}
+
+// SetDpaVersion sets the DpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetDpaVersion(dpaVersion *string) {
+	p.DpaVersion = dpaVersion
+	p.require(postV1AccountExportResponseConsentFieldDpaVersion)
+}
+
+// SetDpaAcceptedAt sets the DpaAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetDpaAcceptedAt(dpaAcceptedAt *string) {
+	p.DpaAcceptedAt = dpaAcceptedAt
+	p.require(postV1AccountExportResponseConsentFieldDpaAcceptedAt)
+}
+
+// SetCurrentTermsVersion sets the CurrentTermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetCurrentTermsVersion(currentTermsVersion string) {
+	p.CurrentTermsVersion = currentTermsVersion
+	p.require(postV1AccountExportResponseConsentFieldCurrentTermsVersion)
+}
+
+// SetCurrentDpaVersion sets the CurrentDpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetCurrentDpaVersion(currentDpaVersion string) {
+	p.CurrentDpaVersion = currentDpaVersion
+	p.require(postV1AccountExportResponseConsentFieldCurrentDpaVersion)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseConsent) SetRequired(required bool) {
+	p.Required = required
+	p.require(postV1AccountExportResponseConsentFieldRequired)
+}
+
+func (p *PostV1AccountExportResponseConsent) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseConsent
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseConsent(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseConsent) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseConsent
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseConsent) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseCreditTransactionsItemFieldID                = big.NewInt(1 << 0)
+	postV1AccountExportResponseCreditTransactionsItemFieldType              = big.NewInt(1 << 1)
+	postV1AccountExportResponseCreditTransactionsItemFieldAmountCents       = big.NewInt(1 << 2)
+	postV1AccountExportResponseCreditTransactionsItemFieldBalanceAfterCents = big.NewInt(1 << 3)
+	postV1AccountExportResponseCreditTransactionsItemFieldDescription       = big.NewInt(1 << 4)
+	postV1AccountExportResponseCreditTransactionsItemFieldCreatedAt         = big.NewInt(1 << 5)
+)
+
+type PostV1AccountExportResponseCreditTransactionsItem struct {
+	ID                string `json:"id" url:"id"`
+	Type              string `json:"type" url:"type"`
+	AmountCents       int64  `json:"amountCents" url:"amountCents"`
+	BalanceAfterCents int64  `json:"balanceAfterCents" url:"balanceAfterCents"`
+	Description       string `json:"description" url:"description"`
+	CreatedAt         string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetType() string {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetAmountCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.AmountCents
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetBalanceAfterCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.BalanceAfterCents
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetDescription() string {
+	if p == nil {
+		return ""
+	}
+	return p.Description
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetType(type_ string) {
+	p.Type = type_
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldType)
+}
+
+// SetAmountCents sets the AmountCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetAmountCents(amountCents int64) {
+	p.AmountCents = amountCents
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldAmountCents)
+}
+
+// SetBalanceAfterCents sets the BalanceAfterCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetBalanceAfterCents(balanceAfterCents int64) {
+	p.BalanceAfterCents = balanceAfterCents
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldBalanceAfterCents)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetDescription(description string) {
+	p.Description = description
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldDescription)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseCreditTransactionsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountExportResponseCreditTransactionsItemFieldCreatedAt)
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseCreditTransactionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseCreditTransactionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseCreditTransactionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseCreditTransactionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseMembershipsItemFieldCompanyID   = big.NewInt(1 << 0)
+	postV1AccountExportResponseMembershipsItemFieldCompanyName = big.NewInt(1 << 1)
+	postV1AccountExportResponseMembershipsItemFieldRole        = big.NewInt(1 << 2)
+	postV1AccountExportResponseMembershipsItemFieldSince       = big.NewInt(1 << 3)
+)
+
+type PostV1AccountExportResponseMembershipsItem struct {
+	CompanyID   string `json:"companyId" url:"companyId"`
+	CompanyName string `json:"companyName" url:"companyName"`
+	Role        string `json:"role" url:"role"`
+	Since       string `json:"since" url:"since"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) GetCompanyID() string {
+	if p == nil {
+		return ""
+	}
+	return p.CompanyID
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) GetCompanyName() string {
+	if p == nil {
+		return ""
+	}
+	return p.CompanyName
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) GetRole() string {
+	if p == nil {
+		return ""
+	}
+	return p.Role
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) GetSince() string {
+	if p == nil {
+		return ""
+	}
+	return p.Since
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCompanyID sets the CompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseMembershipsItem) SetCompanyID(companyID string) {
+	p.CompanyID = companyID
+	p.require(postV1AccountExportResponseMembershipsItemFieldCompanyID)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseMembershipsItem) SetCompanyName(companyName string) {
+	p.CompanyName = companyName
+	p.require(postV1AccountExportResponseMembershipsItemFieldCompanyName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseMembershipsItem) SetRole(role string) {
+	p.Role = role
+	p.require(postV1AccountExportResponseMembershipsItemFieldRole)
+}
+
+// SetSince sets the Since field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseMembershipsItem) SetSince(since string) {
+	p.Since = since
+	p.require(postV1AccountExportResponseMembershipsItemFieldSince)
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseMembershipsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseMembershipsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseMembershipsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseMembershipsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseSessionsItemFieldID        = big.NewInt(1 << 0)
+	postV1AccountExportResponseSessionsItemFieldCompanyID = big.NewInt(1 << 1)
+	postV1AccountExportResponseSessionsItemFieldCreatedAt = big.NewInt(1 << 2)
+	postV1AccountExportResponseSessionsItemFieldExpiresAt = big.NewInt(1 << 3)
+	postV1AccountExportResponseSessionsItemFieldCurrent   = big.NewInt(1 << 4)
+)
+
+type PostV1AccountExportResponseSessionsItem struct {
+	ID        string  `json:"id" url:"id"`
+	CompanyID *string `json:"companyId,omitempty" url:"companyId,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+	ExpiresAt string  `json:"expiresAt" url:"expiresAt"`
+	Current   bool    `json:"current" url:"current"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetCompanyID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyID
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetExpiresAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.ExpiresAt
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetCurrent() bool {
+	if p == nil {
+		return false
+	}
+	return p.Current
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountExportResponseSessionsItemFieldID)
+}
+
+// SetCompanyID sets the CompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetCompanyID(companyID *string) {
+	p.CompanyID = companyID
+	p.require(postV1AccountExportResponseSessionsItemFieldCompanyID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountExportResponseSessionsItemFieldCreatedAt)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetExpiresAt(expiresAt string) {
+	p.ExpiresAt = expiresAt
+	p.require(postV1AccountExportResponseSessionsItemFieldExpiresAt)
+}
+
+// SetCurrent sets the Current field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetCurrent(current bool) {
+	p.Current = current
+	p.require(postV1AccountExportResponseSessionsItemFieldCurrent)
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseSessionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseSessionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseSessionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountExportResponseUserFieldID        = big.NewInt(1 << 0)
+	postV1AccountExportResponseUserFieldEmail     = big.NewInt(1 << 1)
+	postV1AccountExportResponseUserFieldName      = big.NewInt(1 << 2)
+	postV1AccountExportResponseUserFieldLocale    = big.NewInt(1 << 3)
+	postV1AccountExportResponseUserFieldPlan      = big.NewInt(1 << 4)
+	postV1AccountExportResponseUserFieldCreatedAt = big.NewInt(1 << 5)
+)
+
+type PostV1AccountExportResponseUser struct {
+	ID        string  `json:"id" url:"id"`
+	Email     string  `json:"email" url:"email"`
+	Name      *string `json:"name,omitempty" url:"name,omitempty"`
+	Locale    string  `json:"locale" url:"locale"`
+	Plan      string  `json:"plan" url:"plan"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountExportResponseUser) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountExportResponseUser) GetEmail() string {
+	if p == nil {
+		return ""
+	}
+	return p.Email
+}
+
+func (p *PostV1AccountExportResponseUser) GetName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Name
+}
+
+func (p *PostV1AccountExportResponseUser) GetLocale() string {
+	if p == nil {
+		return ""
+	}
+	return p.Locale
+}
+
+func (p *PostV1AccountExportResponseUser) GetPlan() string {
+	if p == nil {
+		return ""
+	}
+	return p.Plan
+}
+
+func (p *PostV1AccountExportResponseUser) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountExportResponseUser) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountExportResponseUser) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountExportResponseUserFieldID)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetEmail(email string) {
+	p.Email = email
+	p.require(postV1AccountExportResponseUserFieldEmail)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetName(name *string) {
+	p.Name = name
+	p.require(postV1AccountExportResponseUserFieldName)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetLocale(locale string) {
+	p.Locale = locale
+	p.require(postV1AccountExportResponseUserFieldLocale)
+}
+
+// SetPlan sets the Plan field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetPlan(plan string) {
+	p.Plan = plan
+	p.require(postV1AccountExportResponseUserFieldPlan)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseUser) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountExportResponseUserFieldCreatedAt)
+}
+
+func (p *PostV1AccountExportResponseUser) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountExportResponseUser
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountExportResponseUser(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountExportResponseUser) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountExportResponseUser
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountExportResponseUser) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1AccountInvitesAcceptRequestLocale string
 
 const (
@@ -5334,7 +7326,8 @@ var (
 	postV1AccountMeResponseFieldActiveCompanyID = big.NewInt(1 << 2)
 	postV1AccountMeResponseFieldRole            = big.NewInt(1 << 3)
 	postV1AccountMeResponseFieldBilling         = big.NewInt(1 << 4)
-	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 5)
+	postV1AccountMeResponseFieldConsent         = big.NewInt(1 << 5)
+	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 6)
 )
 
 type PostV1AccountMeResponse struct {
@@ -5343,6 +7336,7 @@ type PostV1AccountMeResponse struct {
 	ActiveCompanyID *string                                 `json:"activeCompanyId,omitempty" url:"activeCompanyId,omitempty"`
 	Role            *string                                 `json:"role,omitempty" url:"role,omitempty"`
 	Billing         *PostV1AccountMeResponseBilling         `json:"billing" url:"billing"`
+	Consent         *PostV1AccountMeResponseConsent         `json:"consent" url:"consent"`
 	Companies       []*PostV1AccountMeResponseCompaniesItem `json:"companies" url:"companies"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5385,6 +7379,13 @@ func (p *PostV1AccountMeResponse) GetBilling() *PostV1AccountMeResponseBilling {
 		return nil
 	}
 	return p.Billing
+}
+
+func (p *PostV1AccountMeResponse) GetConsent() *PostV1AccountMeResponseConsent {
+	if p == nil {
+		return nil
+	}
+	return p.Consent
 }
 
 func (p *PostV1AccountMeResponse) GetCompanies() []*PostV1AccountMeResponseCompaniesItem {
@@ -5441,6 +7442,13 @@ func (p *PostV1AccountMeResponse) SetRole(role *string) {
 func (p *PostV1AccountMeResponse) SetBilling(billing *PostV1AccountMeResponseBilling) {
 	p.Billing = billing
 	p.require(postV1AccountMeResponseFieldBilling)
+}
+
+// SetConsent sets the Consent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponse) SetConsent(consent *PostV1AccountMeResponseConsent) {
+	p.Consent = consent
+	p.require(postV1AccountMeResponseFieldConsent)
 }
 
 // SetCompanies sets the Companies field and marks it as non-optional;
@@ -5868,6 +7876,186 @@ func NewPostV1AccountMeResponseCompaniesItemStatusFromString(s string) (PostV1Ac
 
 func (p PostV1AccountMeResponseCompaniesItemStatus) Ptr() *PostV1AccountMeResponseCompaniesItemStatus {
 	return &p
+}
+
+var (
+	postV1AccountMeResponseConsentFieldTermsVersion        = big.NewInt(1 << 0)
+	postV1AccountMeResponseConsentFieldTermsAcceptedAt     = big.NewInt(1 << 1)
+	postV1AccountMeResponseConsentFieldDpaVersion          = big.NewInt(1 << 2)
+	postV1AccountMeResponseConsentFieldDpaAcceptedAt       = big.NewInt(1 << 3)
+	postV1AccountMeResponseConsentFieldCurrentTermsVersion = big.NewInt(1 << 4)
+	postV1AccountMeResponseConsentFieldCurrentDpaVersion   = big.NewInt(1 << 5)
+	postV1AccountMeResponseConsentFieldRequired            = big.NewInt(1 << 6)
+)
+
+type PostV1AccountMeResponseConsent struct {
+	TermsVersion        *string `json:"termsVersion,omitempty" url:"termsVersion,omitempty"`
+	TermsAcceptedAt     *string `json:"termsAcceptedAt,omitempty" url:"termsAcceptedAt,omitempty"`
+	DpaVersion          *string `json:"dpaVersion,omitempty" url:"dpaVersion,omitempty"`
+	DpaAcceptedAt       *string `json:"dpaAcceptedAt,omitempty" url:"dpaAcceptedAt,omitempty"`
+	CurrentTermsVersion string  `json:"currentTermsVersion" url:"currentTermsVersion"`
+	CurrentDpaVersion   string  `json:"currentDpaVersion" url:"currentDpaVersion"`
+	Required            bool    `json:"required" url:"required"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountMeResponseConsent) GetTermsVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsVersion
+}
+
+func (p *PostV1AccountMeResponseConsent) GetTermsAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TermsAcceptedAt
+}
+
+func (p *PostV1AccountMeResponseConsent) GetDpaVersion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaVersion
+}
+
+func (p *PostV1AccountMeResponseConsent) GetDpaAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DpaAcceptedAt
+}
+
+func (p *PostV1AccountMeResponseConsent) GetCurrentTermsVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentTermsVersion
+}
+
+func (p *PostV1AccountMeResponseConsent) GetCurrentDpaVersion() string {
+	if p == nil {
+		return ""
+	}
+	return p.CurrentDpaVersion
+}
+
+func (p *PostV1AccountMeResponseConsent) GetRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.Required
+}
+
+func (p *PostV1AccountMeResponseConsent) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountMeResponseConsent) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTermsVersion sets the TermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetTermsVersion(termsVersion *string) {
+	p.TermsVersion = termsVersion
+	p.require(postV1AccountMeResponseConsentFieldTermsVersion)
+}
+
+// SetTermsAcceptedAt sets the TermsAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetTermsAcceptedAt(termsAcceptedAt *string) {
+	p.TermsAcceptedAt = termsAcceptedAt
+	p.require(postV1AccountMeResponseConsentFieldTermsAcceptedAt)
+}
+
+// SetDpaVersion sets the DpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetDpaVersion(dpaVersion *string) {
+	p.DpaVersion = dpaVersion
+	p.require(postV1AccountMeResponseConsentFieldDpaVersion)
+}
+
+// SetDpaAcceptedAt sets the DpaAcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetDpaAcceptedAt(dpaAcceptedAt *string) {
+	p.DpaAcceptedAt = dpaAcceptedAt
+	p.require(postV1AccountMeResponseConsentFieldDpaAcceptedAt)
+}
+
+// SetCurrentTermsVersion sets the CurrentTermsVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetCurrentTermsVersion(currentTermsVersion string) {
+	p.CurrentTermsVersion = currentTermsVersion
+	p.require(postV1AccountMeResponseConsentFieldCurrentTermsVersion)
+}
+
+// SetCurrentDpaVersion sets the CurrentDpaVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetCurrentDpaVersion(currentDpaVersion string) {
+	p.CurrentDpaVersion = currentDpaVersion
+	p.require(postV1AccountMeResponseConsentFieldCurrentDpaVersion)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseConsent) SetRequired(required bool) {
+	p.Required = required
+	p.require(postV1AccountMeResponseConsentFieldRequired)
+}
+
+func (p *PostV1AccountMeResponseConsent) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountMeResponseConsent
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountMeResponseConsent(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountMeResponseConsent) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountMeResponseConsent
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountMeResponseConsent) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }
 
 var (
@@ -6467,6 +8655,522 @@ func (p *PostV1AccountMembersSetRoleResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AccountMembersSetRoleResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountProfileUpdateResponseFieldID    = big.NewInt(1 << 0)
+	postV1AccountProfileUpdateResponseFieldEmail = big.NewInt(1 << 1)
+	postV1AccountProfileUpdateResponseFieldName  = big.NewInt(1 << 2)
+)
+
+type PostV1AccountProfileUpdateResponse struct {
+	ID    string  `json:"id" url:"id"`
+	Email string  `json:"email" url:"email"`
+	Name  *string `json:"name,omitempty" url:"name,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountProfileUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountProfileUpdateResponse) GetEmail() string {
+	if p == nil {
+		return ""
+	}
+	return p.Email
+}
+
+func (p *PostV1AccountProfileUpdateResponse) GetName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Name
+}
+
+func (p *PostV1AccountProfileUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountProfileUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountProfileUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountProfileUpdateResponseFieldID)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountProfileUpdateResponse) SetEmail(email string) {
+	p.Email = email
+	p.require(postV1AccountProfileUpdateResponseFieldEmail)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountProfileUpdateResponse) SetName(name *string) {
+	p.Name = name
+	p.require(postV1AccountProfileUpdateResponseFieldName)
+}
+
+func (p *PostV1AccountProfileUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountProfileUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountProfileUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountProfileUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountProfileUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountProfileUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountSessionsListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1AccountSessionsListResponse struct {
+	Rows []*PostV1AccountSessionsListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountSessionsListResponse) GetRows() []*PostV1AccountSessionsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1AccountSessionsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountSessionsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponse) SetRows(rows []*PostV1AccountSessionsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1AccountSessionsListResponseFieldRows)
+}
+
+func (p *PostV1AccountSessionsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountSessionsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountSessionsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountSessionsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountSessionsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountSessionsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountSessionsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1AccountSessionsListResponseRowsItemFieldCompanyID = big.NewInt(1 << 1)
+	postV1AccountSessionsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 2)
+	postV1AccountSessionsListResponseRowsItemFieldExpiresAt = big.NewInt(1 << 3)
+	postV1AccountSessionsListResponseRowsItemFieldCurrent   = big.NewInt(1 << 4)
+)
+
+type PostV1AccountSessionsListResponseRowsItem struct {
+	ID        string  `json:"id" url:"id"`
+	CompanyID *string `json:"companyId,omitempty" url:"companyId,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+	ExpiresAt string  `json:"expiresAt" url:"expiresAt"`
+	Current   bool    `json:"current" url:"current"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetCompanyID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyID
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetExpiresAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.ExpiresAt
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetCurrent() bool {
+	if p == nil {
+		return false
+	}
+	return p.Current
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountSessionsListResponseRowsItemFieldID)
+}
+
+// SetCompanyID sets the CompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetCompanyID(companyID *string) {
+	p.CompanyID = companyID
+	p.require(postV1AccountSessionsListResponseRowsItemFieldCompanyID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountSessionsListResponseRowsItemFieldCreatedAt)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetExpiresAt(expiresAt string) {
+	p.ExpiresAt = expiresAt
+	p.require(postV1AccountSessionsListResponseRowsItemFieldExpiresAt)
+}
+
+// SetCurrent sets the Current field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetCurrent(current bool) {
+	p.Current = current
+	p.require(postV1AccountSessionsListResponseRowsItemFieldCurrent)
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountSessionsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountSessionsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountSessionsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountSessionsRevokeOthersResponseFieldRevoked = big.NewInt(1 << 0)
+)
+
+type PostV1AccountSessionsRevokeOthersResponse struct {
+	Revoked int64 `json:"revoked" url:"revoked"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) GetRevoked() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Revoked
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRevoked sets the Revoked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsRevokeOthersResponse) SetRevoked(revoked int64) {
+	p.Revoked = revoked
+	p.require(postV1AccountSessionsRevokeOthersResponseFieldRevoked)
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountSessionsRevokeOthersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountSessionsRevokeOthersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountSessionsRevokeOthersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountSessionsRevokeOthersResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountSessionsRevokeResponseFieldRevoked = big.NewInt(1 << 0)
+)
+
+type PostV1AccountSessionsRevokeResponse struct {
+	Revoked bool `json:"revoked" url:"revoked"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) GetRevoked() bool {
+	if p == nil {
+		return false
+	}
+	return p.Revoked
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRevoked sets the Revoked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsRevokeResponse) SetRevoked(revoked bool) {
+	p.Revoked = revoked
+	p.require(postV1AccountSessionsRevokeResponseFieldRevoked)
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountSessionsRevokeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountSessionsRevokeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountSessionsRevokeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountSessionsRevokeResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}

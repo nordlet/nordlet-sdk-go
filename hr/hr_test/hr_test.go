@@ -256,6 +256,58 @@ func TestHrPostV1HrEmployeesListWithWireMock(
 	VerifyRequestCount(t, "TestHrPostV1HrEmployeesListWithWireMock", "POST", "/v1/hr/employees/list", nil, 1)
 }
 
+func TestHrPostV1HrEmployeesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1HrEmployeesDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.PostV1HrEmployeesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrPostV1HrEmployeesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrPostV1HrEmployeesDeleteWithWireMock", "POST", "/v1/hr/employees/delete", nil, 1)
+}
+
+func TestHrBlankAnEmployeesPersonalDataAndHideTheRecordWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1HrEmployeesAnonymizeRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBlankAnEmployeesPersonalDataAndHideTheRecordWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBlankAnEmployeesPersonalDataAndHideTheRecordWithWireMock", "POST", "/v1/hr/employees/anonymize", nil, 1)
+}
+
 func TestHrPostV1HrContractsCreateWithWireMock(
 	t *testing.T,
 ) {

@@ -1365,6 +1365,37 @@
       }
     },
     {
+      "id": "ce76409c-2f53-4193-a7a9-ef20e1480e1e",
+      "name": "Blank a partner's personal data and hide the record - default",
+      "request": {
+        "urlPathTemplate": "/v1/partners/anonymize",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"anonymized\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ce76409c-2f53-4193-a7a9-ef20e1480e1e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "cf0caf3d-d7bb-4318-ae17-2660d354abe8",
       "name": "postV1PartnersList - default",
       "request": {
@@ -6034,6 +6065,68 @@
         }
       },
       "uuid": "8bdc5643-c3c1-4eab-a16f-c62c131cc377",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3408e8d8-34bf-4fd4-9627-300323ff25b6",
+      "name": "postV1HrEmployeesDelete - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/employees/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3408e8d8-34bf-4fd4-9627-300323ff25b6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "c0691974-546f-4284-b343-c6dac44d8edc",
+      "name": "Blank an employee's personal data and hide the record - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/employees/anonymize",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"code\": \"code\",\n  \"firstName\": \"firstName\",\n  \"lastName\": \"lastName\",\n  \"personalCode\": \"personalCode\",\n  \"birthDate\": \"birthDate\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"iban\": \"iban\",\n  \"socialInsuranceNo\": \"socialInsuranceNo\",\n  \"socialInsuranceStart\": \"socialInsuranceStart\",\n  \"hireDate\": \"hireDate\",\n  \"terminationDate\": \"terminationDate\",\n  \"applyNpd\": true,\n  \"npdOverride\": \"npdOverride\",\n  \"pensionAccumulation\": true,\n  \"status\": \"active\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"createdAt\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c0691974-546f-4284-b343-c6dac44d8edc",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -12662,7 +12755,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"trialEndsAt\"\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"deletedAt\"\n    }\n  ]\n}",
+        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"trialEndsAt\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"termsAcceptedAt\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"dpaAcceptedAt\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"deletedAt\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13267,9 +13360,257 @@
           }
         }
       }
+    },
+    {
+      "id": "fbd04f6d-07e5-4d46-8bd0-7ab6bfc75c43",
+      "name": "postV1AccountConsentAccept - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/consent/accept",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"termsVersion\": \"termsVersion\",\n  \"termsAcceptedAt\": \"termsAcceptedAt\",\n  \"dpaVersion\": \"dpaVersion\",\n  \"dpaAcceptedAt\": \"dpaAcceptedAt\",\n  \"currentTermsVersion\": \"currentTermsVersion\",\n  \"currentDpaVersion\": \"currentDpaVersion\",\n  \"required\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "fbd04f6d-07e5-4d46-8bd0-7ab6bfc75c43",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ba29c0f5-6ee5-4593-8a3b-ae776a258cfd",
+      "name": "postV1AccountProfileUpdate - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/profile/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"email\": \"email\",\n  \"name\": \"name\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ba29c0f5-6ee5-4593-8a3b-ae776a258cfd",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ffa8bcd4-ad34-4fb0-8ebc-6b8f86c2e7a9",
+      "name": "postV1AccountEmailChangeRequest - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/email/change-request",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"sent\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ffa8bcd4-ad34-4fb0-8ebc-6b8f86c2e7a9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "20960ce0-5812-471d-b079-00a3d0a9acc0",
+      "name": "postV1AccountSessionsList - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/sessions/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"createdAt\": \"createdAt\",\n      \"expiresAt\": \"expiresAt\",\n      \"current\": true\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "20960ce0-5812-471d-b079-00a3d0a9acc0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1f7bb29a-4f7a-4da3-8739-f5ac92747b87",
+      "name": "postV1AccountSessionsRevoke - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/sessions/revoke",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"revoked\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1f7bb29a-4f7a-4da3-8739-f5ac92747b87",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f39588d8-1463-471e-a4ed-c8f0974c6fc7",
+      "name": "postV1AccountSessionsRevokeOthers - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/sessions/revoke-others",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"revoked\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f39588d8-1463-471e-a4ed-c8f0974c6fc7",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "537ceddf-5d56-41de-aa73-ec2aa837bc51",
+      "name": "Download everything Nordlet stores about the signed-in user - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/export",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"generatedAt\": \"generatedAt\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"createdAt\": \"createdAt\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"termsAcceptedAt\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"dpaAcceptedAt\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"memberships\": [\n    {\n      \"companyId\": \"companyId\",\n      \"companyName\": \"companyName\",\n      \"role\": \"role\",\n      \"since\": \"since\"\n    }\n  ],\n  \"sessions\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"createdAt\": \"createdAt\",\n      \"expiresAt\": \"expiresAt\",\n      \"current\": true\n    }\n  ],\n  \"billing\": {\n    \"status\": \"status\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"trialEndsAt\",\n    \"firstTopUpAt\": \"firstTopUpAt\"\n  },\n  \"creditTransactions\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"type\",\n      \"amountCents\": 1000000,\n      \"balanceAfterCents\": 1000000,\n      \"description\": \"description\",\n      \"createdAt\": \"createdAt\"\n    }\n  ],\n  \"auditEntries\": [\n    {\n      \"id\": 1000000,\n      \"companyId\": \"companyId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"createdAt\": \"createdAt\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "537ceddf-5d56-41de-aa73-ec2aa837bc51",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "81be910d-e8c2-461c-a6d5-7f5c68acc4b3",
+      "name": "Delete the signed-in user account - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"deleted\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "81be910d-e8c2-461c-a6d5-7f5c68acc4b3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
     }
   ],
   "meta": {
-    "total": 428
+    "total": 439
   }
 }

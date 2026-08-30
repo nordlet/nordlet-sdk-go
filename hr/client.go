@@ -146,6 +146,39 @@ func (c *Client) PostV1HrEmployeesList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1HrEmployeesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1HrEmployeesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1HrEmployeesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1HrEmployeesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Replaces the name with a placeholder and removes personal code, birth date, contact details, address, bank account, social-insurance number, notes and sick-leave reasons. Payroll and contract rows stay linked to the record for the statutory retention period.
+func (c *Client) BlankAnEmployeesPersonalDataAndHideTheRecord(
+	ctx context.Context,
+	request *nordlet.PostV1HrEmployeesAnonymizeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1HrEmployeesAnonymizeResponse, error) {
+	response, err := c.WithRawResponse.BlankAnEmployeesPersonalDataAndHideTheRecord(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1HrContractsCreate(
 	ctx context.Context,
 	request *nordlet.PostV1HrContractsCreateRequest,

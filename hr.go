@@ -10,6 +10,52 @@ import (
 )
 
 var (
+	postV1HrEmployeesAnonymizeRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1HrEmployeesAnonymizeRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1HrEmployeesAnonymizeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1HrEmployeesAnonymizeRequestFieldID)
+}
+
+func (p *PostV1HrEmployeesAnonymizeRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesAnonymizeRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesAnonymizeRequest(body)
+	return nil
+}
+
+func (p *PostV1HrEmployeesAnonymizeRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesAnonymizeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1HrContractsCreateRequestFieldEmployeeID       = big.NewInt(1 << 0)
 	postV1HrContractsCreateRequestFieldPositionID       = big.NewInt(1 << 1)
 	postV1HrContractsCreateRequestFieldDepartmentID     = big.NewInt(1 << 2)
@@ -509,6 +555,52 @@ func (p *PostV1HrEmployeesCreateRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1HrEmployeesCreateRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1HrEmployeesCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1HrEmployeesDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1HrEmployeesDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1HrEmployeesDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1HrEmployeesDeleteRequestFieldID)
+}
+
+func (p *PostV1HrEmployeesDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1HrEmployeesDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesDeleteRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -3780,6 +3872,548 @@ func (p PostV1HrContractsListResponseRowsItemType) Ptr() *PostV1HrContractsListR
 }
 
 var (
+	postV1HrEmployeesAnonymizeResponseFieldID                   = big.NewInt(1 << 0)
+	postV1HrEmployeesAnonymizeResponseFieldCode                 = big.NewInt(1 << 1)
+	postV1HrEmployeesAnonymizeResponseFieldFirstName            = big.NewInt(1 << 2)
+	postV1HrEmployeesAnonymizeResponseFieldLastName             = big.NewInt(1 << 3)
+	postV1HrEmployeesAnonymizeResponseFieldPersonalCode         = big.NewInt(1 << 4)
+	postV1HrEmployeesAnonymizeResponseFieldBirthDate            = big.NewInt(1 << 5)
+	postV1HrEmployeesAnonymizeResponseFieldEmail                = big.NewInt(1 << 6)
+	postV1HrEmployeesAnonymizeResponseFieldPhone                = big.NewInt(1 << 7)
+	postV1HrEmployeesAnonymizeResponseFieldAddress              = big.NewInt(1 << 8)
+	postV1HrEmployeesAnonymizeResponseFieldIban                 = big.NewInt(1 << 9)
+	postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
+	postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
+	postV1HrEmployeesAnonymizeResponseFieldHireDate             = big.NewInt(1 << 12)
+	postV1HrEmployeesAnonymizeResponseFieldTerminationDate      = big.NewInt(1 << 13)
+	postV1HrEmployeesAnonymizeResponseFieldApplyNpd             = big.NewInt(1 << 14)
+	postV1HrEmployeesAnonymizeResponseFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
+	postV1HrEmployeesAnonymizeResponseFieldStatus               = big.NewInt(1 << 17)
+	postV1HrEmployeesAnonymizeResponseFieldNotes                = big.NewInt(1 << 18)
+	postV1HrEmployeesAnonymizeResponseFieldCreatedAt            = big.NewInt(1 << 19)
+)
+
+type PostV1HrEmployeesAnonymizeResponse struct {
+	ID                   string                                     `json:"id" url:"id"`
+	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
+	FirstName            string                                     `json:"firstName" url:"firstName"`
+	LastName             string                                     `json:"lastName" url:"lastName"`
+	PersonalCode         *string                                    `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate            *string                                    `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
+	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
+	Address              *PostV1HrEmployeesAnonymizeResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban                 *string                                    `json:"iban,omitempty" url:"iban,omitempty"`
+	SocialInsuranceNo    *string                                    `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
+	SocialInsuranceStart *string                                    `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
+	HireDate             *string                                    `json:"hireDate,omitempty" url:"hireDate,omitempty"`
+	TerminationDate      *string                                    `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
+	ApplyNpd             bool                                       `json:"applyNpd" url:"applyNpd"`
+	NpdOverride          *string                                    `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	PensionAccumulation  bool                                       `json:"pensionAccumulation" url:"pensionAccumulation"`
+	Status               PostV1HrEmployeesAnonymizeResponseStatus   `json:"status" url:"status"`
+	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Code
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetFirstName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FirstName
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetLastName() string {
+	if p == nil {
+		return ""
+	}
+	return p.LastName
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetPersonalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PersonalCode
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetBirthDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BirthDate
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetAddress() *PostV1HrEmployeesAnonymizeResponseAddress {
+	if p == nil {
+		return nil
+	}
+	return p.Address
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetIban() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Iban
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetSocialInsuranceNo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SocialInsuranceNo
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetSocialInsuranceStart() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SocialInsuranceStart
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetHireDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HireDate
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetTerminationDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TerminationDate
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetApplyNpd() bool {
+	if p == nil {
+		return false
+	}
+	return p.ApplyNpd
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetNpdOverride() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NpdOverride
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetPensionAccumulation() bool {
+	if p == nil {
+		return false
+	}
+	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetStatus() PostV1HrEmployeesAnonymizeResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1HrEmployeesAnonymizeResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1HrEmployeesAnonymizeResponseFieldCode)
+}
+
+// SetFirstName sets the FirstName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetFirstName(firstName string) {
+	p.FirstName = firstName
+	p.require(postV1HrEmployeesAnonymizeResponseFieldFirstName)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetLastName(lastName string) {
+	p.LastName = lastName
+	p.require(postV1HrEmployeesAnonymizeResponseFieldLastName)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1HrEmployeesAnonymizeResponseFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1HrEmployeesAnonymizeResponseFieldBirthDate)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1HrEmployeesAnonymizeResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1HrEmployeesAnonymizeResponseFieldPhone)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetAddress(address *PostV1HrEmployeesAnonymizeResponseAddress) {
+	p.Address = address
+	p.require(postV1HrEmployeesAnonymizeResponseFieldAddress)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetIban(iban *string) {
+	p.Iban = iban
+	p.require(postV1HrEmployeesAnonymizeResponseFieldIban)
+}
+
+// SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
+	p.SocialInsuranceNo = socialInsuranceNo
+	p.require(postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceNo)
+}
+
+// SetSocialInsuranceStart sets the SocialInsuranceStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetSocialInsuranceStart(socialInsuranceStart *string) {
+	p.SocialInsuranceStart = socialInsuranceStart
+	p.require(postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceStart)
+}
+
+// SetHireDate sets the HireDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetHireDate(hireDate *string) {
+	p.HireDate = hireDate
+	p.require(postV1HrEmployeesAnonymizeResponseFieldHireDate)
+}
+
+// SetTerminationDate sets the TerminationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetTerminationDate(terminationDate *string) {
+	p.TerminationDate = terminationDate
+	p.require(postV1HrEmployeesAnonymizeResponseFieldTerminationDate)
+}
+
+// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetApplyNpd(applyNpd bool) {
+	p.ApplyNpd = applyNpd
+	p.require(postV1HrEmployeesAnonymizeResponseFieldApplyNpd)
+}
+
+// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetNpdOverride(npdOverride *string) {
+	p.NpdOverride = npdOverride
+	p.require(postV1HrEmployeesAnonymizeResponseFieldNpdOverride)
+}
+
+// SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetPensionAccumulation(pensionAccumulation bool) {
+	p.PensionAccumulation = pensionAccumulation
+	p.require(postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetStatus(status PostV1HrEmployeesAnonymizeResponseStatus) {
+	p.Status = status
+	p.require(postV1HrEmployeesAnonymizeResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1HrEmployeesAnonymizeResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1HrEmployeesAnonymizeResponseFieldCreatedAt)
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesAnonymizeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesAnonymizeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesAnonymizeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1HrEmployeesAnonymizeResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	postV1HrEmployeesAnonymizeResponseAddressFieldCity        = big.NewInt(1 << 1)
+	postV1HrEmployeesAnonymizeResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
+	postV1HrEmployeesAnonymizeResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type PostV1HrEmployeesAnonymizeResponseAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1HrEmployeesAnonymizeResponseAddressFieldCountryCode)
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesAnonymizeResponseAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesAnonymizeResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesAnonymizeResponseAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponseAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1HrEmployeesAnonymizeResponseStatus string
+
+const (
+	PostV1HrEmployeesAnonymizeResponseStatusActive     PostV1HrEmployeesAnonymizeResponseStatus = "active"
+	PostV1HrEmployeesAnonymizeResponseStatusTerminated PostV1HrEmployeesAnonymizeResponseStatus = "terminated"
+)
+
+func NewPostV1HrEmployeesAnonymizeResponseStatusFromString(s string) (PostV1HrEmployeesAnonymizeResponseStatus, error) {
+	switch s {
+	case "active":
+		return PostV1HrEmployeesAnonymizeResponseStatusActive, nil
+	case "terminated":
+		return PostV1HrEmployeesAnonymizeResponseStatusTerminated, nil
+	}
+	var t PostV1HrEmployeesAnonymizeResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1HrEmployeesAnonymizeResponseStatus) Ptr() *PostV1HrEmployeesAnonymizeResponseStatus {
+	return &p
+}
+
+var (
 	postV1HrEmployeesAttachmentsListResponseFieldRows = big.NewInt(1 << 0)
 )
 
@@ -4683,6 +5317,90 @@ func NewPostV1HrEmployeesCreateResponseStatusFromString(s string) (PostV1HrEmplo
 
 func (p PostV1HrEmployeesCreateResponseStatus) Ptr() *PostV1HrEmployeesCreateResponseStatus {
 	return &p
+}
+
+var (
+	postV1HrEmployeesDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1HrEmployeesDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1HrEmployeesDeleteResponseFieldID)
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1HrEmployeesDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }
 
 var (

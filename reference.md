@@ -3198,6 +3198,67 @@ client.Partners.PostV1PartnersDelete(
 </dl>
 </details>
 
+<details><summary><code>client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(request) -> *nordlet.PostV1PartnersAnonymizeResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes birth date, self-employment certificate number, email, phone, address, notes, contacts, addresses and bank accounts, then hides the partner. The name, code and VAT number stay because issued invoices must keep identifying the counterparty for the statutory retention period.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersAnonymizeRequest{
+        ID: "id",
+    }
+client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Partners.PostV1PartnersList(request) -> *nordlet.PostV1PartnersListResponse</code></summary>
 <dl>
 <dd>
@@ -13578,6 +13639,114 @@ client.Hr.PostV1HrEmployeesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1HrEmployeesListRequestFilterItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.PostV1HrEmployeesDelete(request) -> *nordlet.PostV1HrEmployeesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1HrEmployeesDeleteRequest{
+        ID: "id",
+    }
+client.Hr.PostV1HrEmployeesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(request) -> *nordlet.PostV1HrEmployeesAnonymizeResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replaces the name with a placeholder and removes personal code, birth date, contact details, address, bank account, social-insurance number, notes and sick-leave reasons. Payroll and contract rows stay linked to the record for the statutory retention period.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1HrEmployeesAnonymizeRequest{
+        ID: "id",
+    }
+client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
     
 </dd>
 </dl>
@@ -27889,6 +28058,22 @@ client.Account.PostV1AccountLoginLinkRequest(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**acceptTerms:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acceptDpa:** `*bool` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -28377,6 +28562,22 @@ client.Account.PostV1AccountInvitesAccept(
 <dd>
 
 **locale:** `*nordlet.PostV1AccountInvitesAcceptRequestLocale` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acceptTerms:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acceptDpa:** `*bool` 
     
 </dd>
 </dl>
@@ -29082,6 +29283,360 @@ client.Account.PostV1AccountAPIKeysRevoke(
 <dd>
 
 **id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountConsentAccept(request) -> *nordlet.PostV1AccountConsentAcceptResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountConsentAcceptRequest{
+        AcceptTerms: true,
+        AcceptDpa: true,
+    }
+client.Account.PostV1AccountConsentAccept(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**acceptTerms:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acceptDpa:** `bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountProfileUpdate(request) -> *nordlet.PostV1AccountProfileUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountProfileUpdateRequest{}
+client.Account.PostV1AccountProfileUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountEmailChangeRequest(request) -> *nordlet.PostV1AccountEmailChangeRequestResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountEmailChangeRequestRequest{
+        NewEmail: "newEmail",
+    }
+client.Account.PostV1AccountEmailChangeRequest(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**newEmail:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.PostV1AccountEmailChangeRequestRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountSessionsList(request) -> *nordlet.PostV1AccountSessionsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountSessionsListRequest{}
+client.Account.PostV1AccountSessionsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountSessionsRevoke(request) -> *nordlet.PostV1AccountSessionsRevokeResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountSessionsRevokeRequest{
+        ID: "id",
+    }
+client.Account.PostV1AccountSessionsRevoke(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountSessionsRevokeOthers(request) -> *nordlet.PostV1AccountSessionsRevokeOthersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountSessionsRevokeOthersRequest{}
+client.Account.PostV1AccountSessionsRevokeOthers(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(request) -> *nordlet.PostV1AccountExportResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountExportRequest{}
+client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.DeleteTheSignedInUserAccount(request) -> *nordlet.PostV1AccountDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes the user: sessions, sign-in links, memberships and pending invitations are deleted at once; the email and name are replaced by an anonymous placeholder immediately and the remaining row is removed after 30 days. Refused while the user still owns or pays for a company that is not deleted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountDeleteRequest{
+        ConfirmEmail: "confirmEmail",
+    }
+client.Account.DeleteTheSignedInUserAccount(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**confirmEmail:** `string` 
     
 </dd>
 </dl>

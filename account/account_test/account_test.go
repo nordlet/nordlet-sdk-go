@@ -662,3 +662,204 @@ func TestAccountPostV1AccountAPIKeysRevokeWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestAccountPostV1AccountAPIKeysRevokeWithWireMock", "POST", "/v1/account/api-keys/revoke", nil, 1)
 }
+
+func TestAccountPostV1AccountConsentAcceptWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountConsentAcceptRequest{
+		AcceptTerms: true,
+		AcceptDpa:   true,
+	}
+	_, invocationErr := client.Account.PostV1AccountConsentAccept(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountConsentAcceptWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountConsentAcceptWithWireMock", "POST", "/v1/account/consent/accept", nil, 1)
+}
+
+func TestAccountPostV1AccountProfileUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountProfileUpdateRequest{}
+	_, invocationErr := client.Account.PostV1AccountProfileUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountProfileUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountProfileUpdateWithWireMock", "POST", "/v1/account/profile/update", nil, 1)
+}
+
+func TestAccountPostV1AccountEmailChangeRequestWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountEmailChangeRequestRequest{
+		NewEmail: "newEmail",
+	}
+	_, invocationErr := client.Account.PostV1AccountEmailChangeRequest(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountEmailChangeRequestWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountEmailChangeRequestWithWireMock", "POST", "/v1/account/email/change-request", nil, 1)
+}
+
+func TestAccountPostV1AccountSessionsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountSessionsListRequest{}
+	_, invocationErr := client.Account.PostV1AccountSessionsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountSessionsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountSessionsListWithWireMock", "POST", "/v1/account/sessions/list", nil, 1)
+}
+
+func TestAccountPostV1AccountSessionsRevokeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountSessionsRevokeRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Account.PostV1AccountSessionsRevoke(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountSessionsRevokeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountSessionsRevokeWithWireMock", "POST", "/v1/account/sessions/revoke", nil, 1)
+}
+
+func TestAccountPostV1AccountSessionsRevokeOthersWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountSessionsRevokeOthersRequest{}
+	_, invocationErr := client.Account.PostV1AccountSessionsRevokeOthers(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountSessionsRevokeOthersWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountSessionsRevokeOthersWithWireMock", "POST", "/v1/account/sessions/revoke-others", nil, 1)
+}
+
+func TestAccountDownloadEverythingNordletStoresAboutTheSignedInUserWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountExportRequest{}
+	_, invocationErr := client.Account.DownloadEverythingNordletStoresAboutTheSignedInUser(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountDownloadEverythingNordletStoresAboutTheSignedInUserWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountDownloadEverythingNordletStoresAboutTheSignedInUserWithWireMock", "POST", "/v1/account/export", nil, 1)
+}
+
+func TestAccountDeleteTheSignedInUserAccountWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountDeleteRequest{
+		ConfirmEmail: "confirmEmail",
+	}
+	_, invocationErr := client.Account.DeleteTheSignedInUserAccount(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountDeleteTheSignedInUserAccountWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountDeleteTheSignedInUserAccountWithWireMock", "POST", "/v1/account/delete", nil, 1)
+}

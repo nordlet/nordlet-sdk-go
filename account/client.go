@@ -401,3 +401,132 @@ func (c *Client) PostV1AccountAPIKeysRevoke(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) PostV1AccountConsentAccept(
+	ctx context.Context,
+	request *nordlet.PostV1AccountConsentAcceptRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountConsentAcceptResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountConsentAccept(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountProfileUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1AccountProfileUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountProfileUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountProfileUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountEmailChangeRequest(
+	ctx context.Context,
+	request *nordlet.PostV1AccountEmailChangeRequestRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountEmailChangeRequestResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountEmailChangeRequest(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountSessionsList(
+	ctx context.Context,
+	request *nordlet.PostV1AccountSessionsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountSessionsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountSessionsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountSessionsRevoke(
+	ctx context.Context,
+	request *nordlet.PostV1AccountSessionsRevokeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountSessionsRevokeResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountSessionsRevoke(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountSessionsRevokeOthers(
+	ctx context.Context,
+	request *nordlet.PostV1AccountSessionsRevokeOthersRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountSessionsRevokeOthersResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountSessionsRevokeOthers(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) DownloadEverythingNordletStoresAboutTheSignedInUser(
+	ctx context.Context,
+	request *nordlet.PostV1AccountExportRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountExportResponse, error) {
+	response, err := c.WithRawResponse.DownloadEverythingNordletStoresAboutTheSignedInUser(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Removes the user: sessions, sign-in links, memberships and pending invitations are deleted at once; the email and name are replaced by an anonymous placeholder immediately and the remaining row is removed after 30 days. Refused while the user still owns or pays for a company that is not deleted.
+func (c *Client) DeleteTheSignedInUserAccount(
+	ctx context.Context,
+	request *nordlet.PostV1AccountDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountDeleteResponse, error) {
+	response, err := c.WithRawResponse.DeleteTheSignedInUserAccount(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

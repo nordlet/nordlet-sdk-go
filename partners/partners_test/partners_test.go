@@ -590,6 +590,32 @@ func TestPartnersPostV1PartnersDeleteWithWireMock(
 	VerifyRequestCount(t, "TestPartnersPostV1PartnersDeleteWithWireMock", "POST", "/v1/partners/delete", nil, 1)
 }
 
+func TestPartnersBlankAPartnersPersonalDataAndHideTheRecordWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1PartnersAnonymizeRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Partners.BlankAPartnersPersonalDataAndHideTheRecord(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersBlankAPartnersPersonalDataAndHideTheRecordWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersBlankAPartnersPersonalDataAndHideTheRecordWithWireMock", "POST", "/v1/partners/anonymize", nil, 1)
+}
+
 func TestPartnersPostV1PartnersListWithWireMock(
 	t *testing.T,
 ) {
