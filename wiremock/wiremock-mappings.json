@@ -5519,6 +5519,68 @@
       }
     },
     {
+      "id": "e9112ea5-a3cf-42a3-8cb9-9bf534c56baa",
+      "name": "Check a historical-books package without writing anything - default",
+      "request": {
+        "urlPathTemplate": "/v1/migration/books/validate",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"dryRun\": true,\n  \"cutoverDate\": \"cutoverDate\",\n  \"accounts\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"partners\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"items\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"assetGroups\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"openingBalances\": {\n    \"journalTransactionId\": \"journalTransactionId\",\n    \"date\": \"date\",\n    \"entries\": 1000000,\n    \"debitTotal\": \"debitTotal\",\n    \"creditTotal\": \"creditTotal\",\n    \"balancingAmount\": \"balancingAmount\"\n  },\n  \"journal\": {\n    \"transactions\": 1000000,\n    \"entries\": 1000000\n  },\n  \"openReceivables\": {\n    \"created\": 1000000,\n    \"outstandingTotal\": \"outstandingTotal\"\n  },\n  \"openPayables\": {\n    \"created\": 1000000,\n    \"outstandingTotal\": \"outstandingTotal\"\n  },\n  \"fixedAssets\": {\n    \"created\": 1000000,\n    \"costTotal\": \"costTotal\",\n    \"accumulatedDepreciationTotal\": \"accumulatedDepreciationTotal\"\n  },\n  \"stock\": {\n    \"movements\": 1000000,\n    \"costTotal\": \"costTotal\"\n  },\n  \"numberSeries\": [\n    {\n      \"prefix\": \"prefix\",\n      \"year\": 1000000,\n      \"nextNumber\": 1000000\n    }\n  ],\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e9112ea5-a3cf-42a3-8cb9-9bf534c56baa",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "8688ea9f-277b-4c1d-9ace-3ac8f41350b3",
+      "name": "Import historical books from a previous accounting system - default",
+      "request": {
+        "urlPathTemplate": "/v1/migration/books/import",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"dryRun\": true,\n  \"cutoverDate\": \"cutoverDate\",\n  \"accounts\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"partners\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"items\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"assetGroups\": {\n    \"created\": 1000000,\n    \"existing\": 1000000\n  },\n  \"openingBalances\": {\n    \"journalTransactionId\": \"journalTransactionId\",\n    \"date\": \"date\",\n    \"entries\": 1000000,\n    \"debitTotal\": \"debitTotal\",\n    \"creditTotal\": \"creditTotal\",\n    \"balancingAmount\": \"balancingAmount\"\n  },\n  \"journal\": {\n    \"transactions\": 1000000,\n    \"entries\": 1000000\n  },\n  \"openReceivables\": {\n    \"created\": 1000000,\n    \"outstandingTotal\": \"outstandingTotal\"\n  },\n  \"openPayables\": {\n    \"created\": 1000000,\n    \"outstandingTotal\": \"outstandingTotal\"\n  },\n  \"fixedAssets\": {\n    \"created\": 1000000,\n    \"costTotal\": \"costTotal\",\n    \"accumulatedDepreciationTotal\": \"accumulatedDepreciationTotal\"\n  },\n  \"stock\": {\n    \"movements\": 1000000,\n    \"costTotal\": \"costTotal\"\n  },\n  \"numberSeries\": [\n    {\n      \"prefix\": \"prefix\",\n      \"year\": 1000000,\n      \"nextNumber\": 1000000\n    }\n  ],\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "8688ea9f-277b-4c1d-9ace-3ac8f41350b3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "5727b7a9-cc26-40e5-a290-12c2ddd3007f",
       "name": "postV1AssetsGroupsCreate - default",
       "request": {
@@ -13208,6 +13270,6 @@
     }
   ],
   "meta": {
-    "total": 426
+    "total": 428
   }
 }

@@ -12027,6 +12027,305 @@ client.Ledger.PostV1LedgerJournalTransactionsCreate(
 </dl>
 </details>
 
+## Migration
+<details><summary><code>client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(request) -> *nordlet.PostV1MigrationBooksValidateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Runs every check the import runs (accounts, partners, balances, open invoices, assets, stock) and returns the same summary and warnings, then rolls everything back. Nothing is stored.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1MigrationBooksValidateRequest{
+        CutoverDate: "cutoverDate",
+    }
+client.Migration.CheckAHistoricalBooksPackageWithoutWritingAnything(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**cutoverDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accounts:** `[]*nordlet.PostV1MigrationBooksValidateRequestAccountsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partners:** `[]*nordlet.PostV1MigrationBooksValidateRequestPartnersItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**items:** `[]*nordlet.PostV1MigrationBooksValidateRequestItemsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openingBalances:** `*nordlet.PostV1MigrationBooksValidateRequestOpeningBalances` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**journal:** `[]*nordlet.PostV1MigrationBooksValidateRequestJournalItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openReceivables:** `[]*nordlet.PostV1MigrationBooksValidateRequestOpenReceivablesItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openPayables:** `[]*nordlet.PostV1MigrationBooksValidateRequestOpenPayablesItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assetGroups:** `[]*nordlet.PostV1MigrationBooksValidateRequestAssetGroupsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fixedAssets:** `[]*nordlet.PostV1MigrationBooksValidateRequestFixedAssetsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stock:** `[]*nordlet.PostV1MigrationBooksValidateRequestStockItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(request) -> *nordlet.PostV1MigrationBooksImportResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Brings a company over from another system in one call: chart of accounts, partners, items, opening balances (or the full journal history), open customer and supplier invoices, fixed assets with their accumulated depreciation, and stock on hand. The whole package is written in one database transaction — if any row fails, nothing is stored.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1MigrationBooksImportRequest{
+        CutoverDate: "cutoverDate",
+    }
+client.Migration.ImportHistoricalBooksFromAPreviousAccountingSystem(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**cutoverDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accounts:** `[]*nordlet.PostV1MigrationBooksImportRequestAccountsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partners:** `[]*nordlet.PostV1MigrationBooksImportRequestPartnersItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**items:** `[]*nordlet.PostV1MigrationBooksImportRequestItemsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openingBalances:** `*nordlet.PostV1MigrationBooksImportRequestOpeningBalances` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**journal:** `[]*nordlet.PostV1MigrationBooksImportRequestJournalItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openReceivables:** `[]*nordlet.PostV1MigrationBooksImportRequestOpenReceivablesItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openPayables:** `[]*nordlet.PostV1MigrationBooksImportRequestOpenPayablesItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assetGroups:** `[]*nordlet.PostV1MigrationBooksImportRequestAssetGroupsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fixedAssets:** `[]*nordlet.PostV1MigrationBooksImportRequestFixedAssetsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stock:** `[]*nordlet.PostV1MigrationBooksImportRequestStockItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Assets
 <details><summary><code>client.Assets.PostV1AssetsGroupsCreate(request) -> *nordlet.PostV1AssetsGroupsCreateResponse</code></summary>
 <dl>

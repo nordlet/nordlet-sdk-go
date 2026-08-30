@@ -22,6 +22,7 @@ import (
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	inventory "github.com/nordlet/nordlet-sdk-go/inventory"
 	ledger "github.com/nordlet/nordlet-sdk-go/ledger"
+	migration "github.com/nordlet/nordlet-sdk-go/migration"
 	option "github.com/nordlet/nordlet-sdk-go/option"
 	partners "github.com/nordlet/nordlet-sdk-go/partners"
 	payroll "github.com/nordlet/nordlet-sdk-go/payroll"
@@ -46,6 +47,7 @@ type Client struct {
 	Capture       *capture.Client
 	Declarations  *declarations.Client
 	Ledger        *ledger.Client
+	Migration     *migration.Client
 	Assets        *assets.Client
 	Hr            *hr.Client
 	Fleet         *fleet.Client
@@ -84,6 +86,7 @@ func NewClient(opts ...option.RequestOption) *Client {
 		Capture:       capture.NewClient(options),
 		Declarations:  declarations.NewClient(options),
 		Ledger:        ledger.NewClient(options),
+		Migration:     migration.NewClient(options),
 		Assets:        assets.NewClient(options),
 		Hr:            hr.NewClient(options),
 		Fleet:         fleet.NewClient(options),
