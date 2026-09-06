@@ -771,109 +771,6 @@ client.Reference.PostV1ReferenceEuVatRatesList(
 </dl>
 </details>
 
-<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesImportsList(request) -> *nordlet.PostV1ReferenceEuVatRatesImportsListResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-History of EU VAT rate imports from the EC TEDB VatRetrievalService: when rates were pulled, what changed, and whether the run succeeded. The initial seed run carries the built-in snapshot.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1ReferenceEuVatRatesImportsListRequest{}
-client.Reference.PostV1ReferenceEuVatRatesImportsList(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**limit:** `*int64` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSync(request) -> *nordlet.PostV1ReferenceEuVatRatesSyncResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Trigger an immediate pull of EU VAT rates from the EC TEDB VatRetrievalService. Rates are shared reference data: new rates open with today as their effective date, rates that disappeared are closed with a validity end date. Returns the finished import run.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```go
-request := &nordlet.PostV1ReferenceEuVatRatesSyncRequest{}
-client.Reference.PostV1ReferenceEuVatRatesSync(
-        context.TODO(),
-        request,
-    )
-}
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.Reference.PostV1ReferenceEuVatRatesSetOverrides(request) -> *nordlet.PostV1ReferenceEuVatRatesSetOverridesResponse</code></summary>
 <dl>
 <dd>
@@ -2722,6 +2619,14 @@ client.Partners.PostV1PartnersCreate(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2902,6 +2807,14 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -3140,6 +3053,14 @@ client.Partners.PostV1PartnersUpdate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -4301,6 +4222,14 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dl>
 <dd>
 
+**documentRef:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **translations:** `map[string]*nordlet.PostV1CatalogItemsCreateRequestTranslationsValue` 
     
 </dd>
@@ -4548,6 +4477,14 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dd>
 
 **attributes:** `map[string]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -5548,6 +5485,14 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -7538,6 +7483,14 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
+**documentRef:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **lines:** `[]*nordlet.PostV1PurchasesInvoicesCreateRequestLinesItem` 
     
 </dd>
@@ -7975,6 +7928,14 @@ client.Purchases.PostV1PurchasesOrdersCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -10744,6 +10705,14 @@ client.Ledger.PostV1LedgerAccountsCreate(
 <dl>
 <dd>
 
+**translations:** `*nordlet.PostV1LedgerAccountsCreateRequestTranslations` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **type_:** `*nordlet.PostV1LedgerAccountsCreateRequestType` 
     
 </dd>
@@ -10816,6 +10785,14 @@ client.Ledger.PostV1LedgerAccountsUpdate(
 <dd>
 
 **name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**translations:** `*nordlet.PostV1LedgerAccountsUpdateRequestTranslations` 
     
 </dd>
 </dl>
@@ -12654,6 +12631,14 @@ client.Assets.PostV1AssetsAssetsCreate(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**documents:** `[]*nordlet.PostV1AssetsAssetsCreateRequestDocumentsItem` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13335,6 +13320,14 @@ client.Hr.PostV1HrEmployeesCreate(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**attributes:** `[]*nordlet.PostV1HrEmployeesCreateRequestAttributesItem` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -13499,6 +13492,14 @@ client.Hr.PostV1HrEmployeesUpdate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attributes:** `[]*nordlet.PostV1HrEmployeesUpdateRequestAttributesItem` 
     
 </dd>
 </dl>
@@ -13773,7 +13774,6 @@ client.Hr.BlankAnEmployeesPersonalDataAndHideTheRecord(
 ```go
 request := &nordlet.PostV1HrContractsCreateRequest{
         EmployeeID: "employeeId",
-        ContractNo: "contractNo",
         StartDate: "startDate",
         BaseSalary: "baseSalary",
     }
@@ -13828,7 +13828,15 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**contractNo:** `string` 
+**agreementID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contractNo:** `*string` 
     
 </dd>
 </dl>
@@ -13876,7 +13884,7 @@ client.Hr.PostV1HrContractsCreate(
 <dl>
 <dd>
 
-**workHoursPerWeek:** `*string` 
+**workHours:** `*string` 
     
 </dd>
 </dl>
@@ -15132,6 +15140,14 @@ client.Fleet.PostV1FleetVehiclesCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documents:** `[]*nordlet.PostV1FleetVehiclesCreateRequestDocumentsItem` 
     
 </dd>
 </dl>
@@ -16499,7 +16515,6 @@ client.Agreements.PostV1AgreementsTypesList(
 
 ```go
 request := &nordlet.PostV1AgreementsAgreementsCreateRequest{
-        PartnerID: "partnerId",
         Number: "number",
         StartDate: "startDate",
     }
@@ -16530,7 +16545,31 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dl>
 <dd>
 
-**partnerID:** `string` 
+**kind:** `*nordlet.PostV1AgreementsAgreementsCreateRequestKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**employeeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountID:** `*string` 
     
 </dd>
 </dl>
@@ -16611,6 +16650,14 @@ client.Agreements.PostV1AgreementsAgreementsCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -16728,6 +16775,14 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dl>
 <dd>
 
+**kind:** `*nordlet.PostV1AgreementsAgreementsUpdateRequestKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **name:** `*string` 
     
 </dd>
@@ -16777,6 +16832,14 @@ client.Agreements.PostV1AgreementsAgreementsUpdate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
     
 </dd>
 </dl>
@@ -23372,6 +23435,14 @@ client.Bank.PostV1BankAccountsCreate(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**documentRef:** `*string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23633,6 +23704,14 @@ client.Bank.PostV1BankStatementsImport(
 <dl>
 <dd>
 
+**templateID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **format:** `*nordlet.PostV1BankStatementsImportRequestFormat` 
     
 </dd>
@@ -23787,6 +23866,97 @@ client.Bank.PostV1BankTransactionsMatch(
 </dl>
 </details>
 
+<details><summary><code>client.Bank.PostV1BankTransactionsRecord(request) -> *nordlet.PostV1BankTransactionsRecordResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankTransactionsRecordRequest{
+        BankAccountID: "bankAccountId",
+        Date: "date",
+        Amount: "amount",
+        DocumentType: nordlet.PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice,
+        DocumentID: "documentId",
+    }
+client.Bank.PostV1BankTransactionsRecord(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**bankAccountID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentType:** `*nordlet.PostV1BankTransactionsRecordRequestDocumentType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Bank.PostV1BankPaymentsExport(request) -> *nordlet.PostV1BankPaymentsExportResponse</code></summary>
 <dl>
 <dd>
@@ -23842,6 +24012,400 @@ client.Bank.PostV1BankPaymentsExport(
 <dd>
 
 **executionDate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(request) -> *nordlet.PostV1BankImportTemplatesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankImportTemplatesCreateRequest{
+        Name: "name",
+        Type: nordlet.PostV1BankImportTemplatesCreateRequestTypeStripe,
+    }
+client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `*nordlet.PostV1BankImportTemplatesCreateRequestType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `[]*nordlet.PostV1BankImportTemplatesCreateRequestFieldsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metaFields:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceVatRatePercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**companyMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceItemID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**advanceInvoices:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankImportTemplatesUpdate(request) -> *nordlet.PostV1BankImportTemplatesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankImportTemplatesUpdateRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankImportTemplatesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**type_:** `*nordlet.PostV1BankImportTemplatesUpdateRequestType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fields:** `[]*nordlet.PostV1BankImportTemplatesUpdateRequestFieldsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metaFields:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceVatRatePercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**companyMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceItemID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**advanceInvoices:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankImportTemplatesDelete(request) -> *nordlet.PostV1BankImportTemplatesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankImportTemplatesDeleteRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankImportTemplatesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankImportTemplatesGet(request) -> *nordlet.PostV1BankImportTemplatesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankImportTemplatesGetRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankImportTemplatesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankImportTemplatesList(request) -> *nordlet.PostV1BankImportTemplatesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankImportTemplatesListRequest{}
+client.Bank.PostV1BankImportTemplatesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1BankImportTemplatesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1BankImportTemplatesListRequestFilterItem` 
     
 </dd>
 </dl>
@@ -25042,6 +25606,69 @@ client.Bank.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynce
 </dl>
 </details>
 
+<details><summary><code>client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(request) -> *nordlet.PostV1BankFeedsAccountsConfigureResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankFeedsAccountsConfigureRequest{
+        ID: "id",
+    }
+client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**importTemplateID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**syncSchedule:** `*nordlet.PostV1BankFeedsAccountsConfigureRequestSyncSchedule` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(request) -> *nordlet.PostV1BankFeedsSyncResponse</code></summary>
 <dl>
 <dd>
@@ -25129,7 +25756,6 @@ client.Bank.PullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSynced(
 ```go
 request := &nordlet.PostV1FilesUploadRequest{
         Entity: "entity",
-        EntityID: "entityId",
         FileName: "fileName",
         MimeType: "mimeType",
         Content: "content",
@@ -25161,7 +25787,7 @@ client.Files.PostV1FilesUpload(
 <dl>
 <dd>
 
-**entityID:** `string` 
+**entityID:** `*string` 
     
 </dd>
 </dl>

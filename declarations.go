@@ -1384,17 +1384,26 @@ func (p *PostV1DeclarationsSubmissionsMarkRequest) MarshalJSON() ([]byte, error)
 }
 
 var (
-	postV1DeclarationsConfigsListResponseFieldRows = big.NewInt(1 << 0)
+	postV1DeclarationsConfigsListResponseFieldCompanyCountry = big.NewInt(1 << 0)
+	postV1DeclarationsConfigsListResponseFieldRows           = big.NewInt(1 << 1)
 )
 
 type PostV1DeclarationsConfigsListResponse struct {
-	Rows []*PostV1DeclarationsConfigsListResponseRowsItem `json:"rows" url:"rows"`
+	CompanyCountry string                                           `json:"companyCountry" url:"companyCountry"`
+	Rows           []*PostV1DeclarationsConfigsListResponseRowsItem `json:"rows" url:"rows"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (p *PostV1DeclarationsConfigsListResponse) GetCompanyCountry() string {
+	if p == nil {
+		return ""
+	}
+	return p.CompanyCountry
 }
 
 func (p *PostV1DeclarationsConfigsListResponse) GetRows() []*PostV1DeclarationsConfigsListResponseRowsItem {
@@ -1416,6 +1425,13 @@ func (p *PostV1DeclarationsConfigsListResponse) require(field *big.Int) {
 		p.explicitFields = big.NewInt(0)
 	}
 	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCompanyCountry sets the CompanyCountry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DeclarationsConfigsListResponse) SetCompanyCountry(companyCountry string) {
+	p.CompanyCountry = companyCountry
+	p.require(postV1DeclarationsConfigsListResponseFieldCompanyCountry)
 }
 
 // SetRows sets the Rows field and marks it as non-optional;

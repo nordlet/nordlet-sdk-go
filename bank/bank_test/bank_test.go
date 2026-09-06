@@ -264,6 +264,36 @@ func TestBankPostV1BankTransactionsMatchWithWireMock(
 	VerifyRequestCount(t, "TestBankPostV1BankTransactionsMatchWithWireMock", "POST", "/v1/bank/transactions/match", nil, 1)
 }
 
+func TestBankPostV1BankTransactionsRecordWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankTransactionsRecordRequest{
+		BankAccountID: "bankAccountId",
+		Date:          "date",
+		Amount:        "amount",
+		DocumentType:  nordlet.PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice,
+		DocumentID:    "documentId",
+	}
+	_, invocationErr := client.Bank.PostV1BankTransactionsRecord(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostV1BankTransactionsRecordWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostV1BankTransactionsRecordWithWireMock", "POST", "/v1/bank/transactions/record", nil, 1)
+}
+
 func TestBankPostV1BankPaymentsExportWithWireMock(
 	t *testing.T,
 ) {
@@ -291,6 +321,135 @@ func TestBankPostV1BankPaymentsExportWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestBankPostV1BankPaymentsExportWithWireMock", "POST", "/v1/bank/payments/export", nil, 1)
+}
+
+func TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankImportTemplatesCreateRequest{
+		Name: "name",
+		Type: nordlet.PostV1BankImportTemplatesCreateRequestTypeStripe,
+	}
+	_, invocationErr := client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankCreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldListWithWireMock", "POST", "/v1/bank/import-templates/create", nil, 1)
+}
+
+func TestBankPostV1BankImportTemplatesUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankImportTemplatesUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Bank.PostV1BankImportTemplatesUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesUpdateWithWireMock", "POST", "/v1/bank/import-templates/update", nil, 1)
+}
+
+func TestBankPostV1BankImportTemplatesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankImportTemplatesDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Bank.PostV1BankImportTemplatesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesDeleteWithWireMock", "POST", "/v1/bank/import-templates/delete", nil, 1)
+}
+
+func TestBankPostV1BankImportTemplatesGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankImportTemplatesGetRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Bank.PostV1BankImportTemplatesGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesGetWithWireMock", "POST", "/v1/bank/import-templates/get", nil, 1)
+}
+
+func TestBankPostV1BankImportTemplatesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankImportTemplatesListRequest{}
+	_, invocationErr := client.Bank.PostV1BankImportTemplatesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostV1BankImportTemplatesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostV1BankImportTemplatesListWithWireMock", "POST", "/v1/bank/import-templates/list", nil, 1)
 }
 
 func TestBankPostV1BankMandatesCreateWithWireMock(
@@ -785,6 +944,32 @@ func TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSync
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestBankPointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSyncedWithWireMock", "POST", "/v1/bank/feeds/accounts/link", nil, 1)
+}
+
+func TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankFeedsAccountsConfigureRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Bank.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomaticallyWithWireMock", "POST", "/v1/bank/feeds/accounts/configure", nil, 1)
 }
 
 func TestBankPullNewTransactionsFromTheBankIntoTheLedgerEmitsBankFeedSyncedWithWireMock(

@@ -63,11 +63,35 @@ func TestSettersPostV1AgreementsAgreementsCreateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueKind *PostV1AgreementsAgreementsCreateRequestKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPartnerID", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsCreateRequest{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmployeeID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueEmployeeID *string
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBankAccountID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueBankAccountID *string
+		obj.SetBankAccountID(fernTestValueBankAccountID)
+		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -151,6 +175,14 @@ func TestSettersPostV1AgreementsAgreementsCreateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetItems", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsCreateRequest{}
 		var fernTestValueItems []*PostV1AgreementsAgreementsCreateRequestItemsItem
@@ -193,14 +225,107 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsCreateRequest(t *testing.T
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueKind *PostV1AgreementsAgreementsCreateRequestKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsCreateRequest{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 
 		// Act
 		obj.SetPartnerID(fernTestValuePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueEmployeeID *string
+
+		// Act
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueBankAccountID *string
+
+		// Act
+		obj.SetBankAccountID(fernTestValueBankAccountID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -511,6 +636,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsCreateRequest(t *testing.T
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateRequest{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -920,6 +1076,14 @@ func TestSettersPostV1AgreementsAgreementsUpdateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateRequest{}
+		var fernTestValueKind *PostV1AgreementsAgreementsUpdateRequestKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetName", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsUpdateRequest{}
 		var fernTestValueName *string
@@ -976,6 +1140,14 @@ func TestSettersPostV1AgreementsAgreementsUpdateRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateRequest{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestSettersMarkExplicitPostV1AgreementsAgreementsUpdateRequest(t *testing.T) {
@@ -1018,6 +1190,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsUpdateRequest(t *testing.T
 
 		// Act
 		obj.SetTypeID(fernTestValueTypeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateRequest{}
+		var fernTestValueKind *PostV1AgreementsAgreementsUpdateRequestKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1235,6 +1438,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsUpdateRequest(t *testing.T
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateRequest{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3022,11 +3256,35 @@ func TestSettersPostV1AgreementsAgreementsCreateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsCreateResponseKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPartnerID", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsCreateResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmployeeID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueEmployeeID *string
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBankAccountID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueBankAccountID *string
+		obj.SetBankAccountID(fernTestValueBankAccountID)
+		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -3110,6 +3368,14 @@ func TestSettersPostV1AgreementsAgreementsCreateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsCreateResponse{}
 		var fernTestValueCreatedAt string
@@ -3185,15 +3451,48 @@ func TestGettersPostV1AgreementsAgreementsCreateResponse(t *testing.T) {
 		_ = obj.GetTypeID() // Should return zero value
 	})
 
+	t.Run("GetKind", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var expected PostV1AgreementsAgreementsCreateResponseKind
+		obj.Kind = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetKind(), "getter should return the property value")
+	})
+
+	t.Run("GetKind_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsCreateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetKind() // Should return zero value
+	})
+
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsCreateResponse{}
-		var expected string
+		var expected *string
 		obj.PartnerID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetPartnerID(), "getter should return the property value")
+	})
+
+	t.Run("GetPartnerID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		obj.PartnerID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPartnerID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
@@ -3206,6 +3505,72 @@ func TestGettersPostV1AgreementsAgreementsCreateResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPartnerID() // Should return zero value
+	})
+
+	t.Run("GetEmployeeID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var expected *string
+		obj.EmployeeID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmployeeID(), "getter should return the property value")
+	})
+
+	t.Run("GetEmployeeID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		obj.EmployeeID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmployeeID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsCreateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmployeeID() // Should return zero value
+	})
+
+	t.Run("GetBankAccountID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var expected *string
+		obj.BankAccountID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBankAccountID(), "getter should return the property value")
+	})
+
+	t.Run("GetBankAccountID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		obj.BankAccountID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBankAccountID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBankAccountID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsCreateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBankAccountID() // Should return zero value
 	})
 
 	t.Run("GetNumber", func(t *testing.T) {
@@ -3488,6 +3853,39 @@ func TestGettersPostV1AgreementsAgreementsCreateResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetDocumentRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var expected *string
+		obj.DocumentRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentRef(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		obj.DocumentRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsCreateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentRef() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -3609,14 +4007,107 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsCreateResponse(t *testing.
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsCreateResponseKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsCreateResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 
 		// Act
 		obj.SetPartnerID(fernTestValuePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueEmployeeID *string
+
+		// Act
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueBankAccountID *string
+
+		// Act
+		obj.SetBankAccountID(fernTestValueBankAccountID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3927,6 +4418,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsCreateResponse(t *testing.
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsCreateResponse{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4790,11 +5312,35 @@ func TestSettersPostV1AgreementsAgreementsGetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsGetResponseKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPartnerID", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsGetResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmployeeID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueEmployeeID *string
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBankAccountID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueBankAccountID *string
+		obj.SetBankAccountID(fernTestValueBankAccountID)
+		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -4878,6 +5424,14 @@ func TestSettersPostV1AgreementsAgreementsGetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsGetResponse{}
 		var fernTestValueCreatedAt string
@@ -4953,15 +5507,48 @@ func TestGettersPostV1AgreementsAgreementsGetResponse(t *testing.T) {
 		_ = obj.GetTypeID() // Should return zero value
 	})
 
+	t.Run("GetKind", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var expected PostV1AgreementsAgreementsGetResponseKind
+		obj.Kind = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetKind(), "getter should return the property value")
+	})
+
+	t.Run("GetKind_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetKind() // Should return zero value
+	})
+
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsGetResponse{}
-		var expected string
+		var expected *string
 		obj.PartnerID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetPartnerID(), "getter should return the property value")
+	})
+
+	t.Run("GetPartnerID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		obj.PartnerID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPartnerID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
@@ -4974,6 +5561,72 @@ func TestGettersPostV1AgreementsAgreementsGetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPartnerID() // Should return zero value
+	})
+
+	t.Run("GetEmployeeID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var expected *string
+		obj.EmployeeID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmployeeID(), "getter should return the property value")
+	})
+
+	t.Run("GetEmployeeID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		obj.EmployeeID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmployeeID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmployeeID() // Should return zero value
+	})
+
+	t.Run("GetBankAccountID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var expected *string
+		obj.BankAccountID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBankAccountID(), "getter should return the property value")
+	})
+
+	t.Run("GetBankAccountID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		obj.BankAccountID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBankAccountID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBankAccountID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBankAccountID() // Should return zero value
 	})
 
 	t.Run("GetNumber", func(t *testing.T) {
@@ -5256,6 +5909,39 @@ func TestGettersPostV1AgreementsAgreementsGetResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetDocumentRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var expected *string
+		obj.DocumentRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentRef(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		obj.DocumentRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentRef() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -5377,14 +6063,107 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsGetResponse(t *testing.T) 
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsGetResponseKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsGetResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 
 		// Act
 		obj.SetPartnerID(fernTestValuePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueEmployeeID *string
+
+		// Act
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueBankAccountID *string
+
+		// Act
+		obj.SetBankAccountID(fernTestValueBankAccountID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -5695,6 +6474,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsGetResponse(t *testing.T) 
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsGetResponse{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6989,11 +7799,35 @@ func TestSettersPostV1AgreementsAgreementsListResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueKind PostV1AgreementsAgreementsListResponseRowsItemKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPartnerID", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmployeeID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueEmployeeID *string
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBankAccountID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueBankAccountID *string
+		obj.SetBankAccountID(fernTestValueBankAccountID)
+		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -7077,6 +7911,14 @@ func TestSettersPostV1AgreementsAgreementsListResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
 		var fernTestValueCreatedAt string
@@ -7144,15 +7986,48 @@ func TestGettersPostV1AgreementsAgreementsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetTypeID() // Should return zero value
 	})
 
+	t.Run("GetKind", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var expected PostV1AgreementsAgreementsListResponseRowsItemKind
+		obj.Kind = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetKind(), "getter should return the property value")
+	})
+
+	t.Run("GetKind_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetKind() // Should return zero value
+	})
+
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
-		var expected string
+		var expected *string
 		obj.PartnerID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetPartnerID(), "getter should return the property value")
+	})
+
+	t.Run("GetPartnerID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		obj.PartnerID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPartnerID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
@@ -7165,6 +8040,72 @@ func TestGettersPostV1AgreementsAgreementsListResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPartnerID() // Should return zero value
+	})
+
+	t.Run("GetEmployeeID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var expected *string
+		obj.EmployeeID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmployeeID(), "getter should return the property value")
+	})
+
+	t.Run("GetEmployeeID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		obj.EmployeeID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmployeeID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmployeeID() // Should return zero value
+	})
+
+	t.Run("GetBankAccountID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var expected *string
+		obj.BankAccountID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBankAccountID(), "getter should return the property value")
+	})
+
+	t.Run("GetBankAccountID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		obj.BankAccountID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBankAccountID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBankAccountID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBankAccountID() // Should return zero value
 	})
 
 	t.Run("GetNumber", func(t *testing.T) {
@@ -7447,6 +8388,39 @@ func TestGettersPostV1AgreementsAgreementsListResponseRowsItem(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetDocumentRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var expected *string
+		obj.DocumentRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentRef(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		obj.DocumentRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentRef() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -7535,14 +8509,107 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsListResponseRowsItem(t *te
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueKind PostV1AgreementsAgreementsListResponseRowsItemKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 
 		// Act
 		obj.SetPartnerID(fernTestValuePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueEmployeeID *string
+
+		// Act
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueBankAccountID *string
+
+		// Act
+		obj.SetBankAccountID(fernTestValueBankAccountID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7876,6 +8943,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsListResponseRowsItem(t *te
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsListResponseRowsItem{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -7926,11 +9024,35 @@ func TestSettersPostV1AgreementsAgreementsUpdateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetKind", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsUpdateResponseKind
+		obj.SetKind(fernTestValueKind)
+		assert.Equal(t, fernTestValueKind, obj.Kind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPartnerID", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsUpdateResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 		obj.SetPartnerID(fernTestValuePartnerID)
 		assert.Equal(t, fernTestValuePartnerID, obj.PartnerID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEmployeeID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueEmployeeID *string
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+		assert.Equal(t, fernTestValueEmployeeID, obj.EmployeeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetBankAccountID", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueBankAccountID *string
+		obj.SetBankAccountID(fernTestValueBankAccountID)
+		assert.Equal(t, fernTestValueBankAccountID, obj.BankAccountID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -8014,6 +9136,14 @@ func TestSettersPostV1AgreementsAgreementsUpdateResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDocumentRef", func(t *testing.T) {
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueDocumentRef *string
+		obj.SetDocumentRef(fernTestValueDocumentRef)
+		assert.Equal(t, fernTestValueDocumentRef, obj.DocumentRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &PostV1AgreementsAgreementsUpdateResponse{}
 		var fernTestValueCreatedAt string
@@ -8089,15 +9219,48 @@ func TestGettersPostV1AgreementsAgreementsUpdateResponse(t *testing.T) {
 		_ = obj.GetTypeID() // Should return zero value
 	})
 
+	t.Run("GetKind", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var expected PostV1AgreementsAgreementsUpdateResponseKind
+		obj.Kind = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetKind(), "getter should return the property value")
+	})
+
+	t.Run("GetKind_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetKind() // Should return zero value
+	})
+
 	t.Run("GetPartnerID", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsUpdateResponse{}
-		var expected string
+		var expected *string
 		obj.PartnerID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetPartnerID(), "getter should return the property value")
+	})
+
+	t.Run("GetPartnerID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		obj.PartnerID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPartnerID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetPartnerID_NilReceiver", func(t *testing.T) {
@@ -8110,6 +9273,72 @@ func TestGettersPostV1AgreementsAgreementsUpdateResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPartnerID() // Should return zero value
+	})
+
+	t.Run("GetEmployeeID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var expected *string
+		obj.EmployeeID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetEmployeeID(), "getter should return the property value")
+	})
+
+	t.Run("GetEmployeeID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		obj.EmployeeID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEmployeeID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetEmployeeID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetEmployeeID() // Should return zero value
+	})
+
+	t.Run("GetBankAccountID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var expected *string
+		obj.BankAccountID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBankAccountID(), "getter should return the property value")
+	})
+
+	t.Run("GetBankAccountID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		obj.BankAccountID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetBankAccountID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetBankAccountID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBankAccountID() // Should return zero value
 	})
 
 	t.Run("GetNumber", func(t *testing.T) {
@@ -8392,6 +9621,39 @@ func TestGettersPostV1AgreementsAgreementsUpdateResponse(t *testing.T) {
 		_ = obj.GetNotes() // Should return zero value
 	})
 
+	t.Run("GetDocumentRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var expected *string
+		obj.DocumentRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDocumentRef(), "getter should return the property value")
+	})
+
+	t.Run("GetDocumentRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		obj.DocumentRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDocumentRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDocumentRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1AgreementsAgreementsUpdateResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDocumentRef() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -8513,14 +9775,107 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsUpdateResponse(t *testing.
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueKind PostV1AgreementsAgreementsUpdateResponseKind
+
+		// Act
+		obj.SetKind(fernTestValueKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPartnerID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1AgreementsAgreementsUpdateResponse{}
-		var fernTestValuePartnerID string
+		var fernTestValuePartnerID *string
 
 		// Act
 		obj.SetPartnerID(fernTestValuePartnerID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEmployeeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueEmployeeID *string
+
+		// Act
+		obj.SetEmployeeID(fernTestValueEmployeeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBankAccountID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueBankAccountID *string
+
+		// Act
+		obj.SetBankAccountID(fernTestValueBankAccountID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -8831,6 +10186,37 @@ func TestSettersMarkExplicitPostV1AgreementsAgreementsUpdateResponse(t *testing.
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1AgreementsAgreementsUpdateResponse{}
+		var fernTestValueDocumentRef *string
+
+		// Act
+		obj.SetDocumentRef(fernTestValueDocumentRef)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -14015,6 +15401,70 @@ func TestEnumPostV1AgreementsAgreementsCreateRequestBillingPeriod(t *testing.T) 
 	})
 }
 
+func TestEnumPostV1AgreementsAgreementsCreateRequestKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateRequestKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsCreateRequestKindFromString("customer")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1AgreementsAgreementsCreateRequestStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
@@ -14094,6 +15544,70 @@ func TestEnumPostV1AgreementsAgreementsCreateResponseBillingPeriod(t *testing.T)
 	})
 }
 
+func TestEnumPostV1AgreementsAgreementsCreateResponseKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsCreateResponseKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsCreateResponseKindFromString("customer")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1AgreementsAgreementsCreateResponseStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
@@ -14166,6 +15680,70 @@ func TestEnumPostV1AgreementsAgreementsGetResponseBillingPeriod(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewPostV1AgreementsAgreementsGetResponseBillingPeriodFromString("monthly")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1AgreementsAgreementsGetResponseKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsGetResponseKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsGetResponseKindFromString("customer")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -14338,6 +15916,70 @@ func TestEnumPostV1AgreementsAgreementsListResponseRowsItemBillingPeriod(t *test
 	})
 }
 
+func TestEnumPostV1AgreementsAgreementsListResponseRowsItemKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsListResponseRowsItemKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString("customer")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1AgreementsAgreementsListResponseRowsItemStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
@@ -14417,6 +16059,70 @@ func TestEnumPostV1AgreementsAgreementsUpdateRequestBillingPeriod(t *testing.T) 
 	})
 }
 
+func TestEnumPostV1AgreementsAgreementsUpdateRequestKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateRequestKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsUpdateRequestKindFromString("customer")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumPostV1AgreementsAgreementsUpdateRequestStatus(t *testing.T) {
 	t.Run("NewFromString_draft", func(t *testing.T) {
 		t.Parallel()
@@ -14489,6 +16195,70 @@ func TestEnumPostV1AgreementsAgreementsUpdateResponseBillingPeriod(t *testing.T)
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewPostV1AgreementsAgreementsUpdateResponseBillingPeriodFromString("monthly")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPostV1AgreementsAgreementsUpdateResponseKind(t *testing.T) {
+	t.Run("NewFromString_customer", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("customer")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("customer"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_supplier", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("supplier")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("supplier"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_employment", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("employment")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("employment"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("bank")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("bank"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lease", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("lease")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("lease"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_insurance", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("insurance")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("insurance"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_other", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("other")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1AgreementsAgreementsUpdateResponseKind("other"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPostV1AgreementsAgreementsUpdateResponseKindFromString("customer")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

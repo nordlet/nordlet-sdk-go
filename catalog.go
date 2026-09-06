@@ -224,8 +224,9 @@ var (
 	postV1CatalogItemsCreateRequestFieldDescription             = big.NewInt(1 << 15)
 	postV1CatalogItemsCreateRequestFieldGroupID                 = big.NewInt(1 << 16)
 	postV1CatalogItemsCreateRequestFieldAttributes              = big.NewInt(1 << 17)
-	postV1CatalogItemsCreateRequestFieldTranslations            = big.NewInt(1 << 18)
-	postV1CatalogItemsCreateRequestFieldComponents              = big.NewInt(1 << 19)
+	postV1CatalogItemsCreateRequestFieldDocumentRef             = big.NewInt(1 << 18)
+	postV1CatalogItemsCreateRequestFieldTranslations            = big.NewInt(1 << 19)
+	postV1CatalogItemsCreateRequestFieldComponents              = big.NewInt(1 << 20)
 )
 
 type PostV1CatalogItemsCreateRequest struct {
@@ -247,6 +248,7 @@ type PostV1CatalogItemsCreateRequest struct {
 	Description             *string                                                      `json:"description,omitempty" url:"-"`
 	GroupID                 *string                                                      `json:"groupId,omitempty" url:"-"`
 	Attributes              map[string]string                                            `json:"attributes,omitempty" url:"-"`
+	DocumentRef             *string                                                      `json:"documentRef,omitempty" url:"-"`
 	Translations            map[string]*PostV1CatalogItemsCreateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 	Components              []*PostV1CatalogItemsCreateRequestComponentsItem             `json:"components,omitempty" url:"-"`
 
@@ -385,6 +387,13 @@ func (p *PostV1CatalogItemsCreateRequest) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsCreateRequest) SetAttributes(attributes map[string]string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsCreateRequestFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsCreateRequestFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
@@ -799,8 +808,9 @@ var (
 	postV1CatalogItemsUpdateRequestFieldDescription             = big.NewInt(1 << 16)
 	postV1CatalogItemsUpdateRequestFieldGroupID                 = big.NewInt(1 << 17)
 	postV1CatalogItemsUpdateRequestFieldAttributes              = big.NewInt(1 << 18)
-	postV1CatalogItemsUpdateRequestFieldTranslations            = big.NewInt(1 << 19)
-	postV1CatalogItemsUpdateRequestFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsUpdateRequestFieldDocumentRef             = big.NewInt(1 << 19)
+	postV1CatalogItemsUpdateRequestFieldTranslations            = big.NewInt(1 << 20)
+	postV1CatalogItemsUpdateRequestFieldComponents              = big.NewInt(1 << 21)
 )
 
 type PostV1CatalogItemsUpdateRequest struct {
@@ -823,6 +833,7 @@ type PostV1CatalogItemsUpdateRequest struct {
 	Description             *string                                                      `json:"description,omitempty" url:"-"`
 	GroupID                 *string                                                      `json:"groupId,omitempty" url:"-"`
 	Attributes              map[string]string                                            `json:"attributes,omitempty" url:"-"`
+	DocumentRef             *string                                                      `json:"documentRef,omitempty" url:"-"`
 	Translations            map[string]*PostV1CatalogItemsUpdateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 	Components              []*PostV1CatalogItemsUpdateRequestComponentsItem             `json:"components,omitempty" url:"-"`
 
@@ -968,6 +979,13 @@ func (p *PostV1CatalogItemsUpdateRequest) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsUpdateRequest) SetAttributes(attributes map[string]string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsUpdateRequestFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsUpdateRequestFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
@@ -2211,10 +2229,11 @@ var (
 	postV1CatalogItemsCreateResponseFieldDescription             = big.NewInt(1 << 16)
 	postV1CatalogItemsCreateResponseFieldGroupID                 = big.NewInt(1 << 17)
 	postV1CatalogItemsCreateResponseFieldAttributes              = big.NewInt(1 << 18)
-	postV1CatalogItemsCreateResponseFieldTranslations            = big.NewInt(1 << 19)
-	postV1CatalogItemsCreateResponseFieldComponents              = big.NewInt(1 << 20)
-	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 21)
-	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsCreateResponseFieldDocumentRef             = big.NewInt(1 << 19)
+	postV1CatalogItemsCreateResponseFieldTranslations            = big.NewInt(1 << 20)
+	postV1CatalogItemsCreateResponseFieldComponents              = big.NewInt(1 << 21)
+	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 23)
 )
 
 type PostV1CatalogItemsCreateResponse struct {
@@ -2237,6 +2256,7 @@ type PostV1CatalogItemsCreateResponse struct {
 	Description             *string                                                       `json:"description,omitempty" url:"description,omitempty"`
 	GroupID                 *string                                                       `json:"groupId,omitempty" url:"groupId,omitempty"`
 	Attributes              map[string]*string                                            `json:"attributes,omitempty" url:"attributes,omitempty"`
+	DocumentRef             *string                                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsCreateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsCreateResponseComponentsItem             `json:"components" url:"components"`
 	CreatedAt               string                                                        `json:"createdAt" url:"createdAt"`
@@ -2380,6 +2400,13 @@ func (p *PostV1CatalogItemsCreateResponse) GetAttributes() map[string]*string {
 		return nil
 	}
 	return p.Attributes
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1CatalogItemsCreateResponse) GetTranslations() map[string]*PostV1CatalogItemsCreateResponseTranslationsValue {
@@ -2555,6 +2582,13 @@ func (p *PostV1CatalogItemsCreateResponse) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsCreateResponse) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsCreateResponseFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsCreateResponseFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
@@ -2997,10 +3031,11 @@ var (
 	postV1CatalogItemsGetResponseFieldDescription             = big.NewInt(1 << 16)
 	postV1CatalogItemsGetResponseFieldGroupID                 = big.NewInt(1 << 17)
 	postV1CatalogItemsGetResponseFieldAttributes              = big.NewInt(1 << 18)
-	postV1CatalogItemsGetResponseFieldTranslations            = big.NewInt(1 << 19)
-	postV1CatalogItemsGetResponseFieldComponents              = big.NewInt(1 << 20)
-	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 21)
-	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsGetResponseFieldDocumentRef             = big.NewInt(1 << 19)
+	postV1CatalogItemsGetResponseFieldTranslations            = big.NewInt(1 << 20)
+	postV1CatalogItemsGetResponseFieldComponents              = big.NewInt(1 << 21)
+	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 23)
 )
 
 type PostV1CatalogItemsGetResponse struct {
@@ -3023,6 +3058,7 @@ type PostV1CatalogItemsGetResponse struct {
 	Description             *string                                                    `json:"description,omitempty" url:"description,omitempty"`
 	GroupID                 *string                                                    `json:"groupId,omitempty" url:"groupId,omitempty"`
 	Attributes              map[string]*string                                         `json:"attributes,omitempty" url:"attributes,omitempty"`
+	DocumentRef             *string                                                    `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsGetResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsGetResponseComponentsItem             `json:"components" url:"components"`
 	CreatedAt               string                                                     `json:"createdAt" url:"createdAt"`
@@ -3166,6 +3202,13 @@ func (p *PostV1CatalogItemsGetResponse) GetAttributes() map[string]*string {
 		return nil
 	}
 	return p.Attributes
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1CatalogItemsGetResponse) GetTranslations() map[string]*PostV1CatalogItemsGetResponseTranslationsValue {
@@ -3341,6 +3384,13 @@ func (p *PostV1CatalogItemsGetResponse) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsGetResponse) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsGetResponseFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsGetResponseFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
@@ -4269,10 +4319,11 @@ var (
 	postV1CatalogItemsListResponseRowsItemFieldDescription             = big.NewInt(1 << 16)
 	postV1CatalogItemsListResponseRowsItemFieldGroupID                 = big.NewInt(1 << 17)
 	postV1CatalogItemsListResponseRowsItemFieldAttributes              = big.NewInt(1 << 18)
-	postV1CatalogItemsListResponseRowsItemFieldTranslations            = big.NewInt(1 << 19)
-	postV1CatalogItemsListResponseRowsItemFieldComponents              = big.NewInt(1 << 20)
-	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 21)
-	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsListResponseRowsItemFieldDocumentRef             = big.NewInt(1 << 19)
+	postV1CatalogItemsListResponseRowsItemFieldTranslations            = big.NewInt(1 << 20)
+	postV1CatalogItemsListResponseRowsItemFieldComponents              = big.NewInt(1 << 21)
+	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 23)
 )
 
 type PostV1CatalogItemsListResponseRowsItem struct {
@@ -4295,6 +4346,7 @@ type PostV1CatalogItemsListResponseRowsItem struct {
 	Description             *string                                                             `json:"description,omitempty" url:"description,omitempty"`
 	GroupID                 *string                                                             `json:"groupId,omitempty" url:"groupId,omitempty"`
 	Attributes              map[string]*string                                                  `json:"attributes,omitempty" url:"attributes,omitempty"`
+	DocumentRef             *string                                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsListResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsListResponseRowsItemComponentsItem             `json:"components" url:"components"`
 	CreatedAt               string                                                              `json:"createdAt" url:"createdAt"`
@@ -4438,6 +4490,13 @@ func (p *PostV1CatalogItemsListResponseRowsItem) GetAttributes() map[string]*str
 		return nil
 	}
 	return p.Attributes
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1CatalogItemsListResponseRowsItem) GetTranslations() map[string]*PostV1CatalogItemsListResponseRowsItemTranslationsValue {
@@ -4613,6 +4672,13 @@ func (p *PostV1CatalogItemsListResponseRowsItem) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsListResponseRowsItem) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsListResponseRowsItemFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsListResponseRowsItemFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;
@@ -5813,10 +5879,11 @@ var (
 	postV1CatalogItemsUpdateResponseFieldDescription             = big.NewInt(1 << 16)
 	postV1CatalogItemsUpdateResponseFieldGroupID                 = big.NewInt(1 << 17)
 	postV1CatalogItemsUpdateResponseFieldAttributes              = big.NewInt(1 << 18)
-	postV1CatalogItemsUpdateResponseFieldTranslations            = big.NewInt(1 << 19)
-	postV1CatalogItemsUpdateResponseFieldComponents              = big.NewInt(1 << 20)
-	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 21)
-	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsUpdateResponseFieldDocumentRef             = big.NewInt(1 << 19)
+	postV1CatalogItemsUpdateResponseFieldTranslations            = big.NewInt(1 << 20)
+	postV1CatalogItemsUpdateResponseFieldComponents              = big.NewInt(1 << 21)
+	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 22)
+	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 23)
 )
 
 type PostV1CatalogItemsUpdateResponse struct {
@@ -5839,6 +5906,7 @@ type PostV1CatalogItemsUpdateResponse struct {
 	Description             *string                                                       `json:"description,omitempty" url:"description,omitempty"`
 	GroupID                 *string                                                       `json:"groupId,omitempty" url:"groupId,omitempty"`
 	Attributes              map[string]*string                                            `json:"attributes,omitempty" url:"attributes,omitempty"`
+	DocumentRef             *string                                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsUpdateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsUpdateResponseComponentsItem             `json:"components" url:"components"`
 	CreatedAt               string                                                        `json:"createdAt" url:"createdAt"`
@@ -5982,6 +6050,13 @@ func (p *PostV1CatalogItemsUpdateResponse) GetAttributes() map[string]*string {
 		return nil
 	}
 	return p.Attributes
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1CatalogItemsUpdateResponse) GetTranslations() map[string]*PostV1CatalogItemsUpdateResponseTranslationsValue {
@@ -6157,6 +6232,13 @@ func (p *PostV1CatalogItemsUpdateResponse) SetGroupID(groupID *string) {
 func (p *PostV1CatalogItemsUpdateResponse) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsUpdateResponseFieldAttributes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CatalogItemsUpdateResponseFieldDocumentRef)
 }
 
 // SetTranslations sets the Translations field and marks it as non-optional;

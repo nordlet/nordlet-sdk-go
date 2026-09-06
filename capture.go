@@ -1868,9 +1868,10 @@ var (
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                = big.NewInt(1 << 17)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt            = big.NewInt(1 << 19)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                = big.NewInt(1 << 20)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                = big.NewInt(1 << 21)
 )
 
 type PostV1CaptureDocumentsConfirmResponseInvoice struct {
@@ -1892,6 +1893,7 @@ type PostV1CaptureDocumentsConfirmResponseInvoice struct {
 	CreditedInvoiceID    *string                                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                                   `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                                    `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                                    `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem  `json:"lines" url:"lines"`
@@ -2027,6 +2029,13 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetCreatedAt() string {
@@ -2188,6 +2197,13 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPurchaseOrderID(purcha
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

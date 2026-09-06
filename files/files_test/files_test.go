@@ -90,7 +90,6 @@ func TestFilesPostV1FilesUploadWithWireMock(
 	)
 	request := &nordlet.PostV1FilesUploadRequest{
 		Entity:   "entity",
-		EntityID: "entityId",
 		FileName: "fileName",
 		MimeType: "mimeType",
 		Content:  "content",

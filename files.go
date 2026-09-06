@@ -183,10 +183,10 @@ var (
 )
 
 type PostV1FilesUploadRequest struct {
-	Entity   string `json:"entity" url:"-"`
-	EntityID string `json:"entityId" url:"-"`
-	FileName string `json:"fileName" url:"-"`
-	MimeType string `json:"mimeType" url:"-"`
+	Entity   string  `json:"entity" url:"-"`
+	EntityID *string `json:"entityId,omitempty" url:"-"`
+	FileName string  `json:"fileName" url:"-"`
+	MimeType string  `json:"mimeType" url:"-"`
 	// Base64-encoded file content
 	Content string `json:"content" url:"-"`
 
@@ -210,7 +210,7 @@ func (p *PostV1FilesUploadRequest) SetEntity(entity string) {
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadRequest) SetEntityID(entityID string) {
+func (p *PostV1FilesUploadRequest) SetEntityID(entityID *string) {
 	p.EntityID = entityID
 	p.require(postV1FilesUploadRequestFieldEntityID)
 }
@@ -342,27 +342,29 @@ func (p *PostV1FilesDeleteResponse) String() string {
 }
 
 var (
-	postV1FilesGetResponseFieldID        = big.NewInt(1 << 0)
-	postV1FilesGetResponseFieldEntity    = big.NewInt(1 << 1)
-	postV1FilesGetResponseFieldEntityID  = big.NewInt(1 << 2)
-	postV1FilesGetResponseFieldFileName  = big.NewInt(1 << 3)
-	postV1FilesGetResponseFieldMimeType  = big.NewInt(1 << 4)
-	postV1FilesGetResponseFieldSizeBytes = big.NewInt(1 << 5)
-	postV1FilesGetResponseFieldSha256    = big.NewInt(1 << 6)
-	postV1FilesGetResponseFieldCreatedAt = big.NewInt(1 << 7)
-	postV1FilesGetResponseFieldContent   = big.NewInt(1 << 8)
+	postV1FilesGetResponseFieldID         = big.NewInt(1 << 0)
+	postV1FilesGetResponseFieldEntity     = big.NewInt(1 << 1)
+	postV1FilesGetResponseFieldEntityID   = big.NewInt(1 << 2)
+	postV1FilesGetResponseFieldFileName   = big.NewInt(1 << 3)
+	postV1FilesGetResponseFieldMimeType   = big.NewInt(1 << 4)
+	postV1FilesGetResponseFieldSizeBytes  = big.NewInt(1 << 5)
+	postV1FilesGetResponseFieldSha256     = big.NewInt(1 << 6)
+	postV1FilesGetResponseFieldStorageKey = big.NewInt(1 << 7)
+	postV1FilesGetResponseFieldCreatedAt  = big.NewInt(1 << 8)
+	postV1FilesGetResponseFieldContent    = big.NewInt(1 << 9)
 )
 
 type PostV1FilesGetResponse struct {
-	ID        string `json:"id" url:"id"`
-	Entity    string `json:"entity" url:"entity"`
-	EntityID  string `json:"entityId" url:"entityId"`
-	FileName  string `json:"fileName" url:"fileName"`
-	MimeType  string `json:"mimeType" url:"mimeType"`
-	SizeBytes int64  `json:"sizeBytes" url:"sizeBytes"`
-	Sha256    string `json:"sha256" url:"sha256"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
-	Content   string `json:"content" url:"content"`
+	ID         string  `json:"id" url:"id"`
+	Entity     string  `json:"entity" url:"entity"`
+	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string  `json:"fileName" url:"fileName"`
+	MimeType   string  `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string  `json:"sha256" url:"sha256"`
+	StorageKey string  `json:"storageKey" url:"storageKey"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+	Content    string  `json:"content" url:"content"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -385,9 +387,9 @@ func (p *PostV1FilesGetResponse) GetEntity() string {
 	return p.Entity
 }
 
-func (p *PostV1FilesGetResponse) GetEntityID() string {
+func (p *PostV1FilesGetResponse) GetEntityID() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.EntityID
 }
@@ -418,6 +420,13 @@ func (p *PostV1FilesGetResponse) GetSha256() string {
 		return ""
 	}
 	return p.Sha256
+}
+
+func (p *PostV1FilesGetResponse) GetStorageKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.StorageKey
 }
 
 func (p *PostV1FilesGetResponse) GetCreatedAt() string {
@@ -464,7 +473,7 @@ func (p *PostV1FilesGetResponse) SetEntity(entity string) {
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesGetResponse) SetEntityID(entityID string) {
+func (p *PostV1FilesGetResponse) SetEntityID(entityID *string) {
 	p.EntityID = entityID
 	p.require(postV1FilesGetResponseFieldEntityID)
 }
@@ -495,6 +504,13 @@ func (p *PostV1FilesGetResponse) SetSizeBytes(sizeBytes int64) {
 func (p *PostV1FilesGetResponse) SetSha256(sha256 string) {
 	p.Sha256 = sha256
 	p.require(postV1FilesGetResponseFieldSha256)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FilesGetResponse) SetStorageKey(storageKey string) {
+	p.StorageKey = storageKey
+	p.require(postV1FilesGetResponseFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1124,25 +1140,27 @@ func (p *PostV1FilesListResponse) String() string {
 }
 
 var (
-	postV1FilesListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1FilesListResponseRowsItemFieldEntity    = big.NewInt(1 << 1)
-	postV1FilesListResponseRowsItemFieldEntityID  = big.NewInt(1 << 2)
-	postV1FilesListResponseRowsItemFieldFileName  = big.NewInt(1 << 3)
-	postV1FilesListResponseRowsItemFieldMimeType  = big.NewInt(1 << 4)
-	postV1FilesListResponseRowsItemFieldSizeBytes = big.NewInt(1 << 5)
-	postV1FilesListResponseRowsItemFieldSha256    = big.NewInt(1 << 6)
-	postV1FilesListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 7)
+	postV1FilesListResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	postV1FilesListResponseRowsItemFieldEntity     = big.NewInt(1 << 1)
+	postV1FilesListResponseRowsItemFieldEntityID   = big.NewInt(1 << 2)
+	postV1FilesListResponseRowsItemFieldFileName   = big.NewInt(1 << 3)
+	postV1FilesListResponseRowsItemFieldMimeType   = big.NewInt(1 << 4)
+	postV1FilesListResponseRowsItemFieldSizeBytes  = big.NewInt(1 << 5)
+	postV1FilesListResponseRowsItemFieldSha256     = big.NewInt(1 << 6)
+	postV1FilesListResponseRowsItemFieldStorageKey = big.NewInt(1 << 7)
+	postV1FilesListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
 )
 
 type PostV1FilesListResponseRowsItem struct {
-	ID        string `json:"id" url:"id"`
-	Entity    string `json:"entity" url:"entity"`
-	EntityID  string `json:"entityId" url:"entityId"`
-	FileName  string `json:"fileName" url:"fileName"`
-	MimeType  string `json:"mimeType" url:"mimeType"`
-	SizeBytes int64  `json:"sizeBytes" url:"sizeBytes"`
-	Sha256    string `json:"sha256" url:"sha256"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
+	ID         string  `json:"id" url:"id"`
+	Entity     string  `json:"entity" url:"entity"`
+	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string  `json:"fileName" url:"fileName"`
+	MimeType   string  `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string  `json:"sha256" url:"sha256"`
+	StorageKey string  `json:"storageKey" url:"storageKey"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1165,9 +1183,9 @@ func (p *PostV1FilesListResponseRowsItem) GetEntity() string {
 	return p.Entity
 }
 
-func (p *PostV1FilesListResponseRowsItem) GetEntityID() string {
+func (p *PostV1FilesListResponseRowsItem) GetEntityID() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.EntityID
 }
@@ -1198,6 +1216,13 @@ func (p *PostV1FilesListResponseRowsItem) GetSha256() string {
 		return ""
 	}
 	return p.Sha256
+}
+
+func (p *PostV1FilesListResponseRowsItem) GetStorageKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.StorageKey
 }
 
 func (p *PostV1FilesListResponseRowsItem) GetCreatedAt() string {
@@ -1237,7 +1262,7 @@ func (p *PostV1FilesListResponseRowsItem) SetEntity(entity string) {
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesListResponseRowsItem) SetEntityID(entityID string) {
+func (p *PostV1FilesListResponseRowsItem) SetEntityID(entityID *string) {
 	p.EntityID = entityID
 	p.require(postV1FilesListResponseRowsItemFieldEntityID)
 }
@@ -1268,6 +1293,13 @@ func (p *PostV1FilesListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
 func (p *PostV1FilesListResponseRowsItem) SetSha256(sha256 string) {
 	p.Sha256 = sha256
 	p.require(postV1FilesListResponseRowsItemFieldSha256)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FilesListResponseRowsItem) SetStorageKey(storageKey string) {
+	p.StorageKey = storageKey
+	p.require(postV1FilesListResponseRowsItemFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1320,25 +1352,27 @@ func (p *PostV1FilesListResponseRowsItem) String() string {
 }
 
 var (
-	postV1FilesUploadResponseFieldID        = big.NewInt(1 << 0)
-	postV1FilesUploadResponseFieldEntity    = big.NewInt(1 << 1)
-	postV1FilesUploadResponseFieldEntityID  = big.NewInt(1 << 2)
-	postV1FilesUploadResponseFieldFileName  = big.NewInt(1 << 3)
-	postV1FilesUploadResponseFieldMimeType  = big.NewInt(1 << 4)
-	postV1FilesUploadResponseFieldSizeBytes = big.NewInt(1 << 5)
-	postV1FilesUploadResponseFieldSha256    = big.NewInt(1 << 6)
-	postV1FilesUploadResponseFieldCreatedAt = big.NewInt(1 << 7)
+	postV1FilesUploadResponseFieldID         = big.NewInt(1 << 0)
+	postV1FilesUploadResponseFieldEntity     = big.NewInt(1 << 1)
+	postV1FilesUploadResponseFieldEntityID   = big.NewInt(1 << 2)
+	postV1FilesUploadResponseFieldFileName   = big.NewInt(1 << 3)
+	postV1FilesUploadResponseFieldMimeType   = big.NewInt(1 << 4)
+	postV1FilesUploadResponseFieldSizeBytes  = big.NewInt(1 << 5)
+	postV1FilesUploadResponseFieldSha256     = big.NewInt(1 << 6)
+	postV1FilesUploadResponseFieldStorageKey = big.NewInt(1 << 7)
+	postV1FilesUploadResponseFieldCreatedAt  = big.NewInt(1 << 8)
 )
 
 type PostV1FilesUploadResponse struct {
-	ID        string `json:"id" url:"id"`
-	Entity    string `json:"entity" url:"entity"`
-	EntityID  string `json:"entityId" url:"entityId"`
-	FileName  string `json:"fileName" url:"fileName"`
-	MimeType  string `json:"mimeType" url:"mimeType"`
-	SizeBytes int64  `json:"sizeBytes" url:"sizeBytes"`
-	Sha256    string `json:"sha256" url:"sha256"`
-	CreatedAt string `json:"createdAt" url:"createdAt"`
+	ID         string  `json:"id" url:"id"`
+	Entity     string  `json:"entity" url:"entity"`
+	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string  `json:"fileName" url:"fileName"`
+	MimeType   string  `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string  `json:"sha256" url:"sha256"`
+	StorageKey string  `json:"storageKey" url:"storageKey"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1361,9 +1395,9 @@ func (p *PostV1FilesUploadResponse) GetEntity() string {
 	return p.Entity
 }
 
-func (p *PostV1FilesUploadResponse) GetEntityID() string {
+func (p *PostV1FilesUploadResponse) GetEntityID() *string {
 	if p == nil {
-		return ""
+		return nil
 	}
 	return p.EntityID
 }
@@ -1394,6 +1428,13 @@ func (p *PostV1FilesUploadResponse) GetSha256() string {
 		return ""
 	}
 	return p.Sha256
+}
+
+func (p *PostV1FilesUploadResponse) GetStorageKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.StorageKey
 }
 
 func (p *PostV1FilesUploadResponse) GetCreatedAt() string {
@@ -1433,7 +1474,7 @@ func (p *PostV1FilesUploadResponse) SetEntity(entity string) {
 
 // SetEntityID sets the EntityID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1FilesUploadResponse) SetEntityID(entityID string) {
+func (p *PostV1FilesUploadResponse) SetEntityID(entityID *string) {
 	p.EntityID = entityID
 	p.require(postV1FilesUploadResponseFieldEntityID)
 }
@@ -1464,6 +1505,13 @@ func (p *PostV1FilesUploadResponse) SetSizeBytes(sizeBytes int64) {
 func (p *PostV1FilesUploadResponse) SetSha256(sha256 string) {
 	p.Sha256 = sha256
 	p.require(postV1FilesUploadResponseFieldSha256)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FilesUploadResponse) SetStorageKey(storageKey string) {
+	p.StorageKey = storageKey
+	p.require(postV1FilesUploadResponseFieldStorageKey)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

@@ -101,6 +101,188 @@ func (p *PostV1BankFeedsConnectionsStartRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1BankFeedsAccountsConfigureRequestFieldID               = big.NewInt(1 << 0)
+	postV1BankFeedsAccountsConfigureRequestFieldImportTemplateID = big.NewInt(1 << 1)
+	postV1BankFeedsAccountsConfigureRequestFieldSyncSchedule     = big.NewInt(1 << 2)
+)
+
+type PostV1BankFeedsAccountsConfigureRequest struct {
+	ID               string                                               `json:"id" url:"-"`
+	ImportTemplateID *string                                              `json:"importTemplateId,omitempty" url:"-"`
+	SyncSchedule     *PostV1BankFeedsAccountsConfigureRequestSyncSchedule `json:"syncSchedule,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankFeedsAccountsConfigureRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankFeedsAccountsConfigureRequestFieldID)
+}
+
+// SetImportTemplateID sets the ImportTemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureRequest) SetImportTemplateID(importTemplateID *string) {
+	p.ImportTemplateID = importTemplateID
+	p.require(postV1BankFeedsAccountsConfigureRequestFieldImportTemplateID)
+}
+
+// SetSyncSchedule sets the SyncSchedule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureRequest) SetSyncSchedule(syncSchedule *PostV1BankFeedsAccountsConfigureRequestSyncSchedule) {
+	p.SyncSchedule = syncSchedule
+	p.require(postV1BankFeedsAccountsConfigureRequestFieldSyncSchedule)
+}
+
+func (p *PostV1BankFeedsAccountsConfigureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankFeedsAccountsConfigureRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankFeedsAccountsConfigureRequest(body)
+	return nil
+}
+
+func (p *PostV1BankFeedsAccountsConfigureRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankFeedsAccountsConfigureRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankImportTemplatesCreateRequestFieldName                  = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateRequestFieldType                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateRequestFieldFields                = big.NewInt(1 << 2)
+	postV1BankImportTemplatesCreateRequestFieldMetaFields            = big.NewInt(1 << 3)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceMetaField      = big.NewInt(1 << 4)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceVatRatePercent = big.NewInt(1 << 5)
+	postV1BankImportTemplatesCreateRequestFieldCompanyMetaField      = big.NewInt(1 << 6)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceItemID         = big.NewInt(1 << 7)
+	postV1BankImportTemplatesCreateRequestFieldAdvanceInvoices       = big.NewInt(1 << 8)
+)
+
+type PostV1BankImportTemplatesCreateRequest struct {
+	Name                  string                                              `json:"name" url:"-"`
+	Type                  PostV1BankImportTemplatesCreateRequestType          `json:"type" url:"-"`
+	Fields                []*PostV1BankImportTemplatesCreateRequestFieldsItem `json:"fields,omitempty" url:"-"`
+	MetaFields            []string                                            `json:"metaFields,omitempty" url:"-"`
+	InvoiceMetaField      *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
+	InvoiceVatRatePercent *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	CompanyMetaField      *string                                             `json:"companyMetaField,omitempty" url:"-"`
+	InvoiceItemID         *string                                             `json:"invoiceItemId,omitempty" url:"-"`
+	AdvanceInvoices       *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankImportTemplatesCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesCreateRequestFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetType(type_ PostV1BankImportTemplatesCreateRequestType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesCreateRequestFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetFields(fields []*PostV1BankImportTemplatesCreateRequestFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesCreateRequestFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesCreateRequestFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesCreateRequestFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesCreateRequestFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesCreateRequestFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesCreateRequestFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetAdvanceInvoices(advanceInvoices *bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesCreateRequestFieldAdvanceInvoices)
+}
+
+func (p *PostV1BankImportTemplatesCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1BankFeedsConnectionsCompleteRequestFieldReference = big.NewInt(1 << 0)
 	postV1BankFeedsConnectionsCompleteRequestFieldCode      = big.NewInt(1 << 1)
 )
@@ -279,6 +461,7 @@ var (
 	postV1BankAccountsCreateRequestFieldIban        = big.NewInt(1 << 1)
 	postV1BankAccountsCreateRequestFieldCurrency    = big.NewInt(1 << 2)
 	postV1BankAccountsCreateRequestFieldAccountCode = big.NewInt(1 << 3)
+	postV1BankAccountsCreateRequestFieldDocumentRef = big.NewInt(1 << 4)
 )
 
 type PostV1BankAccountsCreateRequest struct {
@@ -286,6 +469,7 @@ type PostV1BankAccountsCreateRequest struct {
 	Iban        *string `json:"iban,omitempty" url:"-"`
 	Currency    *string `json:"currency,omitempty" url:"-"`
 	AccountCode *string `json:"accountCode,omitempty" url:"-"`
+	DocumentRef *string `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -324,6 +508,13 @@ func (p *PostV1BankAccountsCreateRequest) SetCurrency(currency *string) {
 func (p *PostV1BankAccountsCreateRequest) SetAccountCode(accountCode *string) {
 	p.AccountCode = accountCode
 	p.require(postV1BankAccountsCreateRequestFieldAccountCode)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankAccountsCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1BankAccountsCreateRequestFieldDocumentRef)
 }
 
 func (p *PostV1BankAccountsCreateRequest) UnmarshalJSON(data []byte) error {
@@ -676,6 +867,298 @@ func (p *PostV1BankFeedsConnectionsListRequest) UnmarshalJSON(data []byte) error
 
 func (p *PostV1BankFeedsConnectionsListRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1BankFeedsConnectionsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankImportTemplatesDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1BankImportTemplatesDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankImportTemplatesDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesDeleteRequestFieldID)
+}
+
+func (p *PostV1BankImportTemplatesDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankImportTemplatesGetRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1BankImportTemplatesGetRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankImportTemplatesGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesGetRequestFieldID)
+}
+
+func (p *PostV1BankImportTemplatesGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesGetRequest(body)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankImportTemplatesListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1BankImportTemplatesListRequestFieldFilter   = big.NewInt(1 << 3)
+)
+
+type PostV1BankImportTemplatesListRequest struct {
+	Page     *int64                                            `json:"page,omitempty" url:"-"`
+	PageSize *int64                                            `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1BankImportTemplatesListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1BankImportTemplatesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankImportTemplatesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1BankImportTemplatesListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1BankImportTemplatesListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequest) SetSort(sort []*PostV1BankImportTemplatesListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1BankImportTemplatesListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequest) SetFilter(filter []*PostV1BankImportTemplatesListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1BankImportTemplatesListRequestFieldFilter)
+}
+
+func (p *PostV1BankImportTemplatesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListRequest(body)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankImportTemplatesUpdateRequestFieldName                  = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateRequestFieldType                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateRequestFieldFields                = big.NewInt(1 << 2)
+	postV1BankImportTemplatesUpdateRequestFieldMetaFields            = big.NewInt(1 << 3)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceMetaField      = big.NewInt(1 << 4)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceVatRatePercent = big.NewInt(1 << 5)
+	postV1BankImportTemplatesUpdateRequestFieldCompanyMetaField      = big.NewInt(1 << 6)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceItemID         = big.NewInt(1 << 7)
+	postV1BankImportTemplatesUpdateRequestFieldAdvanceInvoices       = big.NewInt(1 << 8)
+	postV1BankImportTemplatesUpdateRequestFieldID                    = big.NewInt(1 << 9)
+)
+
+type PostV1BankImportTemplatesUpdateRequest struct {
+	Name                  *string                                             `json:"name,omitempty" url:"-"`
+	Type                  *PostV1BankImportTemplatesUpdateRequestType         `json:"type,omitempty" url:"-"`
+	Fields                []*PostV1BankImportTemplatesUpdateRequestFieldsItem `json:"fields,omitempty" url:"-"`
+	MetaFields            []string                                            `json:"metaFields,omitempty" url:"-"`
+	InvoiceMetaField      *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
+	InvoiceVatRatePercent *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	CompanyMetaField      *string                                             `json:"companyMetaField,omitempty" url:"-"`
+	InvoiceItemID         *string                                             `json:"invoiceItemId,omitempty" url:"-"`
+	AdvanceInvoices       *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
+	ID                    string                                              `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesUpdateRequestFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetType(type_ *PostV1BankImportTemplatesUpdateRequestType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesUpdateRequestFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetFields(fields []*PostV1BankImportTemplatesUpdateRequestFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesUpdateRequestFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesUpdateRequestFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesUpdateRequestFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesUpdateRequestFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesUpdateRequestFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesUpdateRequestFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetAdvanceInvoices(advanceInvoices *bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesUpdateRequestFieldAdvanceInvoices)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesUpdateRequestFieldID)
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesUpdateRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1409,12 +1892,14 @@ func (p *PostV1BankSettlementsPostRequest) MarshalJSON() ([]byte, error) {
 
 var (
 	postV1BankStatementsImportRequestFieldBankAccountID = big.NewInt(1 << 0)
-	postV1BankStatementsImportRequestFieldFormat        = big.NewInt(1 << 1)
-	postV1BankStatementsImportRequestFieldContent       = big.NewInt(1 << 2)
+	postV1BankStatementsImportRequestFieldTemplateID    = big.NewInt(1 << 1)
+	postV1BankStatementsImportRequestFieldFormat        = big.NewInt(1 << 2)
+	postV1BankStatementsImportRequestFieldContent       = big.NewInt(1 << 3)
 )
 
 type PostV1BankStatementsImportRequest struct {
 	BankAccountID string                                   `json:"bankAccountId" url:"-"`
+	TemplateID    *string                                  `json:"templateId,omitempty" url:"-"`
 	Format        *PostV1BankStatementsImportRequestFormat `json:"format,omitempty" url:"-"`
 	Content       string                                   `json:"content" url:"-"`
 
@@ -1434,6 +1919,13 @@ func (p *PostV1BankStatementsImportRequest) require(field *big.Int) {
 func (p *PostV1BankStatementsImportRequest) SetBankAccountID(bankAccountID string) {
 	p.BankAccountID = bankAccountID
 	p.require(postV1BankStatementsImportRequestFieldBankAccountID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportRequest) SetTemplateID(templateID *string) {
+	p.TemplateID = templateID
+	p.require(postV1BankStatementsImportRequestFieldTemplateID)
 }
 
 // SetFormat sets the Format field and marks it as non-optional;
@@ -1654,6 +2146,97 @@ func (p *PostV1BankTransactionsMatchRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1BankTransactionsMatchRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1BankTransactionsMatchRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankTransactionsRecordRequestFieldBankAccountID = big.NewInt(1 << 0)
+	postV1BankTransactionsRecordRequestFieldDate          = big.NewInt(1 << 1)
+	postV1BankTransactionsRecordRequestFieldAmount        = big.NewInt(1 << 2)
+	postV1BankTransactionsRecordRequestFieldDescription   = big.NewInt(1 << 3)
+	postV1BankTransactionsRecordRequestFieldDocumentType  = big.NewInt(1 << 4)
+	postV1BankTransactionsRecordRequestFieldDocumentID    = big.NewInt(1 << 5)
+)
+
+type PostV1BankTransactionsRecordRequest struct {
+	BankAccountID string                                          `json:"bankAccountId" url:"-"`
+	Date          string                                          `json:"date" url:"-"`
+	Amount        string                                          `json:"amount" url:"-"`
+	Description   *string                                         `json:"description,omitempty" url:"-"`
+	DocumentType  PostV1BankTransactionsRecordRequestDocumentType `json:"documentType" url:"-"`
+	DocumentID    string                                          `json:"documentId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankTransactionsRecordRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetBankAccountID(bankAccountID string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankTransactionsRecordRequestFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetDate(date string) {
+	p.Date = date
+	p.require(postV1BankTransactionsRecordRequestFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1BankTransactionsRecordRequestFieldAmount)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1BankTransactionsRecordRequestFieldDescription)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetDocumentType(documentType PostV1BankTransactionsRecordRequestDocumentType) {
+	p.DocumentType = documentType
+	p.require(postV1BankTransactionsRecordRequestFieldDocumentType)
+}
+
+// SetDocumentID sets the DocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordRequest) SetDocumentID(documentID string) {
+	p.DocumentID = documentID
+	p.require(postV1BankTransactionsRecordRequestFieldDocumentID)
+}
+
+func (p *PostV1BankTransactionsRecordRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankTransactionsRecordRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankTransactionsRecordRequest(body)
+	return nil
+}
+
+func (p *PostV1BankTransactionsRecordRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankTransactionsRecordRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -3095,6 +3678,322 @@ func (p *PostV1BankDirectDebitsExportResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1BankFeedsAccountsConfigureRequestSyncSchedule string
+
+const (
+	PostV1BankFeedsAccountsConfigureRequestSyncScheduleManual  PostV1BankFeedsAccountsConfigureRequestSyncSchedule = "manual"
+	PostV1BankFeedsAccountsConfigureRequestSyncScheduleDaily   PostV1BankFeedsAccountsConfigureRequestSyncSchedule = "daily"
+	PostV1BankFeedsAccountsConfigureRequestSyncScheduleWeekly  PostV1BankFeedsAccountsConfigureRequestSyncSchedule = "weekly"
+	PostV1BankFeedsAccountsConfigureRequestSyncScheduleMonthly PostV1BankFeedsAccountsConfigureRequestSyncSchedule = "monthly"
+)
+
+func NewPostV1BankFeedsAccountsConfigureRequestSyncScheduleFromString(s string) (PostV1BankFeedsAccountsConfigureRequestSyncSchedule, error) {
+	switch s {
+	case "manual":
+		return PostV1BankFeedsAccountsConfigureRequestSyncScheduleManual, nil
+	case "daily":
+		return PostV1BankFeedsAccountsConfigureRequestSyncScheduleDaily, nil
+	case "weekly":
+		return PostV1BankFeedsAccountsConfigureRequestSyncScheduleWeekly, nil
+	case "monthly":
+		return PostV1BankFeedsAccountsConfigureRequestSyncScheduleMonthly, nil
+	}
+	var t PostV1BankFeedsAccountsConfigureRequestSyncSchedule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankFeedsAccountsConfigureRequestSyncSchedule) Ptr() *PostV1BankFeedsAccountsConfigureRequestSyncSchedule {
+	return &p
+}
+
+var (
+	postV1BankFeedsAccountsConfigureResponseFieldID               = big.NewInt(1 << 0)
+	postV1BankFeedsAccountsConfigureResponseFieldConnectionID     = big.NewInt(1 << 1)
+	postV1BankFeedsAccountsConfigureResponseFieldBankAccountID    = big.NewInt(1 << 2)
+	postV1BankFeedsAccountsConfigureResponseFieldImportTemplateID = big.NewInt(1 << 3)
+	postV1BankFeedsAccountsConfigureResponseFieldSyncSchedule     = big.NewInt(1 << 4)
+	postV1BankFeedsAccountsConfigureResponseFieldExternalID       = big.NewInt(1 << 5)
+	postV1BankFeedsAccountsConfigureResponseFieldIban             = big.NewInt(1 << 6)
+	postV1BankFeedsAccountsConfigureResponseFieldCurrency         = big.NewInt(1 << 7)
+	postV1BankFeedsAccountsConfigureResponseFieldName             = big.NewInt(1 << 8)
+	postV1BankFeedsAccountsConfigureResponseFieldProduct          = big.NewInt(1 << 9)
+	postV1BankFeedsAccountsConfigureResponseFieldSyncFrom         = big.NewInt(1 << 10)
+	postV1BankFeedsAccountsConfigureResponseFieldLastSyncedAt     = big.NewInt(1 << 11)
+)
+
+type PostV1BankFeedsAccountsConfigureResponse struct {
+	ID               string                                               `json:"id" url:"id"`
+	ConnectionID     string                                               `json:"connectionId" url:"connectionId"`
+	BankAccountID    *string                                              `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	ImportTemplateID *string                                              `json:"importTemplateId,omitempty" url:"importTemplateId,omitempty"`
+	SyncSchedule     PostV1BankFeedsAccountsConfigureResponseSyncSchedule `json:"syncSchedule" url:"syncSchedule"`
+	ExternalID       string                                               `json:"externalId" url:"externalId"`
+	Iban             *string                                              `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency         string                                               `json:"currency" url:"currency"`
+	Name             *string                                              `json:"name,omitempty" url:"name,omitempty"`
+	Product          *string                                              `json:"product,omitempty" url:"product,omitempty"`
+	SyncFrom         *string                                              `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
+	LastSyncedAt     *string                                              `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetConnectionID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ConnectionID
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetImportTemplateID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ImportTemplateID
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetSyncSchedule() PostV1BankFeedsAccountsConfigureResponseSyncSchedule {
+	if p == nil {
+		return ""
+	}
+	return p.SyncSchedule
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetExternalID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetIban() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Iban
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Name
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetProduct() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Product
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetSyncFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SyncFrom
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetLastSyncedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastSyncedAt
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldID)
+}
+
+// SetConnectionID sets the ConnectionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetConnectionID(connectionID string) {
+	p.ConnectionID = connectionID
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldConnectionID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldBankAccountID)
+}
+
+// SetImportTemplateID sets the ImportTemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetImportTemplateID(importTemplateID *string) {
+	p.ImportTemplateID = importTemplateID
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldImportTemplateID)
+}
+
+// SetSyncSchedule sets the SyncSchedule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetSyncSchedule(syncSchedule PostV1BankFeedsAccountsConfigureResponseSyncSchedule) {
+	p.SyncSchedule = syncSchedule
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldSyncSchedule)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetExternalID(externalID string) {
+	p.ExternalID = externalID
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldExternalID)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetIban(iban *string) {
+	p.Iban = iban
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldIban)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldCurrency)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetName(name *string) {
+	p.Name = name
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldName)
+}
+
+// SetProduct sets the Product field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetProduct(product *string) {
+	p.Product = product
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldProduct)
+}
+
+// SetSyncFrom sets the SyncFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetSyncFrom(syncFrom *string) {
+	p.SyncFrom = syncFrom
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldSyncFrom)
+}
+
+// SetLastSyncedAt sets the LastSyncedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsConfigureResponse) SetLastSyncedAt(lastSyncedAt *string) {
+	p.LastSyncedAt = lastSyncedAt
+	p.require(postV1BankFeedsAccountsConfigureResponseFieldLastSyncedAt)
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankFeedsAccountsConfigureResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankFeedsAccountsConfigureResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankFeedsAccountsConfigureResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankFeedsAccountsConfigureResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankFeedsAccountsConfigureResponseSyncSchedule string
+
+const (
+	PostV1BankFeedsAccountsConfigureResponseSyncScheduleManual  PostV1BankFeedsAccountsConfigureResponseSyncSchedule = "manual"
+	PostV1BankFeedsAccountsConfigureResponseSyncScheduleDaily   PostV1BankFeedsAccountsConfigureResponseSyncSchedule = "daily"
+	PostV1BankFeedsAccountsConfigureResponseSyncScheduleWeekly  PostV1BankFeedsAccountsConfigureResponseSyncSchedule = "weekly"
+	PostV1BankFeedsAccountsConfigureResponseSyncScheduleMonthly PostV1BankFeedsAccountsConfigureResponseSyncSchedule = "monthly"
+)
+
+func NewPostV1BankFeedsAccountsConfigureResponseSyncScheduleFromString(s string) (PostV1BankFeedsAccountsConfigureResponseSyncSchedule, error) {
+	switch s {
+	case "manual":
+		return PostV1BankFeedsAccountsConfigureResponseSyncScheduleManual, nil
+	case "daily":
+		return PostV1BankFeedsAccountsConfigureResponseSyncScheduleDaily, nil
+	case "weekly":
+		return PostV1BankFeedsAccountsConfigureResponseSyncScheduleWeekly, nil
+	case "monthly":
+		return PostV1BankFeedsAccountsConfigureResponseSyncScheduleMonthly, nil
+	}
+	var t PostV1BankFeedsAccountsConfigureResponseSyncSchedule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankFeedsAccountsConfigureResponseSyncSchedule) Ptr() *PostV1BankFeedsAccountsConfigureResponseSyncSchedule {
+	return &p
+}
+
 var (
 	postV1BankFeedsAccountsLinkRequestCreateBankAccountFieldName        = big.NewInt(1 << 0)
 	postV1BankFeedsAccountsLinkRequestCreateBankAccountFieldAccountCode = big.NewInt(1 << 1)
@@ -3196,29 +4095,33 @@ func (p *PostV1BankFeedsAccountsLinkRequestCreateBankAccount) String() string {
 }
 
 var (
-	postV1BankFeedsAccountsLinkResponseFieldID            = big.NewInt(1 << 0)
-	postV1BankFeedsAccountsLinkResponseFieldConnectionID  = big.NewInt(1 << 1)
-	postV1BankFeedsAccountsLinkResponseFieldBankAccountID = big.NewInt(1 << 2)
-	postV1BankFeedsAccountsLinkResponseFieldExternalID    = big.NewInt(1 << 3)
-	postV1BankFeedsAccountsLinkResponseFieldIban          = big.NewInt(1 << 4)
-	postV1BankFeedsAccountsLinkResponseFieldCurrency      = big.NewInt(1 << 5)
-	postV1BankFeedsAccountsLinkResponseFieldName          = big.NewInt(1 << 6)
-	postV1BankFeedsAccountsLinkResponseFieldProduct       = big.NewInt(1 << 7)
-	postV1BankFeedsAccountsLinkResponseFieldSyncFrom      = big.NewInt(1 << 8)
-	postV1BankFeedsAccountsLinkResponseFieldLastSyncedAt  = big.NewInt(1 << 9)
+	postV1BankFeedsAccountsLinkResponseFieldID               = big.NewInt(1 << 0)
+	postV1BankFeedsAccountsLinkResponseFieldConnectionID     = big.NewInt(1 << 1)
+	postV1BankFeedsAccountsLinkResponseFieldBankAccountID    = big.NewInt(1 << 2)
+	postV1BankFeedsAccountsLinkResponseFieldImportTemplateID = big.NewInt(1 << 3)
+	postV1BankFeedsAccountsLinkResponseFieldSyncSchedule     = big.NewInt(1 << 4)
+	postV1BankFeedsAccountsLinkResponseFieldExternalID       = big.NewInt(1 << 5)
+	postV1BankFeedsAccountsLinkResponseFieldIban             = big.NewInt(1 << 6)
+	postV1BankFeedsAccountsLinkResponseFieldCurrency         = big.NewInt(1 << 7)
+	postV1BankFeedsAccountsLinkResponseFieldName             = big.NewInt(1 << 8)
+	postV1BankFeedsAccountsLinkResponseFieldProduct          = big.NewInt(1 << 9)
+	postV1BankFeedsAccountsLinkResponseFieldSyncFrom         = big.NewInt(1 << 10)
+	postV1BankFeedsAccountsLinkResponseFieldLastSyncedAt     = big.NewInt(1 << 11)
 )
 
 type PostV1BankFeedsAccountsLinkResponse struct {
-	ID            string  `json:"id" url:"id"`
-	ConnectionID  string  `json:"connectionId" url:"connectionId"`
-	BankAccountID *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	ExternalID    string  `json:"externalId" url:"externalId"`
-	Iban          *string `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency      string  `json:"currency" url:"currency"`
-	Name          *string `json:"name,omitempty" url:"name,omitempty"`
-	Product       *string `json:"product,omitempty" url:"product,omitempty"`
-	SyncFrom      *string `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
-	LastSyncedAt  *string `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
+	ID               string                                          `json:"id" url:"id"`
+	ConnectionID     string                                          `json:"connectionId" url:"connectionId"`
+	BankAccountID    *string                                         `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	ImportTemplateID *string                                         `json:"importTemplateId,omitempty" url:"importTemplateId,omitempty"`
+	SyncSchedule     PostV1BankFeedsAccountsLinkResponseSyncSchedule `json:"syncSchedule" url:"syncSchedule"`
+	ExternalID       string                                          `json:"externalId" url:"externalId"`
+	Iban             *string                                         `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency         string                                          `json:"currency" url:"currency"`
+	Name             *string                                         `json:"name,omitempty" url:"name,omitempty"`
+	Product          *string                                         `json:"product,omitempty" url:"product,omitempty"`
+	SyncFrom         *string                                         `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
+	LastSyncedAt     *string                                         `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3246,6 +4149,20 @@ func (p *PostV1BankFeedsAccountsLinkResponse) GetBankAccountID() *string {
 		return nil
 	}
 	return p.BankAccountID
+}
+
+func (p *PostV1BankFeedsAccountsLinkResponse) GetImportTemplateID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ImportTemplateID
+}
+
+func (p *PostV1BankFeedsAccountsLinkResponse) GetSyncSchedule() PostV1BankFeedsAccountsLinkResponseSyncSchedule {
+	if p == nil {
+		return ""
+	}
+	return p.SyncSchedule
 }
 
 func (p *PostV1BankFeedsAccountsLinkResponse) GetExternalID() string {
@@ -3330,6 +4247,20 @@ func (p *PostV1BankFeedsAccountsLinkResponse) SetConnectionID(connectionID strin
 func (p *PostV1BankFeedsAccountsLinkResponse) SetBankAccountID(bankAccountID *string) {
 	p.BankAccountID = bankAccountID
 	p.require(postV1BankFeedsAccountsLinkResponseFieldBankAccountID)
+}
+
+// SetImportTemplateID sets the ImportTemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsLinkResponse) SetImportTemplateID(importTemplateID *string) {
+	p.ImportTemplateID = importTemplateID
+	p.require(postV1BankFeedsAccountsLinkResponseFieldImportTemplateID)
+}
+
+// SetSyncSchedule sets the SyncSchedule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsAccountsLinkResponse) SetSyncSchedule(syncSchedule PostV1BankFeedsAccountsLinkResponseSyncSchedule) {
+	p.SyncSchedule = syncSchedule
+	p.require(postV1BankFeedsAccountsLinkResponseFieldSyncSchedule)
 }
 
 // SetExternalID sets the ExternalID field and marks it as non-optional;
@@ -3421,6 +4352,34 @@ func (p *PostV1BankFeedsAccountsLinkResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankFeedsAccountsLinkResponseSyncSchedule string
+
+const (
+	PostV1BankFeedsAccountsLinkResponseSyncScheduleManual  PostV1BankFeedsAccountsLinkResponseSyncSchedule = "manual"
+	PostV1BankFeedsAccountsLinkResponseSyncScheduleDaily   PostV1BankFeedsAccountsLinkResponseSyncSchedule = "daily"
+	PostV1BankFeedsAccountsLinkResponseSyncScheduleWeekly  PostV1BankFeedsAccountsLinkResponseSyncSchedule = "weekly"
+	PostV1BankFeedsAccountsLinkResponseSyncScheduleMonthly PostV1BankFeedsAccountsLinkResponseSyncSchedule = "monthly"
+)
+
+func NewPostV1BankFeedsAccountsLinkResponseSyncScheduleFromString(s string) (PostV1BankFeedsAccountsLinkResponseSyncSchedule, error) {
+	switch s {
+	case "manual":
+		return PostV1BankFeedsAccountsLinkResponseSyncScheduleManual, nil
+	case "daily":
+		return PostV1BankFeedsAccountsLinkResponseSyncScheduleDaily, nil
+	case "weekly":
+		return PostV1BankFeedsAccountsLinkResponseSyncScheduleWeekly, nil
+	case "monthly":
+		return PostV1BankFeedsAccountsLinkResponseSyncScheduleMonthly, nil
+	}
+	var t PostV1BankFeedsAccountsLinkResponseSyncSchedule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankFeedsAccountsLinkResponseSyncSchedule) Ptr() *PostV1BankFeedsAccountsLinkResponseSyncSchedule {
+	return &p
 }
 
 var (
@@ -3970,29 +4929,33 @@ func (p *PostV1BankFeedsConnectionsCompleteResponse) String() string {
 }
 
 var (
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldID            = big.NewInt(1 << 0)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldConnectionID  = big.NewInt(1 << 1)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldBankAccountID = big.NewInt(1 << 2)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldExternalID    = big.NewInt(1 << 3)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldIban          = big.NewInt(1 << 4)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldCurrency      = big.NewInt(1 << 5)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldName          = big.NewInt(1 << 6)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldProduct       = big.NewInt(1 << 7)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldSyncFrom      = big.NewInt(1 << 8)
-	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldLastSyncedAt  = big.NewInt(1 << 9)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldID               = big.NewInt(1 << 0)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldConnectionID     = big.NewInt(1 << 1)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldBankAccountID    = big.NewInt(1 << 2)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldImportTemplateID = big.NewInt(1 << 3)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldSyncSchedule     = big.NewInt(1 << 4)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldExternalID       = big.NewInt(1 << 5)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldIban             = big.NewInt(1 << 6)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldCurrency         = big.NewInt(1 << 7)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldName             = big.NewInt(1 << 8)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldProduct          = big.NewInt(1 << 9)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldSyncFrom         = big.NewInt(1 << 10)
+	postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldLastSyncedAt     = big.NewInt(1 << 11)
 )
 
 type PostV1BankFeedsConnectionsCompleteResponseAccountsItem struct {
-	ID            string  `json:"id" url:"id"`
-	ConnectionID  string  `json:"connectionId" url:"connectionId"`
-	BankAccountID *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	ExternalID    string  `json:"externalId" url:"externalId"`
-	Iban          *string `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency      string  `json:"currency" url:"currency"`
-	Name          *string `json:"name,omitempty" url:"name,omitempty"`
-	Product       *string `json:"product,omitempty" url:"product,omitempty"`
-	SyncFrom      *string `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
-	LastSyncedAt  *string `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
+	ID               string                                                             `json:"id" url:"id"`
+	ConnectionID     string                                                             `json:"connectionId" url:"connectionId"`
+	BankAccountID    *string                                                            `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	ImportTemplateID *string                                                            `json:"importTemplateId,omitempty" url:"importTemplateId,omitempty"`
+	SyncSchedule     PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule `json:"syncSchedule" url:"syncSchedule"`
+	ExternalID       string                                                             `json:"externalId" url:"externalId"`
+	Iban             *string                                                            `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency         string                                                             `json:"currency" url:"currency"`
+	Name             *string                                                            `json:"name,omitempty" url:"name,omitempty"`
+	Product          *string                                                            `json:"product,omitempty" url:"product,omitempty"`
+	SyncFrom         *string                                                            `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
+	LastSyncedAt     *string                                                            `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4020,6 +4983,20 @@ func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) GetBankAccountI
 		return nil
 	}
 	return p.BankAccountID
+}
+
+func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) GetImportTemplateID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ImportTemplateID
+}
+
+func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) GetSyncSchedule() PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule {
+	if p == nil {
+		return ""
+	}
+	return p.SyncSchedule
 }
 
 func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) GetExternalID() string {
@@ -4104,6 +5081,20 @@ func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) SetConnectionID
 func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) SetBankAccountID(bankAccountID *string) {
 	p.BankAccountID = bankAccountID
 	p.require(postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldBankAccountID)
+}
+
+// SetImportTemplateID sets the ImportTemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) SetImportTemplateID(importTemplateID *string) {
+	p.ImportTemplateID = importTemplateID
+	p.require(postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldImportTemplateID)
+}
+
+// SetSyncSchedule sets the SyncSchedule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) SetSyncSchedule(syncSchedule PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule) {
+	p.SyncSchedule = syncSchedule
+	p.require(postV1BankFeedsConnectionsCompleteResponseAccountsItemFieldSyncSchedule)
 }
 
 // SetExternalID sets the ExternalID field and marks it as non-optional;
@@ -4195,6 +5186,34 @@ func (p *PostV1BankFeedsConnectionsCompleteResponseAccountsItem) String() string
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule string
+
+const (
+	PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleManual  PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule = "manual"
+	PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleDaily   PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule = "daily"
+	PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleWeekly  PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule = "weekly"
+	PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleMonthly PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule = "monthly"
+)
+
+func NewPostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleFromString(s string) (PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule, error) {
+	switch s {
+	case "manual":
+		return PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleManual, nil
+	case "daily":
+		return PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleDaily, nil
+	case "weekly":
+		return PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleWeekly, nil
+	case "monthly":
+		return PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncScheduleMonthly, nil
+	}
+	var t PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule) Ptr() *PostV1BankFeedsConnectionsCompleteResponseAccountsItemSyncSchedule {
+	return &p
 }
 
 type PostV1BankFeedsConnectionsCompleteResponsePsuType string
@@ -4611,29 +5630,33 @@ func (p *PostV1BankFeedsConnectionsGetResponse) String() string {
 }
 
 var (
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldID            = big.NewInt(1 << 0)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldConnectionID  = big.NewInt(1 << 1)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldBankAccountID = big.NewInt(1 << 2)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldExternalID    = big.NewInt(1 << 3)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldIban          = big.NewInt(1 << 4)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldCurrency      = big.NewInt(1 << 5)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldName          = big.NewInt(1 << 6)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldProduct       = big.NewInt(1 << 7)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldSyncFrom      = big.NewInt(1 << 8)
-	postV1BankFeedsConnectionsGetResponseAccountsItemFieldLastSyncedAt  = big.NewInt(1 << 9)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldID               = big.NewInt(1 << 0)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldConnectionID     = big.NewInt(1 << 1)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldBankAccountID    = big.NewInt(1 << 2)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldImportTemplateID = big.NewInt(1 << 3)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldSyncSchedule     = big.NewInt(1 << 4)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldExternalID       = big.NewInt(1 << 5)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldIban             = big.NewInt(1 << 6)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldCurrency         = big.NewInt(1 << 7)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldName             = big.NewInt(1 << 8)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldProduct          = big.NewInt(1 << 9)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldSyncFrom         = big.NewInt(1 << 10)
+	postV1BankFeedsConnectionsGetResponseAccountsItemFieldLastSyncedAt     = big.NewInt(1 << 11)
 )
 
 type PostV1BankFeedsConnectionsGetResponseAccountsItem struct {
-	ID            string  `json:"id" url:"id"`
-	ConnectionID  string  `json:"connectionId" url:"connectionId"`
-	BankAccountID *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
-	ExternalID    string  `json:"externalId" url:"externalId"`
-	Iban          *string `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency      string  `json:"currency" url:"currency"`
-	Name          *string `json:"name,omitempty" url:"name,omitempty"`
-	Product       *string `json:"product,omitempty" url:"product,omitempty"`
-	SyncFrom      *string `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
-	LastSyncedAt  *string `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
+	ID               string                                                        `json:"id" url:"id"`
+	ConnectionID     string                                                        `json:"connectionId" url:"connectionId"`
+	BankAccountID    *string                                                       `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	ImportTemplateID *string                                                       `json:"importTemplateId,omitempty" url:"importTemplateId,omitempty"`
+	SyncSchedule     PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule `json:"syncSchedule" url:"syncSchedule"`
+	ExternalID       string                                                        `json:"externalId" url:"externalId"`
+	Iban             *string                                                       `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency         string                                                        `json:"currency" url:"currency"`
+	Name             *string                                                       `json:"name,omitempty" url:"name,omitempty"`
+	Product          *string                                                       `json:"product,omitempty" url:"product,omitempty"`
+	SyncFrom         *string                                                       `json:"syncFrom,omitempty" url:"syncFrom,omitempty"`
+	LastSyncedAt     *string                                                       `json:"lastSyncedAt,omitempty" url:"lastSyncedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4661,6 +5684,20 @@ func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) GetBankAccountID() *
 		return nil
 	}
 	return p.BankAccountID
+}
+
+func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) GetImportTemplateID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ImportTemplateID
+}
+
+func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) GetSyncSchedule() PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule {
+	if p == nil {
+		return ""
+	}
+	return p.SyncSchedule
 }
 
 func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) GetExternalID() string {
@@ -4745,6 +5782,20 @@ func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) SetConnectionID(conn
 func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) SetBankAccountID(bankAccountID *string) {
 	p.BankAccountID = bankAccountID
 	p.require(postV1BankFeedsConnectionsGetResponseAccountsItemFieldBankAccountID)
+}
+
+// SetImportTemplateID sets the ImportTemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) SetImportTemplateID(importTemplateID *string) {
+	p.ImportTemplateID = importTemplateID
+	p.require(postV1BankFeedsConnectionsGetResponseAccountsItemFieldImportTemplateID)
+}
+
+// SetSyncSchedule sets the SyncSchedule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) SetSyncSchedule(syncSchedule PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule) {
+	p.SyncSchedule = syncSchedule
+	p.require(postV1BankFeedsConnectionsGetResponseAccountsItemFieldSyncSchedule)
 }
 
 // SetExternalID sets the ExternalID field and marks it as non-optional;
@@ -4836,6 +5887,34 @@ func (p *PostV1BankFeedsConnectionsGetResponseAccountsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule string
+
+const (
+	PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleManual  PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule = "manual"
+	PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleDaily   PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule = "daily"
+	PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleWeekly  PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule = "weekly"
+	PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleMonthly PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule = "monthly"
+)
+
+func NewPostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleFromString(s string) (PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule, error) {
+	switch s {
+	case "manual":
+		return PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleManual, nil
+	case "daily":
+		return PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleDaily, nil
+	case "weekly":
+		return PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleWeekly, nil
+	case "monthly":
+		return PostV1BankFeedsConnectionsGetResponseAccountsItemSyncScheduleMonthly, nil
+	}
+	var t PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule) Ptr() *PostV1BankFeedsConnectionsGetResponseAccountsItemSyncSchedule {
+	return &p
 }
 
 type PostV1BankFeedsConnectionsGetResponsePsuType string
@@ -5929,17 +7008,29 @@ func (p *PostV1BankFeedsConnectionsStartResponse) String() string {
 }
 
 var (
-	postV1BankFeedsSyncResponseFieldConnectionID = big.NewInt(1 << 0)
-	postV1BankFeedsSyncResponseFieldImported     = big.NewInt(1 << 1)
-	postV1BankFeedsSyncResponseFieldSkipped      = big.NewInt(1 << 2)
-	postV1BankFeedsSyncResponseFieldAccounts     = big.NewInt(1 << 3)
+	postV1BankFeedsSyncResponseFieldConnectionID    = big.NewInt(1 << 0)
+	postV1BankFeedsSyncResponseFieldImported        = big.NewInt(1 << 1)
+	postV1BankFeedsSyncResponseFieldSkipped         = big.NewInt(1 << 2)
+	postV1BankFeedsSyncResponseFieldPosted          = big.NewInt(1 << 3)
+	postV1BankFeedsSyncResponseFieldPartnersCreated = big.NewInt(1 << 4)
+	postV1BankFeedsSyncResponseFieldInvoicesCreated = big.NewInt(1 << 5)
+	postV1BankFeedsSyncResponseFieldInvoicesLinked  = big.NewInt(1 << 6)
+	postV1BankFeedsSyncResponseFieldPaymentsMatched = big.NewInt(1 << 7)
+	postV1BankFeedsSyncResponseFieldWarnings        = big.NewInt(1 << 8)
+	postV1BankFeedsSyncResponseFieldAccounts        = big.NewInt(1 << 9)
 )
 
 type PostV1BankFeedsSyncResponse struct {
-	ConnectionID string                                     `json:"connectionId" url:"connectionId"`
-	Imported     int64                                      `json:"imported" url:"imported"`
-	Skipped      int64                                      `json:"skipped" url:"skipped"`
-	Accounts     []*PostV1BankFeedsSyncResponseAccountsItem `json:"accounts" url:"accounts"`
+	ConnectionID    string                                     `json:"connectionId" url:"connectionId"`
+	Imported        int64                                      `json:"imported" url:"imported"`
+	Skipped         int64                                      `json:"skipped" url:"skipped"`
+	Posted          int64                                      `json:"posted" url:"posted"`
+	PartnersCreated int64                                      `json:"partnersCreated" url:"partnersCreated"`
+	InvoicesCreated int64                                      `json:"invoicesCreated" url:"invoicesCreated"`
+	InvoicesLinked  int64                                      `json:"invoicesLinked" url:"invoicesLinked"`
+	PaymentsMatched int64                                      `json:"paymentsMatched" url:"paymentsMatched"`
+	Warnings        []string                                   `json:"warnings" url:"warnings"`
+	Accounts        []*PostV1BankFeedsSyncResponseAccountsItem `json:"accounts" url:"accounts"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5967,6 +7058,48 @@ func (p *PostV1BankFeedsSyncResponse) GetSkipped() int64 {
 		return 0
 	}
 	return p.Skipped
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetPosted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Posted
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetPartnersCreated() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PartnersCreated
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetInvoicesCreated() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.InvoicesCreated
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetInvoicesLinked() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.InvoicesLinked
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetPaymentsMatched() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PaymentsMatched
+}
+
+func (p *PostV1BankFeedsSyncResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
 }
 
 func (p *PostV1BankFeedsSyncResponse) GetAccounts() []*PostV1BankFeedsSyncResponseAccountsItem {
@@ -6009,6 +7142,48 @@ func (p *PostV1BankFeedsSyncResponse) SetImported(imported int64) {
 func (p *PostV1BankFeedsSyncResponse) SetSkipped(skipped int64) {
 	p.Skipped = skipped
 	p.require(postV1BankFeedsSyncResponseFieldSkipped)
+}
+
+// SetPosted sets the Posted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetPosted(posted int64) {
+	p.Posted = posted
+	p.require(postV1BankFeedsSyncResponseFieldPosted)
+}
+
+// SetPartnersCreated sets the PartnersCreated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetPartnersCreated(partnersCreated int64) {
+	p.PartnersCreated = partnersCreated
+	p.require(postV1BankFeedsSyncResponseFieldPartnersCreated)
+}
+
+// SetInvoicesCreated sets the InvoicesCreated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetInvoicesCreated(invoicesCreated int64) {
+	p.InvoicesCreated = invoicesCreated
+	p.require(postV1BankFeedsSyncResponseFieldInvoicesCreated)
+}
+
+// SetInvoicesLinked sets the InvoicesLinked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetInvoicesLinked(invoicesLinked int64) {
+	p.InvoicesLinked = invoicesLinked
+	p.require(postV1BankFeedsSyncResponseFieldInvoicesLinked)
+}
+
+// SetPaymentsMatched sets the PaymentsMatched field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetPaymentsMatched(paymentsMatched int64) {
+	p.PaymentsMatched = paymentsMatched
+	p.require(postV1BankFeedsSyncResponseFieldPaymentsMatched)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsSyncResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1BankFeedsSyncResponseFieldWarnings)
 }
 
 // SetAccounts sets the Accounts field and marks it as non-optional;
@@ -6174,6 +7349,2562 @@ func (p *PostV1BankFeedsSyncResponseAccountsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesCreateRequestFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateRequestFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateRequestFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesCreateRequestFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner *bool   `json:"createPartner,omitempty" url:"createPartner,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) GetCreatePartner() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesCreateRequestFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesCreateRequestFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) SetCreatePartner(createPartner *bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesCreateRequestFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesCreateRequestFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesCreateRequestFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesCreateRequestFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesCreateRequestFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesCreateRequestType string
+
+const (
+	PostV1BankImportTemplatesCreateRequestTypeStripe         PostV1BankImportTemplatesCreateRequestType = "stripe"
+	PostV1BankImportTemplatesCreateRequestTypeIso20022       PostV1BankImportTemplatesCreateRequestType = "iso20022"
+	PostV1BankImportTemplatesCreateRequestTypeBankConnection PostV1BankImportTemplatesCreateRequestType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesCreateRequestTypeFromString(s string) (PostV1BankImportTemplatesCreateRequestType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesCreateRequestTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesCreateRequestTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesCreateRequestTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesCreateRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesCreateRequestType) Ptr() *PostV1BankImportTemplatesCreateRequestType {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesCreateResponseFieldID                    = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateResponseFieldName                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateResponseFieldType                  = big.NewInt(1 << 2)
+	postV1BankImportTemplatesCreateResponseFieldFields                = big.NewInt(1 << 3)
+	postV1BankImportTemplatesCreateResponseFieldMetaFields            = big.NewInt(1 << 4)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
+	postV1BankImportTemplatesCreateResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
+	postV1BankImportTemplatesCreateResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
+	postV1BankImportTemplatesCreateResponseFieldCreatedAt             = big.NewInt(1 << 10)
+	postV1BankImportTemplatesCreateResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+)
+
+type PostV1BankImportTemplatesCreateResponse struct {
+	ID                    string                                               `json:"id" url:"id"`
+	Name                  string                                               `json:"name" url:"name"`
+	Type                  PostV1BankImportTemplatesCreateResponseType          `json:"type" url:"type"`
+	Fields                []*PostV1BankImportTemplatesCreateResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields            []string                                             `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField      *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField      *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID         *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices       bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
+	CreatedAt             string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                               `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetType() PostV1BankImportTemplatesCreateResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetFields() []*PostV1BankImportTemplatesCreateResponseFieldsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Fields
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetMetaFields() []string {
+	if p == nil {
+		return nil
+	}
+	return p.MetaFields
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetInvoiceMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceMetaField
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetInvoiceVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceVatRatePercent
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetCompanyMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyMetaField
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetInvoiceItemID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceItemID
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetAdvanceInvoices() bool {
+	if p == nil {
+		return false
+	}
+	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesCreateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesCreateResponseFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetType(type_ PostV1BankImportTemplatesCreateResponseType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesCreateResponseFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetFields(fields []*PostV1BankImportTemplatesCreateResponseFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesCreateResponseFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesCreateResponseFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesCreateResponseFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesCreateResponseFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesCreateResponseFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesCreateResponseFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetAdvanceInvoices(advanceInvoices bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesCreateResponseFieldAdvanceInvoices)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankImportTemplatesCreateResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankImportTemplatesCreateResponseFieldUpdatedAt)
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesCreateResponseFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateResponseFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateResponseFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesCreateResponseFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner bool    `json:"createPartner" url:"createPartner"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) GetCreatePartner() bool {
+	if p == nil {
+		return false
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesCreateResponseFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesCreateResponseFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) SetCreatePartner(createPartner bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesCreateResponseFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesCreateResponseFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesCreateResponseFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesCreateResponseFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesCreateResponseFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesCreateResponseType string
+
+const (
+	PostV1BankImportTemplatesCreateResponseTypeStripe         PostV1BankImportTemplatesCreateResponseType = "stripe"
+	PostV1BankImportTemplatesCreateResponseTypeIso20022       PostV1BankImportTemplatesCreateResponseType = "iso20022"
+	PostV1BankImportTemplatesCreateResponseTypeBankConnection PostV1BankImportTemplatesCreateResponseType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesCreateResponseTypeFromString(s string) (PostV1BankImportTemplatesCreateResponseType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesCreateResponseTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesCreateResponseTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesCreateResponseTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesCreateResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesCreateResponseType) Ptr() *PostV1BankImportTemplatesCreateResponseType {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesDeleteResponseFieldID      = big.NewInt(1 << 0)
+	postV1BankImportTemplatesDeleteResponseFieldDeleted = big.NewInt(1 << 1)
+)
+
+type PostV1BankImportTemplatesDeleteResponse struct {
+	ID      string `json:"id" url:"id"`
+	Deleted bool   `json:"deleted" url:"deleted"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) GetDeleted() bool {
+	if p == nil {
+		return false
+	}
+	return p.Deleted
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesDeleteResponseFieldID)
+}
+
+// SetDeleted sets the Deleted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesDeleteResponse) SetDeleted(deleted bool) {
+	p.Deleted = deleted
+	p.require(postV1BankImportTemplatesDeleteResponseFieldDeleted)
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesGetResponseFieldID                    = big.NewInt(1 << 0)
+	postV1BankImportTemplatesGetResponseFieldName                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesGetResponseFieldType                  = big.NewInt(1 << 2)
+	postV1BankImportTemplatesGetResponseFieldFields                = big.NewInt(1 << 3)
+	postV1BankImportTemplatesGetResponseFieldMetaFields            = big.NewInt(1 << 4)
+	postV1BankImportTemplatesGetResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
+	postV1BankImportTemplatesGetResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
+	postV1BankImportTemplatesGetResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
+	postV1BankImportTemplatesGetResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
+	postV1BankImportTemplatesGetResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
+	postV1BankImportTemplatesGetResponseFieldCreatedAt             = big.NewInt(1 << 10)
+	postV1BankImportTemplatesGetResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+)
+
+type PostV1BankImportTemplatesGetResponse struct {
+	ID                    string                                            `json:"id" url:"id"`
+	Name                  string                                            `json:"name" url:"name"`
+	Type                  PostV1BankImportTemplatesGetResponseType          `json:"type" url:"type"`
+	Fields                []*PostV1BankImportTemplatesGetResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields            []string                                          `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField      *string                                           `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent *string                                           `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField      *string                                           `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID         *string                                           `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices       bool                                              `json:"advanceInvoices" url:"advanceInvoices"`
+	CreatedAt             string                                            `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                            `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetType() PostV1BankImportTemplatesGetResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetFields() []*PostV1BankImportTemplatesGetResponseFieldsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Fields
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetMetaFields() []string {
+	if p == nil {
+		return nil
+	}
+	return p.MetaFields
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetInvoiceMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceMetaField
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetInvoiceVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceVatRatePercent
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetCompanyMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyMetaField
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetInvoiceItemID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceItemID
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetAdvanceInvoices() bool {
+	if p == nil {
+		return false
+	}
+	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesGetResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesGetResponseFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetType(type_ PostV1BankImportTemplatesGetResponseType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesGetResponseFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetFields(fields []*PostV1BankImportTemplatesGetResponseFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesGetResponseFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesGetResponseFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesGetResponseFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesGetResponseFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesGetResponseFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesGetResponseFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetAdvanceInvoices(advanceInvoices bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesGetResponseFieldAdvanceInvoices)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankImportTemplatesGetResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankImportTemplatesGetResponseFieldUpdatedAt)
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesGetResponseFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesGetResponseFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesGetResponseFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesGetResponseFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner bool    `json:"createPartner" url:"createPartner"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) GetCreatePartner() bool {
+	if p == nil {
+		return false
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesGetResponseFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesGetResponseFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) SetCreatePartner(createPartner bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesGetResponseFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesGetResponseFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesGetResponseFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesGetResponseFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesGetResponseFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesGetResponseType string
+
+const (
+	PostV1BankImportTemplatesGetResponseTypeStripe         PostV1BankImportTemplatesGetResponseType = "stripe"
+	PostV1BankImportTemplatesGetResponseTypeIso20022       PostV1BankImportTemplatesGetResponseType = "iso20022"
+	PostV1BankImportTemplatesGetResponseTypeBankConnection PostV1BankImportTemplatesGetResponseType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesGetResponseTypeFromString(s string) (PostV1BankImportTemplatesGetResponseType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesGetResponseTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesGetResponseTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesGetResponseTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesGetResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesGetResponseType) Ptr() *PostV1BankImportTemplatesGetResponseType {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesListRequestFilterItem struct {
+	Field string                                               `json:"field" url:"field"`
+	Op    PostV1BankImportTemplatesListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1BankImportTemplatesListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) GetOp() PostV1BankImportTemplatesListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) GetValue() *PostV1BankImportTemplatesListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1BankImportTemplatesListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequestFilterItem) SetOp(op PostV1BankImportTemplatesListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1BankImportTemplatesListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequestFilterItem) SetValue(value *PostV1BankImportTemplatesListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1BankImportTemplatesListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesListRequestFilterItemOp string
+
+const (
+	PostV1BankImportTemplatesListRequestFilterItemOpEq       PostV1BankImportTemplatesListRequestFilterItemOp = "eq"
+	PostV1BankImportTemplatesListRequestFilterItemOpNe       PostV1BankImportTemplatesListRequestFilterItemOp = "ne"
+	PostV1BankImportTemplatesListRequestFilterItemOpContains PostV1BankImportTemplatesListRequestFilterItemOp = "contains"
+	PostV1BankImportTemplatesListRequestFilterItemOpGte      PostV1BankImportTemplatesListRequestFilterItemOp = "gte"
+	PostV1BankImportTemplatesListRequestFilterItemOpLte      PostV1BankImportTemplatesListRequestFilterItemOp = "lte"
+	PostV1BankImportTemplatesListRequestFilterItemOpIn       PostV1BankImportTemplatesListRequestFilterItemOp = "in"
+)
+
+func NewPostV1BankImportTemplatesListRequestFilterItemOpFromString(s string) (PostV1BankImportTemplatesListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1BankImportTemplatesListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1BankImportTemplatesListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1BankImportTemplatesListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1BankImportTemplatesListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1BankImportTemplatesListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1BankImportTemplatesListRequestFilterItemOpIn, nil
+	}
+	var t PostV1BankImportTemplatesListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesListRequestFilterItemOp) Ptr() *PostV1BankImportTemplatesListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1BankImportTemplatesListRequestFilterItemValue struct {
+	String                                                           string
+	Double                                                           float64
+	Boolean                                                          bool
+	PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList []*PostV1BankImportTemplatesListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) GetPostV1BankImportTemplatesListRequestFilterItemValueThreeItemList() []*PostV1BankImportTemplatesListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1BankImportTemplatesListRequestFilterItemValueThreeItemList []*PostV1BankImportTemplatesListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1BankImportTemplatesListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList"
+		p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList = valuePostV1BankImportTemplatesListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1BankImportTemplatesListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList" || p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1BankImportTemplatesListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1BankImportTemplatesListRequestFilterItemValueThreeItemList([]*PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValue) Accept(visitor PostV1BankImportTemplatesListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList" || p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1BankImportTemplatesListRequestFilterItemValueThreeItemList(p.PostV1BankImportTemplatesListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1BankImportTemplatesListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1BankImportTemplatesListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1BankImportTemplatesListRequestFilterItemValueThreeItem) Accept(visitor PostV1BankImportTemplatesListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1BankImportTemplatesListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1BankImportTemplatesListRequestSortItem struct {
+	Field string                                           `json:"field" url:"field"`
+	Dir   *PostV1BankImportTemplatesListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) GetDir() *PostV1BankImportTemplatesListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1BankImportTemplatesListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequestSortItem) SetDir(dir *PostV1BankImportTemplatesListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1BankImportTemplatesListRequestSortItemFieldDir)
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesListRequestSortItemDir string
+
+const (
+	PostV1BankImportTemplatesListRequestSortItemDirAsc  PostV1BankImportTemplatesListRequestSortItemDir = "asc"
+	PostV1BankImportTemplatesListRequestSortItemDirDesc PostV1BankImportTemplatesListRequestSortItemDir = "desc"
+)
+
+func NewPostV1BankImportTemplatesListRequestSortItemDirFromString(s string) (PostV1BankImportTemplatesListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1BankImportTemplatesListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1BankImportTemplatesListRequestSortItemDirDesc, nil
+	}
+	var t PostV1BankImportTemplatesListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesListRequestSortItemDir) Ptr() *PostV1BankImportTemplatesListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1BankImportTemplatesListResponseFieldTotal    = big.NewInt(1 << 3)
+)
+
+type PostV1BankImportTemplatesListResponse struct {
+	Rows     []*PostV1BankImportTemplatesListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                            `json:"page" url:"page"`
+	PageSize int64                                            `json:"pageSize" url:"pageSize"`
+	Total    int64                                            `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetRows() []*PostV1BankImportTemplatesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponse) SetRows(rows []*PostV1BankImportTemplatesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1BankImportTemplatesListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1BankImportTemplatesListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1BankImportTemplatesListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1BankImportTemplatesListResponseFieldTotal)
+}
+
+func (p *PostV1BankImportTemplatesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesListResponseRowsItemFieldID                    = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListResponseRowsItemFieldName                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListResponseRowsItemFieldType                  = big.NewInt(1 << 2)
+	postV1BankImportTemplatesListResponseRowsItemFieldFields                = big.NewInt(1 << 3)
+	postV1BankImportTemplatesListResponseRowsItemFieldMetaFields            = big.NewInt(1 << 4)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceMetaField      = big.NewInt(1 << 5)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
+	postV1BankImportTemplatesListResponseRowsItemFieldCompanyMetaField      = big.NewInt(1 << 7)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceItemID         = big.NewInt(1 << 8)
+	postV1BankImportTemplatesListResponseRowsItemFieldAdvanceInvoices       = big.NewInt(1 << 9)
+	postV1BankImportTemplatesListResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 10)
+	postV1BankImportTemplatesListResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 11)
+)
+
+type PostV1BankImportTemplatesListResponseRowsItem struct {
+	ID                    string                                                     `json:"id" url:"id"`
+	Name                  string                                                     `json:"name" url:"name"`
+	Type                  PostV1BankImportTemplatesListResponseRowsItemType          `json:"type" url:"type"`
+	Fields                []*PostV1BankImportTemplatesListResponseRowsItemFieldsItem `json:"fields" url:"fields"`
+	MetaFields            []string                                                   `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField      *string                                                    `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent *string                                                    `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField      *string                                                    `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID         *string                                                    `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices       bool                                                       `json:"advanceInvoices" url:"advanceInvoices"`
+	CreatedAt             string                                                     `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                                     `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetType() PostV1BankImportTemplatesListResponseRowsItemType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetFields() []*PostV1BankImportTemplatesListResponseRowsItemFieldsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Fields
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetMetaFields() []string {
+	if p == nil {
+		return nil
+	}
+	return p.MetaFields
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetInvoiceMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceMetaField
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetInvoiceVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceVatRatePercent
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetCompanyMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyMetaField
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetInvoiceItemID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceItemID
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetAdvanceInvoices() bool {
+	if p == nil {
+		return false
+	}
+	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetType(type_ PostV1BankImportTemplatesListResponseRowsItemType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetFields(fields []*PostV1BankImportTemplatesListResponseRowsItemFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetAdvanceInvoices(advanceInvoices bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldAdvanceInvoices)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldUpdatedAt)
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesListResponseRowsItemFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner bool    `json:"createPartner" url:"createPartner"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) GetCreatePartner() bool {
+	if p == nil {
+		return false
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) SetCreatePartner(createPartner bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesListResponseRowsItemFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesListResponseRowsItemFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesListResponseRowsItemFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItemFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesListResponseRowsItemType string
+
+const (
+	PostV1BankImportTemplatesListResponseRowsItemTypeStripe         PostV1BankImportTemplatesListResponseRowsItemType = "stripe"
+	PostV1BankImportTemplatesListResponseRowsItemTypeIso20022       PostV1BankImportTemplatesListResponseRowsItemType = "iso20022"
+	PostV1BankImportTemplatesListResponseRowsItemTypeBankConnection PostV1BankImportTemplatesListResponseRowsItemType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesListResponseRowsItemTypeFromString(s string) (PostV1BankImportTemplatesListResponseRowsItemType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesListResponseRowsItemTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesListResponseRowsItemTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesListResponseRowsItemTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesListResponseRowsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesListResponseRowsItemType) Ptr() *PostV1BankImportTemplatesListResponseRowsItemType {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesUpdateRequestFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateRequestFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateRequestFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesUpdateRequestFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner *bool   `json:"createPartner,omitempty" url:"createPartner,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) GetCreatePartner() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesUpdateRequestFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesUpdateRequestFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) SetCreatePartner(createPartner *bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesUpdateRequestFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesUpdateRequestFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesUpdateRequestFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesUpdateRequestFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesUpdateRequestFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesUpdateRequestType string
+
+const (
+	PostV1BankImportTemplatesUpdateRequestTypeStripe         PostV1BankImportTemplatesUpdateRequestType = "stripe"
+	PostV1BankImportTemplatesUpdateRequestTypeIso20022       PostV1BankImportTemplatesUpdateRequestType = "iso20022"
+	PostV1BankImportTemplatesUpdateRequestTypeBankConnection PostV1BankImportTemplatesUpdateRequestType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesUpdateRequestTypeFromString(s string) (PostV1BankImportTemplatesUpdateRequestType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesUpdateRequestTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesUpdateRequestTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesUpdateRequestTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesUpdateRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesUpdateRequestType) Ptr() *PostV1BankImportTemplatesUpdateRequestType {
+	return &p
+}
+
+var (
+	postV1BankImportTemplatesUpdateResponseFieldID                    = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateResponseFieldName                  = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateResponseFieldType                  = big.NewInt(1 << 2)
+	postV1BankImportTemplatesUpdateResponseFieldFields                = big.NewInt(1 << 3)
+	postV1BankImportTemplatesUpdateResponseFieldMetaFields            = big.NewInt(1 << 4)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
+	postV1BankImportTemplatesUpdateResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
+	postV1BankImportTemplatesUpdateResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
+	postV1BankImportTemplatesUpdateResponseFieldCreatedAt             = big.NewInt(1 << 10)
+	postV1BankImportTemplatesUpdateResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+)
+
+type PostV1BankImportTemplatesUpdateResponse struct {
+	ID                    string                                               `json:"id" url:"id"`
+	Name                  string                                               `json:"name" url:"name"`
+	Type                  PostV1BankImportTemplatesUpdateResponseType          `json:"type" url:"type"`
+	Fields                []*PostV1BankImportTemplatesUpdateResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields            []string                                             `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField      *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField      *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID         *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices       bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
+	CreatedAt             string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                               `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetType() PostV1BankImportTemplatesUpdateResponseType {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetFields() []*PostV1BankImportTemplatesUpdateResponseFieldsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Fields
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetMetaFields() []string {
+	if p == nil {
+		return nil
+	}
+	return p.MetaFields
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetInvoiceMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceMetaField
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetInvoiceVatRatePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceVatRatePercent
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetCompanyMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CompanyMetaField
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetInvoiceItemID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceItemID
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetAdvanceInvoices() bool {
+	if p == nil {
+		return false
+	}
+	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankImportTemplatesUpdateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesUpdateResponseFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetType(type_ PostV1BankImportTemplatesUpdateResponseType) {
+	p.Type = type_
+	p.require(postV1BankImportTemplatesUpdateResponseFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetFields(fields []*PostV1BankImportTemplatesUpdateResponseFieldsItem) {
+	p.Fields = fields
+	p.require(postV1BankImportTemplatesUpdateResponseFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetMetaFields(metaFields []string) {
+	p.MetaFields = metaFields
+	p.require(postV1BankImportTemplatesUpdateResponseFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetInvoiceMetaField(invoiceMetaField *string) {
+	p.InvoiceMetaField = invoiceMetaField
+	p.require(postV1BankImportTemplatesUpdateResponseFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	p.InvoiceVatRatePercent = invoiceVatRatePercent
+	p.require(postV1BankImportTemplatesUpdateResponseFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetCompanyMetaField(companyMetaField *string) {
+	p.CompanyMetaField = companyMetaField
+	p.require(postV1BankImportTemplatesUpdateResponseFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetInvoiceItemID(invoiceItemID *string) {
+	p.InvoiceItemID = invoiceItemID
+	p.require(postV1BankImportTemplatesUpdateResponseFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetAdvanceInvoices(advanceInvoices bool) {
+	p.AdvanceInvoices = advanceInvoices
+	p.require(postV1BankImportTemplatesUpdateResponseFieldAdvanceInvoices)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankImportTemplatesUpdateResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankImportTemplatesUpdateResponseFieldUpdatedAt)
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankImportTemplatesUpdateResponseFieldsItemFieldName          = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateResponseFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateResponseFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type PostV1BankImportTemplatesUpdateResponseFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner bool    `json:"createPartner" url:"createPartner"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) GetAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) GetCreatePartner() bool {
+	if p == nil {
+		return false
+	}
+	return p.CreatePartner
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankImportTemplatesUpdateResponseFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) SetAccountCode(accountCode *string) {
+	p.AccountCode = accountCode
+	p.require(postV1BankImportTemplatesUpdateResponseFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) SetCreatePartner(createPartner bool) {
+	p.CreatePartner = createPartner
+	p.require(postV1BankImportTemplatesUpdateResponseFieldsItemFieldCreatePartner)
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankImportTemplatesUpdateResponseFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankImportTemplatesUpdateResponseFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankImportTemplatesUpdateResponseFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponseFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankImportTemplatesUpdateResponseType string
+
+const (
+	PostV1BankImportTemplatesUpdateResponseTypeStripe         PostV1BankImportTemplatesUpdateResponseType = "stripe"
+	PostV1BankImportTemplatesUpdateResponseTypeIso20022       PostV1BankImportTemplatesUpdateResponseType = "iso20022"
+	PostV1BankImportTemplatesUpdateResponseTypeBankConnection PostV1BankImportTemplatesUpdateResponseType = "bank_connection"
+)
+
+func NewPostV1BankImportTemplatesUpdateResponseTypeFromString(s string) (PostV1BankImportTemplatesUpdateResponseType, error) {
+	switch s {
+	case "stripe":
+		return PostV1BankImportTemplatesUpdateResponseTypeStripe, nil
+	case "iso20022":
+		return PostV1BankImportTemplatesUpdateResponseTypeIso20022, nil
+	case "bank_connection":
+		return PostV1BankImportTemplatesUpdateResponseTypeBankConnection, nil
+	}
+	var t PostV1BankImportTemplatesUpdateResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankImportTemplatesUpdateResponseType) Ptr() *PostV1BankImportTemplatesUpdateResponseType {
+	return &p
 }
 
 var (
@@ -11918,15 +15649,29 @@ func (p PostV1BankStatementsImportRequestFormat) Ptr() *PostV1BankStatementsImpo
 }
 
 var (
-	postV1BankStatementsImportResponseFieldImported   = big.NewInt(1 << 0)
-	postV1BankStatementsImportResponseFieldSkipped    = big.NewInt(1 << 1)
-	postV1BankStatementsImportResponseFieldStatements = big.NewInt(1 << 2)
+	postV1BankStatementsImportResponseFieldImported           = big.NewInt(1 << 0)
+	postV1BankStatementsImportResponseFieldSkipped            = big.NewInt(1 << 1)
+	postV1BankStatementsImportResponseFieldPosted             = big.NewInt(1 << 2)
+	postV1BankStatementsImportResponseFieldCustomersCreated   = big.NewInt(1 << 3)
+	postV1BankStatementsImportResponseFieldInvoicesCreated    = big.NewInt(1 << 4)
+	postV1BankStatementsImportResponseFieldInvoicesLinked     = big.NewInt(1 << 5)
+	postV1BankStatementsImportResponseFieldCreditNotesCreated = big.NewInt(1 << 6)
+	postV1BankStatementsImportResponseFieldPaymentsMatched    = big.NewInt(1 << 7)
+	postV1BankStatementsImportResponseFieldWarnings           = big.NewInt(1 << 8)
+	postV1BankStatementsImportResponseFieldStatements         = big.NewInt(1 << 9)
 )
 
 type PostV1BankStatementsImportResponse struct {
-	Imported   int64                                               `json:"imported" url:"imported"`
-	Skipped    int64                                               `json:"skipped" url:"skipped"`
-	Statements []*PostV1BankStatementsImportResponseStatementsItem `json:"statements" url:"statements"`
+	Imported           int64                                               `json:"imported" url:"imported"`
+	Skipped            int64                                               `json:"skipped" url:"skipped"`
+	Posted             int64                                               `json:"posted" url:"posted"`
+	CustomersCreated   int64                                               `json:"customersCreated" url:"customersCreated"`
+	InvoicesCreated    int64                                               `json:"invoicesCreated" url:"invoicesCreated"`
+	InvoicesLinked     int64                                               `json:"invoicesLinked" url:"invoicesLinked"`
+	CreditNotesCreated int64                                               `json:"creditNotesCreated" url:"creditNotesCreated"`
+	PaymentsMatched    int64                                               `json:"paymentsMatched" url:"paymentsMatched"`
+	Warnings           []string                                            `json:"warnings" url:"warnings"`
+	Statements         []*PostV1BankStatementsImportResponseStatementsItem `json:"statements" url:"statements"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11947,6 +15692,55 @@ func (p *PostV1BankStatementsImportResponse) GetSkipped() int64 {
 		return 0
 	}
 	return p.Skipped
+}
+
+func (p *PostV1BankStatementsImportResponse) GetPosted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Posted
+}
+
+func (p *PostV1BankStatementsImportResponse) GetCustomersCreated() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.CustomersCreated
+}
+
+func (p *PostV1BankStatementsImportResponse) GetInvoicesCreated() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.InvoicesCreated
+}
+
+func (p *PostV1BankStatementsImportResponse) GetInvoicesLinked() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.InvoicesLinked
+}
+
+func (p *PostV1BankStatementsImportResponse) GetCreditNotesCreated() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.CreditNotesCreated
+}
+
+func (p *PostV1BankStatementsImportResponse) GetPaymentsMatched() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PaymentsMatched
+}
+
+func (p *PostV1BankStatementsImportResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
 }
 
 func (p *PostV1BankStatementsImportResponse) GetStatements() []*PostV1BankStatementsImportResponseStatementsItem {
@@ -11982,6 +15776,55 @@ func (p *PostV1BankStatementsImportResponse) SetImported(imported int64) {
 func (p *PostV1BankStatementsImportResponse) SetSkipped(skipped int64) {
 	p.Skipped = skipped
 	p.require(postV1BankStatementsImportResponseFieldSkipped)
+}
+
+// SetPosted sets the Posted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetPosted(posted int64) {
+	p.Posted = posted
+	p.require(postV1BankStatementsImportResponseFieldPosted)
+}
+
+// SetCustomersCreated sets the CustomersCreated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetCustomersCreated(customersCreated int64) {
+	p.CustomersCreated = customersCreated
+	p.require(postV1BankStatementsImportResponseFieldCustomersCreated)
+}
+
+// SetInvoicesCreated sets the InvoicesCreated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetInvoicesCreated(invoicesCreated int64) {
+	p.InvoicesCreated = invoicesCreated
+	p.require(postV1BankStatementsImportResponseFieldInvoicesCreated)
+}
+
+// SetInvoicesLinked sets the InvoicesLinked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetInvoicesLinked(invoicesLinked int64) {
+	p.InvoicesLinked = invoicesLinked
+	p.require(postV1BankStatementsImportResponseFieldInvoicesLinked)
+}
+
+// SetCreditNotesCreated sets the CreditNotesCreated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetCreditNotesCreated(creditNotesCreated int64) {
+	p.CreditNotesCreated = creditNotesCreated
+	p.require(postV1BankStatementsImportResponseFieldCreditNotesCreated)
+}
+
+// SetPaymentsMatched sets the PaymentsMatched field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetPaymentsMatched(paymentsMatched int64) {
+	p.PaymentsMatched = paymentsMatched
+	p.require(postV1BankStatementsImportResponseFieldPaymentsMatched)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1BankStatementsImportResponseFieldWarnings)
 }
 
 // SetStatements sets the Statements field and marks it as non-optional;
@@ -13710,6 +17553,342 @@ func NewPostV1BankTransactionsMatchResponseStatusFromString(s string) (PostV1Ban
 }
 
 func (p PostV1BankTransactionsMatchResponseStatus) Ptr() *PostV1BankTransactionsMatchResponseStatus {
+	return &p
+}
+
+type PostV1BankTransactionsRecordRequestDocumentType string
+
+const (
+	PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice     PostV1BankTransactionsRecordRequestDocumentType = "sale_invoice"
+	PostV1BankTransactionsRecordRequestDocumentTypePurchaseInvoice PostV1BankTransactionsRecordRequestDocumentType = "purchase_invoice"
+)
+
+func NewPostV1BankTransactionsRecordRequestDocumentTypeFromString(s string) (PostV1BankTransactionsRecordRequestDocumentType, error) {
+	switch s {
+	case "sale_invoice":
+		return PostV1BankTransactionsRecordRequestDocumentTypeSaleInvoice, nil
+	case "purchase_invoice":
+		return PostV1BankTransactionsRecordRequestDocumentTypePurchaseInvoice, nil
+	}
+	var t PostV1BankTransactionsRecordRequestDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankTransactionsRecordRequestDocumentType) Ptr() *PostV1BankTransactionsRecordRequestDocumentType {
+	return &p
+}
+
+var (
+	postV1BankTransactionsRecordResponseFieldID                   = big.NewInt(1 << 0)
+	postV1BankTransactionsRecordResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	postV1BankTransactionsRecordResponseFieldDate                 = big.NewInt(1 << 2)
+	postV1BankTransactionsRecordResponseFieldAmount               = big.NewInt(1 << 3)
+	postV1BankTransactionsRecordResponseFieldCurrency             = big.NewInt(1 << 4)
+	postV1BankTransactionsRecordResponseFieldCounterpartyName     = big.NewInt(1 << 5)
+	postV1BankTransactionsRecordResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
+	postV1BankTransactionsRecordResponseFieldDescription          = big.NewInt(1 << 7)
+	postV1BankTransactionsRecordResponseFieldExternalID           = big.NewInt(1 << 8)
+	postV1BankTransactionsRecordResponseFieldStatus               = big.NewInt(1 << 9)
+	postV1BankTransactionsRecordResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
+	postV1BankTransactionsRecordResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
+	postV1BankTransactionsRecordResponseFieldJournalTransactionID = big.NewInt(1 << 12)
+	postV1BankTransactionsRecordResponseFieldCreatedAt            = big.NewInt(1 << 13)
+)
+
+type PostV1BankTransactionsRecordResponse struct {
+	ID                   string                                     `json:"id" url:"id"`
+	BankAccountID        string                                     `json:"bankAccountId" url:"bankAccountId"`
+	Date                 string                                     `json:"date" url:"date"`
+	Amount               string                                     `json:"amount" url:"amount"`
+	Currency             string                                     `json:"currency" url:"currency"`
+	CounterpartyName     *string                                    `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
+	CounterpartyIban     *string                                    `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	Description          *string                                    `json:"description,omitempty" url:"description,omitempty"`
+	ExternalID           *string                                    `json:"externalId,omitempty" url:"externalId,omitempty"`
+	Status               PostV1BankTransactionsRecordResponseStatus `json:"status" url:"status"`
+	MatchedDocumentType  *string                                    `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
+	MatchedDocumentID    *string                                    `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
+	JournalTransactionID *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetBankAccountID() string {
+	if p == nil {
+		return ""
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.Date
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetCounterpartyName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CounterpartyName
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetCounterpartyIban() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CounterpartyIban
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetExternalID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetStatus() PostV1BankTransactionsRecordResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetMatchedDocumentType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MatchedDocumentType
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetMatchedDocumentID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MatchedDocumentID
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetJournalTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankTransactionsRecordResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankTransactionsRecordResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankTransactionsRecordResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetBankAccountID(bankAccountID string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankTransactionsRecordResponseFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetDate(date string) {
+	p.Date = date
+	p.require(postV1BankTransactionsRecordResponseFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1BankTransactionsRecordResponseFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1BankTransactionsRecordResponseFieldCurrency)
+}
+
+// SetCounterpartyName sets the CounterpartyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetCounterpartyName(counterpartyName *string) {
+	p.CounterpartyName = counterpartyName
+	p.require(postV1BankTransactionsRecordResponseFieldCounterpartyName)
+}
+
+// SetCounterpartyIban sets the CounterpartyIban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetCounterpartyIban(counterpartyIban *string) {
+	p.CounterpartyIban = counterpartyIban
+	p.require(postV1BankTransactionsRecordResponseFieldCounterpartyIban)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1BankTransactionsRecordResponseFieldDescription)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1BankTransactionsRecordResponseFieldExternalID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetStatus(status PostV1BankTransactionsRecordResponseStatus) {
+	p.Status = status
+	p.require(postV1BankTransactionsRecordResponseFieldStatus)
+}
+
+// SetMatchedDocumentType sets the MatchedDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetMatchedDocumentType(matchedDocumentType *string) {
+	p.MatchedDocumentType = matchedDocumentType
+	p.require(postV1BankTransactionsRecordResponseFieldMatchedDocumentType)
+}
+
+// SetMatchedDocumentID sets the MatchedDocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetMatchedDocumentID(matchedDocumentID *string) {
+	p.MatchedDocumentID = matchedDocumentID
+	p.require(postV1BankTransactionsRecordResponseFieldMatchedDocumentID)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetJournalTransactionID(journalTransactionID *string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1BankTransactionsRecordResponseFieldJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsRecordResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankTransactionsRecordResponseFieldCreatedAt)
+}
+
+func (p *PostV1BankTransactionsRecordResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankTransactionsRecordResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankTransactionsRecordResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankTransactionsRecordResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankTransactionsRecordResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankTransactionsRecordResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankTransactionsRecordResponseStatus string
+
+const (
+	PostV1BankTransactionsRecordResponseStatusNew     PostV1BankTransactionsRecordResponseStatus = "new"
+	PostV1BankTransactionsRecordResponseStatusMatched PostV1BankTransactionsRecordResponseStatus = "matched"
+)
+
+func NewPostV1BankTransactionsRecordResponseStatusFromString(s string) (PostV1BankTransactionsRecordResponseStatus, error) {
+	switch s {
+	case "new":
+		return PostV1BankTransactionsRecordResponseStatusNew, nil
+	case "matched":
+		return PostV1BankTransactionsRecordResponseStatusMatched, nil
+	}
+	var t PostV1BankTransactionsRecordResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankTransactionsRecordResponseStatus) Ptr() *PostV1BankTransactionsRecordResponseStatus {
 	return &p
 }
 

@@ -305,21 +305,23 @@ var (
 	postV1FleetVehiclesCreateRequestFieldTechnicalInspectionDue = big.NewInt(1 << 9)
 	postV1FleetVehiclesCreateRequestFieldInsuranceDue           = big.NewInt(1 << 10)
 	postV1FleetVehiclesCreateRequestFieldNotes                  = big.NewInt(1 << 11)
+	postV1FleetVehiclesCreateRequestFieldDocuments              = big.NewInt(1 << 12)
 )
 
 type PostV1FleetVehiclesCreateRequest struct {
-	PlateNumber            string                                    `json:"plateNumber" url:"-"`
-	Make                   string                                    `json:"make" url:"-"`
-	Model                  string                                    `json:"model" url:"-"`
-	Year                   *int64                                    `json:"year,omitempty" url:"-"`
-	Vin                    *string                                   `json:"vin,omitempty" url:"-"`
-	FuelType               *PostV1FleetVehiclesCreateRequestFuelType `json:"fuelType,omitempty" url:"-"`
-	AcquisitionDate        *string                                   `json:"acquisitionDate,omitempty" url:"-"`
-	MarketValue            *string                                   `json:"marketValue,omitempty" url:"-"`
-	FixedAssetID           *string                                   `json:"fixedAssetId,omitempty" url:"-"`
-	TechnicalInspectionDue *string                                   `json:"technicalInspectionDue,omitempty" url:"-"`
-	InsuranceDue           *string                                   `json:"insuranceDue,omitempty" url:"-"`
-	Notes                  *string                                   `json:"notes,omitempty" url:"-"`
+	PlateNumber            string                                           `json:"plateNumber" url:"-"`
+	Make                   string                                           `json:"make" url:"-"`
+	Model                  string                                           `json:"model" url:"-"`
+	Year                   *int64                                           `json:"year,omitempty" url:"-"`
+	Vin                    *string                                          `json:"vin,omitempty" url:"-"`
+	FuelType               *PostV1FleetVehiclesCreateRequestFuelType        `json:"fuelType,omitempty" url:"-"`
+	AcquisitionDate        *string                                          `json:"acquisitionDate,omitempty" url:"-"`
+	MarketValue            *string                                          `json:"marketValue,omitempty" url:"-"`
+	FixedAssetID           *string                                          `json:"fixedAssetId,omitempty" url:"-"`
+	TechnicalInspectionDue *string                                          `json:"technicalInspectionDue,omitempty" url:"-"`
+	InsuranceDue           *string                                          `json:"insuranceDue,omitempty" url:"-"`
+	Notes                  *string                                          `json:"notes,omitempty" url:"-"`
+	Documents              []*PostV1FleetVehiclesCreateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -414,6 +416,13 @@ func (p *PostV1FleetVehiclesCreateRequest) SetInsuranceDue(insuranceDue *string)
 func (p *PostV1FleetVehiclesCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1FleetVehiclesCreateRequestFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateRequest) SetDocuments(documents []*PostV1FleetVehiclesCreateRequestDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1FleetVehiclesCreateRequestFieldDocuments)
 }
 
 func (p *PostV1FleetVehiclesCreateRequest) UnmarshalJSON(data []byte) error {
@@ -2349,6 +2358,106 @@ func (p *PostV1FleetNaturaPreviewResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1FleetVehiclesCreateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1FleetVehiclesCreateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1FleetVehiclesCreateRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1FleetVehiclesCreateRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1FleetVehiclesCreateRequestDocumentsItemFieldRef)
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1FleetVehiclesCreateRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1FleetVehiclesCreateRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1FleetVehiclesCreateRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1FleetVehiclesCreateRequestDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1FleetVehiclesCreateRequestFuelType string
 
 const (
@@ -2398,8 +2507,9 @@ var (
 	postV1FleetVehiclesCreateResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	postV1FleetVehiclesCreateResponseFieldStatus                 = big.NewInt(1 << 12)
 	postV1FleetVehiclesCreateResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesCreateResponseFieldCurrentAssignment      = big.NewInt(1 << 14)
-	postV1FleetVehiclesCreateResponseFieldCreatedAt              = big.NewInt(1 << 15)
+	postV1FleetVehiclesCreateResponseFieldDocuments              = big.NewInt(1 << 14)
+	postV1FleetVehiclesCreateResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	postV1FleetVehiclesCreateResponseFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
 type PostV1FleetVehiclesCreateResponse struct {
@@ -2417,6 +2527,7 @@ type PostV1FleetVehiclesCreateResponse struct {
 	InsuranceDue           *string                                             `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 PostV1FleetVehiclesCreateResponseStatus             `json:"status" url:"status"`
 	Notes                  *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*PostV1FleetVehiclesCreateResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *PostV1FleetVehiclesCreateResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
 	CreatedAt              string                                              `json:"createdAt" url:"createdAt"`
 
@@ -2523,6 +2634,13 @@ func (p *PostV1FleetVehiclesCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1FleetVehiclesCreateResponse) GetDocuments() []*PostV1FleetVehiclesCreateResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1FleetVehiclesCreateResponse) GetCurrentAssignment() *PostV1FleetVehiclesCreateResponseCurrentAssignment {
@@ -2649,6 +2767,13 @@ func (p *PostV1FleetVehiclesCreateResponse) SetStatus(status PostV1FleetVehicles
 func (p *PostV1FleetVehiclesCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1FleetVehiclesCreateResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateResponse) SetDocuments(documents []*PostV1FleetVehiclesCreateResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1FleetVehiclesCreateResponseFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
@@ -2871,6 +2996,106 @@ func (p *PostV1FleetVehiclesCreateResponseCurrentAssignment) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1FleetVehiclesCreateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1FleetVehiclesCreateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1FleetVehiclesCreateResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1FleetVehiclesCreateResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1FleetVehiclesCreateResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1FleetVehiclesCreateResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1FleetVehiclesCreateResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1FleetVehiclesCreateResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1FleetVehiclesCreateResponseDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1FleetVehiclesCreateResponseStatus string
 
 const (
@@ -2911,8 +3136,9 @@ var (
 	postV1FleetVehiclesGetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	postV1FleetVehiclesGetResponseFieldStatus                 = big.NewInt(1 << 12)
 	postV1FleetVehiclesGetResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesGetResponseFieldCurrentAssignment      = big.NewInt(1 << 14)
-	postV1FleetVehiclesGetResponseFieldCreatedAt              = big.NewInt(1 << 15)
+	postV1FleetVehiclesGetResponseFieldDocuments              = big.NewInt(1 << 14)
+	postV1FleetVehiclesGetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	postV1FleetVehiclesGetResponseFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
 type PostV1FleetVehiclesGetResponse struct {
@@ -2930,6 +3156,7 @@ type PostV1FleetVehiclesGetResponse struct {
 	InsuranceDue           *string                                          `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 PostV1FleetVehiclesGetResponseStatus             `json:"status" url:"status"`
 	Notes                  *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*PostV1FleetVehiclesGetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *PostV1FleetVehiclesGetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
 	CreatedAt              string                                           `json:"createdAt" url:"createdAt"`
 
@@ -3036,6 +3263,13 @@ func (p *PostV1FleetVehiclesGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1FleetVehiclesGetResponse) GetDocuments() []*PostV1FleetVehiclesGetResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1FleetVehiclesGetResponse) GetCurrentAssignment() *PostV1FleetVehiclesGetResponseCurrentAssignment {
@@ -3162,6 +3396,13 @@ func (p *PostV1FleetVehiclesGetResponse) SetStatus(status PostV1FleetVehiclesGet
 func (p *PostV1FleetVehiclesGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1FleetVehiclesGetResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesGetResponse) SetDocuments(documents []*PostV1FleetVehiclesGetResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1FleetVehiclesGetResponseFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
@@ -3370,6 +3611,106 @@ func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) MarshalJSON() ([]byte,
 }
 
 func (p *PostV1FleetVehiclesGetResponseCurrentAssignment) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1FleetVehiclesGetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1FleetVehiclesGetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1FleetVehiclesGetResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1FleetVehiclesGetResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1FleetVehiclesGetResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1FleetVehiclesGetResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1FleetVehiclesGetResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1FleetVehiclesGetResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1FleetVehiclesGetResponseDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -3994,8 +4335,9 @@ var (
 	postV1FleetVehiclesListResponseRowsItemFieldInsuranceDue           = big.NewInt(1 << 11)
 	postV1FleetVehiclesListResponseRowsItemFieldStatus                 = big.NewInt(1 << 12)
 	postV1FleetVehiclesListResponseRowsItemFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesListResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 14)
-	postV1FleetVehiclesListResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 15)
+	postV1FleetVehiclesListResponseRowsItemFieldDocuments              = big.NewInt(1 << 14)
+	postV1FleetVehiclesListResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 15)
+	postV1FleetVehiclesListResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
 type PostV1FleetVehiclesListResponseRowsItem struct {
@@ -4013,6 +4355,7 @@ type PostV1FleetVehiclesListResponseRowsItem struct {
 	InsuranceDue           *string                                                   `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 PostV1FleetVehiclesListResponseRowsItemStatus             `json:"status" url:"status"`
 	Notes                  *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
 	CreatedAt              string                                                    `json:"createdAt" url:"createdAt"`
 
@@ -4119,6 +4462,13 @@ func (p *PostV1FleetVehiclesListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItem) GetDocuments() []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1FleetVehiclesListResponseRowsItem) GetCurrentAssignment() *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment {
@@ -4245,6 +4595,13 @@ func (p *PostV1FleetVehiclesListResponseRowsItem) SetStatus(status PostV1FleetVe
 func (p *PostV1FleetVehiclesListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1FleetVehiclesListResponseRowsItemFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesListResponseRowsItem) SetDocuments(documents []*PostV1FleetVehiclesListResponseRowsItemDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1FleetVehiclesListResponseRowsItemFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
@@ -4467,6 +4824,106 @@ func (p *PostV1FleetVehiclesListResponseRowsItemCurrentAssignment) String() stri
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1FleetVehiclesListResponseRowsItemDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1FleetVehiclesListResponseRowsItemDocumentsItemFieldRef)
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1FleetVehiclesListResponseRowsItemDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1FleetVehiclesListResponseRowsItemDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1FleetVehiclesListResponseRowsItemDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1FleetVehiclesListResponseRowsItemDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1FleetVehiclesListResponseRowsItemStatus string
 
 const (
@@ -4566,8 +5023,9 @@ var (
 	postV1FleetVehiclesUpdateResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	postV1FleetVehiclesUpdateResponseFieldStatus                 = big.NewInt(1 << 12)
 	postV1FleetVehiclesUpdateResponseFieldNotes                  = big.NewInt(1 << 13)
-	postV1FleetVehiclesUpdateResponseFieldCurrentAssignment      = big.NewInt(1 << 14)
-	postV1FleetVehiclesUpdateResponseFieldCreatedAt              = big.NewInt(1 << 15)
+	postV1FleetVehiclesUpdateResponseFieldDocuments              = big.NewInt(1 << 14)
+	postV1FleetVehiclesUpdateResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
+	postV1FleetVehiclesUpdateResponseFieldCreatedAt              = big.NewInt(1 << 16)
 )
 
 type PostV1FleetVehiclesUpdateResponse struct {
@@ -4585,6 +5043,7 @@ type PostV1FleetVehiclesUpdateResponse struct {
 	InsuranceDue           *string                                             `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 PostV1FleetVehiclesUpdateResponseStatus             `json:"status" url:"status"`
 	Notes                  *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents              []*PostV1FleetVehiclesUpdateResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *PostV1FleetVehiclesUpdateResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
 	CreatedAt              string                                              `json:"createdAt" url:"createdAt"`
 
@@ -4691,6 +5150,13 @@ func (p *PostV1FleetVehiclesUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1FleetVehiclesUpdateResponse) GetDocuments() []*PostV1FleetVehiclesUpdateResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1FleetVehiclesUpdateResponse) GetCurrentAssignment() *PostV1FleetVehiclesUpdateResponseCurrentAssignment {
@@ -4817,6 +5283,13 @@ func (p *PostV1FleetVehiclesUpdateResponse) SetStatus(status PostV1FleetVehicles
 func (p *PostV1FleetVehiclesUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1FleetVehiclesUpdateResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesUpdateResponse) SetDocuments(documents []*PostV1FleetVehiclesUpdateResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1FleetVehiclesUpdateResponseFieldDocuments)
 }
 
 // SetCurrentAssignment sets the CurrentAssignment field and marks it as non-optional;
@@ -5025,6 +5498,106 @@ func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) MarshalJSON() ([]by
 }
 
 func (p *PostV1FleetVehiclesUpdateResponseCurrentAssignment) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1FleetVehiclesUpdateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1FleetVehiclesUpdateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1FleetVehiclesUpdateResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1FleetVehiclesUpdateResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1FleetVehiclesUpdateResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1FleetVehiclesUpdateResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1FleetVehiclesUpdateResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1FleetVehiclesUpdateResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1FleetVehiclesUpdateResponseDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}

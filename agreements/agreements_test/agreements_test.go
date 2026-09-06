@@ -140,7 +140,6 @@ func TestAgreementsPostV1AgreementsAgreementsCreateWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &nordlet.PostV1AgreementsAgreementsCreateRequest{
-		PartnerID: "partnerId",
 		Number:    "number",
 		StartDate: "startDate",
 	}

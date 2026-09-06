@@ -631,7 +631,8 @@ var (
 	postV1SalesInvoicesCreateRequestFieldVatCountryCode    = big.NewInt(1 << 7)
 	postV1SalesInvoicesCreateRequestFieldDeemedSupplier    = big.NewInt(1 << 8)
 	postV1SalesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 9)
-	postV1SalesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 11)
 )
 
 type PostV1SalesInvoicesCreateRequest struct {
@@ -645,6 +646,7 @@ type PostV1SalesInvoicesCreateRequest struct {
 	VatCountryCode    *string                                      `json:"vatCountryCode,omitempty" url:"-"`
 	DeemedSupplier    *bool                                        `json:"deemedSupplier,omitempty" url:"-"`
 	Notes             *string                                      `json:"notes,omitempty" url:"-"`
+	DocumentRef       *string                                      `json:"documentRef,omitempty" url:"-"`
 	Lines             []*PostV1SalesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -726,6 +728,13 @@ func (p *PostV1SalesInvoicesCreateRequest) SetDeemedSupplier(deemedSupplier *boo
 func (p *PostV1SalesInvoicesCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesCreateRequestFieldDocumentRef)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -6062,10 +6071,11 @@ var (
 	postV1SalesInvoicesApplyAdvanceResponseFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesApplyAdvanceResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesApplyAdvanceResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt            = big.NewInt(1 << 24)
-	postV1SalesInvoicesApplyAdvanceResponseFieldLines                = big.NewInt(1 << 25)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatEvidence          = big.NewInt(1 << 26)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt            = big.NewInt(1 << 25)
+	postV1SalesInvoicesApplyAdvanceResponseFieldLines                = big.NewInt(1 << 26)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatEvidence          = big.NewInt(1 << 27)
 )
 
 type PostV1SalesInvoicesApplyAdvanceResponse struct {
@@ -6092,6 +6102,7 @@ type PostV1SalesInvoicesApplyAdvanceResponse struct {
 	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1SalesInvoicesApplyAdvanceResponseLinesItem  `json:"lines" url:"lines"`
@@ -6263,6 +6274,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetCreatedAt() string {
@@ -6466,6 +6484,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetDeemedSupplier(deemedSuppli
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8901,10 +8926,11 @@ var (
 	postV1SalesInvoicesCreateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesCreateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 24)
-	postV1SalesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 25)
-	postV1SalesInvoicesCreateResponseFieldVatEvidence          = big.NewInt(1 << 26)
+	postV1SalesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 25)
+	postV1SalesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 26)
+	postV1SalesInvoicesCreateResponseFieldVatEvidence          = big.NewInt(1 << 27)
 )
 
 type PostV1SalesInvoicesCreateResponse struct {
@@ -8931,6 +8957,7 @@ type PostV1SalesInvoicesCreateResponse struct {
 	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1SalesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
@@ -9102,6 +9129,13 @@ func (p *PostV1SalesInvoicesCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesCreateResponse) GetCreatedAt() string {
@@ -9305,6 +9339,13 @@ func (p *PostV1SalesInvoicesCreateResponse) SetDeemedSupplier(deemedSupplier boo
 func (p *PostV1SalesInvoicesCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesCreateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesCreateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -11467,10 +11508,11 @@ var (
 	postV1SalesInvoicesGetResponseFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesGetResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 24)
-	postV1SalesInvoicesGetResponseFieldLines                = big.NewInt(1 << 25)
-	postV1SalesInvoicesGetResponseFieldVatEvidence          = big.NewInt(1 << 26)
+	postV1SalesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 25)
+	postV1SalesInvoicesGetResponseFieldLines                = big.NewInt(1 << 26)
+	postV1SalesInvoicesGetResponseFieldVatEvidence          = big.NewInt(1 << 27)
 )
 
 type PostV1SalesInvoicesGetResponse struct {
@@ -11497,6 +11539,7 @@ type PostV1SalesInvoicesGetResponse struct {
 	VatCountryCode       *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                      `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1SalesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
@@ -11668,6 +11711,13 @@ func (p *PostV1SalesInvoicesGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesGetResponse) GetCreatedAt() string {
@@ -11871,6 +11921,13 @@ func (p *PostV1SalesInvoicesGetResponse) SetDeemedSupplier(deemedSupplier bool) 
 func (p *PostV1SalesInvoicesGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesGetResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesGetResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -13621,10 +13678,11 @@ var (
 	postV1SalesInvoicesIssueResponseFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesIssueResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesIssueResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesIssueResponseFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesIssueResponseFieldUpdatedAt            = big.NewInt(1 << 24)
-	postV1SalesInvoicesIssueResponseFieldLines                = big.NewInt(1 << 25)
-	postV1SalesInvoicesIssueResponseFieldVatEvidence          = big.NewInt(1 << 26)
+	postV1SalesInvoicesIssueResponseFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesIssueResponseFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesIssueResponseFieldUpdatedAt            = big.NewInt(1 << 25)
+	postV1SalesInvoicesIssueResponseFieldLines                = big.NewInt(1 << 26)
+	postV1SalesInvoicesIssueResponseFieldVatEvidence          = big.NewInt(1 << 27)
 )
 
 type PostV1SalesInvoicesIssueResponse struct {
@@ -13651,6 +13709,7 @@ type PostV1SalesInvoicesIssueResponse struct {
 	VatCountryCode       *string                                       `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                          `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                        `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                        `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1SalesInvoicesIssueResponseLinesItem  `json:"lines" url:"lines"`
@@ -13822,6 +13881,13 @@ func (p *PostV1SalesInvoicesIssueResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesIssueResponse) GetCreatedAt() string {
@@ -14025,6 +14091,13 @@ func (p *PostV1SalesInvoicesIssueResponse) SetDeemedSupplier(deemedSupplier bool
 func (p *PostV1SalesInvoicesIssueResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesIssueResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesIssueResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -16345,8 +16418,9 @@ var (
 	postV1SalesInvoicesListResponseRowsItemFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesListResponseRowsItemFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesListResponseRowsItem struct {
@@ -16373,6 +16447,7 @@ type PostV1SalesInvoicesListResponseRowsItem struct {
 	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
 
@@ -16542,6 +16617,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesListResponseRowsItem) GetCreatedAt() string {
@@ -16731,6 +16813,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) SetDeemedSupplier(deemedSuppli
 func (p *PostV1SalesInvoicesListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesListResponseRowsItemFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -18134,10 +18223,11 @@ var (
 	postV1SalesInvoicesUpdateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
 	postV1SalesInvoicesUpdateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
 	postV1SalesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 23)
-	postV1SalesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 24)
-	postV1SalesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 25)
-	postV1SalesInvoicesUpdateResponseFieldVatEvidence          = big.NewInt(1 << 26)
+	postV1SalesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 23)
+	postV1SalesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 24)
+	postV1SalesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 25)
+	postV1SalesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 26)
+	postV1SalesInvoicesUpdateResponseFieldVatEvidence          = big.NewInt(1 << 27)
 )
 
 type PostV1SalesInvoicesUpdateResponse struct {
@@ -18164,6 +18254,7 @@ type PostV1SalesInvoicesUpdateResponse struct {
 	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
 	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
 	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1SalesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
@@ -18335,6 +18426,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1SalesInvoicesUpdateResponse) GetCreatedAt() string {
@@ -18538,6 +18636,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) SetDeemedSupplier(deemedSupplier boo
 func (p *PostV1SalesInvoicesUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1SalesInvoicesUpdateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1SalesInvoicesUpdateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

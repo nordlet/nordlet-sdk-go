@@ -57,23 +57,30 @@ func (p *PostV1AgreementsAgreementsBillingRunRequest) MarshalJSON() ([]byte, err
 
 var (
 	postV1AgreementsAgreementsCreateRequestFieldTypeID        = big.NewInt(1 << 0)
-	postV1AgreementsAgreementsCreateRequestFieldPartnerID     = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateRequestFieldNumber        = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateRequestFieldName          = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateRequestFieldStartDate     = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateRequestFieldEndDate       = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateRequestFieldAutoRenew     = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateRequestFieldValue         = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateRequestFieldBillingPeriod = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateRequestFieldCurrency      = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateRequestFieldStatus        = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateRequestFieldNotes         = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsCreateRequestFieldItems         = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsCreateRequestFieldKind          = big.NewInt(1 << 1)
+	postV1AgreementsAgreementsCreateRequestFieldPartnerID     = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateRequestFieldEmployeeID    = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateRequestFieldBankAccountID = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateRequestFieldNumber        = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsCreateRequestFieldName          = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsCreateRequestFieldStartDate     = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsCreateRequestFieldEndDate       = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsCreateRequestFieldAutoRenew     = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsCreateRequestFieldValue         = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsCreateRequestFieldBillingPeriod = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsCreateRequestFieldCurrency      = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsCreateRequestFieldStatus        = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsCreateRequestFieldNotes         = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsCreateRequestFieldDocumentRef   = big.NewInt(1 << 15)
+	postV1AgreementsAgreementsCreateRequestFieldItems         = big.NewInt(1 << 16)
 )
 
 type PostV1AgreementsAgreementsCreateRequest struct {
 	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
-	PartnerID     string                                                `json:"partnerId" url:"-"`
+	Kind          *PostV1AgreementsAgreementsCreateRequestKind          `json:"kind,omitempty" url:"-"`
+	PartnerID     *string                                               `json:"partnerId,omitempty" url:"-"`
+	EmployeeID    *string                                               `json:"employeeId,omitempty" url:"-"`
+	BankAccountID *string                                               `json:"bankAccountId,omitempty" url:"-"`
 	Number        string                                                `json:"number" url:"-"`
 	Name          *string                                               `json:"name,omitempty" url:"-"`
 	StartDate     string                                                `json:"startDate" url:"-"`
@@ -84,6 +91,7 @@ type PostV1AgreementsAgreementsCreateRequest struct {
 	Currency      *string                                               `json:"currency,omitempty" url:"-"`
 	Status        *PostV1AgreementsAgreementsCreateRequestStatus        `json:"status,omitempty" url:"-"`
 	Notes         *string                                               `json:"notes,omitempty" url:"-"`
+	DocumentRef   *string                                               `json:"documentRef,omitempty" url:"-"`
 	Items         []*PostV1AgreementsAgreementsCreateRequestItemsItem   `json:"items,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -104,11 +112,32 @@ func (p *PostV1AgreementsAgreementsCreateRequest) SetTypeID(typeID *string) {
 	p.require(postV1AgreementsAgreementsCreateRequestFieldTypeID)
 }
 
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequest) SetKind(kind *PostV1AgreementsAgreementsCreateRequestKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsCreateRequestFieldKind)
+}
+
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateRequest) SetPartnerID(partnerID string) {
+func (p *PostV1AgreementsAgreementsCreateRequest) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1AgreementsAgreementsCreateRequestFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequest) SetEmployeeID(employeeID *string) {
+	p.EmployeeID = employeeID
+	p.require(postV1AgreementsAgreementsCreateRequestFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequest) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1AgreementsAgreementsCreateRequestFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
@@ -179,6 +208,13 @@ func (p *PostV1AgreementsAgreementsCreateRequest) SetStatus(status *PostV1Agreem
 func (p *PostV1AgreementsAgreementsCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsCreateRequestFieldDocumentRef)
 }
 
 // SetItems sets the Items field and marks it as non-optional;
@@ -432,18 +468,21 @@ func (p *PostV1AgreementsAgreementsListRequest) MarshalJSON() ([]byte, error) {
 var (
 	postV1AgreementsAgreementsUpdateRequestFieldID            = big.NewInt(1 << 0)
 	postV1AgreementsAgreementsUpdateRequestFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateRequestFieldName          = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateRequestFieldEndDate       = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateRequestFieldAutoRenew     = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateRequestFieldValue         = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateRequestFieldStatus        = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsUpdateRequestFieldNotes         = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsUpdateRequestFieldKind          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsUpdateRequestFieldName          = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsUpdateRequestFieldEndDate       = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateRequestFieldAutoRenew     = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsUpdateRequestFieldValue         = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsUpdateRequestFieldBillingPeriod = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsUpdateRequestFieldStatus        = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsUpdateRequestFieldNotes         = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsUpdateRequestFieldDocumentRef   = big.NewInt(1 << 10)
 )
 
 type PostV1AgreementsAgreementsUpdateRequest struct {
 	ID            string                                                `json:"id" url:"-"`
 	TypeID        *string                                               `json:"typeId,omitempty" url:"-"`
+	Kind          *PostV1AgreementsAgreementsUpdateRequestKind          `json:"kind,omitempty" url:"-"`
 	Name          *string                                               `json:"name,omitempty" url:"-"`
 	EndDate       *string                                               `json:"endDate,omitempty" url:"-"`
 	AutoRenew     *bool                                                 `json:"autoRenew,omitempty" url:"-"`
@@ -451,6 +490,7 @@ type PostV1AgreementsAgreementsUpdateRequest struct {
 	BillingPeriod *PostV1AgreementsAgreementsUpdateRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
 	Status        *PostV1AgreementsAgreementsUpdateRequestStatus        `json:"status,omitempty" url:"-"`
 	Notes         *string                                               `json:"notes,omitempty" url:"-"`
+	DocumentRef   *string                                               `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -475,6 +515,13 @@ func (p *PostV1AgreementsAgreementsUpdateRequest) SetID(id string) {
 func (p *PostV1AgreementsAgreementsUpdateRequest) SetTypeID(typeID *string) {
 	p.TypeID = typeID
 	p.require(postV1AgreementsAgreementsUpdateRequestFieldTypeID)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateRequest) SetKind(kind *PostV1AgreementsAgreementsUpdateRequestKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsUpdateRequestFieldKind)
 }
 
 // SetName sets the Name field and marks it as non-optional;
@@ -524,6 +571,13 @@ func (p *PostV1AgreementsAgreementsUpdateRequest) SetStatus(status *PostV1Agreem
 func (p *PostV1AgreementsAgreementsUpdateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsUpdateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsUpdateRequestFieldDocumentRef)
 }
 
 func (p *PostV1AgreementsAgreementsUpdateRequest) UnmarshalJSON(data []byte) error {
@@ -1424,6 +1478,43 @@ func (p *PostV1AgreementsAgreementsCreateRequestItemsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AgreementsAgreementsCreateRequestKind string
+
+const (
+	PostV1AgreementsAgreementsCreateRequestKindCustomer   PostV1AgreementsAgreementsCreateRequestKind = "customer"
+	PostV1AgreementsAgreementsCreateRequestKindSupplier   PostV1AgreementsAgreementsCreateRequestKind = "supplier"
+	PostV1AgreementsAgreementsCreateRequestKindEmployment PostV1AgreementsAgreementsCreateRequestKind = "employment"
+	PostV1AgreementsAgreementsCreateRequestKindBank       PostV1AgreementsAgreementsCreateRequestKind = "bank"
+	PostV1AgreementsAgreementsCreateRequestKindLease      PostV1AgreementsAgreementsCreateRequestKind = "lease"
+	PostV1AgreementsAgreementsCreateRequestKindInsurance  PostV1AgreementsAgreementsCreateRequestKind = "insurance"
+	PostV1AgreementsAgreementsCreateRequestKindOther      PostV1AgreementsAgreementsCreateRequestKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsCreateRequestKindFromString(s string) (PostV1AgreementsAgreementsCreateRequestKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsCreateRequestKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsCreateRequestKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsCreateRequestKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsCreateRequestKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsCreateRequestKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsCreateRequestKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsCreateRequestKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsCreateRequestKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsCreateRequestKind) Ptr() *PostV1AgreementsAgreementsCreateRequestKind {
+	return &p
+}
+
 type PostV1AgreementsAgreementsCreateRequestStatus string
 
 const (
@@ -1455,25 +1546,32 @@ func (p PostV1AgreementsAgreementsCreateRequestStatus) Ptr() *PostV1AgreementsAg
 var (
 	postV1AgreementsAgreementsCreateResponseFieldID            = big.NewInt(1 << 0)
 	postV1AgreementsAgreementsCreateResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsCreateResponseFieldPartnerID     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsCreateResponseFieldNumber        = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsCreateResponseFieldName          = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsCreateResponseFieldStartDate     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsCreateResponseFieldEndDate       = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsCreateResponseFieldAutoRenew     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsCreateResponseFieldValue         = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsCreateResponseFieldBillingPeriod = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsCreateResponseFieldCurrency      = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsCreateResponseFieldStatus        = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsCreateResponseFieldNotes         = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsCreateResponseFieldCreatedAt     = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsCreateResponseFieldItems         = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsCreateResponseFieldKind          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsCreateResponseFieldPartnerID     = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsCreateResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsCreateResponseFieldBankAccountID = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsCreateResponseFieldNumber        = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsCreateResponseFieldName          = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsCreateResponseFieldStartDate     = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsCreateResponseFieldEndDate       = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsCreateResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsCreateResponseFieldValue         = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsCreateResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsCreateResponseFieldCurrency      = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsCreateResponseFieldStatus        = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsCreateResponseFieldNotes         = big.NewInt(1 << 15)
+	postV1AgreementsAgreementsCreateResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	postV1AgreementsAgreementsCreateResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	postV1AgreementsAgreementsCreateResponseFieldItems         = big.NewInt(1 << 18)
 )
 
 type PostV1AgreementsAgreementsCreateResponse struct {
 	ID            string                                                 `json:"id" url:"id"`
 	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID     string                                                 `json:"partnerId" url:"partnerId"`
+	Kind          PostV1AgreementsAgreementsCreateResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                                `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                                `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                                `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
 	Number        string                                                 `json:"number" url:"number"`
 	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
 	StartDate     string                                                 `json:"startDate" url:"startDate"`
@@ -1484,6 +1582,7 @@ type PostV1AgreementsAgreementsCreateResponse struct {
 	Currency      string                                                 `json:"currency" url:"currency"`
 	Status        PostV1AgreementsAgreementsCreateResponseStatus         `json:"status" url:"status"`
 	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                                `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
 	Items         []*PostV1AgreementsAgreementsCreateResponseItemsItem   `json:"items" url:"items"`
 
@@ -1508,11 +1607,32 @@ func (p *PostV1AgreementsAgreementsCreateResponse) GetTypeID() *string {
 	return p.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsCreateResponse) GetPartnerID() string {
+func (p *PostV1AgreementsAgreementsCreateResponse) GetKind() PostV1AgreementsAgreementsCreateResponseKind {
 	if p == nil {
 		return ""
 	}
+	return p.Kind
+}
+
+func (p *PostV1AgreementsAgreementsCreateResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
 	return p.PartnerID
+}
+
+func (p *PostV1AgreementsAgreementsCreateResponse) GetEmployeeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1AgreementsAgreementsCreateResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
 }
 
 func (p *PostV1AgreementsAgreementsCreateResponse) GetNumber() string {
@@ -1585,6 +1705,13 @@ func (p *PostV1AgreementsAgreementsCreateResponse) GetNotes() *string {
 	return p.Notes
 }
 
+func (p *PostV1AgreementsAgreementsCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
+}
+
 func (p *PostV1AgreementsAgreementsCreateResponse) GetCreatedAt() string {
 	if p == nil {
 		return ""
@@ -1627,11 +1754,32 @@ func (p *PostV1AgreementsAgreementsCreateResponse) SetTypeID(typeID *string) {
 	p.require(postV1AgreementsAgreementsCreateResponseFieldTypeID)
 }
 
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponse) SetKind(kind PostV1AgreementsAgreementsCreateResponseKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsCreateResponseFieldKind)
+}
+
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsCreateResponse) SetPartnerID(partnerID string) {
+func (p *PostV1AgreementsAgreementsCreateResponse) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1AgreementsAgreementsCreateResponseFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponse) SetEmployeeID(employeeID *string) {
+	p.EmployeeID = employeeID
+	p.require(postV1AgreementsAgreementsCreateResponseFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1AgreementsAgreementsCreateResponseFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
@@ -1702,6 +1850,13 @@ func (p *PostV1AgreementsAgreementsCreateResponse) SetStatus(status PostV1Agreem
 func (p *PostV1AgreementsAgreementsCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsCreateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsCreateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1947,6 +2102,43 @@ func (p *PostV1AgreementsAgreementsCreateResponseItemsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AgreementsAgreementsCreateResponseKind string
+
+const (
+	PostV1AgreementsAgreementsCreateResponseKindCustomer   PostV1AgreementsAgreementsCreateResponseKind = "customer"
+	PostV1AgreementsAgreementsCreateResponseKindSupplier   PostV1AgreementsAgreementsCreateResponseKind = "supplier"
+	PostV1AgreementsAgreementsCreateResponseKindEmployment PostV1AgreementsAgreementsCreateResponseKind = "employment"
+	PostV1AgreementsAgreementsCreateResponseKindBank       PostV1AgreementsAgreementsCreateResponseKind = "bank"
+	PostV1AgreementsAgreementsCreateResponseKindLease      PostV1AgreementsAgreementsCreateResponseKind = "lease"
+	PostV1AgreementsAgreementsCreateResponseKindInsurance  PostV1AgreementsAgreementsCreateResponseKind = "insurance"
+	PostV1AgreementsAgreementsCreateResponseKindOther      PostV1AgreementsAgreementsCreateResponseKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsCreateResponseKindFromString(s string) (PostV1AgreementsAgreementsCreateResponseKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsCreateResponseKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsCreateResponseKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsCreateResponseKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsCreateResponseKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsCreateResponseKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsCreateResponseKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsCreateResponseKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsCreateResponseKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsCreateResponseKind) Ptr() *PostV1AgreementsAgreementsCreateResponseKind {
+	return &p
 }
 
 type PostV1AgreementsAgreementsCreateResponseStatus string
@@ -2196,25 +2388,32 @@ func (p *PostV1AgreementsAgreementsGenerateInvoiceResponse) String() string {
 var (
 	postV1AgreementsAgreementsGetResponseFieldID            = big.NewInt(1 << 0)
 	postV1AgreementsAgreementsGetResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsGetResponseFieldPartnerID     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsGetResponseFieldNumber        = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsGetResponseFieldName          = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsGetResponseFieldStartDate     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsGetResponseFieldEndDate       = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsGetResponseFieldAutoRenew     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsGetResponseFieldValue         = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsGetResponseFieldBillingPeriod = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsGetResponseFieldCurrency      = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsGetResponseFieldStatus        = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsGetResponseFieldNotes         = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsGetResponseFieldCreatedAt     = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsGetResponseFieldItems         = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsGetResponseFieldKind          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsGetResponseFieldPartnerID     = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsGetResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsGetResponseFieldBankAccountID = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsGetResponseFieldNumber        = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsGetResponseFieldName          = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsGetResponseFieldStartDate     = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsGetResponseFieldEndDate       = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsGetResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsGetResponseFieldValue         = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsGetResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsGetResponseFieldCurrency      = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsGetResponseFieldStatus        = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsGetResponseFieldNotes         = big.NewInt(1 << 15)
+	postV1AgreementsAgreementsGetResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	postV1AgreementsAgreementsGetResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	postV1AgreementsAgreementsGetResponseFieldItems         = big.NewInt(1 << 18)
 )
 
 type PostV1AgreementsAgreementsGetResponse struct {
 	ID            string                                              `json:"id" url:"id"`
 	TypeID        *string                                             `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID     string                                              `json:"partnerId" url:"partnerId"`
+	Kind          PostV1AgreementsAgreementsGetResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                             `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                             `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                             `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
 	Number        string                                              `json:"number" url:"number"`
 	Name          *string                                             `json:"name,omitempty" url:"name,omitempty"`
 	StartDate     string                                              `json:"startDate" url:"startDate"`
@@ -2225,6 +2424,7 @@ type PostV1AgreementsAgreementsGetResponse struct {
 	Currency      string                                              `json:"currency" url:"currency"`
 	Status        PostV1AgreementsAgreementsGetResponseStatus         `json:"status" url:"status"`
 	Notes         *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt     string                                              `json:"createdAt" url:"createdAt"`
 	Items         []*PostV1AgreementsAgreementsGetResponseItemsItem   `json:"items" url:"items"`
 
@@ -2249,11 +2449,32 @@ func (p *PostV1AgreementsAgreementsGetResponse) GetTypeID() *string {
 	return p.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsGetResponse) GetPartnerID() string {
+func (p *PostV1AgreementsAgreementsGetResponse) GetKind() PostV1AgreementsAgreementsGetResponseKind {
 	if p == nil {
 		return ""
 	}
+	return p.Kind
+}
+
+func (p *PostV1AgreementsAgreementsGetResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
 	return p.PartnerID
+}
+
+func (p *PostV1AgreementsAgreementsGetResponse) GetEmployeeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1AgreementsAgreementsGetResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
 }
 
 func (p *PostV1AgreementsAgreementsGetResponse) GetNumber() string {
@@ -2326,6 +2547,13 @@ func (p *PostV1AgreementsAgreementsGetResponse) GetNotes() *string {
 	return p.Notes
 }
 
+func (p *PostV1AgreementsAgreementsGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
+}
+
 func (p *PostV1AgreementsAgreementsGetResponse) GetCreatedAt() string {
 	if p == nil {
 		return ""
@@ -2368,11 +2596,32 @@ func (p *PostV1AgreementsAgreementsGetResponse) SetTypeID(typeID *string) {
 	p.require(postV1AgreementsAgreementsGetResponseFieldTypeID)
 }
 
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponse) SetKind(kind PostV1AgreementsAgreementsGetResponseKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsGetResponseFieldKind)
+}
+
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsGetResponse) SetPartnerID(partnerID string) {
+func (p *PostV1AgreementsAgreementsGetResponse) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1AgreementsAgreementsGetResponseFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponse) SetEmployeeID(employeeID *string) {
+	p.EmployeeID = employeeID
+	p.require(postV1AgreementsAgreementsGetResponseFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1AgreementsAgreementsGetResponseFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
@@ -2443,6 +2692,13 @@ func (p *PostV1AgreementsAgreementsGetResponse) SetStatus(status PostV1Agreement
 func (p *PostV1AgreementsAgreementsGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsGetResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsGetResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -2688,6 +2944,43 @@ func (p *PostV1AgreementsAgreementsGetResponseItemsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AgreementsAgreementsGetResponseKind string
+
+const (
+	PostV1AgreementsAgreementsGetResponseKindCustomer   PostV1AgreementsAgreementsGetResponseKind = "customer"
+	PostV1AgreementsAgreementsGetResponseKindSupplier   PostV1AgreementsAgreementsGetResponseKind = "supplier"
+	PostV1AgreementsAgreementsGetResponseKindEmployment PostV1AgreementsAgreementsGetResponseKind = "employment"
+	PostV1AgreementsAgreementsGetResponseKindBank       PostV1AgreementsAgreementsGetResponseKind = "bank"
+	PostV1AgreementsAgreementsGetResponseKindLease      PostV1AgreementsAgreementsGetResponseKind = "lease"
+	PostV1AgreementsAgreementsGetResponseKindInsurance  PostV1AgreementsAgreementsGetResponseKind = "insurance"
+	PostV1AgreementsAgreementsGetResponseKindOther      PostV1AgreementsAgreementsGetResponseKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsGetResponseKindFromString(s string) (PostV1AgreementsAgreementsGetResponseKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsGetResponseKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsGetResponseKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsGetResponseKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsGetResponseKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsGetResponseKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsGetResponseKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsGetResponseKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsGetResponseKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsGetResponseKind) Ptr() *PostV1AgreementsAgreementsGetResponseKind {
+	return &p
 }
 
 type PostV1AgreementsAgreementsGetResponseStatus string
@@ -3291,24 +3584,31 @@ func (p *PostV1AgreementsAgreementsListResponse) String() string {
 var (
 	postV1AgreementsAgreementsListResponseRowsItemFieldID            = big.NewInt(1 << 0)
 	postV1AgreementsAgreementsListResponseRowsItemFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNumber        = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsListResponseRowsItemFieldName          = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStartDate     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsListResponseRowsItemFieldEndDate       = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsListResponseRowsItemFieldValue         = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCurrency      = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsListResponseRowsItemFieldStatus        = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsListResponseRowsItemFieldNotes         = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsListResponseRowsItemFieldKind          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID     = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsListResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsListResponseRowsItemFieldBankAccountID = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsListResponseRowsItemFieldNumber        = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsListResponseRowsItemFieldName          = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsListResponseRowsItemFieldStartDate     = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsListResponseRowsItemFieldEndDate       = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsListResponseRowsItemFieldAutoRenew     = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsListResponseRowsItemFieldValue         = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsListResponseRowsItemFieldBillingPeriod = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsListResponseRowsItemFieldCurrency      = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsListResponseRowsItemFieldStatus        = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsListResponseRowsItemFieldNotes         = big.NewInt(1 << 15)
+	postV1AgreementsAgreementsListResponseRowsItemFieldDocumentRef   = big.NewInt(1 << 16)
+	postV1AgreementsAgreementsListResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
 )
 
 type PostV1AgreementsAgreementsListResponseRowsItem struct {
 	ID            string                                                       `json:"id" url:"id"`
 	TypeID        *string                                                      `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID     string                                                       `json:"partnerId" url:"partnerId"`
+	Kind          PostV1AgreementsAgreementsListResponseRowsItemKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                                      `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                                      `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                                      `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
 	Number        string                                                       `json:"number" url:"number"`
 	Name          *string                                                      `json:"name,omitempty" url:"name,omitempty"`
 	StartDate     string                                                       `json:"startDate" url:"startDate"`
@@ -3319,6 +3619,7 @@ type PostV1AgreementsAgreementsListResponseRowsItem struct {
 	Currency      string                                                       `json:"currency" url:"currency"`
 	Status        PostV1AgreementsAgreementsListResponseRowsItemStatus         `json:"status" url:"status"`
 	Notes         *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt     string                                                       `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3342,11 +3643,32 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetTypeID() *string {
 	return p.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetPartnerID() string {
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetKind() PostV1AgreementsAgreementsListResponseRowsItemKind {
 	if p == nil {
 		return ""
 	}
+	return p.Kind
+}
+
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
 	return p.PartnerID
+}
+
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetEmployeeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
 }
 
 func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetNumber() string {
@@ -3419,6 +3741,13 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetNotes() *string {
 	return p.Notes
 }
 
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
+}
+
 func (p *PostV1AgreementsAgreementsListResponseRowsItem) GetCreatedAt() string {
 	if p == nil {
 		return ""
@@ -3454,11 +3783,32 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetTypeID(typeID *strin
 	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldTypeID)
 }
 
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetKind(kind PostV1AgreementsAgreementsListResponseRowsItemKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldKind)
+}
+
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetPartnerID(partnerID string) {
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetEmployeeID(employeeID *string) {
+	p.EmployeeID = employeeID
+	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
@@ -3529,6 +3879,13 @@ func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetStatus(status PostV1
 func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsListResponseRowsItemFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3605,6 +3962,43 @@ func (p PostV1AgreementsAgreementsListResponseRowsItemBillingPeriod) Ptr() *Post
 	return &p
 }
 
+type PostV1AgreementsAgreementsListResponseRowsItemKind string
+
+const (
+	PostV1AgreementsAgreementsListResponseRowsItemKindCustomer   PostV1AgreementsAgreementsListResponseRowsItemKind = "customer"
+	PostV1AgreementsAgreementsListResponseRowsItemKindSupplier   PostV1AgreementsAgreementsListResponseRowsItemKind = "supplier"
+	PostV1AgreementsAgreementsListResponseRowsItemKindEmployment PostV1AgreementsAgreementsListResponseRowsItemKind = "employment"
+	PostV1AgreementsAgreementsListResponseRowsItemKindBank       PostV1AgreementsAgreementsListResponseRowsItemKind = "bank"
+	PostV1AgreementsAgreementsListResponseRowsItemKindLease      PostV1AgreementsAgreementsListResponseRowsItemKind = "lease"
+	PostV1AgreementsAgreementsListResponseRowsItemKindInsurance  PostV1AgreementsAgreementsListResponseRowsItemKind = "insurance"
+	PostV1AgreementsAgreementsListResponseRowsItemKindOther      PostV1AgreementsAgreementsListResponseRowsItemKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsListResponseRowsItemKindFromString(s string) (PostV1AgreementsAgreementsListResponseRowsItemKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsListResponseRowsItemKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsListResponseRowsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsListResponseRowsItemKind) Ptr() *PostV1AgreementsAgreementsListResponseRowsItemKind {
+	return &p
+}
+
 type PostV1AgreementsAgreementsListResponseRowsItemStatus string
 
 const (
@@ -3658,6 +4052,43 @@ func (p PostV1AgreementsAgreementsUpdateRequestBillingPeriod) Ptr() *PostV1Agree
 	return &p
 }
 
+type PostV1AgreementsAgreementsUpdateRequestKind string
+
+const (
+	PostV1AgreementsAgreementsUpdateRequestKindCustomer   PostV1AgreementsAgreementsUpdateRequestKind = "customer"
+	PostV1AgreementsAgreementsUpdateRequestKindSupplier   PostV1AgreementsAgreementsUpdateRequestKind = "supplier"
+	PostV1AgreementsAgreementsUpdateRequestKindEmployment PostV1AgreementsAgreementsUpdateRequestKind = "employment"
+	PostV1AgreementsAgreementsUpdateRequestKindBank       PostV1AgreementsAgreementsUpdateRequestKind = "bank"
+	PostV1AgreementsAgreementsUpdateRequestKindLease      PostV1AgreementsAgreementsUpdateRequestKind = "lease"
+	PostV1AgreementsAgreementsUpdateRequestKindInsurance  PostV1AgreementsAgreementsUpdateRequestKind = "insurance"
+	PostV1AgreementsAgreementsUpdateRequestKindOther      PostV1AgreementsAgreementsUpdateRequestKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsUpdateRequestKindFromString(s string) (PostV1AgreementsAgreementsUpdateRequestKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsUpdateRequestKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsUpdateRequestKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsUpdateRequestKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsUpdateRequestKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsUpdateRequestKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsUpdateRequestKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsUpdateRequestKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsUpdateRequestKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsUpdateRequestKind) Ptr() *PostV1AgreementsAgreementsUpdateRequestKind {
+	return &p
+}
+
 type PostV1AgreementsAgreementsUpdateRequestStatus string
 
 const (
@@ -3689,25 +4120,32 @@ func (p PostV1AgreementsAgreementsUpdateRequestStatus) Ptr() *PostV1AgreementsAg
 var (
 	postV1AgreementsAgreementsUpdateResponseFieldID            = big.NewInt(1 << 0)
 	postV1AgreementsAgreementsUpdateResponseFieldTypeID        = big.NewInt(1 << 1)
-	postV1AgreementsAgreementsUpdateResponseFieldPartnerID     = big.NewInt(1 << 2)
-	postV1AgreementsAgreementsUpdateResponseFieldNumber        = big.NewInt(1 << 3)
-	postV1AgreementsAgreementsUpdateResponseFieldName          = big.NewInt(1 << 4)
-	postV1AgreementsAgreementsUpdateResponseFieldStartDate     = big.NewInt(1 << 5)
-	postV1AgreementsAgreementsUpdateResponseFieldEndDate       = big.NewInt(1 << 6)
-	postV1AgreementsAgreementsUpdateResponseFieldAutoRenew     = big.NewInt(1 << 7)
-	postV1AgreementsAgreementsUpdateResponseFieldValue         = big.NewInt(1 << 8)
-	postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod = big.NewInt(1 << 9)
-	postV1AgreementsAgreementsUpdateResponseFieldCurrency      = big.NewInt(1 << 10)
-	postV1AgreementsAgreementsUpdateResponseFieldStatus        = big.NewInt(1 << 11)
-	postV1AgreementsAgreementsUpdateResponseFieldNotes         = big.NewInt(1 << 12)
-	postV1AgreementsAgreementsUpdateResponseFieldCreatedAt     = big.NewInt(1 << 13)
-	postV1AgreementsAgreementsUpdateResponseFieldItems         = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsUpdateResponseFieldKind          = big.NewInt(1 << 2)
+	postV1AgreementsAgreementsUpdateResponseFieldPartnerID     = big.NewInt(1 << 3)
+	postV1AgreementsAgreementsUpdateResponseFieldEmployeeID    = big.NewInt(1 << 4)
+	postV1AgreementsAgreementsUpdateResponseFieldBankAccountID = big.NewInt(1 << 5)
+	postV1AgreementsAgreementsUpdateResponseFieldNumber        = big.NewInt(1 << 6)
+	postV1AgreementsAgreementsUpdateResponseFieldName          = big.NewInt(1 << 7)
+	postV1AgreementsAgreementsUpdateResponseFieldStartDate     = big.NewInt(1 << 8)
+	postV1AgreementsAgreementsUpdateResponseFieldEndDate       = big.NewInt(1 << 9)
+	postV1AgreementsAgreementsUpdateResponseFieldAutoRenew     = big.NewInt(1 << 10)
+	postV1AgreementsAgreementsUpdateResponseFieldValue         = big.NewInt(1 << 11)
+	postV1AgreementsAgreementsUpdateResponseFieldBillingPeriod = big.NewInt(1 << 12)
+	postV1AgreementsAgreementsUpdateResponseFieldCurrency      = big.NewInt(1 << 13)
+	postV1AgreementsAgreementsUpdateResponseFieldStatus        = big.NewInt(1 << 14)
+	postV1AgreementsAgreementsUpdateResponseFieldNotes         = big.NewInt(1 << 15)
+	postV1AgreementsAgreementsUpdateResponseFieldDocumentRef   = big.NewInt(1 << 16)
+	postV1AgreementsAgreementsUpdateResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	postV1AgreementsAgreementsUpdateResponseFieldItems         = big.NewInt(1 << 18)
 )
 
 type PostV1AgreementsAgreementsUpdateResponse struct {
 	ID            string                                                 `json:"id" url:"id"`
 	TypeID        *string                                                `json:"typeId,omitempty" url:"typeId,omitempty"`
-	PartnerID     string                                                 `json:"partnerId" url:"partnerId"`
+	Kind          PostV1AgreementsAgreementsUpdateResponseKind           `json:"kind" url:"kind"`
+	PartnerID     *string                                                `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	EmployeeID    *string                                                `json:"employeeId,omitempty" url:"employeeId,omitempty"`
+	BankAccountID *string                                                `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
 	Number        string                                                 `json:"number" url:"number"`
 	Name          *string                                                `json:"name,omitempty" url:"name,omitempty"`
 	StartDate     string                                                 `json:"startDate" url:"startDate"`
@@ -3718,6 +4156,7 @@ type PostV1AgreementsAgreementsUpdateResponse struct {
 	Currency      string                                                 `json:"currency" url:"currency"`
 	Status        PostV1AgreementsAgreementsUpdateResponseStatus         `json:"status" url:"status"`
 	Notes         *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef   *string                                                `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt     string                                                 `json:"createdAt" url:"createdAt"`
 	Items         []*PostV1AgreementsAgreementsUpdateResponseItemsItem   `json:"items" url:"items"`
 
@@ -3742,11 +4181,32 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) GetTypeID() *string {
 	return p.TypeID
 }
 
-func (p *PostV1AgreementsAgreementsUpdateResponse) GetPartnerID() string {
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetKind() PostV1AgreementsAgreementsUpdateResponseKind {
 	if p == nil {
 		return ""
 	}
+	return p.Kind
+}
+
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
 	return p.PartnerID
+}
+
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetEmployeeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
 }
 
 func (p *PostV1AgreementsAgreementsUpdateResponse) GetNumber() string {
@@ -3819,6 +4279,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) GetNotes() *string {
 	return p.Notes
 }
 
+func (p *PostV1AgreementsAgreementsUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
+}
+
 func (p *PostV1AgreementsAgreementsUpdateResponse) GetCreatedAt() string {
 	if p == nil {
 		return ""
@@ -3861,11 +4328,32 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) SetTypeID(typeID *string) {
 	p.require(postV1AgreementsAgreementsUpdateResponseFieldTypeID)
 }
 
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetKind(kind PostV1AgreementsAgreementsUpdateResponseKind) {
+	p.Kind = kind
+	p.require(postV1AgreementsAgreementsUpdateResponseFieldKind)
+}
+
 // SetPartnerID sets the PartnerID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AgreementsAgreementsUpdateResponse) SetPartnerID(partnerID string) {
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1AgreementsAgreementsUpdateResponseFieldPartnerID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetEmployeeID(employeeID *string) {
+	p.EmployeeID = employeeID
+	p.require(postV1AgreementsAgreementsUpdateResponseFieldEmployeeID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1AgreementsAgreementsUpdateResponseFieldBankAccountID)
 }
 
 // SetNumber sets the Number field and marks it as non-optional;
@@ -3936,6 +4424,13 @@ func (p *PostV1AgreementsAgreementsUpdateResponse) SetStatus(status PostV1Agreem
 func (p *PostV1AgreementsAgreementsUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AgreementsAgreementsUpdateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AgreementsAgreementsUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1AgreementsAgreementsUpdateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -4181,6 +4676,43 @@ func (p *PostV1AgreementsAgreementsUpdateResponseItemsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AgreementsAgreementsUpdateResponseKind string
+
+const (
+	PostV1AgreementsAgreementsUpdateResponseKindCustomer   PostV1AgreementsAgreementsUpdateResponseKind = "customer"
+	PostV1AgreementsAgreementsUpdateResponseKindSupplier   PostV1AgreementsAgreementsUpdateResponseKind = "supplier"
+	PostV1AgreementsAgreementsUpdateResponseKindEmployment PostV1AgreementsAgreementsUpdateResponseKind = "employment"
+	PostV1AgreementsAgreementsUpdateResponseKindBank       PostV1AgreementsAgreementsUpdateResponseKind = "bank"
+	PostV1AgreementsAgreementsUpdateResponseKindLease      PostV1AgreementsAgreementsUpdateResponseKind = "lease"
+	PostV1AgreementsAgreementsUpdateResponseKindInsurance  PostV1AgreementsAgreementsUpdateResponseKind = "insurance"
+	PostV1AgreementsAgreementsUpdateResponseKindOther      PostV1AgreementsAgreementsUpdateResponseKind = "other"
+)
+
+func NewPostV1AgreementsAgreementsUpdateResponseKindFromString(s string) (PostV1AgreementsAgreementsUpdateResponseKind, error) {
+	switch s {
+	case "customer":
+		return PostV1AgreementsAgreementsUpdateResponseKindCustomer, nil
+	case "supplier":
+		return PostV1AgreementsAgreementsUpdateResponseKindSupplier, nil
+	case "employment":
+		return PostV1AgreementsAgreementsUpdateResponseKindEmployment, nil
+	case "bank":
+		return PostV1AgreementsAgreementsUpdateResponseKindBank, nil
+	case "lease":
+		return PostV1AgreementsAgreementsUpdateResponseKindLease, nil
+	case "insurance":
+		return PostV1AgreementsAgreementsUpdateResponseKindInsurance, nil
+	case "other":
+		return PostV1AgreementsAgreementsUpdateResponseKindOther, nil
+	}
+	var t PostV1AgreementsAgreementsUpdateResponseKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AgreementsAgreementsUpdateResponseKind) Ptr() *PostV1AgreementsAgreementsUpdateResponseKind {
+	return &p
 }
 
 type PostV1AgreementsAgreementsUpdateResponseStatus string

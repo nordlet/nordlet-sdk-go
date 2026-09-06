@@ -19,7 +19,8 @@ var (
 	postV1PurchasesInvoicesCreateRequestFieldCreditedInvoiceID = big.NewInt(1 << 6)
 	postV1PurchasesInvoicesCreateRequestFieldPurchaseOrderID   = big.NewInt(1 << 7)
 	postV1PurchasesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 10)
 )
 
 type PostV1PurchasesInvoicesCreateRequest struct {
@@ -32,6 +33,7 @@ type PostV1PurchasesInvoicesCreateRequest struct {
 	CreditedInvoiceID *string                                          `json:"creditedInvoiceId,omitempty" url:"-"`
 	PurchaseOrderID   *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
 	Notes             *string                                          `json:"notes,omitempty" url:"-"`
+	DocumentRef       *string                                          `json:"documentRef,omitempty" url:"-"`
 	Lines             []*PostV1PurchasesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -106,6 +108,13 @@ func (p *PostV1PurchasesInvoicesCreateRequest) SetPurchaseOrderID(purchaseOrderI
 func (p *PostV1PurchasesInvoicesCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesCreateRequestFieldDocumentRef)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -711,7 +720,8 @@ var (
 	postV1PurchasesOrdersCreateRequestFieldWarehouseID  = big.NewInt(1 << 4)
 	postV1PurchasesOrdersCreateRequestFieldCurrency     = big.NewInt(1 << 5)
 	postV1PurchasesOrdersCreateRequestFieldNotes        = big.NewInt(1 << 6)
-	postV1PurchasesOrdersCreateRequestFieldLines        = big.NewInt(1 << 7)
+	postV1PurchasesOrdersCreateRequestFieldDocumentRef  = big.NewInt(1 << 7)
+	postV1PurchasesOrdersCreateRequestFieldLines        = big.NewInt(1 << 8)
 )
 
 type PostV1PurchasesOrdersCreateRequest struct {
@@ -722,6 +732,7 @@ type PostV1PurchasesOrdersCreateRequest struct {
 	WarehouseID  *string                                        `json:"warehouseId,omitempty" url:"-"`
 	Currency     *string                                        `json:"currency,omitempty" url:"-"`
 	Notes        *string                                        `json:"notes,omitempty" url:"-"`
+	DocumentRef  *string                                        `json:"documentRef,omitempty" url:"-"`
 	Lines        []*PostV1PurchasesOrdersCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -782,6 +793,13 @@ func (p *PostV1PurchasesOrdersCreateRequest) SetCurrency(currency *string) {
 func (p *PostV1PurchasesOrdersCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersCreateRequestFieldDocumentRef)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -1744,9 +1762,10 @@ var (
 	postV1PurchasesInvoicesCreateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesCreateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1PurchasesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 21)
 )
 
 type PostV1PurchasesInvoicesCreateResponse struct {
@@ -1768,6 +1787,7 @@ type PostV1PurchasesInvoicesCreateResponse struct {
 	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                             `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1PurchasesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
@@ -1903,6 +1923,13 @@ func (p *PostV1PurchasesInvoicesCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesInvoicesCreateResponse) GetCreatedAt() string {
@@ -2064,6 +2091,13 @@ func (p *PostV1PurchasesInvoicesCreateResponse) SetPurchaseOrderID(purchaseOrder
 func (p *PostV1PurchasesInvoicesCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesCreateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesCreateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -2625,9 +2659,10 @@ var (
 	postV1PurchasesInvoicesGetResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesGetResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1PurchasesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesGetResponseFieldLines                = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesGetResponseFieldLines                = big.NewInt(1 << 21)
 )
 
 type PostV1PurchasesInvoicesGetResponse struct {
@@ -2649,6 +2684,7 @@ type PostV1PurchasesInvoicesGetResponse struct {
 	CreditedInvoiceID    *string                                         `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                         `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1PurchasesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
@@ -2784,6 +2820,13 @@ func (p *PostV1PurchasesInvoicesGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesInvoicesGetResponse) GetCreatedAt() string {
@@ -2945,6 +2988,13 @@ func (p *PostV1PurchasesInvoicesGetResponse) SetPurchaseOrderID(purchaseOrderID 
 func (p *PostV1PurchasesInvoicesGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesGetResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesGetResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3992,8 +4042,9 @@ var (
 	postV1PurchasesInvoicesListResponseRowsItemFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesListResponseRowsItemFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1PurchasesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
 type PostV1PurchasesInvoicesListResponseRowsItem struct {
@@ -4015,6 +4066,7 @@ type PostV1PurchasesInvoicesListResponseRowsItem struct {
 	CreditedInvoiceID    *string                                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                                  `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                                   `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                                   `json:"updatedAt" url:"updatedAt"`
 
@@ -4149,6 +4201,13 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetCreatedAt() string {
@@ -4303,6 +4362,13 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetPurchaseOrderID(purchas
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -4849,9 +4915,10 @@ var (
 	postV1PurchasesInvoicesRegisterResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesRegisterResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1PurchasesInvoicesRegisterResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesRegisterResponseFieldLines                = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesRegisterResponseFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesRegisterResponseFieldLines                = big.NewInt(1 << 21)
 )
 
 type PostV1PurchasesInvoicesRegisterResponse struct {
@@ -4873,6 +4940,7 @@ type PostV1PurchasesInvoicesRegisterResponse struct {
 	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                              `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1PurchasesInvoicesRegisterResponseLinesItem  `json:"lines" url:"lines"`
@@ -5008,6 +5076,13 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesInvoicesRegisterResponse) GetCreatedAt() string {
@@ -5169,6 +5244,13 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) SetPurchaseOrderID(purchaseOrd
 func (p *PostV1PurchasesInvoicesRegisterResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesRegisterResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5952,9 +6034,10 @@ var (
 	postV1PurchasesInvoicesUpdateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesUpdateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
 	postV1PurchasesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 21)
 )
 
 type PostV1PurchasesInvoicesUpdateResponse struct {
@@ -5976,6 +6059,7 @@ type PostV1PurchasesInvoicesUpdateResponse struct {
 	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
 	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                             `json:"updatedAt" url:"updatedAt"`
 	Lines                []*PostV1PurchasesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
@@ -6111,6 +6195,13 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesInvoicesUpdateResponse) GetCreatedAt() string {
@@ -6272,6 +6363,13 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) SetPurchaseOrderID(purchaseOrder
 func (p *PostV1PurchasesInvoicesUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesUpdateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -6745,9 +6843,10 @@ var (
 	postV1PurchasesOrdersApproveResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersApproveResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersApproveResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersApproveResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersApproveResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersApproveResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersApproveResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersApproveResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersApproveResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersApproveResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersApproveResponse struct {
@@ -6765,6 +6864,7 @@ type PostV1PurchasesOrdersApproveResponse struct {
 	ApprovedBy   *string                                          `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                          `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                          `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                           `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                           `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersApproveResponseLinesItem `json:"lines" url:"lines"`
@@ -6872,6 +6972,13 @@ func (p *PostV1PurchasesOrdersApproveResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersApproveResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersApproveResponse) GetCreatedAt() string {
@@ -7005,6 +7112,13 @@ func (p *PostV1PurchasesOrdersApproveResponse) SetApprovedAt(approvedAt *string)
 func (p *PostV1PurchasesOrdersApproveResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersApproveResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersApproveResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersApproveResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7478,9 +7592,10 @@ var (
 	postV1PurchasesOrdersCancelResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersCancelResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersCancelResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersCancelResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersCancelResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersCancelResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCancelResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersCancelResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersCancelResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCancelResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersCancelResponse struct {
@@ -7498,6 +7613,7 @@ type PostV1PurchasesOrdersCancelResponse struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersCancelResponseLinesItem `json:"lines" url:"lines"`
@@ -7605,6 +7721,13 @@ func (p *PostV1PurchasesOrdersCancelResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersCancelResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersCancelResponse) GetCreatedAt() string {
@@ -7738,6 +7861,13 @@ func (p *PostV1PurchasesOrdersCancelResponse) SetApprovedAt(approvedAt *string) 
 func (p *PostV1PurchasesOrdersCancelResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersCancelResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersCancelResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersCancelResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8211,9 +8341,10 @@ var (
 	postV1PurchasesOrdersCloseResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersCloseResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersCloseResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersCloseResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersCloseResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersCloseResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCloseResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersCloseResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersCloseResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCloseResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersCloseResponse struct {
@@ -8231,6 +8362,7 @@ type PostV1PurchasesOrdersCloseResponse struct {
 	ApprovedBy   *string                                        `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                        `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                         `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                         `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersCloseResponseLinesItem `json:"lines" url:"lines"`
@@ -8338,6 +8470,13 @@ func (p *PostV1PurchasesOrdersCloseResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersCloseResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersCloseResponse) GetCreatedAt() string {
@@ -8471,6 +8610,13 @@ func (p *PostV1PurchasesOrdersCloseResponse) SetApprovedAt(approvedAt *string) {
 func (p *PostV1PurchasesOrdersCloseResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersCloseResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersCloseResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersCloseResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -9250,9 +9396,10 @@ var (
 	postV1PurchasesOrdersCreateResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersCreateResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersCreateResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersCreateResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersCreateResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersCreateResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCreateResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersCreateResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersCreateResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersCreateResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersCreateResponse struct {
@@ -9270,6 +9417,7 @@ type PostV1PurchasesOrdersCreateResponse struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersCreateResponseLinesItem `json:"lines" url:"lines"`
@@ -9377,6 +9525,13 @@ func (p *PostV1PurchasesOrdersCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersCreateResponse) GetCreatedAt() string {
@@ -9510,6 +9665,13 @@ func (p *PostV1PurchasesOrdersCreateResponse) SetApprovedAt(approvedAt *string) 
 func (p *PostV1PurchasesOrdersCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersCreateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersCreateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -10067,9 +10229,10 @@ var (
 	postV1PurchasesOrdersGetResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersGetResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersGetResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersGetResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersGetResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersGetResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersGetResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersGetResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersGetResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersGetResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersGetResponse struct {
@@ -10087,6 +10250,7 @@ type PostV1PurchasesOrdersGetResponse struct {
 	ApprovedBy   *string                                      `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                      `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                       `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                       `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersGetResponseLinesItem `json:"lines" url:"lines"`
@@ -10194,6 +10358,13 @@ func (p *PostV1PurchasesOrdersGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersGetResponse) GetCreatedAt() string {
@@ -10327,6 +10498,13 @@ func (p *PostV1PurchasesOrdersGetResponse) SetApprovedAt(approvedAt *string) {
 func (p *PostV1PurchasesOrdersGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersGetResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersGetResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -11370,8 +11548,9 @@ var (
 	postV1PurchasesOrdersListResponseRowsItemFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersListResponseRowsItemFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersListResponseRowsItemFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersListResponseRowsItemFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersListResponseRowsItemFieldUpdatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersListResponseRowsItemFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersListResponseRowsItemFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersListResponseRowsItemFieldUpdatedAt    = big.NewInt(1 << 16)
 )
 
 type PostV1PurchasesOrdersListResponseRowsItem struct {
@@ -11389,6 +11568,7 @@ type PostV1PurchasesOrdersListResponseRowsItem struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 
@@ -11495,6 +11675,13 @@ func (p *PostV1PurchasesOrdersListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersListResponseRowsItem) GetCreatedAt() string {
@@ -11623,6 +11810,13 @@ func (p *PostV1PurchasesOrdersListResponseRowsItem) SetNotes(notes *string) {
 	p.require(postV1PurchasesOrdersListResponseRowsItemFieldNotes)
 }
 
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersListResponseRowsItemFieldDocumentRef)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PurchasesOrdersListResponseRowsItem) SetCreatedAt(createdAt string) {
@@ -11731,9 +11925,10 @@ var (
 	postV1PurchasesOrdersRejectResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersRejectResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersRejectResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersRejectResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersRejectResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersRejectResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersRejectResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersRejectResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersRejectResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersRejectResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersRejectResponse struct {
@@ -11751,6 +11946,7 @@ type PostV1PurchasesOrdersRejectResponse struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersRejectResponseLinesItem `json:"lines" url:"lines"`
@@ -11858,6 +12054,13 @@ func (p *PostV1PurchasesOrdersRejectResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersRejectResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersRejectResponse) GetCreatedAt() string {
@@ -11991,6 +12194,13 @@ func (p *PostV1PurchasesOrdersRejectResponse) SetApprovedAt(approvedAt *string) 
 func (p *PostV1PurchasesOrdersRejectResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersRejectResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersRejectResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersRejectResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -12464,9 +12674,10 @@ var (
 	postV1PurchasesOrdersSubmitResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersSubmitResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersSubmitResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersSubmitResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersSubmitResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersSubmitResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersSubmitResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersSubmitResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersSubmitResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersSubmitResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersSubmitResponse struct {
@@ -12484,6 +12695,7 @@ type PostV1PurchasesOrdersSubmitResponse struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersSubmitResponseLinesItem `json:"lines" url:"lines"`
@@ -12591,6 +12803,13 @@ func (p *PostV1PurchasesOrdersSubmitResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersSubmitResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersSubmitResponse) GetCreatedAt() string {
@@ -12724,6 +12943,13 @@ func (p *PostV1PurchasesOrdersSubmitResponse) SetApprovedAt(approvedAt *string) 
 func (p *PostV1PurchasesOrdersSubmitResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersSubmitResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersSubmitResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersSubmitResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -13503,9 +13729,10 @@ var (
 	postV1PurchasesOrdersUpdateResponseFieldApprovedBy   = big.NewInt(1 << 11)
 	postV1PurchasesOrdersUpdateResponseFieldApprovedAt   = big.NewInt(1 << 12)
 	postV1PurchasesOrdersUpdateResponseFieldNotes        = big.NewInt(1 << 13)
-	postV1PurchasesOrdersUpdateResponseFieldCreatedAt    = big.NewInt(1 << 14)
-	postV1PurchasesOrdersUpdateResponseFieldUpdatedAt    = big.NewInt(1 << 15)
-	postV1PurchasesOrdersUpdateResponseFieldLines        = big.NewInt(1 << 16)
+	postV1PurchasesOrdersUpdateResponseFieldDocumentRef  = big.NewInt(1 << 14)
+	postV1PurchasesOrdersUpdateResponseFieldCreatedAt    = big.NewInt(1 << 15)
+	postV1PurchasesOrdersUpdateResponseFieldUpdatedAt    = big.NewInt(1 << 16)
+	postV1PurchasesOrdersUpdateResponseFieldLines        = big.NewInt(1 << 17)
 )
 
 type PostV1PurchasesOrdersUpdateResponse struct {
@@ -13523,6 +13750,7 @@ type PostV1PurchasesOrdersUpdateResponse struct {
 	ApprovedBy   *string                                         `json:"approvedBy,omitempty" url:"approvedBy,omitempty"`
 	ApprovedAt   *string                                         `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 	Notes        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt    string                                          `json:"updatedAt" url:"updatedAt"`
 	Lines        []*PostV1PurchasesOrdersUpdateResponseLinesItem `json:"lines" url:"lines"`
@@ -13630,6 +13858,13 @@ func (p *PostV1PurchasesOrdersUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesOrdersUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PurchasesOrdersUpdateResponse) GetCreatedAt() string {
@@ -13763,6 +13998,13 @@ func (p *PostV1PurchasesOrdersUpdateResponse) SetApprovedAt(approvedAt *string) 
 func (p *PostV1PurchasesOrdersUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesOrdersUpdateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PurchasesOrdersUpdateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

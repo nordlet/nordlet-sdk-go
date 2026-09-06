@@ -272,7 +272,7 @@ func TestSettersPostV1FilesUploadRequest(t *testing.T) {
 
 	t.Run("SetEntityID", func(t *testing.T) {
 		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
 		assert.NotNil(t, obj.explicitFields)
@@ -340,7 +340,7 @@ func TestSettersMarkExplicitPostV1FilesUploadRequest(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesUploadRequest{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 
 		// Act
 		obj.SetEntityID(fernTestValueEntityID)
@@ -552,7 +552,7 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 
 	t.Run("SetEntityID", func(t *testing.T) {
 		obj := &PostV1FilesGetResponse{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
 		assert.NotNil(t, obj.explicitFields)
@@ -587,6 +587,14 @@ func TestSettersPostV1FilesGetResponse(t *testing.T) {
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStorageKey", func(t *testing.T) {
+		obj := &PostV1FilesGetResponse{}
+		var fernTestValueStorageKey string
+		obj.SetStorageKey(fernTestValueStorageKey)
+		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -659,11 +667,21 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesGetResponse{}
-		var expected string
+		var expected *string
 		obj.EntityID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetEntityID(), "getter should return the property value")
+	})
+
+	t.Run("GetEntityID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesGetResponse{}
+		obj.EntityID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEntityID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
@@ -768,6 +786,29 @@ func TestGettersPostV1FilesGetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSha256() // Should return zero value
+	})
+
+	t.Run("GetStorageKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesGetResponse{}
+		var expected string
+		obj.StorageKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStorageKey(), "getter should return the property value")
+	})
+
+	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1FilesGetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStorageKey() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -885,7 +926,7 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesGetResponse{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 
 		// Act
 		obj.SetEntityID(fernTestValueEntityID)
@@ -1013,6 +1054,37 @@ func TestSettersMarkExplicitPostV1FilesGetResponse(t *testing.T) {
 
 		// Act
 		obj.SetSha256(fernTestValueSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesGetResponse{}
+		var fernTestValueStorageKey string
+
+		// Act
+		obj.SetStorageKey(fernTestValueStorageKey)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1888,7 +1960,7 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 
 	t.Run("SetEntityID", func(t *testing.T) {
 		obj := &PostV1FilesListResponseRowsItem{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
 		assert.NotNil(t, obj.explicitFields)
@@ -1923,6 +1995,14 @@ func TestSettersPostV1FilesListResponseRowsItem(t *testing.T) {
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStorageKey", func(t *testing.T) {
+		obj := &PostV1FilesListResponseRowsItem{}
+		var fernTestValueStorageKey string
+		obj.SetStorageKey(fernTestValueStorageKey)
+		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -1987,11 +2067,21 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesListResponseRowsItem{}
-		var expected string
+		var expected *string
 		obj.EntityID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetEntityID(), "getter should return the property value")
+	})
+
+	t.Run("GetEntityID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesListResponseRowsItem{}
+		obj.EntityID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEntityID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
@@ -2096,6 +2186,29 @@ func TestGettersPostV1FilesListResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSha256() // Should return zero value
+	})
+
+	t.Run("GetStorageKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesListResponseRowsItem{}
+		var expected string
+		obj.StorageKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStorageKey(), "getter should return the property value")
+	})
+
+	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1FilesListResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStorageKey() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -2190,7 +2303,7 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesListResponseRowsItem{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 
 		// Act
 		obj.SetEntityID(fernTestValueEntityID)
@@ -2341,6 +2454,37 @@ func TestSettersMarkExplicitPostV1FilesListResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesListResponseRowsItem{}
+		var fernTestValueStorageKey string
+
+		// Act
+		obj.SetStorageKey(fernTestValueStorageKey)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -2393,7 +2537,7 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 
 	t.Run("SetEntityID", func(t *testing.T) {
 		obj := &PostV1FilesUploadResponse{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 		obj.SetEntityID(fernTestValueEntityID)
 		assert.Equal(t, fernTestValueEntityID, obj.EntityID)
 		assert.NotNil(t, obj.explicitFields)
@@ -2428,6 +2572,14 @@ func TestSettersPostV1FilesUploadResponse(t *testing.T) {
 		var fernTestValueSha256 string
 		obj.SetSha256(fernTestValueSha256)
 		assert.Equal(t, fernTestValueSha256, obj.Sha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStorageKey", func(t *testing.T) {
+		obj := &PostV1FilesUploadResponse{}
+		var fernTestValueStorageKey string
+		obj.SetStorageKey(fernTestValueStorageKey)
+		assert.Equal(t, fernTestValueStorageKey, obj.StorageKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -2492,11 +2644,21 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesUploadResponse{}
-		var expected string
+		var expected *string
 		obj.EntityID = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetEntityID(), "getter should return the property value")
+	})
+
+	t.Run("GetEntityID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesUploadResponse{}
+		obj.EntityID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetEntityID(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetEntityID_NilReceiver", func(t *testing.T) {
@@ -2603,6 +2765,29 @@ func TestGettersPostV1FilesUploadResponse(t *testing.T) {
 		_ = obj.GetSha256() // Should return zero value
 	})
 
+	t.Run("GetStorageKey", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesUploadResponse{}
+		var expected string
+		obj.StorageKey = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStorageKey(), "getter should return the property value")
+	})
+
+	t.Run("GetStorageKey_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *PostV1FilesUploadResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStorageKey() // Should return zero value
+	})
+
 	t.Run("GetCreatedAt", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -2695,7 +2880,7 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &PostV1FilesUploadResponse{}
-		var fernTestValueEntityID string
+		var fernTestValueEntityID *string
 
 		// Act
 		obj.SetEntityID(fernTestValueEntityID)
@@ -2823,6 +3008,37 @@ func TestSettersMarkExplicitPostV1FilesUploadResponse(t *testing.T) {
 
 		// Act
 		obj.SetSha256(fernTestValueSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStorageKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PostV1FilesUploadResponse{}
+		var fernTestValueStorageKey string
+
+		// Act
+		obj.SetStorageKey(fernTestValueStorageKey)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

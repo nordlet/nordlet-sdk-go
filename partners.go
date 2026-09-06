@@ -995,6 +995,7 @@ var (
 	postV1PartnersCreateRequestFieldStatusID             = big.NewInt(1 << 15)
 	postV1PartnersCreateRequestFieldAddress              = big.NewInt(1 << 16)
 	postV1PartnersCreateRequestFieldNotes                = big.NewInt(1 << 17)
+	postV1PartnersCreateRequestFieldDocumentRef          = big.NewInt(1 << 18)
 )
 
 type PostV1PartnersCreateRequest struct {
@@ -1016,6 +1017,7 @@ type PostV1PartnersCreateRequest struct {
 	StatusID             *string                             `json:"statusId,omitempty" url:"-"`
 	Address              *PostV1PartnersCreateRequestAddress `json:"address,omitempty" url:"-"`
 	Notes                *string                             `json:"notes,omitempty" url:"-"`
+	DocumentRef          *string                             `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1152,6 +1154,13 @@ func (p *PostV1PartnersCreateRequest) SetAddress(address *PostV1PartnersCreateRe
 func (p *PostV1PartnersCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersCreateRequestFieldDocumentRef)
 }
 
 func (p *PostV1PartnersCreateRequest) UnmarshalJSON(data []byte) error {
@@ -1295,6 +1304,7 @@ var (
 	postV1PartnersFindOrCreateRequestFieldStatusID             = big.NewInt(1 << 15)
 	postV1PartnersFindOrCreateRequestFieldAddress              = big.NewInt(1 << 16)
 	postV1PartnersFindOrCreateRequestFieldNotes                = big.NewInt(1 << 17)
+	postV1PartnersFindOrCreateRequestFieldDocumentRef          = big.NewInt(1 << 18)
 )
 
 type PostV1PartnersFindOrCreateRequest struct {
@@ -1316,6 +1326,7 @@ type PostV1PartnersFindOrCreateRequest struct {
 	StatusID             *string                                   `json:"statusId,omitempty" url:"-"`
 	Address              *PostV1PartnersFindOrCreateRequestAddress `json:"address,omitempty" url:"-"`
 	Notes                *string                                   `json:"notes,omitempty" url:"-"`
+	DocumentRef          *string                                   `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1452,6 +1463,13 @@ func (p *PostV1PartnersFindOrCreateRequest) SetAddress(address *PostV1PartnersFi
 func (p *PostV1PartnersFindOrCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersFindOrCreateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersFindOrCreateRequestFieldDocumentRef)
 }
 
 func (p *PostV1PartnersFindOrCreateRequest) UnmarshalJSON(data []byte) error {
@@ -2334,6 +2352,7 @@ var (
 	postV1PartnersUpdateRequestFieldStatusID             = big.NewInt(1 << 16)
 	postV1PartnersUpdateRequestFieldAddress              = big.NewInt(1 << 17)
 	postV1PartnersUpdateRequestFieldNotes                = big.NewInt(1 << 18)
+	postV1PartnersUpdateRequestFieldDocumentRef          = big.NewInt(1 << 19)
 )
 
 type PostV1PartnersUpdateRequest struct {
@@ -2356,6 +2375,7 @@ type PostV1PartnersUpdateRequest struct {
 	StatusID             *string                             `json:"statusId,omitempty" url:"-"`
 	Address              *PostV1PartnersUpdateRequestAddress `json:"address,omitempty" url:"-"`
 	Notes                *string                             `json:"notes,omitempty" url:"-"`
+	DocumentRef          *string                             `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2499,6 +2519,13 @@ func (p *PostV1PartnersUpdateRequest) SetAddress(address *PostV1PartnersUpdateRe
 func (p *PostV1PartnersUpdateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersUpdateRequestFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersUpdateRequestFieldDocumentRef)
 }
 
 func (p *PostV1PartnersUpdateRequest) UnmarshalJSON(data []byte) error {
@@ -6820,8 +6847,9 @@ var (
 	postV1PartnersCreateResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
 	postV1PartnersCreateResponseFieldAddress              = big.NewInt(1 << 19)
 	postV1PartnersCreateResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersCreateResponseFieldCreatedAt            = big.NewInt(1 << 21)
-	postV1PartnersCreateResponseFieldUpdatedAt            = big.NewInt(1 << 22)
+	postV1PartnersCreateResponseFieldDocumentRef          = big.NewInt(1 << 21)
+	postV1PartnersCreateResponseFieldCreatedAt            = big.NewInt(1 << 22)
+	postV1PartnersCreateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
 )
 
 type PostV1PartnersCreateResponse struct {
@@ -6846,6 +6874,7 @@ type PostV1PartnersCreateResponse struct {
 	VatValidatedAt       *string                              `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
 	Address              *PostV1PartnersCreateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
 	Notes                *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                               `json:"updatedAt" url:"updatedAt"`
 
@@ -7001,6 +7030,13 @@ func (p *PostV1PartnersCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PartnersCreateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PartnersCreateResponse) GetCreatedAt() string {
@@ -7176,6 +7212,13 @@ func (p *PostV1PartnersCreateResponse) SetAddress(address *PostV1PartnersCreateR
 func (p *PostV1PartnersCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersCreateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersCreateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7944,8 +7987,9 @@ var (
 	postV1PartnersFindOrCreateResponsePartnerFieldVatValidatedAt       = big.NewInt(1 << 18)
 	postV1PartnersFindOrCreateResponsePartnerFieldAddress              = big.NewInt(1 << 19)
 	postV1PartnersFindOrCreateResponsePartnerFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersFindOrCreateResponsePartnerFieldCreatedAt            = big.NewInt(1 << 21)
-	postV1PartnersFindOrCreateResponsePartnerFieldUpdatedAt            = big.NewInt(1 << 22)
+	postV1PartnersFindOrCreateResponsePartnerFieldDocumentRef          = big.NewInt(1 << 21)
+	postV1PartnersFindOrCreateResponsePartnerFieldCreatedAt            = big.NewInt(1 << 22)
+	postV1PartnersFindOrCreateResponsePartnerFieldUpdatedAt            = big.NewInt(1 << 23)
 )
 
 type PostV1PartnersFindOrCreateResponsePartner struct {
@@ -7970,6 +8014,7 @@ type PostV1PartnersFindOrCreateResponsePartner struct {
 	VatValidatedAt       *string                                           `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
 	Address              *PostV1PartnersFindOrCreateResponsePartnerAddress `json:"address,omitempty" url:"address,omitempty"`
 	Notes                *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                            `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                            `json:"updatedAt" url:"updatedAt"`
 
@@ -8125,6 +8170,13 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PartnersFindOrCreateResponsePartner) GetCreatedAt() string {
@@ -8300,6 +8352,13 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) SetAddress(address *PostV1Pa
 func (p *PostV1PartnersFindOrCreateResponsePartner) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersFindOrCreateResponsePartnerFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8534,8 +8593,9 @@ var (
 	postV1PartnersGetResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
 	postV1PartnersGetResponseFieldAddress              = big.NewInt(1 << 19)
 	postV1PartnersGetResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersGetResponseFieldCreatedAt            = big.NewInt(1 << 21)
-	postV1PartnersGetResponseFieldUpdatedAt            = big.NewInt(1 << 22)
+	postV1PartnersGetResponseFieldDocumentRef          = big.NewInt(1 << 21)
+	postV1PartnersGetResponseFieldCreatedAt            = big.NewInt(1 << 22)
+	postV1PartnersGetResponseFieldUpdatedAt            = big.NewInt(1 << 23)
 )
 
 type PostV1PartnersGetResponse struct {
@@ -8560,6 +8620,7 @@ type PostV1PartnersGetResponse struct {
 	VatValidatedAt       *string                           `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
 	Address              *PostV1PartnersGetResponseAddress `json:"address,omitempty" url:"address,omitempty"`
 	Notes                *string                           `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                            `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                            `json:"updatedAt" url:"updatedAt"`
 
@@ -8715,6 +8776,13 @@ func (p *PostV1PartnersGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PartnersGetResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PartnersGetResponse) GetCreatedAt() string {
@@ -8890,6 +8958,13 @@ func (p *PostV1PartnersGetResponse) SetAddress(address *PostV1PartnersGetRespons
 func (p *PostV1PartnersGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersGetResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersGetResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -12185,8 +12260,9 @@ var (
 	postV1PartnersListResponseRowsItemFieldVatValidatedAt       = big.NewInt(1 << 18)
 	postV1PartnersListResponseRowsItemFieldAddress              = big.NewInt(1 << 19)
 	postV1PartnersListResponseRowsItemFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 21)
-	postV1PartnersListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 22)
+	postV1PartnersListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 21)
+	postV1PartnersListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 22)
+	postV1PartnersListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 23)
 )
 
 type PostV1PartnersListResponseRowsItem struct {
@@ -12211,6 +12287,7 @@ type PostV1PartnersListResponseRowsItem struct {
 	VatValidatedAt       *string                                    `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
 	Address              *PostV1PartnersListResponseRowsItemAddress `json:"address,omitempty" url:"address,omitempty"`
 	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                                    `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                                     `json:"updatedAt" url:"updatedAt"`
 
@@ -12366,6 +12443,13 @@ func (p *PostV1PartnersListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PartnersListResponseRowsItem) GetCreatedAt() string {
@@ -12541,6 +12625,13 @@ func (p *PostV1PartnersListResponseRowsItem) SetAddress(address *PostV1PartnersL
 func (p *PostV1PartnersListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersListResponseRowsItemFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersListResponseRowsItemFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -13541,8 +13632,9 @@ var (
 	postV1PartnersUpdateResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
 	postV1PartnersUpdateResponseFieldAddress              = big.NewInt(1 << 19)
 	postV1PartnersUpdateResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersUpdateResponseFieldCreatedAt            = big.NewInt(1 << 21)
-	postV1PartnersUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 22)
+	postV1PartnersUpdateResponseFieldDocumentRef          = big.NewInt(1 << 21)
+	postV1PartnersUpdateResponseFieldCreatedAt            = big.NewInt(1 << 22)
+	postV1PartnersUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
 )
 
 type PostV1PartnersUpdateResponse struct {
@@ -13567,6 +13659,7 @@ type PostV1PartnersUpdateResponse struct {
 	VatValidatedAt       *string                              `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
 	Address              *PostV1PartnersUpdateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
 	Notes                *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef          *string                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt            string                               `json:"updatedAt" url:"updatedAt"`
 
@@ -13722,6 +13815,13 @@ func (p *PostV1PartnersUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PartnersUpdateResponse) GetDocumentRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentRef
 }
 
 func (p *PostV1PartnersUpdateResponse) GetCreatedAt() string {
@@ -13897,6 +13997,13 @@ func (p *PostV1PartnersUpdateResponse) SetAddress(address *PostV1PartnersUpdateR
 func (p *PostV1PartnersUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PartnersUpdateResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetDocumentRef(documentRef *string) {
+	p.DocumentRef = documentRef
+	p.require(postV1PartnersUpdateResponseFieldDocumentRef)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

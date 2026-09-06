@@ -19,18 +19,20 @@ var (
 	postV1AssetsAssetsCreateRequestFieldSalvageValue          = big.NewInt(1 << 6)
 	postV1AssetsAssetsCreateRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
 	postV1AssetsAssetsCreateRequestFieldNotes                 = big.NewInt(1 << 8)
+	postV1AssetsAssetsCreateRequestFieldDocuments             = big.NewInt(1 << 9)
 )
 
 type PostV1AssetsAssetsCreateRequest struct {
-	GroupID               string  `json:"groupId" url:"-"`
-	Code                  string  `json:"code" url:"-"`
-	Name                  string  `json:"name" url:"-"`
-	AcquisitionDate       string  `json:"acquisitionDate" url:"-"`
-	DepreciationStartDate *string `json:"depreciationStartDate,omitempty" url:"-"`
-	AcquisitionCost       string  `json:"acquisitionCost" url:"-"`
-	SalvageValue          *string `json:"salvageValue,omitempty" url:"-"`
-	UsefulLifeMonths      *int64  `json:"usefulLifeMonths,omitempty" url:"-"`
-	Notes                 *string `json:"notes,omitempty" url:"-"`
+	GroupID               string                                          `json:"groupId" url:"-"`
+	Code                  string                                          `json:"code" url:"-"`
+	Name                  string                                          `json:"name" url:"-"`
+	AcquisitionDate       string                                          `json:"acquisitionDate" url:"-"`
+	DepreciationStartDate *string                                         `json:"depreciationStartDate,omitempty" url:"-"`
+	AcquisitionCost       string                                          `json:"acquisitionCost" url:"-"`
+	SalvageValue          *string                                         `json:"salvageValue,omitempty" url:"-"`
+	UsefulLifeMonths      *int64                                          `json:"usefulLifeMonths,omitempty" url:"-"`
+	Notes                 *string                                         `json:"notes,omitempty" url:"-"`
+	Documents             []*PostV1AssetsAssetsCreateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -104,6 +106,13 @@ func (p *PostV1AssetsAssetsCreateRequest) SetUsefulLifeMonths(usefulLifeMonths *
 func (p *PostV1AssetsAssetsCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1AssetsAssetsCreateRequestFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateRequest) SetDocuments(documents []*PostV1AssetsAssetsCreateRequestDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsCreateRequestFieldDocuments)
 }
 
 func (p *PostV1AssetsAssetsCreateRequest) UnmarshalJSON(data []byte) error {
@@ -603,6 +612,106 @@ func (p *PostV1AssetsGroupsListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1AssetsAssetsCreateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsCreateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsCreateRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsCreateRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsCreateRequestDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsCreateRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsCreateRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsCreateRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1AssetsAssetsCreateResponseFieldID                      = big.NewInt(1 << 0)
 	postV1AssetsAssetsCreateResponseFieldGroupID                 = big.NewInt(1 << 1)
 	postV1AssetsAssetsCreateResponseFieldCode                    = big.NewInt(1 << 2)
@@ -619,27 +728,29 @@ var (
 	postV1AssetsAssetsCreateResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
 	postV1AssetsAssetsCreateResponseFieldStatus                  = big.NewInt(1 << 14)
 	postV1AssetsAssetsCreateResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsCreateResponseFieldCreatedAt               = big.NewInt(1 << 16)
+	postV1AssetsAssetsCreateResponseFieldDocuments               = big.NewInt(1 << 16)
+	postV1AssetsAssetsCreateResponseFieldCreatedAt               = big.NewInt(1 << 17)
 )
 
 type PostV1AssetsAssetsCreateResponse struct {
-	ID                      string                                 `json:"id" url:"id"`
-	GroupID                 string                                 `json:"groupId" url:"groupId"`
-	Code                    string                                 `json:"code" url:"code"`
-	Name                    string                                 `json:"name" url:"name"`
-	AcquisitionDate         string                                 `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                 `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                 `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                 `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                 `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                 `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsCreateResponseStatus `json:"status" url:"status"`
-	Notes                   *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt               string                                 `json:"createdAt" url:"createdAt"`
+	ID                      string                                           `json:"id" url:"id"`
+	GroupID                 string                                           `json:"groupId" url:"groupId"`
+	Code                    string                                           `json:"code" url:"code"`
+	Name                    string                                           `json:"name" url:"name"`
+	AcquisitionDate         string                                           `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate   string                                           `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost         string                                           `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            string                                           `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths        int64                                            `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost               string                                           `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation string                                           `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue            string                                           `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths       int64                                            `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths         int64                                            `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                  PostV1AssetsAssetsCreateResponseStatus           `json:"status" url:"status"`
+	Notes                   *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents               []*PostV1AssetsAssetsCreateResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
+	CreatedAt               string                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -758,6 +869,13 @@ func (p *PostV1AssetsAssetsCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetDocuments() []*PostV1AssetsAssetsCreateResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1AssetsAssetsCreateResponse) GetCreatedAt() string {
@@ -893,6 +1011,13 @@ func (p *PostV1AssetsAssetsCreateResponse) SetNotes(notes *string) {
 	p.require(postV1AssetsAssetsCreateResponseFieldNotes)
 }
 
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetDocuments(documents []*PostV1AssetsAssetsCreateResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsCreateResponseFieldDocuments)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AssetsAssetsCreateResponse) SetCreatedAt(createdAt string) {
@@ -928,6 +1053,106 @@ func (p *PostV1AssetsAssetsCreateResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AssetsAssetsCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsCreateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsCreateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsCreateResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsCreateResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsCreateResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsCreateResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsCreateResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsCreateResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -984,27 +1209,29 @@ var (
 	postV1AssetsAssetsGetResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
 	postV1AssetsAssetsGetResponseFieldStatus                  = big.NewInt(1 << 14)
 	postV1AssetsAssetsGetResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsGetResponseFieldCreatedAt               = big.NewInt(1 << 16)
+	postV1AssetsAssetsGetResponseFieldDocuments               = big.NewInt(1 << 16)
+	postV1AssetsAssetsGetResponseFieldCreatedAt               = big.NewInt(1 << 17)
 )
 
 type PostV1AssetsAssetsGetResponse struct {
-	ID                      string                              `json:"id" url:"id"`
-	GroupID                 string                              `json:"groupId" url:"groupId"`
-	Code                    string                              `json:"code" url:"code"`
-	Name                    string                              `json:"name" url:"name"`
-	AcquisitionDate         string                              `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                              `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                              `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                              `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                               `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                              `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                              `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                              `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                               `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                               `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsGetResponseStatus `json:"status" url:"status"`
-	Notes                   *string                             `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt               string                              `json:"createdAt" url:"createdAt"`
+	ID                      string                                        `json:"id" url:"id"`
+	GroupID                 string                                        `json:"groupId" url:"groupId"`
+	Code                    string                                        `json:"code" url:"code"`
+	Name                    string                                        `json:"name" url:"name"`
+	AcquisitionDate         string                                        `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate   string                                        `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost         string                                        `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            string                                        `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths        int64                                         `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost               string                                        `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation string                                        `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue            string                                        `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths       int64                                         `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths         int64                                         `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                  PostV1AssetsAssetsGetResponseStatus           `json:"status" url:"status"`
+	Notes                   *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents               []*PostV1AssetsAssetsGetResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
+	CreatedAt               string                                        `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1123,6 +1350,13 @@ func (p *PostV1AssetsAssetsGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetDocuments() []*PostV1AssetsAssetsGetResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1AssetsAssetsGetResponse) GetCreatedAt() string {
@@ -1258,6 +1492,13 @@ func (p *PostV1AssetsAssetsGetResponse) SetNotes(notes *string) {
 	p.require(postV1AssetsAssetsGetResponseFieldNotes)
 }
 
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetDocuments(documents []*PostV1AssetsAssetsGetResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsGetResponseFieldDocuments)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AssetsAssetsGetResponse) SetCreatedAt(createdAt string) {
@@ -1293,6 +1534,106 @@ func (p *PostV1AssetsAssetsGetResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AssetsAssetsGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsGetResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsGetResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsGetResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsGetResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsGetResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsGetResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsGetResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsGetResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsGetResponseDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -1919,27 +2260,29 @@ var (
 	postV1AssetsAssetsListResponseRowsItemFieldTotalLifeMonths         = big.NewInt(1 << 13)
 	postV1AssetsAssetsListResponseRowsItemFieldStatus                  = big.NewInt(1 << 14)
 	postV1AssetsAssetsListResponseRowsItemFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 16)
+	postV1AssetsAssetsListResponseRowsItemFieldDocuments               = big.NewInt(1 << 16)
+	postV1AssetsAssetsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 17)
 )
 
 type PostV1AssetsAssetsListResponseRowsItem struct {
-	ID                      string                                       `json:"id" url:"id"`
-	GroupID                 string                                       `json:"groupId" url:"groupId"`
-	Code                    string                                       `json:"code" url:"code"`
-	Name                    string                                       `json:"name" url:"name"`
-	AcquisitionDate         string                                       `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                       `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                       `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                       `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                        `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                       `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                       `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                       `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                        `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                        `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsListResponseRowsItemStatus `json:"status" url:"status"`
-	Notes                   *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt               string                                       `json:"createdAt" url:"createdAt"`
+	ID                      string                                                 `json:"id" url:"id"`
+	GroupID                 string                                                 `json:"groupId" url:"groupId"`
+	Code                    string                                                 `json:"code" url:"code"`
+	Name                    string                                                 `json:"name" url:"name"`
+	AcquisitionDate         string                                                 `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate   string                                                 `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost         string                                                 `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            string                                                 `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths        int64                                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost               string                                                 `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation string                                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue            string                                                 `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths       int64                                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths         int64                                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                  PostV1AssetsAssetsListResponseRowsItemStatus           `json:"status" url:"status"`
+	Notes                   *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents               []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
+	CreatedAt               string                                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2058,6 +2401,13 @@ func (p *PostV1AssetsAssetsListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetDocuments() []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1AssetsAssetsListResponseRowsItem) GetCreatedAt() string {
@@ -2193,6 +2543,13 @@ func (p *PostV1AssetsAssetsListResponseRowsItem) SetNotes(notes *string) {
 	p.require(postV1AssetsAssetsListResponseRowsItemFieldNotes)
 }
 
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetDocuments(documents []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldDocuments)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AssetsAssetsListResponseRowsItem) SetCreatedAt(createdAt string) {
@@ -2228,6 +2585,106 @@ func (p *PostV1AssetsAssetsListResponseRowsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AssetsAssetsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsListResponseRowsItemDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsListResponseRowsItemDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsListResponseRowsItemDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsListResponseRowsItemDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2284,27 +2741,29 @@ var (
 	postV1AssetsAssetsModernizeResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
 	postV1AssetsAssetsModernizeResponseFieldStatus                  = big.NewInt(1 << 14)
 	postV1AssetsAssetsModernizeResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsModernizeResponseFieldCreatedAt               = big.NewInt(1 << 16)
+	postV1AssetsAssetsModernizeResponseFieldDocuments               = big.NewInt(1 << 16)
+	postV1AssetsAssetsModernizeResponseFieldCreatedAt               = big.NewInt(1 << 17)
 )
 
 type PostV1AssetsAssetsModernizeResponse struct {
-	ID                      string                                    `json:"id" url:"id"`
-	GroupID                 string                                    `json:"groupId" url:"groupId"`
-	Code                    string                                    `json:"code" url:"code"`
-	Name                    string                                    `json:"name" url:"name"`
-	AcquisitionDate         string                                    `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                    `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                    `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                    `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                    `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                    `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsModernizeResponseStatus `json:"status" url:"status"`
-	Notes                   *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt               string                                    `json:"createdAt" url:"createdAt"`
+	ID                      string                                              `json:"id" url:"id"`
+	GroupID                 string                                              `json:"groupId" url:"groupId"`
+	Code                    string                                              `json:"code" url:"code"`
+	Name                    string                                              `json:"name" url:"name"`
+	AcquisitionDate         string                                              `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate   string                                              `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost         string                                              `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue            string                                              `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths        int64                                               `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost               string                                              `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation string                                              `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue            string                                              `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths       int64                                               `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths         int64                                               `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                  PostV1AssetsAssetsModernizeResponseStatus           `json:"status" url:"status"`
+	Notes                   *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents               []*PostV1AssetsAssetsModernizeResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
+	CreatedAt               string                                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2423,6 +2882,13 @@ func (p *PostV1AssetsAssetsModernizeResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetDocuments() []*PostV1AssetsAssetsModernizeResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
 }
 
 func (p *PostV1AssetsAssetsModernizeResponse) GetCreatedAt() string {
@@ -2558,6 +3024,13 @@ func (p *PostV1AssetsAssetsModernizeResponse) SetNotes(notes *string) {
 	p.require(postV1AssetsAssetsModernizeResponseFieldNotes)
 }
 
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetDocuments(documents []*PostV1AssetsAssetsModernizeResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsModernizeResponseFieldDocuments)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1AssetsAssetsModernizeResponse) SetCreatedAt(createdAt string) {
@@ -2593,6 +3066,106 @@ func (p *PostV1AssetsAssetsModernizeResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AssetsAssetsModernizeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsModernizeResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsModernizeResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsModernizeResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsModernizeResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsModernizeResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsModernizeResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsModernizeResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsModernizeResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}

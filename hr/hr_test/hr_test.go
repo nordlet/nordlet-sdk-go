@@ -321,7 +321,6 @@ func TestHrPostV1HrContractsCreateWithWireMock(
 	)
 	request := &nordlet.PostV1HrContractsCreateRequest{
 		EmployeeID: "employeeId",
-		ContractNo: "contractNo",
 		StartDate:  "startDate",
 		BaseSalary: "baseSalary",
 	}

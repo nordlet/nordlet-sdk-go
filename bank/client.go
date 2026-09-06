@@ -146,12 +146,108 @@ func (c *Client) PostV1BankTransactionsMatch(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1BankTransactionsRecord(
+	ctx context.Context,
+	request *nordlet.PostV1BankTransactionsRecordRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankTransactionsRecordResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankTransactionsRecord(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1BankPaymentsExport(
 	ctx context.Context,
 	request *nordlet.PostV1BankPaymentsExportRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1BankPaymentsExportResponse, error) {
 	response, err := c.WithRawResponse.PostV1BankPaymentsExport(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+	ctx context.Context,
+	request *nordlet.PostV1BankImportTemplatesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankImportTemplatesCreateResponse, error) {
+	response, err := c.WithRawResponse.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankImportTemplatesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1BankImportTemplatesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankImportTemplatesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankImportTemplatesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankImportTemplatesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1BankImportTemplatesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankImportTemplatesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankImportTemplatesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankImportTemplatesGet(
+	ctx context.Context,
+	request *nordlet.PostV1BankImportTemplatesGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankImportTemplatesGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankImportTemplatesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankImportTemplatesList(
+	ctx context.Context,
+	request *nordlet.PostV1BankImportTemplatesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankImportTemplatesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankImportTemplatesList(
 		ctx,
 		request,
 		opts...,
@@ -456,6 +552,22 @@ func (c *Client) PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBe
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1BankFeedsAccountsLinkResponse, error) {
 	response, err := c.WithRawResponse.PointABankFeedAccountAtALedgerBankAccountSoItsTransactionsCanBeSynced(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+	ctx context.Context,
+	request *nordlet.PostV1BankFeedsAccountsConfigureRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankFeedsAccountsConfigureResponse, error) {
+	response, err := c.WithRawResponse.ChooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
 		ctx,
 		request,
 		opts...,
