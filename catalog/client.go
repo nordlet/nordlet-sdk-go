@@ -114,6 +114,166 @@ func (c *Client) PostV1CatalogItemsList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1CatalogItemsFilesList(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogItemsFilesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogItemsFilesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogItemsFilesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogItemsKindsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogItemsKindsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogItemsKindsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogItemsKindsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogItemsKindsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogItemsKindsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogItemsKindsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogItemsKindsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogItemsKindsDelete(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogItemsKindsDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogItemsKindsDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogItemsKindsDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogItemsKindsList(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogItemsKindsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogItemsKindsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogItemsKindsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogUnitsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogUnitsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogUnitsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogUnitsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogUnitsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogUnitsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogUnitsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogUnitsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogUnitsDelete(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogUnitsDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogUnitsDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogUnitsDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogUnitsList(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogUnitsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogUnitsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogUnitsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CatalogUnitsOptions(
+	ctx context.Context,
+	request *nordlet.PostV1CatalogUnitsOptionsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CatalogUnitsOptionsResponse, error) {
+	response, err := c.WithRawResponse.PostV1CatalogUnitsOptions(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1CatalogItemGroupsCreate(
 	ctx context.Context,
 	request *nordlet.PostV1CatalogItemGroupsCreateRequest,

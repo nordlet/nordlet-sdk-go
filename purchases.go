@@ -18,9 +18,10 @@ var (
 	postV1PurchasesInvoicesCreateRequestFieldCurrency          = big.NewInt(1 << 5)
 	postV1PurchasesInvoicesCreateRequestFieldCreditedInvoiceID = big.NewInt(1 << 6)
 	postV1PurchasesInvoicesCreateRequestFieldPurchaseOrderID   = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesCreateRequestFieldOperationTypeID   = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 11)
 )
 
 type PostV1PurchasesInvoicesCreateRequest struct {
@@ -32,6 +33,7 @@ type PostV1PurchasesInvoicesCreateRequest struct {
 	Currency          *string                                          `json:"currency,omitempty" url:"-"`
 	CreditedInvoiceID *string                                          `json:"creditedInvoiceId,omitempty" url:"-"`
 	PurchaseOrderID   *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
+	OperationTypeID   *string                                          `json:"operationTypeId,omitempty" url:"-"`
 	Notes             *string                                          `json:"notes,omitempty" url:"-"`
 	DocumentRef       *string                                          `json:"documentRef,omitempty" url:"-"`
 	Lines             []*PostV1PurchasesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
@@ -101,6 +103,13 @@ func (p *PostV1PurchasesInvoicesCreateRequest) SetCreditedInvoiceID(creditedInvo
 func (p *PostV1PurchasesInvoicesCreateRequest) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesCreateRequestFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesCreateRequestFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -242,6 +251,7 @@ var (
 	postV1PurchasesInvoicesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PurchasesInvoicesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PurchasesInvoicesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesInvoicesListRequest struct {
@@ -249,6 +259,8 @@ type PostV1PurchasesInvoicesListRequest struct {
 	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PurchasesInvoicesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PurchasesInvoicesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -287,6 +299,13 @@ func (p *PostV1PurchasesInvoicesListRequest) SetSort(sort []*PostV1PurchasesInvo
 func (p *PostV1PurchasesInvoicesListRequest) SetFilter(filter []*PostV1PurchasesInvoicesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PurchasesInvoicesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PurchasesInvoicesListRequestFieldTotals)
 }
 
 func (p *PostV1PurchasesInvoicesListRequest) UnmarshalJSON(data []byte) error {
@@ -437,8 +456,9 @@ var (
 	postV1PurchasesInvoicesUpdateRequestFieldDueDate         = big.NewInt(1 << 4)
 	postV1PurchasesInvoicesUpdateRequestFieldCurrency        = big.NewInt(1 << 5)
 	postV1PurchasesInvoicesUpdateRequestFieldPurchaseOrderID = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesUpdateRequestFieldNotes           = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesUpdateRequestFieldLines           = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesUpdateRequestFieldOperationTypeID = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesUpdateRequestFieldNotes           = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesUpdateRequestFieldLines           = big.NewInt(1 << 9)
 )
 
 type PostV1PurchasesInvoicesUpdateRequest struct {
@@ -449,6 +469,7 @@ type PostV1PurchasesInvoicesUpdateRequest struct {
 	DueDate         *string                                          `json:"dueDate,omitempty" url:"-"`
 	Currency        *string                                          `json:"currency,omitempty" url:"-"`
 	PurchaseOrderID *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
+	OperationTypeID *string                                          `json:"operationTypeId,omitempty" url:"-"`
 	Notes           *string                                          `json:"notes,omitempty" url:"-"`
 	Lines           []*PostV1PurchasesInvoicesUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
 
@@ -510,6 +531,13 @@ func (p *PostV1PurchasesInvoicesUpdateRequest) SetCurrency(currency *string) {
 func (p *PostV1PurchasesInvoicesUpdateRequest) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesUpdateRequestFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -927,6 +955,7 @@ var (
 	postV1PurchasesOrdersListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PurchasesOrdersListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PurchasesOrdersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PurchasesOrdersListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesOrdersListRequest struct {
@@ -934,6 +963,8 @@ type PostV1PurchasesOrdersListRequest struct {
 	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PurchasesOrdersListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PurchasesOrdersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -972,6 +1003,13 @@ func (p *PostV1PurchasesOrdersListRequest) SetSort(sort []*PostV1PurchasesOrders
 func (p *PostV1PurchasesOrdersListRequest) SetFilter(filter []*PostV1PurchasesOrdersListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PurchasesOrdersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PurchasesOrdersListRequestFieldTotals)
 }
 
 func (p *PostV1PurchasesOrdersListRequest) UnmarshalJSON(data []byte) error {
@@ -1347,6 +1385,7 @@ var (
 	postV1PurchasesReceiptsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PurchasesReceiptsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PurchasesReceiptsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PurchasesReceiptsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesReceiptsListRequest struct {
@@ -1354,6 +1393,8 @@ type PostV1PurchasesReceiptsListRequest struct {
 	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PurchasesReceiptsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PurchasesReceiptsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1392,6 +1433,13 @@ func (p *PostV1PurchasesReceiptsListRequest) SetSort(sort []*PostV1PurchasesRece
 func (p *PostV1PurchasesReceiptsListRequest) SetFilter(filter []*PostV1PurchasesReceiptsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PurchasesReceiptsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesReceiptsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PurchasesReceiptsListRequestFieldTotals)
 }
 
 func (p *PostV1PurchasesReceiptsListRequest) UnmarshalJSON(data []byte) error {
@@ -1761,11 +1809,12 @@ var (
 	postV1PurchasesInvoicesCreateResponseFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1PurchasesInvoicesCreateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesCreateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesCreateResponseFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 22)
 )
 
 type PostV1PurchasesInvoicesCreateResponse struct {
@@ -1786,6 +1835,7 @@ type PostV1PurchasesInvoicesCreateResponse struct {
 	JournalTransactionID *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
@@ -1916,6 +1966,13 @@ func (p *PostV1PurchasesInvoicesCreateResponse) GetPurchaseOrderID() *string {
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1PurchasesInvoicesCreateResponse) GetNotes() *string {
@@ -2084,6 +2141,13 @@ func (p *PostV1PurchasesInvoicesCreateResponse) SetCreditedInvoiceID(creditedInv
 func (p *PostV1PurchasesInvoicesCreateResponse) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesCreateResponseFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesCreateResponseFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -2658,11 +2722,12 @@ var (
 	postV1PurchasesInvoicesGetResponseFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1PurchasesInvoicesGetResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesGetResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesGetResponseFieldLines                = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesGetResponseFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesGetResponseFieldLines                = big.NewInt(1 << 22)
 )
 
 type PostV1PurchasesInvoicesGetResponse struct {
@@ -2683,6 +2748,7 @@ type PostV1PurchasesInvoicesGetResponse struct {
 	JournalTransactionID *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                         `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                         `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                         `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                          `json:"createdAt" url:"createdAt"`
@@ -2813,6 +2879,13 @@ func (p *PostV1PurchasesInvoicesGetResponse) GetPurchaseOrderID() *string {
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1PurchasesInvoicesGetResponse) GetNotes() *string {
@@ -2981,6 +3054,13 @@ func (p *PostV1PurchasesInvoicesGetResponse) SetCreditedInvoiceID(creditedInvoic
 func (p *PostV1PurchasesInvoicesGetResponse) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesGetResponseFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesGetResponseFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -3896,6 +3976,7 @@ var (
 	postV1PurchasesInvoicesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PurchasesInvoicesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PurchasesInvoicesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesInvoicesListResponse struct {
@@ -3903,6 +3984,7 @@ type PostV1PurchasesInvoicesListResponse struct {
 	Page     int64                                          `json:"page" url:"page"`
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3937,6 +4019,13 @@ func (p *PostV1PurchasesInvoicesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PurchasesInvoicesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PurchasesInvoicesListResponse) GetExtraProperties() map[string]interface{} {
@@ -3979,6 +4068,13 @@ func (p *PostV1PurchasesInvoicesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PurchasesInvoicesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PurchasesInvoicesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PurchasesInvoicesListResponseFieldTotals)
 }
 
 func (p *PostV1PurchasesInvoicesListResponse) UnmarshalJSON(data []byte) error {
@@ -4041,10 +4137,11 @@ var (
 	postV1PurchasesInvoicesListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1PurchasesInvoicesListResponseRowsItemFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesListResponseRowsItemFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesListResponseRowsItemFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1PurchasesInvoicesListResponseRowsItem struct {
@@ -4065,6 +4162,7 @@ type PostV1PurchasesInvoicesListResponseRowsItem struct {
 	JournalTransactionID *string                                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                                  `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                                   `json:"createdAt" url:"createdAt"`
@@ -4194,6 +4292,13 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetPurchaseOrderID() *stri
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetNotes() *string {
@@ -4355,6 +4460,13 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetCreditedInvoiceID(credi
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -4914,11 +5026,12 @@ var (
 	postV1PurchasesInvoicesRegisterResponseFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1PurchasesInvoicesRegisterResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesRegisterResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesRegisterResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesRegisterResponseFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesRegisterResponseFieldLines                = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesRegisterResponseFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesRegisterResponseFieldNotes                = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesRegisterResponseFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesRegisterResponseFieldLines                = big.NewInt(1 << 22)
 )
 
 type PostV1PurchasesInvoicesRegisterResponse struct {
@@ -4939,6 +5052,7 @@ type PostV1PurchasesInvoicesRegisterResponse struct {
 	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                              `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
@@ -5069,6 +5183,13 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) GetPurchaseOrderID() *string {
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1PurchasesInvoicesRegisterResponse) GetNotes() *string {
@@ -5237,6 +5358,13 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) SetCreditedInvoiceID(creditedI
 func (p *PostV1PurchasesInvoicesRegisterResponse) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesRegisterResponseFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -6033,11 +6161,12 @@ var (
 	postV1PurchasesInvoicesUpdateResponseFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1PurchasesInvoicesUpdateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1PurchasesInvoicesUpdateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesUpdateResponseFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 22)
 )
 
 type PostV1PurchasesInvoicesUpdateResponse struct {
@@ -6058,6 +6187,7 @@ type PostV1PurchasesInvoicesUpdateResponse struct {
 	JournalTransactionID *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
@@ -6188,6 +6318,13 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) GetPurchaseOrderID() *string {
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1PurchasesInvoicesUpdateResponse) GetNotes() *string {
@@ -6356,6 +6493,13 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) SetCreditedInvoiceID(creditedInv
 func (p *PostV1PurchasesInvoicesUpdateResponse) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1PurchasesInvoicesUpdateResponseFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -11406,6 +11550,7 @@ var (
 	postV1PurchasesOrdersListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PurchasesOrdersListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PurchasesOrdersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PurchasesOrdersListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesOrdersListResponse struct {
@@ -11413,6 +11558,7 @@ type PostV1PurchasesOrdersListResponse struct {
 	Page     int64                                        `json:"page" url:"page"`
 	PageSize int64                                        `json:"pageSize" url:"pageSize"`
 	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11447,6 +11593,13 @@ func (p *PostV1PurchasesOrdersListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PurchasesOrdersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PurchasesOrdersListResponse) GetExtraProperties() map[string]interface{} {
@@ -11489,6 +11642,13 @@ func (p *PostV1PurchasesOrdersListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PurchasesOrdersListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PurchasesOrdersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesOrdersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PurchasesOrdersListResponseFieldTotals)
 }
 
 func (p *PostV1PurchasesOrdersListResponse) UnmarshalJSON(data []byte) error {
@@ -15758,6 +15918,7 @@ var (
 	postV1PurchasesReceiptsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PurchasesReceiptsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PurchasesReceiptsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PurchasesReceiptsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PurchasesReceiptsListResponse struct {
@@ -15765,6 +15926,7 @@ type PostV1PurchasesReceiptsListResponse struct {
 	Page     int64                                          `json:"page" url:"page"`
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -15799,6 +15961,13 @@ func (p *PostV1PurchasesReceiptsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PurchasesReceiptsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PurchasesReceiptsListResponse) GetExtraProperties() map[string]interface{} {
@@ -15841,6 +16010,13 @@ func (p *PostV1PurchasesReceiptsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PurchasesReceiptsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PurchasesReceiptsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesReceiptsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PurchasesReceiptsListResponseFieldTotals)
 }
 
 func (p *PostV1PurchasesReceiptsListResponse) UnmarshalJSON(data []byte) error {

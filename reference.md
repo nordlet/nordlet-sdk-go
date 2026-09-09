@@ -106,6 +106,14 @@ client.Reference.PostV1ReferenceExchangeRatesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -240,6 +248,14 @@ client.Reference.PostV1ReferenceExchangeRatesOverridesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -334,6 +350,134 @@ client.Reference.PostV1ReferenceCountriesList(
 </dl>
 </details>
 
+<details><summary><code>client.Reference.PostV1ReferenceLtCountiesList(request) -> *nordlet.PostV1ReferenceLtCountiesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceLtCountiesListRequest{}
+client.Reference.PostV1ReferenceLtCountiesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Reference.PostV1ReferenceLtMunicipalitiesList(request) -> *nordlet.PostV1ReferenceLtMunicipalitiesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceLtMunicipalitiesListRequest{}
+client.Reference.PostV1ReferenceLtMunicipalitiesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**countyCode:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Reference.PostV1ReferenceLtCitiesList(request) -> *nordlet.PostV1ReferenceLtCitiesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1ReferenceLtCitiesListRequest{}
+client.Reference.PostV1ReferenceLtCitiesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**municipalityCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**q:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Reference.PostV1ReferenceBanksList(request) -> *nordlet.PostV1ReferenceBanksListResponse</code></summary>
 <dl>
 <dd>
@@ -392,6 +536,14 @@ client.Reference.PostV1ReferenceBanksList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ReferenceBanksListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -575,6 +727,14 @@ client.Reference.PostV1ReferenceCurrenciesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -641,6 +801,14 @@ client.Reference.PostV1ReferenceVatClassifiersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ReferenceVatClassifiersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -1024,6 +1192,14 @@ client.Reference.PostV1ReferenceCnCodesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1220,6 +1396,14 @@ client.Reference.PostV1ReferenceUnitsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1358,6 +1542,14 @@ client.Reference.PostV1ReferenceSeriesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ReferenceSeriesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -1668,6 +1860,14 @@ client.Partners.PostV1PartnersAddressesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -1956,6 +2156,14 @@ client.Partners.PostV1PartnersContactsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PartnersContactsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -2250,6 +2458,168 @@ client.Partners.PostV1PartnersBankAccountsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1PartnersFilesList(request) -> *nordlet.PostV1PartnersFilesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersFilesListRequest{
+        PartnerID: "partnerId",
+    }
+client.Partners.PostV1PartnersFilesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**partnerID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(request) -> *nordlet.PostV1PartnersDebtRemindersPreviewResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersDebtRemindersPreviewRequest{}
+client.Partners.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1PartnersDebtRemindersList(request) -> *nordlet.PostV1PartnersDebtRemindersListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1PartnersDebtRemindersListRequest{}
+client.Partners.PostV1PartnersDebtRemindersList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1PartnersDebtRemindersListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1PartnersDebtRemindersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2369,6 +2739,14 @@ client.Partners.PostV1PartnersVatReviewsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PartnersVatReviewsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -2615,6 +2993,14 @@ client.Partners.PostV1PartnersCreate(
 <dl>
 <dd>
 
+**correspondenceAddress:** `*nordlet.PostV1PartnersCreateRequestCorrespondenceAddress` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -2624,6 +3010,134 @@ client.Partners.PostV1PartnersCreate(
 <dd>
 
 **documentRef:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**shortName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fax:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**eoriCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**otherCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**foreignTaxNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**autoDebtReminder:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lateInterestPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**firstCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lastCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nextCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rating:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isEmployee:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isGroupMember:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legalCountryClass:** `*nordlet.PostV1PartnersCreateRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -2806,6 +3320,14 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dl>
 <dd>
 
+**correspondenceAddress:** `*nordlet.PostV1PartnersFindOrCreateRequestCorrespondenceAddress` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -2815,6 +3337,134 @@ client.Partners.PostV1PartnersFindOrCreate(
 <dd>
 
 **documentRef:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**shortName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fax:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**eoriCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**otherCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**foreignTaxNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**autoDebtReminder:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lateInterestPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**firstCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lastCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nextCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rating:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isEmployee:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isGroupMember:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legalCountryClass:** `*nordlet.PostV1PartnersFindOrCreateRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -3052,6 +3702,14 @@ client.Partners.PostV1PartnersUpdate(
 <dl>
 <dd>
 
+**correspondenceAddress:** `*nordlet.PostV1PartnersUpdateRequestCorrespondenceAddress` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -3061,6 +3719,134 @@ client.Partners.PostV1PartnersUpdate(
 <dd>
 
 **documentRef:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**shortName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fax:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**eoriCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**otherCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**foreignTaxNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**autoDebtReminder:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lateInterestPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**firstCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lastCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nextCallDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rating:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isEmployee:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isGroupMember:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**legalCountryClass:** `*nordlet.PostV1PartnersUpdateRequestLegalCountryClass` 
     
 </dd>
 </dl>
@@ -3238,6 +4024,14 @@ client.Partners.PostV1PartnersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PartnersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -3979,6 +4773,14 @@ client.Partners.PostV1PartnersInquiriesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -4031,6 +4833,986 @@ client.Partners.PostV1PartnersCreditCheck(
 <dd>
 
 **additionalAmount:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsCreate(request) -> *nordlet.PostV1LeadsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsCreateRequest{
+        Name: "name",
+    }
+client.Partners.PostV1LeadsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contactName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**phone:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**countryCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sourceID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `*nordlet.PostV1LeadsCreateRequestStatus` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**estimatedValue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assignedUserID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documents:** `[]*nordlet.PostV1LeadsCreateRequestDocumentsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `[]string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsGet(request) -> *nordlet.PostV1LeadsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsGetRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsUpdate(request) -> *nordlet.PostV1LeadsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsUpdateRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contactName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**phone:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**website:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**countryCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sourceID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `*nordlet.PostV1LeadsUpdateRequestStatus` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**estimatedValue:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assignedUserID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documents:** `[]*nordlet.PostV1LeadsUpdateRequestDocumentsItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsDelete(request) -> *nordlet.PostV1LeadsDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsDeleteRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsList(request) -> *nordlet.PostV1LeadsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsListRequest{}
+client.Partners.PostV1LeadsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1LeadsListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1LeadsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsNotesCreate(request) -> *nordlet.PostV1LeadsNotesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsNotesCreateRequest{
+        LeadID: "leadId",
+        Body: "body",
+    }
+client.Partners.PostV1LeadsNotesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**leadID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**body:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsNotesDelete(request) -> *nordlet.PostV1LeadsNotesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsNotesDeleteRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsNotesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsNotesList(request) -> *nordlet.PostV1LeadsNotesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsNotesListRequest{
+        LeadID: "leadId",
+    }
+client.Partners.PostV1LeadsNotesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**leadID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsFilesList(request) -> *nordlet.PostV1LeadsFilesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsFilesListRequest{
+        LeadID: "leadId",
+    }
+client.Partners.PostV1LeadsFilesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**leadID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsSourcesCreate(request) -> *nordlet.PostV1LeadsSourcesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsSourcesCreateRequest{
+        Name: "name",
+    }
+client.Partners.PostV1LeadsSourcesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsSourcesUpdate(request) -> *nordlet.PostV1LeadsSourcesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsSourcesUpdateRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsSourcesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsSourcesDelete(request) -> *nordlet.PostV1LeadsSourcesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsSourcesDeleteRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsSourcesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsSourcesList(request) -> *nordlet.PostV1LeadsSourcesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsSourcesListRequest{}
+client.Partners.PostV1LeadsSourcesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsSourcesOptions(request) -> *nordlet.PostV1LeadsSourcesOptionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsSourcesOptionsRequest{}
+client.Partners.PostV1LeadsSourcesOptions(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Partners.PostV1LeadsConvert(request) -> *nordlet.PostV1LeadsConvertResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a customer partner from the lead, move the lead files to the partner, copy the lead notes into the partner notes and mark the lead as converted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1LeadsConvertRequest{
+        ID: "id",
+    }
+client.Partners.PostV1LeadsConvert(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerType:** `*nordlet.PostV1LeadsConvertRequestPartnerType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatCode:** `*string` 
     
 </dd>
 </dl>
@@ -4239,6 +6021,222 @@ client.Catalog.PostV1CatalogItemsCreate(
 <dd>
 
 **components:** `[]*nordlet.PostV1CatalogItemsCreateRequestComponentsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kindID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saleAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purchaseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expenseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**manufacturer:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grossMassKg:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minQuantity:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costPrice:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isFreePrice:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**externalID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isReturnable:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**commentRequired:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priceFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priceTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minPrice:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxDiscountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyaltyPoints:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**department:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ageRestriction:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**packageQuantity:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**taraCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**certificateNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**certificateDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**posFlags:** `map[string]bool` 
     
 </dd>
 </dl>
@@ -4476,7 +6474,7 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dl>
 <dd>
 
-**attributes:** `map[string]string` 
+**attributes:** `map[string]*string` 
     
 </dd>
 </dl>
@@ -4501,6 +6499,222 @@ client.Catalog.PostV1CatalogItemsUpdate(
 <dd>
 
 **components:** `[]*nordlet.PostV1CatalogItemsUpdateRequestComponentsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kindID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saleAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purchaseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expenseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**manufacturer:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grossMassKg:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minQuantity:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**costPrice:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isFreePrice:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**externalID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isReturnable:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**commentRequired:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priceFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**priceTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**minPrice:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**maxDiscountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**loyaltyPoints:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**department:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ageRestriction:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**packageQuantity:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**taraCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**certificateNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**certificateDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**posFlags:** `map[string]*bool` 
     
 </dd>
 </dl>
@@ -4617,6 +6831,562 @@ client.Catalog.PostV1CatalogItemsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1CatalogItemsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogItemsFilesList(request) -> *nordlet.PostV1CatalogItemsFilesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogItemsFilesListRequest{
+        ItemID: "itemId",
+    }
+client.Catalog.PostV1CatalogItemsFilesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**itemID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogItemsKindsCreate(request) -> *nordlet.PostV1CatalogItemsKindsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogItemsKindsCreateRequest{
+        Code: "code",
+        Name: "name",
+    }
+client.Catalog.PostV1CatalogItemsKindsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saftType:** `*nordlet.PostV1CatalogItemsKindsCreateRequestSaftType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**quantityAccounting:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sortOrder:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogItemsKindsUpdate(request) -> *nordlet.PostV1CatalogItemsKindsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogItemsKindsUpdateRequest{
+        ID: "id",
+    }
+client.Catalog.PostV1CatalogItemsKindsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saftType:** `*nordlet.PostV1CatalogItemsKindsUpdateRequestSaftType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**quantityAccounting:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sortOrder:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogItemsKindsDelete(request) -> *nordlet.PostV1CatalogItemsKindsDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogItemsKindsDeleteRequest{
+        ID: "id",
+    }
+client.Catalog.PostV1CatalogItemsKindsDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogItemsKindsList(request) -> *nordlet.PostV1CatalogItemsKindsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogItemsKindsListRequest{}
+client.Catalog.PostV1CatalogItemsKindsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogUnitsCreate(request) -> *nordlet.PostV1CatalogUnitsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogUnitsCreateRequest{
+        Code: "code",
+        Name: "name",
+    }
+client.Catalog.PostV1CatalogUnitsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogUnitsUpdate(request) -> *nordlet.PostV1CatalogUnitsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogUnitsUpdateRequest{
+        ID: "id",
+    }
+client.Catalog.PostV1CatalogUnitsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogUnitsDelete(request) -> *nordlet.PostV1CatalogUnitsDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogUnitsDeleteRequest{
+        ID: "id",
+    }
+client.Catalog.PostV1CatalogUnitsDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogUnitsList(request) -> *nordlet.PostV1CatalogUnitsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogUnitsListRequest{}
+client.Catalog.PostV1CatalogUnitsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.PostV1CatalogUnitsOptions(request) -> *nordlet.PostV1CatalogUnitsOptionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CatalogUnitsOptionsRequest{}
+client.Catalog.PostV1CatalogUnitsOptions(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.PostV1CatalogUnitsOptionsRequestLocale` 
     
 </dd>
 </dl>
@@ -5500,6 +8270,78 @@ client.Sales.PostV1SalesInvoicesCreate(
 <dl>
 <dd>
 
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentSeriesID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**seriesLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **lines:** `[]*nordlet.PostV1SalesInvoicesCreateRequestLinesItem` 
     
 </dd>
@@ -6000,6 +8842,78 @@ client.Sales.PostV1SalesInvoicesUpdate(
 <dl>
 <dd>
 
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentSeriesID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**seriesLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **lines:** `[]*nordlet.PostV1SalesInvoicesUpdateRequestLinesItem` 
     
 </dd>
@@ -6130,6 +9044,222 @@ client.Sales.PostV1SalesInvoicesIssue(
 </dl>
 </details>
 
+<details><summary><code>client.Sales.PostV1SalesInvoicesLock(request) -> *nordlet.PostV1SalesInvoicesLockResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesLockRequest{
+        ID: "id",
+    }
+client.Sales.PostV1SalesInvoicesLock(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesUnlock(request) -> *nordlet.PostV1SalesInvoicesUnlockResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesUnlockRequest{
+        ID: "id",
+    }
+client.Sales.PostV1SalesInvoicesUnlock(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentLink(request) -> *nordlet.PostV1SalesInvoicesPaymentLinkResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesPaymentLinkRequest{
+        ID: "id",
+    }
+client.Sales.PostV1SalesInvoicesPaymentLink(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentSettingsGet(request) -> *nordlet.PostV1SalesInvoicesPaymentSettingsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesPaymentSettingsGetRequest{}
+client.Sales.PostV1SalesInvoicesPaymentSettingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(request) -> *nordlet.PostV1SalesInvoicesPaymentSettingsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1SalesInvoicesPaymentSettingsUpdateRequest{}
+client.Sales.PostV1SalesInvoicesPaymentSettingsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**paymentLinkTemplate:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Sales.PostV1SalesRecognitionSchedulesList(request) -> *nordlet.PostV1SalesRecognitionSchedulesListResponse</code></summary>
 <dl>
 <dd>
@@ -6188,6 +9318,14 @@ client.Sales.PostV1SalesRecognitionSchedulesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1SalesRecognitionSchedulesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -6321,6 +9459,14 @@ client.Sales.PostV1SalesInvoicesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1SalesInvoicesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -6796,6 +9942,14 @@ client.Sales.PostV1SalesActsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -6848,6 +10002,1097 @@ client.Sales.PostV1SalesActsPdf(
 <dd>
 
 **locale:** `*nordlet.PostV1SalesActsPdfRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1OperationTypesCreate(request) -> *nordlet.PostV1OperationTypesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1OperationTypesCreateRequest{
+        Code: "code",
+        Name: "name",
+    }
+client.Sales.PostV1OperationTypesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**code:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceType:** `*nordlet.PostV1OperationTypesCreateRequestInvoiceType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payerPartnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debitAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**creditAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expenseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**advanceAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**incomeAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isPurchase:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isSale:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isWriteOff:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isInternalMovement:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isPurchaseReturn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isSalesReturn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isConsignment:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isProduction:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isAssetIn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isAssetOut:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isCashRegisterSale:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeInVatRegister:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeInSaft:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sortOrder:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1OperationTypesUpdate(request) -> *nordlet.PostV1OperationTypesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1OperationTypesUpdateRequest{
+        ID: "id",
+    }
+client.Sales.PostV1OperationTypesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**code:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceType:** `*nordlet.PostV1OperationTypesUpdateRequestInvoiceType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payerPartnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debitAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**creditAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expenseAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**advanceAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**incomeAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isPurchase:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isSale:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isWriteOff:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isInternalMovement:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isPurchaseReturn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isSalesReturn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isConsignment:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isProduction:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isAssetIn:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isAssetOut:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isCashRegisterSale:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeInVatRegister:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeInSaft:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sortOrder:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1OperationTypesGet(request) -> *nordlet.PostV1OperationTypesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1OperationTypesGetRequest{
+        ID: "id",
+    }
+client.Sales.PostV1OperationTypesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1OperationTypesDelete(request) -> *nordlet.PostV1OperationTypesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1OperationTypesDeleteRequest{
+        ID: "id",
+    }
+client.Sales.PostV1OperationTypesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1OperationTypesList(request) -> *nordlet.PostV1OperationTypesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1OperationTypesListRequest{}
+client.Sales.PostV1OperationTypesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1OperationTypesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1OperationTypesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1DocumentSeriesCreate(request) -> *nordlet.PostV1DocumentSeriesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DocumentSeriesCreateRequest{
+        Prefix: "prefix",
+    }
+client.Sales.PostV1DocumentSeriesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**documentType:** `*nordlet.PostV1DocumentSeriesCreateRequestDocumentType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**label:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**numberLength:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nextNumber:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**printSeries:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isDefault:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1DocumentSeriesUpdate(request) -> *nordlet.PostV1DocumentSeriesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DocumentSeriesUpdateRequest{
+        ID: "id",
+    }
+client.Sales.PostV1DocumentSeriesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentType:** `*nordlet.PostV1DocumentSeriesUpdateRequestDocumentType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**label:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**numberLength:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**nextNumber:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**printSeries:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isDefault:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1DocumentSeriesGet(request) -> *nordlet.PostV1DocumentSeriesGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DocumentSeriesGetRequest{
+        ID: "id",
+    }
+client.Sales.PostV1DocumentSeriesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1DocumentSeriesDelete(request) -> *nordlet.PostV1DocumentSeriesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DocumentSeriesDeleteRequest{
+        ID: "id",
+    }
+client.Sales.PostV1DocumentSeriesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PostV1DocumentSeriesList(request) -> *nordlet.PostV1DocumentSeriesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1DocumentSeriesListRequest{}
+client.Sales.PostV1DocumentSeriesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PostV1DocumentSeriesListRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PostV1DocumentSeriesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -7184,6 +11429,14 @@ client.Sales.PostV1SalesRecognitionRunsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -7295,6 +11548,14 @@ client.Sales.PostV1SalesRefundLiabilityList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1SalesRefundLiabilityListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -7475,6 +11736,14 @@ client.Purchases.PostV1PurchasesInvoicesCreate(
 <dl>
 <dd>
 
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **notes:** `*string` 
     
 </dd>
@@ -7634,6 +11903,14 @@ client.Purchases.PostV1PurchasesInvoicesUpdate(
 <dd>
 
 **purchaseOrderID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operationTypeID:** `*string` 
     
 </dd>
 </dl>
@@ -7829,6 +12106,14 @@ client.Purchases.PostV1PurchasesInvoicesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PurchasesInvoicesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -8163,6 +12448,14 @@ client.Purchases.PostV1PurchasesOrdersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PurchasesOrdersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -8690,6 +12983,14 @@ client.Purchases.PostV1PurchasesReceiptsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -8754,6 +13055,228 @@ client.Purchases.PostV1PurchasesInvoicesMatch(
 </details>
 
 ## Capture
+<details><summary><code>client.Capture.PostV1CaptureSettingsGet(request) -> *nordlet.PostV1CaptureSettingsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureSettingsGetRequest{}
+client.Capture.PostV1CaptureSettingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.PostV1CaptureSettingsUpdate(request) -> *nordlet.PostV1CaptureSettingsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureSettingsUpdateRequest{}
+client.Capture.PostV1CaptureSettingsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**intakeEnabled:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**captureAutoExtract:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.PostV1CaptureSettingsRegenerateIntake(request) -> *nordlet.PostV1CaptureSettingsRegenerateIntakeResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureSettingsRegenerateIntakeRequest{}
+client.Capture.PostV1CaptureSettingsRegenerateIntake(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(request) -> *nordlet.PostV1CaptureInboundEmailResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CaptureInboundEmailRequest{}
+client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**postmarkTo:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**toFull:** `[]*nordlet.PostV1CaptureInboundEmailRequestToFullItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postmarkFrom:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postmarkSubject:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**postmarkAttachments:** `[]*nordlet.PostV1CaptureInboundEmailRequestAttachmentsItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `*nordlet.PostV1CaptureInboundEmailRequestTo` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**subject:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachments:** `[]*nordlet.PostV1CaptureInboundEmailRequestAttachmentsItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Capture.ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(request) -> *nordlet.PostV1CaptureDocumentsUploadResponse</code></summary>
 <dl>
 <dd>
@@ -8971,6 +13494,14 @@ client.Capture.PostV1CaptureDocumentsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1CaptureDocumentsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -10574,6 +15105,14 @@ client.Declarations.PostV1DeclarationsSubmissionsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -10641,6 +15180,14 @@ client.Ledger.PostV1LedgerAccountsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1LedgerAccountsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -10911,6 +15458,14 @@ client.Ledger.PostV1LedgerPeriodsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -11089,6 +15644,14 @@ client.Ledger.PostV1LedgerJournalTransactionsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1LedgerJournalTransactionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -11293,6 +15856,14 @@ client.Ledger.PostV1LedgerCostCentersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1LedgerCostCentersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -11528,6 +16099,14 @@ client.Ledger.PostV1LedgerCostCenterGroupsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1LedgerCostCenterGroupsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -11939,6 +16518,14 @@ client.Ledger.PostV1LedgerOwnersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1LedgerOwnersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -12516,6 +17103,14 @@ client.Assets.PostV1AssetsGroupsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12752,6 +17347,14 @@ client.Assets.PostV1AssetsAssetsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1AssetsAssetsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -13149,6 +17752,14 @@ client.Hr.PostV1HrPositionsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1HrPositionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -13643,6 +18254,14 @@ client.Hr.PostV1HrEmployeesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14029,6 +18648,14 @@ client.Hr.PostV1HrContractsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -14319,6 +18946,14 @@ client.Hr.PostV1HrIncapacityCertificatesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1HrIncapacityCertificatesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -14643,6 +19278,14 @@ client.Hr.PostV1HrEmployeesRecordsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1HrEmployeesRecordsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -15418,6 +20061,14 @@ client.Fleet.PostV1FleetVehiclesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -15637,6 +20288,14 @@ client.Fleet.PostV1FleetAssignmentsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1FleetAssignmentsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -16161,6 +20820,14 @@ client.Payroll.PostV1PayrollRunsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -16490,6 +21157,14 @@ client.Agreements.PostV1AgreementsTypesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1AgreementsTypesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -16959,6 +21634,14 @@ client.Agreements.PostV1AgreementsAgreementsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17234,6 +21917,14 @@ client.Agreements.PostV1AgreementsInsurancePoliciesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -17489,6 +22180,14 @@ client.Inventory.PostV1InventoryWarehousesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1InventoryWarehousesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -18011,6 +22710,14 @@ client.Inventory.PostV1InventoryStockMovementsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18077,6 +22784,14 @@ client.Inventory.PostV1InventoryLotsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1InventoryLotsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -18402,6 +23117,14 @@ client.Inventory.PostV1InventoryLandedCostsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -18682,6 +23405,14 @@ client.Inventory.PostV1InventoryReorderRulesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1InventoryReorderRulesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -18976,6 +23707,14 @@ client.Production.PostV1ProductionWorkCentersList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19168,6 +23907,14 @@ client.Production.PostV1ProductionRoutingsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ProductionRoutingsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -19448,6 +24195,14 @@ client.Production.PostV1ProductionMaintenanceList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -19656,6 +24411,14 @@ client.Production.PostV1ProductionBomsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ProductionBomsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -20010,6 +24773,14 @@ client.Production.PostV1ProductionQualityChecksList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -20194,6 +24965,14 @@ client.Production.PostV1ProductionOrdersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ProductionOrdersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -20436,6 +25215,14 @@ client.Ecommerce.PostV1EcommerceOrdersList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1EcommerceOrdersListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -20974,6 +25761,14 @@ client.Cash.PostV1CashOrdersList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21325,6 +26120,14 @@ client.Projects.PostV1ProjectsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -21622,6 +26425,14 @@ client.Projects.PostV1ProjectsTimeEntriesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1ProjectsTimeEntriesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -22395,6 +27206,14 @@ client.Transport.PostV1TransportWaybillsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -22637,6 +27456,14 @@ client.Pos.PostV1PosDevicesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1PosDevicesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -22923,6 +27750,321 @@ client.Pos.PostV1PosReportsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Calendar
+<details><summary><code>client.Calendar.PostV1CalendarList(request) -> *nordlet.PostV1CalendarListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CalendarListRequest{}
+client.Calendar.PostV1CalendarList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**from:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**includeDone:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Calendar.PostV1CalendarGet(request) -> *nordlet.PostV1CalendarGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CalendarGetRequest{
+        Key: "key",
+    }
+client.Calendar.PostV1CalendarGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**key:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Calendar.PostV1CalendarCreate(request) -> *nordlet.PostV1CalendarCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CalendarCreateRequest{
+        Title: "title",
+        DueDate: "dueDate",
+    }
+client.Calendar.PostV1CalendarCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**title:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dueDate:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**done:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Calendar.PostV1CalendarUpdate(request) -> *nordlet.PostV1CalendarUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CalendarUpdateRequest{
+        Key: "key",
+    }
+client.Calendar.PostV1CalendarUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**key:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dueDate:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**done:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Calendar.PostV1CalendarDelete(request) -> *nordlet.PostV1CalendarDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1CalendarDeleteRequest{
+        Key: "key",
+    }
+client.Calendar.PostV1CalendarDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**key:** `string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -22990,6 +28132,14 @@ client.Audit.PostV1AuditList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1AuditListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -23126,6 +28276,14 @@ client.Webhooks.PostV1WebhooksSubscriptionsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1WebhooksSubscriptionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -23313,6 +28471,14 @@ client.Webhooks.PostV1WebhooksDeliveriesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1WebhooksDeliveriesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -23509,6 +28675,14 @@ client.Bank.PostV1BankAccountsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1BankAccountsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -23724,6 +28898,14 @@ client.Bank.PostV1BankStatementsImport(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**transfersCsv:** `*string` — Stripe transfers export (plain CSV or base64) used to post lender payouts and commissions
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -23790,6 +28972,14 @@ client.Bank.PostV1BankTransactionsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1BankTransactionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -24127,6 +29317,54 @@ client.Bank.CreateABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**authorizationOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payoutOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**commissionOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lenderMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partialRefundLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fullRefundLabel:** `*string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -24235,6 +29473,54 @@ client.Bank.PostV1BankImportTemplatesUpdate(
 <dd>
 
 **advanceInvoices:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**authorizationOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payoutOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**commissionOperationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lenderMetaField:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partialRefundLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fullRefundLabel:** `*string` 
     
 </dd>
 </dl>
@@ -24407,6 +29693,290 @@ client.Bank.PostV1BankImportTemplatesList(
 
 **filter:** `[]*nordlet.PostV1BankImportTemplatesListRequestFilterItem` 
     
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMatchRulesCreate(request) -> *nordlet.PostV1BankMatchRulesCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMatchRulesCreateRequest{
+        Name: "name",
+        Pattern: "pattern",
+    }
+client.Bank.PostV1BankMatchRulesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pattern:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payoutIDPrefix:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateWindowDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMatchRulesUpdate(request) -> *nordlet.PostV1BankMatchRulesUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMatchRulesUpdateRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankMatchRulesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**provider:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pattern:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payoutIDPrefix:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dateWindowDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMatchRulesDelete(request) -> *nordlet.PostV1BankMatchRulesDeleteResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMatchRulesDeleteRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankMatchRulesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankMatchRulesList(request) -> *nordlet.PostV1BankMatchRulesListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankMatchRulesListRequest{}
+client.Bank.PostV1BankMatchRulesList(
+        context.TODO(),
+        request,
+    )
+}
+```
 </dd>
 </dl>
 </dd>
@@ -24756,6 +30326,14 @@ client.Bank.PostV1BankMandatesList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25010,6 +30588,14 @@ client.Bank.PostV1BankSettlementsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -25109,6 +30695,137 @@ client.Bank.PostV1BankSettlementsMatch(
 <dd>
 
 **invoiceID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankSettlementsLink(request) -> *nordlet.PostV1BankSettlementsLinkResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attach the incoming bank-statement line that carries this payout to the settlement batch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankSettlementsLinkRequest{
+        ID: "id",
+        BankTransactionID: "bankTransactionId",
+    }
+client.Bank.PostV1BankSettlementsLink(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankTransactionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.PostV1BankSettlementsUnlink(request) -> *nordlet.PostV1BankSettlementsUnlinkResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Detach the bank-statement line from the settlement batch and return the line to unmatched.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BankSettlementsUnlinkRequest{
+        ID: "id",
+    }
+client.Bank.PostV1BankSettlementsUnlink(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
     
 </dd>
 </dl>
@@ -25477,6 +31194,14 @@ client.Bank.PostV1BankFeedsConnectionsList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1BankFeedsConnectionsListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -25928,6 +31653,14 @@ client.Files.PostV1FilesList(
 <dd>
 
 **filter:** `[]*nordlet.PostV1FilesListRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -27530,6 +33263,14 @@ client.Reports.PostV1ReportsJobsList(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -28402,6 +34143,53 @@ client.Public.PostV1PublicIntegrationRequests(
 </dl>
 </details>
 
+<details><summary><code>client.Public.GetV1PublicPayToken(Token) -> error</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.GetV1PublicPayTokenRequest{
+        Token: "token",
+    }
+client.Public.GetV1PublicPayToken(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Billing
 <details><summary><code>client.Billing.PostV1BillingAccountGet(request) -> *nordlet.PostV1BillingAccountGetResponse</code></summary>
 <dl>
@@ -28524,6 +34312,51 @@ client.Billing.PostV1BillingTopupCreate(
 <dd>
 
 **locale:** `*nordlet.PostV1BillingTopupCreateRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.PostV1BillingPortalCreate(request) -> *nordlet.PostV1BillingPortalCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1BillingPortalCreateRequest{}
+client.Billing.PostV1BillingPortalCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.PostV1BillingPortalCreateRequestLocale` 
     
 </dd>
 </dl>
@@ -28697,6 +34530,14 @@ client.Account.PostV1AccountLoginLinkRequest(
 <dd>
 
 **acceptDpa:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**referralCode:** `*string` 
     
 </dd>
 </dl>
@@ -30264,6 +36105,176 @@ client.Account.DeleteTheSignedInUserAccount(
 
 **confirmEmail:** `string` 
     
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountReferralGet(request) -> *nordlet.PostV1AccountReferralGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountReferralGetRequest{}
+client.Account.PostV1AccountReferralGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountTableSettingsGet(request) -> *nordlet.PostV1AccountTableSettingsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountTableSettingsGetRequest{
+        TableKey: "tableKey",
+    }
+client.Account.PostV1AccountTableSettingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tableKey:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountTableSettingsSet(request) -> *nordlet.PostV1AccountTableSettingsSetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountTableSettingsSetRequest{
+        TableKey: "tableKey",
+    }
+client.Account.PostV1AccountTableSettingsSet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tableKey:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**columns:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*float64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.PostV1AccountTableSettingsList(request) -> *nordlet.PostV1AccountTableSettingsListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PostV1AccountTableSettingsListRequest{}
+client.Account.PostV1AccountTableSettingsList(
+        context.TODO(),
+        request,
+    )
+}
+```
 </dd>
 </dl>
 </dd>

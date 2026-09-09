@@ -258,6 +258,70 @@ func (c *Client) PostV1BankImportTemplatesList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1BankMatchRulesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1BankMatchRulesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMatchRulesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMatchRulesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMatchRulesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1BankMatchRulesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMatchRulesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMatchRulesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMatchRulesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1BankMatchRulesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMatchRulesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMatchRulesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1BankMatchRulesList(
+	ctx context.Context,
+	request *nordlet.PostV1BankMatchRulesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankMatchRulesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankMatchRulesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1BankMandatesCreate(
 	ctx context.Context,
 	request *nordlet.PostV1BankMandatesCreateRequest,
@@ -424,6 +488,40 @@ func (c *Client) PostV1BankSettlementsMatch(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1BankSettlementsMatchResponse, error) {
 	response, err := c.WithRawResponse.PostV1BankSettlementsMatch(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Attach the incoming bank-statement line that carries this payout to the settlement batch.
+func (c *Client) PostV1BankSettlementsLink(
+	ctx context.Context,
+	request *nordlet.PostV1BankSettlementsLinkRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankSettlementsLinkResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankSettlementsLink(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Detach the bank-statement line from the settlement batch and return the line to unmatched.
+func (c *Client) PostV1BankSettlementsUnlink(
+	ctx context.Context,
+	request *nordlet.PostV1BankSettlementsUnlinkRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankSettlementsUnlinkResponse, error) {
+	response, err := c.WithRawResponse.PostV1BankSettlementsUnlink(
 		ctx,
 		request,
 		opts...,

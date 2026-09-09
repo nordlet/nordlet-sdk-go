@@ -49,3 +49,19 @@ func (c *Client) PostV1PublicIntegrationRequests(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) GetV1PublicPayToken(
+	ctx context.Context,
+	request *nordlet.GetV1PublicPayTokenRequest,
+	opts ...option.RequestOption,
+) error {
+	_, err := c.WithRawResponse.GetV1PublicPayToken(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}

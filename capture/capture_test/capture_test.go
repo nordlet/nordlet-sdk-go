@@ -77,6 +77,102 @@ func VerifyRequestCount(
 	require.Equal(t, expected, len(result.Requests))
 }
 
+func TestCapturePostV1CaptureSettingsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CaptureSettingsGetRequest{}
+	_, invocationErr := client.Capture.PostV1CaptureSettingsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsGetWithWireMock", "POST", "/v1/capture/settings/get", nil, 1)
+}
+
+func TestCapturePostV1CaptureSettingsUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CaptureSettingsUpdateRequest{}
+	_, invocationErr := client.Capture.PostV1CaptureSettingsUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsUpdateWithWireMock", "POST", "/v1/capture/settings/update", nil, 1)
+}
+
+func TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CaptureSettingsRegenerateIntakeRequest{}
+	_, invocationErr := client.Capture.PostV1CaptureSettingsRegenerateIntake(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCapturePostV1CaptureSettingsRegenerateIntakeWithWireMock", "POST", "/v1/capture/settings/regenerate-intake", nil, 1)
+}
+
+func TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CaptureInboundEmailRequest{}
+	_, invocationErr := client.Capture.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCaptureReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSONWithWireMock", "POST", "/v1/capture/inbound-email", nil, 1)
+}
+
 func TestCaptureReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraftWithWireMock(
 	t *testing.T,
 ) {

@@ -227,6 +227,33 @@ var (
 	postV1CatalogItemsCreateRequestFieldDocumentRef             = big.NewInt(1 << 18)
 	postV1CatalogItemsCreateRequestFieldTranslations            = big.NewInt(1 << 19)
 	postV1CatalogItemsCreateRequestFieldComponents              = big.NewInt(1 << 20)
+	postV1CatalogItemsCreateRequestFieldKindID                  = big.NewInt(1 << 21)
+	postV1CatalogItemsCreateRequestFieldSaleAccountCode         = big.NewInt(1 << 22)
+	postV1CatalogItemsCreateRequestFieldPurchaseAccountCode     = big.NewInt(1 << 23)
+	postV1CatalogItemsCreateRequestFieldExpenseAccountCode      = big.NewInt(1 << 24)
+	postV1CatalogItemsCreateRequestFieldManufacturer            = big.NewInt(1 << 25)
+	postV1CatalogItemsCreateRequestFieldGrossMassKg             = big.NewInt(1 << 26)
+	postV1CatalogItemsCreateRequestFieldMinQuantity             = big.NewInt(1 << 27)
+	postV1CatalogItemsCreateRequestFieldCostPrice               = big.NewInt(1 << 28)
+	postV1CatalogItemsCreateRequestFieldIsFreePrice             = big.NewInt(1 << 29)
+	postV1CatalogItemsCreateRequestFieldExternalID              = big.NewInt(1 << 30)
+	postV1CatalogItemsCreateRequestFieldIsReturnable            = big.NewInt(1 << 31)
+	postV1CatalogItemsCreateRequestFieldCommentRequired         = big.NewInt(1 << 32)
+	postV1CatalogItemsCreateRequestFieldPriceFrom               = big.NewInt(1 << 33)
+	postV1CatalogItemsCreateRequestFieldPriceTo                 = big.NewInt(1 << 34)
+	postV1CatalogItemsCreateRequestFieldMinPrice                = big.NewInt(1 << 35)
+	postV1CatalogItemsCreateRequestFieldDiscountPercent         = big.NewInt(1 << 36)
+	postV1CatalogItemsCreateRequestFieldMaxDiscountPercent      = big.NewInt(1 << 37)
+	postV1CatalogItemsCreateRequestFieldLoyaltyPoints           = big.NewInt(1 << 38)
+	postV1CatalogItemsCreateRequestFieldDepartment              = big.NewInt(1 << 39)
+	postV1CatalogItemsCreateRequestFieldAgeRestriction          = big.NewInt(1 << 40)
+	postV1CatalogItemsCreateRequestFieldPackageQuantity         = big.NewInt(1 << 41)
+	postV1CatalogItemsCreateRequestFieldTaraCode                = big.NewInt(1 << 42)
+	postV1CatalogItemsCreateRequestFieldCertificateNumber       = big.NewInt(1 << 43)
+	postV1CatalogItemsCreateRequestFieldCertificateDate         = big.NewInt(1 << 44)
+	postV1CatalogItemsCreateRequestFieldValidFrom               = big.NewInt(1 << 45)
+	postV1CatalogItemsCreateRequestFieldValidTo                 = big.NewInt(1 << 46)
+	postV1CatalogItemsCreateRequestFieldPosFlags                = big.NewInt(1 << 47)
 )
 
 type PostV1CatalogItemsCreateRequest struct {
@@ -251,6 +278,33 @@ type PostV1CatalogItemsCreateRequest struct {
 	DocumentRef             *string                                                      `json:"documentRef,omitempty" url:"-"`
 	Translations            map[string]*PostV1CatalogItemsCreateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 	Components              []*PostV1CatalogItemsCreateRequestComponentsItem             `json:"components,omitempty" url:"-"`
+	KindID                  *string                                                      `json:"kindId,omitempty" url:"-"`
+	SaleAccountCode         *string                                                      `json:"saleAccountCode,omitempty" url:"-"`
+	PurchaseAccountCode     *string                                                      `json:"purchaseAccountCode,omitempty" url:"-"`
+	ExpenseAccountCode      *string                                                      `json:"expenseAccountCode,omitempty" url:"-"`
+	Manufacturer            *string                                                      `json:"manufacturer,omitempty" url:"-"`
+	GrossMassKg             *string                                                      `json:"grossMassKg,omitempty" url:"-"`
+	MinQuantity             *string                                                      `json:"minQuantity,omitempty" url:"-"`
+	CostPrice               *string                                                      `json:"costPrice,omitempty" url:"-"`
+	IsFreePrice             *bool                                                        `json:"isFreePrice,omitempty" url:"-"`
+	ExternalID              *string                                                      `json:"externalId,omitempty" url:"-"`
+	IsReturnable            *bool                                                        `json:"isReturnable,omitempty" url:"-"`
+	CommentRequired         *bool                                                        `json:"commentRequired,omitempty" url:"-"`
+	PriceFrom               *string                                                      `json:"priceFrom,omitempty" url:"-"`
+	PriceTo                 *string                                                      `json:"priceTo,omitempty" url:"-"`
+	MinPrice                *string                                                      `json:"minPrice,omitempty" url:"-"`
+	DiscountPercent         *string                                                      `json:"discountPercent,omitempty" url:"-"`
+	MaxDiscountPercent      *string                                                      `json:"maxDiscountPercent,omitempty" url:"-"`
+	LoyaltyPoints           *int64                                                       `json:"loyaltyPoints,omitempty" url:"-"`
+	Department              *string                                                      `json:"department,omitempty" url:"-"`
+	AgeRestriction          *int64                                                       `json:"ageRestriction,omitempty" url:"-"`
+	PackageQuantity         *string                                                      `json:"packageQuantity,omitempty" url:"-"`
+	TaraCode                *string                                                      `json:"taraCode,omitempty" url:"-"`
+	CertificateNumber       *string                                                      `json:"certificateNumber,omitempty" url:"-"`
+	CertificateDate         *string                                                      `json:"certificateDate,omitempty" url:"-"`
+	ValidFrom               *string                                                      `json:"validFrom,omitempty" url:"-"`
+	ValidTo                 *string                                                      `json:"validTo,omitempty" url:"-"`
+	PosFlags                map[string]bool                                              `json:"posFlags,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -410,6 +464,195 @@ func (p *PostV1CatalogItemsCreateRequest) SetComponents(components []*PostV1Cata
 	p.require(postV1CatalogItemsCreateRequestFieldComponents)
 }
 
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsCreateRequestFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsCreateRequestFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsCreateRequestFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsCreateRequestFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsCreateRequestFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsCreateRequestFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsCreateRequestFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsCreateRequestFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetIsFreePrice(isFreePrice *bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsCreateRequestFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsCreateRequestFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetIsReturnable(isReturnable *bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsCreateRequestFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetCommentRequired(commentRequired *bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsCreateRequestFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsCreateRequestFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsCreateRequestFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsCreateRequestFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsCreateRequestFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsCreateRequestFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsCreateRequestFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsCreateRequestFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsCreateRequestFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsCreateRequestFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsCreateRequestFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsCreateRequestFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsCreateRequestFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsCreateRequestFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsCreateRequestFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateRequest) SetPosFlags(posFlags map[string]bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsCreateRequestFieldPosFlags)
+}
+
 func (p *PostV1CatalogItemsCreateRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CatalogItemsCreateRequest
 	var body unmarshaler
@@ -478,6 +721,52 @@ func (p *PostV1CatalogItemsDeleteRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1CatalogItemsFilesListRequestFieldItemID = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogItemsFilesListRequest struct {
+	ItemID string `json:"itemId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogItemsFilesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListRequest) SetItemID(itemID string) {
+	p.ItemID = itemID
+	p.require(postV1CatalogItemsFilesListRequestFieldItemID)
+}
+
+func (p *PostV1CatalogItemsFilesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsFilesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsFilesListRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogItemsFilesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsFilesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1CatalogItemsGetRequestFieldID = big.NewInt(1 << 0)
 )
 
@@ -524,10 +813,243 @@ func (p *PostV1CatalogItemsGetRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1CatalogItemsKindsCreateRequestFieldCode               = big.NewInt(1 << 0)
+	postV1CatalogItemsKindsCreateRequestFieldName               = big.NewInt(1 << 1)
+	postV1CatalogItemsKindsCreateRequestFieldSaftType           = big.NewInt(1 << 2)
+	postV1CatalogItemsKindsCreateRequestFieldQuantityAccounting = big.NewInt(1 << 3)
+	postV1CatalogItemsKindsCreateRequestFieldSortOrder          = big.NewInt(1 << 4)
+)
+
+type PostV1CatalogItemsKindsCreateRequest struct {
+	Code               string                                        `json:"code" url:"-"`
+	Name               string                                        `json:"name" url:"-"`
+	SaftType           *PostV1CatalogItemsKindsCreateRequestSaftType `json:"saftType,omitempty" url:"-"`
+	QuantityAccounting *bool                                         `json:"quantityAccounting,omitempty" url:"-"`
+	SortOrder          *int64                                        `json:"sortOrder,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogItemsKindsCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateRequest) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogItemsKindsCreateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogItemsKindsCreateRequestFieldName)
+}
+
+// SetSaftType sets the SaftType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateRequest) SetSaftType(saftType *PostV1CatalogItemsKindsCreateRequestSaftType) {
+	p.SaftType = saftType
+	p.require(postV1CatalogItemsKindsCreateRequestFieldSaftType)
+}
+
+// SetQuantityAccounting sets the QuantityAccounting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateRequest) SetQuantityAccounting(quantityAccounting *bool) {
+	p.QuantityAccounting = quantityAccounting
+	p.require(postV1CatalogItemsKindsCreateRequestFieldQuantityAccounting)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateRequest) SetSortOrder(sortOrder *int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1CatalogItemsKindsCreateRequestFieldSortOrder)
+}
+
+func (p *PostV1CatalogItemsKindsCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CatalogItemsKindsDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogItemsKindsDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogItemsKindsDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsDeleteRequestFieldID)
+}
+
+func (p *PostV1CatalogItemsKindsDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1CatalogItemsKindsListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogItemsKindsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1CatalogItemsKindsUpdateRequestFieldID                 = big.NewInt(1 << 0)
+	postV1CatalogItemsKindsUpdateRequestFieldCode               = big.NewInt(1 << 1)
+	postV1CatalogItemsKindsUpdateRequestFieldName               = big.NewInt(1 << 2)
+	postV1CatalogItemsKindsUpdateRequestFieldSaftType           = big.NewInt(1 << 3)
+	postV1CatalogItemsKindsUpdateRequestFieldQuantityAccounting = big.NewInt(1 << 4)
+	postV1CatalogItemsKindsUpdateRequestFieldSortOrder          = big.NewInt(1 << 5)
+)
+
+type PostV1CatalogItemsKindsUpdateRequest struct {
+	ID                 string                                        `json:"id" url:"-"`
+	Code               *string                                       `json:"code,omitempty" url:"-"`
+	Name               *string                                       `json:"name,omitempty" url:"-"`
+	SaftType           *PostV1CatalogItemsKindsUpdateRequestSaftType `json:"saftType,omitempty" url:"-"`
+	QuantityAccounting *bool                                         `json:"quantityAccounting,omitempty" url:"-"`
+	SortOrder          *int64                                        `json:"sortOrder,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogItemsKindsUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldName)
+}
+
+// SetSaftType sets the SaftType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetSaftType(saftType *PostV1CatalogItemsKindsUpdateRequestSaftType) {
+	p.SaftType = saftType
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldSaftType)
+}
+
+// SetQuantityAccounting sets the QuantityAccounting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetQuantityAccounting(quantityAccounting *bool) {
+	p.QuantityAccounting = quantityAccounting
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldQuantityAccounting)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateRequest) SetSortOrder(sortOrder *int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1CatalogItemsKindsUpdateRequestFieldSortOrder)
+}
+
+func (p *PostV1CatalogItemsKindsUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1CatalogItemsListRequestFieldPage     = big.NewInt(1 << 0)
 	postV1CatalogItemsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1CatalogItemsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1CatalogItemsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1CatalogItemsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1CatalogItemsListRequest struct {
@@ -535,6 +1057,8 @@ type PostV1CatalogItemsListRequest struct {
 	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1CatalogItemsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1CatalogItemsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -573,6 +1097,13 @@ func (p *PostV1CatalogItemsListRequest) SetSort(sort []*PostV1CatalogItemsListRe
 func (p *PostV1CatalogItemsListRequest) SetFilter(filter []*PostV1CatalogItemsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1CatalogItemsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1CatalogItemsListRequestFieldTotals)
 }
 
 func (p *PostV1CatalogItemsListRequest) UnmarshalJSON(data []byte) error {
@@ -811,6 +1342,33 @@ var (
 	postV1CatalogItemsUpdateRequestFieldDocumentRef             = big.NewInt(1 << 19)
 	postV1CatalogItemsUpdateRequestFieldTranslations            = big.NewInt(1 << 20)
 	postV1CatalogItemsUpdateRequestFieldComponents              = big.NewInt(1 << 21)
+	postV1CatalogItemsUpdateRequestFieldKindID                  = big.NewInt(1 << 22)
+	postV1CatalogItemsUpdateRequestFieldSaleAccountCode         = big.NewInt(1 << 23)
+	postV1CatalogItemsUpdateRequestFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	postV1CatalogItemsUpdateRequestFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	postV1CatalogItemsUpdateRequestFieldManufacturer            = big.NewInt(1 << 26)
+	postV1CatalogItemsUpdateRequestFieldGrossMassKg             = big.NewInt(1 << 27)
+	postV1CatalogItemsUpdateRequestFieldMinQuantity             = big.NewInt(1 << 28)
+	postV1CatalogItemsUpdateRequestFieldCostPrice               = big.NewInt(1 << 29)
+	postV1CatalogItemsUpdateRequestFieldIsFreePrice             = big.NewInt(1 << 30)
+	postV1CatalogItemsUpdateRequestFieldExternalID              = big.NewInt(1 << 31)
+	postV1CatalogItemsUpdateRequestFieldIsReturnable            = big.NewInt(1 << 32)
+	postV1CatalogItemsUpdateRequestFieldCommentRequired         = big.NewInt(1 << 33)
+	postV1CatalogItemsUpdateRequestFieldPriceFrom               = big.NewInt(1 << 34)
+	postV1CatalogItemsUpdateRequestFieldPriceTo                 = big.NewInt(1 << 35)
+	postV1CatalogItemsUpdateRequestFieldMinPrice                = big.NewInt(1 << 36)
+	postV1CatalogItemsUpdateRequestFieldDiscountPercent         = big.NewInt(1 << 37)
+	postV1CatalogItemsUpdateRequestFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	postV1CatalogItemsUpdateRequestFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	postV1CatalogItemsUpdateRequestFieldDepartment              = big.NewInt(1 << 40)
+	postV1CatalogItemsUpdateRequestFieldAgeRestriction          = big.NewInt(1 << 41)
+	postV1CatalogItemsUpdateRequestFieldPackageQuantity         = big.NewInt(1 << 42)
+	postV1CatalogItemsUpdateRequestFieldTaraCode                = big.NewInt(1 << 43)
+	postV1CatalogItemsUpdateRequestFieldCertificateNumber       = big.NewInt(1 << 44)
+	postV1CatalogItemsUpdateRequestFieldCertificateDate         = big.NewInt(1 << 45)
+	postV1CatalogItemsUpdateRequestFieldValidFrom               = big.NewInt(1 << 46)
+	postV1CatalogItemsUpdateRequestFieldValidTo                 = big.NewInt(1 << 47)
+	postV1CatalogItemsUpdateRequestFieldPosFlags                = big.NewInt(1 << 48)
 )
 
 type PostV1CatalogItemsUpdateRequest struct {
@@ -832,10 +1390,37 @@ type PostV1CatalogItemsUpdateRequest struct {
 	SupplementaryQtyPerUnit *string                                                      `json:"supplementaryQtyPerUnit,omitempty" url:"-"`
 	Description             *string                                                      `json:"description,omitempty" url:"-"`
 	GroupID                 *string                                                      `json:"groupId,omitempty" url:"-"`
-	Attributes              map[string]string                                            `json:"attributes,omitempty" url:"-"`
+	Attributes              map[string]*string                                           `json:"attributes,omitempty" url:"-"`
 	DocumentRef             *string                                                      `json:"documentRef,omitempty" url:"-"`
 	Translations            map[string]*PostV1CatalogItemsUpdateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
 	Components              []*PostV1CatalogItemsUpdateRequestComponentsItem             `json:"components,omitempty" url:"-"`
+	KindID                  *string                                                      `json:"kindId,omitempty" url:"-"`
+	SaleAccountCode         *string                                                      `json:"saleAccountCode,omitempty" url:"-"`
+	PurchaseAccountCode     *string                                                      `json:"purchaseAccountCode,omitempty" url:"-"`
+	ExpenseAccountCode      *string                                                      `json:"expenseAccountCode,omitempty" url:"-"`
+	Manufacturer            *string                                                      `json:"manufacturer,omitempty" url:"-"`
+	GrossMassKg             *string                                                      `json:"grossMassKg,omitempty" url:"-"`
+	MinQuantity             *string                                                      `json:"minQuantity,omitempty" url:"-"`
+	CostPrice               *string                                                      `json:"costPrice,omitempty" url:"-"`
+	IsFreePrice             *bool                                                        `json:"isFreePrice,omitempty" url:"-"`
+	ExternalID              *string                                                      `json:"externalId,omitempty" url:"-"`
+	IsReturnable            *bool                                                        `json:"isReturnable,omitempty" url:"-"`
+	CommentRequired         *bool                                                        `json:"commentRequired,omitempty" url:"-"`
+	PriceFrom               *string                                                      `json:"priceFrom,omitempty" url:"-"`
+	PriceTo                 *string                                                      `json:"priceTo,omitempty" url:"-"`
+	MinPrice                *string                                                      `json:"minPrice,omitempty" url:"-"`
+	DiscountPercent         *string                                                      `json:"discountPercent,omitempty" url:"-"`
+	MaxDiscountPercent      *string                                                      `json:"maxDiscountPercent,omitempty" url:"-"`
+	LoyaltyPoints           *int64                                                       `json:"loyaltyPoints,omitempty" url:"-"`
+	Department              *string                                                      `json:"department,omitempty" url:"-"`
+	AgeRestriction          *int64                                                       `json:"ageRestriction,omitempty" url:"-"`
+	PackageQuantity         *string                                                      `json:"packageQuantity,omitempty" url:"-"`
+	TaraCode                *string                                                      `json:"taraCode,omitempty" url:"-"`
+	CertificateNumber       *string                                                      `json:"certificateNumber,omitempty" url:"-"`
+	CertificateDate         *string                                                      `json:"certificateDate,omitempty" url:"-"`
+	ValidFrom               *string                                                      `json:"validFrom,omitempty" url:"-"`
+	ValidTo                 *string                                                      `json:"validTo,omitempty" url:"-"`
+	PosFlags                map[string]*bool                                             `json:"posFlags,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -976,7 +1561,7 @@ func (p *PostV1CatalogItemsUpdateRequest) SetGroupID(groupID *string) {
 
 // SetAttributes sets the Attributes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1CatalogItemsUpdateRequest) SetAttributes(attributes map[string]string) {
+func (p *PostV1CatalogItemsUpdateRequest) SetAttributes(attributes map[string]*string) {
 	p.Attributes = attributes
 	p.require(postV1CatalogItemsUpdateRequestFieldAttributes)
 }
@@ -1000,6 +1585,195 @@ func (p *PostV1CatalogItemsUpdateRequest) SetTranslations(translations map[strin
 func (p *PostV1CatalogItemsUpdateRequest) SetComponents(components []*PostV1CatalogItemsUpdateRequestComponentsItem) {
 	p.Components = components
 	p.require(postV1CatalogItemsUpdateRequestFieldComponents)
+}
+
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsUpdateRequestFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsUpdateRequestFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsUpdateRequestFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsUpdateRequestFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsUpdateRequestFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsUpdateRequestFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsUpdateRequestFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsUpdateRequestFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetIsFreePrice(isFreePrice *bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsUpdateRequestFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsUpdateRequestFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetIsReturnable(isReturnable *bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsUpdateRequestFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetCommentRequired(commentRequired *bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsUpdateRequestFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsUpdateRequestFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsUpdateRequestFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsUpdateRequestFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsUpdateRequestFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsUpdateRequestFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsUpdateRequestFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsUpdateRequestFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsUpdateRequestFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsUpdateRequestFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsUpdateRequestFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsUpdateRequestFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsUpdateRequestFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsUpdateRequestFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsUpdateRequestFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateRequest) SetPosFlags(posFlags map[string]*bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsUpdateRequestFieldPosFlags)
 }
 
 func (p *PostV1CatalogItemsUpdateRequest) UnmarshalJSON(data []byte) error {
@@ -1338,6 +2112,248 @@ func (p *PostV1CatalogPriceListsUpdateRequest) UnmarshalJSON(data []byte) error 
 
 func (p *PostV1CatalogPriceListsUpdateRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1CatalogPriceListsUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CatalogUnitsCreateRequestFieldCode     = big.NewInt(1 << 0)
+	postV1CatalogUnitsCreateRequestFieldName     = big.NewInt(1 << 1)
+	postV1CatalogUnitsCreateRequestFieldIsActive = big.NewInt(1 << 2)
+)
+
+type PostV1CatalogUnitsCreateRequest struct {
+	Code     string `json:"code" url:"-"`
+	Name     string `json:"name" url:"-"`
+	IsActive *bool  `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogUnitsCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateRequest) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsCreateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsCreateRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1CatalogUnitsCreateRequestFieldIsActive)
+}
+
+func (p *PostV1CatalogUnitsCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CatalogUnitsDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogUnitsDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogUnitsDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsDeleteRequestFieldID)
+}
+
+func (p *PostV1CatalogUnitsDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1CatalogUnitsListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogUnitsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1CatalogUnitsOptionsRequestFieldLocale = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogUnitsOptionsRequest struct {
+	Locale *PostV1CatalogUnitsOptionsRequestLocale `json:"locale,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogUnitsOptionsRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsOptionsRequest) SetLocale(locale *PostV1CatalogUnitsOptionsRequestLocale) {
+	p.Locale = locale
+	p.require(postV1CatalogUnitsOptionsRequestFieldLocale)
+}
+
+func (p *PostV1CatalogUnitsOptionsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsOptionsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsOptionsRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsOptionsRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsOptionsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CatalogUnitsUpdateRequestFieldID       = big.NewInt(1 << 0)
+	postV1CatalogUnitsUpdateRequestFieldCode     = big.NewInt(1 << 1)
+	postV1CatalogUnitsUpdateRequestFieldName     = big.NewInt(1 << 2)
+	postV1CatalogUnitsUpdateRequestFieldIsActive = big.NewInt(1 << 3)
+)
+
+type PostV1CatalogUnitsUpdateRequest struct {
+	ID       string  `json:"id" url:"-"`
+	Code     *string `json:"code,omitempty" url:"-"`
+	Name     *string `json:"name,omitempty" url:"-"`
+	IsActive *bool   `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CatalogUnitsUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsUpdateRequestFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateRequest) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsUpdateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsUpdateRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1CatalogUnitsUpdateRequestFieldIsActive)
+}
+
+func (p *PostV1CatalogUnitsUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsUpdateRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -2232,8 +3248,35 @@ var (
 	postV1CatalogItemsCreateResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	postV1CatalogItemsCreateResponseFieldTranslations            = big.NewInt(1 << 20)
 	postV1CatalogItemsCreateResponseFieldComponents              = big.NewInt(1 << 21)
-	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 22)
-	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 23)
+	postV1CatalogItemsCreateResponseFieldKindID                  = big.NewInt(1 << 22)
+	postV1CatalogItemsCreateResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
+	postV1CatalogItemsCreateResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	postV1CatalogItemsCreateResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	postV1CatalogItemsCreateResponseFieldManufacturer            = big.NewInt(1 << 26)
+	postV1CatalogItemsCreateResponseFieldGrossMassKg             = big.NewInt(1 << 27)
+	postV1CatalogItemsCreateResponseFieldMinQuantity             = big.NewInt(1 << 28)
+	postV1CatalogItemsCreateResponseFieldCostPrice               = big.NewInt(1 << 29)
+	postV1CatalogItemsCreateResponseFieldIsFreePrice             = big.NewInt(1 << 30)
+	postV1CatalogItemsCreateResponseFieldExternalID              = big.NewInt(1 << 31)
+	postV1CatalogItemsCreateResponseFieldIsReturnable            = big.NewInt(1 << 32)
+	postV1CatalogItemsCreateResponseFieldCommentRequired         = big.NewInt(1 << 33)
+	postV1CatalogItemsCreateResponseFieldPriceFrom               = big.NewInt(1 << 34)
+	postV1CatalogItemsCreateResponseFieldPriceTo                 = big.NewInt(1 << 35)
+	postV1CatalogItemsCreateResponseFieldMinPrice                = big.NewInt(1 << 36)
+	postV1CatalogItemsCreateResponseFieldDiscountPercent         = big.NewInt(1 << 37)
+	postV1CatalogItemsCreateResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	postV1CatalogItemsCreateResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	postV1CatalogItemsCreateResponseFieldDepartment              = big.NewInt(1 << 40)
+	postV1CatalogItemsCreateResponseFieldAgeRestriction          = big.NewInt(1 << 41)
+	postV1CatalogItemsCreateResponseFieldPackageQuantity         = big.NewInt(1 << 42)
+	postV1CatalogItemsCreateResponseFieldTaraCode                = big.NewInt(1 << 43)
+	postV1CatalogItemsCreateResponseFieldCertificateNumber       = big.NewInt(1 << 44)
+	postV1CatalogItemsCreateResponseFieldCertificateDate         = big.NewInt(1 << 45)
+	postV1CatalogItemsCreateResponseFieldValidFrom               = big.NewInt(1 << 46)
+	postV1CatalogItemsCreateResponseFieldValidTo                 = big.NewInt(1 << 47)
+	postV1CatalogItemsCreateResponseFieldPosFlags                = big.NewInt(1 << 48)
+	postV1CatalogItemsCreateResponseFieldCreatedAt               = big.NewInt(1 << 49)
+	postV1CatalogItemsCreateResponseFieldUpdatedAt               = big.NewInt(1 << 50)
 )
 
 type PostV1CatalogItemsCreateResponse struct {
@@ -2259,6 +3302,33 @@ type PostV1CatalogItemsCreateResponse struct {
 	DocumentRef             *string                                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsCreateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsCreateResponseComponentsItem             `json:"components" url:"components"`
+	KindID                  *string                                                       `json:"kindId,omitempty" url:"kindId,omitempty"`
+	SaleAccountCode         *string                                                       `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
+	PurchaseAccountCode     *string                                                       `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
+	ExpenseAccountCode      *string                                                       `json:"expenseAccountCode,omitempty" url:"expenseAccountCode,omitempty"`
+	Manufacturer            *string                                                       `json:"manufacturer,omitempty" url:"manufacturer,omitempty"`
+	GrossMassKg             *string                                                       `json:"grossMassKg,omitempty" url:"grossMassKg,omitempty"`
+	MinQuantity             *string                                                       `json:"minQuantity,omitempty" url:"minQuantity,omitempty"`
+	CostPrice               *string                                                       `json:"costPrice,omitempty" url:"costPrice,omitempty"`
+	IsFreePrice             bool                                                          `json:"isFreePrice" url:"isFreePrice"`
+	ExternalID              *string                                                       `json:"externalId,omitempty" url:"externalId,omitempty"`
+	IsReturnable            bool                                                          `json:"isReturnable" url:"isReturnable"`
+	CommentRequired         bool                                                          `json:"commentRequired" url:"commentRequired"`
+	PriceFrom               *string                                                       `json:"priceFrom,omitempty" url:"priceFrom,omitempty"`
+	PriceTo                 *string                                                       `json:"priceTo,omitempty" url:"priceTo,omitempty"`
+	MinPrice                *string                                                       `json:"minPrice,omitempty" url:"minPrice,omitempty"`
+	DiscountPercent         *string                                                       `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	MaxDiscountPercent      *string                                                       `json:"maxDiscountPercent,omitempty" url:"maxDiscountPercent,omitempty"`
+	LoyaltyPoints           *int64                                                        `json:"loyaltyPoints,omitempty" url:"loyaltyPoints,omitempty"`
+	Department              *string                                                       `json:"department,omitempty" url:"department,omitempty"`
+	AgeRestriction          *int64                                                        `json:"ageRestriction,omitempty" url:"ageRestriction,omitempty"`
+	PackageQuantity         *string                                                       `json:"packageQuantity,omitempty" url:"packageQuantity,omitempty"`
+	TaraCode                *string                                                       `json:"taraCode,omitempty" url:"taraCode,omitempty"`
+	CertificateNumber       *string                                                       `json:"certificateNumber,omitempty" url:"certificateNumber,omitempty"`
+	CertificateDate         *string                                                       `json:"certificateDate,omitempty" url:"certificateDate,omitempty"`
+	ValidFrom               *string                                                       `json:"validFrom,omitempty" url:"validFrom,omitempty"`
+	ValidTo                 *string                                                       `json:"validTo,omitempty" url:"validTo,omitempty"`
+	PosFlags                map[string]*bool                                              `json:"posFlags,omitempty" url:"posFlags,omitempty"`
 	CreatedAt               string                                                        `json:"createdAt" url:"createdAt"`
 	UpdatedAt               string                                                        `json:"updatedAt" url:"updatedAt"`
 
@@ -2421,6 +3491,195 @@ func (p *PostV1CatalogItemsCreateResponse) GetComponents() []*PostV1CatalogItems
 		return nil
 	}
 	return p.Components
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetKindID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.KindID
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetSaleAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SaleAccountCode
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetPurchaseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PurchaseAccountCode
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetExpenseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpenseAccountCode
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetManufacturer() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Manufacturer
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetGrossMassKg() *string {
+	if p == nil {
+		return nil
+	}
+	return p.GrossMassKg
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetMinQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinQuantity
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetCostPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostPrice
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetIsFreePrice() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsFreePrice
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetExternalID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetIsReturnable() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsReturnable
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetCommentRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.CommentRequired
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetPriceFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceFrom
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetPriceTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceTo
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetMinPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinPrice
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DiscountPercent
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetMaxDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaxDiscountPercent
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetLoyaltyPoints() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.LoyaltyPoints
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetDepartment() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Department
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetAgeRestriction() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AgeRestriction
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetPackageQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PackageQuantity
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetTaraCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TaraCode
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetCertificateNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateNumber
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetCertificateDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateDate
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetValidFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidFrom
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetValidTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidTo
+}
+
+func (p *PostV1CatalogItemsCreateResponse) GetPosFlags() map[string]*bool {
+	if p == nil {
+		return nil
+	}
+	return p.PosFlags
 }
 
 func (p *PostV1CatalogItemsCreateResponse) GetCreatedAt() string {
@@ -2603,6 +3862,195 @@ func (p *PostV1CatalogItemsCreateResponse) SetTranslations(translations map[stri
 func (p *PostV1CatalogItemsCreateResponse) SetComponents(components []*PostV1CatalogItemsCreateResponseComponentsItem) {
 	p.Components = components
 	p.require(postV1CatalogItemsCreateResponseFieldComponents)
+}
+
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsCreateResponseFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsCreateResponseFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsCreateResponseFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsCreateResponseFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsCreateResponseFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsCreateResponseFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsCreateResponseFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsCreateResponseFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetIsFreePrice(isFreePrice bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsCreateResponseFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsCreateResponseFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetIsReturnable(isReturnable bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsCreateResponseFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetCommentRequired(commentRequired bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsCreateResponseFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsCreateResponseFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsCreateResponseFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsCreateResponseFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsCreateResponseFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsCreateResponseFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsCreateResponseFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsCreateResponseFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsCreateResponseFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsCreateResponseFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsCreateResponseFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsCreateResponseFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsCreateResponseFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsCreateResponseFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsCreateResponseFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsCreateResponse) SetPosFlags(posFlags map[string]*bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsCreateResponseFieldPosFlags)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3012,6 +4460,302 @@ func (p *PostV1CatalogItemsDeleteResponse) String() string {
 }
 
 var (
+	postV1CatalogItemsFilesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogItemsFilesListResponse struct {
+	Rows []*PostV1CatalogItemsFilesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) GetRows() []*PostV1CatalogItemsFilesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponse) SetRows(rows []*PostV1CatalogItemsFilesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1CatalogItemsFilesListResponseFieldRows)
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsFilesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsFilesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsFilesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsFilesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogItemsFilesListResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	postV1CatalogItemsFilesListResponseRowsItemFieldEntity     = big.NewInt(1 << 1)
+	postV1CatalogItemsFilesListResponseRowsItemFieldEntityID   = big.NewInt(1 << 2)
+	postV1CatalogItemsFilesListResponseRowsItemFieldFileName   = big.NewInt(1 << 3)
+	postV1CatalogItemsFilesListResponseRowsItemFieldMimeType   = big.NewInt(1 << 4)
+	postV1CatalogItemsFilesListResponseRowsItemFieldSizeBytes  = big.NewInt(1 << 5)
+	postV1CatalogItemsFilesListResponseRowsItemFieldSha256     = big.NewInt(1 << 6)
+	postV1CatalogItemsFilesListResponseRowsItemFieldStorageKey = big.NewInt(1 << 7)
+	postV1CatalogItemsFilesListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
+)
+
+type PostV1CatalogItemsFilesListResponseRowsItem struct {
+	ID         string  `json:"id" url:"id"`
+	Entity     string  `json:"entity" url:"entity"`
+	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string  `json:"fileName" url:"fileName"`
+	MimeType   string  `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string  `json:"sha256" url:"sha256"`
+	StorageKey string  `json:"storageKey" url:"storageKey"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetEntity() string {
+	if p == nil {
+		return ""
+	}
+	return p.Entity
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetEntityID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EntityID
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetMimeType() string {
+	if p == nil {
+		return ""
+	}
+	return p.MimeType
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetSizeBytes() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SizeBytes
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetSha256() string {
+	if p == nil {
+		return ""
+	}
+	return p.Sha256
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetStorageKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.StorageKey
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldID)
+}
+
+// SetEntity sets the Entity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetEntity(entity string) {
+	p.Entity = entity
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldEntity)
+}
+
+// SetEntityID sets the EntityID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetEntityID(entityID *string) {
+	p.EntityID = entityID
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldEntityID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetMimeType(mimeType string) {
+	p.MimeType = mimeType
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldMimeType)
+}
+
+// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	p.SizeBytes = sizeBytes
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldSizeBytes)
+}
+
+// SetSha256 sets the Sha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetSha256(sha256 string) {
+	p.Sha256 = sha256
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldSha256)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetStorageKey(storageKey string) {
+	p.StorageKey = storageKey
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldStorageKey)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogItemsFilesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsFilesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsFilesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsFilesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsFilesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1CatalogItemsGetResponseFieldID                      = big.NewInt(1 << 0)
 	postV1CatalogItemsGetResponseFieldType                    = big.NewInt(1 << 1)
 	postV1CatalogItemsGetResponseFieldTracking                = big.NewInt(1 << 2)
@@ -3034,8 +4778,35 @@ var (
 	postV1CatalogItemsGetResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	postV1CatalogItemsGetResponseFieldTranslations            = big.NewInt(1 << 20)
 	postV1CatalogItemsGetResponseFieldComponents              = big.NewInt(1 << 21)
-	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 22)
-	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 23)
+	postV1CatalogItemsGetResponseFieldKindID                  = big.NewInt(1 << 22)
+	postV1CatalogItemsGetResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
+	postV1CatalogItemsGetResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	postV1CatalogItemsGetResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	postV1CatalogItemsGetResponseFieldManufacturer            = big.NewInt(1 << 26)
+	postV1CatalogItemsGetResponseFieldGrossMassKg             = big.NewInt(1 << 27)
+	postV1CatalogItemsGetResponseFieldMinQuantity             = big.NewInt(1 << 28)
+	postV1CatalogItemsGetResponseFieldCostPrice               = big.NewInt(1 << 29)
+	postV1CatalogItemsGetResponseFieldIsFreePrice             = big.NewInt(1 << 30)
+	postV1CatalogItemsGetResponseFieldExternalID              = big.NewInt(1 << 31)
+	postV1CatalogItemsGetResponseFieldIsReturnable            = big.NewInt(1 << 32)
+	postV1CatalogItemsGetResponseFieldCommentRequired         = big.NewInt(1 << 33)
+	postV1CatalogItemsGetResponseFieldPriceFrom               = big.NewInt(1 << 34)
+	postV1CatalogItemsGetResponseFieldPriceTo                 = big.NewInt(1 << 35)
+	postV1CatalogItemsGetResponseFieldMinPrice                = big.NewInt(1 << 36)
+	postV1CatalogItemsGetResponseFieldDiscountPercent         = big.NewInt(1 << 37)
+	postV1CatalogItemsGetResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	postV1CatalogItemsGetResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	postV1CatalogItemsGetResponseFieldDepartment              = big.NewInt(1 << 40)
+	postV1CatalogItemsGetResponseFieldAgeRestriction          = big.NewInt(1 << 41)
+	postV1CatalogItemsGetResponseFieldPackageQuantity         = big.NewInt(1 << 42)
+	postV1CatalogItemsGetResponseFieldTaraCode                = big.NewInt(1 << 43)
+	postV1CatalogItemsGetResponseFieldCertificateNumber       = big.NewInt(1 << 44)
+	postV1CatalogItemsGetResponseFieldCertificateDate         = big.NewInt(1 << 45)
+	postV1CatalogItemsGetResponseFieldValidFrom               = big.NewInt(1 << 46)
+	postV1CatalogItemsGetResponseFieldValidTo                 = big.NewInt(1 << 47)
+	postV1CatalogItemsGetResponseFieldPosFlags                = big.NewInt(1 << 48)
+	postV1CatalogItemsGetResponseFieldCreatedAt               = big.NewInt(1 << 49)
+	postV1CatalogItemsGetResponseFieldUpdatedAt               = big.NewInt(1 << 50)
 )
 
 type PostV1CatalogItemsGetResponse struct {
@@ -3061,6 +4832,33 @@ type PostV1CatalogItemsGetResponse struct {
 	DocumentRef             *string                                                    `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsGetResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsGetResponseComponentsItem             `json:"components" url:"components"`
+	KindID                  *string                                                    `json:"kindId,omitempty" url:"kindId,omitempty"`
+	SaleAccountCode         *string                                                    `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
+	PurchaseAccountCode     *string                                                    `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
+	ExpenseAccountCode      *string                                                    `json:"expenseAccountCode,omitempty" url:"expenseAccountCode,omitempty"`
+	Manufacturer            *string                                                    `json:"manufacturer,omitempty" url:"manufacturer,omitempty"`
+	GrossMassKg             *string                                                    `json:"grossMassKg,omitempty" url:"grossMassKg,omitempty"`
+	MinQuantity             *string                                                    `json:"minQuantity,omitempty" url:"minQuantity,omitempty"`
+	CostPrice               *string                                                    `json:"costPrice,omitempty" url:"costPrice,omitempty"`
+	IsFreePrice             bool                                                       `json:"isFreePrice" url:"isFreePrice"`
+	ExternalID              *string                                                    `json:"externalId,omitempty" url:"externalId,omitempty"`
+	IsReturnable            bool                                                       `json:"isReturnable" url:"isReturnable"`
+	CommentRequired         bool                                                       `json:"commentRequired" url:"commentRequired"`
+	PriceFrom               *string                                                    `json:"priceFrom,omitempty" url:"priceFrom,omitempty"`
+	PriceTo                 *string                                                    `json:"priceTo,omitempty" url:"priceTo,omitempty"`
+	MinPrice                *string                                                    `json:"minPrice,omitempty" url:"minPrice,omitempty"`
+	DiscountPercent         *string                                                    `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	MaxDiscountPercent      *string                                                    `json:"maxDiscountPercent,omitempty" url:"maxDiscountPercent,omitempty"`
+	LoyaltyPoints           *int64                                                     `json:"loyaltyPoints,omitempty" url:"loyaltyPoints,omitempty"`
+	Department              *string                                                    `json:"department,omitempty" url:"department,omitempty"`
+	AgeRestriction          *int64                                                     `json:"ageRestriction,omitempty" url:"ageRestriction,omitempty"`
+	PackageQuantity         *string                                                    `json:"packageQuantity,omitempty" url:"packageQuantity,omitempty"`
+	TaraCode                *string                                                    `json:"taraCode,omitempty" url:"taraCode,omitempty"`
+	CertificateNumber       *string                                                    `json:"certificateNumber,omitempty" url:"certificateNumber,omitempty"`
+	CertificateDate         *string                                                    `json:"certificateDate,omitempty" url:"certificateDate,omitempty"`
+	ValidFrom               *string                                                    `json:"validFrom,omitempty" url:"validFrom,omitempty"`
+	ValidTo                 *string                                                    `json:"validTo,omitempty" url:"validTo,omitempty"`
+	PosFlags                map[string]*bool                                           `json:"posFlags,omitempty" url:"posFlags,omitempty"`
 	CreatedAt               string                                                     `json:"createdAt" url:"createdAt"`
 	UpdatedAt               string                                                     `json:"updatedAt" url:"updatedAt"`
 
@@ -3223,6 +5021,195 @@ func (p *PostV1CatalogItemsGetResponse) GetComponents() []*PostV1CatalogItemsGet
 		return nil
 	}
 	return p.Components
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetKindID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.KindID
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetSaleAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SaleAccountCode
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetPurchaseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PurchaseAccountCode
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetExpenseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpenseAccountCode
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetManufacturer() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Manufacturer
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetGrossMassKg() *string {
+	if p == nil {
+		return nil
+	}
+	return p.GrossMassKg
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetMinQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinQuantity
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetCostPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostPrice
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetIsFreePrice() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsFreePrice
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetExternalID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetIsReturnable() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsReturnable
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetCommentRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.CommentRequired
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetPriceFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceFrom
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetPriceTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceTo
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetMinPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinPrice
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DiscountPercent
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetMaxDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaxDiscountPercent
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetLoyaltyPoints() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.LoyaltyPoints
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetDepartment() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Department
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetAgeRestriction() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AgeRestriction
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetPackageQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PackageQuantity
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetTaraCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TaraCode
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetCertificateNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateNumber
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetCertificateDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateDate
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetValidFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidFrom
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetValidTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidTo
+}
+
+func (p *PostV1CatalogItemsGetResponse) GetPosFlags() map[string]*bool {
+	if p == nil {
+		return nil
+	}
+	return p.PosFlags
 }
 
 func (p *PostV1CatalogItemsGetResponse) GetCreatedAt() string {
@@ -3405,6 +5392,195 @@ func (p *PostV1CatalogItemsGetResponse) SetTranslations(translations map[string]
 func (p *PostV1CatalogItemsGetResponse) SetComponents(components []*PostV1CatalogItemsGetResponseComponentsItem) {
 	p.Components = components
 	p.require(postV1CatalogItemsGetResponseFieldComponents)
+}
+
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsGetResponseFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsGetResponseFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsGetResponseFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsGetResponseFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsGetResponseFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsGetResponseFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsGetResponseFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsGetResponseFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetIsFreePrice(isFreePrice bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsGetResponseFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsGetResponseFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetIsReturnable(isReturnable bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsGetResponseFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetCommentRequired(commentRequired bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsGetResponseFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsGetResponseFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsGetResponseFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsGetResponseFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsGetResponseFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsGetResponseFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsGetResponseFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsGetResponseFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsGetResponseFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsGetResponseFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsGetResponseFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsGetResponseFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsGetResponseFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsGetResponseFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsGetResponseFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsGetResponse) SetPosFlags(posFlags map[string]*bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsGetResponseFieldPosFlags)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3726,6 +5902,854 @@ func NewPostV1CatalogItemsGetResponseTypeFromString(s string) (PostV1CatalogItem
 }
 
 func (p PostV1CatalogItemsGetResponseType) Ptr() *PostV1CatalogItemsGetResponseType {
+	return &p
+}
+
+type PostV1CatalogItemsKindsCreateRequestSaftType string
+
+const (
+	PostV1CatalogItemsKindsCreateRequestSaftTypeGoods      PostV1CatalogItemsKindsCreateRequestSaftType = "goods"
+	PostV1CatalogItemsKindsCreateRequestSaftTypeService    PostV1CatalogItemsKindsCreateRequestSaftType = "service"
+	PostV1CatalogItemsKindsCreateRequestSaftTypeFixedAsset PostV1CatalogItemsKindsCreateRequestSaftType = "fixed_asset"
+	PostV1CatalogItemsKindsCreateRequestSaftTypeOther      PostV1CatalogItemsKindsCreateRequestSaftType = "other"
+)
+
+func NewPostV1CatalogItemsKindsCreateRequestSaftTypeFromString(s string) (PostV1CatalogItemsKindsCreateRequestSaftType, error) {
+	switch s {
+	case "goods":
+		return PostV1CatalogItemsKindsCreateRequestSaftTypeGoods, nil
+	case "service":
+		return PostV1CatalogItemsKindsCreateRequestSaftTypeService, nil
+	case "fixed_asset":
+		return PostV1CatalogItemsKindsCreateRequestSaftTypeFixedAsset, nil
+	case "other":
+		return PostV1CatalogItemsKindsCreateRequestSaftTypeOther, nil
+	}
+	var t PostV1CatalogItemsKindsCreateRequestSaftType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsKindsCreateRequestSaftType) Ptr() *PostV1CatalogItemsKindsCreateRequestSaftType {
+	return &p
+}
+
+var (
+	postV1CatalogItemsKindsCreateResponseFieldID                 = big.NewInt(1 << 0)
+	postV1CatalogItemsKindsCreateResponseFieldCode               = big.NewInt(1 << 1)
+	postV1CatalogItemsKindsCreateResponseFieldName               = big.NewInt(1 << 2)
+	postV1CatalogItemsKindsCreateResponseFieldSaftType           = big.NewInt(1 << 3)
+	postV1CatalogItemsKindsCreateResponseFieldQuantityAccounting = big.NewInt(1 << 4)
+	postV1CatalogItemsKindsCreateResponseFieldSortOrder          = big.NewInt(1 << 5)
+	postV1CatalogItemsKindsCreateResponseFieldCreatedAt          = big.NewInt(1 << 6)
+)
+
+type PostV1CatalogItemsKindsCreateResponse struct {
+	ID                 string                                        `json:"id" url:"id"`
+	Code               string                                        `json:"code" url:"code"`
+	Name               string                                        `json:"name" url:"name"`
+	SaftType           PostV1CatalogItemsKindsCreateResponseSaftType `json:"saftType" url:"saftType"`
+	QuantityAccounting bool                                          `json:"quantityAccounting" url:"quantityAccounting"`
+	SortOrder          int64                                         `json:"sortOrder" url:"sortOrder"`
+	CreatedAt          string                                        `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetSaftType() PostV1CatalogItemsKindsCreateResponseSaftType {
+	if p == nil {
+		return ""
+	}
+	return p.SaftType
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetQuantityAccounting() bool {
+	if p == nil {
+		return false
+	}
+	return p.QuantityAccounting
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetSortOrder() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SortOrder
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsCreateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogItemsKindsCreateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogItemsKindsCreateResponseFieldName)
+}
+
+// SetSaftType sets the SaftType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetSaftType(saftType PostV1CatalogItemsKindsCreateResponseSaftType) {
+	p.SaftType = saftType
+	p.require(postV1CatalogItemsKindsCreateResponseFieldSaftType)
+}
+
+// SetQuantityAccounting sets the QuantityAccounting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetQuantityAccounting(quantityAccounting bool) {
+	p.QuantityAccounting = quantityAccounting
+	p.require(postV1CatalogItemsKindsCreateResponseFieldQuantityAccounting)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetSortOrder(sortOrder int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1CatalogItemsKindsCreateResponseFieldSortOrder)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogItemsKindsCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsKindsCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsKindsCreateResponseSaftType string
+
+const (
+	PostV1CatalogItemsKindsCreateResponseSaftTypeGoods      PostV1CatalogItemsKindsCreateResponseSaftType = "goods"
+	PostV1CatalogItemsKindsCreateResponseSaftTypeService    PostV1CatalogItemsKindsCreateResponseSaftType = "service"
+	PostV1CatalogItemsKindsCreateResponseSaftTypeFixedAsset PostV1CatalogItemsKindsCreateResponseSaftType = "fixed_asset"
+	PostV1CatalogItemsKindsCreateResponseSaftTypeOther      PostV1CatalogItemsKindsCreateResponseSaftType = "other"
+)
+
+func NewPostV1CatalogItemsKindsCreateResponseSaftTypeFromString(s string) (PostV1CatalogItemsKindsCreateResponseSaftType, error) {
+	switch s {
+	case "goods":
+		return PostV1CatalogItemsKindsCreateResponseSaftTypeGoods, nil
+	case "service":
+		return PostV1CatalogItemsKindsCreateResponseSaftTypeService, nil
+	case "fixed_asset":
+		return PostV1CatalogItemsKindsCreateResponseSaftTypeFixedAsset, nil
+	case "other":
+		return PostV1CatalogItemsKindsCreateResponseSaftTypeOther, nil
+	}
+	var t PostV1CatalogItemsKindsCreateResponseSaftType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsKindsCreateResponseSaftType) Ptr() *PostV1CatalogItemsKindsCreateResponseSaftType {
+	return &p
+}
+
+var (
+	postV1CatalogItemsKindsDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogItemsKindsDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsDeleteResponseFieldID)
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsKindsDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogItemsKindsListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogItemsKindsListResponse struct {
+	Rows []*PostV1CatalogItemsKindsListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) GetRows() []*PostV1CatalogItemsKindsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponse) SetRows(rows []*PostV1CatalogItemsKindsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1CatalogItemsKindsListResponseFieldRows)
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsKindsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogItemsKindsListResponseRowsItemFieldID                 = big.NewInt(1 << 0)
+	postV1CatalogItemsKindsListResponseRowsItemFieldCode               = big.NewInt(1 << 1)
+	postV1CatalogItemsKindsListResponseRowsItemFieldName               = big.NewInt(1 << 2)
+	postV1CatalogItemsKindsListResponseRowsItemFieldSaftType           = big.NewInt(1 << 3)
+	postV1CatalogItemsKindsListResponseRowsItemFieldQuantityAccounting = big.NewInt(1 << 4)
+	postV1CatalogItemsKindsListResponseRowsItemFieldSortOrder          = big.NewInt(1 << 5)
+	postV1CatalogItemsKindsListResponseRowsItemFieldCreatedAt          = big.NewInt(1 << 6)
+)
+
+type PostV1CatalogItemsKindsListResponseRowsItem struct {
+	ID                 string                                              `json:"id" url:"id"`
+	Code               string                                              `json:"code" url:"code"`
+	Name               string                                              `json:"name" url:"name"`
+	SaftType           PostV1CatalogItemsKindsListResponseRowsItemSaftType `json:"saftType" url:"saftType"`
+	QuantityAccounting bool                                                `json:"quantityAccounting" url:"quantityAccounting"`
+	SortOrder          int64                                               `json:"sortOrder" url:"sortOrder"`
+	CreatedAt          string                                              `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetSaftType() PostV1CatalogItemsKindsListResponseRowsItemSaftType {
+	if p == nil {
+		return ""
+	}
+	return p.SaftType
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetQuantityAccounting() bool {
+	if p == nil {
+		return false
+	}
+	return p.QuantityAccounting
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetSortOrder() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SortOrder
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldName)
+}
+
+// SetSaftType sets the SaftType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetSaftType(saftType PostV1CatalogItemsKindsListResponseRowsItemSaftType) {
+	p.SaftType = saftType
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldSaftType)
+}
+
+// SetQuantityAccounting sets the QuantityAccounting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetQuantityAccounting(quantityAccounting bool) {
+	p.QuantityAccounting = quantityAccounting
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldQuantityAccounting)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetSortOrder(sortOrder int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldSortOrder)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogItemsKindsListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsKindsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsKindsListResponseRowsItemSaftType string
+
+const (
+	PostV1CatalogItemsKindsListResponseRowsItemSaftTypeGoods      PostV1CatalogItemsKindsListResponseRowsItemSaftType = "goods"
+	PostV1CatalogItemsKindsListResponseRowsItemSaftTypeService    PostV1CatalogItemsKindsListResponseRowsItemSaftType = "service"
+	PostV1CatalogItemsKindsListResponseRowsItemSaftTypeFixedAsset PostV1CatalogItemsKindsListResponseRowsItemSaftType = "fixed_asset"
+	PostV1CatalogItemsKindsListResponseRowsItemSaftTypeOther      PostV1CatalogItemsKindsListResponseRowsItemSaftType = "other"
+)
+
+func NewPostV1CatalogItemsKindsListResponseRowsItemSaftTypeFromString(s string) (PostV1CatalogItemsKindsListResponseRowsItemSaftType, error) {
+	switch s {
+	case "goods":
+		return PostV1CatalogItemsKindsListResponseRowsItemSaftTypeGoods, nil
+	case "service":
+		return PostV1CatalogItemsKindsListResponseRowsItemSaftTypeService, nil
+	case "fixed_asset":
+		return PostV1CatalogItemsKindsListResponseRowsItemSaftTypeFixedAsset, nil
+	case "other":
+		return PostV1CatalogItemsKindsListResponseRowsItemSaftTypeOther, nil
+	}
+	var t PostV1CatalogItemsKindsListResponseRowsItemSaftType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsKindsListResponseRowsItemSaftType) Ptr() *PostV1CatalogItemsKindsListResponseRowsItemSaftType {
+	return &p
+}
+
+type PostV1CatalogItemsKindsUpdateRequestSaftType string
+
+const (
+	PostV1CatalogItemsKindsUpdateRequestSaftTypeGoods      PostV1CatalogItemsKindsUpdateRequestSaftType = "goods"
+	PostV1CatalogItemsKindsUpdateRequestSaftTypeService    PostV1CatalogItemsKindsUpdateRequestSaftType = "service"
+	PostV1CatalogItemsKindsUpdateRequestSaftTypeFixedAsset PostV1CatalogItemsKindsUpdateRequestSaftType = "fixed_asset"
+	PostV1CatalogItemsKindsUpdateRequestSaftTypeOther      PostV1CatalogItemsKindsUpdateRequestSaftType = "other"
+)
+
+func NewPostV1CatalogItemsKindsUpdateRequestSaftTypeFromString(s string) (PostV1CatalogItemsKindsUpdateRequestSaftType, error) {
+	switch s {
+	case "goods":
+		return PostV1CatalogItemsKindsUpdateRequestSaftTypeGoods, nil
+	case "service":
+		return PostV1CatalogItemsKindsUpdateRequestSaftTypeService, nil
+	case "fixed_asset":
+		return PostV1CatalogItemsKindsUpdateRequestSaftTypeFixedAsset, nil
+	case "other":
+		return PostV1CatalogItemsKindsUpdateRequestSaftTypeOther, nil
+	}
+	var t PostV1CatalogItemsKindsUpdateRequestSaftType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsKindsUpdateRequestSaftType) Ptr() *PostV1CatalogItemsKindsUpdateRequestSaftType {
+	return &p
+}
+
+var (
+	postV1CatalogItemsKindsUpdateResponseFieldID                 = big.NewInt(1 << 0)
+	postV1CatalogItemsKindsUpdateResponseFieldCode               = big.NewInt(1 << 1)
+	postV1CatalogItemsKindsUpdateResponseFieldName               = big.NewInt(1 << 2)
+	postV1CatalogItemsKindsUpdateResponseFieldSaftType           = big.NewInt(1 << 3)
+	postV1CatalogItemsKindsUpdateResponseFieldQuantityAccounting = big.NewInt(1 << 4)
+	postV1CatalogItemsKindsUpdateResponseFieldSortOrder          = big.NewInt(1 << 5)
+	postV1CatalogItemsKindsUpdateResponseFieldCreatedAt          = big.NewInt(1 << 6)
+)
+
+type PostV1CatalogItemsKindsUpdateResponse struct {
+	ID                 string                                        `json:"id" url:"id"`
+	Code               string                                        `json:"code" url:"code"`
+	Name               string                                        `json:"name" url:"name"`
+	SaftType           PostV1CatalogItemsKindsUpdateResponseSaftType `json:"saftType" url:"saftType"`
+	QuantityAccounting bool                                          `json:"quantityAccounting" url:"quantityAccounting"`
+	SortOrder          int64                                         `json:"sortOrder" url:"sortOrder"`
+	CreatedAt          string                                        `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetSaftType() PostV1CatalogItemsKindsUpdateResponseSaftType {
+	if p == nil {
+		return ""
+	}
+	return p.SaftType
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetQuantityAccounting() bool {
+	if p == nil {
+		return false
+	}
+	return p.QuantityAccounting
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetSortOrder() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SortOrder
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldName)
+}
+
+// SetSaftType sets the SaftType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetSaftType(saftType PostV1CatalogItemsKindsUpdateResponseSaftType) {
+	p.SaftType = saftType
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldSaftType)
+}
+
+// SetQuantityAccounting sets the QuantityAccounting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetQuantityAccounting(quantityAccounting bool) {
+	p.QuantityAccounting = quantityAccounting
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldQuantityAccounting)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetSortOrder(sortOrder int64) {
+	p.SortOrder = sortOrder
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldSortOrder)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsKindsUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogItemsKindsUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogItemsKindsUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogItemsKindsUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogItemsKindsUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogItemsKindsUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogItemsKindsUpdateResponseSaftType string
+
+const (
+	PostV1CatalogItemsKindsUpdateResponseSaftTypeGoods      PostV1CatalogItemsKindsUpdateResponseSaftType = "goods"
+	PostV1CatalogItemsKindsUpdateResponseSaftTypeService    PostV1CatalogItemsKindsUpdateResponseSaftType = "service"
+	PostV1CatalogItemsKindsUpdateResponseSaftTypeFixedAsset PostV1CatalogItemsKindsUpdateResponseSaftType = "fixed_asset"
+	PostV1CatalogItemsKindsUpdateResponseSaftTypeOther      PostV1CatalogItemsKindsUpdateResponseSaftType = "other"
+)
+
+func NewPostV1CatalogItemsKindsUpdateResponseSaftTypeFromString(s string) (PostV1CatalogItemsKindsUpdateResponseSaftType, error) {
+	switch s {
+	case "goods":
+		return PostV1CatalogItemsKindsUpdateResponseSaftTypeGoods, nil
+	case "service":
+		return PostV1CatalogItemsKindsUpdateResponseSaftTypeService, nil
+	case "fixed_asset":
+		return PostV1CatalogItemsKindsUpdateResponseSaftTypeFixedAsset, nil
+	case "other":
+		return PostV1CatalogItemsKindsUpdateResponseSaftTypeOther, nil
+	}
+	var t PostV1CatalogItemsKindsUpdateResponseSaftType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogItemsKindsUpdateResponseSaftType) Ptr() *PostV1CatalogItemsKindsUpdateResponseSaftType {
 	return &p
 }
 
@@ -4172,6 +7196,7 @@ var (
 	postV1CatalogItemsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1CatalogItemsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1CatalogItemsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1CatalogItemsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1CatalogItemsListResponse struct {
@@ -4179,6 +7204,7 @@ type PostV1CatalogItemsListResponse struct {
 	Page     int64                                     `json:"page" url:"page"`
 	PageSize int64                                     `json:"pageSize" url:"pageSize"`
 	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4213,6 +7239,13 @@ func (p *PostV1CatalogItemsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1CatalogItemsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1CatalogItemsListResponse) GetExtraProperties() map[string]interface{} {
@@ -4255,6 +7288,13 @@ func (p *PostV1CatalogItemsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1CatalogItemsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1CatalogItemsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1CatalogItemsListResponseFieldTotals)
 }
 
 func (p *PostV1CatalogItemsListResponse) UnmarshalJSON(data []byte) error {
@@ -4322,8 +7362,35 @@ var (
 	postV1CatalogItemsListResponseRowsItemFieldDocumentRef             = big.NewInt(1 << 19)
 	postV1CatalogItemsListResponseRowsItemFieldTranslations            = big.NewInt(1 << 20)
 	postV1CatalogItemsListResponseRowsItemFieldComponents              = big.NewInt(1 << 21)
-	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 22)
-	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 23)
+	postV1CatalogItemsListResponseRowsItemFieldKindID                  = big.NewInt(1 << 22)
+	postV1CatalogItemsListResponseRowsItemFieldSaleAccountCode         = big.NewInt(1 << 23)
+	postV1CatalogItemsListResponseRowsItemFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	postV1CatalogItemsListResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	postV1CatalogItemsListResponseRowsItemFieldManufacturer            = big.NewInt(1 << 26)
+	postV1CatalogItemsListResponseRowsItemFieldGrossMassKg             = big.NewInt(1 << 27)
+	postV1CatalogItemsListResponseRowsItemFieldMinQuantity             = big.NewInt(1 << 28)
+	postV1CatalogItemsListResponseRowsItemFieldCostPrice               = big.NewInt(1 << 29)
+	postV1CatalogItemsListResponseRowsItemFieldIsFreePrice             = big.NewInt(1 << 30)
+	postV1CatalogItemsListResponseRowsItemFieldExternalID              = big.NewInt(1 << 31)
+	postV1CatalogItemsListResponseRowsItemFieldIsReturnable            = big.NewInt(1 << 32)
+	postV1CatalogItemsListResponseRowsItemFieldCommentRequired         = big.NewInt(1 << 33)
+	postV1CatalogItemsListResponseRowsItemFieldPriceFrom               = big.NewInt(1 << 34)
+	postV1CatalogItemsListResponseRowsItemFieldPriceTo                 = big.NewInt(1 << 35)
+	postV1CatalogItemsListResponseRowsItemFieldMinPrice                = big.NewInt(1 << 36)
+	postV1CatalogItemsListResponseRowsItemFieldDiscountPercent         = big.NewInt(1 << 37)
+	postV1CatalogItemsListResponseRowsItemFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	postV1CatalogItemsListResponseRowsItemFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	postV1CatalogItemsListResponseRowsItemFieldDepartment              = big.NewInt(1 << 40)
+	postV1CatalogItemsListResponseRowsItemFieldAgeRestriction          = big.NewInt(1 << 41)
+	postV1CatalogItemsListResponseRowsItemFieldPackageQuantity         = big.NewInt(1 << 42)
+	postV1CatalogItemsListResponseRowsItemFieldTaraCode                = big.NewInt(1 << 43)
+	postV1CatalogItemsListResponseRowsItemFieldCertificateNumber       = big.NewInt(1 << 44)
+	postV1CatalogItemsListResponseRowsItemFieldCertificateDate         = big.NewInt(1 << 45)
+	postV1CatalogItemsListResponseRowsItemFieldValidFrom               = big.NewInt(1 << 46)
+	postV1CatalogItemsListResponseRowsItemFieldValidTo                 = big.NewInt(1 << 47)
+	postV1CatalogItemsListResponseRowsItemFieldPosFlags                = big.NewInt(1 << 48)
+	postV1CatalogItemsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 49)
+	postV1CatalogItemsListResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 50)
 )
 
 type PostV1CatalogItemsListResponseRowsItem struct {
@@ -4349,6 +7416,33 @@ type PostV1CatalogItemsListResponseRowsItem struct {
 	DocumentRef             *string                                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsListResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsListResponseRowsItemComponentsItem             `json:"components" url:"components"`
+	KindID                  *string                                                             `json:"kindId,omitempty" url:"kindId,omitempty"`
+	SaleAccountCode         *string                                                             `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
+	PurchaseAccountCode     *string                                                             `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
+	ExpenseAccountCode      *string                                                             `json:"expenseAccountCode,omitempty" url:"expenseAccountCode,omitempty"`
+	Manufacturer            *string                                                             `json:"manufacturer,omitempty" url:"manufacturer,omitempty"`
+	GrossMassKg             *string                                                             `json:"grossMassKg,omitempty" url:"grossMassKg,omitempty"`
+	MinQuantity             *string                                                             `json:"minQuantity,omitempty" url:"minQuantity,omitempty"`
+	CostPrice               *string                                                             `json:"costPrice,omitempty" url:"costPrice,omitempty"`
+	IsFreePrice             bool                                                                `json:"isFreePrice" url:"isFreePrice"`
+	ExternalID              *string                                                             `json:"externalId,omitempty" url:"externalId,omitempty"`
+	IsReturnable            bool                                                                `json:"isReturnable" url:"isReturnable"`
+	CommentRequired         bool                                                                `json:"commentRequired" url:"commentRequired"`
+	PriceFrom               *string                                                             `json:"priceFrom,omitempty" url:"priceFrom,omitempty"`
+	PriceTo                 *string                                                             `json:"priceTo,omitempty" url:"priceTo,omitempty"`
+	MinPrice                *string                                                             `json:"minPrice,omitempty" url:"minPrice,omitempty"`
+	DiscountPercent         *string                                                             `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	MaxDiscountPercent      *string                                                             `json:"maxDiscountPercent,omitempty" url:"maxDiscountPercent,omitempty"`
+	LoyaltyPoints           *int64                                                              `json:"loyaltyPoints,omitempty" url:"loyaltyPoints,omitempty"`
+	Department              *string                                                             `json:"department,omitempty" url:"department,omitempty"`
+	AgeRestriction          *int64                                                              `json:"ageRestriction,omitempty" url:"ageRestriction,omitempty"`
+	PackageQuantity         *string                                                             `json:"packageQuantity,omitempty" url:"packageQuantity,omitempty"`
+	TaraCode                *string                                                             `json:"taraCode,omitempty" url:"taraCode,omitempty"`
+	CertificateNumber       *string                                                             `json:"certificateNumber,omitempty" url:"certificateNumber,omitempty"`
+	CertificateDate         *string                                                             `json:"certificateDate,omitempty" url:"certificateDate,omitempty"`
+	ValidFrom               *string                                                             `json:"validFrom,omitempty" url:"validFrom,omitempty"`
+	ValidTo                 *string                                                             `json:"validTo,omitempty" url:"validTo,omitempty"`
+	PosFlags                map[string]*bool                                                    `json:"posFlags,omitempty" url:"posFlags,omitempty"`
 	CreatedAt               string                                                              `json:"createdAt" url:"createdAt"`
 	UpdatedAt               string                                                              `json:"updatedAt" url:"updatedAt"`
 
@@ -4511,6 +7605,195 @@ func (p *PostV1CatalogItemsListResponseRowsItem) GetComponents() []*PostV1Catalo
 		return nil
 	}
 	return p.Components
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetKindID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.KindID
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetSaleAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SaleAccountCode
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetPurchaseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PurchaseAccountCode
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetExpenseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpenseAccountCode
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetManufacturer() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Manufacturer
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetGrossMassKg() *string {
+	if p == nil {
+		return nil
+	}
+	return p.GrossMassKg
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetMinQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinQuantity
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetCostPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostPrice
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetIsFreePrice() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsFreePrice
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetExternalID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetIsReturnable() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsReturnable
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetCommentRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.CommentRequired
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetPriceFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceFrom
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetPriceTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceTo
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetMinPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinPrice
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DiscountPercent
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetMaxDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaxDiscountPercent
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetLoyaltyPoints() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.LoyaltyPoints
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetDepartment() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Department
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetAgeRestriction() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AgeRestriction
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetPackageQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PackageQuantity
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetTaraCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TaraCode
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetCertificateNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateNumber
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetCertificateDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateDate
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetValidFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidFrom
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetValidTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidTo
+}
+
+func (p *PostV1CatalogItemsListResponseRowsItem) GetPosFlags() map[string]*bool {
+	if p == nil {
+		return nil
+	}
+	return p.PosFlags
 }
 
 func (p *PostV1CatalogItemsListResponseRowsItem) GetCreatedAt() string {
@@ -4693,6 +7976,195 @@ func (p *PostV1CatalogItemsListResponseRowsItem) SetTranslations(translations ma
 func (p *PostV1CatalogItemsListResponseRowsItem) SetComponents(components []*PostV1CatalogItemsListResponseRowsItemComponentsItem) {
 	p.Components = components
 	p.require(postV1CatalogItemsListResponseRowsItemFieldComponents)
+}
+
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsListResponseRowsItemFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsListResponseRowsItemFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsListResponseRowsItemFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsListResponseRowsItemFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsListResponseRowsItemFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsListResponseRowsItemFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsListResponseRowsItemFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsListResponseRowsItemFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetIsFreePrice(isFreePrice bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsListResponseRowsItemFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsListResponseRowsItemFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetIsReturnable(isReturnable bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsListResponseRowsItemFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetCommentRequired(commentRequired bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsListResponseRowsItemFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsListResponseRowsItemFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsListResponseRowsItemFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsListResponseRowsItemFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsListResponseRowsItemFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsListResponseRowsItemFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsListResponseRowsItemFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsListResponseRowsItemFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsListResponseRowsItemFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsListResponseRowsItemFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsListResponseRowsItemFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsListResponseRowsItemFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsListResponseRowsItemFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsListResponseRowsItemFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsListResponseRowsItemFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsListResponseRowsItem) SetPosFlags(posFlags map[string]*bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsListResponseRowsItemFieldPosFlags)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5882,8 +9354,35 @@ var (
 	postV1CatalogItemsUpdateResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	postV1CatalogItemsUpdateResponseFieldTranslations            = big.NewInt(1 << 20)
 	postV1CatalogItemsUpdateResponseFieldComponents              = big.NewInt(1 << 21)
-	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 22)
-	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 23)
+	postV1CatalogItemsUpdateResponseFieldKindID                  = big.NewInt(1 << 22)
+	postV1CatalogItemsUpdateResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
+	postV1CatalogItemsUpdateResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	postV1CatalogItemsUpdateResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	postV1CatalogItemsUpdateResponseFieldManufacturer            = big.NewInt(1 << 26)
+	postV1CatalogItemsUpdateResponseFieldGrossMassKg             = big.NewInt(1 << 27)
+	postV1CatalogItemsUpdateResponseFieldMinQuantity             = big.NewInt(1 << 28)
+	postV1CatalogItemsUpdateResponseFieldCostPrice               = big.NewInt(1 << 29)
+	postV1CatalogItemsUpdateResponseFieldIsFreePrice             = big.NewInt(1 << 30)
+	postV1CatalogItemsUpdateResponseFieldExternalID              = big.NewInt(1 << 31)
+	postV1CatalogItemsUpdateResponseFieldIsReturnable            = big.NewInt(1 << 32)
+	postV1CatalogItemsUpdateResponseFieldCommentRequired         = big.NewInt(1 << 33)
+	postV1CatalogItemsUpdateResponseFieldPriceFrom               = big.NewInt(1 << 34)
+	postV1CatalogItemsUpdateResponseFieldPriceTo                 = big.NewInt(1 << 35)
+	postV1CatalogItemsUpdateResponseFieldMinPrice                = big.NewInt(1 << 36)
+	postV1CatalogItemsUpdateResponseFieldDiscountPercent         = big.NewInt(1 << 37)
+	postV1CatalogItemsUpdateResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	postV1CatalogItemsUpdateResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	postV1CatalogItemsUpdateResponseFieldDepartment              = big.NewInt(1 << 40)
+	postV1CatalogItemsUpdateResponseFieldAgeRestriction          = big.NewInt(1 << 41)
+	postV1CatalogItemsUpdateResponseFieldPackageQuantity         = big.NewInt(1 << 42)
+	postV1CatalogItemsUpdateResponseFieldTaraCode                = big.NewInt(1 << 43)
+	postV1CatalogItemsUpdateResponseFieldCertificateNumber       = big.NewInt(1 << 44)
+	postV1CatalogItemsUpdateResponseFieldCertificateDate         = big.NewInt(1 << 45)
+	postV1CatalogItemsUpdateResponseFieldValidFrom               = big.NewInt(1 << 46)
+	postV1CatalogItemsUpdateResponseFieldValidTo                 = big.NewInt(1 << 47)
+	postV1CatalogItemsUpdateResponseFieldPosFlags                = big.NewInt(1 << 48)
+	postV1CatalogItemsUpdateResponseFieldCreatedAt               = big.NewInt(1 << 49)
+	postV1CatalogItemsUpdateResponseFieldUpdatedAt               = big.NewInt(1 << 50)
 )
 
 type PostV1CatalogItemsUpdateResponse struct {
@@ -5909,6 +9408,33 @@ type PostV1CatalogItemsUpdateResponse struct {
 	DocumentRef             *string                                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*PostV1CatalogItemsUpdateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*PostV1CatalogItemsUpdateResponseComponentsItem             `json:"components" url:"components"`
+	KindID                  *string                                                       `json:"kindId,omitempty" url:"kindId,omitempty"`
+	SaleAccountCode         *string                                                       `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
+	PurchaseAccountCode     *string                                                       `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
+	ExpenseAccountCode      *string                                                       `json:"expenseAccountCode,omitempty" url:"expenseAccountCode,omitempty"`
+	Manufacturer            *string                                                       `json:"manufacturer,omitempty" url:"manufacturer,omitempty"`
+	GrossMassKg             *string                                                       `json:"grossMassKg,omitempty" url:"grossMassKg,omitempty"`
+	MinQuantity             *string                                                       `json:"minQuantity,omitempty" url:"minQuantity,omitempty"`
+	CostPrice               *string                                                       `json:"costPrice,omitempty" url:"costPrice,omitempty"`
+	IsFreePrice             bool                                                          `json:"isFreePrice" url:"isFreePrice"`
+	ExternalID              *string                                                       `json:"externalId,omitempty" url:"externalId,omitempty"`
+	IsReturnable            bool                                                          `json:"isReturnable" url:"isReturnable"`
+	CommentRequired         bool                                                          `json:"commentRequired" url:"commentRequired"`
+	PriceFrom               *string                                                       `json:"priceFrom,omitempty" url:"priceFrom,omitempty"`
+	PriceTo                 *string                                                       `json:"priceTo,omitempty" url:"priceTo,omitempty"`
+	MinPrice                *string                                                       `json:"minPrice,omitempty" url:"minPrice,omitempty"`
+	DiscountPercent         *string                                                       `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	MaxDiscountPercent      *string                                                       `json:"maxDiscountPercent,omitempty" url:"maxDiscountPercent,omitempty"`
+	LoyaltyPoints           *int64                                                        `json:"loyaltyPoints,omitempty" url:"loyaltyPoints,omitempty"`
+	Department              *string                                                       `json:"department,omitempty" url:"department,omitempty"`
+	AgeRestriction          *int64                                                        `json:"ageRestriction,omitempty" url:"ageRestriction,omitempty"`
+	PackageQuantity         *string                                                       `json:"packageQuantity,omitempty" url:"packageQuantity,omitempty"`
+	TaraCode                *string                                                       `json:"taraCode,omitempty" url:"taraCode,omitempty"`
+	CertificateNumber       *string                                                       `json:"certificateNumber,omitempty" url:"certificateNumber,omitempty"`
+	CertificateDate         *string                                                       `json:"certificateDate,omitempty" url:"certificateDate,omitempty"`
+	ValidFrom               *string                                                       `json:"validFrom,omitempty" url:"validFrom,omitempty"`
+	ValidTo                 *string                                                       `json:"validTo,omitempty" url:"validTo,omitempty"`
+	PosFlags                map[string]*bool                                              `json:"posFlags,omitempty" url:"posFlags,omitempty"`
 	CreatedAt               string                                                        `json:"createdAt" url:"createdAt"`
 	UpdatedAt               string                                                        `json:"updatedAt" url:"updatedAt"`
 
@@ -6071,6 +9597,195 @@ func (p *PostV1CatalogItemsUpdateResponse) GetComponents() []*PostV1CatalogItems
 		return nil
 	}
 	return p.Components
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetKindID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.KindID
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetSaleAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SaleAccountCode
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetPurchaseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PurchaseAccountCode
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetExpenseAccountCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpenseAccountCode
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetManufacturer() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Manufacturer
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetGrossMassKg() *string {
+	if p == nil {
+		return nil
+	}
+	return p.GrossMassKg
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetMinQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinQuantity
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetCostPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CostPrice
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetIsFreePrice() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsFreePrice
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetExternalID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetIsReturnable() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsReturnable
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetCommentRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.CommentRequired
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetPriceFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceFrom
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetPriceTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PriceTo
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetMinPrice() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MinPrice
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DiscountPercent
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetMaxDiscountPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MaxDiscountPercent
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetLoyaltyPoints() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.LoyaltyPoints
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetDepartment() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Department
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetAgeRestriction() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AgeRestriction
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetPackageQuantity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PackageQuantity
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetTaraCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TaraCode
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetCertificateNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateNumber
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetCertificateDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateDate
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetValidFrom() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidFrom
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetValidTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ValidTo
+}
+
+func (p *PostV1CatalogItemsUpdateResponse) GetPosFlags() map[string]*bool {
+	if p == nil {
+		return nil
+	}
+	return p.PosFlags
 }
 
 func (p *PostV1CatalogItemsUpdateResponse) GetCreatedAt() string {
@@ -6253,6 +9968,195 @@ func (p *PostV1CatalogItemsUpdateResponse) SetTranslations(translations map[stri
 func (p *PostV1CatalogItemsUpdateResponse) SetComponents(components []*PostV1CatalogItemsUpdateResponseComponentsItem) {
 	p.Components = components
 	p.require(postV1CatalogItemsUpdateResponseFieldComponents)
+}
+
+// SetKindID sets the KindID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetKindID(kindID *string) {
+	p.KindID = kindID
+	p.require(postV1CatalogItemsUpdateResponseFieldKindID)
+}
+
+// SetSaleAccountCode sets the SaleAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetSaleAccountCode(saleAccountCode *string) {
+	p.SaleAccountCode = saleAccountCode
+	p.require(postV1CatalogItemsUpdateResponseFieldSaleAccountCode)
+}
+
+// SetPurchaseAccountCode sets the PurchaseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetPurchaseAccountCode(purchaseAccountCode *string) {
+	p.PurchaseAccountCode = purchaseAccountCode
+	p.require(postV1CatalogItemsUpdateResponseFieldPurchaseAccountCode)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetExpenseAccountCode(expenseAccountCode *string) {
+	p.ExpenseAccountCode = expenseAccountCode
+	p.require(postV1CatalogItemsUpdateResponseFieldExpenseAccountCode)
+}
+
+// SetManufacturer sets the Manufacturer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetManufacturer(manufacturer *string) {
+	p.Manufacturer = manufacturer
+	p.require(postV1CatalogItemsUpdateResponseFieldManufacturer)
+}
+
+// SetGrossMassKg sets the GrossMassKg field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetGrossMassKg(grossMassKg *string) {
+	p.GrossMassKg = grossMassKg
+	p.require(postV1CatalogItemsUpdateResponseFieldGrossMassKg)
+}
+
+// SetMinQuantity sets the MinQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetMinQuantity(minQuantity *string) {
+	p.MinQuantity = minQuantity
+	p.require(postV1CatalogItemsUpdateResponseFieldMinQuantity)
+}
+
+// SetCostPrice sets the CostPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetCostPrice(costPrice *string) {
+	p.CostPrice = costPrice
+	p.require(postV1CatalogItemsUpdateResponseFieldCostPrice)
+}
+
+// SetIsFreePrice sets the IsFreePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetIsFreePrice(isFreePrice bool) {
+	p.IsFreePrice = isFreePrice
+	p.require(postV1CatalogItemsUpdateResponseFieldIsFreePrice)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetExternalID(externalID *string) {
+	p.ExternalID = externalID
+	p.require(postV1CatalogItemsUpdateResponseFieldExternalID)
+}
+
+// SetIsReturnable sets the IsReturnable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetIsReturnable(isReturnable bool) {
+	p.IsReturnable = isReturnable
+	p.require(postV1CatalogItemsUpdateResponseFieldIsReturnable)
+}
+
+// SetCommentRequired sets the CommentRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetCommentRequired(commentRequired bool) {
+	p.CommentRequired = commentRequired
+	p.require(postV1CatalogItemsUpdateResponseFieldCommentRequired)
+}
+
+// SetPriceFrom sets the PriceFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetPriceFrom(priceFrom *string) {
+	p.PriceFrom = priceFrom
+	p.require(postV1CatalogItemsUpdateResponseFieldPriceFrom)
+}
+
+// SetPriceTo sets the PriceTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetPriceTo(priceTo *string) {
+	p.PriceTo = priceTo
+	p.require(postV1CatalogItemsUpdateResponseFieldPriceTo)
+}
+
+// SetMinPrice sets the MinPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetMinPrice(minPrice *string) {
+	p.MinPrice = minPrice
+	p.require(postV1CatalogItemsUpdateResponseFieldMinPrice)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetDiscountPercent(discountPercent *string) {
+	p.DiscountPercent = discountPercent
+	p.require(postV1CatalogItemsUpdateResponseFieldDiscountPercent)
+}
+
+// SetMaxDiscountPercent sets the MaxDiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetMaxDiscountPercent(maxDiscountPercent *string) {
+	p.MaxDiscountPercent = maxDiscountPercent
+	p.require(postV1CatalogItemsUpdateResponseFieldMaxDiscountPercent)
+}
+
+// SetLoyaltyPoints sets the LoyaltyPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetLoyaltyPoints(loyaltyPoints *int64) {
+	p.LoyaltyPoints = loyaltyPoints
+	p.require(postV1CatalogItemsUpdateResponseFieldLoyaltyPoints)
+}
+
+// SetDepartment sets the Department field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetDepartment(department *string) {
+	p.Department = department
+	p.require(postV1CatalogItemsUpdateResponseFieldDepartment)
+}
+
+// SetAgeRestriction sets the AgeRestriction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetAgeRestriction(ageRestriction *int64) {
+	p.AgeRestriction = ageRestriction
+	p.require(postV1CatalogItemsUpdateResponseFieldAgeRestriction)
+}
+
+// SetPackageQuantity sets the PackageQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetPackageQuantity(packageQuantity *string) {
+	p.PackageQuantity = packageQuantity
+	p.require(postV1CatalogItemsUpdateResponseFieldPackageQuantity)
+}
+
+// SetTaraCode sets the TaraCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetTaraCode(taraCode *string) {
+	p.TaraCode = taraCode
+	p.require(postV1CatalogItemsUpdateResponseFieldTaraCode)
+}
+
+// SetCertificateNumber sets the CertificateNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetCertificateNumber(certificateNumber *string) {
+	p.CertificateNumber = certificateNumber
+	p.require(postV1CatalogItemsUpdateResponseFieldCertificateNumber)
+}
+
+// SetCertificateDate sets the CertificateDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetCertificateDate(certificateDate *string) {
+	p.CertificateDate = certificateDate
+	p.require(postV1CatalogItemsUpdateResponseFieldCertificateDate)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetValidFrom(validFrom *string) {
+	p.ValidFrom = validFrom
+	p.require(postV1CatalogItemsUpdateResponseFieldValidFrom)
+}
+
+// SetValidTo sets the ValidTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetValidTo(validTo *string) {
+	p.ValidTo = validTo
+	p.require(postV1CatalogItemsUpdateResponseFieldValidTo)
+}
+
+// SetPosFlags sets the PosFlags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogItemsUpdateResponse) SetPosFlags(posFlags map[string]*bool) {
+	p.PosFlags = posFlags
+	p.require(postV1CatalogItemsUpdateResponseFieldPosFlags)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7623,6 +11527,862 @@ func (p *PostV1CatalogPriceListsUpdateResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1CatalogPriceListsUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogUnitsCreateResponseFieldID        = big.NewInt(1 << 0)
+	postV1CatalogUnitsCreateResponseFieldCode      = big.NewInt(1 << 1)
+	postV1CatalogUnitsCreateResponseFieldName      = big.NewInt(1 << 2)
+	postV1CatalogUnitsCreateResponseFieldIsActive  = big.NewInt(1 << 3)
+	postV1CatalogUnitsCreateResponseFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1CatalogUnitsCreateResponse struct {
+	ID        string `json:"id" url:"id"`
+	Code      string `json:"code" url:"code"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsCreateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsCreateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsCreateResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1CatalogUnitsCreateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogUnitsCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogUnitsDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogUnitsDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsDeleteResponseFieldID)
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogUnitsListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogUnitsListResponse struct {
+	Rows []*PostV1CatalogUnitsListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsListResponse) GetRows() []*PostV1CatalogUnitsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1CatalogUnitsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponse) SetRows(rows []*PostV1CatalogUnitsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1CatalogUnitsListResponseFieldRows)
+}
+
+func (p *PostV1CatalogUnitsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogUnitsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1CatalogUnitsListResponseRowsItemFieldCode      = big.NewInt(1 << 1)
+	postV1CatalogUnitsListResponseRowsItemFieldName      = big.NewInt(1 << 2)
+	postV1CatalogUnitsListResponseRowsItemFieldIsActive  = big.NewInt(1 << 3)
+	postV1CatalogUnitsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1CatalogUnitsListResponseRowsItem struct {
+	ID        string `json:"id" url:"id"`
+	Code      string `json:"code" url:"code"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsListResponseRowsItemFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsListResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsListResponseRowsItemFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1CatalogUnitsListResponseRowsItemFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogUnitsListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogUnitsOptionsRequestLocale string
+
+const (
+	PostV1CatalogUnitsOptionsRequestLocaleLt PostV1CatalogUnitsOptionsRequestLocale = "lt"
+	PostV1CatalogUnitsOptionsRequestLocaleEn PostV1CatalogUnitsOptionsRequestLocale = "en"
+)
+
+func NewPostV1CatalogUnitsOptionsRequestLocaleFromString(s string) (PostV1CatalogUnitsOptionsRequestLocale, error) {
+	switch s {
+	case "lt":
+		return PostV1CatalogUnitsOptionsRequestLocaleLt, nil
+	case "en":
+		return PostV1CatalogUnitsOptionsRequestLocaleEn, nil
+	}
+	var t PostV1CatalogUnitsOptionsRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogUnitsOptionsRequestLocale) Ptr() *PostV1CatalogUnitsOptionsRequestLocale {
+	return &p
+}
+
+var (
+	postV1CatalogUnitsOptionsResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1CatalogUnitsOptionsResponse struct {
+	Rows []*PostV1CatalogUnitsOptionsResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) GetRows() []*PostV1CatalogUnitsOptionsResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsOptionsResponse) SetRows(rows []*PostV1CatalogUnitsOptionsResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1CatalogUnitsOptionsResponseFieldRows)
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsOptionsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsOptionsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsOptionsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsOptionsResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CatalogUnitsOptionsResponseRowsItemFieldCode   = big.NewInt(1 << 0)
+	postV1CatalogUnitsOptionsResponseRowsItemFieldName   = big.NewInt(1 << 1)
+	postV1CatalogUnitsOptionsResponseRowsItemFieldSource = big.NewInt(1 << 2)
+)
+
+type PostV1CatalogUnitsOptionsResponseRowsItem struct {
+	Code   string                                          `json:"code" url:"code"`
+	Name   string                                          `json:"name" url:"name"`
+	Source PostV1CatalogUnitsOptionsResponseRowsItemSource `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) GetSource() PostV1CatalogUnitsOptionsResponseRowsItemSource {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsOptionsResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsOptionsResponseRowsItemFieldName)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) SetSource(source PostV1CatalogUnitsOptionsResponseRowsItemSource) {
+	p.Source = source
+	p.require(postV1CatalogUnitsOptionsResponseRowsItemFieldSource)
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsOptionsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsOptionsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsOptionsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsOptionsResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CatalogUnitsOptionsResponseRowsItemSource string
+
+const (
+	PostV1CatalogUnitsOptionsResponseRowsItemSourceCompany PostV1CatalogUnitsOptionsResponseRowsItemSource = "company"
+	PostV1CatalogUnitsOptionsResponseRowsItemSourceGlobal  PostV1CatalogUnitsOptionsResponseRowsItemSource = "global"
+)
+
+func NewPostV1CatalogUnitsOptionsResponseRowsItemSourceFromString(s string) (PostV1CatalogUnitsOptionsResponseRowsItemSource, error) {
+	switch s {
+	case "company":
+		return PostV1CatalogUnitsOptionsResponseRowsItemSourceCompany, nil
+	case "global":
+		return PostV1CatalogUnitsOptionsResponseRowsItemSourceGlobal, nil
+	}
+	var t PostV1CatalogUnitsOptionsResponseRowsItemSource
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CatalogUnitsOptionsResponseRowsItemSource) Ptr() *PostV1CatalogUnitsOptionsResponseRowsItemSource {
+	return &p
+}
+
+var (
+	postV1CatalogUnitsUpdateResponseFieldID        = big.NewInt(1 << 0)
+	postV1CatalogUnitsUpdateResponseFieldCode      = big.NewInt(1 << 1)
+	postV1CatalogUnitsUpdateResponseFieldName      = big.NewInt(1 << 2)
+	postV1CatalogUnitsUpdateResponseFieldIsActive  = big.NewInt(1 << 3)
+	postV1CatalogUnitsUpdateResponseFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1CatalogUnitsUpdateResponse struct {
+	ID        string `json:"id" url:"id"`
+	Code      string `json:"code" url:"code"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CatalogUnitsUpdateResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1CatalogUnitsUpdateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1CatalogUnitsUpdateResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1CatalogUnitsUpdateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CatalogUnitsUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CatalogUnitsUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CatalogUnitsUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CatalogUnitsUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CatalogUnitsUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CatalogUnitsUpdateResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}

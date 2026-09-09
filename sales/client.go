@@ -212,6 +212,86 @@ func (c *Client) PostV1SalesInvoicesIssue(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1SalesInvoicesLock(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesLockRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesLockResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesLock(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesInvoicesUnlock(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesUnlockRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesUnlockResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesUnlock(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesInvoicesPaymentLink(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesPaymentLinkRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesPaymentLinkResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentLink(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesInvoicesPaymentSettingsGet(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesPaymentSettingsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesPaymentSettingsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentSettingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1SalesInvoicesPaymentSettingsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesPaymentSettingsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesPaymentSettingsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesPaymentSettingsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1SalesRecognitionSchedulesList(
 	ctx context.Context,
 	request *nordlet.PostV1SalesRecognitionSchedulesListRequest,
@@ -362,6 +442,166 @@ func (c *Client) PostV1SalesActsPdf(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1SalesActsPdfResponse, error) {
 	response, err := c.WithRawResponse.PostV1SalesActsPdf(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1OperationTypesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1OperationTypesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OperationTypesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1OperationTypesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1OperationTypesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1OperationTypesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OperationTypesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1OperationTypesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1OperationTypesGet(
+	ctx context.Context,
+	request *nordlet.PostV1OperationTypesGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OperationTypesGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1OperationTypesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1OperationTypesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1OperationTypesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OperationTypesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1OperationTypesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1OperationTypesList(
+	ctx context.Context,
+	request *nordlet.PostV1OperationTypesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OperationTypesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1OperationTypesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DocumentSeriesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1DocumentSeriesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DocumentSeriesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1DocumentSeriesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DocumentSeriesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1DocumentSeriesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DocumentSeriesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1DocumentSeriesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DocumentSeriesGet(
+	ctx context.Context,
+	request *nordlet.PostV1DocumentSeriesGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DocumentSeriesGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1DocumentSeriesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DocumentSeriesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1DocumentSeriesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DocumentSeriesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1DocumentSeriesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1DocumentSeriesList(
+	ctx context.Context,
+	request *nordlet.PostV1DocumentSeriesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1DocumentSeriesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1DocumentSeriesList(
 		ctx,
 		request,
 		opts...,

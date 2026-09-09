@@ -9,6 +9,7 @@ import (
 	audit "github.com/nordlet/nordlet-sdk-go/audit"
 	bank "github.com/nordlet/nordlet-sdk-go/bank"
 	billing "github.com/nordlet/nordlet-sdk-go/billing"
+	calendar "github.com/nordlet/nordlet-sdk-go/calendar"
 	capture "github.com/nordlet/nordlet-sdk-go/capture"
 	cash "github.com/nordlet/nordlet-sdk-go/cash"
 	catalog "github.com/nordlet/nordlet-sdk-go/catalog"
@@ -60,6 +61,7 @@ type Client struct {
 	Projects      *projects.Client
 	Transport     *transport.Client
 	Pos           *pos.Client
+	Calendar      *calendar.Client
 	Audit         *audit.Client
 	Webhooks      *webhooks.Client
 	Bank          *bank.Client
@@ -99,6 +101,7 @@ func NewClient(opts ...option.RequestOption) *Client {
 		Projects:      projects.NewClient(options),
 		Transport:     transport.NewClient(options),
 		Pos:           pos.NewClient(options),
+		Calendar:      calendar.NewClient(options),
 		Audit:         audit.NewClient(options),
 		Webhooks:      webhooks.NewClient(options),
 		Bank:          bank.NewClient(options),

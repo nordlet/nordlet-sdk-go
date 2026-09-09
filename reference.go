@@ -14,6 +14,7 @@ var (
 	postV1ReferenceBanksListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceBanksListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceBanksListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceBanksListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceBanksListRequest struct {
@@ -21,6 +22,8 @@ type PostV1ReferenceBanksListRequest struct {
 	PageSize *int64                                       `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceBanksListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceBanksListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -59,6 +62,13 @@ func (p *PostV1ReferenceBanksListRequest) SetSort(sort []*PostV1ReferenceBanksLi
 func (p *PostV1ReferenceBanksListRequest) SetFilter(filter []*PostV1ReferenceBanksListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceBanksListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceBanksListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceBanksListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceBanksListRequest) UnmarshalJSON(data []byte) error {
@@ -169,6 +179,7 @@ var (
 	postV1ReferenceCnCodesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceCnCodesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceCnCodesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceCnCodesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceCnCodesListRequest struct {
@@ -176,6 +187,8 @@ type PostV1ReferenceCnCodesListRequest struct {
 	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceCnCodesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceCnCodesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -214,6 +227,13 @@ func (p *PostV1ReferenceCnCodesListRequest) SetSort(sort []*PostV1ReferenceCnCod
 func (p *PostV1ReferenceCnCodesListRequest) SetFilter(filter []*PostV1ReferenceCnCodesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceCnCodesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceCnCodesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceCnCodesListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceCnCodesListRequest) UnmarshalJSON(data []byte) error {
@@ -347,6 +367,7 @@ var (
 	postV1ReferenceCurrenciesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceCurrenciesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceCurrenciesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceCurrenciesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceCurrenciesListRequest struct {
@@ -354,6 +375,8 @@ type PostV1ReferenceCurrenciesListRequest struct {
 	PageSize *int64                                            `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceCurrenciesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceCurrenciesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -392,6 +415,13 @@ func (p *PostV1ReferenceCurrenciesListRequest) SetSort(sort []*PostV1ReferenceCu
 func (p *PostV1ReferenceCurrenciesListRequest) SetFilter(filter []*PostV1ReferenceCurrenciesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceCurrenciesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceCurrenciesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceCurrenciesListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceCurrenciesListRequest) UnmarshalJSON(data []byte) error {
@@ -530,6 +560,7 @@ var (
 	postV1ReferenceExchangeRatesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceExchangeRatesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceExchangeRatesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceExchangeRatesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceExchangeRatesListRequest struct {
@@ -537,6 +568,8 @@ type PostV1ReferenceExchangeRatesListRequest struct {
 	PageSize *int64                                               `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceExchangeRatesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceExchangeRatesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -575,6 +608,13 @@ func (p *PostV1ReferenceExchangeRatesListRequest) SetSort(sort []*PostV1Referenc
 func (p *PostV1ReferenceExchangeRatesListRequest) SetFilter(filter []*PostV1ReferenceExchangeRatesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceExchangeRatesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceExchangeRatesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceExchangeRatesListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceExchangeRatesListRequest) UnmarshalJSON(data []byte) error {
@@ -658,6 +698,7 @@ var (
 	postV1ReferenceExchangeRatesOverridesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceExchangeRatesOverridesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceExchangeRatesOverridesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceExchangeRatesOverridesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceExchangeRatesOverridesListRequest struct {
@@ -665,6 +706,8 @@ type PostV1ReferenceExchangeRatesOverridesListRequest struct {
 	PageSize *int64                                                        `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceExchangeRatesOverridesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceExchangeRatesOverridesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -703,6 +746,13 @@ func (p *PostV1ReferenceExchangeRatesOverridesListRequest) SetSort(sort []*PostV
 func (p *PostV1ReferenceExchangeRatesOverridesListRequest) SetFilter(filter []*PostV1ReferenceExchangeRatesOverridesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceExchangeRatesOverridesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceExchangeRatesOverridesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceExchangeRatesOverridesListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceExchangeRatesOverridesListRequest) UnmarshalJSON(data []byte) error {
@@ -849,6 +899,120 @@ func (p *PostV1ReferenceIntrastatThresholdsListRequest) require(field *big.Int) 
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
+var (
+	postV1ReferenceLtCitiesListRequestFieldMunicipalityCode = big.NewInt(1 << 0)
+	postV1ReferenceLtCitiesListRequestFieldQ                = big.NewInt(1 << 1)
+)
+
+type PostV1ReferenceLtCitiesListRequest struct {
+	MunicipalityCode *string `json:"municipalityCode,omitempty" url:"-"`
+	Q                *string `json:"q,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceLtCitiesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetMunicipalityCode sets the MunicipalityCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCitiesListRequest) SetMunicipalityCode(municipalityCode *string) {
+	p.MunicipalityCode = municipalityCode
+	p.require(postV1ReferenceLtCitiesListRequestFieldMunicipalityCode)
+}
+
+// SetQ sets the Q field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCitiesListRequest) SetQ(q *string) {
+	p.Q = q
+	p.require(postV1ReferenceLtCitiesListRequestFieldQ)
+}
+
+func (p *PostV1ReferenceLtCitiesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtCitiesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtCitiesListRequest(body)
+	return nil
+}
+
+func (p *PostV1ReferenceLtCitiesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtCitiesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1ReferenceLtCountiesListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceLtCountiesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1ReferenceLtMunicipalitiesListRequestFieldCountyCode = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceLtMunicipalitiesListRequest struct {
+	CountyCode *string `json:"countyCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountyCode sets the CountyCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtMunicipalitiesListRequest) SetCountyCode(countyCode *string) {
+	p.CountyCode = countyCode
+	p.require(postV1ReferenceLtMunicipalitiesListRequestFieldCountyCode)
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtMunicipalitiesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtMunicipalitiesListRequest(body)
+	return nil
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtMunicipalitiesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
 type PostV1ReferenceLtRegionsListRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -940,6 +1104,7 @@ var (
 	postV1ReferenceSeriesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceSeriesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceSeriesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceSeriesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceSeriesListRequest struct {
@@ -947,6 +1112,8 @@ type PostV1ReferenceSeriesListRequest struct {
 	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceSeriesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceSeriesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -987,6 +1154,13 @@ func (p *PostV1ReferenceSeriesListRequest) SetFilter(filter []*PostV1ReferenceSe
 	p.require(postV1ReferenceSeriesListRequestFieldFilter)
 }
 
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceSeriesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceSeriesListRequestFieldTotals)
+}
+
 func (p *PostV1ReferenceSeriesListRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1ReferenceSeriesListRequest
 	var body unmarshaler
@@ -1013,6 +1187,7 @@ var (
 	postV1ReferenceUnitsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceUnitsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceUnitsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceUnitsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceUnitsListRequest struct {
@@ -1020,6 +1195,8 @@ type PostV1ReferenceUnitsListRequest struct {
 	PageSize *int64                                       `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceUnitsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceUnitsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1060,6 +1237,13 @@ func (p *PostV1ReferenceUnitsListRequest) SetFilter(filter []*PostV1ReferenceUni
 	p.require(postV1ReferenceUnitsListRequestFieldFilter)
 }
 
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceUnitsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceUnitsListRequestFieldTotals)
+}
+
 func (p *PostV1ReferenceUnitsListRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1ReferenceUnitsListRequest
 	var body unmarshaler
@@ -1086,6 +1270,7 @@ var (
 	postV1ReferenceVatClassifiersListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReferenceVatClassifiersListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReferenceVatClassifiersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReferenceVatClassifiersListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceVatClassifiersListRequest struct {
@@ -1093,6 +1278,8 @@ type PostV1ReferenceVatClassifiersListRequest struct {
 	PageSize *int64                                                `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReferenceVatClassifiersListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReferenceVatClassifiersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1131,6 +1318,13 @@ func (p *PostV1ReferenceVatClassifiersListRequest) SetSort(sort []*PostV1Referen
 func (p *PostV1ReferenceVatClassifiersListRequest) SetFilter(filter []*PostV1ReferenceVatClassifiersListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReferenceVatClassifiersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceVatClassifiersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReferenceVatClassifiersListRequestFieldTotals)
 }
 
 func (p *PostV1ReferenceVatClassifiersListRequest) UnmarshalJSON(data []byte) error {
@@ -1770,6 +1964,7 @@ var (
 	postV1ReferenceBanksListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceBanksListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceBanksListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceBanksListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceBanksListResponse struct {
@@ -1777,6 +1972,7 @@ type PostV1ReferenceBanksListResponse struct {
 	Page     int64                                       `json:"page" url:"page"`
 	PageSize int64                                       `json:"pageSize" url:"pageSize"`
 	Total    int64                                       `json:"total" url:"total"`
+	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1811,6 +2007,13 @@ func (p *PostV1ReferenceBanksListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceBanksListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceBanksListResponse) GetExtraProperties() map[string]interface{} {
@@ -1853,6 +2056,13 @@ func (p *PostV1ReferenceBanksListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceBanksListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceBanksListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceBanksListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceBanksListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceBanksListResponse) UnmarshalJSON(data []byte) error {
@@ -2668,6 +2878,7 @@ var (
 	postV1ReferenceCnCodesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceCnCodesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceCnCodesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceCnCodesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceCnCodesListResponse struct {
@@ -2675,6 +2886,7 @@ type PostV1ReferenceCnCodesListResponse struct {
 	Page     int64                                         `json:"page" url:"page"`
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2709,6 +2921,13 @@ func (p *PostV1ReferenceCnCodesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceCnCodesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceCnCodesListResponse) GetExtraProperties() map[string]interface{} {
@@ -2751,6 +2970,13 @@ func (p *PostV1ReferenceCnCodesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceCnCodesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceCnCodesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceCnCodesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceCnCodesListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceCnCodesListResponse) UnmarshalJSON(data []byte) error {
@@ -4198,6 +4424,7 @@ var (
 	postV1ReferenceCurrenciesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceCurrenciesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceCurrenciesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceCurrenciesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceCurrenciesListResponse struct {
@@ -4205,6 +4432,7 @@ type PostV1ReferenceCurrenciesListResponse struct {
 	Page     int64                                            `json:"page" url:"page"`
 	PageSize int64                                            `json:"pageSize" url:"pageSize"`
 	Total    int64                                            `json:"total" url:"total"`
+	Totals   map[string]string                                `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4239,6 +4467,13 @@ func (p *PostV1ReferenceCurrenciesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceCurrenciesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceCurrenciesListResponse) GetExtraProperties() map[string]interface{} {
@@ -4281,6 +4516,13 @@ func (p *PostV1ReferenceCurrenciesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceCurrenciesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceCurrenciesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceCurrenciesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceCurrenciesListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceCurrenciesListResponse) UnmarshalJSON(data []byte) error {
@@ -5608,6 +5850,7 @@ var (
 	postV1ReferenceExchangeRatesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceExchangeRatesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceExchangeRatesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceExchangeRatesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceExchangeRatesListResponse struct {
@@ -5615,6 +5858,7 @@ type PostV1ReferenceExchangeRatesListResponse struct {
 	Page     int64                                               `json:"page" url:"page"`
 	PageSize int64                                               `json:"pageSize" url:"pageSize"`
 	Total    int64                                               `json:"total" url:"total"`
+	Totals   map[string]string                                   `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5649,6 +5893,13 @@ func (p *PostV1ReferenceExchangeRatesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceExchangeRatesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceExchangeRatesListResponse) GetExtraProperties() map[string]interface{} {
@@ -5691,6 +5942,13 @@ func (p *PostV1ReferenceExchangeRatesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceExchangeRatesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceExchangeRatesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceExchangeRatesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceExchangeRatesListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceExchangeRatesListResponse) UnmarshalJSON(data []byte) error {
@@ -6378,6 +6636,7 @@ var (
 	postV1ReferenceExchangeRatesOverridesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceExchangeRatesOverridesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceExchangeRatesOverridesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceExchangeRatesOverridesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceExchangeRatesOverridesListResponse struct {
@@ -6385,6 +6644,7 @@ type PostV1ReferenceExchangeRatesOverridesListResponse struct {
 	Page     int64                                                        `json:"page" url:"page"`
 	PageSize int64                                                        `json:"pageSize" url:"pageSize"`
 	Total    int64                                                        `json:"total" url:"total"`
+	Totals   map[string]string                                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6419,6 +6679,13 @@ func (p *PostV1ReferenceExchangeRatesOverridesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceExchangeRatesOverridesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceExchangeRatesOverridesListResponse) GetExtraProperties() map[string]interface{} {
@@ -6461,6 +6728,13 @@ func (p *PostV1ReferenceExchangeRatesOverridesListResponse) SetPageSize(pageSize
 func (p *PostV1ReferenceExchangeRatesOverridesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceExchangeRatesOverridesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceExchangeRatesOverridesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceExchangeRatesOverridesListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceExchangeRatesOverridesListResponse) UnmarshalJSON(data []byte) error {
@@ -7055,6 +7329,590 @@ func (p *PostV1ReferenceIntrastatThresholdsListResponseRowsItem) MarshalJSON() (
 }
 
 func (p *PostV1ReferenceIntrastatThresholdsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtCitiesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceLtCitiesListResponse struct {
+	Rows []*PostV1ReferenceLtCitiesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) GetRows() []*PostV1ReferenceLtCitiesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCitiesListResponse) SetRows(rows []*PostV1ReferenceLtCitiesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ReferenceLtCitiesListResponseFieldRows)
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtCitiesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtCitiesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtCitiesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtCitiesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtCitiesListResponseRowsItemFieldName             = big.NewInt(1 << 0)
+	postV1ReferenceLtCitiesListResponseRowsItemFieldMunicipalityCode = big.NewInt(1 << 1)
+)
+
+type PostV1ReferenceLtCitiesListResponseRowsItem struct {
+	Name             string `json:"name" url:"name"`
+	MunicipalityCode string `json:"municipalityCode" url:"municipalityCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) GetMunicipalityCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.MunicipalityCode
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ReferenceLtCitiesListResponseRowsItemFieldName)
+}
+
+// SetMunicipalityCode sets the MunicipalityCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) SetMunicipalityCode(municipalityCode string) {
+	p.MunicipalityCode = municipalityCode
+	p.require(postV1ReferenceLtCitiesListResponseRowsItemFieldMunicipalityCode)
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtCitiesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtCitiesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtCitiesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtCitiesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtCountiesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceLtCountiesListResponse struct {
+	Rows []*PostV1ReferenceLtCountiesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) GetRows() []*PostV1ReferenceLtCountiesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCountiesListResponse) SetRows(rows []*PostV1ReferenceLtCountiesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ReferenceLtCountiesListResponseFieldRows)
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtCountiesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtCountiesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtCountiesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtCountiesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtCountiesListResponseRowsItemFieldCode    = big.NewInt(1 << 0)
+	postV1ReferenceLtCountiesListResponseRowsItemFieldIsoCode = big.NewInt(1 << 1)
+	postV1ReferenceLtCountiesListResponseRowsItemFieldName    = big.NewInt(1 << 2)
+)
+
+type PostV1ReferenceLtCountiesListResponseRowsItem struct {
+	Code    string `json:"code" url:"code"`
+	IsoCode string `json:"isoCode" url:"isoCode"`
+	Name    string `json:"name" url:"name"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) GetIsoCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.IsoCode
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ReferenceLtCountiesListResponseRowsItemFieldCode)
+}
+
+// SetIsoCode sets the IsoCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) SetIsoCode(isoCode string) {
+	p.IsoCode = isoCode
+	p.require(postV1ReferenceLtCountiesListResponseRowsItemFieldIsoCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ReferenceLtCountiesListResponseRowsItemFieldName)
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtCountiesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtCountiesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtCountiesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtCountiesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtMunicipalitiesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1ReferenceLtMunicipalitiesListResponse struct {
+	Rows []*PostV1ReferenceLtMunicipalitiesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) GetRows() []*PostV1ReferenceLtMunicipalitiesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) SetRows(rows []*PostV1ReferenceLtMunicipalitiesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1ReferenceLtMunicipalitiesListResponseFieldRows)
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtMunicipalitiesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtMunicipalitiesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtMunicipalitiesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldCode       = big.NewInt(1 << 0)
+	postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldName       = big.NewInt(1 << 1)
+	postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldCountyCode = big.NewInt(1 << 2)
+)
+
+type PostV1ReferenceLtMunicipalitiesListResponseRowsItem struct {
+	Code       string `json:"code" url:"code"`
+	Name       string `json:"name" url:"name"`
+	CountyCode string `json:"countyCode" url:"countyCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) GetCountyCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountyCode
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldName)
+}
+
+// SetCountyCode sets the CountyCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) SetCountyCode(countyCode string) {
+	p.CountyCode = countyCode
+	p.require(postV1ReferenceLtMunicipalitiesListResponseRowsItemFieldCountyCode)
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReferenceLtMunicipalitiesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReferenceLtMunicipalitiesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReferenceLtMunicipalitiesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReferenceLtMunicipalitiesListResponseRowsItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -7876,6 +8734,7 @@ var (
 	postV1ReferenceSeriesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceSeriesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceSeriesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceSeriesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceSeriesListResponse struct {
@@ -7883,6 +8742,7 @@ type PostV1ReferenceSeriesListResponse struct {
 	Page     int64                                        `json:"page" url:"page"`
 	PageSize int64                                        `json:"pageSize" url:"pageSize"`
 	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7917,6 +8777,13 @@ func (p *PostV1ReferenceSeriesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceSeriesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceSeriesListResponse) GetExtraProperties() map[string]interface{} {
@@ -7959,6 +8826,13 @@ func (p *PostV1ReferenceSeriesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceSeriesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceSeriesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceSeriesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceSeriesListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceSeriesListResponse) UnmarshalJSON(data []byte) error {
@@ -8610,6 +9484,7 @@ var (
 	postV1ReferenceUnitsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceUnitsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceUnitsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceUnitsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceUnitsListResponse struct {
@@ -8617,6 +9492,7 @@ type PostV1ReferenceUnitsListResponse struct {
 	Page     int64                                       `json:"page" url:"page"`
 	PageSize int64                                       `json:"pageSize" url:"pageSize"`
 	Total    int64                                       `json:"total" url:"total"`
+	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8651,6 +9527,13 @@ func (p *PostV1ReferenceUnitsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceUnitsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceUnitsListResponse) GetExtraProperties() map[string]interface{} {
@@ -8693,6 +9576,13 @@ func (p *PostV1ReferenceUnitsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReferenceUnitsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceUnitsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceUnitsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceUnitsListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceUnitsListResponse) UnmarshalJSON(data []byte) error {
@@ -9296,6 +10186,7 @@ var (
 	postV1ReferenceVatClassifiersListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReferenceVatClassifiersListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReferenceVatClassifiersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReferenceVatClassifiersListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReferenceVatClassifiersListResponse struct {
@@ -9303,6 +10194,7 @@ type PostV1ReferenceVatClassifiersListResponse struct {
 	Page     int64                                                `json:"page" url:"page"`
 	PageSize int64                                                `json:"pageSize" url:"pageSize"`
 	Total    int64                                                `json:"total" url:"total"`
+	Totals   map[string]string                                    `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9337,6 +10229,13 @@ func (p *PostV1ReferenceVatClassifiersListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReferenceVatClassifiersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReferenceVatClassifiersListResponse) GetExtraProperties() map[string]interface{} {
@@ -9379,6 +10278,13 @@ func (p *PostV1ReferenceVatClassifiersListResponse) SetPageSize(pageSize int64) 
 func (p *PostV1ReferenceVatClassifiersListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReferenceVatClassifiersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReferenceVatClassifiersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReferenceVatClassifiersListResponseFieldTotals)
 }
 
 func (p *PostV1ReferenceVatClassifiersListResponse) UnmarshalJSON(data []byte) error {

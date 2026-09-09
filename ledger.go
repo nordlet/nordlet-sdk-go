@@ -118,6 +118,7 @@ var (
 	postV1LedgerAccountsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerAccountsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerAccountsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerAccountsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerAccountsListRequest struct {
@@ -125,6 +126,8 @@ type PostV1LedgerAccountsListRequest struct {
 	PageSize *int64                                       `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerAccountsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerAccountsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -163,6 +166,13 @@ func (p *PostV1LedgerAccountsListRequest) SetSort(sort []*PostV1LedgerAccountsLi
 func (p *PostV1LedgerAccountsListRequest) SetFilter(filter []*PostV1LedgerAccountsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerAccountsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerAccountsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerAccountsListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerAccountsListRequest) UnmarshalJSON(data []byte) error {
@@ -374,6 +384,7 @@ var (
 	postV1LedgerCostCenterGroupsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerCostCenterGroupsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerCostCenterGroupsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerCostCenterGroupsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerCostCenterGroupsListRequest struct {
@@ -381,6 +392,8 @@ type PostV1LedgerCostCenterGroupsListRequest struct {
 	PageSize *int64                                               `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerCostCenterGroupsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerCostCenterGroupsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -419,6 +432,13 @@ func (p *PostV1LedgerCostCenterGroupsListRequest) SetSort(sort []*PostV1LedgerCo
 func (p *PostV1LedgerCostCenterGroupsListRequest) SetFilter(filter []*PostV1LedgerCostCenterGroupsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerCostCenterGroupsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerCostCenterGroupsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerCostCenterGroupsListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerCostCenterGroupsListRequest) UnmarshalJSON(data []byte) error {
@@ -575,6 +595,7 @@ var (
 	postV1LedgerCostCentersListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerCostCentersListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerCostCentersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerCostCentersListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerCostCentersListRequest struct {
@@ -582,6 +603,8 @@ type PostV1LedgerCostCentersListRequest struct {
 	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerCostCentersListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerCostCentersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -620,6 +643,13 @@ func (p *PostV1LedgerCostCentersListRequest) SetSort(sort []*PostV1LedgerCostCen
 func (p *PostV1LedgerCostCentersListRequest) SetFilter(filter []*PostV1LedgerCostCentersListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerCostCentersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerCostCentersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerCostCentersListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerCostCentersListRequest) UnmarshalJSON(data []byte) error {
@@ -831,6 +861,7 @@ var (
 	postV1LedgerJournalTransactionsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerJournalTransactionsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerJournalTransactionsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerJournalTransactionsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerJournalTransactionsListRequest struct {
@@ -838,6 +869,8 @@ type PostV1LedgerJournalTransactionsListRequest struct {
 	PageSize *int64                                                  `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerJournalTransactionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerJournalTransactionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -876,6 +909,13 @@ func (p *PostV1LedgerJournalTransactionsListRequest) SetSort(sort []*PostV1Ledge
 func (p *PostV1LedgerJournalTransactionsListRequest) SetFilter(filter []*PostV1LedgerJournalTransactionsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerJournalTransactionsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerJournalTransactionsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerJournalTransactionsListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerJournalTransactionsListRequest) UnmarshalJSON(data []byte) error {
@@ -1059,6 +1099,7 @@ var (
 	postV1LedgerOwnersListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerOwnersListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerOwnersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerOwnersListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerOwnersListRequest struct {
@@ -1066,6 +1107,8 @@ type PostV1LedgerOwnersListRequest struct {
 	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerOwnersListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerOwnersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1104,6 +1147,13 @@ func (p *PostV1LedgerOwnersListRequest) SetSort(sort []*PostV1LedgerOwnersListRe
 func (p *PostV1LedgerOwnersListRequest) SetFilter(filter []*PostV1LedgerOwnersListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerOwnersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerOwnersListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerOwnersListRequest) UnmarshalJSON(data []byte) error {
@@ -1250,6 +1300,7 @@ var (
 	postV1LedgerPeriodsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1LedgerPeriodsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1LedgerPeriodsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LedgerPeriodsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerPeriodsListRequest struct {
@@ -1257,6 +1308,8 @@ type PostV1LedgerPeriodsListRequest struct {
 	PageSize *int64                                      `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1LedgerPeriodsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1LedgerPeriodsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1295,6 +1348,13 @@ func (p *PostV1LedgerPeriodsListRequest) SetSort(sort []*PostV1LedgerPeriodsList
 func (p *PostV1LedgerPeriodsListRequest) SetFilter(filter []*PostV1LedgerPeriodsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1LedgerPeriodsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerPeriodsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LedgerPeriodsListRequestFieldTotals)
 }
 
 func (p *PostV1LedgerPeriodsListRequest) UnmarshalJSON(data []byte) error {
@@ -3008,6 +3068,7 @@ var (
 	postV1LedgerAccountsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerAccountsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerAccountsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerAccountsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerAccountsListResponse struct {
@@ -3015,6 +3076,7 @@ type PostV1LedgerAccountsListResponse struct {
 	Page     int64                                       `json:"page" url:"page"`
 	PageSize int64                                       `json:"pageSize" url:"pageSize"`
 	Total    int64                                       `json:"total" url:"total"`
+	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3049,6 +3111,13 @@ func (p *PostV1LedgerAccountsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerAccountsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerAccountsListResponse) GetExtraProperties() map[string]interface{} {
@@ -3091,6 +3160,13 @@ func (p *PostV1LedgerAccountsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1LedgerAccountsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerAccountsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerAccountsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerAccountsListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerAccountsListResponse) UnmarshalJSON(data []byte) error {
@@ -5352,6 +5428,7 @@ var (
 	postV1LedgerCostCenterGroupsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerCostCenterGroupsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerCostCenterGroupsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerCostCenterGroupsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerCostCenterGroupsListResponse struct {
@@ -5359,6 +5436,7 @@ type PostV1LedgerCostCenterGroupsListResponse struct {
 	Page     int64                                               `json:"page" url:"page"`
 	PageSize int64                                               `json:"pageSize" url:"pageSize"`
 	Total    int64                                               `json:"total" url:"total"`
+	Totals   map[string]string                                   `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5393,6 +5471,13 @@ func (p *PostV1LedgerCostCenterGroupsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerCostCenterGroupsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerCostCenterGroupsListResponse) GetExtraProperties() map[string]interface{} {
@@ -5435,6 +5520,13 @@ func (p *PostV1LedgerCostCenterGroupsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1LedgerCostCenterGroupsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerCostCenterGroupsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerCostCenterGroupsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerCostCenterGroupsListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerCostCenterGroupsListResponse) UnmarshalJSON(data []byte) error {
@@ -6366,6 +6458,7 @@ var (
 	postV1LedgerCostCentersListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerCostCentersListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerCostCentersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerCostCentersListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerCostCentersListResponse struct {
@@ -6373,6 +6466,7 @@ type PostV1LedgerCostCentersListResponse struct {
 	Page     int64                                          `json:"page" url:"page"`
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6407,6 +6501,13 @@ func (p *PostV1LedgerCostCentersListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerCostCentersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerCostCentersListResponse) GetExtraProperties() map[string]interface{} {
@@ -6449,6 +6550,13 @@ func (p *PostV1LedgerCostCentersListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1LedgerCostCentersListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerCostCentersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerCostCentersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerCostCentersListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerCostCentersListResponse) UnmarshalJSON(data []byte) error {
@@ -8156,6 +8264,7 @@ var (
 	postV1LedgerJournalTransactionsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerJournalTransactionsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerJournalTransactionsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerJournalTransactionsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerJournalTransactionsListResponse struct {
@@ -8163,6 +8272,7 @@ type PostV1LedgerJournalTransactionsListResponse struct {
 	Page     int64                                                  `json:"page" url:"page"`
 	PageSize int64                                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                                  `json:"total" url:"total"`
+	Totals   map[string]string                                      `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8197,6 +8307,13 @@ func (p *PostV1LedgerJournalTransactionsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerJournalTransactionsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerJournalTransactionsListResponse) GetExtraProperties() map[string]interface{} {
@@ -8239,6 +8356,13 @@ func (p *PostV1LedgerJournalTransactionsListResponse) SetPageSize(pageSize int64
 func (p *PostV1LedgerJournalTransactionsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerJournalTransactionsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerJournalTransactionsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerJournalTransactionsListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerJournalTransactionsListResponse) UnmarshalJSON(data []byte) error {
@@ -9580,6 +9704,7 @@ var (
 	postV1LedgerOwnersListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerOwnersListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerOwnersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerOwnersListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerOwnersListResponse struct {
@@ -9587,6 +9712,7 @@ type PostV1LedgerOwnersListResponse struct {
 	Page     int64                                     `json:"page" url:"page"`
 	PageSize int64                                     `json:"pageSize" url:"pageSize"`
 	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9621,6 +9747,13 @@ func (p *PostV1LedgerOwnersListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerOwnersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerOwnersListResponse) GetExtraProperties() map[string]interface{} {
@@ -9663,6 +9796,13 @@ func (p *PostV1LedgerOwnersListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1LedgerOwnersListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerOwnersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerOwnersListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerOwnersListResponse) UnmarshalJSON(data []byte) error {
@@ -11030,6 +11170,7 @@ var (
 	postV1LedgerPeriodsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1LedgerPeriodsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1LedgerPeriodsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LedgerPeriodsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1LedgerPeriodsListResponse struct {
@@ -11037,6 +11178,7 @@ type PostV1LedgerPeriodsListResponse struct {
 	Page     int64                                      `json:"page" url:"page"`
 	PageSize int64                                      `json:"pageSize" url:"pageSize"`
 	Total    int64                                      `json:"total" url:"total"`
+	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11071,6 +11213,13 @@ func (p *PostV1LedgerPeriodsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1LedgerPeriodsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1LedgerPeriodsListResponse) GetExtraProperties() map[string]interface{} {
@@ -11113,6 +11262,13 @@ func (p *PostV1LedgerPeriodsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1LedgerPeriodsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1LedgerPeriodsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerPeriodsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LedgerPeriodsListResponseFieldTotals)
 }
 
 func (p *PostV1LedgerPeriodsListResponse) UnmarshalJSON(data []byte) error {

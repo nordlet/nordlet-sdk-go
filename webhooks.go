@@ -14,6 +14,7 @@ var (
 	postV1WebhooksDeliveriesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1WebhooksDeliveriesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1WebhooksDeliveriesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1WebhooksDeliveriesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1WebhooksDeliveriesListRequest struct {
@@ -21,6 +22,8 @@ type PostV1WebhooksDeliveriesListRequest struct {
 	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1WebhooksDeliveriesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1WebhooksDeliveriesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -59,6 +62,13 @@ func (p *PostV1WebhooksDeliveriesListRequest) SetSort(sort []*PostV1WebhooksDeli
 func (p *PostV1WebhooksDeliveriesListRequest) SetFilter(filter []*PostV1WebhooksDeliveriesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1WebhooksDeliveriesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1WebhooksDeliveriesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1WebhooksDeliveriesListRequestFieldTotals)
 }
 
 func (p *PostV1WebhooksDeliveriesListRequest) UnmarshalJSON(data []byte) error {
@@ -243,6 +253,7 @@ var (
 	postV1WebhooksSubscriptionsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1WebhooksSubscriptionsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1WebhooksSubscriptionsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1WebhooksSubscriptionsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1WebhooksSubscriptionsListRequest struct {
@@ -250,6 +261,8 @@ type PostV1WebhooksSubscriptionsListRequest struct {
 	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1WebhooksSubscriptionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1WebhooksSubscriptionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -288,6 +301,13 @@ func (p *PostV1WebhooksSubscriptionsListRequest) SetSort(sort []*PostV1WebhooksS
 func (p *PostV1WebhooksSubscriptionsListRequest) SetFilter(filter []*PostV1WebhooksSubscriptionsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1WebhooksSubscriptionsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1WebhooksSubscriptionsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1WebhooksSubscriptionsListRequestFieldTotals)
 }
 
 func (p *PostV1WebhooksSubscriptionsListRequest) UnmarshalJSON(data []byte) error {
@@ -827,6 +847,7 @@ var (
 	postV1WebhooksDeliveriesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1WebhooksDeliveriesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1WebhooksDeliveriesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1WebhooksDeliveriesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1WebhooksDeliveriesListResponse struct {
@@ -834,6 +855,7 @@ type PostV1WebhooksDeliveriesListResponse struct {
 	Page     int64                                           `json:"page" url:"page"`
 	PageSize int64                                           `json:"pageSize" url:"pageSize"`
 	Total    int64                                           `json:"total" url:"total"`
+	Totals   map[string]string                               `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -868,6 +890,13 @@ func (p *PostV1WebhooksDeliveriesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1WebhooksDeliveriesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1WebhooksDeliveriesListResponse) GetExtraProperties() map[string]interface{} {
@@ -910,6 +939,13 @@ func (p *PostV1WebhooksDeliveriesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1WebhooksDeliveriesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1WebhooksDeliveriesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1WebhooksDeliveriesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1WebhooksDeliveriesListResponseFieldTotals)
 }
 
 func (p *PostV1WebhooksDeliveriesListResponse) UnmarshalJSON(data []byte) error {
@@ -1966,6 +2002,7 @@ var (
 	postV1WebhooksSubscriptionsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1WebhooksSubscriptionsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1WebhooksSubscriptionsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1WebhooksSubscriptionsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1WebhooksSubscriptionsListResponse struct {
@@ -1973,6 +2010,7 @@ type PostV1WebhooksSubscriptionsListResponse struct {
 	Page     int64                                              `json:"page" url:"page"`
 	PageSize int64                                              `json:"pageSize" url:"pageSize"`
 	Total    int64                                              `json:"total" url:"total"`
+	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2007,6 +2045,13 @@ func (p *PostV1WebhooksSubscriptionsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1WebhooksSubscriptionsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1WebhooksSubscriptionsListResponse) GetExtraProperties() map[string]interface{} {
@@ -2049,6 +2094,13 @@ func (p *PostV1WebhooksSubscriptionsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1WebhooksSubscriptionsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1WebhooksSubscriptionsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1WebhooksSubscriptionsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1WebhooksSubscriptionsListResponseFieldTotals)
 }
 
 func (p *PostV1WebhooksSubscriptionsListResponse) UnmarshalJSON(data []byte) error {

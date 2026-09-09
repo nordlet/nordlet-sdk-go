@@ -530,3 +530,67 @@ func (c *Client) DeleteTheSignedInUserAccount(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) PostV1AccountReferralGet(
+	ctx context.Context,
+	request *nordlet.PostV1AccountReferralGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountReferralGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountReferralGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountTableSettingsGet(
+	ctx context.Context,
+	request *nordlet.PostV1AccountTableSettingsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountTableSettingsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountTableSettingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountTableSettingsSet(
+	ctx context.Context,
+	request *nordlet.PostV1AccountTableSettingsSetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountTableSettingsSetResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountTableSettingsSet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountTableSettingsList(
+	ctx context.Context,
+	request *nordlet.PostV1AccountTableSettingsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountTableSettingsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountTableSettingsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

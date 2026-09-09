@@ -228,6 +228,78 @@ func TestReferencePostV1ReferenceCountriesListWithWireMock(
 	VerifyRequestCount(t, "TestReferencePostV1ReferenceCountriesListWithWireMock", "POST", "/v1/reference/countries/list", nil, 1)
 }
 
+func TestReferencePostV1ReferenceLtCountiesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceLtCountiesListRequest{}
+	_, invocationErr := client.Reference.PostV1ReferenceLtCountiesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtCountiesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtCountiesListWithWireMock", "POST", "/v1/reference/lt/counties/list", nil, 1)
+}
+
+func TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceLtMunicipalitiesListRequest{}
+	_, invocationErr := client.Reference.PostV1ReferenceLtMunicipalitiesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtMunicipalitiesListWithWireMock", "POST", "/v1/reference/lt/municipalities/list", nil, 1)
+}
+
+func TestReferencePostV1ReferenceLtCitiesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReferenceLtCitiesListRequest{}
+	_, invocationErr := client.Reference.PostV1ReferenceLtCitiesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReferencePostV1ReferenceLtCitiesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReferencePostV1ReferenceLtCitiesListWithWireMock", "POST", "/v1/reference/lt/cities/list", nil, 1)
+}
+
 func TestReferencePostV1ReferenceBanksListWithWireMock(
 	t *testing.T,
 ) {

@@ -728,6 +728,7 @@ var (
 	postV1ReportsJobsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1ReportsJobsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1ReportsJobsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1ReportsJobsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReportsJobsListRequest struct {
@@ -735,6 +736,8 @@ type PostV1ReportsJobsListRequest struct {
 	PageSize *int64                                    `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1ReportsJobsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1ReportsJobsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -773,6 +776,13 @@ func (p *PostV1ReportsJobsListRequest) SetSort(sort []*PostV1ReportsJobsListRequ
 func (p *PostV1ReportsJobsListRequest) SetFilter(filter []*PostV1ReportsJobsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1ReportsJobsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsJobsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1ReportsJobsListRequestFieldTotals)
 }
 
 func (p *PostV1ReportsJobsListRequest) UnmarshalJSON(data []byte) error {
@@ -8520,6 +8530,7 @@ var (
 	postV1ReportsJobsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1ReportsJobsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1ReportsJobsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1ReportsJobsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1ReportsJobsListResponse struct {
@@ -8527,6 +8538,7 @@ type PostV1ReportsJobsListResponse struct {
 	Page     int64                                    `json:"page" url:"page"`
 	PageSize int64                                    `json:"pageSize" url:"pageSize"`
 	Total    int64                                    `json:"total" url:"total"`
+	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8561,6 +8573,13 @@ func (p *PostV1ReportsJobsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1ReportsJobsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1ReportsJobsListResponse) GetExtraProperties() map[string]interface{} {
@@ -8603,6 +8622,13 @@ func (p *PostV1ReportsJobsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1ReportsJobsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1ReportsJobsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsJobsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1ReportsJobsListResponseFieldTotals)
 }
 
 func (p *PostV1ReportsJobsListResponse) UnmarshalJSON(data []byte) error {

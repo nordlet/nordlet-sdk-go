@@ -106,6 +106,7 @@ var (
 	postV1CaptureDocumentsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1CaptureDocumentsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1CaptureDocumentsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1CaptureDocumentsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1CaptureDocumentsListRequest struct {
@@ -113,6 +114,8 @@ type PostV1CaptureDocumentsListRequest struct {
 	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1CaptureDocumentsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1CaptureDocumentsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -153,6 +156,13 @@ func (p *PostV1CaptureDocumentsListRequest) SetFilter(filter []*PostV1CaptureDoc
 	p.require(postV1CaptureDocumentsListRequestFieldFilter)
 }
 
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1CaptureDocumentsListRequestFieldTotals)
+}
+
 func (p *PostV1CaptureDocumentsListRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CaptureDocumentsListRequest
 	var body unmarshaler
@@ -165,6 +175,87 @@ func (p *PostV1CaptureDocumentsListRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1CaptureDocumentsListRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1CaptureDocumentsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1CaptureSettingsGetRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CaptureSettingsGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+type PostV1CaptureSettingsRegenerateIntakeRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1CaptureSettingsUpdateRequestFieldIntakeEnabled      = big.NewInt(1 << 0)
+	postV1CaptureSettingsUpdateRequestFieldCaptureAutoExtract = big.NewInt(1 << 1)
+)
+
+type PostV1CaptureSettingsUpdateRequest struct {
+	IntakeEnabled      *bool `json:"intakeEnabled,omitempty" url:"-"`
+	CaptureAutoExtract *bool `json:"captureAutoExtract,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CaptureSettingsUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateRequest) SetIntakeEnabled(intakeEnabled *bool) {
+	p.IntakeEnabled = intakeEnabled
+	p.require(postV1CaptureSettingsUpdateRequestFieldIntakeEnabled)
+}
+
+// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateRequest) SetCaptureAutoExtract(captureAutoExtract *bool) {
+	p.CaptureAutoExtract = captureAutoExtract
+	p.require(postV1CaptureSettingsUpdateRequestFieldCaptureAutoExtract)
+}
+
+func (p *PostV1CaptureSettingsUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureSettingsUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CaptureSettingsUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1CaptureSettingsUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureSettingsUpdateRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -276,6 +367,124 @@ func (p *PostV1CaptureDocumentsUploadRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1CaptureDocumentsUploadRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1CaptureDocumentsUploadRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CaptureInboundEmailRequestFieldPostmarkTo          = big.NewInt(1 << 0)
+	postV1CaptureInboundEmailRequestFieldToFull              = big.NewInt(1 << 1)
+	postV1CaptureInboundEmailRequestFieldPostmarkFrom        = big.NewInt(1 << 2)
+	postV1CaptureInboundEmailRequestFieldPostmarkSubject     = big.NewInt(1 << 3)
+	postV1CaptureInboundEmailRequestFieldPostmarkAttachments = big.NewInt(1 << 4)
+	postV1CaptureInboundEmailRequestFieldTo                  = big.NewInt(1 << 5)
+	postV1CaptureInboundEmailRequestFieldFrom                = big.NewInt(1 << 6)
+	postV1CaptureInboundEmailRequestFieldSubject             = big.NewInt(1 << 7)
+	postV1CaptureInboundEmailRequestFieldAttachments         = big.NewInt(1 << 8)
+)
+
+type PostV1CaptureInboundEmailRequest struct {
+	PostmarkTo          *string                                            `json:"To,omitempty" url:"-"`
+	ToFull              []*PostV1CaptureInboundEmailRequestToFullItem      `json:"ToFull,omitempty" url:"-"`
+	PostmarkFrom        *string                                            `json:"From,omitempty" url:"-"`
+	PostmarkSubject     *string                                            `json:"Subject,omitempty" url:"-"`
+	PostmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem `json:"Attachments,omitempty" url:"-"`
+	To                  *PostV1CaptureInboundEmailRequestTo                `json:"to,omitempty" url:"-"`
+	From                *string                                            `json:"from,omitempty" url:"-"`
+	Subject             *string                                            `json:"subject,omitempty" url:"-"`
+	Attachments         []*PostV1CaptureInboundEmailRequestAttachmentsItem `json:"attachments,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CaptureInboundEmailRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPostmarkTo sets the PostmarkTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetPostmarkTo(postmarkTo *string) {
+	p.PostmarkTo = postmarkTo
+	p.require(postV1CaptureInboundEmailRequestFieldPostmarkTo)
+}
+
+// SetToFull sets the ToFull field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetToFull(toFull []*PostV1CaptureInboundEmailRequestToFullItem) {
+	p.ToFull = toFull
+	p.require(postV1CaptureInboundEmailRequestFieldToFull)
+}
+
+// SetPostmarkFrom sets the PostmarkFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetPostmarkFrom(postmarkFrom *string) {
+	p.PostmarkFrom = postmarkFrom
+	p.require(postV1CaptureInboundEmailRequestFieldPostmarkFrom)
+}
+
+// SetPostmarkSubject sets the PostmarkSubject field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetPostmarkSubject(postmarkSubject *string) {
+	p.PostmarkSubject = postmarkSubject
+	p.require(postV1CaptureInboundEmailRequestFieldPostmarkSubject)
+}
+
+// SetPostmarkAttachments sets the PostmarkAttachments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetPostmarkAttachments(postmarkAttachments []*PostV1CaptureInboundEmailRequestAttachmentsItem) {
+	p.PostmarkAttachments = postmarkAttachments
+	p.require(postV1CaptureInboundEmailRequestFieldPostmarkAttachments)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetTo(to *PostV1CaptureInboundEmailRequestTo) {
+	p.To = to
+	p.require(postV1CaptureInboundEmailRequestFieldTo)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetFrom(from *string) {
+	p.From = from
+	p.require(postV1CaptureInboundEmailRequestFieldFrom)
+}
+
+// SetSubject sets the Subject field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetSubject(subject *string) {
+	p.Subject = subject
+	p.require(postV1CaptureInboundEmailRequestFieldSubject)
+}
+
+// SetAttachments sets the Attachments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequest) SetAttachments(attachments []*PostV1CaptureInboundEmailRequestAttachmentsItem) {
+	p.Attachments = attachments
+	p.require(postV1CaptureInboundEmailRequestFieldAttachments)
+}
+
+func (p *PostV1CaptureInboundEmailRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureInboundEmailRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CaptureInboundEmailRequest(body)
+	return nil
+}
+
+func (p *PostV1CaptureInboundEmailRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureInboundEmailRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1867,11 +2076,12 @@ var (
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldJournalTransactionID = big.NewInt(1 << 14)
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID    = big.NewInt(1 << 15)
 	postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                = big.NewInt(1 << 17)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef          = big.NewInt(1 << 18)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt            = big.NewInt(1 << 19)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt            = big.NewInt(1 << 20)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                = big.NewInt(1 << 21)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID      = big.NewInt(1 << 17)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                = big.NewInt(1 << 18)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                = big.NewInt(1 << 22)
 )
 
 type PostV1CaptureDocumentsConfirmResponseInvoice struct {
@@ -1892,6 +2102,7 @@ type PostV1CaptureDocumentsConfirmResponseInvoice struct {
 	JournalTransactionID *string                                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	CreditedInvoiceID    *string                                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	PurchaseOrderID      *string                                                   `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID      *string                                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	Notes                *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
 	DocumentRef          *string                                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	CreatedAt            string                                                    `json:"createdAt" url:"createdAt"`
@@ -2022,6 +2233,13 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetPurchaseOrderID() *str
 		return nil
 	}
 	return p.PurchaseOrderID
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OperationTypeID
 }
 
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetNotes() *string {
@@ -2190,6 +2408,13 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetCreditedInvoiceID(cred
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetPurchaseOrderID(purchaseOrderID *string) {
 	p.PurchaseOrderID = purchaseOrderID
 	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetOperationTypeID(operationTypeID *string) {
+	p.OperationTypeID = operationTypeID
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -5037,6 +5262,7 @@ var (
 	postV1CaptureDocumentsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1CaptureDocumentsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1CaptureDocumentsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1CaptureDocumentsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1CaptureDocumentsListResponse struct {
@@ -5044,6 +5270,7 @@ type PostV1CaptureDocumentsListResponse struct {
 	Page     int64                                         `json:"page" url:"page"`
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5078,6 +5305,13 @@ func (p *PostV1CaptureDocumentsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1CaptureDocumentsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1CaptureDocumentsListResponse) GetExtraProperties() map[string]interface{} {
@@ -5120,6 +5354,13 @@ func (p *PostV1CaptureDocumentsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1CaptureDocumentsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1CaptureDocumentsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1CaptureDocumentsListResponseFieldTotals)
 }
 
 func (p *PostV1CaptureDocumentsListResponse) UnmarshalJSON(data []byte) error {
@@ -6994,4 +7235,831 @@ func NewPostV1CaptureDocumentsUploadResponseStatusFromString(s string) (PostV1Ca
 
 func (p PostV1CaptureDocumentsUploadResponseStatus) Ptr() *PostV1CaptureDocumentsUploadResponseStatus {
 	return &p
+}
+
+var (
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkName        = big.NewInt(1 << 0)
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContent     = big.NewInt(1 << 1)
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContentType = big.NewInt(1 << 2)
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldFileName            = big.NewInt(1 << 3)
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldMimeType            = big.NewInt(1 << 4)
+	postV1CaptureInboundEmailRequestAttachmentsItemFieldContent             = big.NewInt(1 << 5)
+)
+
+type PostV1CaptureInboundEmailRequestAttachmentsItem struct {
+	PostmarkName        *string `json:"Name,omitempty" url:"Name,omitempty"`
+	PostmarkContent     *string `json:"Content,omitempty" url:"Content,omitempty"`
+	PostmarkContentType *string `json:"ContentType,omitempty" url:"ContentType,omitempty"`
+	FileName            *string `json:"fileName,omitempty" url:"fileName,omitempty"`
+	MimeType            *string `json:"mimeType,omitempty" url:"mimeType,omitempty"`
+	Content             *string `json:"content,omitempty" url:"content,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostmarkName
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkContent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostmarkContent
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetPostmarkContentType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostmarkContentType
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetFileName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileName
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetMimeType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MimeType
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetContent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Content
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPostmarkName sets the PostmarkName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkName(postmarkName *string) {
+	p.PostmarkName = postmarkName
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkName)
+}
+
+// SetPostmarkContent sets the PostmarkContent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkContent(postmarkContent *string) {
+	p.PostmarkContent = postmarkContent
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContent)
+}
+
+// SetPostmarkContentType sets the PostmarkContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetPostmarkContentType(postmarkContentType *string) {
+	p.PostmarkContentType = postmarkContentType
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldPostmarkContentType)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetFileName(fileName *string) {
+	p.FileName = fileName
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetMimeType(mimeType *string) {
+	p.MimeType = mimeType
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldMimeType)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) SetContent(content *string) {
+	p.Content = content
+	p.require(postV1CaptureInboundEmailRequestAttachmentsItemFieldContent)
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureInboundEmailRequestAttachmentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CaptureInboundEmailRequestAttachmentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureInboundEmailRequestAttachmentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CaptureInboundEmailRequestAttachmentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CaptureInboundEmailRequestTo struct {
+	String     string
+	StringList []string
+
+	typ string
+}
+
+func (p *PostV1CaptureInboundEmailRequestTo) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1CaptureInboundEmailRequestTo) GetStringList() []string {
+	if p == nil {
+		return nil
+	}
+	return p.StringList
+}
+
+func (p *PostV1CaptureInboundEmailRequestTo) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueStringList []string
+	if err := json.Unmarshal(data, &valueStringList); err == nil {
+		p.typ = "StringList"
+		p.StringList = valueStringList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1CaptureInboundEmailRequestTo) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "StringList" || p.StringList != nil {
+		return json.Marshal(p.StringList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1CaptureInboundEmailRequestToVisitor interface {
+	VisitString(string) error
+	VisitStringList([]string) error
+}
+
+func (p *PostV1CaptureInboundEmailRequestTo) Accept(visitor PostV1CaptureInboundEmailRequestToVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "StringList" || p.StringList != nil {
+		return visitor.VisitStringList(p.StringList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1CaptureInboundEmailRequestToFullItemFieldEmail = big.NewInt(1 << 0)
+)
+
+type PostV1CaptureInboundEmailRequestToFullItem struct {
+	Email *string `json:"Email,omitempty" url:"Email,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	ExtraProperties map[string]interface{} `json:"-" url:"-"`
+
+	rawJSON json.RawMessage
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.ExtraProperties
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailRequestToFullItem) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1CaptureInboundEmailRequestToFullItemFieldEmail)
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) UnmarshalJSON(data []byte) error {
+	type embed PostV1CaptureInboundEmailRequestToFullItem
+	var unmarshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PostV1CaptureInboundEmailRequestToFullItem(unmarshaler.embed)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.ExtraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureInboundEmailRequestToFullItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return internal.MarshalJSONWithExtraProperties(explicitMarshaler, p.ExtraProperties)
+}
+
+func (p *PostV1CaptureInboundEmailRequestToFullItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CaptureInboundEmailResponseFieldAccepted   = big.NewInt(1 << 0)
+	postV1CaptureInboundEmailResponseFieldSkipped    = big.NewInt(1 << 1)
+	postV1CaptureInboundEmailResponseFieldCaptureIDs = big.NewInt(1 << 2)
+)
+
+type PostV1CaptureInboundEmailResponse struct {
+	Accepted   int64    `json:"accepted" url:"accepted"`
+	Skipped    int64    `json:"skipped" url:"skipped"`
+	CaptureIDs []string `json:"captureIds" url:"captureIds"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CaptureInboundEmailResponse) GetAccepted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Accepted
+}
+
+func (p *PostV1CaptureInboundEmailResponse) GetSkipped() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Skipped
+}
+
+func (p *PostV1CaptureInboundEmailResponse) GetCaptureIDs() []string {
+	if p == nil {
+		return nil
+	}
+	return p.CaptureIDs
+}
+
+func (p *PostV1CaptureInboundEmailResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CaptureInboundEmailResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetAccepted sets the Accepted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailResponse) SetAccepted(accepted int64) {
+	p.Accepted = accepted
+	p.require(postV1CaptureInboundEmailResponseFieldAccepted)
+}
+
+// SetSkipped sets the Skipped field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailResponse) SetSkipped(skipped int64) {
+	p.Skipped = skipped
+	p.require(postV1CaptureInboundEmailResponseFieldSkipped)
+}
+
+// SetCaptureIDs sets the CaptureIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureInboundEmailResponse) SetCaptureIDs(captureIDs []string) {
+	p.CaptureIDs = captureIDs
+	p.require(postV1CaptureInboundEmailResponseFieldCaptureIDs)
+}
+
+func (p *PostV1CaptureInboundEmailResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureInboundEmailResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CaptureInboundEmailResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureInboundEmailResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureInboundEmailResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CaptureInboundEmailResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CaptureSettingsGetResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	postV1CaptureSettingsGetResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	postV1CaptureSettingsGetResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	postV1CaptureSettingsGetResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+)
+
+type PostV1CaptureSettingsGetResponse struct {
+	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
+	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
+	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
+	OcrConfigured      bool    `json:"ocrConfigured" url:"ocrConfigured"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CaptureSettingsGetResponse) GetIntakeEnabled() bool {
+	if p == nil {
+		return false
+	}
+	return p.IntakeEnabled
+}
+
+func (p *PostV1CaptureSettingsGetResponse) GetCaptureAutoExtract() bool {
+	if p == nil {
+		return false
+	}
+	return p.CaptureAutoExtract
+}
+
+func (p *PostV1CaptureSettingsGetResponse) GetIntakeAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntakeAddress
+}
+
+func (p *PostV1CaptureSettingsGetResponse) GetOcrConfigured() bool {
+	if p == nil {
+		return false
+	}
+	return p.OcrConfigured
+}
+
+func (p *PostV1CaptureSettingsGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CaptureSettingsGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsGetResponse) SetIntakeEnabled(intakeEnabled bool) {
+	p.IntakeEnabled = intakeEnabled
+	p.require(postV1CaptureSettingsGetResponseFieldIntakeEnabled)
+}
+
+// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsGetResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	p.CaptureAutoExtract = captureAutoExtract
+	p.require(postV1CaptureSettingsGetResponseFieldCaptureAutoExtract)
+}
+
+// SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsGetResponse) SetIntakeAddress(intakeAddress *string) {
+	p.IntakeAddress = intakeAddress
+	p.require(postV1CaptureSettingsGetResponseFieldIntakeAddress)
+}
+
+// SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsGetResponse) SetOcrConfigured(ocrConfigured bool) {
+	p.OcrConfigured = ocrConfigured
+	p.require(postV1CaptureSettingsGetResponseFieldOcrConfigured)
+}
+
+func (p *PostV1CaptureSettingsGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureSettingsGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CaptureSettingsGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureSettingsGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureSettingsGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CaptureSettingsGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	postV1CaptureSettingsRegenerateIntakeResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	postV1CaptureSettingsRegenerateIntakeResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+)
+
+type PostV1CaptureSettingsRegenerateIntakeResponse struct {
+	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
+	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
+	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
+	OcrConfigured      bool    `json:"ocrConfigured" url:"ocrConfigured"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetIntakeEnabled() bool {
+	if p == nil {
+		return false
+	}
+	return p.IntakeEnabled
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetCaptureAutoExtract() bool {
+	if p == nil {
+		return false
+	}
+	return p.CaptureAutoExtract
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetIntakeAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntakeAddress
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetOcrConfigured() bool {
+	if p == nil {
+		return false
+	}
+	return p.OcrConfigured
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetIntakeEnabled(intakeEnabled bool) {
+	p.IntakeEnabled = intakeEnabled
+	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeEnabled)
+}
+
+// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	p.CaptureAutoExtract = captureAutoExtract
+	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldCaptureAutoExtract)
+}
+
+// SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetIntakeAddress(intakeAddress *string) {
+	p.IntakeAddress = intakeAddress
+	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldIntakeAddress)
+}
+
+// SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) SetOcrConfigured(ocrConfigured bool) {
+	p.OcrConfigured = ocrConfigured
+	p.require(postV1CaptureSettingsRegenerateIntakeResponseFieldOcrConfigured)
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureSettingsRegenerateIntakeResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CaptureSettingsRegenerateIntakeResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureSettingsRegenerateIntakeResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CaptureSettingsRegenerateIntakeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CaptureSettingsUpdateResponseFieldIntakeEnabled      = big.NewInt(1 << 0)
+	postV1CaptureSettingsUpdateResponseFieldCaptureAutoExtract = big.NewInt(1 << 1)
+	postV1CaptureSettingsUpdateResponseFieldIntakeAddress      = big.NewInt(1 << 2)
+	postV1CaptureSettingsUpdateResponseFieldOcrConfigured      = big.NewInt(1 << 3)
+)
+
+type PostV1CaptureSettingsUpdateResponse struct {
+	IntakeEnabled      bool    `json:"intakeEnabled" url:"intakeEnabled"`
+	CaptureAutoExtract bool    `json:"captureAutoExtract" url:"captureAutoExtract"`
+	IntakeAddress      *string `json:"intakeAddress,omitempty" url:"intakeAddress,omitempty"`
+	OcrConfigured      bool    `json:"ocrConfigured" url:"ocrConfigured"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) GetIntakeEnabled() bool {
+	if p == nil {
+		return false
+	}
+	return p.IntakeEnabled
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) GetCaptureAutoExtract() bool {
+	if p == nil {
+		return false
+	}
+	return p.CaptureAutoExtract
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) GetIntakeAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntakeAddress
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) GetOcrConfigured() bool {
+	if p == nil {
+		return false
+	}
+	return p.OcrConfigured
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetIntakeEnabled sets the IntakeEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateResponse) SetIntakeEnabled(intakeEnabled bool) {
+	p.IntakeEnabled = intakeEnabled
+	p.require(postV1CaptureSettingsUpdateResponseFieldIntakeEnabled)
+}
+
+// SetCaptureAutoExtract sets the CaptureAutoExtract field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateResponse) SetCaptureAutoExtract(captureAutoExtract bool) {
+	p.CaptureAutoExtract = captureAutoExtract
+	p.require(postV1CaptureSettingsUpdateResponseFieldCaptureAutoExtract)
+}
+
+// SetIntakeAddress sets the IntakeAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateResponse) SetIntakeAddress(intakeAddress *string) {
+	p.IntakeAddress = intakeAddress
+	p.require(postV1CaptureSettingsUpdateResponseFieldIntakeAddress)
+}
+
+// SetOcrConfigured sets the OcrConfigured field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureSettingsUpdateResponse) SetOcrConfigured(ocrConfigured bool) {
+	p.OcrConfigured = ocrConfigured
+	p.require(postV1CaptureSettingsUpdateResponseFieldOcrConfigured)
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CaptureSettingsUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CaptureSettingsUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CaptureSettingsUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CaptureSettingsUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }

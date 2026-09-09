@@ -56,6 +56,964 @@ func (p *PostV1PartnersAnonymizeRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1LeadsConvertRequestFieldID          = big.NewInt(1 << 0)
+	postV1LeadsConvertRequestFieldPartnerType = big.NewInt(1 << 1)
+	postV1LeadsConvertRequestFieldCode        = big.NewInt(1 << 2)
+	postV1LeadsConvertRequestFieldVatCode     = big.NewInt(1 << 3)
+)
+
+type PostV1LeadsConvertRequest struct {
+	ID          string                                `json:"id" url:"-"`
+	PartnerType *PostV1LeadsConvertRequestPartnerType `json:"partnerType,omitempty" url:"-"`
+	Code        *string                               `json:"code,omitempty" url:"-"`
+	VatCode     *string                               `json:"vatCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsConvertRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsConvertRequestFieldID)
+}
+
+// SetPartnerType sets the PartnerType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertRequest) SetPartnerType(partnerType *PostV1LeadsConvertRequestPartnerType) {
+	p.PartnerType = partnerType
+	p.require(postV1LeadsConvertRequestFieldPartnerType)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertRequest) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1LeadsConvertRequestFieldCode)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertRequest) SetVatCode(vatCode *string) {
+	p.VatCode = vatCode
+	p.require(postV1LeadsConvertRequestFieldVatCode)
+}
+
+func (p *PostV1LeadsConvertRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsConvertRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsConvertRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsConvertRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsConvertRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsCreateRequestFieldName           = big.NewInt(1 << 0)
+	postV1LeadsCreateRequestFieldContactName    = big.NewInt(1 << 1)
+	postV1LeadsCreateRequestFieldEmail          = big.NewInt(1 << 2)
+	postV1LeadsCreateRequestFieldPhone          = big.NewInt(1 << 3)
+	postV1LeadsCreateRequestFieldWebsite        = big.NewInt(1 << 4)
+	postV1LeadsCreateRequestFieldCountryCode    = big.NewInt(1 << 5)
+	postV1LeadsCreateRequestFieldSourceID       = big.NewInt(1 << 6)
+	postV1LeadsCreateRequestFieldStatus         = big.NewInt(1 << 7)
+	postV1LeadsCreateRequestFieldEstimatedValue = big.NewInt(1 << 8)
+	postV1LeadsCreateRequestFieldCurrency       = big.NewInt(1 << 9)
+	postV1LeadsCreateRequestFieldDescription    = big.NewInt(1 << 10)
+	postV1LeadsCreateRequestFieldAssignedUserID = big.NewInt(1 << 11)
+	postV1LeadsCreateRequestFieldDocuments      = big.NewInt(1 << 12)
+	postV1LeadsCreateRequestFieldNotes          = big.NewInt(1 << 13)
+)
+
+type PostV1LeadsCreateRequest struct {
+	Name           string                                   `json:"name" url:"-"`
+	ContactName    *string                                  `json:"contactName,omitempty" url:"-"`
+	Email          *string                                  `json:"email,omitempty" url:"-"`
+	Phone          *string                                  `json:"phone,omitempty" url:"-"`
+	Website        *string                                  `json:"website,omitempty" url:"-"`
+	CountryCode    *string                                  `json:"countryCode,omitempty" url:"-"`
+	SourceID       *string                                  `json:"sourceId,omitempty" url:"-"`
+	Status         *PostV1LeadsCreateRequestStatus          `json:"status,omitempty" url:"-"`
+	EstimatedValue *string                                  `json:"estimatedValue,omitempty" url:"-"`
+	Currency       *string                                  `json:"currency,omitempty" url:"-"`
+	Description    *string                                  `json:"description,omitempty" url:"-"`
+	AssignedUserID *string                                  `json:"assignedUserId,omitempty" url:"-"`
+	Documents      []*PostV1LeadsCreateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+	Notes          []string                                 `json:"notes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsCreateRequestFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsCreateRequestFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsCreateRequestFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsCreateRequestFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsCreateRequestFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsCreateRequestFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsCreateRequestFieldSourceID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetStatus(status *PostV1LeadsCreateRequestStatus) {
+	p.Status = status
+	p.require(postV1LeadsCreateRequestFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsCreateRequestFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetCurrency(currency *string) {
+	p.Currency = currency
+	p.require(postV1LeadsCreateRequestFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsCreateRequestFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsCreateRequestFieldAssignedUserID)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetDocuments(documents []*PostV1LeadsCreateRequestDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1LeadsCreateRequestFieldDocuments)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequest) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1LeadsCreateRequestFieldNotes)
+}
+
+func (p *PostV1LeadsCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsDeleteRequestFieldID)
+}
+
+func (p *PostV1LeadsDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsFilesListRequestFieldLeadID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsFilesListRequest struct {
+	LeadID string `json:"leadId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsFilesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLeadID sets the LeadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListRequest) SetLeadID(leadID string) {
+	p.LeadID = leadID
+	p.require(postV1LeadsFilesListRequestFieldLeadID)
+}
+
+func (p *PostV1LeadsFilesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsFilesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsFilesListRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsFilesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsFilesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsGetRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsGetRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsGetRequestFieldID)
+}
+
+func (p *PostV1LeadsGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsGetRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1LeadsListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1LeadsListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1LeadsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1LeadsListRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type PostV1LeadsListRequest struct {
+	Page     *int64                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1LeadsListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1LeadsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1LeadsListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1LeadsListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequest) SetSort(sort []*PostV1LeadsListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1LeadsListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequest) SetFilter(filter []*PostV1LeadsListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1LeadsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1LeadsListRequestFieldTotals)
+}
+
+func (p *PostV1LeadsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsListRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsNotesCreateRequestFieldLeadID = big.NewInt(1 << 0)
+	postV1LeadsNotesCreateRequestFieldBody   = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsNotesCreateRequest struct {
+	LeadID string `json:"leadId" url:"-"`
+	Body   string `json:"body" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsNotesCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLeadID sets the LeadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateRequest) SetLeadID(leadID string) {
+	p.LeadID = leadID
+	p.require(postV1LeadsNotesCreateRequestFieldLeadID)
+}
+
+// SetBody sets the Body field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateRequest) SetBody(body string) {
+	p.Body = body
+	p.require(postV1LeadsNotesCreateRequestFieldBody)
+}
+
+func (p *PostV1LeadsNotesCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsNotesCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsNotesDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsNotesDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsNotesDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsNotesDeleteRequestFieldID)
+}
+
+func (p *PostV1LeadsNotesDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsNotesDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsNotesListRequestFieldLeadID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsNotesListRequest struct {
+	LeadID string `json:"leadId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsNotesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLeadID sets the LeadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListRequest) SetLeadID(leadID string) {
+	p.LeadID = leadID
+	p.require(postV1LeadsNotesListRequestFieldLeadID)
+}
+
+func (p *PostV1LeadsNotesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesListRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsNotesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsSourcesCreateRequestFieldName     = big.NewInt(1 << 0)
+	postV1LeadsSourcesCreateRequestFieldIsActive = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsSourcesCreateRequest struct {
+	Name     string `json:"name" url:"-"`
+	IsActive *bool  `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsSourcesCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesCreateRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1LeadsSourcesCreateRequestFieldIsActive)
+}
+
+func (p *PostV1LeadsSourcesCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsSourcesDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsSourcesDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsSourcesDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesDeleteRequestFieldID)
+}
+
+func (p *PostV1LeadsSourcesDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1LeadsSourcesListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsSourcesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+type PostV1LeadsSourcesOptionsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsSourcesOptionsRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1LeadsSourcesUpdateRequestFieldID       = big.NewInt(1 << 0)
+	postV1LeadsSourcesUpdateRequestFieldName     = big.NewInt(1 << 1)
+	postV1LeadsSourcesUpdateRequestFieldIsActive = big.NewInt(1 << 2)
+)
+
+type PostV1LeadsSourcesUpdateRequest struct {
+	ID       string  `json:"id" url:"-"`
+	Name     *string `json:"name,omitempty" url:"-"`
+	IsActive *bool   `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsSourcesUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesUpdateRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesUpdateRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1LeadsSourcesUpdateRequestFieldIsActive)
+}
+
+func (p *PostV1LeadsSourcesUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LeadsUpdateRequestFieldID             = big.NewInt(1 << 0)
+	postV1LeadsUpdateRequestFieldName           = big.NewInt(1 << 1)
+	postV1LeadsUpdateRequestFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsUpdateRequestFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsUpdateRequestFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsUpdateRequestFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsUpdateRequestFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsUpdateRequestFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsUpdateRequestFieldStatus         = big.NewInt(1 << 8)
+	postV1LeadsUpdateRequestFieldEstimatedValue = big.NewInt(1 << 9)
+	postV1LeadsUpdateRequestFieldCurrency       = big.NewInt(1 << 10)
+	postV1LeadsUpdateRequestFieldDescription    = big.NewInt(1 << 11)
+	postV1LeadsUpdateRequestFieldAssignedUserID = big.NewInt(1 << 12)
+	postV1LeadsUpdateRequestFieldDocuments      = big.NewInt(1 << 13)
+)
+
+type PostV1LeadsUpdateRequest struct {
+	ID             string                                   `json:"id" url:"-"`
+	Name           *string                                  `json:"name,omitempty" url:"-"`
+	ContactName    *string                                  `json:"contactName,omitempty" url:"-"`
+	Email          *string                                  `json:"email,omitempty" url:"-"`
+	Phone          *string                                  `json:"phone,omitempty" url:"-"`
+	Website        *string                                  `json:"website,omitempty" url:"-"`
+	CountryCode    *string                                  `json:"countryCode,omitempty" url:"-"`
+	SourceID       *string                                  `json:"sourceId,omitempty" url:"-"`
+	Status         *PostV1LeadsUpdateRequestStatus          `json:"status,omitempty" url:"-"`
+	EstimatedValue *string                                  `json:"estimatedValue,omitempty" url:"-"`
+	Currency       *string                                  `json:"currency,omitempty" url:"-"`
+	Description    *string                                  `json:"description,omitempty" url:"-"`
+	AssignedUserID *string                                  `json:"assignedUserId,omitempty" url:"-"`
+	Documents      []*PostV1LeadsUpdateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LeadsUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsUpdateRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1LeadsUpdateRequestFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsUpdateRequestFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsUpdateRequestFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsUpdateRequestFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsUpdateRequestFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsUpdateRequestFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsUpdateRequestFieldSourceID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetStatus(status *PostV1LeadsUpdateRequestStatus) {
+	p.Status = status
+	p.require(postV1LeadsUpdateRequestFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsUpdateRequestFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetCurrency(currency *string) {
+	p.Currency = currency
+	p.require(postV1LeadsUpdateRequestFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsUpdateRequestFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsUpdateRequestFieldAssignedUserID)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequest) SetDocuments(documents []*PostV1LeadsUpdateRequestDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1LeadsUpdateRequestFieldDocuments)
+}
+
+func (p *PostV1LeadsUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LeadsUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1LeadsUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1PartnersAddressesCreateRequestFieldType        = big.NewInt(1 << 0)
 	postV1PartnersAddressesCreateRequestFieldStreet      = big.NewInt(1 << 1)
 	postV1PartnersAddressesCreateRequestFieldCity        = big.NewInt(1 << 2)
@@ -206,6 +1164,7 @@ var (
 	postV1PartnersAddressesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersAddressesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersAddressesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersAddressesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersAddressesListRequest struct {
@@ -213,6 +1172,8 @@ type PostV1PartnersAddressesListRequest struct {
 	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersAddressesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersAddressesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -251,6 +1212,13 @@ func (p *PostV1PartnersAddressesListRequest) SetSort(sort []*PostV1PartnersAddre
 func (p *PostV1PartnersAddressesListRequest) SetFilter(filter []*PostV1PartnersAddressesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersAddressesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersAddressesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersAddressesListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersAddressesListRequest) UnmarshalJSON(data []byte) error {
@@ -516,6 +1484,7 @@ var (
 	postV1PartnersBankAccountsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersBankAccountsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersBankAccountsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersBankAccountsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersBankAccountsListRequest struct {
@@ -523,6 +1492,8 @@ type PostV1PartnersBankAccountsListRequest struct {
 	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersBankAccountsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersBankAccountsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -561,6 +1532,13 @@ func (p *PostV1PartnersBankAccountsListRequest) SetSort(sort []*PostV1PartnersBa
 func (p *PostV1PartnersBankAccountsListRequest) SetFilter(filter []*PostV1PartnersBankAccountsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersBankAccountsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersBankAccountsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersBankAccountsListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersBankAccountsListRequest) UnmarshalJSON(data []byte) error {
@@ -817,6 +1795,7 @@ var (
 	postV1PartnersContactsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersContactsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersContactsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersContactsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersContactsListRequest struct {
@@ -824,6 +1803,8 @@ type PostV1PartnersContactsListRequest struct {
 	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersContactsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersContactsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -862,6 +1843,13 @@ func (p *PostV1PartnersContactsListRequest) SetSort(sort []*PostV1PartnersContac
 func (p *PostV1PartnersContactsListRequest) SetFilter(filter []*PostV1PartnersContactsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersContactsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersContactsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersContactsListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersContactsListRequest) UnmarshalJSON(data []byte) error {
@@ -977,47 +1965,81 @@ func (p *PostV1PartnersContactsUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PartnersCreateRequestFieldType                 = big.NewInt(1 << 0)
-	postV1PartnersCreateRequestFieldName                 = big.NewInt(1 << 1)
-	postV1PartnersCreateRequestFieldCode                 = big.NewInt(1 << 2)
-	postV1PartnersCreateRequestFieldVatCode              = big.NewInt(1 << 3)
-	postV1PartnersCreateRequestFieldPeppolID             = big.NewInt(1 << 4)
-	postV1PartnersCreateRequestFieldEmail                = big.NewInt(1 << 5)
-	postV1PartnersCreateRequestFieldPhone                = big.NewInt(1 << 6)
-	postV1PartnersCreateRequestFieldSelfEmploymentCertNo = big.NewInt(1 << 7)
-	postV1PartnersCreateRequestFieldBirthDate            = big.NewInt(1 << 8)
-	postV1PartnersCreateRequestFieldIsCustomer           = big.NewInt(1 << 9)
-	postV1PartnersCreateRequestFieldIsSupplier           = big.NewInt(1 << 10)
-	postV1PartnersCreateRequestFieldPaymentTermDays      = big.NewInt(1 << 11)
-	postV1PartnersCreateRequestFieldCreditLimit          = big.NewInt(1 << 12)
-	postV1PartnersCreateRequestFieldPriceListID          = big.NewInt(1 << 13)
-	postV1PartnersCreateRequestFieldGroupID              = big.NewInt(1 << 14)
-	postV1PartnersCreateRequestFieldStatusID             = big.NewInt(1 << 15)
-	postV1PartnersCreateRequestFieldAddress              = big.NewInt(1 << 16)
-	postV1PartnersCreateRequestFieldNotes                = big.NewInt(1 << 17)
-	postV1PartnersCreateRequestFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PartnersCreateRequestFieldType                  = big.NewInt(1 << 0)
+	postV1PartnersCreateRequestFieldName                  = big.NewInt(1 << 1)
+	postV1PartnersCreateRequestFieldCode                  = big.NewInt(1 << 2)
+	postV1PartnersCreateRequestFieldVatCode               = big.NewInt(1 << 3)
+	postV1PartnersCreateRequestFieldPeppolID              = big.NewInt(1 << 4)
+	postV1PartnersCreateRequestFieldEmail                 = big.NewInt(1 << 5)
+	postV1PartnersCreateRequestFieldPhone                 = big.NewInt(1 << 6)
+	postV1PartnersCreateRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 7)
+	postV1PartnersCreateRequestFieldBirthDate             = big.NewInt(1 << 8)
+	postV1PartnersCreateRequestFieldIsCustomer            = big.NewInt(1 << 9)
+	postV1PartnersCreateRequestFieldIsSupplier            = big.NewInt(1 << 10)
+	postV1PartnersCreateRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
+	postV1PartnersCreateRequestFieldCreditLimit           = big.NewInt(1 << 12)
+	postV1PartnersCreateRequestFieldPriceListID           = big.NewInt(1 << 13)
+	postV1PartnersCreateRequestFieldGroupID               = big.NewInt(1 << 14)
+	postV1PartnersCreateRequestFieldStatusID              = big.NewInt(1 << 15)
+	postV1PartnersCreateRequestFieldAddress               = big.NewInt(1 << 16)
+	postV1PartnersCreateRequestFieldCorrespondenceAddress = big.NewInt(1 << 17)
+	postV1PartnersCreateRequestFieldNotes                 = big.NewInt(1 << 18)
+	postV1PartnersCreateRequestFieldDocumentRef           = big.NewInt(1 << 19)
+	postV1PartnersCreateRequestFieldShortName             = big.NewInt(1 << 20)
+	postV1PartnersCreateRequestFieldWebsite               = big.NewInt(1 << 21)
+	postV1PartnersCreateRequestFieldFax                   = big.NewInt(1 << 22)
+	postV1PartnersCreateRequestFieldEoriCode              = big.NewInt(1 << 23)
+	postV1PartnersCreateRequestFieldOtherCode             = big.NewInt(1 << 24)
+	postV1PartnersCreateRequestFieldForeignTaxNumber      = big.NewInt(1 << 25)
+	postV1PartnersCreateRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
+	postV1PartnersCreateRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
+	postV1PartnersCreateRequestFieldFirstCallDate         = big.NewInt(1 << 28)
+	postV1PartnersCreateRequestFieldLastCallDate          = big.NewInt(1 << 29)
+	postV1PartnersCreateRequestFieldNextCallDate          = big.NewInt(1 << 30)
+	postV1PartnersCreateRequestFieldRating                = big.NewInt(1 << 31)
+	postV1PartnersCreateRequestFieldIsEmployee            = big.NewInt(1 << 32)
+	postV1PartnersCreateRequestFieldIsGroupMember         = big.NewInt(1 << 33)
+	postV1PartnersCreateRequestFieldIsActive              = big.NewInt(1 << 34)
+	postV1PartnersCreateRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
 )
 
 type PostV1PartnersCreateRequest struct {
-	Type                 *PostV1PartnersCreateRequestType    `json:"type,omitempty" url:"-"`
-	Name                 string                              `json:"name" url:"-"`
-	Code                 *string                             `json:"code,omitempty" url:"-"`
-	VatCode              *string                             `json:"vatCode,omitempty" url:"-"`
-	PeppolID             *string                             `json:"peppolId,omitempty" url:"-"`
-	Email                *string                             `json:"email,omitempty" url:"-"`
-	Phone                *string                             `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo *string                             `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate            *string                             `json:"birthDate,omitempty" url:"-"`
-	IsCustomer           *bool                               `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                               `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                              `json:"paymentTermDays,omitempty" url:"-"`
-	CreditLimit          *string                             `json:"creditLimit,omitempty" url:"-"`
-	PriceListID          *string                             `json:"priceListId,omitempty" url:"-"`
-	GroupID              *string                             `json:"groupId,omitempty" url:"-"`
-	StatusID             *string                             `json:"statusId,omitempty" url:"-"`
-	Address              *PostV1PartnersCreateRequestAddress `json:"address,omitempty" url:"-"`
-	Notes                *string                             `json:"notes,omitempty" url:"-"`
-	DocumentRef          *string                             `json:"documentRef,omitempty" url:"-"`
+	Type                  *PostV1PartnersCreateRequestType                  `json:"type,omitempty" url:"-"`
+	Name                  string                                            `json:"name" url:"-"`
+	Code                  *string                                           `json:"code,omitempty" url:"-"`
+	VatCode               *string                                           `json:"vatCode,omitempty" url:"-"`
+	PeppolID              *string                                           `json:"peppolId,omitempty" url:"-"`
+	Email                 *string                                           `json:"email,omitempty" url:"-"`
+	Phone                 *string                                           `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo  *string                                           `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate             *string                                           `json:"birthDate,omitempty" url:"-"`
+	IsCustomer            *bool                                             `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier            *bool                                             `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays       *int64                                            `json:"paymentTermDays,omitempty" url:"-"`
+	CreditLimit           *string                                           `json:"creditLimit,omitempty" url:"-"`
+	PriceListID           *string                                           `json:"priceListId,omitempty" url:"-"`
+	GroupID               *string                                           `json:"groupId,omitempty" url:"-"`
+	StatusID              *string                                           `json:"statusId,omitempty" url:"-"`
+	Address               *PostV1PartnersCreateRequestAddress               `json:"address,omitempty" url:"-"`
+	CorrespondenceAddress *PostV1PartnersCreateRequestCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"-"`
+	Notes                 *string                                           `json:"notes,omitempty" url:"-"`
+	DocumentRef           *string                                           `json:"documentRef,omitempty" url:"-"`
+	ShortName             *string                                           `json:"shortName,omitempty" url:"-"`
+	Website               *string                                           `json:"website,omitempty" url:"-"`
+	Fax                   *string                                           `json:"fax,omitempty" url:"-"`
+	EoriCode              *string                                           `json:"eoriCode,omitempty" url:"-"`
+	OtherCode             *string                                           `json:"otherCode,omitempty" url:"-"`
+	ForeignTaxNumber      *string                                           `json:"foreignTaxNumber,omitempty" url:"-"`
+	AutoDebtReminder      *bool                                             `json:"autoDebtReminder,omitempty" url:"-"`
+	LateInterestPercent   *string                                           `json:"lateInterestPercent,omitempty" url:"-"`
+	FirstCallDate         *string                                           `json:"firstCallDate,omitempty" url:"-"`
+	LastCallDate          *string                                           `json:"lastCallDate,omitempty" url:"-"`
+	NextCallDate          *string                                           `json:"nextCallDate,omitempty" url:"-"`
+	Rating                *int64                                            `json:"rating,omitempty" url:"-"`
+	IsEmployee            *bool                                             `json:"isEmployee,omitempty" url:"-"`
+	IsGroupMember         *bool                                             `json:"isGroupMember,omitempty" url:"-"`
+	IsActive              *bool                                             `json:"isActive,omitempty" url:"-"`
+	LegalCountryClass     *PostV1PartnersCreateRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1149,6 +2171,13 @@ func (p *PostV1PartnersCreateRequest) SetAddress(address *PostV1PartnersCreateRe
 	p.require(postV1PartnersCreateRequestFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersCreateRequestCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersCreateRequestFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersCreateRequest) SetNotes(notes *string) {
@@ -1161,6 +2190,118 @@ func (p *PostV1PartnersCreateRequest) SetNotes(notes *string) {
 func (p *PostV1PartnersCreateRequest) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersCreateRequestFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersCreateRequestFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersCreateRequestFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersCreateRequestFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersCreateRequestFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersCreateRequestFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersCreateRequestFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetAutoDebtReminder(autoDebtReminder *bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersCreateRequestFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersCreateRequestFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersCreateRequestFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersCreateRequestFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersCreateRequestFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersCreateRequestFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetIsEmployee(isEmployee *bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersCreateRequestFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetIsGroupMember(isGroupMember *bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersCreateRequestFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersCreateRequestFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequest) SetLegalCountryClass(legalCountryClass *PostV1PartnersCreateRequestLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersCreateRequestFieldLegalCountryClass)
 }
 
 func (p *PostV1PartnersCreateRequest) UnmarshalJSON(data []byte) error {
@@ -1240,6 +2381,89 @@ func (p *PostV1PartnersCreditCheckRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1PartnersDebtRemindersListRequestFieldPage     = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersListRequestFieldPageSize = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersListRequestFieldSort     = big.NewInt(1 << 2)
+	postV1PartnersDebtRemindersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersDebtRemindersListRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type PostV1PartnersDebtRemindersListRequest struct {
+	Page     *int64                                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PostV1PartnersDebtRemindersListRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PostV1PartnersDebtRemindersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersDebtRemindersListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(postV1PartnersDebtRemindersListRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1PartnersDebtRemindersListRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequest) SetSort(sort []*PostV1PartnersDebtRemindersListRequestSortItem) {
+	p.Sort = sort
+	p.require(postV1PartnersDebtRemindersListRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequest) SetFilter(filter []*PostV1PartnersDebtRemindersListRequestFilterItem) {
+	p.Filter = filter
+	p.require(postV1PartnersDebtRemindersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersDebtRemindersListRequestFieldTotals)
+}
+
+func (p *PostV1PartnersDebtRemindersListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersListRequest(body)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1PartnersDeleteRequestFieldID = big.NewInt(1 << 0)
 )
 
@@ -1286,47 +2510,127 @@ func (p *PostV1PartnersDeleteRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PartnersFindOrCreateRequestFieldType                 = big.NewInt(1 << 0)
-	postV1PartnersFindOrCreateRequestFieldName                 = big.NewInt(1 << 1)
-	postV1PartnersFindOrCreateRequestFieldCode                 = big.NewInt(1 << 2)
-	postV1PartnersFindOrCreateRequestFieldVatCode              = big.NewInt(1 << 3)
-	postV1PartnersFindOrCreateRequestFieldPeppolID             = big.NewInt(1 << 4)
-	postV1PartnersFindOrCreateRequestFieldEmail                = big.NewInt(1 << 5)
-	postV1PartnersFindOrCreateRequestFieldPhone                = big.NewInt(1 << 6)
-	postV1PartnersFindOrCreateRequestFieldSelfEmploymentCertNo = big.NewInt(1 << 7)
-	postV1PartnersFindOrCreateRequestFieldBirthDate            = big.NewInt(1 << 8)
-	postV1PartnersFindOrCreateRequestFieldIsCustomer           = big.NewInt(1 << 9)
-	postV1PartnersFindOrCreateRequestFieldIsSupplier           = big.NewInt(1 << 10)
-	postV1PartnersFindOrCreateRequestFieldPaymentTermDays      = big.NewInt(1 << 11)
-	postV1PartnersFindOrCreateRequestFieldCreditLimit          = big.NewInt(1 << 12)
-	postV1PartnersFindOrCreateRequestFieldPriceListID          = big.NewInt(1 << 13)
-	postV1PartnersFindOrCreateRequestFieldGroupID              = big.NewInt(1 << 14)
-	postV1PartnersFindOrCreateRequestFieldStatusID             = big.NewInt(1 << 15)
-	postV1PartnersFindOrCreateRequestFieldAddress              = big.NewInt(1 << 16)
-	postV1PartnersFindOrCreateRequestFieldNotes                = big.NewInt(1 << 17)
-	postV1PartnersFindOrCreateRequestFieldDocumentRef          = big.NewInt(1 << 18)
+	postV1PartnersFilesListRequestFieldPartnerID = big.NewInt(1 << 0)
+)
+
+type PostV1PartnersFilesListRequest struct {
+	PartnerID string `json:"partnerId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersFilesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListRequest) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1PartnersFilesListRequestFieldPartnerID)
+}
+
+func (p *PostV1PartnersFilesListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersFilesListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PartnersFilesListRequest(body)
+	return nil
+}
+
+func (p *PostV1PartnersFilesListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersFilesListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1PartnersFindOrCreateRequestFieldType                  = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateRequestFieldName                  = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateRequestFieldCode                  = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateRequestFieldVatCode               = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateRequestFieldPeppolID              = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateRequestFieldEmail                 = big.NewInt(1 << 5)
+	postV1PartnersFindOrCreateRequestFieldPhone                 = big.NewInt(1 << 6)
+	postV1PartnersFindOrCreateRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 7)
+	postV1PartnersFindOrCreateRequestFieldBirthDate             = big.NewInt(1 << 8)
+	postV1PartnersFindOrCreateRequestFieldIsCustomer            = big.NewInt(1 << 9)
+	postV1PartnersFindOrCreateRequestFieldIsSupplier            = big.NewInt(1 << 10)
+	postV1PartnersFindOrCreateRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
+	postV1PartnersFindOrCreateRequestFieldCreditLimit           = big.NewInt(1 << 12)
+	postV1PartnersFindOrCreateRequestFieldPriceListID           = big.NewInt(1 << 13)
+	postV1PartnersFindOrCreateRequestFieldGroupID               = big.NewInt(1 << 14)
+	postV1PartnersFindOrCreateRequestFieldStatusID              = big.NewInt(1 << 15)
+	postV1PartnersFindOrCreateRequestFieldAddress               = big.NewInt(1 << 16)
+	postV1PartnersFindOrCreateRequestFieldCorrespondenceAddress = big.NewInt(1 << 17)
+	postV1PartnersFindOrCreateRequestFieldNotes                 = big.NewInt(1 << 18)
+	postV1PartnersFindOrCreateRequestFieldDocumentRef           = big.NewInt(1 << 19)
+	postV1PartnersFindOrCreateRequestFieldShortName             = big.NewInt(1 << 20)
+	postV1PartnersFindOrCreateRequestFieldWebsite               = big.NewInt(1 << 21)
+	postV1PartnersFindOrCreateRequestFieldFax                   = big.NewInt(1 << 22)
+	postV1PartnersFindOrCreateRequestFieldEoriCode              = big.NewInt(1 << 23)
+	postV1PartnersFindOrCreateRequestFieldOtherCode             = big.NewInt(1 << 24)
+	postV1PartnersFindOrCreateRequestFieldForeignTaxNumber      = big.NewInt(1 << 25)
+	postV1PartnersFindOrCreateRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
+	postV1PartnersFindOrCreateRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
+	postV1PartnersFindOrCreateRequestFieldFirstCallDate         = big.NewInt(1 << 28)
+	postV1PartnersFindOrCreateRequestFieldLastCallDate          = big.NewInt(1 << 29)
+	postV1PartnersFindOrCreateRequestFieldNextCallDate          = big.NewInt(1 << 30)
+	postV1PartnersFindOrCreateRequestFieldRating                = big.NewInt(1 << 31)
+	postV1PartnersFindOrCreateRequestFieldIsEmployee            = big.NewInt(1 << 32)
+	postV1PartnersFindOrCreateRequestFieldIsGroupMember         = big.NewInt(1 << 33)
+	postV1PartnersFindOrCreateRequestFieldIsActive              = big.NewInt(1 << 34)
+	postV1PartnersFindOrCreateRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
 )
 
 type PostV1PartnersFindOrCreateRequest struct {
-	Type                 *PostV1PartnersFindOrCreateRequestType    `json:"type,omitempty" url:"-"`
-	Name                 string                                    `json:"name" url:"-"`
-	Code                 *string                                   `json:"code,omitempty" url:"-"`
-	VatCode              *string                                   `json:"vatCode,omitempty" url:"-"`
-	PeppolID             *string                                   `json:"peppolId,omitempty" url:"-"`
-	Email                *string                                   `json:"email,omitempty" url:"-"`
-	Phone                *string                                   `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo *string                                   `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate            *string                                   `json:"birthDate,omitempty" url:"-"`
-	IsCustomer           *bool                                     `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                                     `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                                    `json:"paymentTermDays,omitempty" url:"-"`
-	CreditLimit          *string                                   `json:"creditLimit,omitempty" url:"-"`
-	PriceListID          *string                                   `json:"priceListId,omitempty" url:"-"`
-	GroupID              *string                                   `json:"groupId,omitempty" url:"-"`
-	StatusID             *string                                   `json:"statusId,omitempty" url:"-"`
-	Address              *PostV1PartnersFindOrCreateRequestAddress `json:"address,omitempty" url:"-"`
-	Notes                *string                                   `json:"notes,omitempty" url:"-"`
-	DocumentRef          *string                                   `json:"documentRef,omitempty" url:"-"`
+	Type                  *PostV1PartnersFindOrCreateRequestType                  `json:"type,omitempty" url:"-"`
+	Name                  string                                                  `json:"name" url:"-"`
+	Code                  *string                                                 `json:"code,omitempty" url:"-"`
+	VatCode               *string                                                 `json:"vatCode,omitempty" url:"-"`
+	PeppolID              *string                                                 `json:"peppolId,omitempty" url:"-"`
+	Email                 *string                                                 `json:"email,omitempty" url:"-"`
+	Phone                 *string                                                 `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo  *string                                                 `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate             *string                                                 `json:"birthDate,omitempty" url:"-"`
+	IsCustomer            *bool                                                   `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier            *bool                                                   `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays       *int64                                                  `json:"paymentTermDays,omitempty" url:"-"`
+	CreditLimit           *string                                                 `json:"creditLimit,omitempty" url:"-"`
+	PriceListID           *string                                                 `json:"priceListId,omitempty" url:"-"`
+	GroupID               *string                                                 `json:"groupId,omitempty" url:"-"`
+	StatusID              *string                                                 `json:"statusId,omitempty" url:"-"`
+	Address               *PostV1PartnersFindOrCreateRequestAddress               `json:"address,omitempty" url:"-"`
+	CorrespondenceAddress *PostV1PartnersFindOrCreateRequestCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"-"`
+	Notes                 *string                                                 `json:"notes,omitempty" url:"-"`
+	DocumentRef           *string                                                 `json:"documentRef,omitempty" url:"-"`
+	ShortName             *string                                                 `json:"shortName,omitempty" url:"-"`
+	Website               *string                                                 `json:"website,omitempty" url:"-"`
+	Fax                   *string                                                 `json:"fax,omitempty" url:"-"`
+	EoriCode              *string                                                 `json:"eoriCode,omitempty" url:"-"`
+	OtherCode             *string                                                 `json:"otherCode,omitempty" url:"-"`
+	ForeignTaxNumber      *string                                                 `json:"foreignTaxNumber,omitempty" url:"-"`
+	AutoDebtReminder      *bool                                                   `json:"autoDebtReminder,omitempty" url:"-"`
+	LateInterestPercent   *string                                                 `json:"lateInterestPercent,omitempty" url:"-"`
+	FirstCallDate         *string                                                 `json:"firstCallDate,omitempty" url:"-"`
+	LastCallDate          *string                                                 `json:"lastCallDate,omitempty" url:"-"`
+	NextCallDate          *string                                                 `json:"nextCallDate,omitempty" url:"-"`
+	Rating                *int64                                                  `json:"rating,omitempty" url:"-"`
+	IsEmployee            *bool                                                   `json:"isEmployee,omitempty" url:"-"`
+	IsGroupMember         *bool                                                   `json:"isGroupMember,omitempty" url:"-"`
+	IsActive              *bool                                                   `json:"isActive,omitempty" url:"-"`
+	LegalCountryClass     *PostV1PartnersFindOrCreateRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1458,6 +2762,13 @@ func (p *PostV1PartnersFindOrCreateRequest) SetAddress(address *PostV1PartnersFi
 	p.require(postV1PartnersFindOrCreateRequestFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersFindOrCreateRequestFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersFindOrCreateRequest) SetNotes(notes *string) {
@@ -1470,6 +2781,118 @@ func (p *PostV1PartnersFindOrCreateRequest) SetNotes(notes *string) {
 func (p *PostV1PartnersFindOrCreateRequest) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersFindOrCreateRequestFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersFindOrCreateRequestFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersFindOrCreateRequestFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersFindOrCreateRequestFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersFindOrCreateRequestFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersFindOrCreateRequestFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersFindOrCreateRequestFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetAutoDebtReminder(autoDebtReminder *bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersFindOrCreateRequestFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersFindOrCreateRequestFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersFindOrCreateRequestFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersFindOrCreateRequestFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersFindOrCreateRequestFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersFindOrCreateRequestFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetIsEmployee(isEmployee *bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersFindOrCreateRequestFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetIsGroupMember(isGroupMember *bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersFindOrCreateRequestFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersFindOrCreateRequestFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequest) SetLegalCountryClass(legalCountryClass *PostV1PartnersFindOrCreateRequestLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersFindOrCreateRequestFieldLegalCountryClass)
 }
 
 func (p *PostV1PartnersFindOrCreateRequest) UnmarshalJSON(data []byte) error {
@@ -1886,6 +3309,7 @@ var (
 	postV1PartnersInquiriesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersInquiriesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersInquiriesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersInquiriesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersInquiriesListRequest struct {
@@ -1893,6 +3317,8 @@ type PostV1PartnersInquiriesListRequest struct {
 	PageSize *int64                                          `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersInquiriesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersInquiriesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1931,6 +3357,13 @@ func (p *PostV1PartnersInquiriesListRequest) SetSort(sort []*PostV1PartnersInqui
 func (p *PostV1PartnersInquiriesListRequest) SetFilter(filter []*PostV1PartnersInquiriesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersInquiriesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersInquiriesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersInquiriesListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersInquiriesListRequest) UnmarshalJSON(data []byte) error {
@@ -2068,6 +3501,7 @@ var (
 	postV1PartnersListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersListRequest struct {
@@ -2075,6 +3509,8 @@ type PostV1PartnersListRequest struct {
 	PageSize *int64                                 `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2113,6 +3549,13 @@ func (p *PostV1PartnersListRequest) SetSort(sort []*PostV1PartnersListRequestSor
 func (p *PostV1PartnersListRequest) SetFilter(filter []*PostV1PartnersListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersListRequest) UnmarshalJSON(data []byte) error {
@@ -2333,49 +3776,83 @@ func (p *PostV1PartnersStatusesUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PartnersUpdateRequestFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersUpdateRequestFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersUpdateRequestFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersUpdateRequestFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersUpdateRequestFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersUpdateRequestFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersUpdateRequestFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersUpdateRequestFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersUpdateRequestFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersUpdateRequestFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersUpdateRequestFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersUpdateRequestFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersUpdateRequestFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersUpdateRequestFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersUpdateRequestFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersUpdateRequestFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersUpdateRequestFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersUpdateRequestFieldAddress              = big.NewInt(1 << 17)
-	postV1PartnersUpdateRequestFieldNotes                = big.NewInt(1 << 18)
-	postV1PartnersUpdateRequestFieldDocumentRef          = big.NewInt(1 << 19)
+	postV1PartnersUpdateRequestFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersUpdateRequestFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersUpdateRequestFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersUpdateRequestFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersUpdateRequestFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersUpdateRequestFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersUpdateRequestFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersUpdateRequestFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersUpdateRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersUpdateRequestFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersUpdateRequestFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersUpdateRequestFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersUpdateRequestFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersUpdateRequestFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersUpdateRequestFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersUpdateRequestFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersUpdateRequestFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersUpdateRequestFieldAddress               = big.NewInt(1 << 17)
+	postV1PartnersUpdateRequestFieldCorrespondenceAddress = big.NewInt(1 << 18)
+	postV1PartnersUpdateRequestFieldNotes                 = big.NewInt(1 << 19)
+	postV1PartnersUpdateRequestFieldDocumentRef           = big.NewInt(1 << 20)
+	postV1PartnersUpdateRequestFieldShortName             = big.NewInt(1 << 21)
+	postV1PartnersUpdateRequestFieldWebsite               = big.NewInt(1 << 22)
+	postV1PartnersUpdateRequestFieldFax                   = big.NewInt(1 << 23)
+	postV1PartnersUpdateRequestFieldEoriCode              = big.NewInt(1 << 24)
+	postV1PartnersUpdateRequestFieldOtherCode             = big.NewInt(1 << 25)
+	postV1PartnersUpdateRequestFieldForeignTaxNumber      = big.NewInt(1 << 26)
+	postV1PartnersUpdateRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	postV1PartnersUpdateRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
+	postV1PartnersUpdateRequestFieldFirstCallDate         = big.NewInt(1 << 29)
+	postV1PartnersUpdateRequestFieldLastCallDate          = big.NewInt(1 << 30)
+	postV1PartnersUpdateRequestFieldNextCallDate          = big.NewInt(1 << 31)
+	postV1PartnersUpdateRequestFieldRating                = big.NewInt(1 << 32)
+	postV1PartnersUpdateRequestFieldIsEmployee            = big.NewInt(1 << 33)
+	postV1PartnersUpdateRequestFieldIsGroupMember         = big.NewInt(1 << 34)
+	postV1PartnersUpdateRequestFieldIsActive              = big.NewInt(1 << 35)
+	postV1PartnersUpdateRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
 )
 
 type PostV1PartnersUpdateRequest struct {
-	ID                   string                              `json:"id" url:"-"`
-	Type                 *PostV1PartnersUpdateRequestType    `json:"type,omitempty" url:"-"`
-	Name                 *string                             `json:"name,omitempty" url:"-"`
-	Code                 *string                             `json:"code,omitempty" url:"-"`
-	VatCode              *string                             `json:"vatCode,omitempty" url:"-"`
-	PeppolID             *string                             `json:"peppolId,omitempty" url:"-"`
-	Email                *string                             `json:"email,omitempty" url:"-"`
-	Phone                *string                             `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo *string                             `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate            *string                             `json:"birthDate,omitempty" url:"-"`
-	IsCustomer           *bool                               `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                               `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                              `json:"paymentTermDays,omitempty" url:"-"`
-	CreditLimit          *string                             `json:"creditLimit,omitempty" url:"-"`
-	PriceListID          *string                             `json:"priceListId,omitempty" url:"-"`
-	GroupID              *string                             `json:"groupId,omitempty" url:"-"`
-	StatusID             *string                             `json:"statusId,omitempty" url:"-"`
-	Address              *PostV1PartnersUpdateRequestAddress `json:"address,omitempty" url:"-"`
-	Notes                *string                             `json:"notes,omitempty" url:"-"`
-	DocumentRef          *string                             `json:"documentRef,omitempty" url:"-"`
+	ID                    string                                            `json:"id" url:"-"`
+	Type                  *PostV1PartnersUpdateRequestType                  `json:"type,omitempty" url:"-"`
+	Name                  *string                                           `json:"name,omitempty" url:"-"`
+	Code                  *string                                           `json:"code,omitempty" url:"-"`
+	VatCode               *string                                           `json:"vatCode,omitempty" url:"-"`
+	PeppolID              *string                                           `json:"peppolId,omitempty" url:"-"`
+	Email                 *string                                           `json:"email,omitempty" url:"-"`
+	Phone                 *string                                           `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo  *string                                           `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate             *string                                           `json:"birthDate,omitempty" url:"-"`
+	IsCustomer            *bool                                             `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier            *bool                                             `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays       *int64                                            `json:"paymentTermDays,omitempty" url:"-"`
+	CreditLimit           *string                                           `json:"creditLimit,omitempty" url:"-"`
+	PriceListID           *string                                           `json:"priceListId,omitempty" url:"-"`
+	GroupID               *string                                           `json:"groupId,omitempty" url:"-"`
+	StatusID              *string                                           `json:"statusId,omitempty" url:"-"`
+	Address               *PostV1PartnersUpdateRequestAddress               `json:"address,omitempty" url:"-"`
+	CorrespondenceAddress *PostV1PartnersUpdateRequestCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"-"`
+	Notes                 *string                                           `json:"notes,omitempty" url:"-"`
+	DocumentRef           *string                                           `json:"documentRef,omitempty" url:"-"`
+	ShortName             *string                                           `json:"shortName,omitempty" url:"-"`
+	Website               *string                                           `json:"website,omitempty" url:"-"`
+	Fax                   *string                                           `json:"fax,omitempty" url:"-"`
+	EoriCode              *string                                           `json:"eoriCode,omitempty" url:"-"`
+	OtherCode             *string                                           `json:"otherCode,omitempty" url:"-"`
+	ForeignTaxNumber      *string                                           `json:"foreignTaxNumber,omitempty" url:"-"`
+	AutoDebtReminder      *bool                                             `json:"autoDebtReminder,omitempty" url:"-"`
+	LateInterestPercent   *string                                           `json:"lateInterestPercent,omitempty" url:"-"`
+	FirstCallDate         *string                                           `json:"firstCallDate,omitempty" url:"-"`
+	LastCallDate          *string                                           `json:"lastCallDate,omitempty" url:"-"`
+	NextCallDate          *string                                           `json:"nextCallDate,omitempty" url:"-"`
+	Rating                *int64                                            `json:"rating,omitempty" url:"-"`
+	IsEmployee            *bool                                             `json:"isEmployee,omitempty" url:"-"`
+	IsGroupMember         *bool                                             `json:"isGroupMember,omitempty" url:"-"`
+	IsActive              *bool                                             `json:"isActive,omitempty" url:"-"`
+	LegalCountryClass     *PostV1PartnersUpdateRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2514,6 +3991,13 @@ func (p *PostV1PartnersUpdateRequest) SetAddress(address *PostV1PartnersUpdateRe
 	p.require(postV1PartnersUpdateRequestFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersUpdateRequestCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersUpdateRequestFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersUpdateRequest) SetNotes(notes *string) {
@@ -2526,6 +4010,118 @@ func (p *PostV1PartnersUpdateRequest) SetNotes(notes *string) {
 func (p *PostV1PartnersUpdateRequest) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersUpdateRequestFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersUpdateRequestFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersUpdateRequestFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersUpdateRequestFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersUpdateRequestFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersUpdateRequestFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersUpdateRequestFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetAutoDebtReminder(autoDebtReminder *bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersUpdateRequestFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersUpdateRequestFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersUpdateRequestFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersUpdateRequestFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersUpdateRequestFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersUpdateRequestFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetIsEmployee(isEmployee *bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersUpdateRequestFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetIsGroupMember(isGroupMember *bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersUpdateRequestFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersUpdateRequestFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequest) SetLegalCountryClass(legalCountryClass *PostV1PartnersUpdateRequestLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersUpdateRequestFieldLegalCountryClass)
 }
 
 func (p *PostV1PartnersUpdateRequest) UnmarshalJSON(data []byte) error {
@@ -2609,6 +4205,7 @@ var (
 	postV1PartnersVatReviewsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1PartnersVatReviewsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1PartnersVatReviewsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersVatReviewsListRequest struct {
@@ -2616,6 +4213,8 @@ type PostV1PartnersVatReviewsListRequest struct {
 	PageSize *int64                                           `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1PartnersVatReviewsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1PartnersVatReviewsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2654,6 +4253,13 @@ func (p *PostV1PartnersVatReviewsListRequest) SetSort(sort []*PostV1PartnersVatR
 func (p *PostV1PartnersVatReviewsListRequest) SetFilter(filter []*PostV1PartnersVatReviewsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1PartnersVatReviewsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1PartnersVatReviewsListRequestFieldTotals)
 }
 
 func (p *PostV1PartnersVatReviewsListRequest) UnmarshalJSON(data []byte) error {
@@ -2739,6 +4345,4446 @@ func (p *PostV1PartnersVatReviewsResolveRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1PartnersDebtRemindersPreviewRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+type PostV1LeadsConvertRequestPartnerType string
+
+const (
+	PostV1LeadsConvertRequestPartnerTypeCompany PostV1LeadsConvertRequestPartnerType = "company"
+	PostV1LeadsConvertRequestPartnerTypePerson  PostV1LeadsConvertRequestPartnerType = "person"
+)
+
+func NewPostV1LeadsConvertRequestPartnerTypeFromString(s string) (PostV1LeadsConvertRequestPartnerType, error) {
+	switch s {
+	case "company":
+		return PostV1LeadsConvertRequestPartnerTypeCompany, nil
+	case "person":
+		return PostV1LeadsConvertRequestPartnerTypePerson, nil
+	}
+	var t PostV1LeadsConvertRequestPartnerType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsConvertRequestPartnerType) Ptr() *PostV1LeadsConvertRequestPartnerType {
+	return &p
+}
+
+var (
+	postV1LeadsConvertResponseFieldLead      = big.NewInt(1 << 0)
+	postV1LeadsConvertResponseFieldPartnerID = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsConvertResponse struct {
+	Lead      *PostV1LeadsConvertResponseLead `json:"lead" url:"lead"`
+	PartnerID string                          `json:"partnerId" url:"partnerId"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsConvertResponse) GetLead() *PostV1LeadsConvertResponseLead {
+	if p == nil {
+		return nil
+	}
+	return p.Lead
+}
+
+func (p *PostV1LeadsConvertResponse) GetPartnerID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsConvertResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsConvertResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLead sets the Lead field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponse) SetLead(lead *PostV1LeadsConvertResponseLead) {
+	p.Lead = lead
+	p.require(postV1LeadsConvertResponseFieldLead)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponse) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsConvertResponseFieldPartnerID)
+}
+
+func (p *PostV1LeadsConvertResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsConvertResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsConvertResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsConvertResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsConvertResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsConvertResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsConvertResponseLeadFieldID             = big.NewInt(1 << 0)
+	postV1LeadsConvertResponseLeadFieldName           = big.NewInt(1 << 1)
+	postV1LeadsConvertResponseLeadFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsConvertResponseLeadFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsConvertResponseLeadFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsConvertResponseLeadFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsConvertResponseLeadFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsConvertResponseLeadFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsConvertResponseLeadFieldSourceName     = big.NewInt(1 << 8)
+	postV1LeadsConvertResponseLeadFieldStatus         = big.NewInt(1 << 9)
+	postV1LeadsConvertResponseLeadFieldEstimatedValue = big.NewInt(1 << 10)
+	postV1LeadsConvertResponseLeadFieldCurrency       = big.NewInt(1 << 11)
+	postV1LeadsConvertResponseLeadFieldDescription    = big.NewInt(1 << 12)
+	postV1LeadsConvertResponseLeadFieldAssignedUserID = big.NewInt(1 << 13)
+	postV1LeadsConvertResponseLeadFieldPartnerID      = big.NewInt(1 << 14)
+	postV1LeadsConvertResponseLeadFieldConvertedAt    = big.NewInt(1 << 15)
+	postV1LeadsConvertResponseLeadFieldCreatedAt      = big.NewInt(1 << 16)
+	postV1LeadsConvertResponseLeadFieldUpdatedAt      = big.NewInt(1 << 17)
+)
+
+type PostV1LeadsConvertResponseLead struct {
+	ID             string                               `json:"id" url:"id"`
+	Name           string                               `json:"name" url:"name"`
+	ContactName    *string                              `json:"contactName,omitempty" url:"contactName,omitempty"`
+	Email          *string                              `json:"email,omitempty" url:"email,omitempty"`
+	Phone          *string                              `json:"phone,omitempty" url:"phone,omitempty"`
+	Website        *string                              `json:"website,omitempty" url:"website,omitempty"`
+	CountryCode    *string                              `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	SourceID       *string                              `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	SourceName     *string                              `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	Status         PostV1LeadsConvertResponseLeadStatus `json:"status" url:"status"`
+	EstimatedValue *string                              `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
+	Currency       string                               `json:"currency" url:"currency"`
+	Description    *string                              `json:"description,omitempty" url:"description,omitempty"`
+	AssignedUserID *string                              `json:"assignedUserId,omitempty" url:"assignedUserId,omitempty"`
+	PartnerID      *string                              `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	ConvertedAt    *string                              `json:"convertedAt,omitempty" url:"convertedAt,omitempty"`
+	CreatedAt      string                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                               `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetContactName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContactName
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetSourceName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceName
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetStatus() PostV1LeadsConvertResponseLeadStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetEstimatedValue() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EstimatedValue
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetAssignedUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AssignedUserID
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetConvertedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ConvertedAt
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1LeadsConvertResponseLead) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsConvertResponseLead) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsConvertResponseLeadFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsConvertResponseLeadFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsConvertResponseLeadFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsConvertResponseLeadFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsConvertResponseLeadFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsConvertResponseLeadFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsConvertResponseLeadFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsConvertResponseLeadFieldSourceID)
+}
+
+// SetSourceName sets the SourceName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetSourceName(sourceName *string) {
+	p.SourceName = sourceName
+	p.require(postV1LeadsConvertResponseLeadFieldSourceName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetStatus(status PostV1LeadsConvertResponseLeadStatus) {
+	p.Status = status
+	p.require(postV1LeadsConvertResponseLeadFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsConvertResponseLeadFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1LeadsConvertResponseLeadFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsConvertResponseLeadFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsConvertResponseLeadFieldAssignedUserID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsConvertResponseLeadFieldPartnerID)
+}
+
+// SetConvertedAt sets the ConvertedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetConvertedAt(convertedAt *string) {
+	p.ConvertedAt = convertedAt
+	p.require(postV1LeadsConvertResponseLeadFieldConvertedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsConvertResponseLeadFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsConvertResponseLead) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1LeadsConvertResponseLeadFieldUpdatedAt)
+}
+
+func (p *PostV1LeadsConvertResponseLead) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsConvertResponseLead
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsConvertResponseLead(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsConvertResponseLead) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsConvertResponseLead
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsConvertResponseLead) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsConvertResponseLeadStatus string
+
+const (
+	PostV1LeadsConvertResponseLeadStatusNew       PostV1LeadsConvertResponseLeadStatus = "new"
+	PostV1LeadsConvertResponseLeadStatusContacted PostV1LeadsConvertResponseLeadStatus = "contacted"
+	PostV1LeadsConvertResponseLeadStatusQualified PostV1LeadsConvertResponseLeadStatus = "qualified"
+	PostV1LeadsConvertResponseLeadStatusLost      PostV1LeadsConvertResponseLeadStatus = "lost"
+	PostV1LeadsConvertResponseLeadStatusConverted PostV1LeadsConvertResponseLeadStatus = "converted"
+)
+
+func NewPostV1LeadsConvertResponseLeadStatusFromString(s string) (PostV1LeadsConvertResponseLeadStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsConvertResponseLeadStatusNew, nil
+	case "contacted":
+		return PostV1LeadsConvertResponseLeadStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsConvertResponseLeadStatusQualified, nil
+	case "lost":
+		return PostV1LeadsConvertResponseLeadStatusLost, nil
+	case "converted":
+		return PostV1LeadsConvertResponseLeadStatusConverted, nil
+	}
+	var t PostV1LeadsConvertResponseLeadStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsConvertResponseLeadStatus) Ptr() *PostV1LeadsConvertResponseLeadStatus {
+	return &p
+}
+
+var (
+	postV1LeadsCreateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1LeadsCreateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsCreateRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequestDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsCreateRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateRequestDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1LeadsCreateRequestDocumentsItemFieldRef)
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsCreateRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsCreateRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsCreateRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsCreateRequestDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsCreateRequestStatus string
+
+const (
+	PostV1LeadsCreateRequestStatusNew       PostV1LeadsCreateRequestStatus = "new"
+	PostV1LeadsCreateRequestStatusContacted PostV1LeadsCreateRequestStatus = "contacted"
+	PostV1LeadsCreateRequestStatusQualified PostV1LeadsCreateRequestStatus = "qualified"
+	PostV1LeadsCreateRequestStatusLost      PostV1LeadsCreateRequestStatus = "lost"
+)
+
+func NewPostV1LeadsCreateRequestStatusFromString(s string) (PostV1LeadsCreateRequestStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsCreateRequestStatusNew, nil
+	case "contacted":
+		return PostV1LeadsCreateRequestStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsCreateRequestStatusQualified, nil
+	case "lost":
+		return PostV1LeadsCreateRequestStatusLost, nil
+	}
+	var t PostV1LeadsCreateRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsCreateRequestStatus) Ptr() *PostV1LeadsCreateRequestStatus {
+	return &p
+}
+
+var (
+	postV1LeadsCreateResponseFieldID             = big.NewInt(1 << 0)
+	postV1LeadsCreateResponseFieldName           = big.NewInt(1 << 1)
+	postV1LeadsCreateResponseFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsCreateResponseFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsCreateResponseFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsCreateResponseFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsCreateResponseFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsCreateResponseFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsCreateResponseFieldSourceName     = big.NewInt(1 << 8)
+	postV1LeadsCreateResponseFieldStatus         = big.NewInt(1 << 9)
+	postV1LeadsCreateResponseFieldEstimatedValue = big.NewInt(1 << 10)
+	postV1LeadsCreateResponseFieldCurrency       = big.NewInt(1 << 11)
+	postV1LeadsCreateResponseFieldDescription    = big.NewInt(1 << 12)
+	postV1LeadsCreateResponseFieldAssignedUserID = big.NewInt(1 << 13)
+	postV1LeadsCreateResponseFieldPartnerID      = big.NewInt(1 << 14)
+	postV1LeadsCreateResponseFieldConvertedAt    = big.NewInt(1 << 15)
+	postV1LeadsCreateResponseFieldCreatedAt      = big.NewInt(1 << 16)
+	postV1LeadsCreateResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+)
+
+type PostV1LeadsCreateResponse struct {
+	ID             string                          `json:"id" url:"id"`
+	Name           string                          `json:"name" url:"name"`
+	ContactName    *string                         `json:"contactName,omitempty" url:"contactName,omitempty"`
+	Email          *string                         `json:"email,omitempty" url:"email,omitempty"`
+	Phone          *string                         `json:"phone,omitempty" url:"phone,omitempty"`
+	Website        *string                         `json:"website,omitempty" url:"website,omitempty"`
+	CountryCode    *string                         `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	SourceID       *string                         `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	SourceName     *string                         `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	Status         PostV1LeadsCreateResponseStatus `json:"status" url:"status"`
+	EstimatedValue *string                         `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
+	Currency       string                          `json:"currency" url:"currency"`
+	Description    *string                         `json:"description,omitempty" url:"description,omitempty"`
+	AssignedUserID *string                         `json:"assignedUserId,omitempty" url:"assignedUserId,omitempty"`
+	PartnerID      *string                         `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	ConvertedAt    *string                         `json:"convertedAt,omitempty" url:"convertedAt,omitempty"`
+	CreatedAt      string                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                          `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsCreateResponse) GetContactName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContactName
+}
+
+func (p *PostV1LeadsCreateResponse) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1LeadsCreateResponse) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1LeadsCreateResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1LeadsCreateResponse) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1LeadsCreateResponse) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1LeadsCreateResponse) GetSourceName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceName
+}
+
+func (p *PostV1LeadsCreateResponse) GetStatus() PostV1LeadsCreateResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1LeadsCreateResponse) GetEstimatedValue() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EstimatedValue
+}
+
+func (p *PostV1LeadsCreateResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1LeadsCreateResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1LeadsCreateResponse) GetAssignedUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AssignedUserID
+}
+
+func (p *PostV1LeadsCreateResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsCreateResponse) GetConvertedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ConvertedAt
+}
+
+func (p *PostV1LeadsCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsCreateResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1LeadsCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsCreateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsCreateResponseFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsCreateResponseFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsCreateResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsCreateResponseFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsCreateResponseFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsCreateResponseFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsCreateResponseFieldSourceID)
+}
+
+// SetSourceName sets the SourceName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetSourceName(sourceName *string) {
+	p.SourceName = sourceName
+	p.require(postV1LeadsCreateResponseFieldSourceName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetStatus(status PostV1LeadsCreateResponseStatus) {
+	p.Status = status
+	p.require(postV1LeadsCreateResponseFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsCreateResponseFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1LeadsCreateResponseFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsCreateResponseFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsCreateResponseFieldAssignedUserID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsCreateResponseFieldPartnerID)
+}
+
+// SetConvertedAt sets the ConvertedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetConvertedAt(convertedAt *string) {
+	p.ConvertedAt = convertedAt
+	p.require(postV1LeadsCreateResponseFieldConvertedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsCreateResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsCreateResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1LeadsCreateResponseFieldUpdatedAt)
+}
+
+func (p *PostV1LeadsCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsCreateResponseStatus string
+
+const (
+	PostV1LeadsCreateResponseStatusNew       PostV1LeadsCreateResponseStatus = "new"
+	PostV1LeadsCreateResponseStatusContacted PostV1LeadsCreateResponseStatus = "contacted"
+	PostV1LeadsCreateResponseStatusQualified PostV1LeadsCreateResponseStatus = "qualified"
+	PostV1LeadsCreateResponseStatusLost      PostV1LeadsCreateResponseStatus = "lost"
+	PostV1LeadsCreateResponseStatusConverted PostV1LeadsCreateResponseStatus = "converted"
+)
+
+func NewPostV1LeadsCreateResponseStatusFromString(s string) (PostV1LeadsCreateResponseStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsCreateResponseStatusNew, nil
+	case "contacted":
+		return PostV1LeadsCreateResponseStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsCreateResponseStatusQualified, nil
+	case "lost":
+		return PostV1LeadsCreateResponseStatusLost, nil
+	case "converted":
+		return PostV1LeadsCreateResponseStatusConverted, nil
+	}
+	var t PostV1LeadsCreateResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsCreateResponseStatus) Ptr() *PostV1LeadsCreateResponseStatus {
+	return &p
+}
+
+var (
+	postV1LeadsDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsDeleteResponseFieldID)
+}
+
+func (p *PostV1LeadsDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsFilesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsFilesListResponse struct {
+	Rows []*PostV1LeadsFilesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsFilesListResponse) GetRows() []*PostV1LeadsFilesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LeadsFilesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsFilesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponse) SetRows(rows []*PostV1LeadsFilesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LeadsFilesListResponseFieldRows)
+}
+
+func (p *PostV1LeadsFilesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsFilesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsFilesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsFilesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsFilesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsFilesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsFilesListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1LeadsFilesListResponseRowsItemFieldFileName  = big.NewInt(1 << 1)
+	postV1LeadsFilesListResponseRowsItemFieldMimeType  = big.NewInt(1 << 2)
+	postV1LeadsFilesListResponseRowsItemFieldSizeBytes = big.NewInt(1 << 3)
+	postV1LeadsFilesListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1LeadsFilesListResponseRowsItem struct {
+	ID        string `json:"id" url:"id"`
+	FileName  string `json:"fileName" url:"fileName"`
+	MimeType  string `json:"mimeType" url:"mimeType"`
+	SizeBytes int64  `json:"sizeBytes" url:"sizeBytes"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetMimeType() string {
+	if p == nil {
+		return ""
+	}
+	return p.MimeType
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetSizeBytes() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SizeBytes
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsFilesListResponseRowsItemFieldID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponseRowsItem) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1LeadsFilesListResponseRowsItemFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponseRowsItem) SetMimeType(mimeType string) {
+	p.MimeType = mimeType
+	p.require(postV1LeadsFilesListResponseRowsItemFieldMimeType)
+}
+
+// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	p.SizeBytes = sizeBytes
+	p.require(postV1LeadsFilesListResponseRowsItemFieldSizeBytes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsFilesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsFilesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsFilesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsFilesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsFilesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsFilesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsGetResponseFieldID             = big.NewInt(1 << 0)
+	postV1LeadsGetResponseFieldName           = big.NewInt(1 << 1)
+	postV1LeadsGetResponseFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsGetResponseFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsGetResponseFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsGetResponseFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsGetResponseFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsGetResponseFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsGetResponseFieldSourceName     = big.NewInt(1 << 8)
+	postV1LeadsGetResponseFieldStatus         = big.NewInt(1 << 9)
+	postV1LeadsGetResponseFieldEstimatedValue = big.NewInt(1 << 10)
+	postV1LeadsGetResponseFieldCurrency       = big.NewInt(1 << 11)
+	postV1LeadsGetResponseFieldDescription    = big.NewInt(1 << 12)
+	postV1LeadsGetResponseFieldAssignedUserID = big.NewInt(1 << 13)
+	postV1LeadsGetResponseFieldPartnerID      = big.NewInt(1 << 14)
+	postV1LeadsGetResponseFieldConvertedAt    = big.NewInt(1 << 15)
+	postV1LeadsGetResponseFieldCreatedAt      = big.NewInt(1 << 16)
+	postV1LeadsGetResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+)
+
+type PostV1LeadsGetResponse struct {
+	ID             string                       `json:"id" url:"id"`
+	Name           string                       `json:"name" url:"name"`
+	ContactName    *string                      `json:"contactName,omitempty" url:"contactName,omitempty"`
+	Email          *string                      `json:"email,omitempty" url:"email,omitempty"`
+	Phone          *string                      `json:"phone,omitempty" url:"phone,omitempty"`
+	Website        *string                      `json:"website,omitempty" url:"website,omitempty"`
+	CountryCode    *string                      `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	SourceID       *string                      `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	SourceName     *string                      `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	Status         PostV1LeadsGetResponseStatus `json:"status" url:"status"`
+	EstimatedValue *string                      `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
+	Currency       string                       `json:"currency" url:"currency"`
+	Description    *string                      `json:"description,omitempty" url:"description,omitempty"`
+	AssignedUserID *string                      `json:"assignedUserId,omitempty" url:"assignedUserId,omitempty"`
+	PartnerID      *string                      `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	ConvertedAt    *string                      `json:"convertedAt,omitempty" url:"convertedAt,omitempty"`
+	CreatedAt      string                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsGetResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsGetResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsGetResponse) GetContactName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContactName
+}
+
+func (p *PostV1LeadsGetResponse) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1LeadsGetResponse) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1LeadsGetResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1LeadsGetResponse) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1LeadsGetResponse) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1LeadsGetResponse) GetSourceName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceName
+}
+
+func (p *PostV1LeadsGetResponse) GetStatus() PostV1LeadsGetResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1LeadsGetResponse) GetEstimatedValue() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EstimatedValue
+}
+
+func (p *PostV1LeadsGetResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1LeadsGetResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1LeadsGetResponse) GetAssignedUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AssignedUserID
+}
+
+func (p *PostV1LeadsGetResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsGetResponse) GetConvertedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ConvertedAt
+}
+
+func (p *PostV1LeadsGetResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsGetResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1LeadsGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsGetResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsGetResponseFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsGetResponseFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsGetResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsGetResponseFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsGetResponseFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsGetResponseFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsGetResponseFieldSourceID)
+}
+
+// SetSourceName sets the SourceName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetSourceName(sourceName *string) {
+	p.SourceName = sourceName
+	p.require(postV1LeadsGetResponseFieldSourceName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetStatus(status PostV1LeadsGetResponseStatus) {
+	p.Status = status
+	p.require(postV1LeadsGetResponseFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsGetResponseFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1LeadsGetResponseFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsGetResponseFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsGetResponseFieldAssignedUserID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsGetResponseFieldPartnerID)
+}
+
+// SetConvertedAt sets the ConvertedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetConvertedAt(convertedAt *string) {
+	p.ConvertedAt = convertedAt
+	p.require(postV1LeadsGetResponseFieldConvertedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsGetResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsGetResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1LeadsGetResponseFieldUpdatedAt)
+}
+
+func (p *PostV1LeadsGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsGetResponseStatus string
+
+const (
+	PostV1LeadsGetResponseStatusNew       PostV1LeadsGetResponseStatus = "new"
+	PostV1LeadsGetResponseStatusContacted PostV1LeadsGetResponseStatus = "contacted"
+	PostV1LeadsGetResponseStatusQualified PostV1LeadsGetResponseStatus = "qualified"
+	PostV1LeadsGetResponseStatusLost      PostV1LeadsGetResponseStatus = "lost"
+	PostV1LeadsGetResponseStatusConverted PostV1LeadsGetResponseStatus = "converted"
+)
+
+func NewPostV1LeadsGetResponseStatusFromString(s string) (PostV1LeadsGetResponseStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsGetResponseStatusNew, nil
+	case "contacted":
+		return PostV1LeadsGetResponseStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsGetResponseStatusQualified, nil
+	case "lost":
+		return PostV1LeadsGetResponseStatusLost, nil
+	case "converted":
+		return PostV1LeadsGetResponseStatusConverted, nil
+	}
+	var t PostV1LeadsGetResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsGetResponseStatus) Ptr() *PostV1LeadsGetResponseStatus {
+	return &p
+}
+
+var (
+	postV1LeadsListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1LeadsListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1LeadsListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1LeadsListRequestFilterItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Op    PostV1LeadsListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1LeadsListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1LeadsListRequestFilterItem) GetOp() PostV1LeadsListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1LeadsListRequestFilterItem) GetValue() *PostV1LeadsListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1LeadsListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1LeadsListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequestFilterItem) SetOp(op PostV1LeadsListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1LeadsListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequestFilterItem) SetValue(value *PostV1LeadsListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1LeadsListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1LeadsListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsListRequestFilterItemOp string
+
+const (
+	PostV1LeadsListRequestFilterItemOpEq       PostV1LeadsListRequestFilterItemOp = "eq"
+	PostV1LeadsListRequestFilterItemOpNe       PostV1LeadsListRequestFilterItemOp = "ne"
+	PostV1LeadsListRequestFilterItemOpContains PostV1LeadsListRequestFilterItemOp = "contains"
+	PostV1LeadsListRequestFilterItemOpGte      PostV1LeadsListRequestFilterItemOp = "gte"
+	PostV1LeadsListRequestFilterItemOpLte      PostV1LeadsListRequestFilterItemOp = "lte"
+	PostV1LeadsListRequestFilterItemOpIn       PostV1LeadsListRequestFilterItemOp = "in"
+)
+
+func NewPostV1LeadsListRequestFilterItemOpFromString(s string) (PostV1LeadsListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1LeadsListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1LeadsListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1LeadsListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1LeadsListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1LeadsListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1LeadsListRequestFilterItemOpIn, nil
+	}
+	var t PostV1LeadsListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsListRequestFilterItemOp) Ptr() *PostV1LeadsListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1LeadsListRequestFilterItemValue struct {
+	String                                             string
+	Double                                             float64
+	Boolean                                            bool
+	PostV1LeadsListRequestFilterItemValueThreeItemList []*PostV1LeadsListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) GetPostV1LeadsListRequestFilterItemValueThreeItemList() []*PostV1LeadsListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1LeadsListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1LeadsListRequestFilterItemValueThreeItemList []*PostV1LeadsListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1LeadsListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1LeadsListRequestFilterItemValueThreeItemList"
+		p.PostV1LeadsListRequestFilterItemValueThreeItemList = valuePostV1LeadsListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1LeadsListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1LeadsListRequestFilterItemValueThreeItemList" || p.PostV1LeadsListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1LeadsListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1LeadsListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1LeadsListRequestFilterItemValueThreeItemList([]*PostV1LeadsListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1LeadsListRequestFilterItemValue) Accept(visitor PostV1LeadsListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1LeadsListRequestFilterItemValueThreeItemList" || p.PostV1LeadsListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1LeadsListRequestFilterItemValueThreeItemList(p.PostV1LeadsListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1LeadsListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1LeadsListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1LeadsListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1LeadsListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1LeadsListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1LeadsListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1LeadsListRequestFilterItemValueThreeItem) Accept(visitor PostV1LeadsListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1LeadsListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1LeadsListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsListRequestSortItem struct {
+	Field string                             `json:"field" url:"field"`
+	Dir   *PostV1LeadsListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1LeadsListRequestSortItem) GetDir() *PostV1LeadsListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1LeadsListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1LeadsListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListRequestSortItem) SetDir(dir *PostV1LeadsListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1LeadsListRequestSortItemFieldDir)
+}
+
+func (p *PostV1LeadsListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsListRequestSortItemDir string
+
+const (
+	PostV1LeadsListRequestSortItemDirAsc  PostV1LeadsListRequestSortItemDir = "asc"
+	PostV1LeadsListRequestSortItemDirDesc PostV1LeadsListRequestSortItemDir = "desc"
+)
+
+func NewPostV1LeadsListRequestSortItemDirFromString(s string) (PostV1LeadsListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1LeadsListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1LeadsListRequestSortItemDirDesc, nil
+	}
+	var t PostV1LeadsListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsListRequestSortItemDir) Ptr() *PostV1LeadsListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1LeadsListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1LeadsListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1LeadsListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1LeadsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1LeadsListResponseFieldTotals   = big.NewInt(1 << 4)
+)
+
+type PostV1LeadsListResponse struct {
+	Rows     []*PostV1LeadsListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                              `json:"page" url:"page"`
+	PageSize int64                              `json:"pageSize" url:"pageSize"`
+	Total    int64                              `json:"total" url:"total"`
+	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsListResponse) GetRows() []*PostV1LeadsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LeadsListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1LeadsListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1LeadsListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1LeadsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
+}
+
+func (p *PostV1LeadsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponse) SetRows(rows []*PostV1LeadsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LeadsListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1LeadsListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1LeadsListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1LeadsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1LeadsListResponseFieldTotals)
+}
+
+func (p *PostV1LeadsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsListResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	postV1LeadsListResponseRowsItemFieldName           = big.NewInt(1 << 1)
+	postV1LeadsListResponseRowsItemFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsListResponseRowsItemFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsListResponseRowsItemFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsListResponseRowsItemFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsListResponseRowsItemFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsListResponseRowsItemFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsListResponseRowsItemFieldSourceName     = big.NewInt(1 << 8)
+	postV1LeadsListResponseRowsItemFieldStatus         = big.NewInt(1 << 9)
+	postV1LeadsListResponseRowsItemFieldEstimatedValue = big.NewInt(1 << 10)
+	postV1LeadsListResponseRowsItemFieldCurrency       = big.NewInt(1 << 11)
+	postV1LeadsListResponseRowsItemFieldDescription    = big.NewInt(1 << 12)
+	postV1LeadsListResponseRowsItemFieldAssignedUserID = big.NewInt(1 << 13)
+	postV1LeadsListResponseRowsItemFieldPartnerID      = big.NewInt(1 << 14)
+	postV1LeadsListResponseRowsItemFieldConvertedAt    = big.NewInt(1 << 15)
+	postV1LeadsListResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 16)
+	postV1LeadsListResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 17)
+)
+
+type PostV1LeadsListResponseRowsItem struct {
+	ID             string                                `json:"id" url:"id"`
+	Name           string                                `json:"name" url:"name"`
+	ContactName    *string                               `json:"contactName,omitempty" url:"contactName,omitempty"`
+	Email          *string                               `json:"email,omitempty" url:"email,omitempty"`
+	Phone          *string                               `json:"phone,omitempty" url:"phone,omitempty"`
+	Website        *string                               `json:"website,omitempty" url:"website,omitempty"`
+	CountryCode    *string                               `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	SourceID       *string                               `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	SourceName     *string                               `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	Status         PostV1LeadsListResponseRowsItemStatus `json:"status" url:"status"`
+	EstimatedValue *string                               `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
+	Currency       string                                `json:"currency" url:"currency"`
+	Description    *string                               `json:"description,omitempty" url:"description,omitempty"`
+	AssignedUserID *string                               `json:"assignedUserId,omitempty" url:"assignedUserId,omitempty"`
+	PartnerID      *string                               `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	ConvertedAt    *string                               `json:"convertedAt,omitempty" url:"convertedAt,omitempty"`
+	CreatedAt      string                                `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                                `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetContactName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContactName
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetSourceName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceName
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetStatus() PostV1LeadsListResponseRowsItemStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetEstimatedValue() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EstimatedValue
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetAssignedUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AssignedUserID
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetConvertedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ConvertedAt
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1LeadsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsListResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsListResponseRowsItemFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsListResponseRowsItemFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsListResponseRowsItemFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsListResponseRowsItemFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsListResponseRowsItemFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsListResponseRowsItemFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsListResponseRowsItemFieldSourceID)
+}
+
+// SetSourceName sets the SourceName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetSourceName(sourceName *string) {
+	p.SourceName = sourceName
+	p.require(postV1LeadsListResponseRowsItemFieldSourceName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetStatus(status PostV1LeadsListResponseRowsItemStatus) {
+	p.Status = status
+	p.require(postV1LeadsListResponseRowsItemFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsListResponseRowsItemFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1LeadsListResponseRowsItemFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsListResponseRowsItemFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsListResponseRowsItemFieldAssignedUserID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsListResponseRowsItemFieldPartnerID)
+}
+
+// SetConvertedAt sets the ConvertedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetConvertedAt(convertedAt *string) {
+	p.ConvertedAt = convertedAt
+	p.require(postV1LeadsListResponseRowsItemFieldConvertedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsListResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsListResponseRowsItem) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1LeadsListResponseRowsItemFieldUpdatedAt)
+}
+
+func (p *PostV1LeadsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsListResponseRowsItemStatus string
+
+const (
+	PostV1LeadsListResponseRowsItemStatusNew       PostV1LeadsListResponseRowsItemStatus = "new"
+	PostV1LeadsListResponseRowsItemStatusContacted PostV1LeadsListResponseRowsItemStatus = "contacted"
+	PostV1LeadsListResponseRowsItemStatusQualified PostV1LeadsListResponseRowsItemStatus = "qualified"
+	PostV1LeadsListResponseRowsItemStatusLost      PostV1LeadsListResponseRowsItemStatus = "lost"
+	PostV1LeadsListResponseRowsItemStatusConverted PostV1LeadsListResponseRowsItemStatus = "converted"
+)
+
+func NewPostV1LeadsListResponseRowsItemStatusFromString(s string) (PostV1LeadsListResponseRowsItemStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsListResponseRowsItemStatusNew, nil
+	case "contacted":
+		return PostV1LeadsListResponseRowsItemStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsListResponseRowsItemStatusQualified, nil
+	case "lost":
+		return PostV1LeadsListResponseRowsItemStatusLost, nil
+	case "converted":
+		return PostV1LeadsListResponseRowsItemStatusConverted, nil
+	}
+	var t PostV1LeadsListResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsListResponseRowsItemStatus) Ptr() *PostV1LeadsListResponseRowsItemStatus {
+	return &p
+}
+
+var (
+	postV1LeadsNotesCreateResponseFieldID        = big.NewInt(1 << 0)
+	postV1LeadsNotesCreateResponseFieldLeadID    = big.NewInt(1 << 1)
+	postV1LeadsNotesCreateResponseFieldBody      = big.NewInt(1 << 2)
+	postV1LeadsNotesCreateResponseFieldAuthorID  = big.NewInt(1 << 3)
+	postV1LeadsNotesCreateResponseFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1LeadsNotesCreateResponse struct {
+	ID        string  `json:"id" url:"id"`
+	LeadID    string  `json:"leadId" url:"leadId"`
+	Body      string  `json:"body" url:"body"`
+	AuthorID  *string `json:"authorId,omitempty" url:"authorId,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetLeadID() string {
+	if p == nil {
+		return ""
+	}
+	return p.LeadID
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetBody() string {
+	if p == nil {
+		return ""
+	}
+	return p.Body
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetAuthorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorID
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsNotesCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsNotesCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsNotesCreateResponseFieldID)
+}
+
+// SetLeadID sets the LeadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateResponse) SetLeadID(leadID string) {
+	p.LeadID = leadID
+	p.require(postV1LeadsNotesCreateResponseFieldLeadID)
+}
+
+// SetBody sets the Body field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateResponse) SetBody(body string) {
+	p.Body = body
+	p.require(postV1LeadsNotesCreateResponseFieldBody)
+}
+
+// SetAuthorID sets the AuthorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateResponse) SetAuthorID(authorID *string) {
+	p.AuthorID = authorID
+	p.require(postV1LeadsNotesCreateResponseFieldAuthorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsNotesCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1LeadsNotesCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsNotesCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsNotesCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsNotesDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsNotesDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsNotesDeleteResponseFieldID)
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsNotesDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsNotesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsNotesListResponse struct {
+	Rows []*PostV1LeadsNotesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsNotesListResponse) GetRows() []*PostV1LeadsNotesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LeadsNotesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsNotesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponse) SetRows(rows []*PostV1LeadsNotesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LeadsNotesListResponseFieldRows)
+}
+
+func (p *PostV1LeadsNotesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsNotesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsNotesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsNotesListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1LeadsNotesListResponseRowsItemFieldLeadID    = big.NewInt(1 << 1)
+	postV1LeadsNotesListResponseRowsItemFieldBody      = big.NewInt(1 << 2)
+	postV1LeadsNotesListResponseRowsItemFieldAuthorID  = big.NewInt(1 << 3)
+	postV1LeadsNotesListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+)
+
+type PostV1LeadsNotesListResponseRowsItem struct {
+	ID        string  `json:"id" url:"id"`
+	LeadID    string  `json:"leadId" url:"leadId"`
+	Body      string  `json:"body" url:"body"`
+	AuthorID  *string `json:"authorId,omitempty" url:"authorId,omitempty"`
+	CreatedAt string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetLeadID() string {
+	if p == nil {
+		return ""
+	}
+	return p.LeadID
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetBody() string {
+	if p == nil {
+		return ""
+	}
+	return p.Body
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetAuthorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorID
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsNotesListResponseRowsItemFieldID)
+}
+
+// SetLeadID sets the LeadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponseRowsItem) SetLeadID(leadID string) {
+	p.LeadID = leadID
+	p.require(postV1LeadsNotesListResponseRowsItemFieldLeadID)
+}
+
+// SetBody sets the Body field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponseRowsItem) SetBody(body string) {
+	p.Body = body
+	p.require(postV1LeadsNotesListResponseRowsItemFieldBody)
+}
+
+// SetAuthorID sets the AuthorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponseRowsItem) SetAuthorID(authorID *string) {
+	p.AuthorID = authorID
+	p.require(postV1LeadsNotesListResponseRowsItemFieldAuthorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsNotesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsNotesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsNotesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsNotesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsNotesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsNotesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesCreateResponseFieldID        = big.NewInt(1 << 0)
+	postV1LeadsSourcesCreateResponseFieldName      = big.NewInt(1 << 1)
+	postV1LeadsSourcesCreateResponseFieldIsActive  = big.NewInt(1 << 2)
+	postV1LeadsSourcesCreateResponseFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type PostV1LeadsSourcesCreateResponse struct {
+	ID        string `json:"id" url:"id"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesCreateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesCreateResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1LeadsSourcesCreateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsSourcesCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsSourcesDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesDeleteResponseFieldID)
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsSourcesListResponse struct {
+	Rows []*PostV1LeadsSourcesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesListResponse) GetRows() []*PostV1LeadsSourcesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LeadsSourcesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesListResponse) SetRows(rows []*PostV1LeadsSourcesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LeadsSourcesListResponseFieldRows)
+}
+
+func (p *PostV1LeadsSourcesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesListResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	postV1LeadsSourcesListResponseRowsItemFieldName      = big.NewInt(1 << 1)
+	postV1LeadsSourcesListResponseRowsItemFieldIsActive  = big.NewInt(1 << 2)
+	postV1LeadsSourcesListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type PostV1LeadsSourcesListResponseRowsItem struct {
+	ID        string `json:"id" url:"id"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesListResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesListResponseRowsItemFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1LeadsSourcesListResponseRowsItemFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsSourcesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesOptionsResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1LeadsSourcesOptionsResponse struct {
+	Rows []*PostV1LeadsSourcesOptionsResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) GetRows() []*PostV1LeadsSourcesOptionsResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesOptionsResponse) SetRows(rows []*PostV1LeadsSourcesOptionsResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LeadsSourcesOptionsResponseFieldRows)
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesOptionsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesOptionsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesOptionsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesOptionsResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesOptionsResponseRowsItemFieldID   = big.NewInt(1 << 0)
+	postV1LeadsSourcesOptionsResponseRowsItemFieldName = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsSourcesOptionsResponseRowsItem struct {
+	ID   string `json:"id" url:"id"`
+	Name string `json:"name" url:"name"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesOptionsResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesOptionsResponseRowsItemFieldName)
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesOptionsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesOptionsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesOptionsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesOptionsResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsSourcesUpdateResponseFieldID        = big.NewInt(1 << 0)
+	postV1LeadsSourcesUpdateResponseFieldName      = big.NewInt(1 << 1)
+	postV1LeadsSourcesUpdateResponseFieldIsActive  = big.NewInt(1 << 2)
+	postV1LeadsSourcesUpdateResponseFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type PostV1LeadsSourcesUpdateResponse struct {
+	ID        string `json:"id" url:"id"`
+	Name      string `json:"name" url:"name"`
+	IsActive  bool   `json:"isActive" url:"isActive"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsSourcesUpdateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsSourcesUpdateResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1LeadsSourcesUpdateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsSourcesUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsSourcesUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsSourcesUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsSourcesUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsSourcesUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsSourcesUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LeadsUpdateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1LeadsUpdateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1LeadsUpdateRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequestDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsUpdateRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateRequestDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1LeadsUpdateRequestDocumentsItemFieldRef)
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsUpdateRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsUpdateRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsUpdateRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsUpdateRequestDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsUpdateRequestStatus string
+
+const (
+	PostV1LeadsUpdateRequestStatusNew       PostV1LeadsUpdateRequestStatus = "new"
+	PostV1LeadsUpdateRequestStatusContacted PostV1LeadsUpdateRequestStatus = "contacted"
+	PostV1LeadsUpdateRequestStatusQualified PostV1LeadsUpdateRequestStatus = "qualified"
+	PostV1LeadsUpdateRequestStatusLost      PostV1LeadsUpdateRequestStatus = "lost"
+)
+
+func NewPostV1LeadsUpdateRequestStatusFromString(s string) (PostV1LeadsUpdateRequestStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsUpdateRequestStatusNew, nil
+	case "contacted":
+		return PostV1LeadsUpdateRequestStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsUpdateRequestStatusQualified, nil
+	case "lost":
+		return PostV1LeadsUpdateRequestStatusLost, nil
+	}
+	var t PostV1LeadsUpdateRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsUpdateRequestStatus) Ptr() *PostV1LeadsUpdateRequestStatus {
+	return &p
+}
+
+var (
+	postV1LeadsUpdateResponseFieldID             = big.NewInt(1 << 0)
+	postV1LeadsUpdateResponseFieldName           = big.NewInt(1 << 1)
+	postV1LeadsUpdateResponseFieldContactName    = big.NewInt(1 << 2)
+	postV1LeadsUpdateResponseFieldEmail          = big.NewInt(1 << 3)
+	postV1LeadsUpdateResponseFieldPhone          = big.NewInt(1 << 4)
+	postV1LeadsUpdateResponseFieldWebsite        = big.NewInt(1 << 5)
+	postV1LeadsUpdateResponseFieldCountryCode    = big.NewInt(1 << 6)
+	postV1LeadsUpdateResponseFieldSourceID       = big.NewInt(1 << 7)
+	postV1LeadsUpdateResponseFieldSourceName     = big.NewInt(1 << 8)
+	postV1LeadsUpdateResponseFieldStatus         = big.NewInt(1 << 9)
+	postV1LeadsUpdateResponseFieldEstimatedValue = big.NewInt(1 << 10)
+	postV1LeadsUpdateResponseFieldCurrency       = big.NewInt(1 << 11)
+	postV1LeadsUpdateResponseFieldDescription    = big.NewInt(1 << 12)
+	postV1LeadsUpdateResponseFieldAssignedUserID = big.NewInt(1 << 13)
+	postV1LeadsUpdateResponseFieldPartnerID      = big.NewInt(1 << 14)
+	postV1LeadsUpdateResponseFieldConvertedAt    = big.NewInt(1 << 15)
+	postV1LeadsUpdateResponseFieldCreatedAt      = big.NewInt(1 << 16)
+	postV1LeadsUpdateResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+)
+
+type PostV1LeadsUpdateResponse struct {
+	ID             string                          `json:"id" url:"id"`
+	Name           string                          `json:"name" url:"name"`
+	ContactName    *string                         `json:"contactName,omitempty" url:"contactName,omitempty"`
+	Email          *string                         `json:"email,omitempty" url:"email,omitempty"`
+	Phone          *string                         `json:"phone,omitempty" url:"phone,omitempty"`
+	Website        *string                         `json:"website,omitempty" url:"website,omitempty"`
+	CountryCode    *string                         `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	SourceID       *string                         `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	SourceName     *string                         `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	Status         PostV1LeadsUpdateResponseStatus `json:"status" url:"status"`
+	EstimatedValue *string                         `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
+	Currency       string                          `json:"currency" url:"currency"`
+	Description    *string                         `json:"description,omitempty" url:"description,omitempty"`
+	AssignedUserID *string                         `json:"assignedUserId,omitempty" url:"assignedUserId,omitempty"`
+	PartnerID      *string                         `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	ConvertedAt    *string                         `json:"convertedAt,omitempty" url:"convertedAt,omitempty"`
+	CreatedAt      string                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt      string                          `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LeadsUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1LeadsUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LeadsUpdateResponse) GetContactName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContactName
+}
+
+func (p *PostV1LeadsUpdateResponse) GetEmail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Email
+}
+
+func (p *PostV1LeadsUpdateResponse) GetPhone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Phone
+}
+
+func (p *PostV1LeadsUpdateResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1LeadsUpdateResponse) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1LeadsUpdateResponse) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1LeadsUpdateResponse) GetSourceName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceName
+}
+
+func (p *PostV1LeadsUpdateResponse) GetStatus() PostV1LeadsUpdateResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1LeadsUpdateResponse) GetEstimatedValue() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EstimatedValue
+}
+
+func (p *PostV1LeadsUpdateResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1LeadsUpdateResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1LeadsUpdateResponse) GetAssignedUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AssignedUserID
+}
+
+func (p *PostV1LeadsUpdateResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1LeadsUpdateResponse) GetConvertedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ConvertedAt
+}
+
+func (p *PostV1LeadsUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1LeadsUpdateResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1LeadsUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LeadsUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1LeadsUpdateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1LeadsUpdateResponseFieldName)
+}
+
+// SetContactName sets the ContactName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetContactName(contactName *string) {
+	p.ContactName = contactName
+	p.require(postV1LeadsUpdateResponseFieldContactName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetEmail(email *string) {
+	p.Email = email
+	p.require(postV1LeadsUpdateResponseFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetPhone(phone *string) {
+	p.Phone = phone
+	p.require(postV1LeadsUpdateResponseFieldPhone)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1LeadsUpdateResponseFieldWebsite)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1LeadsUpdateResponseFieldCountryCode)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1LeadsUpdateResponseFieldSourceID)
+}
+
+// SetSourceName sets the SourceName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetSourceName(sourceName *string) {
+	p.SourceName = sourceName
+	p.require(postV1LeadsUpdateResponseFieldSourceName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetStatus(status PostV1LeadsUpdateResponseStatus) {
+	p.Status = status
+	p.require(postV1LeadsUpdateResponseFieldStatus)
+}
+
+// SetEstimatedValue sets the EstimatedValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetEstimatedValue(estimatedValue *string) {
+	p.EstimatedValue = estimatedValue
+	p.require(postV1LeadsUpdateResponseFieldEstimatedValue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1LeadsUpdateResponseFieldCurrency)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1LeadsUpdateResponseFieldDescription)
+}
+
+// SetAssignedUserID sets the AssignedUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetAssignedUserID(assignedUserID *string) {
+	p.AssignedUserID = assignedUserID
+	p.require(postV1LeadsUpdateResponseFieldAssignedUserID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postV1LeadsUpdateResponseFieldPartnerID)
+}
+
+// SetConvertedAt sets the ConvertedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetConvertedAt(convertedAt *string) {
+	p.ConvertedAt = convertedAt
+	p.require(postV1LeadsUpdateResponseFieldConvertedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1LeadsUpdateResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LeadsUpdateResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1LeadsUpdateResponseFieldUpdatedAt)
+}
+
+func (p *PostV1LeadsUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LeadsUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LeadsUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LeadsUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LeadsUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LeadsUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LeadsUpdateResponseStatus string
+
+const (
+	PostV1LeadsUpdateResponseStatusNew       PostV1LeadsUpdateResponseStatus = "new"
+	PostV1LeadsUpdateResponseStatusContacted PostV1LeadsUpdateResponseStatus = "contacted"
+	PostV1LeadsUpdateResponseStatusQualified PostV1LeadsUpdateResponseStatus = "qualified"
+	PostV1LeadsUpdateResponseStatusLost      PostV1LeadsUpdateResponseStatus = "lost"
+	PostV1LeadsUpdateResponseStatusConverted PostV1LeadsUpdateResponseStatus = "converted"
+)
+
+func NewPostV1LeadsUpdateResponseStatusFromString(s string) (PostV1LeadsUpdateResponseStatus, error) {
+	switch s {
+	case "new":
+		return PostV1LeadsUpdateResponseStatusNew, nil
+	case "contacted":
+		return PostV1LeadsUpdateResponseStatusContacted, nil
+	case "qualified":
+		return PostV1LeadsUpdateResponseStatusQualified, nil
+	case "lost":
+		return PostV1LeadsUpdateResponseStatusLost, nil
+	case "converted":
+		return PostV1LeadsUpdateResponseStatusConverted, nil
+	}
+	var t PostV1LeadsUpdateResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LeadsUpdateResponseStatus) Ptr() *PostV1LeadsUpdateResponseStatus {
+	return &p
 }
 
 type PostV1PartnersAddressesCreateRequestType string
@@ -3508,6 +9554,7 @@ var (
 	postV1PartnersAddressesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersAddressesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersAddressesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersAddressesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersAddressesListResponse struct {
@@ -3515,6 +9562,7 @@ type PostV1PartnersAddressesListResponse struct {
 	Page     int64                                          `json:"page" url:"page"`
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3549,6 +9597,13 @@ func (p *PostV1PartnersAddressesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersAddressesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersAddressesListResponse) GetExtraProperties() map[string]interface{} {
@@ -3591,6 +9646,13 @@ func (p *PostV1PartnersAddressesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersAddressesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersAddressesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersAddressesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersAddressesListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersAddressesListResponse) UnmarshalJSON(data []byte) error {
@@ -4910,6 +10972,7 @@ var (
 	postV1PartnersBankAccountsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersBankAccountsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersBankAccountsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersBankAccountsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersBankAccountsListResponse struct {
@@ -4917,6 +10980,7 @@ type PostV1PartnersBankAccountsListResponse struct {
 	Page     int64                                             `json:"page" url:"page"`
 	PageSize int64                                             `json:"pageSize" url:"pageSize"`
 	Total    int64                                             `json:"total" url:"total"`
+	Totals   map[string]string                                 `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4951,6 +11015,13 @@ func (p *PostV1PartnersBankAccountsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersBankAccountsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersBankAccountsListResponse) GetExtraProperties() map[string]interface{} {
@@ -4993,6 +11064,13 @@ func (p *PostV1PartnersBankAccountsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersBankAccountsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersBankAccountsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersBankAccountsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersBankAccountsListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersBankAccountsListResponse) UnmarshalJSON(data []byte) error {
@@ -6152,6 +12230,7 @@ var (
 	postV1PartnersContactsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersContactsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersContactsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersContactsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersContactsListResponse struct {
@@ -6159,6 +12238,7 @@ type PostV1PartnersContactsListResponse struct {
 	Page     int64                                         `json:"page" url:"page"`
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6193,6 +12273,13 @@ func (p *PostV1PartnersContactsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersContactsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersContactsListResponse) GetExtraProperties() map[string]interface{} {
@@ -6235,6 +12322,13 @@ func (p *PostV1PartnersContactsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersContactsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersContactsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersContactsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersContactsListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersContactsListResponse) UnmarshalJSON(data []byte) error {
@@ -6672,17 +12766,21 @@ func (p *PostV1PartnersContactsUpdateResponse) String() string {
 }
 
 var (
-	postV1PartnersCreateRequestAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersCreateRequestAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersCreateRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersCreateRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersCreateRequestAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersCreateRequestAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersCreateRequestAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersCreateRequestAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersCreateRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersCreateRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersCreateRequestAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6703,6 +12801,20 @@ func (p *PostV1PartnersCreateRequestAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersCreateRequestAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersCreateRequestAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersCreateRequestAddress) GetPostalCode() *string {
@@ -6745,6 +12857,20 @@ func (p *PostV1PartnersCreateRequestAddress) SetStreet(street *string) {
 func (p *PostV1PartnersCreateRequestAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersCreateRequestAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersCreateRequestAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersCreateRequestAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -6803,6 +12929,195 @@ func (p *PostV1PartnersCreateRequestAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1PartnersCreateRequestCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersCreateRequestCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersCreateRequestCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersCreateRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersCreateRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersCreateRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersCreateRequestCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersCreateRequestCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersCreateRequestCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersCreateRequestCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersCreateRequestCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersCreateRequestCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersCreateRequestLegalCountryClass string
+
+const (
+	PostV1PartnersCreateRequestLegalCountryClassLt    PostV1PartnersCreateRequestLegalCountryClass = "lt"
+	PostV1PartnersCreateRequestLegalCountryClassEu    PostV1PartnersCreateRequestLegalCountryClass = "eu"
+	PostV1PartnersCreateRequestLegalCountryClassNonEu PostV1PartnersCreateRequestLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersCreateRequestLegalCountryClassFromString(s string) (PostV1PartnersCreateRequestLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersCreateRequestLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersCreateRequestLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersCreateRequestLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersCreateRequestLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersCreateRequestLegalCountryClass) Ptr() *PostV1PartnersCreateRequestLegalCountryClass {
+	return &p
+}
+
 type PostV1PartnersCreateRequestType string
 
 const (
@@ -6826,57 +13141,91 @@ func (p PostV1PartnersCreateRequestType) Ptr() *PostV1PartnersCreateRequestType 
 }
 
 var (
-	postV1PartnersCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersCreateResponseFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersCreateResponseFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersCreateResponseFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersCreateResponseFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersCreateResponseFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersCreateResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersCreateResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersCreateResponseFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersCreateResponseFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersCreateResponseFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersCreateResponseFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersCreateResponseFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersCreateResponseFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersCreateResponseFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersCreateResponseFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersCreateResponseFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersCreateResponseFieldVatValid             = big.NewInt(1 << 17)
-	postV1PartnersCreateResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
-	postV1PartnersCreateResponseFieldAddress              = big.NewInt(1 << 19)
-	postV1PartnersCreateResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersCreateResponseFieldDocumentRef          = big.NewInt(1 << 21)
-	postV1PartnersCreateResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1PartnersCreateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1PartnersCreateResponseFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersCreateResponseFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersCreateResponseFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersCreateResponseFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersCreateResponseFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersCreateResponseFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersCreateResponseFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersCreateResponseFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersCreateResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersCreateResponseFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersCreateResponseFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersCreateResponseFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersCreateResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersCreateResponseFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersCreateResponseFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersCreateResponseFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersCreateResponseFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersCreateResponseFieldVatValid              = big.NewInt(1 << 17)
+	postV1PartnersCreateResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
+	postV1PartnersCreateResponseFieldAddress               = big.NewInt(1 << 19)
+	postV1PartnersCreateResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	postV1PartnersCreateResponseFieldNotes                 = big.NewInt(1 << 21)
+	postV1PartnersCreateResponseFieldDocumentRef           = big.NewInt(1 << 22)
+	postV1PartnersCreateResponseFieldShortName             = big.NewInt(1 << 23)
+	postV1PartnersCreateResponseFieldWebsite               = big.NewInt(1 << 24)
+	postV1PartnersCreateResponseFieldFax                   = big.NewInt(1 << 25)
+	postV1PartnersCreateResponseFieldEoriCode              = big.NewInt(1 << 26)
+	postV1PartnersCreateResponseFieldOtherCode             = big.NewInt(1 << 27)
+	postV1PartnersCreateResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
+	postV1PartnersCreateResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	postV1PartnersCreateResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	postV1PartnersCreateResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	postV1PartnersCreateResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	postV1PartnersCreateResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	postV1PartnersCreateResponseFieldRating                = big.NewInt(1 << 34)
+	postV1PartnersCreateResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	postV1PartnersCreateResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	postV1PartnersCreateResponseFieldIsActive              = big.NewInt(1 << 37)
+	postV1PartnersCreateResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	postV1PartnersCreateResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	postV1PartnersCreateResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type PostV1PartnersCreateResponse struct {
-	ID                   string                               `json:"id" url:"id"`
-	Type                 PostV1PartnersCreateResponseType     `json:"type" url:"type"`
-	Name                 string                               `json:"name" url:"name"`
-	Code                 *string                              `json:"code,omitempty" url:"code,omitempty"`
-	VatCode              *string                              `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	PeppolID             *string                              `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	Email                *string                              `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                              `json:"phone,omitempty" url:"phone,omitempty"`
-	SelfEmploymentCertNo *string                              `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
-	BirthDate            *string                              `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	IsCustomer           bool                                 `json:"isCustomer" url:"isCustomer"`
-	IsSupplier           bool                                 `json:"isSupplier" url:"isSupplier"`
-	PaymentTermDays      *int64                               `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	CreditLimit          *string                              `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
-	PriceListID          *string                              `json:"priceListId,omitempty" url:"priceListId,omitempty"`
-	GroupID              *string                              `json:"groupId,omitempty" url:"groupId,omitempty"`
-	StatusID             *string                              `json:"statusId,omitempty" url:"statusId,omitempty"`
-	VatValid             *bool                                `json:"vatValid,omitempty" url:"vatValid,omitempty"`
-	VatValidatedAt       *string                              `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
-	Address              *PostV1PartnersCreateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes                *string                              `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                               `json:"updatedAt" url:"updatedAt"`
+	ID                    string                                             `json:"id" url:"id"`
+	Type                  PostV1PartnersCreateResponseType                   `json:"type" url:"type"`
+	Name                  string                                             `json:"name" url:"name"`
+	Code                  *string                                            `json:"code,omitempty" url:"code,omitempty"`
+	VatCode               *string                                            `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	PeppolID              *string                                            `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	Email                 *string                                            `json:"email,omitempty" url:"email,omitempty"`
+	Phone                 *string                                            `json:"phone,omitempty" url:"phone,omitempty"`
+	SelfEmploymentCertNo  *string                                            `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
+	BirthDate             *string                                            `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	IsCustomer            bool                                               `json:"isCustomer" url:"isCustomer"`
+	IsSupplier            bool                                               `json:"isSupplier" url:"isSupplier"`
+	PaymentTermDays       *int64                                             `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	CreditLimit           *string                                            `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
+	PriceListID           *string                                            `json:"priceListId,omitempty" url:"priceListId,omitempty"`
+	GroupID               *string                                            `json:"groupId,omitempty" url:"groupId,omitempty"`
+	StatusID              *string                                            `json:"statusId,omitempty" url:"statusId,omitempty"`
+	VatValid              *bool                                              `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt        *string                                            `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+	Address               *PostV1PartnersCreateResponseAddress               `json:"address,omitempty" url:"address,omitempty"`
+	CorrespondenceAddress *PostV1PartnersCreateResponseCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"correspondenceAddress,omitempty"`
+	Notes                 *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef           *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	ShortName             *string                                            `json:"shortName,omitempty" url:"shortName,omitempty"`
+	Website               *string                                            `json:"website,omitempty" url:"website,omitempty"`
+	Fax                   *string                                            `json:"fax,omitempty" url:"fax,omitempty"`
+	EoriCode              *string                                            `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
+	OtherCode             *string                                            `json:"otherCode,omitempty" url:"otherCode,omitempty"`
+	ForeignTaxNumber      *string                                            `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
+	AutoDebtReminder      bool                                               `json:"autoDebtReminder" url:"autoDebtReminder"`
+	LateInterestPercent   *string                                            `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
+	FirstCallDate         *string                                            `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty"`
+	LastCallDate          *string                                            `json:"lastCallDate,omitempty" url:"lastCallDate,omitempty"`
+	NextCallDate          *string                                            `json:"nextCallDate,omitempty" url:"nextCallDate,omitempty"`
+	Rating                *int64                                             `json:"rating,omitempty" url:"rating,omitempty"`
+	IsEmployee            bool                                               `json:"isEmployee" url:"isEmployee"`
+	IsGroupMember         bool                                               `json:"isGroupMember" url:"isGroupMember"`
+	IsActive              bool                                               `json:"isActive" url:"isActive"`
+	LegalCountryClass     *PostV1PartnersCreateResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	CreatedAt             string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                             `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7025,6 +13374,13 @@ func (p *PostV1PartnersCreateResponse) GetAddress() *PostV1PartnersCreateRespons
 	return p.Address
 }
 
+func (p *PostV1PartnersCreateResponse) GetCorrespondenceAddress() *PostV1PartnersCreateResponseCorrespondenceAddress {
+	if p == nil {
+		return nil
+	}
+	return p.CorrespondenceAddress
+}
+
 func (p *PostV1PartnersCreateResponse) GetNotes() *string {
 	if p == nil {
 		return nil
@@ -7037,6 +13393,118 @@ func (p *PostV1PartnersCreateResponse) GetDocumentRef() *string {
 		return nil
 	}
 	return p.DocumentRef
+}
+
+func (p *PostV1PartnersCreateResponse) GetShortName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShortName
+}
+
+func (p *PostV1PartnersCreateResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1PartnersCreateResponse) GetFax() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Fax
+}
+
+func (p *PostV1PartnersCreateResponse) GetEoriCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EoriCode
+}
+
+func (p *PostV1PartnersCreateResponse) GetOtherCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OtherCode
+}
+
+func (p *PostV1PartnersCreateResponse) GetForeignTaxNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ForeignTaxNumber
+}
+
+func (p *PostV1PartnersCreateResponse) GetAutoDebtReminder() bool {
+	if p == nil {
+		return false
+	}
+	return p.AutoDebtReminder
+}
+
+func (p *PostV1PartnersCreateResponse) GetLateInterestPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LateInterestPercent
+}
+
+func (p *PostV1PartnersCreateResponse) GetFirstCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstCallDate
+}
+
+func (p *PostV1PartnersCreateResponse) GetLastCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastCallDate
+}
+
+func (p *PostV1PartnersCreateResponse) GetNextCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCallDate
+}
+
+func (p *PostV1PartnersCreateResponse) GetRating() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.Rating
+}
+
+func (p *PostV1PartnersCreateResponse) GetIsEmployee() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsEmployee
+}
+
+func (p *PostV1PartnersCreateResponse) GetIsGroupMember() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsGroupMember
+}
+
+func (p *PostV1PartnersCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1PartnersCreateResponse) GetLegalCountryClass() *PostV1PartnersCreateResponseLegalCountryClass {
+	if p == nil {
+		return nil
+	}
+	return p.LegalCountryClass
 }
 
 func (p *PostV1PartnersCreateResponse) GetCreatedAt() string {
@@ -7207,6 +13675,13 @@ func (p *PostV1PartnersCreateResponse) SetAddress(address *PostV1PartnersCreateR
 	p.require(postV1PartnersCreateResponseFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersCreateResponseCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersCreateResponseFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersCreateResponse) SetNotes(notes *string) {
@@ -7219,6 +13694,118 @@ func (p *PostV1PartnersCreateResponse) SetNotes(notes *string) {
 func (p *PostV1PartnersCreateResponse) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersCreateResponseFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersCreateResponseFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersCreateResponseFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersCreateResponseFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersCreateResponseFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersCreateResponseFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersCreateResponseFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetAutoDebtReminder(autoDebtReminder bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersCreateResponseFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersCreateResponseFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersCreateResponseFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersCreateResponseFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersCreateResponseFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersCreateResponseFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetIsEmployee(isEmployee bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersCreateResponseFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetIsGroupMember(isGroupMember bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersCreateResponseFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersCreateResponseFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponse) SetLegalCountryClass(legalCountryClass *PostV1PartnersCreateResponseLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersCreateResponseFieldLegalCountryClass)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7278,17 +13865,21 @@ func (p *PostV1PartnersCreateResponse) String() string {
 }
 
 var (
-	postV1PartnersCreateResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersCreateResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersCreateResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersCreateResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersCreateResponseAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersCreateResponseAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersCreateResponseAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersCreateResponseAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersCreateResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersCreateResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersCreateResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7309,6 +13900,20 @@ func (p *PostV1PartnersCreateResponseAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersCreateResponseAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersCreateResponseAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersCreateResponseAddress) GetPostalCode() *string {
@@ -7351,6 +13956,20 @@ func (p *PostV1PartnersCreateResponseAddress) SetStreet(street *string) {
 func (p *PostV1PartnersCreateResponseAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersCreateResponseAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersCreateResponseAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersCreateResponseAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -7407,6 +14026,195 @@ func (p *PostV1PartnersCreateResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersCreateResponseCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersCreateResponseCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersCreateResponseCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersCreateResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersCreateResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersCreateResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersCreateResponseCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersCreateResponseCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersCreateResponseCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersCreateResponseCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersCreateResponseCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersCreateResponseCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersCreateResponseLegalCountryClass string
+
+const (
+	PostV1PartnersCreateResponseLegalCountryClassLt    PostV1PartnersCreateResponseLegalCountryClass = "lt"
+	PostV1PartnersCreateResponseLegalCountryClassEu    PostV1PartnersCreateResponseLegalCountryClass = "eu"
+	PostV1PartnersCreateResponseLegalCountryClassNonEu PostV1PartnersCreateResponseLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersCreateResponseLegalCountryClassFromString(s string) (PostV1PartnersCreateResponseLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersCreateResponseLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersCreateResponseLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersCreateResponseLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersCreateResponseLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersCreateResponseLegalCountryClass) Ptr() *PostV1PartnersCreateResponseLegalCountryClass {
+	return &p
 }
 
 type PostV1PartnersCreateResponseType string
@@ -7628,6 +14436,1289 @@ func (p *PostV1PartnersCreditCheckResponse) String() string {
 }
 
 var (
+	postV1PartnersDebtRemindersListRequestFilterItemFieldField = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersListRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersListRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PostV1PartnersDebtRemindersListRequestFilterItem struct {
+	Field string                                                 `json:"field" url:"field"`
+	Op    PostV1PartnersDebtRemindersListRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PostV1PartnersDebtRemindersListRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) GetOp() PostV1PartnersDebtRemindersListRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) GetValue() *PostV1PartnersDebtRemindersListRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1PartnersDebtRemindersListRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) SetOp(op PostV1PartnersDebtRemindersListRequestFilterItemOp) {
+	p.Op = op
+	p.require(postV1PartnersDebtRemindersListRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) SetValue(value *PostV1PartnersDebtRemindersListRequestFilterItemValue) {
+	p.Value = value
+	p.require(postV1PartnersDebtRemindersListRequestFilterItemFieldValue)
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersListRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersListRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersListRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersDebtRemindersListRequestFilterItemOp string
+
+const (
+	PostV1PartnersDebtRemindersListRequestFilterItemOpEq       PostV1PartnersDebtRemindersListRequestFilterItemOp = "eq"
+	PostV1PartnersDebtRemindersListRequestFilterItemOpNe       PostV1PartnersDebtRemindersListRequestFilterItemOp = "ne"
+	PostV1PartnersDebtRemindersListRequestFilterItemOpContains PostV1PartnersDebtRemindersListRequestFilterItemOp = "contains"
+	PostV1PartnersDebtRemindersListRequestFilterItemOpGte      PostV1PartnersDebtRemindersListRequestFilterItemOp = "gte"
+	PostV1PartnersDebtRemindersListRequestFilterItemOpLte      PostV1PartnersDebtRemindersListRequestFilterItemOp = "lte"
+	PostV1PartnersDebtRemindersListRequestFilterItemOpIn       PostV1PartnersDebtRemindersListRequestFilterItemOp = "in"
+)
+
+func NewPostV1PartnersDebtRemindersListRequestFilterItemOpFromString(s string) (PostV1PartnersDebtRemindersListRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpEq, nil
+	case "ne":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpNe, nil
+	case "contains":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpContains, nil
+	case "gte":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpGte, nil
+	case "lte":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpLte, nil
+	case "in":
+		return PostV1PartnersDebtRemindersListRequestFilterItemOpIn, nil
+	}
+	var t PostV1PartnersDebtRemindersListRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersDebtRemindersListRequestFilterItemOp) Ptr() *PostV1PartnersDebtRemindersListRequestFilterItemOp {
+	return &p
+}
+
+type PostV1PartnersDebtRemindersListRequestFilterItemValue struct {
+	String                                                             string
+	Double                                                             float64
+	Boolean                                                            bool
+	PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList []*PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) GetPostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList() []*PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList []*PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList"
+		p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList = valuePostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1PartnersDebtRemindersListRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList" || p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersDebtRemindersListRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList([]*PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) error
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValue) Accept(visitor PostV1PartnersDebtRemindersListRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList" || p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList(p.PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItem) Accept(visitor PostV1PartnersDebtRemindersListRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	postV1PartnersDebtRemindersListRequestSortItemFieldField = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersListRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PostV1PartnersDebtRemindersListRequestSortItem struct {
+	Field string                                             `json:"field" url:"field"`
+	Dir   *PostV1PartnersDebtRemindersListRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) GetDir() *PostV1PartnersDebtRemindersListRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(postV1PartnersDebtRemindersListRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) SetDir(dir *PostV1PartnersDebtRemindersListRequestSortItemDir) {
+	p.Dir = dir
+	p.require(postV1PartnersDebtRemindersListRequestSortItemFieldDir)
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersListRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersListRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersListRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersListRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersDebtRemindersListRequestSortItemDir string
+
+const (
+	PostV1PartnersDebtRemindersListRequestSortItemDirAsc  PostV1PartnersDebtRemindersListRequestSortItemDir = "asc"
+	PostV1PartnersDebtRemindersListRequestSortItemDirDesc PostV1PartnersDebtRemindersListRequestSortItemDir = "desc"
+)
+
+func NewPostV1PartnersDebtRemindersListRequestSortItemDirFromString(s string) (PostV1PartnersDebtRemindersListRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PostV1PartnersDebtRemindersListRequestSortItemDirAsc, nil
+	case "desc":
+		return PostV1PartnersDebtRemindersListRequestSortItemDirDesc, nil
+	}
+	var t PostV1PartnersDebtRemindersListRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersDebtRemindersListRequestSortItemDir) Ptr() *PostV1PartnersDebtRemindersListRequestSortItemDir {
+	return &p
+}
+
+var (
+	postV1PartnersDebtRemindersListResponseFieldRows     = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersListResponseFieldPage     = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersListResponseFieldPageSize = big.NewInt(1 << 2)
+	postV1PartnersDebtRemindersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersDebtRemindersListResponseFieldTotals   = big.NewInt(1 << 4)
+)
+
+type PostV1PartnersDebtRemindersListResponse struct {
+	Rows     []*PostV1PartnersDebtRemindersListResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                              `json:"page" url:"page"`
+	PageSize int64                                              `json:"pageSize" url:"pageSize"`
+	Total    int64                                              `json:"total" url:"total"`
+	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetRows() []*PostV1PartnersDebtRemindersListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponse) SetRows(rows []*PostV1PartnersDebtRemindersListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1PartnersDebtRemindersListResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(postV1PartnersDebtRemindersListResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(postV1PartnersDebtRemindersListResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(postV1PartnersDebtRemindersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersDebtRemindersListResponseFieldTotals)
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersDebtRemindersListResponseRowsItemFieldID           = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldPartnerID    = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldSentTo       = big.NewInt(1 << 2)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldInvoiceCount = big.NewInt(1 << 3)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldTotalDue     = big.NewInt(1 << 4)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldInterestDue  = big.NewInt(1 << 5)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldCurrency     = big.NewInt(1 << 6)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldInvoiceIDs   = big.NewInt(1 << 7)
+	postV1PartnersDebtRemindersListResponseRowsItemFieldSentAt       = big.NewInt(1 << 8)
+)
+
+type PostV1PartnersDebtRemindersListResponseRowsItem struct {
+	ID           string   `json:"id" url:"id"`
+	PartnerID    string   `json:"partnerId" url:"partnerId"`
+	SentTo       string   `json:"sentTo" url:"sentTo"`
+	InvoiceCount int64    `json:"invoiceCount" url:"invoiceCount"`
+	TotalDue     string   `json:"totalDue" url:"totalDue"`
+	InterestDue  string   `json:"interestDue" url:"interestDue"`
+	Currency     string   `json:"currency" url:"currency"`
+	InvoiceIDs   []string `json:"invoiceIds" url:"invoiceIds"`
+	SentAt       string   `json:"sentAt" url:"sentAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetPartnerID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetSentTo() string {
+	if p == nil {
+		return ""
+	}
+	return p.SentTo
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetInvoiceCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.InvoiceCount
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetTotalDue() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalDue
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetInterestDue() string {
+	if p == nil {
+		return ""
+	}
+	return p.InterestDue
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetInvoiceIDs() []string {
+	if p == nil {
+		return nil
+	}
+	return p.InvoiceIDs
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetSentAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.SentAt
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldPartnerID)
+}
+
+// SetSentTo sets the SentTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetSentTo(sentTo string) {
+	p.SentTo = sentTo
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldSentTo)
+}
+
+// SetInvoiceCount sets the InvoiceCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetInvoiceCount(invoiceCount int64) {
+	p.InvoiceCount = invoiceCount
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldInvoiceCount)
+}
+
+// SetTotalDue sets the TotalDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetTotalDue(totalDue string) {
+	p.TotalDue = totalDue
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldTotalDue)
+}
+
+// SetInterestDue sets the InterestDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetInterestDue(interestDue string) {
+	p.InterestDue = interestDue
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldInterestDue)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldCurrency)
+}
+
+// SetInvoiceIDs sets the InvoiceIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetInvoiceIDs(invoiceIDs []string) {
+	p.InvoiceIDs = invoiceIDs
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldInvoiceIDs)
+}
+
+// SetSentAt sets the SentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) SetSentAt(sentAt string) {
+	p.SentAt = sentAt
+	p.require(postV1PartnersDebtRemindersListResponseRowsItemFieldSentAt)
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersDebtRemindersPreviewResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1PartnersDebtRemindersPreviewResponse struct {
+	Rows []*PostV1PartnersDebtRemindersPreviewResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) GetRows() []*PostV1PartnersDebtRemindersPreviewResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponse) SetRows(rows []*PostV1PartnersDebtRemindersPreviewResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1PartnersDebtRemindersPreviewResponseFieldRows)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersPreviewResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersPreviewResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersPreviewResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldPartnerID   = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldPartnerName = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldEmail       = big.NewInt(1 << 2)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldLocale      = big.NewInt(1 << 3)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldCurrency    = big.NewInt(1 << 4)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldInvoices    = big.NewInt(1 << 5)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldTotalDue    = big.NewInt(1 << 6)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemFieldInterestDue = big.NewInt(1 << 7)
+)
+
+type PostV1PartnersDebtRemindersPreviewResponseRowsItem struct {
+	PartnerID   string                                                            `json:"partnerId" url:"partnerId"`
+	PartnerName string                                                            `json:"partnerName" url:"partnerName"`
+	Email       string                                                            `json:"email" url:"email"`
+	Locale      PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale          `json:"locale" url:"locale"`
+	Currency    string                                                            `json:"currency" url:"currency"`
+	Invoices    []*PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem `json:"invoices" url:"invoices"`
+	TotalDue    string                                                            `json:"totalDue" url:"totalDue"`
+	InterestDue string                                                            `json:"interestDue" url:"interestDue"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetPartnerID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerID
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetPartnerName() string {
+	if p == nil {
+		return ""
+	}
+	return p.PartnerName
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetEmail() string {
+	if p == nil {
+		return ""
+	}
+	return p.Email
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetLocale() PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale {
+	if p == nil {
+		return ""
+	}
+	return p.Locale
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetInvoices() []*PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem {
+	if p == nil {
+		return nil
+	}
+	return p.Invoices
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetTotalDue() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalDue
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetInterestDue() string {
+	if p == nil {
+		return ""
+	}
+	return p.InterestDue
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetPartnerID(partnerID string) {
+	p.PartnerID = partnerID
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetPartnerName(partnerName string) {
+	p.PartnerName = partnerName
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldPartnerName)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetEmail(email string) {
+	p.Email = email
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldEmail)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetLocale(locale PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale) {
+	p.Locale = locale
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldLocale)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldCurrency)
+}
+
+// SetInvoices sets the Invoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetInvoices(invoices []*PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) {
+	p.Invoices = invoices
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldInvoices)
+}
+
+// SetTotalDue sets the TotalDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetTotalDue(totalDue string) {
+	p.TotalDue = totalDue
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldTotalDue)
+}
+
+// SetInterestDue sets the InterestDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) SetInterestDue(interestDue string) {
+	p.InterestDue = interestDue
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemFieldInterestDue)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersPreviewResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersPreviewResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersPreviewResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldID         = big.NewInt(1 << 0)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldFullNumber = big.NewInt(1 << 1)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldIssueDate  = big.NewInt(1 << 2)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldDueDate    = big.NewInt(1 << 3)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldRemaining  = big.NewInt(1 << 4)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldDaysLate   = big.NewInt(1 << 5)
+	postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldInterest   = big.NewInt(1 << 6)
+)
+
+type PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem struct {
+	ID         string `json:"id" url:"id"`
+	FullNumber string `json:"fullNumber" url:"fullNumber"`
+	IssueDate  string `json:"issueDate" url:"issueDate"`
+	DueDate    string `json:"dueDate" url:"dueDate"`
+	Remaining  string `json:"remaining" url:"remaining"`
+	DaysLate   int64  `json:"daysLate" url:"daysLate"`
+	Interest   string `json:"interest" url:"interest"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetFullNumber() string {
+	if p == nil {
+		return ""
+	}
+	return p.FullNumber
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetIssueDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.IssueDate
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetDueDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.DueDate
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetRemaining() string {
+	if p == nil {
+		return ""
+	}
+	return p.Remaining
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetDaysLate() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DaysLate
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetInterest() string {
+	if p == nil {
+		return ""
+	}
+	return p.Interest
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldID)
+}
+
+// SetFullNumber sets the FullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetFullNumber(fullNumber string) {
+	p.FullNumber = fullNumber
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldFullNumber)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetIssueDate(issueDate string) {
+	p.IssueDate = issueDate
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldIssueDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetDueDate(dueDate string) {
+	p.DueDate = dueDate
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldDueDate)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetRemaining(remaining string) {
+	p.Remaining = remaining
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldRemaining)
+}
+
+// SetDaysLate sets the DaysLate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetDaysLate(daysLate int64) {
+	p.DaysLate = daysLate
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldDaysLate)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) SetInterest(interest string) {
+	p.Interest = interest
+	p.require(postV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItemFieldInterest)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale string
+
+const (
+	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "lt"
+	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleEn PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "en"
+	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleRu PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "ru"
+)
+
+func NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString(s string) (PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt, nil
+	case "en":
+		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleEn, nil
+	case "ru":
+		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleRu, nil
+	}
+	var t PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale) Ptr() *PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale {
+	return &p
+}
+
+var (
 	postV1PartnersDeleteResponseFieldID = big.NewInt(1 << 0)
 )
 
@@ -7712,17 +15803,317 @@ func (p *PostV1PartnersDeleteResponse) String() string {
 }
 
 var (
-	postV1PartnersFindOrCreateRequestAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersFindOrCreateRequestAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersFindOrCreateRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersFindOrCreateRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersFilesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1PartnersFilesListResponse struct {
+	Rows []*PostV1PartnersFilesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersFilesListResponse) GetRows() []*PostV1PartnersFilesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1PartnersFilesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersFilesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponse) SetRows(rows []*PostV1PartnersFilesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1PartnersFilesListResponseFieldRows)
+}
+
+func (p *PostV1PartnersFilesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersFilesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersFilesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersFilesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersFilesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersFilesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersFilesListResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	postV1PartnersFilesListResponseRowsItemFieldEntity     = big.NewInt(1 << 1)
+	postV1PartnersFilesListResponseRowsItemFieldEntityID   = big.NewInt(1 << 2)
+	postV1PartnersFilesListResponseRowsItemFieldFileName   = big.NewInt(1 << 3)
+	postV1PartnersFilesListResponseRowsItemFieldMimeType   = big.NewInt(1 << 4)
+	postV1PartnersFilesListResponseRowsItemFieldSizeBytes  = big.NewInt(1 << 5)
+	postV1PartnersFilesListResponseRowsItemFieldSha256     = big.NewInt(1 << 6)
+	postV1PartnersFilesListResponseRowsItemFieldStorageKey = big.NewInt(1 << 7)
+	postV1PartnersFilesListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
+)
+
+type PostV1PartnersFilesListResponseRowsItem struct {
+	ID         string  `json:"id" url:"id"`
+	Entity     string  `json:"entity" url:"entity"`
+	EntityID   *string `json:"entityId,omitempty" url:"entityId,omitempty"`
+	FileName   string  `json:"fileName" url:"fileName"`
+	MimeType   string  `json:"mimeType" url:"mimeType"`
+	SizeBytes  int64   `json:"sizeBytes" url:"sizeBytes"`
+	Sha256     string  `json:"sha256" url:"sha256"`
+	StorageKey string  `json:"storageKey" url:"storageKey"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetEntity() string {
+	if p == nil {
+		return ""
+	}
+	return p.Entity
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetEntityID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EntityID
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetMimeType() string {
+	if p == nil {
+		return ""
+	}
+	return p.MimeType
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetSizeBytes() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.SizeBytes
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetSha256() string {
+	if p == nil {
+		return ""
+	}
+	return p.Sha256
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetStorageKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.StorageKey
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1PartnersFilesListResponseRowsItemFieldID)
+}
+
+// SetEntity sets the Entity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetEntity(entity string) {
+	p.Entity = entity
+	p.require(postV1PartnersFilesListResponseRowsItemFieldEntity)
+}
+
+// SetEntityID sets the EntityID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetEntityID(entityID *string) {
+	p.EntityID = entityID
+	p.require(postV1PartnersFilesListResponseRowsItemFieldEntityID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1PartnersFilesListResponseRowsItemFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetMimeType(mimeType string) {
+	p.MimeType = mimeType
+	p.require(postV1PartnersFilesListResponseRowsItemFieldMimeType)
+}
+
+// SetSizeBytes sets the SizeBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetSizeBytes(sizeBytes int64) {
+	p.SizeBytes = sizeBytes
+	p.require(postV1PartnersFilesListResponseRowsItemFieldSizeBytes)
+}
+
+// SetSha256 sets the Sha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetSha256(sha256 string) {
+	p.Sha256 = sha256
+	p.require(postV1PartnersFilesListResponseRowsItemFieldSha256)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetStorageKey(storageKey string) {
+	p.StorageKey = storageKey
+	p.require(postV1PartnersFilesListResponseRowsItemFieldStorageKey)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFilesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1PartnersFilesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersFilesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersFilesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersFilesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersFilesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersFindOrCreateRequestAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateRequestAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateRequestAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateRequestAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersFindOrCreateRequestAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7743,6 +16134,20 @@ func (p *PostV1PartnersFindOrCreateRequestAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersFindOrCreateRequestAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersFindOrCreateRequestAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersFindOrCreateRequestAddress) GetPostalCode() *string {
@@ -7785,6 +16190,20 @@ func (p *PostV1PartnersFindOrCreateRequestAddress) SetStreet(street *string) {
 func (p *PostV1PartnersFindOrCreateRequestAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersFindOrCreateRequestAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersFindOrCreateRequestAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersFindOrCreateRequestAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -7841,6 +16260,195 @@ func (p *PostV1PartnersFindOrCreateRequestAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersFindOrCreateRequestCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersFindOrCreateRequestCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersFindOrCreateRequestCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersFindOrCreateRequestCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersFindOrCreateRequestCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersFindOrCreateRequestCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersFindOrCreateRequestLegalCountryClass string
+
+const (
+	PostV1PartnersFindOrCreateRequestLegalCountryClassLt    PostV1PartnersFindOrCreateRequestLegalCountryClass = "lt"
+	PostV1PartnersFindOrCreateRequestLegalCountryClassEu    PostV1PartnersFindOrCreateRequestLegalCountryClass = "eu"
+	PostV1PartnersFindOrCreateRequestLegalCountryClassNonEu PostV1PartnersFindOrCreateRequestLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersFindOrCreateRequestLegalCountryClassFromString(s string) (PostV1PartnersFindOrCreateRequestLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersFindOrCreateRequestLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersFindOrCreateRequestLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersFindOrCreateRequestLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersFindOrCreateRequestLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersFindOrCreateRequestLegalCountryClass) Ptr() *PostV1PartnersFindOrCreateRequestLegalCountryClass {
+	return &p
 }
 
 type PostV1PartnersFindOrCreateRequestType string
@@ -7966,57 +16574,91 @@ func (p *PostV1PartnersFindOrCreateResponse) String() string {
 }
 
 var (
-	postV1PartnersFindOrCreateResponsePartnerFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersFindOrCreateResponsePartnerFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersFindOrCreateResponsePartnerFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersFindOrCreateResponsePartnerFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersFindOrCreateResponsePartnerFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersFindOrCreateResponsePartnerFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersFindOrCreateResponsePartnerFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersFindOrCreateResponsePartnerFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersFindOrCreateResponsePartnerFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersFindOrCreateResponsePartnerFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersFindOrCreateResponsePartnerFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersFindOrCreateResponsePartnerFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersFindOrCreateResponsePartnerFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersFindOrCreateResponsePartnerFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersFindOrCreateResponsePartnerFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersFindOrCreateResponsePartnerFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersFindOrCreateResponsePartnerFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersFindOrCreateResponsePartnerFieldVatValid             = big.NewInt(1 << 17)
-	postV1PartnersFindOrCreateResponsePartnerFieldVatValidatedAt       = big.NewInt(1 << 18)
-	postV1PartnersFindOrCreateResponsePartnerFieldAddress              = big.NewInt(1 << 19)
-	postV1PartnersFindOrCreateResponsePartnerFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersFindOrCreateResponsePartnerFieldDocumentRef          = big.NewInt(1 << 21)
-	postV1PartnersFindOrCreateResponsePartnerFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1PartnersFindOrCreateResponsePartnerFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1PartnersFindOrCreateResponsePartnerFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateResponsePartnerFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateResponsePartnerFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateResponsePartnerFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateResponsePartnerFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateResponsePartnerFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersFindOrCreateResponsePartnerFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersFindOrCreateResponsePartnerFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersFindOrCreateResponsePartnerFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersFindOrCreateResponsePartnerFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersFindOrCreateResponsePartnerFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersFindOrCreateResponsePartnerFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersFindOrCreateResponsePartnerFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersFindOrCreateResponsePartnerFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersFindOrCreateResponsePartnerFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersFindOrCreateResponsePartnerFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersFindOrCreateResponsePartnerFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersFindOrCreateResponsePartnerFieldVatValid              = big.NewInt(1 << 17)
+	postV1PartnersFindOrCreateResponsePartnerFieldVatValidatedAt        = big.NewInt(1 << 18)
+	postV1PartnersFindOrCreateResponsePartnerFieldAddress               = big.NewInt(1 << 19)
+	postV1PartnersFindOrCreateResponsePartnerFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	postV1PartnersFindOrCreateResponsePartnerFieldNotes                 = big.NewInt(1 << 21)
+	postV1PartnersFindOrCreateResponsePartnerFieldDocumentRef           = big.NewInt(1 << 22)
+	postV1PartnersFindOrCreateResponsePartnerFieldShortName             = big.NewInt(1 << 23)
+	postV1PartnersFindOrCreateResponsePartnerFieldWebsite               = big.NewInt(1 << 24)
+	postV1PartnersFindOrCreateResponsePartnerFieldFax                   = big.NewInt(1 << 25)
+	postV1PartnersFindOrCreateResponsePartnerFieldEoriCode              = big.NewInt(1 << 26)
+	postV1PartnersFindOrCreateResponsePartnerFieldOtherCode             = big.NewInt(1 << 27)
+	postV1PartnersFindOrCreateResponsePartnerFieldForeignTaxNumber      = big.NewInt(1 << 28)
+	postV1PartnersFindOrCreateResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	postV1PartnersFindOrCreateResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 30)
+	postV1PartnersFindOrCreateResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 31)
+	postV1PartnersFindOrCreateResponsePartnerFieldLastCallDate          = big.NewInt(1 << 32)
+	postV1PartnersFindOrCreateResponsePartnerFieldNextCallDate          = big.NewInt(1 << 33)
+	postV1PartnersFindOrCreateResponsePartnerFieldRating                = big.NewInt(1 << 34)
+	postV1PartnersFindOrCreateResponsePartnerFieldIsEmployee            = big.NewInt(1 << 35)
+	postV1PartnersFindOrCreateResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 36)
+	postV1PartnersFindOrCreateResponsePartnerFieldIsActive              = big.NewInt(1 << 37)
+	postV1PartnersFindOrCreateResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 38)
+	postV1PartnersFindOrCreateResponsePartnerFieldCreatedAt             = big.NewInt(1 << 39)
+	postV1PartnersFindOrCreateResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type PostV1PartnersFindOrCreateResponsePartner struct {
-	ID                   string                                            `json:"id" url:"id"`
-	Type                 PostV1PartnersFindOrCreateResponsePartnerType     `json:"type" url:"type"`
-	Name                 string                                            `json:"name" url:"name"`
-	Code                 *string                                           `json:"code,omitempty" url:"code,omitempty"`
-	VatCode              *string                                           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	PeppolID             *string                                           `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	Email                *string                                           `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                           `json:"phone,omitempty" url:"phone,omitempty"`
-	SelfEmploymentCertNo *string                                           `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
-	BirthDate            *string                                           `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	IsCustomer           bool                                              `json:"isCustomer" url:"isCustomer"`
-	IsSupplier           bool                                              `json:"isSupplier" url:"isSupplier"`
-	PaymentTermDays      *int64                                            `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	CreditLimit          *string                                           `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
-	PriceListID          *string                                           `json:"priceListId,omitempty" url:"priceListId,omitempty"`
-	GroupID              *string                                           `json:"groupId,omitempty" url:"groupId,omitempty"`
-	StatusID             *string                                           `json:"statusId,omitempty" url:"statusId,omitempty"`
-	VatValid             *bool                                             `json:"vatValid,omitempty" url:"vatValid,omitempty"`
-	VatValidatedAt       *string                                           `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
-	Address              *PostV1PartnersFindOrCreateResponsePartnerAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes                *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                            `json:"updatedAt" url:"updatedAt"`
+	ID                    string                                                          `json:"id" url:"id"`
+	Type                  PostV1PartnersFindOrCreateResponsePartnerType                   `json:"type" url:"type"`
+	Name                  string                                                          `json:"name" url:"name"`
+	Code                  *string                                                         `json:"code,omitempty" url:"code,omitempty"`
+	VatCode               *string                                                         `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	PeppolID              *string                                                         `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	Email                 *string                                                         `json:"email,omitempty" url:"email,omitempty"`
+	Phone                 *string                                                         `json:"phone,omitempty" url:"phone,omitempty"`
+	SelfEmploymentCertNo  *string                                                         `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
+	BirthDate             *string                                                         `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	IsCustomer            bool                                                            `json:"isCustomer" url:"isCustomer"`
+	IsSupplier            bool                                                            `json:"isSupplier" url:"isSupplier"`
+	PaymentTermDays       *int64                                                          `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	CreditLimit           *string                                                         `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
+	PriceListID           *string                                                         `json:"priceListId,omitempty" url:"priceListId,omitempty"`
+	GroupID               *string                                                         `json:"groupId,omitempty" url:"groupId,omitempty"`
+	StatusID              *string                                                         `json:"statusId,omitempty" url:"statusId,omitempty"`
+	VatValid              *bool                                                           `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt        *string                                                         `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+	Address               *PostV1PartnersFindOrCreateResponsePartnerAddress               `json:"address,omitempty" url:"address,omitempty"`
+	CorrespondenceAddress *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"correspondenceAddress,omitempty"`
+	Notes                 *string                                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef           *string                                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	ShortName             *string                                                         `json:"shortName,omitempty" url:"shortName,omitempty"`
+	Website               *string                                                         `json:"website,omitempty" url:"website,omitempty"`
+	Fax                   *string                                                         `json:"fax,omitempty" url:"fax,omitempty"`
+	EoriCode              *string                                                         `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
+	OtherCode             *string                                                         `json:"otherCode,omitempty" url:"otherCode,omitempty"`
+	ForeignTaxNumber      *string                                                         `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
+	AutoDebtReminder      bool                                                            `json:"autoDebtReminder" url:"autoDebtReminder"`
+	LateInterestPercent   *string                                                         `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
+	FirstCallDate         *string                                                         `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty"`
+	LastCallDate          *string                                                         `json:"lastCallDate,omitempty" url:"lastCallDate,omitempty"`
+	NextCallDate          *string                                                         `json:"nextCallDate,omitempty" url:"nextCallDate,omitempty"`
+	Rating                *int64                                                          `json:"rating,omitempty" url:"rating,omitempty"`
+	IsEmployee            bool                                                            `json:"isEmployee" url:"isEmployee"`
+	IsGroupMember         bool                                                            `json:"isGroupMember" url:"isGroupMember"`
+	IsActive              bool                                                            `json:"isActive" url:"isActive"`
+	LegalCountryClass     *PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	CreatedAt             string                                                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                                          `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8165,6 +16807,13 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) GetAddress() *PostV1Partners
 	return p.Address
 }
 
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetCorrespondenceAddress() *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress {
+	if p == nil {
+		return nil
+	}
+	return p.CorrespondenceAddress
+}
+
 func (p *PostV1PartnersFindOrCreateResponsePartner) GetNotes() *string {
 	if p == nil {
 		return nil
@@ -8177,6 +16826,118 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) GetDocumentRef() *string {
 		return nil
 	}
 	return p.DocumentRef
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetShortName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShortName
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetFax() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Fax
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetEoriCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EoriCode
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetOtherCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OtherCode
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetForeignTaxNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ForeignTaxNumber
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetAutoDebtReminder() bool {
+	if p == nil {
+		return false
+	}
+	return p.AutoDebtReminder
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetLateInterestPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LateInterestPercent
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetFirstCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstCallDate
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetLastCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastCallDate
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetNextCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCallDate
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetRating() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.Rating
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetIsEmployee() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsEmployee
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetIsGroupMember() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsGroupMember
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartner) GetLegalCountryClass() *PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass {
+	if p == nil {
+		return nil
+	}
+	return p.LegalCountryClass
 }
 
 func (p *PostV1PartnersFindOrCreateResponsePartner) GetCreatedAt() string {
@@ -8347,6 +17108,13 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) SetAddress(address *PostV1Pa
 	p.require(postV1PartnersFindOrCreateResponsePartnerFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersFindOrCreateResponsePartner) SetNotes(notes *string) {
@@ -8359,6 +17127,118 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) SetNotes(notes *string) {
 func (p *PostV1PartnersFindOrCreateResponsePartner) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersFindOrCreateResponsePartnerFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetAutoDebtReminder(autoDebtReminder bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetIsEmployee(isEmployee bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetIsGroupMember(isGroupMember bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartner) SetLegalCountryClass(legalCountryClass *PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersFindOrCreateResponsePartnerFieldLegalCountryClass)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8418,17 +17298,21 @@ func (p *PostV1PartnersFindOrCreateResponsePartner) String() string {
 }
 
 var (
-	postV1PartnersFindOrCreateResponsePartnerAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersFindOrCreateResponsePartnerAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersFindOrCreateResponsePartnerAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersFindOrCreateResponsePartnerAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateResponsePartnerAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersFindOrCreateResponsePartnerAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8449,6 +17333,20 @@ func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) GetPostalCode() *string {
@@ -8491,6 +17389,20 @@ func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) SetStreet(street *str
 func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersFindOrCreateResponsePartnerAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersFindOrCreateResponsePartnerAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersFindOrCreateResponsePartnerAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -8549,6 +17461,195 @@ func (p *PostV1PartnersFindOrCreateResponsePartnerAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersFindOrCreateResponsePartnerCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersFindOrCreateResponsePartnerCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass string
+
+const (
+	PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassLt    PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass = "lt"
+	PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassEu    PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass = "eu"
+	PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassNonEu PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersFindOrCreateResponsePartnerLegalCountryClassFromString(s string) (PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersFindOrCreateResponsePartnerLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass) Ptr() *PostV1PartnersFindOrCreateResponsePartnerLegalCountryClass {
+	return &p
+}
+
 type PostV1PartnersFindOrCreateResponsePartnerType string
 
 const (
@@ -8572,57 +17673,91 @@ func (p PostV1PartnersFindOrCreateResponsePartnerType) Ptr() *PostV1PartnersFind
 }
 
 var (
-	postV1PartnersGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersGetResponseFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersGetResponseFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersGetResponseFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersGetResponseFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersGetResponseFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersGetResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersGetResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersGetResponseFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersGetResponseFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersGetResponseFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersGetResponseFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersGetResponseFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersGetResponseFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersGetResponseFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersGetResponseFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersGetResponseFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersGetResponseFieldVatValid             = big.NewInt(1 << 17)
-	postV1PartnersGetResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
-	postV1PartnersGetResponseFieldAddress              = big.NewInt(1 << 19)
-	postV1PartnersGetResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersGetResponseFieldDocumentRef          = big.NewInt(1 << 21)
-	postV1PartnersGetResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1PartnersGetResponseFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1PartnersGetResponseFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersGetResponseFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersGetResponseFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersGetResponseFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersGetResponseFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersGetResponseFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersGetResponseFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersGetResponseFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersGetResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersGetResponseFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersGetResponseFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersGetResponseFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersGetResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersGetResponseFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersGetResponseFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersGetResponseFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersGetResponseFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersGetResponseFieldVatValid              = big.NewInt(1 << 17)
+	postV1PartnersGetResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
+	postV1PartnersGetResponseFieldAddress               = big.NewInt(1 << 19)
+	postV1PartnersGetResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	postV1PartnersGetResponseFieldNotes                 = big.NewInt(1 << 21)
+	postV1PartnersGetResponseFieldDocumentRef           = big.NewInt(1 << 22)
+	postV1PartnersGetResponseFieldShortName             = big.NewInt(1 << 23)
+	postV1PartnersGetResponseFieldWebsite               = big.NewInt(1 << 24)
+	postV1PartnersGetResponseFieldFax                   = big.NewInt(1 << 25)
+	postV1PartnersGetResponseFieldEoriCode              = big.NewInt(1 << 26)
+	postV1PartnersGetResponseFieldOtherCode             = big.NewInt(1 << 27)
+	postV1PartnersGetResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
+	postV1PartnersGetResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	postV1PartnersGetResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	postV1PartnersGetResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	postV1PartnersGetResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	postV1PartnersGetResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	postV1PartnersGetResponseFieldRating                = big.NewInt(1 << 34)
+	postV1PartnersGetResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	postV1PartnersGetResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	postV1PartnersGetResponseFieldIsActive              = big.NewInt(1 << 37)
+	postV1PartnersGetResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	postV1PartnersGetResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	postV1PartnersGetResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type PostV1PartnersGetResponse struct {
-	ID                   string                            `json:"id" url:"id"`
-	Type                 PostV1PartnersGetResponseType     `json:"type" url:"type"`
-	Name                 string                            `json:"name" url:"name"`
-	Code                 *string                           `json:"code,omitempty" url:"code,omitempty"`
-	VatCode              *string                           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	PeppolID             *string                           `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	Email                *string                           `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                           `json:"phone,omitempty" url:"phone,omitempty"`
-	SelfEmploymentCertNo *string                           `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
-	BirthDate            *string                           `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	IsCustomer           bool                              `json:"isCustomer" url:"isCustomer"`
-	IsSupplier           bool                              `json:"isSupplier" url:"isSupplier"`
-	PaymentTermDays      *int64                            `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	CreditLimit          *string                           `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
-	PriceListID          *string                           `json:"priceListId,omitempty" url:"priceListId,omitempty"`
-	GroupID              *string                           `json:"groupId,omitempty" url:"groupId,omitempty"`
-	StatusID             *string                           `json:"statusId,omitempty" url:"statusId,omitempty"`
-	VatValid             *bool                             `json:"vatValid,omitempty" url:"vatValid,omitempty"`
-	VatValidatedAt       *string                           `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
-	Address              *PostV1PartnersGetResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes                *string                           `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                            `json:"updatedAt" url:"updatedAt"`
+	ID                    string                                          `json:"id" url:"id"`
+	Type                  PostV1PartnersGetResponseType                   `json:"type" url:"type"`
+	Name                  string                                          `json:"name" url:"name"`
+	Code                  *string                                         `json:"code,omitempty" url:"code,omitempty"`
+	VatCode               *string                                         `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	PeppolID              *string                                         `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	Email                 *string                                         `json:"email,omitempty" url:"email,omitempty"`
+	Phone                 *string                                         `json:"phone,omitempty" url:"phone,omitempty"`
+	SelfEmploymentCertNo  *string                                         `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
+	BirthDate             *string                                         `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	IsCustomer            bool                                            `json:"isCustomer" url:"isCustomer"`
+	IsSupplier            bool                                            `json:"isSupplier" url:"isSupplier"`
+	PaymentTermDays       *int64                                          `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	CreditLimit           *string                                         `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
+	PriceListID           *string                                         `json:"priceListId,omitempty" url:"priceListId,omitempty"`
+	GroupID               *string                                         `json:"groupId,omitempty" url:"groupId,omitempty"`
+	StatusID              *string                                         `json:"statusId,omitempty" url:"statusId,omitempty"`
+	VatValid              *bool                                           `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt        *string                                         `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+	Address               *PostV1PartnersGetResponseAddress               `json:"address,omitempty" url:"address,omitempty"`
+	CorrespondenceAddress *PostV1PartnersGetResponseCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"correspondenceAddress,omitempty"`
+	Notes                 *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef           *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	ShortName             *string                                         `json:"shortName,omitempty" url:"shortName,omitempty"`
+	Website               *string                                         `json:"website,omitempty" url:"website,omitempty"`
+	Fax                   *string                                         `json:"fax,omitempty" url:"fax,omitempty"`
+	EoriCode              *string                                         `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
+	OtherCode             *string                                         `json:"otherCode,omitempty" url:"otherCode,omitempty"`
+	ForeignTaxNumber      *string                                         `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
+	AutoDebtReminder      bool                                            `json:"autoDebtReminder" url:"autoDebtReminder"`
+	LateInterestPercent   *string                                         `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
+	FirstCallDate         *string                                         `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty"`
+	LastCallDate          *string                                         `json:"lastCallDate,omitempty" url:"lastCallDate,omitempty"`
+	NextCallDate          *string                                         `json:"nextCallDate,omitempty" url:"nextCallDate,omitempty"`
+	Rating                *int64                                          `json:"rating,omitempty" url:"rating,omitempty"`
+	IsEmployee            bool                                            `json:"isEmployee" url:"isEmployee"`
+	IsGroupMember         bool                                            `json:"isGroupMember" url:"isGroupMember"`
+	IsActive              bool                                            `json:"isActive" url:"isActive"`
+	LegalCountryClass     *PostV1PartnersGetResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	CreatedAt             string                                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                          `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8771,6 +17906,13 @@ func (p *PostV1PartnersGetResponse) GetAddress() *PostV1PartnersGetResponseAddre
 	return p.Address
 }
 
+func (p *PostV1PartnersGetResponse) GetCorrespondenceAddress() *PostV1PartnersGetResponseCorrespondenceAddress {
+	if p == nil {
+		return nil
+	}
+	return p.CorrespondenceAddress
+}
+
 func (p *PostV1PartnersGetResponse) GetNotes() *string {
 	if p == nil {
 		return nil
@@ -8783,6 +17925,118 @@ func (p *PostV1PartnersGetResponse) GetDocumentRef() *string {
 		return nil
 	}
 	return p.DocumentRef
+}
+
+func (p *PostV1PartnersGetResponse) GetShortName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShortName
+}
+
+func (p *PostV1PartnersGetResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1PartnersGetResponse) GetFax() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Fax
+}
+
+func (p *PostV1PartnersGetResponse) GetEoriCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EoriCode
+}
+
+func (p *PostV1PartnersGetResponse) GetOtherCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OtherCode
+}
+
+func (p *PostV1PartnersGetResponse) GetForeignTaxNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ForeignTaxNumber
+}
+
+func (p *PostV1PartnersGetResponse) GetAutoDebtReminder() bool {
+	if p == nil {
+		return false
+	}
+	return p.AutoDebtReminder
+}
+
+func (p *PostV1PartnersGetResponse) GetLateInterestPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LateInterestPercent
+}
+
+func (p *PostV1PartnersGetResponse) GetFirstCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstCallDate
+}
+
+func (p *PostV1PartnersGetResponse) GetLastCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastCallDate
+}
+
+func (p *PostV1PartnersGetResponse) GetNextCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCallDate
+}
+
+func (p *PostV1PartnersGetResponse) GetRating() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.Rating
+}
+
+func (p *PostV1PartnersGetResponse) GetIsEmployee() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsEmployee
+}
+
+func (p *PostV1PartnersGetResponse) GetIsGroupMember() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsGroupMember
+}
+
+func (p *PostV1PartnersGetResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1PartnersGetResponse) GetLegalCountryClass() *PostV1PartnersGetResponseLegalCountryClass {
+	if p == nil {
+		return nil
+	}
+	return p.LegalCountryClass
 }
 
 func (p *PostV1PartnersGetResponse) GetCreatedAt() string {
@@ -8953,6 +18207,13 @@ func (p *PostV1PartnersGetResponse) SetAddress(address *PostV1PartnersGetRespons
 	p.require(postV1PartnersGetResponseFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersGetResponseCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersGetResponseFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersGetResponse) SetNotes(notes *string) {
@@ -8965,6 +18226,118 @@ func (p *PostV1PartnersGetResponse) SetNotes(notes *string) {
 func (p *PostV1PartnersGetResponse) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersGetResponseFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersGetResponseFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersGetResponseFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersGetResponseFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersGetResponseFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersGetResponseFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersGetResponseFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetAutoDebtReminder(autoDebtReminder bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersGetResponseFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersGetResponseFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersGetResponseFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersGetResponseFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersGetResponseFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersGetResponseFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetIsEmployee(isEmployee bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersGetResponseFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetIsGroupMember(isGroupMember bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersGetResponseFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersGetResponseFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponse) SetLegalCountryClass(legalCountryClass *PostV1PartnersGetResponseLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersGetResponseFieldLegalCountryClass)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -9024,17 +18397,21 @@ func (p *PostV1PartnersGetResponse) String() string {
 }
 
 var (
-	postV1PartnersGetResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersGetResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersGetResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersGetResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersGetResponseAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersGetResponseAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersGetResponseAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersGetResponseAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersGetResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersGetResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersGetResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9055,6 +18432,20 @@ func (p *PostV1PartnersGetResponseAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersGetResponseAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersGetResponseAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersGetResponseAddress) GetPostalCode() *string {
@@ -9097,6 +18488,20 @@ func (p *PostV1PartnersGetResponseAddress) SetStreet(street *string) {
 func (p *PostV1PartnersGetResponseAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersGetResponseAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersGetResponseAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersGetResponseAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -9153,6 +18558,195 @@ func (p *PostV1PartnersGetResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersGetResponseCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersGetResponseCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersGetResponseCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersGetResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersGetResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersGetResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersGetResponseCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersGetResponseCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersGetResponseCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersGetResponseCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersGetResponseCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersGetResponseCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersGetResponseLegalCountryClass string
+
+const (
+	PostV1PartnersGetResponseLegalCountryClassLt    PostV1PartnersGetResponseLegalCountryClass = "lt"
+	PostV1PartnersGetResponseLegalCountryClassEu    PostV1PartnersGetResponseLegalCountryClass = "eu"
+	PostV1PartnersGetResponseLegalCountryClassNonEu PostV1PartnersGetResponseLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersGetResponseLegalCountryClassFromString(s string) (PostV1PartnersGetResponseLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersGetResponseLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersGetResponseLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersGetResponseLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersGetResponseLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersGetResponseLegalCountryClass) Ptr() *PostV1PartnersGetResponseLegalCountryClass {
+	return &p
 }
 
 type PostV1PartnersGetResponseType string
@@ -10850,6 +20444,7 @@ var (
 	postV1PartnersInquiriesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersInquiriesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersInquiriesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersInquiriesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersInquiriesListResponse struct {
@@ -10857,6 +20452,7 @@ type PostV1PartnersInquiriesListResponse struct {
 	Page     int64                                          `json:"page" url:"page"`
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
+	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10891,6 +20487,13 @@ func (p *PostV1PartnersInquiriesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersInquiriesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersInquiriesListResponse) GetExtraProperties() map[string]interface{} {
@@ -10933,6 +20536,13 @@ func (p *PostV1PartnersInquiriesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersInquiriesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersInquiriesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersInquiriesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersInquiriesListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersInquiriesListResponse) UnmarshalJSON(data []byte) error {
@@ -12111,6 +21721,7 @@ var (
 	postV1PartnersListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersListResponse struct {
@@ -12118,6 +21729,7 @@ type PostV1PartnersListResponse struct {
 	Page     int64                                 `json:"page" url:"page"`
 	PageSize int64                                 `json:"pageSize" url:"pageSize"`
 	Total    int64                                 `json:"total" url:"total"`
+	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12152,6 +21764,13 @@ func (p *PostV1PartnersListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersListResponse) GetExtraProperties() map[string]interface{} {
@@ -12194,6 +21813,13 @@ func (p *PostV1PartnersListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersListResponse) UnmarshalJSON(data []byte) error {
@@ -12239,57 +21865,91 @@ func (p *PostV1PartnersListResponse) String() string {
 }
 
 var (
-	postV1PartnersListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersListResponseRowsItemFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersListResponseRowsItemFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersListResponseRowsItemFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersListResponseRowsItemFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersListResponseRowsItemFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersListResponseRowsItemFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersListResponseRowsItemFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersListResponseRowsItemFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersListResponseRowsItemFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersListResponseRowsItemFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersListResponseRowsItemFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersListResponseRowsItemFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersListResponseRowsItemFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersListResponseRowsItemFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersListResponseRowsItemFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersListResponseRowsItemFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersListResponseRowsItemFieldVatValid             = big.NewInt(1 << 17)
-	postV1PartnersListResponseRowsItemFieldVatValidatedAt       = big.NewInt(1 << 18)
-	postV1PartnersListResponseRowsItemFieldAddress              = big.NewInt(1 << 19)
-	postV1PartnersListResponseRowsItemFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 21)
-	postV1PartnersListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1PartnersListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1PartnersListResponseRowsItemFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersListResponseRowsItemFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersListResponseRowsItemFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersListResponseRowsItemFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersListResponseRowsItemFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersListResponseRowsItemFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersListResponseRowsItemFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersListResponseRowsItemFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersListResponseRowsItemFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersListResponseRowsItemFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersListResponseRowsItemFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersListResponseRowsItemFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersListResponseRowsItemFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersListResponseRowsItemFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersListResponseRowsItemFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersListResponseRowsItemFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersListResponseRowsItemFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersListResponseRowsItemFieldVatValid              = big.NewInt(1 << 17)
+	postV1PartnersListResponseRowsItemFieldVatValidatedAt        = big.NewInt(1 << 18)
+	postV1PartnersListResponseRowsItemFieldAddress               = big.NewInt(1 << 19)
+	postV1PartnersListResponseRowsItemFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	postV1PartnersListResponseRowsItemFieldNotes                 = big.NewInt(1 << 21)
+	postV1PartnersListResponseRowsItemFieldDocumentRef           = big.NewInt(1 << 22)
+	postV1PartnersListResponseRowsItemFieldShortName             = big.NewInt(1 << 23)
+	postV1PartnersListResponseRowsItemFieldWebsite               = big.NewInt(1 << 24)
+	postV1PartnersListResponseRowsItemFieldFax                   = big.NewInt(1 << 25)
+	postV1PartnersListResponseRowsItemFieldEoriCode              = big.NewInt(1 << 26)
+	postV1PartnersListResponseRowsItemFieldOtherCode             = big.NewInt(1 << 27)
+	postV1PartnersListResponseRowsItemFieldForeignTaxNumber      = big.NewInt(1 << 28)
+	postV1PartnersListResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	postV1PartnersListResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 30)
+	postV1PartnersListResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 31)
+	postV1PartnersListResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 32)
+	postV1PartnersListResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 33)
+	postV1PartnersListResponseRowsItemFieldRating                = big.NewInt(1 << 34)
+	postV1PartnersListResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 35)
+	postV1PartnersListResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 36)
+	postV1PartnersListResponseRowsItemFieldIsActive              = big.NewInt(1 << 37)
+	postV1PartnersListResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 38)
+	postV1PartnersListResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 39)
+	postV1PartnersListResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type PostV1PartnersListResponseRowsItem struct {
-	ID                   string                                     `json:"id" url:"id"`
-	Type                 PostV1PartnersListResponseRowsItemType     `json:"type" url:"type"`
-	Name                 string                                     `json:"name" url:"name"`
-	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
-	VatCode              *string                                    `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	PeppolID             *string                                    `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
-	SelfEmploymentCertNo *string                                    `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
-	BirthDate            *string                                    `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	IsCustomer           bool                                       `json:"isCustomer" url:"isCustomer"`
-	IsSupplier           bool                                       `json:"isSupplier" url:"isSupplier"`
-	PaymentTermDays      *int64                                     `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	CreditLimit          *string                                    `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
-	PriceListID          *string                                    `json:"priceListId,omitempty" url:"priceListId,omitempty"`
-	GroupID              *string                                    `json:"groupId,omitempty" url:"groupId,omitempty"`
-	StatusID             *string                                    `json:"statusId,omitempty" url:"statusId,omitempty"`
-	VatValid             *bool                                      `json:"vatValid,omitempty" url:"vatValid,omitempty"`
-	VatValidatedAt       *string                                    `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
-	Address              *PostV1PartnersListResponseRowsItemAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes                *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                    `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                     `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                     `json:"updatedAt" url:"updatedAt"`
+	ID                    string                                                   `json:"id" url:"id"`
+	Type                  PostV1PartnersListResponseRowsItemType                   `json:"type" url:"type"`
+	Name                  string                                                   `json:"name" url:"name"`
+	Code                  *string                                                  `json:"code,omitempty" url:"code,omitempty"`
+	VatCode               *string                                                  `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	PeppolID              *string                                                  `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	Email                 *string                                                  `json:"email,omitempty" url:"email,omitempty"`
+	Phone                 *string                                                  `json:"phone,omitempty" url:"phone,omitempty"`
+	SelfEmploymentCertNo  *string                                                  `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
+	BirthDate             *string                                                  `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	IsCustomer            bool                                                     `json:"isCustomer" url:"isCustomer"`
+	IsSupplier            bool                                                     `json:"isSupplier" url:"isSupplier"`
+	PaymentTermDays       *int64                                                   `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	CreditLimit           *string                                                  `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
+	PriceListID           *string                                                  `json:"priceListId,omitempty" url:"priceListId,omitempty"`
+	GroupID               *string                                                  `json:"groupId,omitempty" url:"groupId,omitempty"`
+	StatusID              *string                                                  `json:"statusId,omitempty" url:"statusId,omitempty"`
+	VatValid              *bool                                                    `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt        *string                                                  `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+	Address               *PostV1PartnersListResponseRowsItemAddress               `json:"address,omitempty" url:"address,omitempty"`
+	CorrespondenceAddress *PostV1PartnersListResponseRowsItemCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"correspondenceAddress,omitempty"`
+	Notes                 *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef           *string                                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	ShortName             *string                                                  `json:"shortName,omitempty" url:"shortName,omitempty"`
+	Website               *string                                                  `json:"website,omitempty" url:"website,omitempty"`
+	Fax                   *string                                                  `json:"fax,omitempty" url:"fax,omitempty"`
+	EoriCode              *string                                                  `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
+	OtherCode             *string                                                  `json:"otherCode,omitempty" url:"otherCode,omitempty"`
+	ForeignTaxNumber      *string                                                  `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
+	AutoDebtReminder      bool                                                     `json:"autoDebtReminder" url:"autoDebtReminder"`
+	LateInterestPercent   *string                                                  `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
+	FirstCallDate         *string                                                  `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty"`
+	LastCallDate          *string                                                  `json:"lastCallDate,omitempty" url:"lastCallDate,omitempty"`
+	NextCallDate          *string                                                  `json:"nextCallDate,omitempty" url:"nextCallDate,omitempty"`
+	Rating                *int64                                                   `json:"rating,omitempty" url:"rating,omitempty"`
+	IsEmployee            bool                                                     `json:"isEmployee" url:"isEmployee"`
+	IsGroupMember         bool                                                     `json:"isGroupMember" url:"isGroupMember"`
+	IsActive              bool                                                     `json:"isActive" url:"isActive"`
+	LegalCountryClass     *PostV1PartnersListResponseRowsItemLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	CreatedAt             string                                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                                   `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12438,6 +22098,13 @@ func (p *PostV1PartnersListResponseRowsItem) GetAddress() *PostV1PartnersListRes
 	return p.Address
 }
 
+func (p *PostV1PartnersListResponseRowsItem) GetCorrespondenceAddress() *PostV1PartnersListResponseRowsItemCorrespondenceAddress {
+	if p == nil {
+		return nil
+	}
+	return p.CorrespondenceAddress
+}
+
 func (p *PostV1PartnersListResponseRowsItem) GetNotes() *string {
 	if p == nil {
 		return nil
@@ -12450,6 +22117,118 @@ func (p *PostV1PartnersListResponseRowsItem) GetDocumentRef() *string {
 		return nil
 	}
 	return p.DocumentRef
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetShortName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShortName
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetFax() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Fax
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetEoriCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EoriCode
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetOtherCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OtherCode
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetForeignTaxNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ForeignTaxNumber
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetAutoDebtReminder() bool {
+	if p == nil {
+		return false
+	}
+	return p.AutoDebtReminder
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetLateInterestPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LateInterestPercent
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetFirstCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstCallDate
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetLastCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastCallDate
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetNextCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCallDate
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetRating() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.Rating
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetIsEmployee() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsEmployee
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetIsGroupMember() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsGroupMember
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1PartnersListResponseRowsItem) GetLegalCountryClass() *PostV1PartnersListResponseRowsItemLegalCountryClass {
+	if p == nil {
+		return nil
+	}
+	return p.LegalCountryClass
 }
 
 func (p *PostV1PartnersListResponseRowsItem) GetCreatedAt() string {
@@ -12620,6 +22399,13 @@ func (p *PostV1PartnersListResponseRowsItem) SetAddress(address *PostV1PartnersL
 	p.require(postV1PartnersListResponseRowsItemFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersListResponseRowsItemCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersListResponseRowsItemFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersListResponseRowsItem) SetNotes(notes *string) {
@@ -12632,6 +22418,118 @@ func (p *PostV1PartnersListResponseRowsItem) SetNotes(notes *string) {
 func (p *PostV1PartnersListResponseRowsItem) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersListResponseRowsItemFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersListResponseRowsItemFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersListResponseRowsItemFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersListResponseRowsItemFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersListResponseRowsItemFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersListResponseRowsItemFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersListResponseRowsItemFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetAutoDebtReminder(autoDebtReminder bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersListResponseRowsItemFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersListResponseRowsItemFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersListResponseRowsItemFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersListResponseRowsItemFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersListResponseRowsItemFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersListResponseRowsItemFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetIsEmployee(isEmployee bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersListResponseRowsItemFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetIsGroupMember(isGroupMember bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersListResponseRowsItemFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersListResponseRowsItemFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItem) SetLegalCountryClass(legalCountryClass *PostV1PartnersListResponseRowsItemLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersListResponseRowsItemFieldLegalCountryClass)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -12691,17 +22589,21 @@ func (p *PostV1PartnersListResponseRowsItem) String() string {
 }
 
 var (
-	postV1PartnersListResponseRowsItemAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersListResponseRowsItemAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersListResponseRowsItemAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersListResponseRowsItemAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersListResponseRowsItemAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersListResponseRowsItemAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersListResponseRowsItemAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersListResponseRowsItemAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersListResponseRowsItemAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersListResponseRowsItemAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersListResponseRowsItemAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12722,6 +22624,20 @@ func (p *PostV1PartnersListResponseRowsItemAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersListResponseRowsItemAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersListResponseRowsItemAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersListResponseRowsItemAddress) GetPostalCode() *string {
@@ -12764,6 +22680,20 @@ func (p *PostV1PartnersListResponseRowsItemAddress) SetStreet(street *string) {
 func (p *PostV1PartnersListResponseRowsItemAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersListResponseRowsItemAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersListResponseRowsItemAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersListResponseRowsItemAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -12820,6 +22750,195 @@ func (p *PostV1PartnersListResponseRowsItemAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersListResponseRowsItemCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersListResponseRowsItemCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersListResponseRowsItemCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersListResponseRowsItemCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersListResponseRowsItemCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersListResponseRowsItemCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersListResponseRowsItemLegalCountryClass string
+
+const (
+	PostV1PartnersListResponseRowsItemLegalCountryClassLt    PostV1PartnersListResponseRowsItemLegalCountryClass = "lt"
+	PostV1PartnersListResponseRowsItemLegalCountryClassEu    PostV1PartnersListResponseRowsItemLegalCountryClass = "eu"
+	PostV1PartnersListResponseRowsItemLegalCountryClassNonEu PostV1PartnersListResponseRowsItemLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersListResponseRowsItemLegalCountryClassFromString(s string) (PostV1PartnersListResponseRowsItemLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersListResponseRowsItemLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersListResponseRowsItemLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersListResponseRowsItemLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersListResponseRowsItemLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersListResponseRowsItemLegalCountryClass) Ptr() *PostV1PartnersListResponseRowsItemLegalCountryClass {
+	return &p
 }
 
 type PostV1PartnersListResponseRowsItemType string
@@ -13457,17 +23576,21 @@ func (p *PostV1PartnersStatusesUpdateResponse) String() string {
 }
 
 var (
-	postV1PartnersUpdateRequestAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersUpdateRequestAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersUpdateRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersUpdateRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersUpdateRequestAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersUpdateRequestAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersUpdateRequestAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersUpdateRequestAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersUpdateRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersUpdateRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersUpdateRequestAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13488,6 +23611,20 @@ func (p *PostV1PartnersUpdateRequestAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersUpdateRequestAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersUpdateRequestAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersUpdateRequestAddress) GetPostalCode() *string {
@@ -13530,6 +23667,20 @@ func (p *PostV1PartnersUpdateRequestAddress) SetStreet(street *string) {
 func (p *PostV1PartnersUpdateRequestAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersUpdateRequestAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersUpdateRequestAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersUpdateRequestAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -13588,6 +23739,195 @@ func (p *PostV1PartnersUpdateRequestAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersUpdateRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersUpdateRequestCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersUpdateRequestCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersUpdateRequestCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersUpdateRequestCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersUpdateRequestCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersUpdateRequestCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersUpdateRequestLegalCountryClass string
+
+const (
+	PostV1PartnersUpdateRequestLegalCountryClassLt    PostV1PartnersUpdateRequestLegalCountryClass = "lt"
+	PostV1PartnersUpdateRequestLegalCountryClassEu    PostV1PartnersUpdateRequestLegalCountryClass = "eu"
+	PostV1PartnersUpdateRequestLegalCountryClassNonEu PostV1PartnersUpdateRequestLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersUpdateRequestLegalCountryClassFromString(s string) (PostV1PartnersUpdateRequestLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersUpdateRequestLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersUpdateRequestLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersUpdateRequestLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersUpdateRequestLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersUpdateRequestLegalCountryClass) Ptr() *PostV1PartnersUpdateRequestLegalCountryClass {
+	return &p
+}
+
 type PostV1PartnersUpdateRequestType string
 
 const (
@@ -13611,57 +23951,91 @@ func (p PostV1PartnersUpdateRequestType) Ptr() *PostV1PartnersUpdateRequestType 
 }
 
 var (
-	postV1PartnersUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PartnersUpdateResponseFieldType                 = big.NewInt(1 << 1)
-	postV1PartnersUpdateResponseFieldName                 = big.NewInt(1 << 2)
-	postV1PartnersUpdateResponseFieldCode                 = big.NewInt(1 << 3)
-	postV1PartnersUpdateResponseFieldVatCode              = big.NewInt(1 << 4)
-	postV1PartnersUpdateResponseFieldPeppolID             = big.NewInt(1 << 5)
-	postV1PartnersUpdateResponseFieldEmail                = big.NewInt(1 << 6)
-	postV1PartnersUpdateResponseFieldPhone                = big.NewInt(1 << 7)
-	postV1PartnersUpdateResponseFieldSelfEmploymentCertNo = big.NewInt(1 << 8)
-	postV1PartnersUpdateResponseFieldBirthDate            = big.NewInt(1 << 9)
-	postV1PartnersUpdateResponseFieldIsCustomer           = big.NewInt(1 << 10)
-	postV1PartnersUpdateResponseFieldIsSupplier           = big.NewInt(1 << 11)
-	postV1PartnersUpdateResponseFieldPaymentTermDays      = big.NewInt(1 << 12)
-	postV1PartnersUpdateResponseFieldCreditLimit          = big.NewInt(1 << 13)
-	postV1PartnersUpdateResponseFieldPriceListID          = big.NewInt(1 << 14)
-	postV1PartnersUpdateResponseFieldGroupID              = big.NewInt(1 << 15)
-	postV1PartnersUpdateResponseFieldStatusID             = big.NewInt(1 << 16)
-	postV1PartnersUpdateResponseFieldVatValid             = big.NewInt(1 << 17)
-	postV1PartnersUpdateResponseFieldVatValidatedAt       = big.NewInt(1 << 18)
-	postV1PartnersUpdateResponseFieldAddress              = big.NewInt(1 << 19)
-	postV1PartnersUpdateResponseFieldNotes                = big.NewInt(1 << 20)
-	postV1PartnersUpdateResponseFieldDocumentRef          = big.NewInt(1 << 21)
-	postV1PartnersUpdateResponseFieldCreatedAt            = big.NewInt(1 << 22)
-	postV1PartnersUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 23)
+	postV1PartnersUpdateResponseFieldID                    = big.NewInt(1 << 0)
+	postV1PartnersUpdateResponseFieldType                  = big.NewInt(1 << 1)
+	postV1PartnersUpdateResponseFieldName                  = big.NewInt(1 << 2)
+	postV1PartnersUpdateResponseFieldCode                  = big.NewInt(1 << 3)
+	postV1PartnersUpdateResponseFieldVatCode               = big.NewInt(1 << 4)
+	postV1PartnersUpdateResponseFieldPeppolID              = big.NewInt(1 << 5)
+	postV1PartnersUpdateResponseFieldEmail                 = big.NewInt(1 << 6)
+	postV1PartnersUpdateResponseFieldPhone                 = big.NewInt(1 << 7)
+	postV1PartnersUpdateResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
+	postV1PartnersUpdateResponseFieldBirthDate             = big.NewInt(1 << 9)
+	postV1PartnersUpdateResponseFieldIsCustomer            = big.NewInt(1 << 10)
+	postV1PartnersUpdateResponseFieldIsSupplier            = big.NewInt(1 << 11)
+	postV1PartnersUpdateResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
+	postV1PartnersUpdateResponseFieldCreditLimit           = big.NewInt(1 << 13)
+	postV1PartnersUpdateResponseFieldPriceListID           = big.NewInt(1 << 14)
+	postV1PartnersUpdateResponseFieldGroupID               = big.NewInt(1 << 15)
+	postV1PartnersUpdateResponseFieldStatusID              = big.NewInt(1 << 16)
+	postV1PartnersUpdateResponseFieldVatValid              = big.NewInt(1 << 17)
+	postV1PartnersUpdateResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
+	postV1PartnersUpdateResponseFieldAddress               = big.NewInt(1 << 19)
+	postV1PartnersUpdateResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	postV1PartnersUpdateResponseFieldNotes                 = big.NewInt(1 << 21)
+	postV1PartnersUpdateResponseFieldDocumentRef           = big.NewInt(1 << 22)
+	postV1PartnersUpdateResponseFieldShortName             = big.NewInt(1 << 23)
+	postV1PartnersUpdateResponseFieldWebsite               = big.NewInt(1 << 24)
+	postV1PartnersUpdateResponseFieldFax                   = big.NewInt(1 << 25)
+	postV1PartnersUpdateResponseFieldEoriCode              = big.NewInt(1 << 26)
+	postV1PartnersUpdateResponseFieldOtherCode             = big.NewInt(1 << 27)
+	postV1PartnersUpdateResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
+	postV1PartnersUpdateResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	postV1PartnersUpdateResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	postV1PartnersUpdateResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	postV1PartnersUpdateResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	postV1PartnersUpdateResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	postV1PartnersUpdateResponseFieldRating                = big.NewInt(1 << 34)
+	postV1PartnersUpdateResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	postV1PartnersUpdateResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	postV1PartnersUpdateResponseFieldIsActive              = big.NewInt(1 << 37)
+	postV1PartnersUpdateResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	postV1PartnersUpdateResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	postV1PartnersUpdateResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type PostV1PartnersUpdateResponse struct {
-	ID                   string                               `json:"id" url:"id"`
-	Type                 PostV1PartnersUpdateResponseType     `json:"type" url:"type"`
-	Name                 string                               `json:"name" url:"name"`
-	Code                 *string                              `json:"code,omitempty" url:"code,omitempty"`
-	VatCode              *string                              `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	PeppolID             *string                              `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	Email                *string                              `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                              `json:"phone,omitempty" url:"phone,omitempty"`
-	SelfEmploymentCertNo *string                              `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
-	BirthDate            *string                              `json:"birthDate,omitempty" url:"birthDate,omitempty"`
-	IsCustomer           bool                                 `json:"isCustomer" url:"isCustomer"`
-	IsSupplier           bool                                 `json:"isSupplier" url:"isSupplier"`
-	PaymentTermDays      *int64                               `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
-	CreditLimit          *string                              `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
-	PriceListID          *string                              `json:"priceListId,omitempty" url:"priceListId,omitempty"`
-	GroupID              *string                              `json:"groupId,omitempty" url:"groupId,omitempty"`
-	StatusID             *string                              `json:"statusId,omitempty" url:"statusId,omitempty"`
-	VatValid             *bool                                `json:"vatValid,omitempty" url:"vatValid,omitempty"`
-	VatValidatedAt       *string                              `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
-	Address              *PostV1PartnersUpdateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	Notes                *string                              `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                               `json:"updatedAt" url:"updatedAt"`
+	ID                    string                                             `json:"id" url:"id"`
+	Type                  PostV1PartnersUpdateResponseType                   `json:"type" url:"type"`
+	Name                  string                                             `json:"name" url:"name"`
+	Code                  *string                                            `json:"code,omitempty" url:"code,omitempty"`
+	VatCode               *string                                            `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	PeppolID              *string                                            `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	Email                 *string                                            `json:"email,omitempty" url:"email,omitempty"`
+	Phone                 *string                                            `json:"phone,omitempty" url:"phone,omitempty"`
+	SelfEmploymentCertNo  *string                                            `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
+	BirthDate             *string                                            `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	IsCustomer            bool                                               `json:"isCustomer" url:"isCustomer"`
+	IsSupplier            bool                                               `json:"isSupplier" url:"isSupplier"`
+	PaymentTermDays       *int64                                             `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	CreditLimit           *string                                            `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
+	PriceListID           *string                                            `json:"priceListId,omitempty" url:"priceListId,omitempty"`
+	GroupID               *string                                            `json:"groupId,omitempty" url:"groupId,omitempty"`
+	StatusID              *string                                            `json:"statusId,omitempty" url:"statusId,omitempty"`
+	VatValid              *bool                                              `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt        *string                                            `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+	Address               *PostV1PartnersUpdateResponseAddress               `json:"address,omitempty" url:"address,omitempty"`
+	CorrespondenceAddress *PostV1PartnersUpdateResponseCorrespondenceAddress `json:"correspondenceAddress,omitempty" url:"correspondenceAddress,omitempty"`
+	Notes                 *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef           *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	ShortName             *string                                            `json:"shortName,omitempty" url:"shortName,omitempty"`
+	Website               *string                                            `json:"website,omitempty" url:"website,omitempty"`
+	Fax                   *string                                            `json:"fax,omitempty" url:"fax,omitempty"`
+	EoriCode              *string                                            `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
+	OtherCode             *string                                            `json:"otherCode,omitempty" url:"otherCode,omitempty"`
+	ForeignTaxNumber      *string                                            `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
+	AutoDebtReminder      bool                                               `json:"autoDebtReminder" url:"autoDebtReminder"`
+	LateInterestPercent   *string                                            `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
+	FirstCallDate         *string                                            `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty"`
+	LastCallDate          *string                                            `json:"lastCallDate,omitempty" url:"lastCallDate,omitempty"`
+	NextCallDate          *string                                            `json:"nextCallDate,omitempty" url:"nextCallDate,omitempty"`
+	Rating                *int64                                             `json:"rating,omitempty" url:"rating,omitempty"`
+	IsEmployee            bool                                               `json:"isEmployee" url:"isEmployee"`
+	IsGroupMember         bool                                               `json:"isGroupMember" url:"isGroupMember"`
+	IsActive              bool                                               `json:"isActive" url:"isActive"`
+	LegalCountryClass     *PostV1PartnersUpdateResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	CreatedAt             string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt             string                                             `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13810,6 +24184,13 @@ func (p *PostV1PartnersUpdateResponse) GetAddress() *PostV1PartnersUpdateRespons
 	return p.Address
 }
 
+func (p *PostV1PartnersUpdateResponse) GetCorrespondenceAddress() *PostV1PartnersUpdateResponseCorrespondenceAddress {
+	if p == nil {
+		return nil
+	}
+	return p.CorrespondenceAddress
+}
+
 func (p *PostV1PartnersUpdateResponse) GetNotes() *string {
 	if p == nil {
 		return nil
@@ -13822,6 +24203,118 @@ func (p *PostV1PartnersUpdateResponse) GetDocumentRef() *string {
 		return nil
 	}
 	return p.DocumentRef
+}
+
+func (p *PostV1PartnersUpdateResponse) GetShortName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShortName
+}
+
+func (p *PostV1PartnersUpdateResponse) GetWebsite() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Website
+}
+
+func (p *PostV1PartnersUpdateResponse) GetFax() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Fax
+}
+
+func (p *PostV1PartnersUpdateResponse) GetEoriCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EoriCode
+}
+
+func (p *PostV1PartnersUpdateResponse) GetOtherCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.OtherCode
+}
+
+func (p *PostV1PartnersUpdateResponse) GetForeignTaxNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ForeignTaxNumber
+}
+
+func (p *PostV1PartnersUpdateResponse) GetAutoDebtReminder() bool {
+	if p == nil {
+		return false
+	}
+	return p.AutoDebtReminder
+}
+
+func (p *PostV1PartnersUpdateResponse) GetLateInterestPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LateInterestPercent
+}
+
+func (p *PostV1PartnersUpdateResponse) GetFirstCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FirstCallDate
+}
+
+func (p *PostV1PartnersUpdateResponse) GetLastCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastCallDate
+}
+
+func (p *PostV1PartnersUpdateResponse) GetNextCallDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCallDate
+}
+
+func (p *PostV1PartnersUpdateResponse) GetRating() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.Rating
+}
+
+func (p *PostV1PartnersUpdateResponse) GetIsEmployee() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsEmployee
+}
+
+func (p *PostV1PartnersUpdateResponse) GetIsGroupMember() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsGroupMember
+}
+
+func (p *PostV1PartnersUpdateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1PartnersUpdateResponse) GetLegalCountryClass() *PostV1PartnersUpdateResponseLegalCountryClass {
+	if p == nil {
+		return nil
+	}
+	return p.LegalCountryClass
 }
 
 func (p *PostV1PartnersUpdateResponse) GetCreatedAt() string {
@@ -13992,6 +24485,13 @@ func (p *PostV1PartnersUpdateResponse) SetAddress(address *PostV1PartnersUpdateR
 	p.require(postV1PartnersUpdateResponseFieldAddress)
 }
 
+// SetCorrespondenceAddress sets the CorrespondenceAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetCorrespondenceAddress(correspondenceAddress *PostV1PartnersUpdateResponseCorrespondenceAddress) {
+	p.CorrespondenceAddress = correspondenceAddress
+	p.require(postV1PartnersUpdateResponseFieldCorrespondenceAddress)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PartnersUpdateResponse) SetNotes(notes *string) {
@@ -14004,6 +24504,118 @@ func (p *PostV1PartnersUpdateResponse) SetNotes(notes *string) {
 func (p *PostV1PartnersUpdateResponse) SetDocumentRef(documentRef *string) {
 	p.DocumentRef = documentRef
 	p.require(postV1PartnersUpdateResponseFieldDocumentRef)
+}
+
+// SetShortName sets the ShortName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetShortName(shortName *string) {
+	p.ShortName = shortName
+	p.require(postV1PartnersUpdateResponseFieldShortName)
+}
+
+// SetWebsite sets the Website field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetWebsite(website *string) {
+	p.Website = website
+	p.require(postV1PartnersUpdateResponseFieldWebsite)
+}
+
+// SetFax sets the Fax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetFax(fax *string) {
+	p.Fax = fax
+	p.require(postV1PartnersUpdateResponseFieldFax)
+}
+
+// SetEoriCode sets the EoriCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetEoriCode(eoriCode *string) {
+	p.EoriCode = eoriCode
+	p.require(postV1PartnersUpdateResponseFieldEoriCode)
+}
+
+// SetOtherCode sets the OtherCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetOtherCode(otherCode *string) {
+	p.OtherCode = otherCode
+	p.require(postV1PartnersUpdateResponseFieldOtherCode)
+}
+
+// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
+	p.ForeignTaxNumber = foreignTaxNumber
+	p.require(postV1PartnersUpdateResponseFieldForeignTaxNumber)
+}
+
+// SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetAutoDebtReminder(autoDebtReminder bool) {
+	p.AutoDebtReminder = autoDebtReminder
+	p.require(postV1PartnersUpdateResponseFieldAutoDebtReminder)
+}
+
+// SetLateInterestPercent sets the LateInterestPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetLateInterestPercent(lateInterestPercent *string) {
+	p.LateInterestPercent = lateInterestPercent
+	p.require(postV1PartnersUpdateResponseFieldLateInterestPercent)
+}
+
+// SetFirstCallDate sets the FirstCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetFirstCallDate(firstCallDate *string) {
+	p.FirstCallDate = firstCallDate
+	p.require(postV1PartnersUpdateResponseFieldFirstCallDate)
+}
+
+// SetLastCallDate sets the LastCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetLastCallDate(lastCallDate *string) {
+	p.LastCallDate = lastCallDate
+	p.require(postV1PartnersUpdateResponseFieldLastCallDate)
+}
+
+// SetNextCallDate sets the NextCallDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetNextCallDate(nextCallDate *string) {
+	p.NextCallDate = nextCallDate
+	p.require(postV1PartnersUpdateResponseFieldNextCallDate)
+}
+
+// SetRating sets the Rating field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetRating(rating *int64) {
+	p.Rating = rating
+	p.require(postV1PartnersUpdateResponseFieldRating)
+}
+
+// SetIsEmployee sets the IsEmployee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetIsEmployee(isEmployee bool) {
+	p.IsEmployee = isEmployee
+	p.require(postV1PartnersUpdateResponseFieldIsEmployee)
+}
+
+// SetIsGroupMember sets the IsGroupMember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetIsGroupMember(isGroupMember bool) {
+	p.IsGroupMember = isGroupMember
+	p.require(postV1PartnersUpdateResponseFieldIsGroupMember)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1PartnersUpdateResponseFieldIsActive)
+}
+
+// SetLegalCountryClass sets the LegalCountryClass field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponse) SetLegalCountryClass(legalCountryClass *PostV1PartnersUpdateResponseLegalCountryClass) {
+	p.LegalCountryClass = legalCountryClass
+	p.require(postV1PartnersUpdateResponseFieldLegalCountryClass)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -14063,17 +24675,21 @@ func (p *PostV1PartnersUpdateResponse) String() string {
 }
 
 var (
-	postV1PartnersUpdateResponseAddressFieldStreet      = big.NewInt(1 << 0)
-	postV1PartnersUpdateResponseAddressFieldCity        = big.NewInt(1 << 1)
-	postV1PartnersUpdateResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
-	postV1PartnersUpdateResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	postV1PartnersUpdateResponseAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersUpdateResponseAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersUpdateResponseAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersUpdateResponseAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersUpdateResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersUpdateResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
 )
 
 type PostV1PartnersUpdateResponseAddress struct {
-	Street      *string `json:"street,omitempty" url:"street,omitempty"`
-	City        *string `json:"city,omitempty" url:"city,omitempty"`
-	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
-	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14094,6 +24710,20 @@ func (p *PostV1PartnersUpdateResponseAddress) GetCity() *string {
 		return nil
 	}
 	return p.City
+}
+
+func (p *PostV1PartnersUpdateResponseAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersUpdateResponseAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
 }
 
 func (p *PostV1PartnersUpdateResponseAddress) GetPostalCode() *string {
@@ -14136,6 +24766,20 @@ func (p *PostV1PartnersUpdateResponseAddress) SetStreet(street *string) {
 func (p *PostV1PartnersUpdateResponseAddress) SetCity(city *string) {
 	p.City = city
 	p.require(postV1PartnersUpdateResponseAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersUpdateResponseAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersUpdateResponseAddressFieldCounty)
 }
 
 // SetPostalCode sets the PostalCode field and marks it as non-optional;
@@ -14192,6 +24836,195 @@ func (p *PostV1PartnersUpdateResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldStreet       = big.NewInt(1 << 0)
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldCity         = big.NewInt(1 << 1)
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldMunicipality = big.NewInt(1 << 2)
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
+	postV1PartnersUpdateResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+)
+
+type PostV1PartnersUpdateResponseCorrespondenceAddress struct {
+	Street       *string `json:"street,omitempty" url:"street,omitempty"`
+	City         *string `json:"city,omitempty" url:"city,omitempty"`
+	Municipality *string `json:"municipality,omitempty" url:"municipality,omitempty"`
+	County       *string `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetStreet() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Street
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetCity() *string {
+	if p == nil {
+		return nil
+	}
+	return p.City
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetMunicipality() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Municipality
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetCounty() *string {
+	if p == nil {
+		return nil
+	}
+	return p.County
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetPostalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PostalCode
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetCountryCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CountryCode
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetStreet(street *string) {
+	p.Street = street
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetCity(city *string) {
+	p.City = city
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldCity)
+}
+
+// SetMunicipality sets the Municipality field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetMunicipality(municipality *string) {
+	p.Municipality = municipality
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldMunicipality)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetCounty(county *string) {
+	p.County = county
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetPostalCode(postalCode *string) {
+	p.PostalCode = postalCode
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
+	p.CountryCode = countryCode
+	p.require(postV1PartnersUpdateResponseCorrespondenceAddressFieldCountryCode)
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PartnersUpdateResponseCorrespondenceAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PartnersUpdateResponseCorrespondenceAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) MarshalJSON() ([]byte, error) {
+	type embed PostV1PartnersUpdateResponseCorrespondenceAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PartnersUpdateResponseCorrespondenceAddress) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PartnersUpdateResponseLegalCountryClass string
+
+const (
+	PostV1PartnersUpdateResponseLegalCountryClassLt    PostV1PartnersUpdateResponseLegalCountryClass = "lt"
+	PostV1PartnersUpdateResponseLegalCountryClassEu    PostV1PartnersUpdateResponseLegalCountryClass = "eu"
+	PostV1PartnersUpdateResponseLegalCountryClassNonEu PostV1PartnersUpdateResponseLegalCountryClass = "non_eu"
+)
+
+func NewPostV1PartnersUpdateResponseLegalCountryClassFromString(s string) (PostV1PartnersUpdateResponseLegalCountryClass, error) {
+	switch s {
+	case "lt":
+		return PostV1PartnersUpdateResponseLegalCountryClassLt, nil
+	case "eu":
+		return PostV1PartnersUpdateResponseLegalCountryClassEu, nil
+	case "non_eu":
+		return PostV1PartnersUpdateResponseLegalCountryClassNonEu, nil
+	}
+	var t PostV1PartnersUpdateResponseLegalCountryClass
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PartnersUpdateResponseLegalCountryClass) Ptr() *PostV1PartnersUpdateResponseLegalCountryClass {
+	return &p
 }
 
 type PostV1PartnersUpdateResponseType string
@@ -14839,6 +25672,7 @@ var (
 	postV1PartnersVatReviewsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1PartnersVatReviewsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1PartnersVatReviewsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1PartnersVatReviewsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1PartnersVatReviewsListResponse struct {
@@ -14846,6 +25680,7 @@ type PostV1PartnersVatReviewsListResponse struct {
 	Page     int64                                           `json:"page" url:"page"`
 	PageSize int64                                           `json:"pageSize" url:"pageSize"`
 	Total    int64                                           `json:"total" url:"total"`
+	Totals   map[string]string                               `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14880,6 +25715,13 @@ func (p *PostV1PartnersVatReviewsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1PartnersVatReviewsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1PartnersVatReviewsListResponse) GetExtraProperties() map[string]interface{} {
@@ -14922,6 +25764,13 @@ func (p *PostV1PartnersVatReviewsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1PartnersVatReviewsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1PartnersVatReviewsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PartnersVatReviewsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1PartnersVatReviewsListResponseFieldTotals)
 }
 
 func (p *PostV1PartnersVatReviewsListResponse) UnmarshalJSON(data []byte) error {

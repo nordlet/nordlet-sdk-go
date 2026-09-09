@@ -1170,17 +1170,19 @@ func (p *PostV1AccountLoginLinkConsumeRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountLoginLinkRequestRequestFieldEmail       = big.NewInt(1 << 0)
-	postV1AccountLoginLinkRequestRequestFieldLocale      = big.NewInt(1 << 1)
-	postV1AccountLoginLinkRequestRequestFieldAcceptTerms = big.NewInt(1 << 2)
-	postV1AccountLoginLinkRequestRequestFieldAcceptDpa   = big.NewInt(1 << 3)
+	postV1AccountLoginLinkRequestRequestFieldEmail        = big.NewInt(1 << 0)
+	postV1AccountLoginLinkRequestRequestFieldLocale       = big.NewInt(1 << 1)
+	postV1AccountLoginLinkRequestRequestFieldAcceptTerms  = big.NewInt(1 << 2)
+	postV1AccountLoginLinkRequestRequestFieldAcceptDpa    = big.NewInt(1 << 3)
+	postV1AccountLoginLinkRequestRequestFieldReferralCode = big.NewInt(1 << 4)
 )
 
 type PostV1AccountLoginLinkRequestRequest struct {
-	Email       string                                      `json:"email" url:"-"`
-	Locale      *PostV1AccountLoginLinkRequestRequestLocale `json:"locale,omitempty" url:"-"`
-	AcceptTerms *bool                                       `json:"acceptTerms,omitempty" url:"-"`
-	AcceptDpa   *bool                                       `json:"acceptDpa,omitempty" url:"-"`
+	Email        string                                      `json:"email" url:"-"`
+	Locale       *PostV1AccountLoginLinkRequestRequestLocale `json:"locale,omitempty" url:"-"`
+	AcceptTerms  *bool                                       `json:"acceptTerms,omitempty" url:"-"`
+	AcceptDpa    *bool                                       `json:"acceptDpa,omitempty" url:"-"`
+	ReferralCode *string                                     `json:"referralCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1219,6 +1221,13 @@ func (p *PostV1AccountLoginLinkRequestRequest) SetAcceptTerms(acceptTerms *bool)
 func (p *PostV1AccountLoginLinkRequestRequest) SetAcceptDpa(acceptDpa *bool) {
 	p.AcceptDpa = acceptDpa
 	p.require(postV1AccountLoginLinkRequestRequestFieldAcceptDpa)
+}
+
+// SetReferralCode sets the ReferralCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountLoginLinkRequestRequest) SetReferralCode(referralCode *string) {
+	p.ReferralCode = referralCode
+	p.require(postV1AccountLoginLinkRequestRequestFieldReferralCode)
 }
 
 func (p *PostV1AccountLoginLinkRequestRequest) UnmarshalJSON(data []byte) error {
@@ -1428,6 +1437,19 @@ func (p *PostV1AccountProfileUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type PostV1AccountReferralGetRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountReferralGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
 type PostV1AccountSessionsListRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1498,6 +1520,129 @@ func (p *PostV1AccountSessionsRevokeOthersRequest) require(field *big.Int) {
 		p.explicitFields = big.NewInt(0)
 	}
 	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1AccountTableSettingsGetRequestFieldTableKey = big.NewInt(1 << 0)
+)
+
+type PostV1AccountTableSettingsGetRequest struct {
+	TableKey string `json:"tableKey" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountTableSettingsGetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTableKey sets the TableKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsGetRequest) SetTableKey(tableKey string) {
+	p.TableKey = tableKey
+	p.require(postV1AccountTableSettingsGetRequestFieldTableKey)
+}
+
+func (p *PostV1AccountTableSettingsGetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsGetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsGetRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsGetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsGetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1AccountTableSettingsListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountTableSettingsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1AccountTableSettingsSetRequestFieldTableKey = big.NewInt(1 << 0)
+	postV1AccountTableSettingsSetRequestFieldColumns  = big.NewInt(1 << 1)
+	postV1AccountTableSettingsSetRequestFieldPageSize = big.NewInt(1 << 2)
+)
+
+type PostV1AccountTableSettingsSetRequest struct {
+	TableKey string   `json:"tableKey" url:"-"`
+	Columns  []string `json:"columns,omitempty" url:"-"`
+	PageSize *float64 `json:"pageSize,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountTableSettingsSetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTableKey sets the TableKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetRequest) SetTableKey(tableKey string) {
+	p.TableKey = tableKey
+	p.require(postV1AccountTableSettingsSetRequestFieldTableKey)
+}
+
+// SetColumns sets the Columns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetRequest) SetColumns(columns []string) {
+	p.Columns = columns
+	p.require(postV1AccountTableSettingsSetRequestFieldColumns)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetRequest) SetPageSize(pageSize *float64) {
+	p.PageSize = pageSize
+	p.require(postV1AccountTableSettingsSetRequestFieldPageSize)
+}
+
+func (p *PostV1AccountTableSettingsSetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsSetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsSetRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsSetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsSetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }
 
 var (
@@ -7326,8 +7471,9 @@ var (
 	postV1AccountMeResponseFieldActiveCompanyID = big.NewInt(1 << 2)
 	postV1AccountMeResponseFieldRole            = big.NewInt(1 << 3)
 	postV1AccountMeResponseFieldBilling         = big.NewInt(1 << 4)
-	postV1AccountMeResponseFieldConsent         = big.NewInt(1 << 5)
-	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 6)
+	postV1AccountMeResponseFieldReferralPoints  = big.NewInt(1 << 5)
+	postV1AccountMeResponseFieldConsent         = big.NewInt(1 << 6)
+	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 7)
 )
 
 type PostV1AccountMeResponse struct {
@@ -7336,6 +7482,7 @@ type PostV1AccountMeResponse struct {
 	ActiveCompanyID *string                                 `json:"activeCompanyId,omitempty" url:"activeCompanyId,omitempty"`
 	Role            *string                                 `json:"role,omitempty" url:"role,omitempty"`
 	Billing         *PostV1AccountMeResponseBilling         `json:"billing" url:"billing"`
+	ReferralPoints  int64                                   `json:"referralPoints" url:"referralPoints"`
 	Consent         *PostV1AccountMeResponseConsent         `json:"consent" url:"consent"`
 	Companies       []*PostV1AccountMeResponseCompaniesItem `json:"companies" url:"companies"`
 
@@ -7379,6 +7526,13 @@ func (p *PostV1AccountMeResponse) GetBilling() *PostV1AccountMeResponseBilling {
 		return nil
 	}
 	return p.Billing
+}
+
+func (p *PostV1AccountMeResponse) GetReferralPoints() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ReferralPoints
 }
 
 func (p *PostV1AccountMeResponse) GetConsent() *PostV1AccountMeResponseConsent {
@@ -7442,6 +7596,13 @@ func (p *PostV1AccountMeResponse) SetRole(role *string) {
 func (p *PostV1AccountMeResponse) SetBilling(billing *PostV1AccountMeResponseBilling) {
 	p.Billing = billing
 	p.require(postV1AccountMeResponseFieldBilling)
+}
+
+// SetReferralPoints sets the ReferralPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponse) SetReferralPoints(referralPoints int64) {
+	p.ReferralPoints = referralPoints
+	p.require(postV1AccountMeResponseFieldReferralPoints)
 }
 
 // SetConsent sets the Consent field and marks it as non-optional;
@@ -8786,6 +8947,270 @@ func (p *PostV1AccountProfileUpdateResponse) String() string {
 }
 
 var (
+	postV1AccountReferralGetResponseFieldCode          = big.NewInt(1 << 0)
+	postV1AccountReferralGetResponseFieldLink          = big.NewInt(1 << 1)
+	postV1AccountReferralGetResponseFieldPoints        = big.NewInt(1 << 2)
+	postV1AccountReferralGetResponseFieldReferredCount = big.NewInt(1 << 3)
+	postV1AccountReferralGetResponseFieldHistory       = big.NewInt(1 << 4)
+)
+
+type PostV1AccountReferralGetResponse struct {
+	Code          string                                         `json:"code" url:"code"`
+	Link          string                                         `json:"link" url:"link"`
+	Points        int64                                          `json:"points" url:"points"`
+	ReferredCount int64                                          `json:"referredCount" url:"referredCount"`
+	History       []*PostV1AccountReferralGetResponseHistoryItem `json:"history" url:"history"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountReferralGetResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1AccountReferralGetResponse) GetLink() string {
+	if p == nil {
+		return ""
+	}
+	return p.Link
+}
+
+func (p *PostV1AccountReferralGetResponse) GetPoints() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Points
+}
+
+func (p *PostV1AccountReferralGetResponse) GetReferredCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.ReferredCount
+}
+
+func (p *PostV1AccountReferralGetResponse) GetHistory() []*PostV1AccountReferralGetResponseHistoryItem {
+	if p == nil {
+		return nil
+	}
+	return p.History
+}
+
+func (p *PostV1AccountReferralGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountReferralGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1AccountReferralGetResponseFieldCode)
+}
+
+// SetLink sets the Link field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetLink(link string) {
+	p.Link = link
+	p.require(postV1AccountReferralGetResponseFieldLink)
+}
+
+// SetPoints sets the Points field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetPoints(points int64) {
+	p.Points = points
+	p.require(postV1AccountReferralGetResponseFieldPoints)
+}
+
+// SetReferredCount sets the ReferredCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetReferredCount(referredCount int64) {
+	p.ReferredCount = referredCount
+	p.require(postV1AccountReferralGetResponseFieldReferredCount)
+}
+
+// SetHistory sets the History field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetHistory(history []*PostV1AccountReferralGetResponseHistoryItem) {
+	p.History = history
+	p.require(postV1AccountReferralGetResponseFieldHistory)
+}
+
+func (p *PostV1AccountReferralGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountReferralGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountReferralGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountReferralGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountReferralGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountReferralGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountReferralGetResponseHistoryItemFieldPoints    = big.NewInt(1 << 0)
+	postV1AccountReferralGetResponseHistoryItemFieldReason    = big.NewInt(1 << 1)
+	postV1AccountReferralGetResponseHistoryItemFieldCreatedAt = big.NewInt(1 << 2)
+)
+
+type PostV1AccountReferralGetResponseHistoryItem struct {
+	Points    int64  `json:"points" url:"points"`
+	Reason    string `json:"reason" url:"reason"`
+	CreatedAt string `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) GetPoints() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Points
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) GetReason() string {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPoints sets the Points field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponseHistoryItem) SetPoints(points int64) {
+	p.Points = points
+	p.require(postV1AccountReferralGetResponseHistoryItemFieldPoints)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponseHistoryItem) SetReason(reason string) {
+	p.Reason = reason
+	p.require(postV1AccountReferralGetResponseHistoryItemFieldReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponseHistoryItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AccountReferralGetResponseHistoryItemFieldCreatedAt)
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountReferralGetResponseHistoryItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountReferralGetResponseHistoryItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountReferralGetResponseHistoryItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountReferralGetResponseHistoryItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1AccountSessionsListResponseFieldRows = big.NewInt(1 << 0)
 )
 
@@ -9171,6 +9596,438 @@ func (p *PostV1AccountSessionsRevokeResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AccountSessionsRevokeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountTableSettingsGetResponseFieldTableKey = big.NewInt(1 << 0)
+	postV1AccountTableSettingsGetResponseFieldColumns  = big.NewInt(1 << 1)
+	postV1AccountTableSettingsGetResponseFieldPageSize = big.NewInt(1 << 2)
+)
+
+type PostV1AccountTableSettingsGetResponse struct {
+	TableKey string   `json:"tableKey" url:"tableKey"`
+	Columns  []string `json:"columns,omitempty" url:"columns,omitempty"`
+	PageSize *int64   `json:"pageSize,omitempty" url:"pageSize,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) GetTableKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.TableKey
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) GetColumns() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Columns
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) GetPageSize() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PageSize
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTableKey sets the TableKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsGetResponse) SetTableKey(tableKey string) {
+	p.TableKey = tableKey
+	p.require(postV1AccountTableSettingsGetResponseFieldTableKey)
+}
+
+// SetColumns sets the Columns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsGetResponse) SetColumns(columns []string) {
+	p.Columns = columns
+	p.require(postV1AccountTableSettingsGetResponseFieldColumns)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsGetResponse) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1AccountTableSettingsGetResponseFieldPageSize)
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsGetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsGetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsGetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountTableSettingsGetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountTableSettingsListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1AccountTableSettingsListResponse struct {
+	Rows []*PostV1AccountTableSettingsListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountTableSettingsListResponse) GetRows() []*PostV1AccountTableSettingsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1AccountTableSettingsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountTableSettingsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsListResponse) SetRows(rows []*PostV1AccountTableSettingsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1AccountTableSettingsListResponseFieldRows)
+}
+
+func (p *PostV1AccountTableSettingsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountTableSettingsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountTableSettingsListResponseRowsItemFieldTableKey = big.NewInt(1 << 0)
+	postV1AccountTableSettingsListResponseRowsItemFieldColumns  = big.NewInt(1 << 1)
+	postV1AccountTableSettingsListResponseRowsItemFieldPageSize = big.NewInt(1 << 2)
+)
+
+type PostV1AccountTableSettingsListResponseRowsItem struct {
+	TableKey string   `json:"tableKey" url:"tableKey"`
+	Columns  []string `json:"columns,omitempty" url:"columns,omitempty"`
+	PageSize *int64   `json:"pageSize,omitempty" url:"pageSize,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) GetTableKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.TableKey
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) GetColumns() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Columns
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) GetPageSize() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PageSize
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTableKey sets the TableKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsListResponseRowsItem) SetTableKey(tableKey string) {
+	p.TableKey = tableKey
+	p.require(postV1AccountTableSettingsListResponseRowsItemFieldTableKey)
+}
+
+// SetColumns sets the Columns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsListResponseRowsItem) SetColumns(columns []string) {
+	p.Columns = columns
+	p.require(postV1AccountTableSettingsListResponseRowsItemFieldColumns)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsListResponseRowsItem) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1AccountTableSettingsListResponseRowsItemFieldPageSize)
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountTableSettingsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountTableSettingsSetResponseFieldTableKey = big.NewInt(1 << 0)
+	postV1AccountTableSettingsSetResponseFieldColumns  = big.NewInt(1 << 1)
+	postV1AccountTableSettingsSetResponseFieldPageSize = big.NewInt(1 << 2)
+)
+
+type PostV1AccountTableSettingsSetResponse struct {
+	TableKey string   `json:"tableKey" url:"tableKey"`
+	Columns  []string `json:"columns,omitempty" url:"columns,omitempty"`
+	PageSize *int64   `json:"pageSize,omitempty" url:"pageSize,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) GetTableKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.TableKey
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) GetColumns() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Columns
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) GetPageSize() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PageSize
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetTableKey sets the TableKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetResponse) SetTableKey(tableKey string) {
+	p.TableKey = tableKey
+	p.require(postV1AccountTableSettingsSetResponseFieldTableKey)
+}
+
+// SetColumns sets the Columns field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetResponse) SetColumns(columns []string) {
+	p.Columns = columns
+	p.require(postV1AccountTableSettingsSetResponseFieldColumns)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountTableSettingsSetResponse) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(postV1AccountTableSettingsSetResponseFieldPageSize)
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountTableSettingsSetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountTableSettingsSetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountTableSettingsSetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountTableSettingsSetResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}

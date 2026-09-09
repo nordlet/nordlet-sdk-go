@@ -165,27 +165,39 @@ func (p *PostV1BankFeedsAccountsConfigureRequest) MarshalJSON() ([]byte, error) 
 }
 
 var (
-	postV1BankImportTemplatesCreateRequestFieldName                  = big.NewInt(1 << 0)
-	postV1BankImportTemplatesCreateRequestFieldType                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesCreateRequestFieldFields                = big.NewInt(1 << 2)
-	postV1BankImportTemplatesCreateRequestFieldMetaFields            = big.NewInt(1 << 3)
-	postV1BankImportTemplatesCreateRequestFieldInvoiceMetaField      = big.NewInt(1 << 4)
-	postV1BankImportTemplatesCreateRequestFieldInvoiceVatRatePercent = big.NewInt(1 << 5)
-	postV1BankImportTemplatesCreateRequestFieldCompanyMetaField      = big.NewInt(1 << 6)
-	postV1BankImportTemplatesCreateRequestFieldInvoiceItemID         = big.NewInt(1 << 7)
-	postV1BankImportTemplatesCreateRequestFieldAdvanceInvoices       = big.NewInt(1 << 8)
+	postV1BankImportTemplatesCreateRequestFieldName                         = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateRequestFieldType                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateRequestFieldFields                       = big.NewInt(1 << 2)
+	postV1BankImportTemplatesCreateRequestFieldMetaFields                   = big.NewInt(1 << 3)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceMetaField             = big.NewInt(1 << 4)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceVatRatePercent        = big.NewInt(1 << 5)
+	postV1BankImportTemplatesCreateRequestFieldCompanyMetaField             = big.NewInt(1 << 6)
+	postV1BankImportTemplatesCreateRequestFieldInvoiceItemID                = big.NewInt(1 << 7)
+	postV1BankImportTemplatesCreateRequestFieldAdvanceInvoices              = big.NewInt(1 << 8)
+	postV1BankImportTemplatesCreateRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 9)
+	postV1BankImportTemplatesCreateRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 10)
+	postV1BankImportTemplatesCreateRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 11)
+	postV1BankImportTemplatesCreateRequestFieldLenderMetaField              = big.NewInt(1 << 12)
+	postV1BankImportTemplatesCreateRequestFieldPartialRefundLabel           = big.NewInt(1 << 13)
+	postV1BankImportTemplatesCreateRequestFieldFullRefundLabel              = big.NewInt(1 << 14)
 )
 
 type PostV1BankImportTemplatesCreateRequest struct {
-	Name                  string                                              `json:"name" url:"-"`
-	Type                  PostV1BankImportTemplatesCreateRequestType          `json:"type" url:"-"`
-	Fields                []*PostV1BankImportTemplatesCreateRequestFieldsItem `json:"fields,omitempty" url:"-"`
-	MetaFields            []string                                            `json:"metaFields,omitempty" url:"-"`
-	InvoiceMetaField      *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
-	InvoiceVatRatePercent *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
-	CompanyMetaField      *string                                             `json:"companyMetaField,omitempty" url:"-"`
-	InvoiceItemID         *string                                             `json:"invoiceItemId,omitempty" url:"-"`
-	AdvanceInvoices       *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
+	Name                         string                                              `json:"name" url:"-"`
+	Type                         PostV1BankImportTemplatesCreateRequestType          `json:"type" url:"-"`
+	Fields                       []*PostV1BankImportTemplatesCreateRequestFieldsItem `json:"fields,omitempty" url:"-"`
+	MetaFields                   []string                                            `json:"metaFields,omitempty" url:"-"`
+	InvoiceMetaField             *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
+	InvoiceVatRatePercent        *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	CompanyMetaField             *string                                             `json:"companyMetaField,omitempty" url:"-"`
+	InvoiceItemID                *string                                             `json:"invoiceItemId,omitempty" url:"-"`
+	AdvanceInvoices              *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
+	AuthorizationOperationTypeID *string                                             `json:"authorizationOperationTypeId,omitempty" url:"-"`
+	PayoutOperationTypeID        *string                                             `json:"payoutOperationTypeId,omitempty" url:"-"`
+	CommissionOperationTypeID    *string                                             `json:"commissionOperationTypeId,omitempty" url:"-"`
+	LenderMetaField              *string                                             `json:"lenderMetaField,omitempty" url:"-"`
+	PartialRefundLabel           *string                                             `json:"partialRefundLabel,omitempty" url:"-"`
+	FullRefundLabel              *string                                             `json:"fullRefundLabel,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -259,6 +271,48 @@ func (p *PostV1BankImportTemplatesCreateRequest) SetInvoiceItemID(invoiceItemID 
 func (p *PostV1BankImportTemplatesCreateRequest) SetAdvanceInvoices(advanceInvoices *bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesCreateRequestFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesCreateRequestFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesCreateRequestFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesCreateRequestFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesCreateRequestFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesCreateRequestFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateRequest) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesCreateRequestFieldFullRefundLabel)
 }
 
 func (p *PostV1BankImportTemplatesCreateRequest) UnmarshalJSON(data []byte) error {
@@ -543,6 +597,7 @@ var (
 	postV1BankAccountsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankAccountsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankAccountsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankAccountsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankAccountsListRequest struct {
@@ -550,6 +605,8 @@ type PostV1BankAccountsListRequest struct {
 	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankAccountsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankAccountsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -588,6 +645,13 @@ func (p *PostV1BankAccountsListRequest) SetSort(sort []*PostV1BankAccountsListRe
 func (p *PostV1BankAccountsListRequest) SetFilter(filter []*PostV1BankAccountsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1BankAccountsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankAccountsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankAccountsListRequestFieldTotals)
 }
 
 func (p *PostV1BankAccountsListRequest) UnmarshalJSON(data []byte) error {
@@ -808,6 +872,7 @@ var (
 	postV1BankFeedsConnectionsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankFeedsConnectionsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankFeedsConnectionsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankFeedsConnectionsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankFeedsConnectionsListRequest struct {
@@ -815,6 +880,8 @@ type PostV1BankFeedsConnectionsListRequest struct {
 	PageSize *int64                                             `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankFeedsConnectionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankFeedsConnectionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -853,6 +920,13 @@ func (p *PostV1BankFeedsConnectionsListRequest) SetSort(sort []*PostV1BankFeedsC
 func (p *PostV1BankFeedsConnectionsListRequest) SetFilter(filter []*PostV1BankFeedsConnectionsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1BankFeedsConnectionsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankFeedsConnectionsListRequestFieldTotals)
 }
 
 func (p *PostV1BankFeedsConnectionsListRequest) UnmarshalJSON(data []byte) error {
@@ -973,6 +1047,7 @@ var (
 	postV1BankImportTemplatesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankImportTemplatesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankImportTemplatesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankImportTemplatesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankImportTemplatesListRequest struct {
@@ -980,6 +1055,8 @@ type PostV1BankImportTemplatesListRequest struct {
 	PageSize *int64                                            `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankImportTemplatesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankImportTemplatesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1020,6 +1097,13 @@ func (p *PostV1BankImportTemplatesListRequest) SetFilter(filter []*PostV1BankImp
 	p.require(postV1BankImportTemplatesListRequestFieldFilter)
 }
 
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankImportTemplatesListRequestFieldTotals)
+}
+
 func (p *PostV1BankImportTemplatesListRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1BankImportTemplatesListRequest
 	var body unmarshaler
@@ -1042,29 +1126,41 @@ func (p *PostV1BankImportTemplatesListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1BankImportTemplatesUpdateRequestFieldName                  = big.NewInt(1 << 0)
-	postV1BankImportTemplatesUpdateRequestFieldType                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesUpdateRequestFieldFields                = big.NewInt(1 << 2)
-	postV1BankImportTemplatesUpdateRequestFieldMetaFields            = big.NewInt(1 << 3)
-	postV1BankImportTemplatesUpdateRequestFieldInvoiceMetaField      = big.NewInt(1 << 4)
-	postV1BankImportTemplatesUpdateRequestFieldInvoiceVatRatePercent = big.NewInt(1 << 5)
-	postV1BankImportTemplatesUpdateRequestFieldCompanyMetaField      = big.NewInt(1 << 6)
-	postV1BankImportTemplatesUpdateRequestFieldInvoiceItemID         = big.NewInt(1 << 7)
-	postV1BankImportTemplatesUpdateRequestFieldAdvanceInvoices       = big.NewInt(1 << 8)
-	postV1BankImportTemplatesUpdateRequestFieldID                    = big.NewInt(1 << 9)
+	postV1BankImportTemplatesUpdateRequestFieldName                         = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateRequestFieldType                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateRequestFieldFields                       = big.NewInt(1 << 2)
+	postV1BankImportTemplatesUpdateRequestFieldMetaFields                   = big.NewInt(1 << 3)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceMetaField             = big.NewInt(1 << 4)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceVatRatePercent        = big.NewInt(1 << 5)
+	postV1BankImportTemplatesUpdateRequestFieldCompanyMetaField             = big.NewInt(1 << 6)
+	postV1BankImportTemplatesUpdateRequestFieldInvoiceItemID                = big.NewInt(1 << 7)
+	postV1BankImportTemplatesUpdateRequestFieldAdvanceInvoices              = big.NewInt(1 << 8)
+	postV1BankImportTemplatesUpdateRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 9)
+	postV1BankImportTemplatesUpdateRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 10)
+	postV1BankImportTemplatesUpdateRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 11)
+	postV1BankImportTemplatesUpdateRequestFieldLenderMetaField              = big.NewInt(1 << 12)
+	postV1BankImportTemplatesUpdateRequestFieldPartialRefundLabel           = big.NewInt(1 << 13)
+	postV1BankImportTemplatesUpdateRequestFieldFullRefundLabel              = big.NewInt(1 << 14)
+	postV1BankImportTemplatesUpdateRequestFieldID                           = big.NewInt(1 << 15)
 )
 
 type PostV1BankImportTemplatesUpdateRequest struct {
-	Name                  *string                                             `json:"name,omitempty" url:"-"`
-	Type                  *PostV1BankImportTemplatesUpdateRequestType         `json:"type,omitempty" url:"-"`
-	Fields                []*PostV1BankImportTemplatesUpdateRequestFieldsItem `json:"fields,omitempty" url:"-"`
-	MetaFields            []string                                            `json:"metaFields,omitempty" url:"-"`
-	InvoiceMetaField      *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
-	InvoiceVatRatePercent *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
-	CompanyMetaField      *string                                             `json:"companyMetaField,omitempty" url:"-"`
-	InvoiceItemID         *string                                             `json:"invoiceItemId,omitempty" url:"-"`
-	AdvanceInvoices       *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
-	ID                    string                                              `json:"id" url:"-"`
+	Name                         *string                                             `json:"name,omitempty" url:"-"`
+	Type                         *PostV1BankImportTemplatesUpdateRequestType         `json:"type,omitempty" url:"-"`
+	Fields                       []*PostV1BankImportTemplatesUpdateRequestFieldsItem `json:"fields,omitempty" url:"-"`
+	MetaFields                   []string                                            `json:"metaFields,omitempty" url:"-"`
+	InvoiceMetaField             *string                                             `json:"invoiceMetaField,omitempty" url:"-"`
+	InvoiceVatRatePercent        *string                                             `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	CompanyMetaField             *string                                             `json:"companyMetaField,omitempty" url:"-"`
+	InvoiceItemID                *string                                             `json:"invoiceItemId,omitempty" url:"-"`
+	AdvanceInvoices              *bool                                               `json:"advanceInvoices,omitempty" url:"-"`
+	AuthorizationOperationTypeID *string                                             `json:"authorizationOperationTypeId,omitempty" url:"-"`
+	PayoutOperationTypeID        *string                                             `json:"payoutOperationTypeId,omitempty" url:"-"`
+	CommissionOperationTypeID    *string                                             `json:"commissionOperationTypeId,omitempty" url:"-"`
+	LenderMetaField              *string                                             `json:"lenderMetaField,omitempty" url:"-"`
+	PartialRefundLabel           *string                                             `json:"partialRefundLabel,omitempty" url:"-"`
+	FullRefundLabel              *string                                             `json:"fullRefundLabel,omitempty" url:"-"`
+	ID                           string                                              `json:"id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1138,6 +1234,48 @@ func (p *PostV1BankImportTemplatesUpdateRequest) SetInvoiceItemID(invoiceItemID 
 func (p *PostV1BankImportTemplatesUpdateRequest) SetAdvanceInvoices(advanceInvoices *bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesUpdateRequestFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateRequestFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateRequestFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateRequestFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesUpdateRequestFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesUpdateRequestFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateRequest) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesUpdateRequestFieldFullRefundLabel)
 }
 
 // SetID sets the ID field and marks it as non-optional;
@@ -1383,6 +1521,7 @@ var (
 	postV1BankMandatesListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankMandatesListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankMandatesListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankMandatesListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankMandatesListRequest struct {
@@ -1390,6 +1529,8 @@ type PostV1BankMandatesListRequest struct {
 	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankMandatesListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankMandatesListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1428,6 +1569,13 @@ func (p *PostV1BankMandatesListRequest) SetSort(sort []*PostV1BankMandatesListRe
 func (p *PostV1BankMandatesListRequest) SetFilter(filter []*PostV1BankMandatesListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1BankMandatesListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMandatesListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankMandatesListRequestFieldTotals)
 }
 
 func (p *PostV1BankMandatesListRequest) UnmarshalJSON(data []byte) error {
@@ -1515,6 +1663,274 @@ func (p *PostV1BankMandatesUpdateRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1BankMandatesUpdateRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1BankMandatesUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankMatchRulesCreateRequestFieldName           = big.NewInt(1 << 0)
+	postV1BankMatchRulesCreateRequestFieldProvider       = big.NewInt(1 << 1)
+	postV1BankMatchRulesCreateRequestFieldPattern        = big.NewInt(1 << 2)
+	postV1BankMatchRulesCreateRequestFieldPayoutIDPrefix = big.NewInt(1 << 3)
+	postV1BankMatchRulesCreateRequestFieldBankAccountID  = big.NewInt(1 << 4)
+	postV1BankMatchRulesCreateRequestFieldDateWindowDays = big.NewInt(1 << 5)
+	postV1BankMatchRulesCreateRequestFieldIsActive       = big.NewInt(1 << 6)
+)
+
+type PostV1BankMatchRulesCreateRequest struct {
+	Name           string  `json:"name" url:"-"`
+	Provider       *string `json:"provider,omitempty" url:"-"`
+	Pattern        string  `json:"pattern" url:"-"`
+	PayoutIDPrefix *string `json:"payoutIdPrefix,omitempty" url:"-"`
+	BankAccountID  *string `json:"bankAccountId,omitempty" url:"-"`
+	DateWindowDays *int64  `json:"dateWindowDays,omitempty" url:"-"`
+	IsActive       *bool   `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankMatchRulesCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankMatchRulesCreateRequestFieldName)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetProvider(provider *string) {
+	p.Provider = provider
+	p.require(postV1BankMatchRulesCreateRequestFieldProvider)
+}
+
+// SetPattern sets the Pattern field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetPattern(pattern string) {
+	p.Pattern = pattern
+	p.require(postV1BankMatchRulesCreateRequestFieldPattern)
+}
+
+// SetPayoutIDPrefix sets the PayoutIDPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetPayoutIDPrefix(payoutIDPrefix *string) {
+	p.PayoutIDPrefix = payoutIDPrefix
+	p.require(postV1BankMatchRulesCreateRequestFieldPayoutIDPrefix)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankMatchRulesCreateRequestFieldBankAccountID)
+}
+
+// SetDateWindowDays sets the DateWindowDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetDateWindowDays(dateWindowDays *int64) {
+	p.DateWindowDays = dateWindowDays
+	p.require(postV1BankMatchRulesCreateRequestFieldDateWindowDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1BankMatchRulesCreateRequestFieldIsActive)
+}
+
+func (p *PostV1BankMatchRulesCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1BankMatchRulesDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1BankMatchRulesDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankMatchRulesDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesDeleteRequestFieldID)
+}
+
+func (p *PostV1BankMatchRulesDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1BankMatchRulesListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankMatchRulesListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
+	postV1BankMatchRulesUpdateRequestFieldID             = big.NewInt(1 << 0)
+	postV1BankMatchRulesUpdateRequestFieldName           = big.NewInt(1 << 1)
+	postV1BankMatchRulesUpdateRequestFieldProvider       = big.NewInt(1 << 2)
+	postV1BankMatchRulesUpdateRequestFieldPattern        = big.NewInt(1 << 3)
+	postV1BankMatchRulesUpdateRequestFieldPayoutIDPrefix = big.NewInt(1 << 4)
+	postV1BankMatchRulesUpdateRequestFieldBankAccountID  = big.NewInt(1 << 5)
+	postV1BankMatchRulesUpdateRequestFieldDateWindowDays = big.NewInt(1 << 6)
+	postV1BankMatchRulesUpdateRequestFieldIsActive       = big.NewInt(1 << 7)
+)
+
+type PostV1BankMatchRulesUpdateRequest struct {
+	ID             string  `json:"id" url:"-"`
+	Name           *string `json:"name,omitempty" url:"-"`
+	Provider       *string `json:"provider,omitempty" url:"-"`
+	Pattern        *string `json:"pattern,omitempty" url:"-"`
+	PayoutIDPrefix *string `json:"payoutIdPrefix,omitempty" url:"-"`
+	BankAccountID  *string `json:"bankAccountId,omitempty" url:"-"`
+	DateWindowDays *int64  `json:"dateWindowDays,omitempty" url:"-"`
+	IsActive       *bool   `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankMatchRulesUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesUpdateRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1BankMatchRulesUpdateRequestFieldName)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetProvider(provider *string) {
+	p.Provider = provider
+	p.require(postV1BankMatchRulesUpdateRequestFieldProvider)
+}
+
+// SetPattern sets the Pattern field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetPattern(pattern *string) {
+	p.Pattern = pattern
+	p.require(postV1BankMatchRulesUpdateRequestFieldPattern)
+}
+
+// SetPayoutIDPrefix sets the PayoutIDPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetPayoutIDPrefix(payoutIDPrefix *string) {
+	p.PayoutIDPrefix = payoutIDPrefix
+	p.require(postV1BankMatchRulesUpdateRequestFieldPayoutIDPrefix)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankMatchRulesUpdateRequestFieldBankAccountID)
+}
+
+// SetDateWindowDays sets the DateWindowDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetDateWindowDays(dateWindowDays *int64) {
+	p.DateWindowDays = dateWindowDays
+	p.require(postV1BankMatchRulesUpdateRequestFieldDateWindowDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateRequest) SetIsActive(isActive *bool) {
+	p.IsActive = isActive
+	p.require(postV1BankMatchRulesUpdateRequestFieldIsActive)
+}
+
+func (p *PostV1BankMatchRulesUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesUpdateRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1699,10 +2115,66 @@ func (p *PostV1BankSettlementsImportRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1BankSettlementsLinkRequestFieldID                = big.NewInt(1 << 0)
+	postV1BankSettlementsLinkRequestFieldBankTransactionID = big.NewInt(1 << 1)
+)
+
+type PostV1BankSettlementsLinkRequest struct {
+	ID                string `json:"id" url:"-"`
+	BankTransactionID string `json:"bankTransactionId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankSettlementsLinkRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankSettlementsLinkRequestFieldID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkRequest) SetBankTransactionID(bankTransactionID string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsLinkRequestFieldBankTransactionID)
+}
+
+func (p *PostV1BankSettlementsLinkRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsLinkRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsLinkRequest(body)
+	return nil
+}
+
+func (p *PostV1BankSettlementsLinkRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsLinkRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1BankSettlementsListRequestFieldPage     = big.NewInt(1 << 0)
 	postV1BankSettlementsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankSettlementsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankSettlementsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankSettlementsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankSettlementsListRequest struct {
@@ -1710,6 +2182,8 @@ type PostV1BankSettlementsListRequest struct {
 	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankSettlementsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankSettlementsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1748,6 +2222,13 @@ func (p *PostV1BankSettlementsListRequest) SetSort(sort []*PostV1BankSettlements
 func (p *PostV1BankSettlementsListRequest) SetFilter(filter []*PostV1BankSettlementsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1BankSettlementsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankSettlementsListRequestFieldTotals)
 }
 
 func (p *PostV1BankSettlementsListRequest) UnmarshalJSON(data []byte) error {
@@ -1891,10 +2372,57 @@ func (p *PostV1BankSettlementsPostRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1BankSettlementsUnlinkRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1BankSettlementsUnlinkRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankSettlementsUnlinkRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankSettlementsUnlinkRequestFieldID)
+}
+
+func (p *PostV1BankSettlementsUnlinkRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsUnlinkRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsUnlinkRequest(body)
+	return nil
+}
+
+func (p *PostV1BankSettlementsUnlinkRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsUnlinkRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1BankStatementsImportRequestFieldBankAccountID = big.NewInt(1 << 0)
 	postV1BankStatementsImportRequestFieldTemplateID    = big.NewInt(1 << 1)
 	postV1BankStatementsImportRequestFieldFormat        = big.NewInt(1 << 2)
 	postV1BankStatementsImportRequestFieldContent       = big.NewInt(1 << 3)
+	postV1BankStatementsImportRequestFieldTransfersCsv  = big.NewInt(1 << 4)
 )
 
 type PostV1BankStatementsImportRequest struct {
@@ -1902,6 +2430,8 @@ type PostV1BankStatementsImportRequest struct {
 	TemplateID    *string                                  `json:"templateId,omitempty" url:"-"`
 	Format        *PostV1BankStatementsImportRequestFormat `json:"format,omitempty" url:"-"`
 	Content       string                                   `json:"content" url:"-"`
+	// Stripe transfers export (plain CSV or base64) used to post lender payouts and commissions
+	TransfersCsv *string `json:"transfersCsv,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1940,6 +2470,13 @@ func (p *PostV1BankStatementsImportRequest) SetFormat(format *PostV1BankStatemen
 func (p *PostV1BankStatementsImportRequest) SetContent(content string) {
 	p.Content = content
 	p.require(postV1BankStatementsImportRequestFieldContent)
+}
+
+// SetTransfersCsv sets the TransfersCsv field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportRequest) SetTransfersCsv(transfersCsv *string) {
+	p.TransfersCsv = transfersCsv
+	p.require(postV1BankStatementsImportRequestFieldTransfersCsv)
 }
 
 func (p *PostV1BankStatementsImportRequest) UnmarshalJSON(data []byte) error {
@@ -2023,6 +2560,7 @@ var (
 	postV1BankTransactionsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1BankTransactionsListRequestFieldSort     = big.NewInt(1 << 2)
 	postV1BankTransactionsListRequestFieldFilter   = big.NewInt(1 << 3)
+	postV1BankTransactionsListRequestFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankTransactionsListRequest struct {
@@ -2030,6 +2568,8 @@ type PostV1BankTransactionsListRequest struct {
 	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
 	Sort     []*PostV1BankTransactionsListRequestSortItem   `json:"sort,omitempty" url:"-"`
 	Filter   []*PostV1BankTransactionsListRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2068,6 +2608,13 @@ func (p *PostV1BankTransactionsListRequest) SetSort(sort []*PostV1BankTransactio
 func (p *PostV1BankTransactionsListRequest) SetFilter(filter []*PostV1BankTransactionsListRequestFilterItem) {
 	p.Filter = filter
 	p.require(postV1BankTransactionsListRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsListRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(postV1BankTransactionsListRequestFieldTotals)
 }
 
 func (p *PostV1BankTransactionsListRequest) UnmarshalJSON(data []byte) error {
@@ -3043,6 +3590,7 @@ var (
 	postV1BankAccountsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankAccountsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankAccountsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankAccountsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankAccountsListResponse struct {
@@ -3050,6 +3598,7 @@ type PostV1BankAccountsListResponse struct {
 	Page     int64                                     `json:"page" url:"page"`
 	PageSize int64                                     `json:"pageSize" url:"pageSize"`
 	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3084,6 +3633,13 @@ func (p *PostV1BankAccountsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankAccountsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankAccountsListResponse) GetExtraProperties() map[string]interface{} {
@@ -3126,6 +3682,13 @@ func (p *PostV1BankAccountsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankAccountsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankAccountsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankAccountsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankAccountsListResponseFieldTotals)
 }
 
 func (p *PostV1BankAccountsListResponse) UnmarshalJSON(data []byte) error {
@@ -6413,6 +6976,7 @@ var (
 	postV1BankFeedsConnectionsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankFeedsConnectionsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankFeedsConnectionsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankFeedsConnectionsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankFeedsConnectionsListResponse struct {
@@ -6420,6 +6984,7 @@ type PostV1BankFeedsConnectionsListResponse struct {
 	Page     int64                                             `json:"page" url:"page"`
 	PageSize int64                                             `json:"pageSize" url:"pageSize"`
 	Total    int64                                             `json:"total" url:"total"`
+	Totals   map[string]string                                 `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6454,6 +7019,13 @@ func (p *PostV1BankFeedsConnectionsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankFeedsConnectionsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankFeedsConnectionsListResponse) GetExtraProperties() map[string]interface{} {
@@ -6496,6 +7068,13 @@ func (p *PostV1BankFeedsConnectionsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankFeedsConnectionsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankFeedsConnectionsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankFeedsConnectionsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankFeedsConnectionsListResponseFieldTotals)
 }
 
 func (p *PostV1BankFeedsConnectionsListResponse) UnmarshalJSON(data []byte) error {
@@ -7493,33 +8072,45 @@ func (p PostV1BankImportTemplatesCreateRequestType) Ptr() *PostV1BankImportTempl
 }
 
 var (
-	postV1BankImportTemplatesCreateResponseFieldID                    = big.NewInt(1 << 0)
-	postV1BankImportTemplatesCreateResponseFieldName                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesCreateResponseFieldType                  = big.NewInt(1 << 2)
-	postV1BankImportTemplatesCreateResponseFieldFields                = big.NewInt(1 << 3)
-	postV1BankImportTemplatesCreateResponseFieldMetaFields            = big.NewInt(1 << 4)
-	postV1BankImportTemplatesCreateResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
-	postV1BankImportTemplatesCreateResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
-	postV1BankImportTemplatesCreateResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
-	postV1BankImportTemplatesCreateResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
-	postV1BankImportTemplatesCreateResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
-	postV1BankImportTemplatesCreateResponseFieldCreatedAt             = big.NewInt(1 << 10)
-	postV1BankImportTemplatesCreateResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+	postV1BankImportTemplatesCreateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1BankImportTemplatesCreateResponseFieldName                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesCreateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1BankImportTemplatesCreateResponseFieldFields                       = big.NewInt(1 << 3)
+	postV1BankImportTemplatesCreateResponseFieldMetaFields                   = big.NewInt(1 << 4)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
+	postV1BankImportTemplatesCreateResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
+	postV1BankImportTemplatesCreateResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
+	postV1BankImportTemplatesCreateResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	postV1BankImportTemplatesCreateResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	postV1BankImportTemplatesCreateResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	postV1BankImportTemplatesCreateResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	postV1BankImportTemplatesCreateResponseFieldLenderMetaField              = big.NewInt(1 << 13)
+	postV1BankImportTemplatesCreateResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	postV1BankImportTemplatesCreateResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
+	postV1BankImportTemplatesCreateResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	postV1BankImportTemplatesCreateResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
 )
 
 type PostV1BankImportTemplatesCreateResponse struct {
-	ID                    string                                               `json:"id" url:"id"`
-	Name                  string                                               `json:"name" url:"name"`
-	Type                  PostV1BankImportTemplatesCreateResponseType          `json:"type" url:"type"`
-	Fields                []*PostV1BankImportTemplatesCreateResponseFieldsItem `json:"fields" url:"fields"`
-	MetaFields            []string                                             `json:"metaFields" url:"metaFields"`
-	InvoiceMetaField      *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
-	InvoiceVatRatePercent *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
-	CompanyMetaField      *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
-	InvoiceItemID         *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
-	AdvanceInvoices       bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
-	CreatedAt             string                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt             string                                               `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                               `json:"id" url:"id"`
+	Name                         string                                               `json:"name" url:"name"`
+	Type                         PostV1BankImportTemplatesCreateResponseType          `json:"type" url:"type"`
+	Fields                       []*PostV1BankImportTemplatesCreateResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields                   []string                                             `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField             *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent        *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField             *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID                *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices              bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
+	AuthorizationOperationTypeID *string                                              `json:"authorizationOperationTypeId,omitempty" url:"authorizationOperationTypeId,omitempty"`
+	PayoutOperationTypeID        *string                                              `json:"payoutOperationTypeId,omitempty" url:"payoutOperationTypeId,omitempty"`
+	CommissionOperationTypeID    *string                                              `json:"commissionOperationTypeId,omitempty" url:"commissionOperationTypeId,omitempty"`
+	LenderMetaField              *string                                              `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
+	PartialRefundLabel           *string                                              `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
+	FullRefundLabel              *string                                              `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
+	CreatedAt                    string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                               `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7596,6 +8187,48 @@ func (p *PostV1BankImportTemplatesCreateResponse) GetAdvanceInvoices() bool {
 		return false
 	}
 	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetAuthorizationOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorizationOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetPayoutOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetCommissionOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetLenderMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LenderMetaField
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetPartialRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartialRefundLabel
+}
+
+func (p *PostV1BankImportTemplatesCreateResponse) GetFullRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FullRefundLabel
 }
 
 func (p *PostV1BankImportTemplatesCreateResponse) GetCreatedAt() string {
@@ -7694,6 +8327,48 @@ func (p *PostV1BankImportTemplatesCreateResponse) SetInvoiceItemID(invoiceItemID
 func (p *PostV1BankImportTemplatesCreateResponse) SetAdvanceInvoices(advanceInvoices bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesCreateResponseFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesCreateResponseFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesCreateResponseFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesCreateResponseFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesCreateResponseFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesCreateResponseFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesCreateResponse) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesCreateResponseFieldFullRefundLabel)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7994,33 +8669,45 @@ func (p *PostV1BankImportTemplatesDeleteResponse) String() string {
 }
 
 var (
-	postV1BankImportTemplatesGetResponseFieldID                    = big.NewInt(1 << 0)
-	postV1BankImportTemplatesGetResponseFieldName                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesGetResponseFieldType                  = big.NewInt(1 << 2)
-	postV1BankImportTemplatesGetResponseFieldFields                = big.NewInt(1 << 3)
-	postV1BankImportTemplatesGetResponseFieldMetaFields            = big.NewInt(1 << 4)
-	postV1BankImportTemplatesGetResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
-	postV1BankImportTemplatesGetResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
-	postV1BankImportTemplatesGetResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
-	postV1BankImportTemplatesGetResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
-	postV1BankImportTemplatesGetResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
-	postV1BankImportTemplatesGetResponseFieldCreatedAt             = big.NewInt(1 << 10)
-	postV1BankImportTemplatesGetResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+	postV1BankImportTemplatesGetResponseFieldID                           = big.NewInt(1 << 0)
+	postV1BankImportTemplatesGetResponseFieldName                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesGetResponseFieldType                         = big.NewInt(1 << 2)
+	postV1BankImportTemplatesGetResponseFieldFields                       = big.NewInt(1 << 3)
+	postV1BankImportTemplatesGetResponseFieldMetaFields                   = big.NewInt(1 << 4)
+	postV1BankImportTemplatesGetResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
+	postV1BankImportTemplatesGetResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
+	postV1BankImportTemplatesGetResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
+	postV1BankImportTemplatesGetResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
+	postV1BankImportTemplatesGetResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	postV1BankImportTemplatesGetResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	postV1BankImportTemplatesGetResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	postV1BankImportTemplatesGetResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	postV1BankImportTemplatesGetResponseFieldLenderMetaField              = big.NewInt(1 << 13)
+	postV1BankImportTemplatesGetResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	postV1BankImportTemplatesGetResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
+	postV1BankImportTemplatesGetResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	postV1BankImportTemplatesGetResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
 )
 
 type PostV1BankImportTemplatesGetResponse struct {
-	ID                    string                                            `json:"id" url:"id"`
-	Name                  string                                            `json:"name" url:"name"`
-	Type                  PostV1BankImportTemplatesGetResponseType          `json:"type" url:"type"`
-	Fields                []*PostV1BankImportTemplatesGetResponseFieldsItem `json:"fields" url:"fields"`
-	MetaFields            []string                                          `json:"metaFields" url:"metaFields"`
-	InvoiceMetaField      *string                                           `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
-	InvoiceVatRatePercent *string                                           `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
-	CompanyMetaField      *string                                           `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
-	InvoiceItemID         *string                                           `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
-	AdvanceInvoices       bool                                              `json:"advanceInvoices" url:"advanceInvoices"`
-	CreatedAt             string                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt             string                                            `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                            `json:"id" url:"id"`
+	Name                         string                                            `json:"name" url:"name"`
+	Type                         PostV1BankImportTemplatesGetResponseType          `json:"type" url:"type"`
+	Fields                       []*PostV1BankImportTemplatesGetResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields                   []string                                          `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField             *string                                           `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent        *string                                           `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField             *string                                           `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID                *string                                           `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices              bool                                              `json:"advanceInvoices" url:"advanceInvoices"`
+	AuthorizationOperationTypeID *string                                           `json:"authorizationOperationTypeId,omitempty" url:"authorizationOperationTypeId,omitempty"`
+	PayoutOperationTypeID        *string                                           `json:"payoutOperationTypeId,omitempty" url:"payoutOperationTypeId,omitempty"`
+	CommissionOperationTypeID    *string                                           `json:"commissionOperationTypeId,omitempty" url:"commissionOperationTypeId,omitempty"`
+	LenderMetaField              *string                                           `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
+	PartialRefundLabel           *string                                           `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
+	FullRefundLabel              *string                                           `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
+	CreatedAt                    string                                            `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                            `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8097,6 +8784,48 @@ func (p *PostV1BankImportTemplatesGetResponse) GetAdvanceInvoices() bool {
 		return false
 	}
 	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetAuthorizationOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorizationOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetPayoutOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetCommissionOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetLenderMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LenderMetaField
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetPartialRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartialRefundLabel
+}
+
+func (p *PostV1BankImportTemplatesGetResponse) GetFullRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FullRefundLabel
 }
 
 func (p *PostV1BankImportTemplatesGetResponse) GetCreatedAt() string {
@@ -8195,6 +8924,48 @@ func (p *PostV1BankImportTemplatesGetResponse) SetInvoiceItemID(invoiceItemID *s
 func (p *PostV1BankImportTemplatesGetResponse) SetAdvanceInvoices(advanceInvoices bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesGetResponseFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesGetResponseFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesGetResponseFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesGetResponseFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesGetResponseFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesGetResponseFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesGetResponse) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesGetResponseFieldFullRefundLabel)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8837,6 +9608,7 @@ var (
 	postV1BankImportTemplatesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankImportTemplatesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankImportTemplatesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankImportTemplatesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankImportTemplatesListResponse struct {
@@ -8844,6 +9616,7 @@ type PostV1BankImportTemplatesListResponse struct {
 	Page     int64                                            `json:"page" url:"page"`
 	PageSize int64                                            `json:"pageSize" url:"pageSize"`
 	Total    int64                                            `json:"total" url:"total"`
+	Totals   map[string]string                                `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8878,6 +9651,13 @@ func (p *PostV1BankImportTemplatesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankImportTemplatesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankImportTemplatesListResponse) GetExtraProperties() map[string]interface{} {
@@ -8920,6 +9700,13 @@ func (p *PostV1BankImportTemplatesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankImportTemplatesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankImportTemplatesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankImportTemplatesListResponseFieldTotals)
 }
 
 func (p *PostV1BankImportTemplatesListResponse) UnmarshalJSON(data []byte) error {
@@ -8965,33 +9752,45 @@ func (p *PostV1BankImportTemplatesListResponse) String() string {
 }
 
 var (
-	postV1BankImportTemplatesListResponseRowsItemFieldID                    = big.NewInt(1 << 0)
-	postV1BankImportTemplatesListResponseRowsItemFieldName                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesListResponseRowsItemFieldType                  = big.NewInt(1 << 2)
-	postV1BankImportTemplatesListResponseRowsItemFieldFields                = big.NewInt(1 << 3)
-	postV1BankImportTemplatesListResponseRowsItemFieldMetaFields            = big.NewInt(1 << 4)
-	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceMetaField      = big.NewInt(1 << 5)
-	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
-	postV1BankImportTemplatesListResponseRowsItemFieldCompanyMetaField      = big.NewInt(1 << 7)
-	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceItemID         = big.NewInt(1 << 8)
-	postV1BankImportTemplatesListResponseRowsItemFieldAdvanceInvoices       = big.NewInt(1 << 9)
-	postV1BankImportTemplatesListResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 10)
-	postV1BankImportTemplatesListResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 11)
+	postV1BankImportTemplatesListResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	postV1BankImportTemplatesListResponseRowsItemFieldName                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesListResponseRowsItemFieldType                         = big.NewInt(1 << 2)
+	postV1BankImportTemplatesListResponseRowsItemFieldFields                       = big.NewInt(1 << 3)
+	postV1BankImportTemplatesListResponseRowsItemFieldMetaFields                   = big.NewInt(1 << 4)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceMetaField             = big.NewInt(1 << 5)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
+	postV1BankImportTemplatesListResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 7)
+	postV1BankImportTemplatesListResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 8)
+	postV1BankImportTemplatesListResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	postV1BankImportTemplatesListResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	postV1BankImportTemplatesListResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	postV1BankImportTemplatesListResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	postV1BankImportTemplatesListResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 13)
+	postV1BankImportTemplatesListResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	postV1BankImportTemplatesListResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 15)
+	postV1BankImportTemplatesListResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 16)
+	postV1BankImportTemplatesListResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 17)
 )
 
 type PostV1BankImportTemplatesListResponseRowsItem struct {
-	ID                    string                                                     `json:"id" url:"id"`
-	Name                  string                                                     `json:"name" url:"name"`
-	Type                  PostV1BankImportTemplatesListResponseRowsItemType          `json:"type" url:"type"`
-	Fields                []*PostV1BankImportTemplatesListResponseRowsItemFieldsItem `json:"fields" url:"fields"`
-	MetaFields            []string                                                   `json:"metaFields" url:"metaFields"`
-	InvoiceMetaField      *string                                                    `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
-	InvoiceVatRatePercent *string                                                    `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
-	CompanyMetaField      *string                                                    `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
-	InvoiceItemID         *string                                                    `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
-	AdvanceInvoices       bool                                                       `json:"advanceInvoices" url:"advanceInvoices"`
-	CreatedAt             string                                                     `json:"createdAt" url:"createdAt"`
-	UpdatedAt             string                                                     `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                                     `json:"id" url:"id"`
+	Name                         string                                                     `json:"name" url:"name"`
+	Type                         PostV1BankImportTemplatesListResponseRowsItemType          `json:"type" url:"type"`
+	Fields                       []*PostV1BankImportTemplatesListResponseRowsItemFieldsItem `json:"fields" url:"fields"`
+	MetaFields                   []string                                                   `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField             *string                                                    `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent        *string                                                    `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField             *string                                                    `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID                *string                                                    `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices              bool                                                       `json:"advanceInvoices" url:"advanceInvoices"`
+	AuthorizationOperationTypeID *string                                                    `json:"authorizationOperationTypeId,omitempty" url:"authorizationOperationTypeId,omitempty"`
+	PayoutOperationTypeID        *string                                                    `json:"payoutOperationTypeId,omitempty" url:"payoutOperationTypeId,omitempty"`
+	CommissionOperationTypeID    *string                                                    `json:"commissionOperationTypeId,omitempty" url:"commissionOperationTypeId,omitempty"`
+	LenderMetaField              *string                                                    `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
+	PartialRefundLabel           *string                                                    `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
+	FullRefundLabel              *string                                                    `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
+	CreatedAt                    string                                                     `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                                     `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9068,6 +9867,48 @@ func (p *PostV1BankImportTemplatesListResponseRowsItem) GetAdvanceInvoices() boo
 		return false
 	}
 	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetAuthorizationOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorizationOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetPayoutOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetCommissionOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetLenderMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LenderMetaField
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetPartialRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartialRefundLabel
+}
+
+func (p *PostV1BankImportTemplatesListResponseRowsItem) GetFullRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FullRefundLabel
 }
 
 func (p *PostV1BankImportTemplatesListResponseRowsItem) GetCreatedAt() string {
@@ -9166,6 +10007,48 @@ func (p *PostV1BankImportTemplatesListResponseRowsItem) SetInvoiceItemID(invoice
 func (p *PostV1BankImportTemplatesListResponseRowsItem) SetAdvanceInvoices(advanceInvoices bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesListResponseRowsItemFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesListResponseRowsItem) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesListResponseRowsItemFieldFullRefundLabel)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -9507,33 +10390,45 @@ func (p PostV1BankImportTemplatesUpdateRequestType) Ptr() *PostV1BankImportTempl
 }
 
 var (
-	postV1BankImportTemplatesUpdateResponseFieldID                    = big.NewInt(1 << 0)
-	postV1BankImportTemplatesUpdateResponseFieldName                  = big.NewInt(1 << 1)
-	postV1BankImportTemplatesUpdateResponseFieldType                  = big.NewInt(1 << 2)
-	postV1BankImportTemplatesUpdateResponseFieldFields                = big.NewInt(1 << 3)
-	postV1BankImportTemplatesUpdateResponseFieldMetaFields            = big.NewInt(1 << 4)
-	postV1BankImportTemplatesUpdateResponseFieldInvoiceMetaField      = big.NewInt(1 << 5)
-	postV1BankImportTemplatesUpdateResponseFieldInvoiceVatRatePercent = big.NewInt(1 << 6)
-	postV1BankImportTemplatesUpdateResponseFieldCompanyMetaField      = big.NewInt(1 << 7)
-	postV1BankImportTemplatesUpdateResponseFieldInvoiceItemID         = big.NewInt(1 << 8)
-	postV1BankImportTemplatesUpdateResponseFieldAdvanceInvoices       = big.NewInt(1 << 9)
-	postV1BankImportTemplatesUpdateResponseFieldCreatedAt             = big.NewInt(1 << 10)
-	postV1BankImportTemplatesUpdateResponseFieldUpdatedAt             = big.NewInt(1 << 11)
+	postV1BankImportTemplatesUpdateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1BankImportTemplatesUpdateResponseFieldName                         = big.NewInt(1 << 1)
+	postV1BankImportTemplatesUpdateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1BankImportTemplatesUpdateResponseFieldFields                       = big.NewInt(1 << 3)
+	postV1BankImportTemplatesUpdateResponseFieldMetaFields                   = big.NewInt(1 << 4)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
+	postV1BankImportTemplatesUpdateResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
+	postV1BankImportTemplatesUpdateResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
+	postV1BankImportTemplatesUpdateResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	postV1BankImportTemplatesUpdateResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	postV1BankImportTemplatesUpdateResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	postV1BankImportTemplatesUpdateResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	postV1BankImportTemplatesUpdateResponseFieldLenderMetaField              = big.NewInt(1 << 13)
+	postV1BankImportTemplatesUpdateResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	postV1BankImportTemplatesUpdateResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
+	postV1BankImportTemplatesUpdateResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	postV1BankImportTemplatesUpdateResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
 )
 
 type PostV1BankImportTemplatesUpdateResponse struct {
-	ID                    string                                               `json:"id" url:"id"`
-	Name                  string                                               `json:"name" url:"name"`
-	Type                  PostV1BankImportTemplatesUpdateResponseType          `json:"type" url:"type"`
-	Fields                []*PostV1BankImportTemplatesUpdateResponseFieldsItem `json:"fields" url:"fields"`
-	MetaFields            []string                                             `json:"metaFields" url:"metaFields"`
-	InvoiceMetaField      *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
-	InvoiceVatRatePercent *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
-	CompanyMetaField      *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
-	InvoiceItemID         *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
-	AdvanceInvoices       bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
-	CreatedAt             string                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt             string                                               `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                               `json:"id" url:"id"`
+	Name                         string                                               `json:"name" url:"name"`
+	Type                         PostV1BankImportTemplatesUpdateResponseType          `json:"type" url:"type"`
+	Fields                       []*PostV1BankImportTemplatesUpdateResponseFieldsItem `json:"fields" url:"fields"`
+	MetaFields                   []string                                             `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField             *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent        *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField             *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID                *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices              bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
+	AuthorizationOperationTypeID *string                                              `json:"authorizationOperationTypeId,omitempty" url:"authorizationOperationTypeId,omitempty"`
+	PayoutOperationTypeID        *string                                              `json:"payoutOperationTypeId,omitempty" url:"payoutOperationTypeId,omitempty"`
+	CommissionOperationTypeID    *string                                              `json:"commissionOperationTypeId,omitempty" url:"commissionOperationTypeId,omitempty"`
+	LenderMetaField              *string                                              `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
+	PartialRefundLabel           *string                                              `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
+	FullRefundLabel              *string                                              `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
+	CreatedAt                    string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                               `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9610,6 +10505,48 @@ func (p *PostV1BankImportTemplatesUpdateResponse) GetAdvanceInvoices() bool {
 		return false
 	}
 	return p.AdvanceInvoices
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetAuthorizationOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuthorizationOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetPayoutOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetCommissionOperationTypeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionOperationTypeID
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetLenderMetaField() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LenderMetaField
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetPartialRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartialRefundLabel
+}
+
+func (p *PostV1BankImportTemplatesUpdateResponse) GetFullRefundLabel() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FullRefundLabel
 }
 
 func (p *PostV1BankImportTemplatesUpdateResponse) GetCreatedAt() string {
@@ -9708,6 +10645,48 @@ func (p *PostV1BankImportTemplatesUpdateResponse) SetInvoiceItemID(invoiceItemID
 func (p *PostV1BankImportTemplatesUpdateResponse) SetAdvanceInvoices(advanceInvoices bool) {
 	p.AdvanceInvoices = advanceInvoices
 	p.require(postV1BankImportTemplatesUpdateResponseFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	p.AuthorizationOperationTypeID = authorizationOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateResponseFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	p.PayoutOperationTypeID = payoutOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateResponseFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	p.CommissionOperationTypeID = commissionOperationTypeID
+	p.require(postV1BankImportTemplatesUpdateResponseFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetLenderMetaField(lenderMetaField *string) {
+	p.LenderMetaField = lenderMetaField
+	p.require(postV1BankImportTemplatesUpdateResponseFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetPartialRefundLabel(partialRefundLabel *string) {
+	p.PartialRefundLabel = partialRefundLabel
+	p.require(postV1BankImportTemplatesUpdateResponseFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankImportTemplatesUpdateResponse) SetFullRefundLabel(fullRefundLabel *string) {
+	p.FullRefundLabel = fullRefundLabel
+	p.require(postV1BankImportTemplatesUpdateResponseFieldFullRefundLabel)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -11573,6 +12552,7 @@ var (
 	postV1BankMandatesListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankMandatesListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankMandatesListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankMandatesListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankMandatesListResponse struct {
@@ -11580,6 +12560,7 @@ type PostV1BankMandatesListResponse struct {
 	Page     int64                                     `json:"page" url:"page"`
 	PageSize int64                                     `json:"pageSize" url:"pageSize"`
 	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11614,6 +12595,13 @@ func (p *PostV1BankMandatesListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankMandatesListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankMandatesListResponse) GetExtraProperties() map[string]interface{} {
@@ -11656,6 +12644,13 @@ func (p *PostV1BankMandatesListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankMandatesListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankMandatesListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMandatesListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankMandatesListResponseFieldTotals)
 }
 
 func (p *PostV1BankMandatesListResponse) UnmarshalJSON(data []byte) error {
@@ -12487,6 +13482,810 @@ func (p PostV1BankMandatesUpdateResponseStatus) Ptr() *PostV1BankMandatesUpdateR
 }
 
 var (
+	postV1BankMatchRulesCreateResponseFieldID             = big.NewInt(1 << 0)
+	postV1BankMatchRulesCreateResponseFieldName           = big.NewInt(1 << 1)
+	postV1BankMatchRulesCreateResponseFieldProvider       = big.NewInt(1 << 2)
+	postV1BankMatchRulesCreateResponseFieldPattern        = big.NewInt(1 << 3)
+	postV1BankMatchRulesCreateResponseFieldPayoutIDPrefix = big.NewInt(1 << 4)
+	postV1BankMatchRulesCreateResponseFieldBankAccountID  = big.NewInt(1 << 5)
+	postV1BankMatchRulesCreateResponseFieldDateWindowDays = big.NewInt(1 << 6)
+	postV1BankMatchRulesCreateResponseFieldIsActive       = big.NewInt(1 << 7)
+	postV1BankMatchRulesCreateResponseFieldCreatedAt      = big.NewInt(1 << 8)
+)
+
+type PostV1BankMatchRulesCreateResponse struct {
+	ID             string  `json:"id" url:"id"`
+	Name           string  `json:"name" url:"name"`
+	Provider       string  `json:"provider" url:"provider"`
+	Pattern        string  `json:"pattern" url:"pattern"`
+	PayoutIDPrefix *string `json:"payoutIdPrefix,omitempty" url:"payoutIdPrefix,omitempty"`
+	BankAccountID  *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	DateWindowDays int64   `json:"dateWindowDays" url:"dateWindowDays"`
+	IsActive       bool    `json:"isActive" url:"isActive"`
+	CreatedAt      string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetProvider() string {
+	if p == nil {
+		return ""
+	}
+	return p.Provider
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetPattern() string {
+	if p == nil {
+		return ""
+	}
+	return p.Pattern
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetPayoutIDPrefix() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutIDPrefix
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetDateWindowDays() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DateWindowDays
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesCreateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankMatchRulesCreateResponseFieldName)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetProvider(provider string) {
+	p.Provider = provider
+	p.require(postV1BankMatchRulesCreateResponseFieldProvider)
+}
+
+// SetPattern sets the Pattern field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetPattern(pattern string) {
+	p.Pattern = pattern
+	p.require(postV1BankMatchRulesCreateResponseFieldPattern)
+}
+
+// SetPayoutIDPrefix sets the PayoutIDPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetPayoutIDPrefix(payoutIDPrefix *string) {
+	p.PayoutIDPrefix = payoutIDPrefix
+	p.require(postV1BankMatchRulesCreateResponseFieldPayoutIDPrefix)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankMatchRulesCreateResponseFieldBankAccountID)
+}
+
+// SetDateWindowDays sets the DateWindowDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetDateWindowDays(dateWindowDays int64) {
+	p.DateWindowDays = dateWindowDays
+	p.require(postV1BankMatchRulesCreateResponseFieldDateWindowDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1BankMatchRulesCreateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesCreateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankMatchRulesCreateResponseFieldCreatedAt)
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankMatchRulesCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankMatchRulesDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1BankMatchRulesDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesDeleteResponseFieldID)
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankMatchRulesDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankMatchRulesListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1BankMatchRulesListResponse struct {
+	Rows []*PostV1BankMatchRulesListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankMatchRulesListResponse) GetRows() []*PostV1BankMatchRulesListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1BankMatchRulesListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankMatchRulesListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponse) SetRows(rows []*PostV1BankMatchRulesListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1BankMatchRulesListResponseFieldRows)
+}
+
+func (p *PostV1BankMatchRulesListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankMatchRulesListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankMatchRulesListResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	postV1BankMatchRulesListResponseRowsItemFieldName           = big.NewInt(1 << 1)
+	postV1BankMatchRulesListResponseRowsItemFieldProvider       = big.NewInt(1 << 2)
+	postV1BankMatchRulesListResponseRowsItemFieldPattern        = big.NewInt(1 << 3)
+	postV1BankMatchRulesListResponseRowsItemFieldPayoutIDPrefix = big.NewInt(1 << 4)
+	postV1BankMatchRulesListResponseRowsItemFieldBankAccountID  = big.NewInt(1 << 5)
+	postV1BankMatchRulesListResponseRowsItemFieldDateWindowDays = big.NewInt(1 << 6)
+	postV1BankMatchRulesListResponseRowsItemFieldIsActive       = big.NewInt(1 << 7)
+	postV1BankMatchRulesListResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 8)
+)
+
+type PostV1BankMatchRulesListResponseRowsItem struct {
+	ID             string  `json:"id" url:"id"`
+	Name           string  `json:"name" url:"name"`
+	Provider       string  `json:"provider" url:"provider"`
+	Pattern        string  `json:"pattern" url:"pattern"`
+	PayoutIDPrefix *string `json:"payoutIdPrefix,omitempty" url:"payoutIdPrefix,omitempty"`
+	BankAccountID  *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	DateWindowDays int64   `json:"dateWindowDays" url:"dateWindowDays"`
+	IsActive       bool    `json:"isActive" url:"isActive"`
+	CreatedAt      string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetProvider() string {
+	if p == nil {
+		return ""
+	}
+	return p.Provider
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetPattern() string {
+	if p == nil {
+		return ""
+	}
+	return p.Pattern
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetPayoutIDPrefix() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutIDPrefix
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetDateWindowDays() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DateWindowDays
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldName)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetProvider(provider string) {
+	p.Provider = provider
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldProvider)
+}
+
+// SetPattern sets the Pattern field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetPattern(pattern string) {
+	p.Pattern = pattern
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldPattern)
+}
+
+// SetPayoutIDPrefix sets the PayoutIDPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetPayoutIDPrefix(payoutIDPrefix *string) {
+	p.PayoutIDPrefix = payoutIDPrefix
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldPayoutIDPrefix)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldBankAccountID)
+}
+
+// SetDateWindowDays sets the DateWindowDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetDateWindowDays(dateWindowDays int64) {
+	p.DateWindowDays = dateWindowDays
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldDateWindowDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesListResponseRowsItem) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankMatchRulesListResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankMatchRulesListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1BankMatchRulesUpdateResponseFieldID             = big.NewInt(1 << 0)
+	postV1BankMatchRulesUpdateResponseFieldName           = big.NewInt(1 << 1)
+	postV1BankMatchRulesUpdateResponseFieldProvider       = big.NewInt(1 << 2)
+	postV1BankMatchRulesUpdateResponseFieldPattern        = big.NewInt(1 << 3)
+	postV1BankMatchRulesUpdateResponseFieldPayoutIDPrefix = big.NewInt(1 << 4)
+	postV1BankMatchRulesUpdateResponseFieldBankAccountID  = big.NewInt(1 << 5)
+	postV1BankMatchRulesUpdateResponseFieldDateWindowDays = big.NewInt(1 << 6)
+	postV1BankMatchRulesUpdateResponseFieldIsActive       = big.NewInt(1 << 7)
+	postV1BankMatchRulesUpdateResponseFieldCreatedAt      = big.NewInt(1 << 8)
+)
+
+type PostV1BankMatchRulesUpdateResponse struct {
+	ID             string  `json:"id" url:"id"`
+	Name           string  `json:"name" url:"name"`
+	Provider       string  `json:"provider" url:"provider"`
+	Pattern        string  `json:"pattern" url:"pattern"`
+	PayoutIDPrefix *string `json:"payoutIdPrefix,omitempty" url:"payoutIdPrefix,omitempty"`
+	BankAccountID  *string `json:"bankAccountId,omitempty" url:"bankAccountId,omitempty"`
+	DateWindowDays int64   `json:"dateWindowDays" url:"dateWindowDays"`
+	IsActive       bool    `json:"isActive" url:"isActive"`
+	CreatedAt      string  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetProvider() string {
+	if p == nil {
+		return ""
+	}
+	return p.Provider
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetPattern() string {
+	if p == nil {
+		return ""
+	}
+	return p.Pattern
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetPayoutIDPrefix() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutIDPrefix
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetBankAccountID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetDateWindowDays() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DateWindowDays
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetIsActive() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsActive
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankMatchRulesUpdateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1BankMatchRulesUpdateResponseFieldName)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetProvider(provider string) {
+	p.Provider = provider
+	p.require(postV1BankMatchRulesUpdateResponseFieldProvider)
+}
+
+// SetPattern sets the Pattern field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetPattern(pattern string) {
+	p.Pattern = pattern
+	p.require(postV1BankMatchRulesUpdateResponseFieldPattern)
+}
+
+// SetPayoutIDPrefix sets the PayoutIDPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetPayoutIDPrefix(payoutIDPrefix *string) {
+	p.PayoutIDPrefix = payoutIDPrefix
+	p.require(postV1BankMatchRulesUpdateResponseFieldPayoutIDPrefix)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetBankAccountID(bankAccountID *string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankMatchRulesUpdateResponseFieldBankAccountID)
+}
+
+// SetDateWindowDays sets the DateWindowDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetDateWindowDays(dateWindowDays int64) {
+	p.DateWindowDays = dateWindowDays
+	p.require(postV1BankMatchRulesUpdateResponseFieldDateWindowDays)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetIsActive(isActive bool) {
+	p.IsActive = isActive
+	p.require(postV1BankMatchRulesUpdateResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankMatchRulesUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankMatchRulesUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankMatchRulesUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankMatchRulesUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankMatchRulesUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankMatchRulesUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1BankPaymentsExportResponseFieldMessageID        = big.NewInt(1 << 0)
 	postV1BankPaymentsExportResponseFieldFileName         = big.NewInt(1 << 1)
 	postV1BankPaymentsExportResponseFieldTransactionCount = big.NewInt(1 << 2)
@@ -12646,12 +14445,13 @@ var (
 	postV1BankSettlementsGetResponseFieldNetTotal             = big.NewInt(1 << 8)
 	postV1BankSettlementsGetResponseFieldStatus               = big.NewInt(1 << 9)
 	postV1BankSettlementsGetResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsGetResponseFieldLineCount            = big.NewInt(1 << 11)
-	postV1BankSettlementsGetResponseFieldMatchedCount         = big.NewInt(1 << 12)
-	postV1BankSettlementsGetResponseFieldUnmatchedCount       = big.NewInt(1 << 13)
-	postV1BankSettlementsGetResponseFieldCreatedAt            = big.NewInt(1 << 14)
-	postV1BankSettlementsGetResponseFieldUpdatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsGetResponseFieldLines                = big.NewInt(1 << 16)
+	postV1BankSettlementsGetResponseFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsGetResponseFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsGetResponseFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsGetResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsGetResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsGetResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsGetResponseFieldLines                = big.NewInt(1 << 17)
 )
 
 type PostV1BankSettlementsGetResponse struct {
@@ -12666,6 +14466,7 @@ type PostV1BankSettlementsGetResponse struct {
 	NetTotal             string                                       `json:"netTotal" url:"netTotal"`
 	Status               PostV1BankSettlementsGetResponseStatus       `json:"status" url:"status"`
 	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                      `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
 	LineCount            int64                                        `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                        `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                        `json:"unmatchedCount" url:"unmatchedCount"`
@@ -12755,6 +14556,13 @@ func (p *PostV1BankSettlementsGetResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsGetResponse) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
 }
 
 func (p *PostV1BankSettlementsGetResponse) GetLineCount() int64 {
@@ -12888,6 +14696,13 @@ func (p *PostV1BankSettlementsGetResponse) SetStatus(status PostV1BankSettlement
 func (p *PostV1BankSettlementsGetResponse) SetJournalTransactionID(journalTransactionID *string) {
 	p.JournalTransactionID = journalTransactionID
 	p.require(postV1BankSettlementsGetResponseFieldJournalTransactionID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsGetResponse) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsGetResponseFieldBankTransactionID)
 }
 
 // SetLineCount sets the LineCount field and marks it as non-optional;
@@ -13524,11 +15339,12 @@ var (
 	postV1BankSettlementsImportResponseBatchesItemFieldNetTotal             = big.NewInt(1 << 8)
 	postV1BankSettlementsImportResponseBatchesItemFieldStatus               = big.NewInt(1 << 9)
 	postV1BankSettlementsImportResponseBatchesItemFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsImportResponseBatchesItemFieldLineCount            = big.NewInt(1 << 11)
-	postV1BankSettlementsImportResponseBatchesItemFieldMatchedCount         = big.NewInt(1 << 12)
-	postV1BankSettlementsImportResponseBatchesItemFieldUnmatchedCount       = big.NewInt(1 << 13)
-	postV1BankSettlementsImportResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 14)
-	postV1BankSettlementsImportResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsImportResponseBatchesItemFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsImportResponseBatchesItemFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsImportResponseBatchesItemFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsImportResponseBatchesItemFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsImportResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsImportResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 16)
 )
 
 type PostV1BankSettlementsImportResponseBatchesItem struct {
@@ -13543,6 +15359,7 @@ type PostV1BankSettlementsImportResponseBatchesItem struct {
 	NetTotal             string                                               `json:"netTotal" url:"netTotal"`
 	Status               PostV1BankSettlementsImportResponseBatchesItemStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                              `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
 	LineCount            int64                                                `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                                `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                                `json:"unmatchedCount" url:"unmatchedCount"`
@@ -13631,6 +15448,13 @@ func (p *PostV1BankSettlementsImportResponseBatchesItem) GetJournalTransactionID
 		return nil
 	}
 	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsImportResponseBatchesItem) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
 }
 
 func (p *PostV1BankSettlementsImportResponseBatchesItem) GetLineCount() int64 {
@@ -13759,6 +15583,13 @@ func (p *PostV1BankSettlementsImportResponseBatchesItem) SetJournalTransactionID
 	p.require(postV1BankSettlementsImportResponseBatchesItemFieldJournalTransactionID)
 }
 
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsImportResponseBatchesItem) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsImportResponseBatchesItemFieldBankTransactionID)
+}
+
 // SetLineCount sets the LineCount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1BankSettlementsImportResponseBatchesItem) SetLineCount(lineCount int64) {
@@ -13877,6 +15708,368 @@ func NewPostV1BankSettlementsImportResponseFormatFromString(s string) (PostV1Ban
 }
 
 func (p PostV1BankSettlementsImportResponseFormat) Ptr() *PostV1BankSettlementsImportResponseFormat {
+	return &p
+}
+
+var (
+	postV1BankSettlementsLinkResponseFieldID                   = big.NewInt(1 << 0)
+	postV1BankSettlementsLinkResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	postV1BankSettlementsLinkResponseFieldProvider             = big.NewInt(1 << 2)
+	postV1BankSettlementsLinkResponseFieldPayoutID             = big.NewInt(1 << 3)
+	postV1BankSettlementsLinkResponseFieldPayoutDate           = big.NewInt(1 << 4)
+	postV1BankSettlementsLinkResponseFieldCurrency             = big.NewInt(1 << 5)
+	postV1BankSettlementsLinkResponseFieldGrossTotal           = big.NewInt(1 << 6)
+	postV1BankSettlementsLinkResponseFieldFeeTotal             = big.NewInt(1 << 7)
+	postV1BankSettlementsLinkResponseFieldNetTotal             = big.NewInt(1 << 8)
+	postV1BankSettlementsLinkResponseFieldStatus               = big.NewInt(1 << 9)
+	postV1BankSettlementsLinkResponseFieldJournalTransactionID = big.NewInt(1 << 10)
+	postV1BankSettlementsLinkResponseFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsLinkResponseFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsLinkResponseFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsLinkResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsLinkResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsLinkResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+)
+
+type PostV1BankSettlementsLinkResponse struct {
+	ID                   string                                  `json:"id" url:"id"`
+	BankAccountID        string                                  `json:"bankAccountId" url:"bankAccountId"`
+	Provider             string                                  `json:"provider" url:"provider"`
+	PayoutID             string                                  `json:"payoutId" url:"payoutId"`
+	PayoutDate           *string                                 `json:"payoutDate,omitempty" url:"payoutDate,omitempty"`
+	Currency             string                                  `json:"currency" url:"currency"`
+	GrossTotal           string                                  `json:"grossTotal" url:"grossTotal"`
+	FeeTotal             string                                  `json:"feeTotal" url:"feeTotal"`
+	NetTotal             string                                  `json:"netTotal" url:"netTotal"`
+	Status               PostV1BankSettlementsLinkResponseStatus `json:"status" url:"status"`
+	JournalTransactionID *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                 `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
+	LineCount            int64                                   `json:"lineCount" url:"lineCount"`
+	MatchedCount         int64                                   `json:"matchedCount" url:"matchedCount"`
+	UnmatchedCount       int64                                   `json:"unmatchedCount" url:"unmatchedCount"`
+	CreatedAt            string                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt            string                                  `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetBankAccountID() string {
+	if p == nil {
+		return ""
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetProvider() string {
+	if p == nil {
+		return ""
+	}
+	return p.Provider
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetPayoutID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PayoutID
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetPayoutDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutDate
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetGrossTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.GrossTotal
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetFeeTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.FeeTotal
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetNetTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetStatus() PostV1BankSettlementsLinkResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetJournalTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetLineCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.LineCount
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetMatchedCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.MatchedCount
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetUnmatchedCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.UnmatchedCount
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankSettlementsLinkResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankSettlementsLinkResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetBankAccountID(bankAccountID string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankSettlementsLinkResponseFieldBankAccountID)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetProvider(provider string) {
+	p.Provider = provider
+	p.require(postV1BankSettlementsLinkResponseFieldProvider)
+}
+
+// SetPayoutID sets the PayoutID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetPayoutID(payoutID string) {
+	p.PayoutID = payoutID
+	p.require(postV1BankSettlementsLinkResponseFieldPayoutID)
+}
+
+// SetPayoutDate sets the PayoutDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetPayoutDate(payoutDate *string) {
+	p.PayoutDate = payoutDate
+	p.require(postV1BankSettlementsLinkResponseFieldPayoutDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1BankSettlementsLinkResponseFieldCurrency)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetGrossTotal(grossTotal string) {
+	p.GrossTotal = grossTotal
+	p.require(postV1BankSettlementsLinkResponseFieldGrossTotal)
+}
+
+// SetFeeTotal sets the FeeTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetFeeTotal(feeTotal string) {
+	p.FeeTotal = feeTotal
+	p.require(postV1BankSettlementsLinkResponseFieldFeeTotal)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetNetTotal(netTotal string) {
+	p.NetTotal = netTotal
+	p.require(postV1BankSettlementsLinkResponseFieldNetTotal)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetStatus(status PostV1BankSettlementsLinkResponseStatus) {
+	p.Status = status
+	p.require(postV1BankSettlementsLinkResponseFieldStatus)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetJournalTransactionID(journalTransactionID *string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1BankSettlementsLinkResponseFieldJournalTransactionID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsLinkResponseFieldBankTransactionID)
+}
+
+// SetLineCount sets the LineCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetLineCount(lineCount int64) {
+	p.LineCount = lineCount
+	p.require(postV1BankSettlementsLinkResponseFieldLineCount)
+}
+
+// SetMatchedCount sets the MatchedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetMatchedCount(matchedCount int64) {
+	p.MatchedCount = matchedCount
+	p.require(postV1BankSettlementsLinkResponseFieldMatchedCount)
+}
+
+// SetUnmatchedCount sets the UnmatchedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetUnmatchedCount(unmatchedCount int64) {
+	p.UnmatchedCount = unmatchedCount
+	p.require(postV1BankSettlementsLinkResponseFieldUnmatchedCount)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankSettlementsLinkResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankSettlementsLinkResponseFieldUpdatedAt)
+}
+
+func (p *PostV1BankSettlementsLinkResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsLinkResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsLinkResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankSettlementsLinkResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsLinkResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankSettlementsLinkResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankSettlementsLinkResponseStatus string
+
+const (
+	PostV1BankSettlementsLinkResponseStatusImported PostV1BankSettlementsLinkResponseStatus = "imported"
+	PostV1BankSettlementsLinkResponseStatusPosted   PostV1BankSettlementsLinkResponseStatus = "posted"
+)
+
+func NewPostV1BankSettlementsLinkResponseStatusFromString(s string) (PostV1BankSettlementsLinkResponseStatus, error) {
+	switch s {
+	case "imported":
+		return PostV1BankSettlementsLinkResponseStatusImported, nil
+	case "posted":
+		return PostV1BankSettlementsLinkResponseStatusPosted, nil
+	}
+	var t PostV1BankSettlementsLinkResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankSettlementsLinkResponseStatus) Ptr() *PostV1BankSettlementsLinkResponseStatus {
 	return &p
 }
 
@@ -14323,6 +16516,7 @@ var (
 	postV1BankSettlementsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankSettlementsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankSettlementsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankSettlementsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankSettlementsListResponse struct {
@@ -14330,6 +16524,7 @@ type PostV1BankSettlementsListResponse struct {
 	Page     int64                                        `json:"page" url:"page"`
 	PageSize int64                                        `json:"pageSize" url:"pageSize"`
 	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14364,6 +16559,13 @@ func (p *PostV1BankSettlementsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankSettlementsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankSettlementsListResponse) GetExtraProperties() map[string]interface{} {
@@ -14406,6 +16608,13 @@ func (p *PostV1BankSettlementsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankSettlementsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankSettlementsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankSettlementsListResponseFieldTotals)
 }
 
 func (p *PostV1BankSettlementsListResponse) UnmarshalJSON(data []byte) error {
@@ -14462,11 +16671,12 @@ var (
 	postV1BankSettlementsListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 8)
 	postV1BankSettlementsListResponseRowsItemFieldStatus               = big.NewInt(1 << 9)
 	postV1BankSettlementsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsListResponseRowsItemFieldLineCount            = big.NewInt(1 << 11)
-	postV1BankSettlementsListResponseRowsItemFieldMatchedCount         = big.NewInt(1 << 12)
-	postV1BankSettlementsListResponseRowsItemFieldUnmatchedCount       = big.NewInt(1 << 13)
-	postV1BankSettlementsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 14)
-	postV1BankSettlementsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsListResponseRowsItemFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsListResponseRowsItemFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsListResponseRowsItemFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsListResponseRowsItemFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 16)
 )
 
 type PostV1BankSettlementsListResponseRowsItem struct {
@@ -14481,6 +16691,7 @@ type PostV1BankSettlementsListResponseRowsItem struct {
 	NetTotal             string                                          `json:"netTotal" url:"netTotal"`
 	Status               PostV1BankSettlementsListResponseRowsItemStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                         `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
 	LineCount            int64                                           `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                           `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                           `json:"unmatchedCount" url:"unmatchedCount"`
@@ -14569,6 +16780,13 @@ func (p *PostV1BankSettlementsListResponseRowsItem) GetJournalTransactionID() *s
 		return nil
 	}
 	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsListResponseRowsItem) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
 }
 
 func (p *PostV1BankSettlementsListResponseRowsItem) GetLineCount() int64 {
@@ -14695,6 +16913,13 @@ func (p *PostV1BankSettlementsListResponseRowsItem) SetStatus(status PostV1BankS
 func (p *PostV1BankSettlementsListResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
 	p.JournalTransactionID = journalTransactionID
 	p.require(postV1BankSettlementsListResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsListResponseRowsItem) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsListResponseRowsItemFieldBankTransactionID)
 }
 
 // SetLineCount sets the LineCount field and marks it as non-optional;
@@ -15109,13 +17334,14 @@ var (
 	postV1BankSettlementsPostResponseFieldNetTotal             = big.NewInt(1 << 8)
 	postV1BankSettlementsPostResponseFieldStatus               = big.NewInt(1 << 9)
 	postV1BankSettlementsPostResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsPostResponseFieldLineCount            = big.NewInt(1 << 11)
-	postV1BankSettlementsPostResponseFieldMatchedCount         = big.NewInt(1 << 12)
-	postV1BankSettlementsPostResponseFieldUnmatchedCount       = big.NewInt(1 << 13)
-	postV1BankSettlementsPostResponseFieldCreatedAt            = big.NewInt(1 << 14)
-	postV1BankSettlementsPostResponseFieldUpdatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsPostResponseFieldWarnings             = big.NewInt(1 << 16)
-	postV1BankSettlementsPostResponseFieldSummary              = big.NewInt(1 << 17)
+	postV1BankSettlementsPostResponseFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsPostResponseFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsPostResponseFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsPostResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsPostResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsPostResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsPostResponseFieldWarnings             = big.NewInt(1 << 17)
+	postV1BankSettlementsPostResponseFieldSummary              = big.NewInt(1 << 18)
 )
 
 type PostV1BankSettlementsPostResponse struct {
@@ -15130,6 +17356,7 @@ type PostV1BankSettlementsPostResponse struct {
 	NetTotal             string                                    `json:"netTotal" url:"netTotal"`
 	Status               PostV1BankSettlementsPostResponseStatus   `json:"status" url:"status"`
 	JournalTransactionID *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                   `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
 	LineCount            int64                                     `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                     `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                     `json:"unmatchedCount" url:"unmatchedCount"`
@@ -15220,6 +17447,13 @@ func (p *PostV1BankSettlementsPostResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsPostResponse) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
 }
 
 func (p *PostV1BankSettlementsPostResponse) GetLineCount() int64 {
@@ -15360,6 +17594,13 @@ func (p *PostV1BankSettlementsPostResponse) SetStatus(status PostV1BankSettlemen
 func (p *PostV1BankSettlementsPostResponse) SetJournalTransactionID(journalTransactionID *string) {
 	p.JournalTransactionID = journalTransactionID
 	p.require(postV1BankSettlementsPostResponseFieldJournalTransactionID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsPostResponse) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsPostResponseFieldBankTransactionID)
 }
 
 // SetLineCount sets the LineCount field and marks it as non-optional;
@@ -15623,6 +17864,368 @@ func (p *PostV1BankSettlementsPostResponseSummary) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1BankSettlementsUnlinkResponseFieldID                   = big.NewInt(1 << 0)
+	postV1BankSettlementsUnlinkResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	postV1BankSettlementsUnlinkResponseFieldProvider             = big.NewInt(1 << 2)
+	postV1BankSettlementsUnlinkResponseFieldPayoutID             = big.NewInt(1 << 3)
+	postV1BankSettlementsUnlinkResponseFieldPayoutDate           = big.NewInt(1 << 4)
+	postV1BankSettlementsUnlinkResponseFieldCurrency             = big.NewInt(1 << 5)
+	postV1BankSettlementsUnlinkResponseFieldGrossTotal           = big.NewInt(1 << 6)
+	postV1BankSettlementsUnlinkResponseFieldFeeTotal             = big.NewInt(1 << 7)
+	postV1BankSettlementsUnlinkResponseFieldNetTotal             = big.NewInt(1 << 8)
+	postV1BankSettlementsUnlinkResponseFieldStatus               = big.NewInt(1 << 9)
+	postV1BankSettlementsUnlinkResponseFieldJournalTransactionID = big.NewInt(1 << 10)
+	postV1BankSettlementsUnlinkResponseFieldBankTransactionID    = big.NewInt(1 << 11)
+	postV1BankSettlementsUnlinkResponseFieldLineCount            = big.NewInt(1 << 12)
+	postV1BankSettlementsUnlinkResponseFieldMatchedCount         = big.NewInt(1 << 13)
+	postV1BankSettlementsUnlinkResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
+	postV1BankSettlementsUnlinkResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	postV1BankSettlementsUnlinkResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+)
+
+type PostV1BankSettlementsUnlinkResponse struct {
+	ID                   string                                    `json:"id" url:"id"`
+	BankAccountID        string                                    `json:"bankAccountId" url:"bankAccountId"`
+	Provider             string                                    `json:"provider" url:"provider"`
+	PayoutID             string                                    `json:"payoutId" url:"payoutId"`
+	PayoutDate           *string                                   `json:"payoutDate,omitempty" url:"payoutDate,omitempty"`
+	Currency             string                                    `json:"currency" url:"currency"`
+	GrossTotal           string                                    `json:"grossTotal" url:"grossTotal"`
+	FeeTotal             string                                    `json:"feeTotal" url:"feeTotal"`
+	NetTotal             string                                    `json:"netTotal" url:"netTotal"`
+	Status               PostV1BankSettlementsUnlinkResponseStatus `json:"status" url:"status"`
+	JournalTransactionID *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	BankTransactionID    *string                                   `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
+	LineCount            int64                                     `json:"lineCount" url:"lineCount"`
+	MatchedCount         int64                                     `json:"matchedCount" url:"matchedCount"`
+	UnmatchedCount       int64                                     `json:"unmatchedCount" url:"unmatchedCount"`
+	CreatedAt            string                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt            string                                    `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetBankAccountID() string {
+	if p == nil {
+		return ""
+	}
+	return p.BankAccountID
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetProvider() string {
+	if p == nil {
+		return ""
+	}
+	return p.Provider
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetPayoutID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PayoutID
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetPayoutDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayoutDate
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetCurrency() string {
+	if p == nil {
+		return ""
+	}
+	return p.Currency
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetGrossTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.GrossTotal
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetFeeTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.FeeTotal
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetNetTotal() string {
+	if p == nil {
+		return ""
+	}
+	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetStatus() PostV1BankSettlementsUnlinkResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetJournalTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.JournalTransactionID
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetBankTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BankTransactionID
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetLineCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.LineCount
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetMatchedCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.MatchedCount
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetUnmatchedCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.UnmatchedCount
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankSettlementsUnlinkResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetBankAccountID(bankAccountID string) {
+	p.BankAccountID = bankAccountID
+	p.require(postV1BankSettlementsUnlinkResponseFieldBankAccountID)
+}
+
+// SetProvider sets the Provider field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetProvider(provider string) {
+	p.Provider = provider
+	p.require(postV1BankSettlementsUnlinkResponseFieldProvider)
+}
+
+// SetPayoutID sets the PayoutID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetPayoutID(payoutID string) {
+	p.PayoutID = payoutID
+	p.require(postV1BankSettlementsUnlinkResponseFieldPayoutID)
+}
+
+// SetPayoutDate sets the PayoutDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetPayoutDate(payoutDate *string) {
+	p.PayoutDate = payoutDate
+	p.require(postV1BankSettlementsUnlinkResponseFieldPayoutDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetCurrency(currency string) {
+	p.Currency = currency
+	p.require(postV1BankSettlementsUnlinkResponseFieldCurrency)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetGrossTotal(grossTotal string) {
+	p.GrossTotal = grossTotal
+	p.require(postV1BankSettlementsUnlinkResponseFieldGrossTotal)
+}
+
+// SetFeeTotal sets the FeeTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetFeeTotal(feeTotal string) {
+	p.FeeTotal = feeTotal
+	p.require(postV1BankSettlementsUnlinkResponseFieldFeeTotal)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetNetTotal(netTotal string) {
+	p.NetTotal = netTotal
+	p.require(postV1BankSettlementsUnlinkResponseFieldNetTotal)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetStatus(status PostV1BankSettlementsUnlinkResponseStatus) {
+	p.Status = status
+	p.require(postV1BankSettlementsUnlinkResponseFieldStatus)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetJournalTransactionID(journalTransactionID *string) {
+	p.JournalTransactionID = journalTransactionID
+	p.require(postV1BankSettlementsUnlinkResponseFieldJournalTransactionID)
+}
+
+// SetBankTransactionID sets the BankTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetBankTransactionID(bankTransactionID *string) {
+	p.BankTransactionID = bankTransactionID
+	p.require(postV1BankSettlementsUnlinkResponseFieldBankTransactionID)
+}
+
+// SetLineCount sets the LineCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetLineCount(lineCount int64) {
+	p.LineCount = lineCount
+	p.require(postV1BankSettlementsUnlinkResponseFieldLineCount)
+}
+
+// SetMatchedCount sets the MatchedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetMatchedCount(matchedCount int64) {
+	p.MatchedCount = matchedCount
+	p.require(postV1BankSettlementsUnlinkResponseFieldMatchedCount)
+}
+
+// SetUnmatchedCount sets the UnmatchedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetUnmatchedCount(unmatchedCount int64) {
+	p.UnmatchedCount = unmatchedCount
+	p.require(postV1BankSettlementsUnlinkResponseFieldUnmatchedCount)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1BankSettlementsUnlinkResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1BankSettlementsUnlinkResponseFieldUpdatedAt)
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsUnlinkResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsUnlinkResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsUnlinkResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankSettlementsUnlinkResponseStatus string
+
+const (
+	PostV1BankSettlementsUnlinkResponseStatusImported PostV1BankSettlementsUnlinkResponseStatus = "imported"
+	PostV1BankSettlementsUnlinkResponseStatusPosted   PostV1BankSettlementsUnlinkResponseStatus = "posted"
+)
+
+func NewPostV1BankSettlementsUnlinkResponseStatusFromString(s string) (PostV1BankSettlementsUnlinkResponseStatus, error) {
+	switch s {
+	case "imported":
+		return PostV1BankSettlementsUnlinkResponseStatusImported, nil
+	case "posted":
+		return PostV1BankSettlementsUnlinkResponseStatusPosted, nil
+	}
+	var t PostV1BankSettlementsUnlinkResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankSettlementsUnlinkResponseStatus) Ptr() *PostV1BankSettlementsUnlinkResponseStatus {
+	return &p
+}
+
 type PostV1BankStatementsImportRequestFormat string
 
 const (
@@ -15649,29 +18252,35 @@ func (p PostV1BankStatementsImportRequestFormat) Ptr() *PostV1BankStatementsImpo
 }
 
 var (
-	postV1BankStatementsImportResponseFieldImported           = big.NewInt(1 << 0)
-	postV1BankStatementsImportResponseFieldSkipped            = big.NewInt(1 << 1)
-	postV1BankStatementsImportResponseFieldPosted             = big.NewInt(1 << 2)
-	postV1BankStatementsImportResponseFieldCustomersCreated   = big.NewInt(1 << 3)
-	postV1BankStatementsImportResponseFieldInvoicesCreated    = big.NewInt(1 << 4)
-	postV1BankStatementsImportResponseFieldInvoicesLinked     = big.NewInt(1 << 5)
-	postV1BankStatementsImportResponseFieldCreditNotesCreated = big.NewInt(1 << 6)
-	postV1BankStatementsImportResponseFieldPaymentsMatched    = big.NewInt(1 << 7)
-	postV1BankStatementsImportResponseFieldWarnings           = big.NewInt(1 << 8)
-	postV1BankStatementsImportResponseFieldStatements         = big.NewInt(1 << 9)
+	postV1BankStatementsImportResponseFieldImported               = big.NewInt(1 << 0)
+	postV1BankStatementsImportResponseFieldSkipped                = big.NewInt(1 << 1)
+	postV1BankStatementsImportResponseFieldPosted                 = big.NewInt(1 << 2)
+	postV1BankStatementsImportResponseFieldCustomersCreated       = big.NewInt(1 << 3)
+	postV1BankStatementsImportResponseFieldInvoicesCreated        = big.NewInt(1 << 4)
+	postV1BankStatementsImportResponseFieldInvoicesLinked         = big.NewInt(1 << 5)
+	postV1BankStatementsImportResponseFieldCreditNotesCreated     = big.NewInt(1 << 6)
+	postV1BankStatementsImportResponseFieldAuthorizationsRecorded = big.NewInt(1 << 7)
+	postV1BankStatementsImportResponseFieldPayoutsPosted          = big.NewInt(1 << 8)
+	postV1BankStatementsImportResponseFieldCommissionsPosted      = big.NewInt(1 << 9)
+	postV1BankStatementsImportResponseFieldPaymentsMatched        = big.NewInt(1 << 10)
+	postV1BankStatementsImportResponseFieldWarnings               = big.NewInt(1 << 11)
+	postV1BankStatementsImportResponseFieldStatements             = big.NewInt(1 << 12)
 )
 
 type PostV1BankStatementsImportResponse struct {
-	Imported           int64                                               `json:"imported" url:"imported"`
-	Skipped            int64                                               `json:"skipped" url:"skipped"`
-	Posted             int64                                               `json:"posted" url:"posted"`
-	CustomersCreated   int64                                               `json:"customersCreated" url:"customersCreated"`
-	InvoicesCreated    int64                                               `json:"invoicesCreated" url:"invoicesCreated"`
-	InvoicesLinked     int64                                               `json:"invoicesLinked" url:"invoicesLinked"`
-	CreditNotesCreated int64                                               `json:"creditNotesCreated" url:"creditNotesCreated"`
-	PaymentsMatched    int64                                               `json:"paymentsMatched" url:"paymentsMatched"`
-	Warnings           []string                                            `json:"warnings" url:"warnings"`
-	Statements         []*PostV1BankStatementsImportResponseStatementsItem `json:"statements" url:"statements"`
+	Imported               int64                                               `json:"imported" url:"imported"`
+	Skipped                int64                                               `json:"skipped" url:"skipped"`
+	Posted                 int64                                               `json:"posted" url:"posted"`
+	CustomersCreated       int64                                               `json:"customersCreated" url:"customersCreated"`
+	InvoicesCreated        int64                                               `json:"invoicesCreated" url:"invoicesCreated"`
+	InvoicesLinked         int64                                               `json:"invoicesLinked" url:"invoicesLinked"`
+	CreditNotesCreated     int64                                               `json:"creditNotesCreated" url:"creditNotesCreated"`
+	AuthorizationsRecorded int64                                               `json:"authorizationsRecorded" url:"authorizationsRecorded"`
+	PayoutsPosted          int64                                               `json:"payoutsPosted" url:"payoutsPosted"`
+	CommissionsPosted      int64                                               `json:"commissionsPosted" url:"commissionsPosted"`
+	PaymentsMatched        int64                                               `json:"paymentsMatched" url:"paymentsMatched"`
+	Warnings               []string                                            `json:"warnings" url:"warnings"`
+	Statements             []*PostV1BankStatementsImportResponseStatementsItem `json:"statements" url:"statements"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -15727,6 +18336,27 @@ func (p *PostV1BankStatementsImportResponse) GetCreditNotesCreated() int64 {
 		return 0
 	}
 	return p.CreditNotesCreated
+}
+
+func (p *PostV1BankStatementsImportResponse) GetAuthorizationsRecorded() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.AuthorizationsRecorded
+}
+
+func (p *PostV1BankStatementsImportResponse) GetPayoutsPosted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PayoutsPosted
+}
+
+func (p *PostV1BankStatementsImportResponse) GetCommissionsPosted() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.CommissionsPosted
 }
 
 func (p *PostV1BankStatementsImportResponse) GetPaymentsMatched() int64 {
@@ -15811,6 +18441,27 @@ func (p *PostV1BankStatementsImportResponse) SetInvoicesLinked(invoicesLinked in
 func (p *PostV1BankStatementsImportResponse) SetCreditNotesCreated(creditNotesCreated int64) {
 	p.CreditNotesCreated = creditNotesCreated
 	p.require(postV1BankStatementsImportResponseFieldCreditNotesCreated)
+}
+
+// SetAuthorizationsRecorded sets the AuthorizationsRecorded field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetAuthorizationsRecorded(authorizationsRecorded int64) {
+	p.AuthorizationsRecorded = authorizationsRecorded
+	p.require(postV1BankStatementsImportResponseFieldAuthorizationsRecorded)
+}
+
+// SetPayoutsPosted sets the PayoutsPosted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetPayoutsPosted(payoutsPosted int64) {
+	p.PayoutsPosted = payoutsPosted
+	p.require(postV1BankStatementsImportResponseFieldPayoutsPosted)
+}
+
+// SetCommissionsPosted sets the CommissionsPosted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankStatementsImportResponse) SetCommissionsPosted(commissionsPosted int64) {
+	p.CommissionsPosted = commissionsPosted
+	p.require(postV1BankStatementsImportResponseFieldCommissionsPosted)
 }
 
 // SetPaymentsMatched sets the PaymentsMatched field and marks it as non-optional;
@@ -16779,6 +19430,7 @@ var (
 	postV1BankTransactionsListResponseFieldPage     = big.NewInt(1 << 1)
 	postV1BankTransactionsListResponseFieldPageSize = big.NewInt(1 << 2)
 	postV1BankTransactionsListResponseFieldTotal    = big.NewInt(1 << 3)
+	postV1BankTransactionsListResponseFieldTotals   = big.NewInt(1 << 4)
 )
 
 type PostV1BankTransactionsListResponse struct {
@@ -16786,6 +19438,7 @@ type PostV1BankTransactionsListResponse struct {
 	Page     int64                                         `json:"page" url:"page"`
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16820,6 +19473,13 @@ func (p *PostV1BankTransactionsListResponse) GetTotal() int64 {
 		return 0
 	}
 	return p.Total
+}
+
+func (p *PostV1BankTransactionsListResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PostV1BankTransactionsListResponse) GetExtraProperties() map[string]interface{} {
@@ -16862,6 +19522,13 @@ func (p *PostV1BankTransactionsListResponse) SetPageSize(pageSize int64) {
 func (p *PostV1BankTransactionsListResponse) SetTotal(total int64) {
 	p.Total = total
 	p.require(postV1BankTransactionsListResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankTransactionsListResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(postV1BankTransactionsListResponseFieldTotals)
 }
 
 func (p *PostV1BankTransactionsListResponse) UnmarshalJSON(data []byte) error {

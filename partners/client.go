@@ -226,6 +226,54 @@ func (c *Client) PostV1PartnersBankAccountsList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1PartnersFilesList(
+	ctx context.Context,
+	request *nordlet.PostV1PartnersFilesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PartnersFilesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1PartnersFilesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+	ctx context.Context,
+	request *nordlet.PostV1PartnersDebtRemindersPreviewRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PartnersDebtRemindersPreviewResponse, error) {
+	response, err := c.WithRawResponse.RemindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1PartnersDebtRemindersList(
+	ctx context.Context,
+	request *nordlet.PostV1PartnersDebtRemindersListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PartnersDebtRemindersListResponse, error) {
+	response, err := c.WithRawResponse.PostV1PartnersDebtRemindersList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1PartnersValidateVat(
 	ctx context.Context,
 	request *nordlet.PostV1PartnersValidateVatRequest,
@@ -585,6 +633,247 @@ func (c *Client) PostV1PartnersCreditCheck(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1PartnersCreditCheckResponse, error) {
 	response, err := c.WithRawResponse.PostV1PartnersCreditCheck(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsCreate(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsGet(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsDelete(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsList(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsListResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsNotesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsNotesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsNotesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsNotesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsNotesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsNotesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsNotesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsNotesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsNotesList(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsNotesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsNotesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsNotesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsFilesList(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsFilesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsFilesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsFilesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsSourcesCreate(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsSourcesCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsSourcesCreateResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsSourcesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsSourcesUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsSourcesUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsSourcesUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsSourcesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsSourcesDelete(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsSourcesDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsSourcesDeleteResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsSourcesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsSourcesList(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsSourcesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsSourcesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsSourcesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1LeadsSourcesOptions(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsSourcesOptionsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsSourcesOptionsResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsSourcesOptions(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Create a customer partner from the lead, move the lead files to the partner, copy the lead notes into the partner notes and mark the lead as converted.
+func (c *Client) PostV1LeadsConvert(
+	ctx context.Context,
+	request *nordlet.PostV1LeadsConvertRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LeadsConvertResponse, error) {
+	response, err := c.WithRawResponse.PostV1LeadsConvert(
 		ctx,
 		request,
 		opts...,

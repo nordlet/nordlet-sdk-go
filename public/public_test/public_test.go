@@ -104,3 +104,29 @@ func TestPublicPostV1PublicIntegrationRequestsWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestPublicPostV1PublicIntegrationRequestsWithWireMock", "POST", "/v1/public/integration-requests", nil, 1)
 }
+
+func TestPublicGetV1PublicPayTokenWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.GetV1PublicPayTokenRequest{
+		Token: "token",
+	}
+	invocationErr := client.Public.GetV1PublicPayToken(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPublicGetV1PublicPayTokenWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPublicGetV1PublicPayTokenWithWireMock", "GET", "/v1/public/pay/token", nil, 1)
+}

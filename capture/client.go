@@ -34,6 +34,70 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+func (c *Client) PostV1CaptureSettingsGet(
+	ctx context.Context,
+	request *nordlet.PostV1CaptureSettingsGetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CaptureSettingsGetResponse, error) {
+	response, err := c.WithRawResponse.PostV1CaptureSettingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CaptureSettingsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1CaptureSettingsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CaptureSettingsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1CaptureSettingsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1CaptureSettingsRegenerateIntake(
+	ctx context.Context,
+	request *nordlet.PostV1CaptureSettingsRegenerateIntakeRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CaptureSettingsRegenerateIntakeResponse, error) {
+	response, err := c.WithRawResponse.PostV1CaptureSettingsRegenerateIntake(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+	ctx context.Context,
+	request *nordlet.PostV1CaptureInboundEmailRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CaptureInboundEmailResponse, error) {
+	response, err := c.WithRawResponse.ReceiveAnInboundEmailWithSupplierDocumentsAttachedPostmarkStyleOrGenericJSON(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) ReadAVendorBillOrReceiptAndReturnAnEditablePurchaseInvoiceDraft(
 	ctx context.Context,
 	request *nordlet.PostV1CaptureDocumentsUploadRequest,

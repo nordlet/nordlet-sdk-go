@@ -130,6 +130,54 @@ func (c *Client) PostV1ReferenceCountriesList(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1ReferenceLtCountiesList(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceLtCountiesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceLtCountiesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceLtCountiesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ReferenceLtMunicipalitiesList(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceLtMunicipalitiesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceLtMunicipalitiesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceLtMunicipalitiesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1ReferenceLtCitiesList(
+	ctx context.Context,
+	request *nordlet.PostV1ReferenceLtCitiesListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReferenceLtCitiesListResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReferenceLtCitiesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1ReferenceBanksList(
 	ctx context.Context,
 	request *nordlet.PostV1ReferenceBanksListRequest,
