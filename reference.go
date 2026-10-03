@@ -3741,10 +3741,10 @@ var (
 )
 
 type PostV1ReferenceCountriesListResponseRowsItem struct {
-	Code  string                                             `json:"code" url:"code"`
-	IsEu  bool                                               `json:"isEu" url:"isEu"`
-	IsEea bool                                               `json:"isEea" url:"isEea"`
-	Names *PostV1ReferenceCountriesListResponseRowsItemNames `json:"names" url:"names"`
+	Code  string            `json:"code" url:"code"`
+	IsEu  bool              `json:"isEu" url:"isEu"`
+	IsEea bool              `json:"isEea" url:"isEea"`
+	Names map[string]string `json:"names" url:"names"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3774,7 +3774,7 @@ func (p *PostV1ReferenceCountriesListResponseRowsItem) GetIsEea() bool {
 	return p.IsEea
 }
 
-func (p *PostV1ReferenceCountriesListResponseRowsItem) GetNames() *PostV1ReferenceCountriesListResponseRowsItemNames {
+func (p *PostV1ReferenceCountriesListResponseRowsItem) GetNames() map[string]string {
 	if p == nil {
 		return nil
 	}
@@ -3818,7 +3818,7 @@ func (p *PostV1ReferenceCountriesListResponseRowsItem) SetIsEea(isEea bool) {
 
 // SetNames sets the Names field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ReferenceCountriesListResponseRowsItem) SetNames(names *PostV1ReferenceCountriesListResponseRowsItemNames) {
+func (p *PostV1ReferenceCountriesListResponseRowsItem) SetNames(names map[string]string) {
 	p.Names = names
 	p.require(postV1ReferenceCountriesListResponseRowsItemFieldNames)
 }
@@ -3851,122 +3851,6 @@ func (p *PostV1ReferenceCountriesListResponseRowsItem) MarshalJSON() ([]byte, er
 }
 
 func (p *PostV1ReferenceCountriesListResponseRowsItem) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1ReferenceCountriesListResponseRowsItemNamesFieldLt = big.NewInt(1 << 0)
-	postV1ReferenceCountriesListResponseRowsItemNamesFieldEn = big.NewInt(1 << 1)
-	postV1ReferenceCountriesListResponseRowsItemNamesFieldRu = big.NewInt(1 << 2)
-)
-
-type PostV1ReferenceCountriesListResponseRowsItemNames struct {
-	Lt string `json:"lt" url:"lt"`
-	En string `json:"en" url:"en"`
-	Ru string `json:"ru" url:"ru"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) GetLt() string {
-	if p == nil {
-		return ""
-	}
-	return p.Lt
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) GetEn() string {
-	if p == nil {
-		return ""
-	}
-	return p.En
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) GetRu() string {
-	if p == nil {
-		return ""
-	}
-	return p.Ru
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetLt sets the Lt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) SetLt(lt string) {
-	p.Lt = lt
-	p.require(postV1ReferenceCountriesListResponseRowsItemNamesFieldLt)
-}
-
-// SetEn sets the En field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) SetEn(en string) {
-	p.En = en
-	p.require(postV1ReferenceCountriesListResponseRowsItemNamesFieldEn)
-}
-
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) SetRu(ru string) {
-	p.Ru = ru
-	p.require(postV1ReferenceCountriesListResponseRowsItemNamesFieldRu)
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1ReferenceCountriesListResponseRowsItemNames
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1ReferenceCountriesListResponseRowsItemNames(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) MarshalJSON() ([]byte, error) {
-	type embed PostV1ReferenceCountriesListResponseRowsItemNames
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1ReferenceCountriesListResponseRowsItemNames) String() string {
 	if p == nil {
 		return "<nil>"
 	}

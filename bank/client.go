@@ -498,6 +498,23 @@ func (c *Client) PostV1BankSettlementsMatch(
 	return response.Body, nil
 }
 
+// A line with its own rate or amount is split with that value when the batch is posted. A line without one falls back to the commissionPercent given to the posting call, and without that the amount goes to the suspense account. Send both fields as null to clear the line back to the fallback.
+func (c *Client) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+	ctx context.Context,
+	request *nordlet.PostV1BankSettlementsCommissionRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1BankSettlementsCommissionResponse, error) {
+	response, err := c.WithRawResponse.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Attach the incoming bank-statement line that carries this payout to the settlement batch.
 func (c *Client) PostV1BankSettlementsLink(
 	ctx context.Context,

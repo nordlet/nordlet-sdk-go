@@ -147,13 +147,30 @@ func (c *Client) PostV1SalesInvoicesEinvoiceXML(
 	return response.Body, nil
 }
 
-// Build the national e-invoicing payload and deliver it to the bridge endpoint configured for the country gateway in compliance settings. The bridge (an accredited intermediary or connector) handles the certified national channel - SdI accreditation, KSeF sessions or ANAF SPV OAuth.
+// Build the national e-invoicing payload and deliver it over the transport configured for the country gateway in compliance settings. With transport=direct the request talks to the tax authority itself - SdICoop over 2-way TLS for Italy, a KSeF session for Poland, ANAF SPV OAuth for Romania - and returns the national number as soon as the channel assigns one. With transport=bridge the payload goes to the configured bridge endpoint (an accredited intermediary or connector) instead.
 func (c *Client) PostV1SalesInvoicesEinvoiceSend(
 	ctx context.Context,
 	request *nordlet.PostV1SalesInvoicesEinvoiceSendRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1SalesInvoicesEinvoiceSendResponse, error) {
 	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceSend(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Ask the national e-invoicing channel what happened to an invoice that was already sent, and store the answer. Italy, Poland and Romania return the outcome only on request - none of them calls back - so this is the way the national number and any rejection reason reach the invoice.
+func (c *Client) PostV1SalesInvoicesEinvoiceStatus(
+	ctx context.Context,
+	request *nordlet.PostV1SalesInvoicesEinvoiceStatusRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1SalesInvoicesEinvoiceStatusResponse, error) {
+	response, err := c.WithRawResponse.PostV1SalesInvoicesEinvoiceStatus(
 		ctx,
 		request,
 		opts...,

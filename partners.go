@@ -15696,19 +15696,19 @@ func (p *PostV1PartnersDebtRemindersPreviewResponseRowsItemInvoicesItem) String(
 type PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale string
 
 const (
-	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "lt"
 	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleEn PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "en"
-	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleRu PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "ru"
+	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "lt"
+	PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleDe PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale = "de"
 )
 
 func NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString(s string) (PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt, nil
 	case "en":
 		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleEn, nil
-	case "ru":
-		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleRu, nil
+	case "lt":
+		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleLt, nil
+	case "de":
+		return PostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleDe, nil
 	}
 	var t PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

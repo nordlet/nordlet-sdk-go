@@ -322,6 +322,144 @@ func TestDeclarationsPostV1DeclarationsLtSaftGenerateWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtSaftGenerateWithWireMock", "POST", "/v1/declarations/lt/saft/generate", nil, 1)
 }
 
+func TestDeclarationsPostV1DeclarationsLtIvazAmendWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtIvazAmendRequest{
+		WaybillIDs: []string{
+			"waybillIds",
+		},
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtIvazAmend(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtIvazAmendWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtIvazAmendWithWireMock", "POST", "/v1/declarations/lt/ivaz/amend", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtIvazCancelWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtIvazCancelRequest{
+		Entries: []*nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItem{
+			&nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItem{
+				WaybillID: "waybillId",
+				Reason:    nordlet.PostV1DeclarationsLtIvazCancelRequestEntriesItemReasonOne,
+			},
+		},
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtIvazCancel(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtIvazCancelWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtIvazCancelWithWireMock", "POST", "/v1/declarations/lt/ivaz/cancel", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtFr0564ComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtFr0564ComputeRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtFr0564Compute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtFr0564ComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtFr0564ComputeWithWireMock", "POST", "/v1/declarations/lt/fr0564/compute", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtGpm312ComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtGpm312ComputeRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtGpm312Compute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtGpm312ComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtGpm312ComputeWithWireMock", "POST", "/v1/declarations/lt/gpm312/compute", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtPln204ComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtPln204ComputeRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtPln204Compute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtPln204ComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtPln204ComputeWithWireMock", "POST", "/v1/declarations/lt/pln204/compute", nil, 1)
+}
+
 func TestDeclarationsPostV1DeclarationsEuOssComputeWithWireMock(
 	t *testing.T,
 ) {
@@ -580,6 +718,1479 @@ func TestDeclarationsPostV1DeclarationsPlJpkV7MGenerateWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlJpkV7MGenerateWithWireMock", "POST", "/v1/declarations/pl/jpk-v7m/generate", nil, 1)
 }
 
+func TestDeclarationsPostV1DeclarationsPlVatUeGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlVatUeGenerateRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlVatUeGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlVatUeGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlVatUeGenerateWithWireMock", "POST", "/v1/declarations/pl/vat-ue/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlIntrastatGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlIntrastatGenerateRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+		Flow:  nordlet.PostV1DeclarationsPlIntrastatGenerateRequestFlowArrivals,
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlIntrastatGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlIntrastatGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlIntrastatGenerateWithWireMock", "POST", "/v1/declarations/pl/intrastat/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlKsefReceivedListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlKsefReceivedListRequest{
+		From: nordlet.MustParseDateTime(
+			"2024-01-15T09:30:00Z",
+		),
+		To: nordlet.MustParseDateTime(
+			"2024-01-15T09:30:00Z",
+		),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlKsefReceivedList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlKsefReceivedListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlKsefReceivedListWithWireMock", "POST", "/v1/declarations/pl/ksef/received/list", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlKsefReceivedFetchWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlKsefReceivedFetchRequest{
+		KsefNumber: "ksefNumber",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlKsefReceivedFetch(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlKsefReceivedFetchWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlKsefReceivedFetchWithWireMock", "POST", "/v1/declarations/pl/ksef/received/fetch", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlKsefReceiptWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlKsefReceiptRequest{}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlKsefReceipt(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlKsefReceiptWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlKsefReceiptWithWireMock", "POST", "/v1/declarations/pl/ksef/receipt", nil, 1)
+}
+
+func TestDeclarationsTaxAdjustmentsRecordedForATaxYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxAdjustmentsListRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.TaxAdjustmentsRecordedForATaxYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsTaxAdjustmentsRecordedForATaxYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsTaxAdjustmentsRecordedForATaxYearWithWireMock", "POST", "/v1/declarations/tax-adjustments/list", nil, 1)
+}
+
+func TestDeclarationsRecordATaxAdjustmentForATaxYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequest{
+		Year:        int64(1000000),
+		Kind:        nordlet.PostV1DeclarationsTaxAdjustmentsCreateRequestKindNonDeductible,
+		Amount:      "amount",
+		Description: "description",
+	}
+	_, invocationErr := client.Declarations.RecordATaxAdjustmentForATaxYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRecordATaxAdjustmentForATaxYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRecordATaxAdjustmentForATaxYearWithWireMock", "POST", "/v1/declarations/tax-adjustments/create", nil, 1)
+}
+
+func TestDeclarationsChangeARecordedTaxAdjustmentWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxAdjustmentsUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.ChangeARecordedTaxAdjustment(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsChangeARecordedTaxAdjustmentWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsChangeARecordedTaxAdjustmentWithWireMock", "POST", "/v1/declarations/tax-adjustments/update", nil, 1)
+}
+
+func TestDeclarationsRemoveARecordedTaxAdjustmentWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxAdjustmentsDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.RemoveARecordedTaxAdjustment(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRemoveARecordedTaxAdjustmentWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRemoveARecordedTaxAdjustmentWithWireMock", "POST", "/v1/declarations/tax-adjustments/delete", nil, 1)
+}
+
+func TestDeclarationsPaymentsAlreadyMadeTowardsATaxOfAYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxPaymentsListRequest{
+		Tax:  nordlet.PostV1DeclarationsTaxPaymentsListRequestTaxCorporateIncomeTax,
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PaymentsAlreadyMadeTowardsATaxOfAYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPaymentsAlreadyMadeTowardsATaxOfAYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPaymentsAlreadyMadeTowardsATaxOfAYearWithWireMock", "POST", "/v1/declarations/tax-payments/list", nil, 1)
+}
+
+func TestDeclarationsRecordAPaymentMadeTowardsATaxWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxPaymentsCreateRequest{
+		Tax:         nordlet.PostV1DeclarationsTaxPaymentsCreateRequestTaxCorporateIncomeTax,
+		Year:        int64(1000000),
+		Kind:        nordlet.PostV1DeclarationsTaxPaymentsCreateRequestKindAdvance,
+		Amount:      "amount",
+		PaidOn:      "paidOn",
+		Description: "description",
+	}
+	_, invocationErr := client.Declarations.RecordAPaymentMadeTowardsATax(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRecordAPaymentMadeTowardsATaxWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRecordAPaymentMadeTowardsATaxWithWireMock", "POST", "/v1/declarations/tax-payments/create", nil, 1)
+}
+
+func TestDeclarationsChangeARecordedTaxPaymentWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxPaymentsUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.ChangeARecordedTaxPayment(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsChangeARecordedTaxPaymentWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsChangeARecordedTaxPaymentWithWireMock", "POST", "/v1/declarations/tax-payments/update", nil, 1)
+}
+
+func TestDeclarationsRemoveARecordedTaxPaymentWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsTaxPaymentsDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.RemoveARecordedTaxPayment(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRemoveARecordedTaxPaymentWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRemoveARecordedTaxPaymentWithWireMock", "POST", "/v1/declarations/tax-payments/delete", nil, 1)
+}
+
+func TestDeclarationsAdoptionAndSigningFactsOfTheAnnualAccountsOfAYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsGetRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.AdoptionAndSigningFactsOfTheAnnualAccountsOfAYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsAdoptionAndSigningFactsOfTheAnnualAccountsOfAYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsAdoptionAndSigningFactsOfTheAnnualAccountsOfAYearWithWireMock", "POST", "/v1/declarations/annual-accounts/get", nil, 1)
+}
+
+func TestDeclarationsRecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsSetRequest{
+		Year:              int64(1000000),
+		Adopted:           true,
+		DateOfPreparation: "dateOfPreparation",
+	}
+	_, invocationErr := client.Declarations.RecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRecordTheAdoptionAndPreparationOfTheAnnualAccountsOfAYearWithWireMock", "POST", "/v1/declarations/annual-accounts/set", nil, 1)
+}
+
+func TestDeclarationsRecordWhetherADirectorSignedTheAnnualAccountsOfAYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequest{
+		Year:         int64(1000000),
+		DirectorName: "directorName",
+		DirectorType: nordlet.PostV1DeclarationsAnnualAccountsSignaturesCreateRequestDirectorTypeManagingCurrent,
+		Signed:       true,
+	}
+	_, invocationErr := client.Declarations.RecordWhetherADirectorSignedTheAnnualAccountsOfAYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRecordWhetherADirectorSignedTheAnnualAccountsOfAYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRecordWhetherADirectorSignedTheAnnualAccountsOfAYearWithWireMock", "POST", "/v1/declarations/annual-accounts/signatures/create", nil, 1)
+}
+
+func TestDeclarationsChangeARecordedDirectorSignatureWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequest{
+		ID:           "id",
+		DirectorName: "directorName",
+		DirectorType: nordlet.PostV1DeclarationsAnnualAccountsSignaturesUpdateRequestDirectorTypeManagingCurrent,
+		Signed:       true,
+	}
+	_, invocationErr := client.Declarations.ChangeARecordedDirectorSignature(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsChangeARecordedDirectorSignatureWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsChangeARecordedDirectorSignatureWithWireMock", "POST", "/v1/declarations/annual-accounts/signatures/update", nil, 1)
+}
+
+func TestDeclarationsRemoveARecordedDirectorSignatureWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsSignaturesDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.RemoveARecordedDirectorSignature(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRemoveARecordedDirectorSignatureWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRemoveARecordedDirectorSignatureWithWireMock", "POST", "/v1/declarations/annual-accounts/signatures/delete", nil, 1)
+}
+
+func TestDeclarationsRecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOneWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequest{
+		Year:      int64(1000000),
+		DecidedOn: "decidedOn",
+		Kind:      nordlet.PostV1DeclarationsAnnualAccountsDistributionsCreateRequestKindDividend,
+		Amount:    "amount",
+	}
+	_, invocationErr := client.Declarations.RecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOne(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOneWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRecordADecisionToDistributeProfitADividendAnInterimDividendOrAPaymentTreatedAsOneWithWireMock", "POST", "/v1/declarations/annual-accounts/distributions/create", nil, 1)
+}
+
+func TestDeclarationsChangeARecordedProfitDistributionWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequest{
+		ID:        "id",
+		DecidedOn: "decidedOn",
+		Kind:      nordlet.PostV1DeclarationsAnnualAccountsDistributionsUpdateRequestKindDividend,
+		Amount:    "amount",
+	}
+	_, invocationErr := client.Declarations.ChangeARecordedProfitDistribution(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsChangeARecordedProfitDistributionWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsChangeARecordedProfitDistributionWithWireMock", "POST", "/v1/declarations/annual-accounts/distributions/update", nil, 1)
+}
+
+func TestDeclarationsRemoveARecordedProfitDistributionWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsDistributionsDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.RemoveARecordedProfitDistribution(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRemoveARecordedProfitDistributionWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRemoveARecordedProfitDistributionWithWireMock", "POST", "/v1/declarations/annual-accounts/distributions/delete", nil, 1)
+}
+
+func TestDeclarationsAttachAnUploadedDocumentToTheAnnualAccountsOfAYearWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequest{
+		Year: int64(1000000),
+		Kind: nordlet.PostV1DeclarationsAnnualAccountsAttachmentsAddRequestKindFullReport,
+		Ref:  "ref",
+	}
+	_, invocationErr := client.Declarations.AttachAnUploadedDocumentToTheAnnualAccountsOfAYear(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsAttachAnUploadedDocumentToTheAnnualAccountsOfAYearWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsAttachAnUploadedDocumentToTheAnnualAccountsOfAYearWithWireMock", "POST", "/v1/declarations/annual-accounts/attachments/add", nil, 1)
+}
+
+func TestDeclarationsRemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFileWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAnnualAccountsAttachmentsDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.RemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFile(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsRemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFileWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsRemoveADocumentAttachedToTheAnnualAccountsAndDeleteItsFileWithWireMock", "POST", "/v1/declarations/annual-accounts/attachments/delete", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsCyTd4GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsCyTd4GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsCyTd4Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsCyTd4GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsCyTd4GenerateWithWireMock", "POST", "/v1/declarations/cy/td4/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsCyHe32GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsCyHe32GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsCyHe32Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsCyHe32GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsCyHe32GenerateWithWireMock", "POST", "/v1/declarations/cy/he32/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDeReturnsGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDeReturnsGenerateRequest{
+		RuleKey: nordlet.PostV1DeclarationsDeReturnsGenerateRequestRuleKeyDeEBilanz,
+		Period:  "period",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDeReturnsGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDeReturnsGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDeReturnsGenerateWithWireMock", "POST", "/v1/declarations/de/returns/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDeReturnFactsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDeReturnFactsGetRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDeReturnFactsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDeReturnFactsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDeReturnFactsGetWithWireMock", "POST", "/v1/declarations/de/return-facts/get", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDeReturnFactsSetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDeReturnFactsSetRequest{
+		Year:  int64(1000000),
+		Facts: &nordlet.PostV1DeclarationsDeReturnFactsSetRequestFacts{},
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDeReturnFactsSet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDeReturnFactsSetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDeReturnFactsSetWithWireMock", "POST", "/v1/declarations/de/return-facts/set", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDeDeuevGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDeDeuevGenerateRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDeDeuevGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDeDeuevGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDeDeuevGenerateWithWireMock", "POST", "/v1/declarations/de/deuev/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDeBeitragsnachweisGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDeBeitragsnachweisGenerateRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDeBeitragsnachweisGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDeBeitragsnachweisGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDeBeitragsnachweisGenerateWithWireMock", "POST", "/v1/declarations/de/beitragsnachweis/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsDkSelskabsskatGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsDkSelskabsskatGenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsDkSelskabsskatGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsDkSelskabsskatGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsDkSelskabsskatGenerateWithWireMock", "POST", "/v1/declarations/dk/selskabsskat/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsEeEmploymentRegisterSendWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequest{
+		ContractID: "contractId",
+		Event:      nordlet.PostV1DeclarationsEeEmploymentRegisterSendRequestEventStart,
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsEeEmploymentRegisterSend(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsEeEmploymentRegisterSendWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsEeEmploymentRegisterSendWithWireMock", "POST", "/v1/declarations/ee/employment-register/send", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsEsVerifactuDeclaracionResponsableWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsEsVerifactuDeclaracionResponsableRequest{}
+	_, invocationErr := client.Declarations.PostV1DeclarationsEsVerifactuDeclaracionResponsable(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsEsVerifactuDeclaracionResponsableWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsEsVerifactuDeclaracionResponsableWithWireMock", "POST", "/v1/declarations/es/verifactu/declaracion-responsable", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsIeCt1GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsIeCt1GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsIeCt1Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsIeCt1GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsIeCt1GenerateWithWireMock", "POST", "/v1/declarations/ie/ct1/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsIeB1GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsIeB1GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsIeB1Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsIeB1GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsIeB1GenerateWithWireMock", "POST", "/v1/declarations/ie/b1/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsItSdiPurchaseSendWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsItSdiPurchaseSendRequest{
+		PurchaseInvoiceID: "purchaseInvoiceId",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsItSdiPurchaseSend(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsItSdiPurchaseSendWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsItSdiPurchaseSendWithWireMock", "POST", "/v1/declarations/it/sdi/purchase-send", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsItSdiPurchasePreviewWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsItSdiPurchasePreviewRequest{
+		PurchaseInvoiceID: "purchaseInvoiceId",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsItSdiPurchasePreview(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsItSdiPurchasePreviewWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsItSdiPurchasePreviewWithWireMock", "POST", "/v1/declarations/it/sdi/purchase-preview", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtSaftSendWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtSaftSendRequest{
+		FromDate: "fromDate",
+		ToDate:   "toDate",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtSaftSend(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtSaftSendWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtSaftSendWithWireMock", "POST", "/v1/declarations/lt/saft/send", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtSdFfdataWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtSdFfdataRequest{
+		Type:     nordlet.PostV1DeclarationsLtSdFfdataRequestTypeOneSd,
+		FromDate: "fromDate",
+		ToDate:   "toDate",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtSdFfdata(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtSdFfdataWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtSdFfdataWithWireMock", "POST", "/v1/declarations/lt/sd/ffdata", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLtPln204FfdataWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLtPln204FfdataRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLtPln204Ffdata(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLtPln204FfdataWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLtPln204FfdataWithWireMock", "POST", "/v1/declarations/lt/pln204/ffdata", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsMtCompanyTaxGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsMtCompanyTaxGenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsMtCompanyTaxGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsMtCompanyTaxGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsMtCompanyTaxGenerateWithWireMock", "POST", "/v1/declarations/mt/company-tax/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsMtAnnualReturnGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsMtAnnualReturnGenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsMtAnnualReturnGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsMtAnnualReturnGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsMtAnnualReturnGenerateWithWireMock", "POST", "/v1/declarations/mt/annual-return/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlJpkFaGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlJpkFaGenerateRequest{
+		DateFrom: "dateFrom",
+		DateTo:   "dateTo",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlJpkFaGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlJpkFaGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlJpkFaGenerateWithWireMock", "POST", "/v1/declarations/pl/jpk-fa/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlJpkKrGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlJpkKrGenerateRequest{
+		DateFrom: "dateFrom",
+		DateTo:   "dateTo",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlJpkKrGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlJpkKrGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlJpkKrGenerateWithWireMock", "POST", "/v1/declarations/pl/jpk-kr/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlJpkMagGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlJpkMagGenerateRequest{
+		DateFrom: "dateFrom",
+		DateTo:   "dateTo",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlJpkMagGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlJpkMagGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlJpkMagGenerateWithWireMock", "POST", "/v1/declarations/pl/jpk-mag/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlPit11GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlPit11GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlPit11Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlPit11GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlPit11GenerateWithWireMock", "POST", "/v1/declarations/pl/pit-11/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlCit8GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlCit8GenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlCit8Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlCit8GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlCit8GenerateWithWireMock", "POST", "/v1/declarations/pl/cit-8/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlZusDraComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlZusDraComputeRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlZusDraCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlZusDraComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlZusDraComputeWithWireMock", "POST", "/v1/declarations/pl/zus-dra/compute", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlZusDraKeduWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlZusDraKeduRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlZusDraKedu(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlZusDraKeduWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlZusDraKeduWithWireMock", "POST", "/v1/declarations/pl/zus-dra/kedu", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsPlZusDraPdfWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsPlZusDraPdfRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsPlZusDraPdf(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsPlZusDraPdfWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsPlZusDraPdfWithWireMock", "POST", "/v1/declarations/pl/zus-dra/pdf", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsRoEtransportBuildWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsRoEtransportBuildRequest{
+		WaybillID: "waybillId",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsRoEtransportBuild(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsRoEtransportBuildWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsRoEtransportBuildWithWireMock", "POST", "/v1/declarations/ro/etransport/build", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsRoEtransportSubmitWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsRoEtransportSubmitRequest{
+		WaybillID: "waybillId",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsRoEtransportSubmit(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsRoEtransportSubmitWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsRoEtransportSubmitWithWireMock", "POST", "/v1/declarations/ro/etransport/submit", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsRoEtransportStatusWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsRoEtransportStatusRequest{
+		Reference: "reference",
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsRoEtransportStatus(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsRoEtransportStatusWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsRoEtransportStatusWithWireMock", "POST", "/v1/declarations/ro/etransport/status", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLiLohndeklarationGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLiLohndeklarationGenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLiLohndeklarationGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLiLohndeklarationGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLiLohndeklarationGenerateWithWireMock", "POST", "/v1/declarations/li/lohndeklaration/generate", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsLiLohnlistenGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsLiLohnlistenGenerateRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsLiLohnlistenGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsLiLohnlistenGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsLiLohnlistenGenerateWithWireMock", "POST", "/v1/declarations/li/lohnlisten/generate", nil, 1)
+}
+
 func TestDeclarationsPostV1DeclarationsConfigsListWithWireMock(
 	t *testing.T,
 ) {
@@ -631,6 +2242,162 @@ func TestDeclarationsPostV1DeclarationsConfigsUpdateWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsConfigsUpdateWithWireMock", "POST", "/v1/declarations/configs/update", nil, 1)
+}
+
+func TestDeclarationsStoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWithWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsCertificatesUploadRequest{
+		System:   "system",
+		FileName: "fileName",
+		Content:  "content",
+	}
+	_, invocationErr := client.Declarations.StoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWith(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsStoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWithWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsStoreTheCertificateOrPrivateKeyAFilingSystemAuthenticatesWithWithWireMock", "POST", "/v1/declarations/certificates/upload", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsCertificatesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsCertificatesListRequest{}
+	_, invocationErr := client.Declarations.PostV1DeclarationsCertificatesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsCertificatesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsCertificatesListWithWireMock", "POST", "/v1/declarations/certificates/list", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsCertificatesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsCertificatesDeleteRequest{
+		System:   "system",
+		FieldKey: nordlet.PostV1DeclarationsCertificatesDeleteRequestFieldKeyCertificate,
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsCertificatesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsCertificatesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsCertificatesDeleteWithWireMock", "POST", "/v1/declarations/certificates/delete", nil, 1)
+}
+
+func TestDeclarationsWhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOnWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAutomationListRequest{}
+	_, invocationErr := client.Declarations.WhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOn(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsWhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOnWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsWhichDeadlinesNordletCanFileByItselfForThisCompanyAndWhichAreSwitchedOnWithWireMock", "POST", "/v1/declarations/automation/list", nil, 1)
+}
+
+func TestDeclarationsPostV1DeclarationsAutomationUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsAutomationUpdateRequest{
+		RuleKey: "ruleKey",
+		Enabled: true,
+	}
+	_, invocationErr := client.Declarations.PostV1DeclarationsAutomationUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsPostV1DeclarationsAutomationUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsPostV1DeclarationsAutomationUpdateWithWireMock", "POST", "/v1/declarations/automation/update", nil, 1)
+}
+
+func TestDeclarationsSendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGeneratedWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1DeclarationsSubmissionsRetryRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.SendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGenerated(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsSendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGeneratedWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsSendAFilingWhoseDeliveryFailedOnceMoreWithTheBytesThatWereGeneratedWithWireMock", "POST", "/v1/declarations/submissions/retry", nil, 1)
 }
 
 func TestDeclarationsPostV1DeclarationsSubmissionsCreateWithWireMock(

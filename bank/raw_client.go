@@ -1308,6 +1308,50 @@ func (r *RawClient) PostV1BankSettlementsMatch(
 	}, nil
 }
 
+func (r *RawClient) SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+	ctx context.Context,
+	request *nordlet.PostV1BankSettlementsCommissionRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.PostV1BankSettlementsCommissionResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/bank/settlements/commission"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.PostV1BankSettlementsCommissionResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.PostV1BankSettlementsCommissionResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) PostV1BankSettlementsLink(
 	ctx context.Context,
 	request *nordlet.PostV1BankSettlementsLinkRequest,

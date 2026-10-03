@@ -271,35 +271,39 @@ func (p *PostV1BillingUsageListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1BillingAccountGetResponseFieldPlan               = big.NewInt(1 << 0)
-	postV1BillingAccountGetResponseFieldStatus             = big.NewInt(1 << 1)
-	postV1BillingAccountGetResponseFieldBalanceCents       = big.NewInt(1 << 2)
-	postV1BillingAccountGetResponseFieldTrialEndsAt        = big.NewInt(1 << 3)
-	postV1BillingAccountGetResponseFieldFirstTopUpAt       = big.NewInt(1 << 4)
-	postV1BillingAccountGetResponseFieldLastChargedDate    = big.NewInt(1 << 5)
-	postV1BillingAccountGetResponseFieldPaymentsConfigured = big.NewInt(1 << 6)
-	postV1BillingAccountGetResponseFieldHasPaymentAccount  = big.NewInt(1 << 7)
-	postV1BillingAccountGetResponseFieldHasSubscription    = big.NewInt(1 << 8)
-	postV1BillingAccountGetResponseFieldMonthToDate        = big.NewInt(1 << 9)
-	postV1BillingAccountGetResponseFieldPlans              = big.NewInt(1 << 10)
-	postV1BillingAccountGetResponseFieldTopUp              = big.NewInt(1 << 11)
-	postV1BillingAccountGetResponseFieldTrialDays          = big.NewInt(1 << 12)
+	postV1BillingAccountGetResponseFieldPlan                    = big.NewInt(1 << 0)
+	postV1BillingAccountGetResponseFieldStatus                  = big.NewInt(1 << 1)
+	postV1BillingAccountGetResponseFieldBalanceCents            = big.NewInt(1 << 2)
+	postV1BillingAccountGetResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
+	postV1BillingAccountGetResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
+	postV1BillingAccountGetResponseFieldLastChargedDate         = big.NewInt(1 << 5)
+	postV1BillingAccountGetResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
+	postV1BillingAccountGetResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
+	postV1BillingAccountGetResponseFieldHasSubscription         = big.NewInt(1 << 8)
+	postV1BillingAccountGetResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
+	postV1BillingAccountGetResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
+	postV1BillingAccountGetResponseFieldMonthToDate             = big.NewInt(1 << 11)
+	postV1BillingAccountGetResponseFieldPlans                   = big.NewInt(1 << 12)
+	postV1BillingAccountGetResponseFieldTopUp                   = big.NewInt(1 << 13)
+	postV1BillingAccountGetResponseFieldTrialDays               = big.NewInt(1 << 14)
 )
 
 type PostV1BillingAccountGetResponse struct {
-	Plan               PostV1BillingAccountGetResponsePlan                   `json:"plan" url:"plan"`
-	Status             PostV1BillingAccountGetResponseStatus                 `json:"status" url:"status"`
-	BalanceCents       int64                                                 `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *string                                               `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *string                                               `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *string                                               `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
-	PaymentsConfigured bool                                                  `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                                  `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                                  `json:"hasSubscription" url:"hasSubscription"`
-	MonthToDate        *PostV1BillingAccountGetResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
-	Plans              map[string]*PostV1BillingAccountGetResponsePlansValue `json:"plans" url:"plans"`
-	TopUp              *PostV1BillingAccountGetResponseTopUp                 `json:"topUp" url:"topUp"`
-	TrialDays          int64                                                 `json:"trialDays" url:"trialDays"`
+	Plan                    PostV1BillingAccountGetResponsePlan                   `json:"plan" url:"plan"`
+	Status                  PostV1BillingAccountGetResponseStatus                 `json:"status" url:"status"`
+	BalanceCents            int64                                                 `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt             *string                                               `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt            *string                                               `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate         *string                                               `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
+	PaymentsConfigured      bool                                                  `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount       bool                                                  `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription         bool                                                  `json:"hasSubscription" url:"hasSubscription"`
+	PaymentFailedAt         *string                                               `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
+	PaymentFailedInvoiceURL *string                                               `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
+	MonthToDate             *PostV1BillingAccountGetResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
+	Plans                   map[string]*PostV1BillingAccountGetResponsePlansValue `json:"plans" url:"plans"`
+	TopUp                   *PostV1BillingAccountGetResponseTopUp                 `json:"topUp" url:"topUp"`
+	TrialDays               int64                                                 `json:"trialDays" url:"trialDays"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -369,6 +373,20 @@ func (p *PostV1BillingAccountGetResponse) GetHasSubscription() bool {
 		return false
 	}
 	return p.HasSubscription
+}
+
+func (p *PostV1BillingAccountGetResponse) GetPaymentFailedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PaymentFailedAt
+}
+
+func (p *PostV1BillingAccountGetResponse) GetPaymentFailedInvoiceURL() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PaymentFailedInvoiceURL
 }
 
 func (p *PostV1BillingAccountGetResponse) GetMonthToDate() *PostV1BillingAccountGetResponseMonthToDate {
@@ -474,6 +492,20 @@ func (p *PostV1BillingAccountGetResponse) SetHasPaymentAccount(hasPaymentAccount
 func (p *PostV1BillingAccountGetResponse) SetHasSubscription(hasSubscription bool) {
 	p.HasSubscription = hasSubscription
 	p.require(postV1BillingAccountGetResponseFieldHasSubscription)
+}
+
+// SetPaymentFailedAt sets the PaymentFailedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BillingAccountGetResponse) SetPaymentFailedAt(paymentFailedAt *string) {
+	p.PaymentFailedAt = paymentFailedAt
+	p.require(postV1BillingAccountGetResponseFieldPaymentFailedAt)
+}
+
+// SetPaymentFailedInvoiceURL sets the PaymentFailedInvoiceURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BillingAccountGetResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
+	p.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
+	p.require(postV1BillingAccountGetResponseFieldPaymentFailedInvoiceURL)
 }
 
 // SetMonthToDate sets the MonthToDate field and marks it as non-optional;
@@ -1066,35 +1098,39 @@ func (p PostV1BillingAccountSetPlanRequestPlan) Ptr() *PostV1BillingAccountSetPl
 }
 
 var (
-	postV1BillingAccountSetPlanResponseFieldPlan               = big.NewInt(1 << 0)
-	postV1BillingAccountSetPlanResponseFieldStatus             = big.NewInt(1 << 1)
-	postV1BillingAccountSetPlanResponseFieldBalanceCents       = big.NewInt(1 << 2)
-	postV1BillingAccountSetPlanResponseFieldTrialEndsAt        = big.NewInt(1 << 3)
-	postV1BillingAccountSetPlanResponseFieldFirstTopUpAt       = big.NewInt(1 << 4)
-	postV1BillingAccountSetPlanResponseFieldLastChargedDate    = big.NewInt(1 << 5)
-	postV1BillingAccountSetPlanResponseFieldPaymentsConfigured = big.NewInt(1 << 6)
-	postV1BillingAccountSetPlanResponseFieldHasPaymentAccount  = big.NewInt(1 << 7)
-	postV1BillingAccountSetPlanResponseFieldHasSubscription    = big.NewInt(1 << 8)
-	postV1BillingAccountSetPlanResponseFieldMonthToDate        = big.NewInt(1 << 9)
-	postV1BillingAccountSetPlanResponseFieldPlans              = big.NewInt(1 << 10)
-	postV1BillingAccountSetPlanResponseFieldTopUp              = big.NewInt(1 << 11)
-	postV1BillingAccountSetPlanResponseFieldTrialDays          = big.NewInt(1 << 12)
+	postV1BillingAccountSetPlanResponseFieldPlan                    = big.NewInt(1 << 0)
+	postV1BillingAccountSetPlanResponseFieldStatus                  = big.NewInt(1 << 1)
+	postV1BillingAccountSetPlanResponseFieldBalanceCents            = big.NewInt(1 << 2)
+	postV1BillingAccountSetPlanResponseFieldTrialEndsAt             = big.NewInt(1 << 3)
+	postV1BillingAccountSetPlanResponseFieldFirstTopUpAt            = big.NewInt(1 << 4)
+	postV1BillingAccountSetPlanResponseFieldLastChargedDate         = big.NewInt(1 << 5)
+	postV1BillingAccountSetPlanResponseFieldPaymentsConfigured      = big.NewInt(1 << 6)
+	postV1BillingAccountSetPlanResponseFieldHasPaymentAccount       = big.NewInt(1 << 7)
+	postV1BillingAccountSetPlanResponseFieldHasSubscription         = big.NewInt(1 << 8)
+	postV1BillingAccountSetPlanResponseFieldPaymentFailedAt         = big.NewInt(1 << 9)
+	postV1BillingAccountSetPlanResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 10)
+	postV1BillingAccountSetPlanResponseFieldMonthToDate             = big.NewInt(1 << 11)
+	postV1BillingAccountSetPlanResponseFieldPlans                   = big.NewInt(1 << 12)
+	postV1BillingAccountSetPlanResponseFieldTopUp                   = big.NewInt(1 << 13)
+	postV1BillingAccountSetPlanResponseFieldTrialDays               = big.NewInt(1 << 14)
 )
 
 type PostV1BillingAccountSetPlanResponse struct {
-	Plan               PostV1BillingAccountSetPlanResponsePlan                   `json:"plan" url:"plan"`
-	Status             PostV1BillingAccountSetPlanResponseStatus                 `json:"status" url:"status"`
-	BalanceCents       int64                                                     `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *string                                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *string                                                   `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *string                                                   `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
-	PaymentsConfigured bool                                                      `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                                      `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                                      `json:"hasSubscription" url:"hasSubscription"`
-	MonthToDate        *PostV1BillingAccountSetPlanResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
-	Plans              map[string]*PostV1BillingAccountSetPlanResponsePlansValue `json:"plans" url:"plans"`
-	TopUp              *PostV1BillingAccountSetPlanResponseTopUp                 `json:"topUp" url:"topUp"`
-	TrialDays          int64                                                     `json:"trialDays" url:"trialDays"`
+	Plan                    PostV1BillingAccountSetPlanResponsePlan                   `json:"plan" url:"plan"`
+	Status                  PostV1BillingAccountSetPlanResponseStatus                 `json:"status" url:"status"`
+	BalanceCents            int64                                                     `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt             *string                                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt            *string                                                   `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate         *string                                                   `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty"`
+	PaymentsConfigured      bool                                                      `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount       bool                                                      `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription         bool                                                      `json:"hasSubscription" url:"hasSubscription"`
+	PaymentFailedAt         *string                                                   `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
+	PaymentFailedInvoiceURL *string                                                   `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
+	MonthToDate             *PostV1BillingAccountSetPlanResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
+	Plans                   map[string]*PostV1BillingAccountSetPlanResponsePlansValue `json:"plans" url:"plans"`
+	TopUp                   *PostV1BillingAccountSetPlanResponseTopUp                 `json:"topUp" url:"topUp"`
+	TrialDays               int64                                                     `json:"trialDays" url:"trialDays"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1164,6 +1200,20 @@ func (p *PostV1BillingAccountSetPlanResponse) GetHasSubscription() bool {
 		return false
 	}
 	return p.HasSubscription
+}
+
+func (p *PostV1BillingAccountSetPlanResponse) GetPaymentFailedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PaymentFailedAt
+}
+
+func (p *PostV1BillingAccountSetPlanResponse) GetPaymentFailedInvoiceURL() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PaymentFailedInvoiceURL
 }
 
 func (p *PostV1BillingAccountSetPlanResponse) GetMonthToDate() *PostV1BillingAccountSetPlanResponseMonthToDate {
@@ -1269,6 +1319,20 @@ func (p *PostV1BillingAccountSetPlanResponse) SetHasPaymentAccount(hasPaymentAcc
 func (p *PostV1BillingAccountSetPlanResponse) SetHasSubscription(hasSubscription bool) {
 	p.HasSubscription = hasSubscription
 	p.require(postV1BillingAccountSetPlanResponseFieldHasSubscription)
+}
+
+// SetPaymentFailedAt sets the PaymentFailedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BillingAccountSetPlanResponse) SetPaymentFailedAt(paymentFailedAt *string) {
+	p.PaymentFailedAt = paymentFailedAt
+	p.require(postV1BillingAccountSetPlanResponseFieldPaymentFailedAt)
+}
+
+// SetPaymentFailedInvoiceURL sets the PaymentFailedInvoiceURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BillingAccountSetPlanResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
+	p.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
+	p.require(postV1BillingAccountSetPlanResponseFieldPaymentFailedInvoiceURL)
 }
 
 // SetMonthToDate sets the MonthToDate field and marks it as non-optional;
@@ -1838,19 +1902,19 @@ func (p *PostV1BillingAccountSetPlanResponseTopUp) String() string {
 type PostV1BillingPortalCreateRequestLocale string
 
 const (
-	PostV1BillingPortalCreateRequestLocaleLt PostV1BillingPortalCreateRequestLocale = "lt"
 	PostV1BillingPortalCreateRequestLocaleEn PostV1BillingPortalCreateRequestLocale = "en"
-	PostV1BillingPortalCreateRequestLocaleRu PostV1BillingPortalCreateRequestLocale = "ru"
+	PostV1BillingPortalCreateRequestLocaleLt PostV1BillingPortalCreateRequestLocale = "lt"
+	PostV1BillingPortalCreateRequestLocaleDe PostV1BillingPortalCreateRequestLocale = "de"
 )
 
 func NewPostV1BillingPortalCreateRequestLocaleFromString(s string) (PostV1BillingPortalCreateRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1BillingPortalCreateRequestLocaleLt, nil
 	case "en":
 		return PostV1BillingPortalCreateRequestLocaleEn, nil
-	case "ru":
-		return PostV1BillingPortalCreateRequestLocaleRu, nil
+	case "lt":
+		return PostV1BillingPortalCreateRequestLocaleLt, nil
+	case "de":
+		return PostV1BillingPortalCreateRequestLocaleDe, nil
 	}
 	var t PostV1BillingPortalCreateRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -1947,19 +2011,19 @@ func (p *PostV1BillingPortalCreateResponse) String() string {
 type PostV1BillingTopupCreateRequestLocale string
 
 const (
-	PostV1BillingTopupCreateRequestLocaleLt PostV1BillingTopupCreateRequestLocale = "lt"
 	PostV1BillingTopupCreateRequestLocaleEn PostV1BillingTopupCreateRequestLocale = "en"
-	PostV1BillingTopupCreateRequestLocaleRu PostV1BillingTopupCreateRequestLocale = "ru"
+	PostV1BillingTopupCreateRequestLocaleLt PostV1BillingTopupCreateRequestLocale = "lt"
+	PostV1BillingTopupCreateRequestLocaleDe PostV1BillingTopupCreateRequestLocale = "de"
 )
 
 func NewPostV1BillingTopupCreateRequestLocaleFromString(s string) (PostV1BillingTopupCreateRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1BillingTopupCreateRequestLocaleLt, nil
 	case "en":
 		return PostV1BillingTopupCreateRequestLocaleEn, nil
-	case "ru":
-		return PostV1BillingTopupCreateRequestLocaleRu, nil
+	case "lt":
+		return PostV1BillingTopupCreateRequestLocaleLt, nil
+	case "de":
+		return PostV1BillingTopupCreateRequestLocaleDe, nil
 	}
 	var t PostV1BillingTopupCreateRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

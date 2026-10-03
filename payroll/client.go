@@ -98,12 +98,12 @@ func (c *Client) PostV1PayrollSchedulesList(
 	return response.Body, nil
 }
 
-func (c *Client) PostV1PayrollCalc(
+func (c *Client) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 	ctx context.Context,
 	request *nordlet.PostV1PayrollCalcRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1PayrollCalcResponse, error) {
-	response, err := c.WithRawResponse.PostV1PayrollCalc(
+	response, err := c.WithRawResponse.CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 		ctx,
 		request,
 		opts...,
@@ -152,6 +152,23 @@ func (c *Client) PostV1PayrollRunsList(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1PayrollRunsListResponse, error) {
 	response, err := c.WithRawResponse.PostV1PayrollRunsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// The days and hours worked, the days on the register and the average hourly earnings that some countries report per employment. The Czech monthly employer report asks for all four. They can be set while the run is a draft.
+func (c *Client) RecordTheTimeAPersonWorkedInAPayrollLine(
+	ctx context.Context,
+	request *nordlet.PostV1PayrollLinesAttendanceRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1PayrollLinesAttendanceResponse, error) {
+	response, err := c.WithRawResponse.RecordTheTimeAPersonWorkedInAPayrollLine(
 		ctx,
 		request,
 		opts...,

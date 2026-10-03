@@ -208,7 +208,7 @@ func (r *RawClient) PostV1PayrollSchedulesList(
 	}, nil
 }
 
-func (r *RawClient) PostV1PayrollCalc(
+func (r *RawClient) CalculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
 	ctx context.Context,
 	request *nordlet.PostV1PayrollCalcRequest,
 	opts ...option.RequestOption,
@@ -378,6 +378,50 @@ func (r *RawClient) PostV1PayrollRunsList(
 		return nil, err
 	}
 	return &core.Response[*nordlet.PostV1PayrollRunsListResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) RecordTheTimeAPersonWorkedInAPayrollLine(
+	ctx context.Context,
+	request *nordlet.PostV1PayrollLinesAttendanceRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.PostV1PayrollLinesAttendanceResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/payroll/lines/attendance"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.PostV1PayrollLinesAttendanceResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.PostV1PayrollLinesAttendanceResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

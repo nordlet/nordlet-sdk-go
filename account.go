@@ -69,13 +69,79 @@ func (p *PostV1AccountExportRequest) require(field *big.Int) {
 }
 
 var (
-	postV1AccountAPIKeysCreateRequestFieldName   = big.NewInt(1 << 0)
-	postV1AccountAPIKeysCreateRequestFieldScopes = big.NewInt(1 << 1)
+	postV1AccountAPIKeysRotateRequestFieldID            = big.NewInt(1 << 0)
+	postV1AccountAPIKeysRotateRequestFieldOverlapHours  = big.NewInt(1 << 1)
+	postV1AccountAPIKeysRotateRequestFieldExpiresInDays = big.NewInt(1 << 2)
+)
+
+type PostV1AccountAPIKeysRotateRequest struct {
+	ID            string `json:"id" url:"-"`
+	OverlapHours  *int64 `json:"overlapHours,omitempty" url:"-"`
+	ExpiresInDays *int64 `json:"expiresInDays,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountAPIKeysRotateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountAPIKeysRotateRequestFieldID)
+}
+
+// SetOverlapHours sets the OverlapHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateRequest) SetOverlapHours(overlapHours *int64) {
+	p.OverlapHours = overlapHours
+	p.require(postV1AccountAPIKeysRotateRequestFieldOverlapHours)
+}
+
+// SetExpiresInDays sets the ExpiresInDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateRequest) SetExpiresInDays(expiresInDays *int64) {
+	p.ExpiresInDays = expiresInDays
+	p.require(postV1AccountAPIKeysRotateRequestFieldExpiresInDays)
+}
+
+func (p *PostV1AccountAPIKeysRotateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountAPIKeysRotateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountAPIKeysRotateRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountAPIKeysRotateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountAPIKeysRotateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AccountAPIKeysCreateRequestFieldName          = big.NewInt(1 << 0)
+	postV1AccountAPIKeysCreateRequestFieldScopes        = big.NewInt(1 << 1)
+	postV1AccountAPIKeysCreateRequestFieldExpiresInDays = big.NewInt(1 << 2)
 )
 
 type PostV1AccountAPIKeysCreateRequest struct {
-	Name   string   `json:"name" url:"-"`
-	Scopes []string `json:"scopes,omitempty" url:"-"`
+	Name          string   `json:"name" url:"-"`
+	Scopes        []string `json:"scopes,omitempty" url:"-"`
+	ExpiresInDays *int64   `json:"expiresInDays,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -100,6 +166,13 @@ func (p *PostV1AccountAPIKeysCreateRequest) SetName(name string) {
 func (p *PostV1AccountAPIKeysCreateRequest) SetScopes(scopes []string) {
 	p.Scopes = scopes
 	p.require(postV1AccountAPIKeysCreateRequestFieldScopes)
+}
+
+// SetExpiresInDays sets the ExpiresInDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysCreateRequest) SetExpiresInDays(expiresInDays *int64) {
+	p.ExpiresInDays = expiresInDays
+	p.require(postV1AccountAPIKeysCreateRequestFieldExpiresInDays)
 }
 
 func (p *PostV1AccountAPIKeysCreateRequest) UnmarshalJSON(data []byte) error {
@@ -275,37 +348,63 @@ func (p *PostV1AccountCompaniesArchiveRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountCompaniesCreateRequestFieldName                   = big.NewInt(1 << 0)
-	postV1AccountCompaniesCreateRequestFieldCode                   = big.NewInt(1 << 1)
-	postV1AccountCompaniesCreateRequestFieldVatCode                = big.NewInt(1 << 2)
-	postV1AccountCompaniesCreateRequestFieldSmeExemptionNumber     = big.NewInt(1 << 3)
-	postV1AccountCompaniesCreateRequestFieldIsVatPayer             = big.NewInt(1 << 4)
-	postV1AccountCompaniesCreateRequestFieldAddress                = big.NewInt(1 << 5)
-	postV1AccountCompaniesCreateRequestFieldEmail                  = big.NewInt(1 << 6)
-	postV1AccountCompaniesCreateRequestFieldPhone                  = big.NewInt(1 << 7)
-	postV1AccountCompaniesCreateRequestFieldIban                   = big.NewInt(1 << 8)
-	postV1AccountCompaniesCreateRequestFieldBankName               = big.NewInt(1 << 9)
-	postV1AccountCompaniesCreateRequestFieldPeppolID               = big.NewInt(1 << 10)
-	postV1AccountCompaniesCreateRequestFieldSepaCreditorID         = big.NewInt(1 << 11)
-	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 12)
-	postV1AccountCompaniesCreateRequestFieldCountryCode            = big.NewInt(1 << 13)
-	postV1AccountCompaniesCreateRequestFieldIsSandbox              = big.NewInt(1 << 14)
+	postV1AccountCompaniesCreateRequestFieldName                      = big.NewInt(1 << 0)
+	postV1AccountCompaniesCreateRequestFieldCode                      = big.NewInt(1 << 1)
+	postV1AccountCompaniesCreateRequestFieldVatCode                   = big.NewInt(1 << 2)
+	postV1AccountCompaniesCreateRequestFieldSmeExemptionNumber        = big.NewInt(1 << 3)
+	postV1AccountCompaniesCreateRequestFieldIsVatPayer                = big.NewInt(1 << 4)
+	postV1AccountCompaniesCreateRequestFieldVatPeriod                 = big.NewInt(1 << 5)
+	postV1AccountCompaniesCreateRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 6)
+	postV1AccountCompaniesCreateRequestFieldTimeZone                  = big.NewInt(1 << 7)
+	postV1AccountCompaniesCreateRequestFieldFilingOptions             = big.NewInt(1 << 8)
+	postV1AccountCompaniesCreateRequestFieldAddress                   = big.NewInt(1 << 9)
+	postV1AccountCompaniesCreateRequestFieldEmail                     = big.NewInt(1 << 10)
+	postV1AccountCompaniesCreateRequestFieldPhone                     = big.NewInt(1 << 11)
+	postV1AccountCompaniesCreateRequestFieldIban                      = big.NewInt(1 << 12)
+	postV1AccountCompaniesCreateRequestFieldBankName                  = big.NewInt(1 << 13)
+	postV1AccountCompaniesCreateRequestFieldPeppolID                  = big.NewInt(1 << 14)
+	postV1AccountCompaniesCreateRequestFieldSepaCreditorID            = big.NewInt(1 << 15)
+	postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 16)
+	postV1AccountCompaniesCreateRequestFieldLegalForm                 = big.NewInt(1 << 17)
+	postV1AccountCompaniesCreateRequestFieldRegistryName              = big.NewInt(1 << 18)
+	postV1AccountCompaniesCreateRequestFieldIncorporatedOn            = big.NewInt(1 << 19)
+	postV1AccountCompaniesCreateRequestFieldShareCapital              = big.NewInt(1 << 20)
+	postV1AccountCompaniesCreateRequestFieldAccountsKeptBy            = big.NewInt(1 << 21)
+	postV1AccountCompaniesCreateRequestFieldBookkeeperName            = big.NewInt(1 << 22)
+	postV1AccountCompaniesCreateRequestFieldAuditorName               = big.NewInt(1 << 23)
+	postV1AccountCompaniesCreateRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 24)
+	postV1AccountCompaniesCreateRequestFieldAuditRequired             = big.NewInt(1 << 25)
+	postV1AccountCompaniesCreateRequestFieldCountryCode               = big.NewInt(1 << 26)
+	postV1AccountCompaniesCreateRequestFieldIsSandbox                 = big.NewInt(1 << 27)
 )
 
 type PostV1AccountCompaniesCreateRequest struct {
-	Name                   string                                      `json:"name" url:"-"`
-	Code                   *string                                     `json:"code,omitempty" url:"-"`
-	VatCode                *string                                     `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber     *string                                     `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer             *bool                                       `json:"isVatPayer,omitempty" url:"-"`
-	Address                *PostV1AccountCompaniesCreateRequestAddress `json:"address,omitempty" url:"-"`
-	Email                  *string                                     `json:"email,omitempty" url:"-"`
-	Phone                  *string                                     `json:"phone,omitempty" url:"-"`
-	Iban                   *string                                     `json:"iban,omitempty" url:"-"`
-	BankName               *string                                     `json:"bankName,omitempty" url:"-"`
-	PeppolID               *string                                     `json:"peppolId,omitempty" url:"-"`
-	SepaCreditorID         *string                                     `json:"sepaCreditorId,omitempty" url:"-"`
-	DefaultInvoiceCurrency *string                                     `json:"defaultInvoiceCurrency,omitempty" url:"-"`
+	Name                      string                                             `json:"name" url:"-"`
+	Code                      *string                                            `json:"code,omitempty" url:"-"`
+	VatCode                   *string                                            `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber        *string                                            `json:"smeExemptionNumber,omitempty" url:"-"`
+	IsVatPayer                *bool                                              `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod                 *PostV1AccountCompaniesCreateRequestVatPeriod      `json:"vatPeriod,omitempty" url:"-"`
+	FiscalYearEndMonth        *int64                                             `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	TimeZone                  *string                                            `json:"timeZone,omitempty" url:"-"`
+	FilingOptions             map[string]string                                  `json:"filingOptions,omitempty" url:"-"`
+	Address                   *PostV1AccountCompaniesCreateRequestAddress        `json:"address,omitempty" url:"-"`
+	Email                     *string                                            `json:"email,omitempty" url:"-"`
+	Phone                     *string                                            `json:"phone,omitempty" url:"-"`
+	Iban                      *string                                            `json:"iban,omitempty" url:"-"`
+	BankName                  *string                                            `json:"bankName,omitempty" url:"-"`
+	PeppolID                  *string                                            `json:"peppolId,omitempty" url:"-"`
+	SepaCreditorID            *string                                            `json:"sepaCreditorId,omitempty" url:"-"`
+	DefaultInvoiceCurrency    *string                                            `json:"defaultInvoiceCurrency,omitempty" url:"-"`
+	LegalForm                 *string                                            `json:"legalForm,omitempty" url:"-"`
+	RegistryName              *string                                            `json:"registryName,omitempty" url:"-"`
+	IncorporatedOn            *string                                            `json:"incorporatedOn,omitempty" url:"-"`
+	ShareCapital              *string                                            `json:"shareCapital,omitempty" url:"-"`
+	AccountsKeptBy            *PostV1AccountCompaniesCreateRequestAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"-"`
+	BookkeeperName            *string                                            `json:"bookkeeperName,omitempty" url:"-"`
+	AuditorName               *string                                            `json:"auditorName,omitempty" url:"-"`
+	AuditorRegistrationNumber *string                                            `json:"auditorRegistrationNumber,omitempty" url:"-"`
+	AuditRequired             *bool                                              `json:"auditRequired,omitempty" url:"-"`
 	// Jurisdiction the company is registered in (immutable after creation)
 	CountryCode *PostV1AccountCompaniesCreateRequestCountryCode `json:"countryCode,omitempty" url:"-"`
 	// Sandbox companies hold test data and are purged immediately on delete (immutable after creation)
@@ -355,6 +454,34 @@ func (p *PostV1AccountCompaniesCreateRequest) SetSmeExemptionNumber(smeExemption
 func (p *PostV1AccountCompaniesCreateRequest) SetIsVatPayer(isVatPayer *bool) {
 	p.IsVatPayer = isVatPayer
 	p.require(postV1AccountCompaniesCreateRequestFieldIsVatPayer)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetVatPeriod(vatPeriod *PostV1AccountCompaniesCreateRequestVatPeriod) {
+	p.VatPeriod = vatPeriod
+	p.require(postV1AccountCompaniesCreateRequestFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	p.FiscalYearEndMonth = fiscalYearEndMonth
+	p.require(postV1AccountCompaniesCreateRequestFieldFiscalYearEndMonth)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetTimeZone(timeZone *string) {
+	p.TimeZone = timeZone
+	p.require(postV1AccountCompaniesCreateRequestFieldTimeZone)
+}
+
+// SetFilingOptions sets the FilingOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetFilingOptions(filingOptions map[string]string) {
+	p.FilingOptions = filingOptions
+	p.require(postV1AccountCompaniesCreateRequestFieldFilingOptions)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -411,6 +538,69 @@ func (p *PostV1AccountCompaniesCreateRequest) SetSepaCreditorID(sepaCreditorID *
 func (p *PostV1AccountCompaniesCreateRequest) SetDefaultInvoiceCurrency(defaultInvoiceCurrency *string) {
 	p.DefaultInvoiceCurrency = defaultInvoiceCurrency
 	p.require(postV1AccountCompaniesCreateRequestFieldDefaultInvoiceCurrency)
+}
+
+// SetLegalForm sets the LegalForm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetLegalForm(legalForm *string) {
+	p.LegalForm = legalForm
+	p.require(postV1AccountCompaniesCreateRequestFieldLegalForm)
+}
+
+// SetRegistryName sets the RegistryName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetRegistryName(registryName *string) {
+	p.RegistryName = registryName
+	p.require(postV1AccountCompaniesCreateRequestFieldRegistryName)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetIncorporatedOn(incorporatedOn *string) {
+	p.IncorporatedOn = incorporatedOn
+	p.require(postV1AccountCompaniesCreateRequestFieldIncorporatedOn)
+}
+
+// SetShareCapital sets the ShareCapital field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetShareCapital(shareCapital *string) {
+	p.ShareCapital = shareCapital
+	p.require(postV1AccountCompaniesCreateRequestFieldShareCapital)
+}
+
+// SetAccountsKeptBy sets the AccountsKeptBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetAccountsKeptBy(accountsKeptBy *PostV1AccountCompaniesCreateRequestAccountsKeptBy) {
+	p.AccountsKeptBy = accountsKeptBy
+	p.require(postV1AccountCompaniesCreateRequestFieldAccountsKeptBy)
+}
+
+// SetBookkeeperName sets the BookkeeperName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetBookkeeperName(bookkeeperName *string) {
+	p.BookkeeperName = bookkeeperName
+	p.require(postV1AccountCompaniesCreateRequestFieldBookkeeperName)
+}
+
+// SetAuditorName sets the AuditorName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetAuditorName(auditorName *string) {
+	p.AuditorName = auditorName
+	p.require(postV1AccountCompaniesCreateRequestFieldAuditorName)
+}
+
+// SetAuditorRegistrationNumber sets the AuditorRegistrationNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetAuditorRegistrationNumber(auditorRegistrationNumber *string) {
+	p.AuditorRegistrationNumber = auditorRegistrationNumber
+	p.require(postV1AccountCompaniesCreateRequestFieldAuditorRegistrationNumber)
+}
+
+// SetAuditRequired sets the AuditRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesCreateRequest) SetAuditRequired(auditRequired *bool) {
+	p.AuditRequired = auditRequired
+	p.require(postV1AccountCompaniesCreateRequestFieldAuditRequired)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -554,37 +744,63 @@ func (p *PostV1AccountCompaniesSelectRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountCompaniesUpdateRequestFieldName                   = big.NewInt(1 << 0)
-	postV1AccountCompaniesUpdateRequestFieldCode                   = big.NewInt(1 << 1)
-	postV1AccountCompaniesUpdateRequestFieldVatCode                = big.NewInt(1 << 2)
-	postV1AccountCompaniesUpdateRequestFieldSmeExemptionNumber     = big.NewInt(1 << 3)
-	postV1AccountCompaniesUpdateRequestFieldIsVatPayer             = big.NewInt(1 << 4)
-	postV1AccountCompaniesUpdateRequestFieldAddress                = big.NewInt(1 << 5)
-	postV1AccountCompaniesUpdateRequestFieldEmail                  = big.NewInt(1 << 6)
-	postV1AccountCompaniesUpdateRequestFieldPhone                  = big.NewInt(1 << 7)
-	postV1AccountCompaniesUpdateRequestFieldIban                   = big.NewInt(1 << 8)
-	postV1AccountCompaniesUpdateRequestFieldBankName               = big.NewInt(1 << 9)
-	postV1AccountCompaniesUpdateRequestFieldPeppolID               = big.NewInt(1 << 10)
-	postV1AccountCompaniesUpdateRequestFieldSepaCreditorID         = big.NewInt(1 << 11)
-	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency = big.NewInt(1 << 12)
-	postV1AccountCompaniesUpdateRequestFieldLogo                   = big.NewInt(1 << 13)
+	postV1AccountCompaniesUpdateRequestFieldName                      = big.NewInt(1 << 0)
+	postV1AccountCompaniesUpdateRequestFieldCode                      = big.NewInt(1 << 1)
+	postV1AccountCompaniesUpdateRequestFieldVatCode                   = big.NewInt(1 << 2)
+	postV1AccountCompaniesUpdateRequestFieldSmeExemptionNumber        = big.NewInt(1 << 3)
+	postV1AccountCompaniesUpdateRequestFieldIsVatPayer                = big.NewInt(1 << 4)
+	postV1AccountCompaniesUpdateRequestFieldVatPeriod                 = big.NewInt(1 << 5)
+	postV1AccountCompaniesUpdateRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 6)
+	postV1AccountCompaniesUpdateRequestFieldTimeZone                  = big.NewInt(1 << 7)
+	postV1AccountCompaniesUpdateRequestFieldFilingOptions             = big.NewInt(1 << 8)
+	postV1AccountCompaniesUpdateRequestFieldAddress                   = big.NewInt(1 << 9)
+	postV1AccountCompaniesUpdateRequestFieldEmail                     = big.NewInt(1 << 10)
+	postV1AccountCompaniesUpdateRequestFieldPhone                     = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateRequestFieldIban                      = big.NewInt(1 << 12)
+	postV1AccountCompaniesUpdateRequestFieldBankName                  = big.NewInt(1 << 13)
+	postV1AccountCompaniesUpdateRequestFieldPeppolID                  = big.NewInt(1 << 14)
+	postV1AccountCompaniesUpdateRequestFieldSepaCreditorID            = big.NewInt(1 << 15)
+	postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 16)
+	postV1AccountCompaniesUpdateRequestFieldLegalForm                 = big.NewInt(1 << 17)
+	postV1AccountCompaniesUpdateRequestFieldRegistryName              = big.NewInt(1 << 18)
+	postV1AccountCompaniesUpdateRequestFieldIncorporatedOn            = big.NewInt(1 << 19)
+	postV1AccountCompaniesUpdateRequestFieldShareCapital              = big.NewInt(1 << 20)
+	postV1AccountCompaniesUpdateRequestFieldAccountsKeptBy            = big.NewInt(1 << 21)
+	postV1AccountCompaniesUpdateRequestFieldBookkeeperName            = big.NewInt(1 << 22)
+	postV1AccountCompaniesUpdateRequestFieldAuditorName               = big.NewInt(1 << 23)
+	postV1AccountCompaniesUpdateRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 24)
+	postV1AccountCompaniesUpdateRequestFieldAuditRequired             = big.NewInt(1 << 25)
+	postV1AccountCompaniesUpdateRequestFieldLogo                      = big.NewInt(1 << 26)
 )
 
 type PostV1AccountCompaniesUpdateRequest struct {
-	Name                   *string                                     `json:"name,omitempty" url:"-"`
-	Code                   *string                                     `json:"code,omitempty" url:"-"`
-	VatCode                *string                                     `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber     *string                                     `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer             *bool                                       `json:"isVatPayer,omitempty" url:"-"`
-	Address                *PostV1AccountCompaniesUpdateRequestAddress `json:"address,omitempty" url:"-"`
-	Email                  *string                                     `json:"email,omitempty" url:"-"`
-	Phone                  *string                                     `json:"phone,omitempty" url:"-"`
-	Iban                   *string                                     `json:"iban,omitempty" url:"-"`
-	BankName               *string                                     `json:"bankName,omitempty" url:"-"`
-	PeppolID               *string                                     `json:"peppolId,omitempty" url:"-"`
-	SepaCreditorID         *string                                     `json:"sepaCreditorId,omitempty" url:"-"`
-	DefaultInvoiceCurrency *string                                     `json:"defaultInvoiceCurrency,omitempty" url:"-"`
-	Logo                   *PostV1AccountCompaniesUpdateRequestLogo    `json:"logo,omitempty" url:"-"`
+	Name                      *string                                            `json:"name,omitempty" url:"-"`
+	Code                      *string                                            `json:"code,omitempty" url:"-"`
+	VatCode                   *string                                            `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber        *string                                            `json:"smeExemptionNumber,omitempty" url:"-"`
+	IsVatPayer                *bool                                              `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod                 *PostV1AccountCompaniesUpdateRequestVatPeriod      `json:"vatPeriod,omitempty" url:"-"`
+	FiscalYearEndMonth        *int64                                             `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	TimeZone                  *string                                            `json:"timeZone,omitempty" url:"-"`
+	FilingOptions             map[string]*string                                 `json:"filingOptions,omitempty" url:"-"`
+	Address                   *PostV1AccountCompaniesUpdateRequestAddress        `json:"address,omitempty" url:"-"`
+	Email                     *string                                            `json:"email,omitempty" url:"-"`
+	Phone                     *string                                            `json:"phone,omitempty" url:"-"`
+	Iban                      *string                                            `json:"iban,omitempty" url:"-"`
+	BankName                  *string                                            `json:"bankName,omitempty" url:"-"`
+	PeppolID                  *string                                            `json:"peppolId,omitempty" url:"-"`
+	SepaCreditorID            *string                                            `json:"sepaCreditorId,omitempty" url:"-"`
+	DefaultInvoiceCurrency    *string                                            `json:"defaultInvoiceCurrency,omitempty" url:"-"`
+	LegalForm                 *string                                            `json:"legalForm,omitempty" url:"-"`
+	RegistryName              *string                                            `json:"registryName,omitempty" url:"-"`
+	IncorporatedOn            *string                                            `json:"incorporatedOn,omitempty" url:"-"`
+	ShareCapital              *string                                            `json:"shareCapital,omitempty" url:"-"`
+	AccountsKeptBy            *PostV1AccountCompaniesUpdateRequestAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"-"`
+	BookkeeperName            *string                                            `json:"bookkeeperName,omitempty" url:"-"`
+	AuditorName               *string                                            `json:"auditorName,omitempty" url:"-"`
+	AuditorRegistrationNumber *string                                            `json:"auditorRegistrationNumber,omitempty" url:"-"`
+	AuditRequired             *bool                                              `json:"auditRequired,omitempty" url:"-"`
+	Logo                      *PostV1AccountCompaniesUpdateRequestLogo           `json:"logo,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -630,6 +846,34 @@ func (p *PostV1AccountCompaniesUpdateRequest) SetSmeExemptionNumber(smeExemption
 func (p *PostV1AccountCompaniesUpdateRequest) SetIsVatPayer(isVatPayer *bool) {
 	p.IsVatPayer = isVatPayer
 	p.require(postV1AccountCompaniesUpdateRequestFieldIsVatPayer)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetVatPeriod(vatPeriod *PostV1AccountCompaniesUpdateRequestVatPeriod) {
+	p.VatPeriod = vatPeriod
+	p.require(postV1AccountCompaniesUpdateRequestFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	p.FiscalYearEndMonth = fiscalYearEndMonth
+	p.require(postV1AccountCompaniesUpdateRequestFieldFiscalYearEndMonth)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetTimeZone(timeZone *string) {
+	p.TimeZone = timeZone
+	p.require(postV1AccountCompaniesUpdateRequestFieldTimeZone)
+}
+
+// SetFilingOptions sets the FilingOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetFilingOptions(filingOptions map[string]*string) {
+	p.FilingOptions = filingOptions
+	p.require(postV1AccountCompaniesUpdateRequestFieldFilingOptions)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -686,6 +930,69 @@ func (p *PostV1AccountCompaniesUpdateRequest) SetSepaCreditorID(sepaCreditorID *
 func (p *PostV1AccountCompaniesUpdateRequest) SetDefaultInvoiceCurrency(defaultInvoiceCurrency *string) {
 	p.DefaultInvoiceCurrency = defaultInvoiceCurrency
 	p.require(postV1AccountCompaniesUpdateRequestFieldDefaultInvoiceCurrency)
+}
+
+// SetLegalForm sets the LegalForm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetLegalForm(legalForm *string) {
+	p.LegalForm = legalForm
+	p.require(postV1AccountCompaniesUpdateRequestFieldLegalForm)
+}
+
+// SetRegistryName sets the RegistryName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetRegistryName(registryName *string) {
+	p.RegistryName = registryName
+	p.require(postV1AccountCompaniesUpdateRequestFieldRegistryName)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetIncorporatedOn(incorporatedOn *string) {
+	p.IncorporatedOn = incorporatedOn
+	p.require(postV1AccountCompaniesUpdateRequestFieldIncorporatedOn)
+}
+
+// SetShareCapital sets the ShareCapital field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetShareCapital(shareCapital *string) {
+	p.ShareCapital = shareCapital
+	p.require(postV1AccountCompaniesUpdateRequestFieldShareCapital)
+}
+
+// SetAccountsKeptBy sets the AccountsKeptBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetAccountsKeptBy(accountsKeptBy *PostV1AccountCompaniesUpdateRequestAccountsKeptBy) {
+	p.AccountsKeptBy = accountsKeptBy
+	p.require(postV1AccountCompaniesUpdateRequestFieldAccountsKeptBy)
+}
+
+// SetBookkeeperName sets the BookkeeperName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetBookkeeperName(bookkeeperName *string) {
+	p.BookkeeperName = bookkeeperName
+	p.require(postV1AccountCompaniesUpdateRequestFieldBookkeeperName)
+}
+
+// SetAuditorName sets the AuditorName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetAuditorName(auditorName *string) {
+	p.AuditorName = auditorName
+	p.require(postV1AccountCompaniesUpdateRequestFieldAuditorName)
+}
+
+// SetAuditorRegistrationNumber sets the AuditorRegistrationNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetAuditorRegistrationNumber(auditorRegistrationNumber *string) {
+	p.AuditorRegistrationNumber = auditorRegistrationNumber
+	p.require(postV1AccountCompaniesUpdateRequestFieldAuditorRegistrationNumber)
+}
+
+// SetAuditRequired sets the AuditRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateRequest) SetAuditRequired(auditRequired *bool) {
+	p.AuditRequired = auditRequired
+	p.require(postV1AccountCompaniesUpdateRequestFieldAuditRequired)
 }
 
 // SetLogo sets the Logo field and marks it as non-optional;
@@ -1392,6 +1699,61 @@ func (p *PostV1AccountMembersSetRoleRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1AccountMembersTransferOwnershipRequestFieldUserID    = big.NewInt(1 << 0)
+	postV1AccountMembersTransferOwnershipRequestFieldMovePayer = big.NewInt(1 << 1)
+)
+
+type PostV1AccountMembersTransferOwnershipRequest struct {
+	UserID    string `json:"userId" url:"-"`
+	MovePayer *bool  `json:"movePayer,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountMembersTransferOwnershipRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetUserID sets the UserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMembersTransferOwnershipRequest) SetUserID(userID string) {
+	p.UserID = userID
+	p.require(postV1AccountMembersTransferOwnershipRequestFieldUserID)
+}
+
+// SetMovePayer sets the MovePayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMembersTransferOwnershipRequest) SetMovePayer(movePayer *bool) {
+	p.MovePayer = movePayer
+	p.require(postV1AccountMembersTransferOwnershipRequestFieldMovePayer)
+}
+
+func (p *PostV1AccountMembersTransferOwnershipRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountMembersTransferOwnershipRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountMembersTransferOwnershipRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountMembersTransferOwnershipRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountMembersTransferOwnershipRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1AccountProfileUpdateRequestFieldName = big.NewInt(1 << 0)
 )
 
@@ -1428,6 +1790,52 @@ func (p *PostV1AccountProfileUpdateRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1AccountProfileUpdateRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1AccountProfileUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AccountReferralConvertRequestFieldPoints = big.NewInt(1 << 0)
+)
+
+type PostV1AccountReferralConvertRequest struct {
+	Points int64 `json:"points" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AccountReferralConvertRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPoints sets the Points field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralConvertRequest) SetPoints(points int64) {
+	p.Points = points
+	p.require(postV1AccountReferralConvertRequestFieldPoints)
+}
+
+func (p *PostV1AccountReferralConvertRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountReferralConvertRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AccountReferralConvertRequest(body)
+	return nil
+}
+
+func (p *PostV1AccountReferralConvertRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountReferralConvertRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1646,17 +2054,19 @@ func (p *PostV1AccountTableSettingsSetRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1AccountAPIKeysCreateResponseFieldID     = big.NewInt(1 << 0)
-	postV1AccountAPIKeysCreateResponseFieldName   = big.NewInt(1 << 1)
-	postV1AccountAPIKeysCreateResponseFieldScopes = big.NewInt(1 << 2)
-	postV1AccountAPIKeysCreateResponseFieldKey    = big.NewInt(1 << 3)
+	postV1AccountAPIKeysCreateResponseFieldID        = big.NewInt(1 << 0)
+	postV1AccountAPIKeysCreateResponseFieldName      = big.NewInt(1 << 1)
+	postV1AccountAPIKeysCreateResponseFieldScopes    = big.NewInt(1 << 2)
+	postV1AccountAPIKeysCreateResponseFieldKey       = big.NewInt(1 << 3)
+	postV1AccountAPIKeysCreateResponseFieldExpiresAt = big.NewInt(1 << 4)
 )
 
 type PostV1AccountAPIKeysCreateResponse struct {
-	ID     string   `json:"id" url:"id"`
-	Name   string   `json:"name" url:"name"`
-	Scopes []string `json:"scopes" url:"scopes"`
-	Key    string   `json:"key" url:"key"`
+	ID        string   `json:"id" url:"id"`
+	Name      string   `json:"name" url:"name"`
+	Scopes    []string `json:"scopes" url:"scopes"`
+	Key       string   `json:"key" url:"key"`
+	ExpiresAt *string  `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1691,6 +2101,13 @@ func (p *PostV1AccountAPIKeysCreateResponse) GetKey() string {
 		return ""
 	}
 	return p.Key
+}
+
+func (p *PostV1AccountAPIKeysCreateResponse) GetExpiresAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpiresAt
 }
 
 func (p *PostV1AccountAPIKeysCreateResponse) GetExtraProperties() map[string]interface{} {
@@ -1733,6 +2150,13 @@ func (p *PostV1AccountAPIKeysCreateResponse) SetScopes(scopes []string) {
 func (p *PostV1AccountAPIKeysCreateResponse) SetKey(key string) {
 	p.Key = key
 	p.require(postV1AccountAPIKeysCreateResponseFieldKey)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysCreateResponse) SetExpiresAt(expiresAt *string) {
+	p.ExpiresAt = expiresAt
+	p.require(postV1AccountAPIKeysCreateResponseFieldExpiresAt)
 }
 
 func (p *PostV1AccountAPIKeysCreateResponse) UnmarshalJSON(data []byte) error {
@@ -1862,21 +2286,25 @@ func (p *PostV1AccountAPIKeysListResponse) String() string {
 }
 
 var (
-	postV1AccountAPIKeysListResponseRowsItemFieldID         = big.NewInt(1 << 0)
-	postV1AccountAPIKeysListResponseRowsItemFieldName       = big.NewInt(1 << 1)
-	postV1AccountAPIKeysListResponseRowsItemFieldScopes     = big.NewInt(1 << 2)
-	postV1AccountAPIKeysListResponseRowsItemFieldLastUsedAt = big.NewInt(1 << 3)
-	postV1AccountAPIKeysListResponseRowsItemFieldRevokedAt  = big.NewInt(1 << 4)
-	postV1AccountAPIKeysListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 5)
+	postV1AccountAPIKeysListResponseRowsItemFieldID              = big.NewInt(1 << 0)
+	postV1AccountAPIKeysListResponseRowsItemFieldName            = big.NewInt(1 << 1)
+	postV1AccountAPIKeysListResponseRowsItemFieldScopes          = big.NewInt(1 << 2)
+	postV1AccountAPIKeysListResponseRowsItemFieldLastUsedAt      = big.NewInt(1 << 3)
+	postV1AccountAPIKeysListResponseRowsItemFieldExpiresAt       = big.NewInt(1 << 4)
+	postV1AccountAPIKeysListResponseRowsItemFieldReplacedByKeyID = big.NewInt(1 << 5)
+	postV1AccountAPIKeysListResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 6)
+	postV1AccountAPIKeysListResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
 )
 
 type PostV1AccountAPIKeysListResponseRowsItem struct {
-	ID         string   `json:"id" url:"id"`
-	Name       string   `json:"name" url:"name"`
-	Scopes     []string `json:"scopes" url:"scopes"`
-	LastUsedAt *string  `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
-	RevokedAt  *string  `json:"revokedAt,omitempty" url:"revokedAt,omitempty"`
-	CreatedAt  string   `json:"createdAt" url:"createdAt"`
+	ID              string   `json:"id" url:"id"`
+	Name            string   `json:"name" url:"name"`
+	Scopes          []string `json:"scopes" url:"scopes"`
+	LastUsedAt      *string  `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
+	ExpiresAt       *string  `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
+	ReplacedByKeyID *string  `json:"replacedByKeyId,omitempty" url:"replacedByKeyId,omitempty"`
+	RevokedAt       *string  `json:"revokedAt,omitempty" url:"revokedAt,omitempty"`
+	CreatedAt       string   `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1911,6 +2339,20 @@ func (p *PostV1AccountAPIKeysListResponseRowsItem) GetLastUsedAt() *string {
 		return nil
 	}
 	return p.LastUsedAt
+}
+
+func (p *PostV1AccountAPIKeysListResponseRowsItem) GetExpiresAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpiresAt
+}
+
+func (p *PostV1AccountAPIKeysListResponseRowsItem) GetReplacedByKeyID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ReplacedByKeyID
 }
 
 func (p *PostV1AccountAPIKeysListResponseRowsItem) GetRevokedAt() *string {
@@ -1967,6 +2409,20 @@ func (p *PostV1AccountAPIKeysListResponseRowsItem) SetScopes(scopes []string) {
 func (p *PostV1AccountAPIKeysListResponseRowsItem) SetLastUsedAt(lastUsedAt *string) {
 	p.LastUsedAt = lastUsedAt
 	p.require(postV1AccountAPIKeysListResponseRowsItemFieldLastUsedAt)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysListResponseRowsItem) SetExpiresAt(expiresAt *string) {
+	p.ExpiresAt = expiresAt
+	p.require(postV1AccountAPIKeysListResponseRowsItemFieldExpiresAt)
+}
+
+// SetReplacedByKeyID sets the ReplacedByKeyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysListResponseRowsItem) SetReplacedByKeyID(replacedByKeyID *string) {
+	p.ReplacedByKeyID = replacedByKeyID
+	p.require(postV1AccountAPIKeysListResponseRowsItemFieldReplacedByKeyID)
 }
 
 // SetRevokedAt sets the RevokedAt field and marks it as non-optional;
@@ -2095,6 +2551,186 @@ func (p *PostV1AccountAPIKeysRevokeResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1AccountAPIKeysRevokeResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AccountAPIKeysRotateResponseFieldID                   = big.NewInt(1 << 0)
+	postV1AccountAPIKeysRotateResponseFieldName                 = big.NewInt(1 << 1)
+	postV1AccountAPIKeysRotateResponseFieldScopes               = big.NewInt(1 << 2)
+	postV1AccountAPIKeysRotateResponseFieldKey                  = big.NewInt(1 << 3)
+	postV1AccountAPIKeysRotateResponseFieldExpiresAt            = big.NewInt(1 << 4)
+	postV1AccountAPIKeysRotateResponseFieldReplacedKeyID        = big.NewInt(1 << 5)
+	postV1AccountAPIKeysRotateResponseFieldReplacedKeyExpiresAt = big.NewInt(1 << 6)
+)
+
+type PostV1AccountAPIKeysRotateResponse struct {
+	ID                   string   `json:"id" url:"id"`
+	Name                 string   `json:"name" url:"name"`
+	Scopes               []string `json:"scopes" url:"scopes"`
+	Key                  string   `json:"key" url:"key"`
+	ExpiresAt            *string  `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
+	ReplacedKeyID        string   `json:"replacedKeyId" url:"replacedKeyId"`
+	ReplacedKeyExpiresAt string   `json:"replacedKeyExpiresAt" url:"replacedKeyExpiresAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetScopes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Scopes
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.Key
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetExpiresAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExpiresAt
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetReplacedKeyID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ReplacedKeyID
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetReplacedKeyExpiresAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.ReplacedKeyExpiresAt
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1AccountAPIKeysRotateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1AccountAPIKeysRotateResponseFieldName)
+}
+
+// SetScopes sets the Scopes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetScopes(scopes []string) {
+	p.Scopes = scopes
+	p.require(postV1AccountAPIKeysRotateResponseFieldScopes)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetKey(key string) {
+	p.Key = key
+	p.require(postV1AccountAPIKeysRotateResponseFieldKey)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetExpiresAt(expiresAt *string) {
+	p.ExpiresAt = expiresAt
+	p.require(postV1AccountAPIKeysRotateResponseFieldExpiresAt)
+}
+
+// SetReplacedKeyID sets the ReplacedKeyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetReplacedKeyID(replacedKeyID string) {
+	p.ReplacedKeyID = replacedKeyID
+	p.require(postV1AccountAPIKeysRotateResponseFieldReplacedKeyID)
+}
+
+// SetReplacedKeyExpiresAt sets the ReplacedKeyExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountAPIKeysRotateResponse) SetReplacedKeyExpiresAt(replacedKeyExpiresAt string) {
+	p.ReplacedKeyExpiresAt = replacedKeyExpiresAt
+	p.require(postV1AccountAPIKeysRotateResponseFieldReplacedKeyExpiresAt)
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountAPIKeysRotateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountAPIKeysRotateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountAPIKeysRotateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountAPIKeysRotateResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2307,6 +2943,28 @@ func (p *PostV1AccountCompaniesArchiveResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountCompaniesCreateRequestAccountsKeptBy string
+
+const (
+	PostV1AccountCompaniesCreateRequestAccountsKeptByCompany  PostV1AccountCompaniesCreateRequestAccountsKeptBy = "company"
+	PostV1AccountCompaniesCreateRequestAccountsKeptByExternal PostV1AccountCompaniesCreateRequestAccountsKeptBy = "external"
+)
+
+func NewPostV1AccountCompaniesCreateRequestAccountsKeptByFromString(s string) (PostV1AccountCompaniesCreateRequestAccountsKeptBy, error) {
+	switch s {
+	case "company":
+		return PostV1AccountCompaniesCreateRequestAccountsKeptByCompany, nil
+	case "external":
+		return PostV1AccountCompaniesCreateRequestAccountsKeptByExternal, nil
+	}
+	var t PostV1AccountCompaniesCreateRequestAccountsKeptBy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesCreateRequestAccountsKeptBy) Ptr() *PostV1AccountCompaniesCreateRequestAccountsKeptBy {
+	return &p
 }
 
 var (
@@ -2545,6 +3203,37 @@ func NewPostV1AccountCompaniesCreateRequestCountryCodeFromString(s string) (Post
 }
 
 func (p PostV1AccountCompaniesCreateRequestCountryCode) Ptr() *PostV1AccountCompaniesCreateRequestCountryCode {
+	return &p
+}
+
+type PostV1AccountCompaniesCreateRequestVatPeriod string
+
+const (
+	PostV1AccountCompaniesCreateRequestVatPeriodMonthly    PostV1AccountCompaniesCreateRequestVatPeriod = "monthly"
+	PostV1AccountCompaniesCreateRequestVatPeriodBimonthly  PostV1AccountCompaniesCreateRequestVatPeriod = "bimonthly"
+	PostV1AccountCompaniesCreateRequestVatPeriodQuarterly  PostV1AccountCompaniesCreateRequestVatPeriod = "quarterly"
+	PostV1AccountCompaniesCreateRequestVatPeriodSemiannual PostV1AccountCompaniesCreateRequestVatPeriod = "semiannual"
+	PostV1AccountCompaniesCreateRequestVatPeriodAnnual     PostV1AccountCompaniesCreateRequestVatPeriod = "annual"
+)
+
+func NewPostV1AccountCompaniesCreateRequestVatPeriodFromString(s string) (PostV1AccountCompaniesCreateRequestVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AccountCompaniesCreateRequestVatPeriodMonthly, nil
+	case "bimonthly":
+		return PostV1AccountCompaniesCreateRequestVatPeriodBimonthly, nil
+	case "quarterly":
+		return PostV1AccountCompaniesCreateRequestVatPeriodQuarterly, nil
+	case "semiannual":
+		return PostV1AccountCompaniesCreateRequestVatPeriodSemiannual, nil
+	case "annual":
+		return PostV1AccountCompaniesCreateRequestVatPeriodAnnual, nil
+	}
+	var t PostV1AccountCompaniesCreateRequestVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesCreateRequestVatPeriod) Ptr() *PostV1AccountCompaniesCreateRequestVatPeriod {
 	return &p
 }
 
@@ -2829,47 +3518,79 @@ func (p *PostV1AccountCompaniesDeleteResponse) String() string {
 }
 
 var (
-	postV1AccountCompaniesProfileResponseFieldID                     = big.NewInt(1 << 0)
-	postV1AccountCompaniesProfileResponseFieldName                   = big.NewInt(1 << 1)
-	postV1AccountCompaniesProfileResponseFieldCode                   = big.NewInt(1 << 2)
-	postV1AccountCompaniesProfileResponseFieldVatCode                = big.NewInt(1 << 3)
-	postV1AccountCompaniesProfileResponseFieldSmeExemptionNumber     = big.NewInt(1 << 4)
-	postV1AccountCompaniesProfileResponseFieldIsVatPayer             = big.NewInt(1 << 5)
-	postV1AccountCompaniesProfileResponseFieldIsSandbox              = big.NewInt(1 << 6)
-	postV1AccountCompaniesProfileResponseFieldCountryCode            = big.NewInt(1 << 7)
-	postV1AccountCompaniesProfileResponseFieldBaseCurrency           = big.NewInt(1 << 8)
-	postV1AccountCompaniesProfileResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 9)
-	postV1AccountCompaniesProfileResponseFieldStatus                 = big.NewInt(1 << 10)
-	postV1AccountCompaniesProfileResponseFieldAddress                = big.NewInt(1 << 11)
-	postV1AccountCompaniesProfileResponseFieldEmail                  = big.NewInt(1 << 12)
-	postV1AccountCompaniesProfileResponseFieldPhone                  = big.NewInt(1 << 13)
-	postV1AccountCompaniesProfileResponseFieldIban                   = big.NewInt(1 << 14)
-	postV1AccountCompaniesProfileResponseFieldBankName               = big.NewInt(1 << 15)
-	postV1AccountCompaniesProfileResponseFieldPeppolID               = big.NewInt(1 << 16)
-	postV1AccountCompaniesProfileResponseFieldSepaCreditorID         = big.NewInt(1 << 17)
-	postV1AccountCompaniesProfileResponseFieldLogoFileID             = big.NewInt(1 << 18)
+	postV1AccountCompaniesProfileResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AccountCompaniesProfileResponseFieldName                      = big.NewInt(1 << 1)
+	postV1AccountCompaniesProfileResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AccountCompaniesProfileResponseFieldVatCode                   = big.NewInt(1 << 3)
+	postV1AccountCompaniesProfileResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
+	postV1AccountCompaniesProfileResponseFieldIsVatPayer                = big.NewInt(1 << 5)
+	postV1AccountCompaniesProfileResponseFieldIsSandbox                 = big.NewInt(1 << 6)
+	postV1AccountCompaniesProfileResponseFieldCountryCode               = big.NewInt(1 << 7)
+	postV1AccountCompaniesProfileResponseFieldChartTemplate             = big.NewInt(1 << 8)
+	postV1AccountCompaniesProfileResponseFieldCountryChartTemplate      = big.NewInt(1 << 9)
+	postV1AccountCompaniesProfileResponseFieldBaseCurrency              = big.NewInt(1 << 10)
+	postV1AccountCompaniesProfileResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 11)
+	postV1AccountCompaniesProfileResponseFieldStatus                    = big.NewInt(1 << 12)
+	postV1AccountCompaniesProfileResponseFieldAddress                   = big.NewInt(1 << 13)
+	postV1AccountCompaniesProfileResponseFieldEmail                     = big.NewInt(1 << 14)
+	postV1AccountCompaniesProfileResponseFieldPhone                     = big.NewInt(1 << 15)
+	postV1AccountCompaniesProfileResponseFieldIban                      = big.NewInt(1 << 16)
+	postV1AccountCompaniesProfileResponseFieldBankName                  = big.NewInt(1 << 17)
+	postV1AccountCompaniesProfileResponseFieldPeppolID                  = big.NewInt(1 << 18)
+	postV1AccountCompaniesProfileResponseFieldSepaCreditorID            = big.NewInt(1 << 19)
+	postV1AccountCompaniesProfileResponseFieldLogoFileID                = big.NewInt(1 << 20)
+	postV1AccountCompaniesProfileResponseFieldLegalForm                 = big.NewInt(1 << 21)
+	postV1AccountCompaniesProfileResponseFieldRegistryName              = big.NewInt(1 << 22)
+	postV1AccountCompaniesProfileResponseFieldIncorporatedOn            = big.NewInt(1 << 23)
+	postV1AccountCompaniesProfileResponseFieldShareCapital              = big.NewInt(1 << 24)
+	postV1AccountCompaniesProfileResponseFieldAccountsKeptBy            = big.NewInt(1 << 25)
+	postV1AccountCompaniesProfileResponseFieldVatPeriod                 = big.NewInt(1 << 26)
+	postV1AccountCompaniesProfileResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 27)
+	postV1AccountCompaniesProfileResponseFieldTimeZone                  = big.NewInt(1 << 28)
+	postV1AccountCompaniesProfileResponseFieldFilingOptions             = big.NewInt(1 << 29)
+	postV1AccountCompaniesProfileResponseFieldBookkeeperName            = big.NewInt(1 << 30)
+	postV1AccountCompaniesProfileResponseFieldAuditorName               = big.NewInt(1 << 31)
+	postV1AccountCompaniesProfileResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 32)
+	postV1AccountCompaniesProfileResponseFieldAuditRequired             = big.NewInt(1 << 33)
 )
 
 type PostV1AccountCompaniesProfileResponse struct {
-	ID                     string                                        `json:"id" url:"id"`
-	Name                   string                                        `json:"name" url:"name"`
-	Code                   *string                                       `json:"code,omitempty" url:"code,omitempty"`
-	VatCode                *string                                       `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	SmeExemptionNumber     *string                                       `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
-	IsVatPayer             bool                                          `json:"isVatPayer" url:"isVatPayer"`
-	IsSandbox              bool                                          `json:"isSandbox" url:"isSandbox"`
-	CountryCode            string                                        `json:"countryCode" url:"countryCode"`
-	BaseCurrency           string                                        `json:"baseCurrency" url:"baseCurrency"`
-	DefaultInvoiceCurrency string                                        `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
-	Status                 PostV1AccountCompaniesProfileResponseStatus   `json:"status" url:"status"`
-	Address                *PostV1AccountCompaniesProfileResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	Email                  *string                                       `json:"email,omitempty" url:"email,omitempty"`
-	Phone                  *string                                       `json:"phone,omitempty" url:"phone,omitempty"`
-	Iban                   *string                                       `json:"iban,omitempty" url:"iban,omitempty"`
-	BankName               *string                                       `json:"bankName,omitempty" url:"bankName,omitempty"`
-	PeppolID               *string                                       `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	SepaCreditorID         *string                                       `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
-	LogoFileID             *string                                       `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	ID                 string  `json:"id" url:"id"`
+	Name               string  `json:"name" url:"name"`
+	Code               *string `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
+	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	// Chart of accounts template the company was seeded with
+	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
+	// Chart of accounts template of the company country
+	CountryChartTemplate      string                                               `json:"countryChartTemplate" url:"countryChartTemplate"`
+	BaseCurrency              string                                               `json:"baseCurrency" url:"baseCurrency"`
+	DefaultInvoiceCurrency    string                                               `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
+	Status                    PostV1AccountCompaniesProfileResponseStatus          `json:"status" url:"status"`
+	Address                   *PostV1AccountCompaniesProfileResponseAddress        `json:"address,omitempty" url:"address,omitempty"`
+	Email                     *string                                              `json:"email,omitempty" url:"email,omitempty"`
+	Phone                     *string                                              `json:"phone,omitempty" url:"phone,omitempty"`
+	Iban                      *string                                              `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName                  *string                                              `json:"bankName,omitempty" url:"bankName,omitempty"`
+	PeppolID                  *string                                              `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                              `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                              `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                              `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                              `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                              `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                              `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *PostV1AccountCompaniesProfileResponseAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *PostV1AccountCompaniesProfileResponseVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	FiscalYearEndMonth        *int64                                               `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	TimeZone                  string                                               `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                   `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                              `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                              `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                              `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                                 `json:"auditRequired" url:"auditRequired"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2932,6 +3653,20 @@ func (p *PostV1AccountCompaniesProfileResponse) GetCountryCode() string {
 		return ""
 	}
 	return p.CountryCode
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetChartTemplate() string {
+	if p == nil {
+		return ""
+	}
+	return p.ChartTemplate
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetCountryChartTemplate() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryChartTemplate
 }
 
 func (p *PostV1AccountCompaniesProfileResponse) GetBaseCurrency() string {
@@ -3011,6 +3746,97 @@ func (p *PostV1AccountCompaniesProfileResponse) GetLogoFileID() *string {
 	return p.LogoFileID
 }
 
+func (p *PostV1AccountCompaniesProfileResponse) GetLegalForm() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LegalForm
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetRegistryName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RegistryName
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetIncorporatedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IncorporatedOn
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetShareCapital() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShareCapital
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetAccountsKeptBy() *PostV1AccountCompaniesProfileResponseAccountsKeptBy {
+	if p == nil {
+		return nil
+	}
+	return p.AccountsKeptBy
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetVatPeriod() *PostV1AccountCompaniesProfileResponseVatPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.VatPeriod
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetFiscalYearEndMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.FiscalYearEndMonth
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetTimeZone() string {
+	if p == nil {
+		return ""
+	}
+	return p.TimeZone
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetFilingOptions() map[string]*string {
+	if p == nil {
+		return nil
+	}
+	return p.FilingOptions
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetBookkeeperName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BookkeeperName
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetAuditorName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuditorName
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetAuditorRegistrationNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuditorRegistrationNumber
+}
+
+func (p *PostV1AccountCompaniesProfileResponse) GetAuditRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.AuditRequired
+}
+
 func (p *PostV1AccountCompaniesProfileResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
@@ -3079,6 +3905,20 @@ func (p *PostV1AccountCompaniesProfileResponse) SetIsSandbox(isSandbox bool) {
 func (p *PostV1AccountCompaniesProfileResponse) SetCountryCode(countryCode string) {
 	p.CountryCode = countryCode
 	p.require(postV1AccountCompaniesProfileResponseFieldCountryCode)
+}
+
+// SetChartTemplate sets the ChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetChartTemplate(chartTemplate string) {
+	p.ChartTemplate = chartTemplate
+	p.require(postV1AccountCompaniesProfileResponseFieldChartTemplate)
+}
+
+// SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetCountryChartTemplate(countryChartTemplate string) {
+	p.CountryChartTemplate = countryChartTemplate
+	p.require(postV1AccountCompaniesProfileResponseFieldCountryChartTemplate)
 }
 
 // SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
@@ -3158,6 +3998,97 @@ func (p *PostV1AccountCompaniesProfileResponse) SetLogoFileID(logoFileID *string
 	p.require(postV1AccountCompaniesProfileResponseFieldLogoFileID)
 }
 
+// SetLegalForm sets the LegalForm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetLegalForm(legalForm *string) {
+	p.LegalForm = legalForm
+	p.require(postV1AccountCompaniesProfileResponseFieldLegalForm)
+}
+
+// SetRegistryName sets the RegistryName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetRegistryName(registryName *string) {
+	p.RegistryName = registryName
+	p.require(postV1AccountCompaniesProfileResponseFieldRegistryName)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetIncorporatedOn(incorporatedOn *string) {
+	p.IncorporatedOn = incorporatedOn
+	p.require(postV1AccountCompaniesProfileResponseFieldIncorporatedOn)
+}
+
+// SetShareCapital sets the ShareCapital field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetShareCapital(shareCapital *string) {
+	p.ShareCapital = shareCapital
+	p.require(postV1AccountCompaniesProfileResponseFieldShareCapital)
+}
+
+// SetAccountsKeptBy sets the AccountsKeptBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetAccountsKeptBy(accountsKeptBy *PostV1AccountCompaniesProfileResponseAccountsKeptBy) {
+	p.AccountsKeptBy = accountsKeptBy
+	p.require(postV1AccountCompaniesProfileResponseFieldAccountsKeptBy)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetVatPeriod(vatPeriod *PostV1AccountCompaniesProfileResponseVatPeriod) {
+	p.VatPeriod = vatPeriod
+	p.require(postV1AccountCompaniesProfileResponseFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	p.FiscalYearEndMonth = fiscalYearEndMonth
+	p.require(postV1AccountCompaniesProfileResponseFieldFiscalYearEndMonth)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetTimeZone(timeZone string) {
+	p.TimeZone = timeZone
+	p.require(postV1AccountCompaniesProfileResponseFieldTimeZone)
+}
+
+// SetFilingOptions sets the FilingOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetFilingOptions(filingOptions map[string]*string) {
+	p.FilingOptions = filingOptions
+	p.require(postV1AccountCompaniesProfileResponseFieldFilingOptions)
+}
+
+// SetBookkeeperName sets the BookkeeperName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetBookkeeperName(bookkeeperName *string) {
+	p.BookkeeperName = bookkeeperName
+	p.require(postV1AccountCompaniesProfileResponseFieldBookkeeperName)
+}
+
+// SetAuditorName sets the AuditorName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetAuditorName(auditorName *string) {
+	p.AuditorName = auditorName
+	p.require(postV1AccountCompaniesProfileResponseFieldAuditorName)
+}
+
+// SetAuditorRegistrationNumber sets the AuditorRegistrationNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetAuditorRegistrationNumber(auditorRegistrationNumber *string) {
+	p.AuditorRegistrationNumber = auditorRegistrationNumber
+	p.require(postV1AccountCompaniesProfileResponseFieldAuditorRegistrationNumber)
+}
+
+// SetAuditRequired sets the AuditRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesProfileResponse) SetAuditRequired(auditRequired bool) {
+	p.AuditRequired = auditRequired
+	p.require(postV1AccountCompaniesProfileResponseFieldAuditRequired)
+}
+
 func (p *PostV1AccountCompaniesProfileResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1AccountCompaniesProfileResponse
 	var value unmarshaler
@@ -3198,6 +4129,28 @@ func (p *PostV1AccountCompaniesProfileResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountCompaniesProfileResponseAccountsKeptBy string
+
+const (
+	PostV1AccountCompaniesProfileResponseAccountsKeptByCompany  PostV1AccountCompaniesProfileResponseAccountsKeptBy = "company"
+	PostV1AccountCompaniesProfileResponseAccountsKeptByExternal PostV1AccountCompaniesProfileResponseAccountsKeptBy = "external"
+)
+
+func NewPostV1AccountCompaniesProfileResponseAccountsKeptByFromString(s string) (PostV1AccountCompaniesProfileResponseAccountsKeptBy, error) {
+	switch s {
+	case "company":
+		return PostV1AccountCompaniesProfileResponseAccountsKeptByCompany, nil
+	case "external":
+		return PostV1AccountCompaniesProfileResponseAccountsKeptByExternal, nil
+	}
+	var t PostV1AccountCompaniesProfileResponseAccountsKeptBy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesProfileResponseAccountsKeptBy) Ptr() *PostV1AccountCompaniesProfileResponseAccountsKeptBy {
+	return &p
 }
 
 var (
@@ -3357,6 +4310,37 @@ func (p PostV1AccountCompaniesProfileResponseStatus) Ptr() *PostV1AccountCompani
 	return &p
 }
 
+type PostV1AccountCompaniesProfileResponseVatPeriod string
+
+const (
+	PostV1AccountCompaniesProfileResponseVatPeriodMonthly    PostV1AccountCompaniesProfileResponseVatPeriod = "monthly"
+	PostV1AccountCompaniesProfileResponseVatPeriodBimonthly  PostV1AccountCompaniesProfileResponseVatPeriod = "bimonthly"
+	PostV1AccountCompaniesProfileResponseVatPeriodQuarterly  PostV1AccountCompaniesProfileResponseVatPeriod = "quarterly"
+	PostV1AccountCompaniesProfileResponseVatPeriodSemiannual PostV1AccountCompaniesProfileResponseVatPeriod = "semiannual"
+	PostV1AccountCompaniesProfileResponseVatPeriodAnnual     PostV1AccountCompaniesProfileResponseVatPeriod = "annual"
+)
+
+func NewPostV1AccountCompaniesProfileResponseVatPeriodFromString(s string) (PostV1AccountCompaniesProfileResponseVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AccountCompaniesProfileResponseVatPeriodMonthly, nil
+	case "bimonthly":
+		return PostV1AccountCompaniesProfileResponseVatPeriodBimonthly, nil
+	case "quarterly":
+		return PostV1AccountCompaniesProfileResponseVatPeriodQuarterly, nil
+	case "semiannual":
+		return PostV1AccountCompaniesProfileResponseVatPeriodSemiannual, nil
+	case "annual":
+		return PostV1AccountCompaniesProfileResponseVatPeriodAnnual, nil
+	}
+	var t PostV1AccountCompaniesProfileResponseVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesProfileResponseVatPeriod) Ptr() *PostV1AccountCompaniesProfileResponseVatPeriod {
+	return &p
+}
+
 var (
 	postV1AccountCompaniesSelectResponseFieldActiveCompanyID = big.NewInt(1 << 0)
 )
@@ -3439,6 +4423,28 @@ func (p *PostV1AccountCompaniesSelectResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountCompaniesUpdateRequestAccountsKeptBy string
+
+const (
+	PostV1AccountCompaniesUpdateRequestAccountsKeptByCompany  PostV1AccountCompaniesUpdateRequestAccountsKeptBy = "company"
+	PostV1AccountCompaniesUpdateRequestAccountsKeptByExternal PostV1AccountCompaniesUpdateRequestAccountsKeptBy = "external"
+)
+
+func NewPostV1AccountCompaniesUpdateRequestAccountsKeptByFromString(s string) (PostV1AccountCompaniesUpdateRequestAccountsKeptBy, error) {
+	switch s {
+	case "company":
+		return PostV1AccountCompaniesUpdateRequestAccountsKeptByCompany, nil
+	case "external":
+		return PostV1AccountCompaniesUpdateRequestAccountsKeptByExternal, nil
+	}
+	var t PostV1AccountCompaniesUpdateRequestAccountsKeptBy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesUpdateRequestAccountsKeptBy) Ptr() *PostV1AccountCompaniesUpdateRequestAccountsKeptBy {
+	return &p
 }
 
 var (
@@ -3690,48 +4696,111 @@ func (p *PostV1AccountCompaniesUpdateRequestLogo) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1AccountCompaniesUpdateRequestVatPeriod string
+
+const (
+	PostV1AccountCompaniesUpdateRequestVatPeriodMonthly    PostV1AccountCompaniesUpdateRequestVatPeriod = "monthly"
+	PostV1AccountCompaniesUpdateRequestVatPeriodBimonthly  PostV1AccountCompaniesUpdateRequestVatPeriod = "bimonthly"
+	PostV1AccountCompaniesUpdateRequestVatPeriodQuarterly  PostV1AccountCompaniesUpdateRequestVatPeriod = "quarterly"
+	PostV1AccountCompaniesUpdateRequestVatPeriodSemiannual PostV1AccountCompaniesUpdateRequestVatPeriod = "semiannual"
+	PostV1AccountCompaniesUpdateRequestVatPeriodAnnual     PostV1AccountCompaniesUpdateRequestVatPeriod = "annual"
+)
+
+func NewPostV1AccountCompaniesUpdateRequestVatPeriodFromString(s string) (PostV1AccountCompaniesUpdateRequestVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AccountCompaniesUpdateRequestVatPeriodMonthly, nil
+	case "bimonthly":
+		return PostV1AccountCompaniesUpdateRequestVatPeriodBimonthly, nil
+	case "quarterly":
+		return PostV1AccountCompaniesUpdateRequestVatPeriodQuarterly, nil
+	case "semiannual":
+		return PostV1AccountCompaniesUpdateRequestVatPeriodSemiannual, nil
+	case "annual":
+		return PostV1AccountCompaniesUpdateRequestVatPeriodAnnual, nil
+	}
+	var t PostV1AccountCompaniesUpdateRequestVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesUpdateRequestVatPeriod) Ptr() *PostV1AccountCompaniesUpdateRequestVatPeriod {
+	return &p
+}
+
 var (
-	postV1AccountCompaniesUpdateResponseFieldID                     = big.NewInt(1 << 0)
-	postV1AccountCompaniesUpdateResponseFieldName                   = big.NewInt(1 << 1)
-	postV1AccountCompaniesUpdateResponseFieldCode                   = big.NewInt(1 << 2)
-	postV1AccountCompaniesUpdateResponseFieldVatCode                = big.NewInt(1 << 3)
-	postV1AccountCompaniesUpdateResponseFieldSmeExemptionNumber     = big.NewInt(1 << 4)
-	postV1AccountCompaniesUpdateResponseFieldIsVatPayer             = big.NewInt(1 << 5)
-	postV1AccountCompaniesUpdateResponseFieldIsSandbox              = big.NewInt(1 << 6)
-	postV1AccountCompaniesUpdateResponseFieldCountryCode            = big.NewInt(1 << 7)
-	postV1AccountCompaniesUpdateResponseFieldBaseCurrency           = big.NewInt(1 << 8)
-	postV1AccountCompaniesUpdateResponseFieldDefaultInvoiceCurrency = big.NewInt(1 << 9)
-	postV1AccountCompaniesUpdateResponseFieldStatus                 = big.NewInt(1 << 10)
-	postV1AccountCompaniesUpdateResponseFieldAddress                = big.NewInt(1 << 11)
-	postV1AccountCompaniesUpdateResponseFieldEmail                  = big.NewInt(1 << 12)
-	postV1AccountCompaniesUpdateResponseFieldPhone                  = big.NewInt(1 << 13)
-	postV1AccountCompaniesUpdateResponseFieldIban                   = big.NewInt(1 << 14)
-	postV1AccountCompaniesUpdateResponseFieldBankName               = big.NewInt(1 << 15)
-	postV1AccountCompaniesUpdateResponseFieldPeppolID               = big.NewInt(1 << 16)
-	postV1AccountCompaniesUpdateResponseFieldSepaCreditorID         = big.NewInt(1 << 17)
-	postV1AccountCompaniesUpdateResponseFieldLogoFileID             = big.NewInt(1 << 18)
+	postV1AccountCompaniesUpdateResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AccountCompaniesUpdateResponseFieldName                      = big.NewInt(1 << 1)
+	postV1AccountCompaniesUpdateResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AccountCompaniesUpdateResponseFieldVatCode                   = big.NewInt(1 << 3)
+	postV1AccountCompaniesUpdateResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
+	postV1AccountCompaniesUpdateResponseFieldIsVatPayer                = big.NewInt(1 << 5)
+	postV1AccountCompaniesUpdateResponseFieldIsSandbox                 = big.NewInt(1 << 6)
+	postV1AccountCompaniesUpdateResponseFieldCountryCode               = big.NewInt(1 << 7)
+	postV1AccountCompaniesUpdateResponseFieldChartTemplate             = big.NewInt(1 << 8)
+	postV1AccountCompaniesUpdateResponseFieldCountryChartTemplate      = big.NewInt(1 << 9)
+	postV1AccountCompaniesUpdateResponseFieldBaseCurrency              = big.NewInt(1 << 10)
+	postV1AccountCompaniesUpdateResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 11)
+	postV1AccountCompaniesUpdateResponseFieldStatus                    = big.NewInt(1 << 12)
+	postV1AccountCompaniesUpdateResponseFieldAddress                   = big.NewInt(1 << 13)
+	postV1AccountCompaniesUpdateResponseFieldEmail                     = big.NewInt(1 << 14)
+	postV1AccountCompaniesUpdateResponseFieldPhone                     = big.NewInt(1 << 15)
+	postV1AccountCompaniesUpdateResponseFieldIban                      = big.NewInt(1 << 16)
+	postV1AccountCompaniesUpdateResponseFieldBankName                  = big.NewInt(1 << 17)
+	postV1AccountCompaniesUpdateResponseFieldPeppolID                  = big.NewInt(1 << 18)
+	postV1AccountCompaniesUpdateResponseFieldSepaCreditorID            = big.NewInt(1 << 19)
+	postV1AccountCompaniesUpdateResponseFieldLogoFileID                = big.NewInt(1 << 20)
+	postV1AccountCompaniesUpdateResponseFieldLegalForm                 = big.NewInt(1 << 21)
+	postV1AccountCompaniesUpdateResponseFieldRegistryName              = big.NewInt(1 << 22)
+	postV1AccountCompaniesUpdateResponseFieldIncorporatedOn            = big.NewInt(1 << 23)
+	postV1AccountCompaniesUpdateResponseFieldShareCapital              = big.NewInt(1 << 24)
+	postV1AccountCompaniesUpdateResponseFieldAccountsKeptBy            = big.NewInt(1 << 25)
+	postV1AccountCompaniesUpdateResponseFieldVatPeriod                 = big.NewInt(1 << 26)
+	postV1AccountCompaniesUpdateResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 27)
+	postV1AccountCompaniesUpdateResponseFieldTimeZone                  = big.NewInt(1 << 28)
+	postV1AccountCompaniesUpdateResponseFieldFilingOptions             = big.NewInt(1 << 29)
+	postV1AccountCompaniesUpdateResponseFieldBookkeeperName            = big.NewInt(1 << 30)
+	postV1AccountCompaniesUpdateResponseFieldAuditorName               = big.NewInt(1 << 31)
+	postV1AccountCompaniesUpdateResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 32)
+	postV1AccountCompaniesUpdateResponseFieldAuditRequired             = big.NewInt(1 << 33)
 )
 
 type PostV1AccountCompaniesUpdateResponse struct {
-	ID                     string                                       `json:"id" url:"id"`
-	Name                   string                                       `json:"name" url:"name"`
-	Code                   *string                                      `json:"code,omitempty" url:"code,omitempty"`
-	VatCode                *string                                      `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	SmeExemptionNumber     *string                                      `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
-	IsVatPayer             bool                                         `json:"isVatPayer" url:"isVatPayer"`
-	IsSandbox              bool                                         `json:"isSandbox" url:"isSandbox"`
-	CountryCode            string                                       `json:"countryCode" url:"countryCode"`
-	BaseCurrency           string                                       `json:"baseCurrency" url:"baseCurrency"`
-	DefaultInvoiceCurrency string                                       `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
-	Status                 PostV1AccountCompaniesUpdateResponseStatus   `json:"status" url:"status"`
-	Address                *PostV1AccountCompaniesUpdateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	Email                  *string                                      `json:"email,omitempty" url:"email,omitempty"`
-	Phone                  *string                                      `json:"phone,omitempty" url:"phone,omitempty"`
-	Iban                   *string                                      `json:"iban,omitempty" url:"iban,omitempty"`
-	BankName               *string                                      `json:"bankName,omitempty" url:"bankName,omitempty"`
-	PeppolID               *string                                      `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	SepaCreditorID         *string                                      `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
-	LogoFileID             *string                                      `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	ID                 string  `json:"id" url:"id"`
+	Name               string  `json:"name" url:"name"`
+	Code               *string `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
+	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	// Chart of accounts template the company was seeded with
+	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
+	// Chart of accounts template of the company country
+	CountryChartTemplate      string                                              `json:"countryChartTemplate" url:"countryChartTemplate"`
+	BaseCurrency              string                                              `json:"baseCurrency" url:"baseCurrency"`
+	DefaultInvoiceCurrency    string                                              `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
+	Status                    PostV1AccountCompaniesUpdateResponseStatus          `json:"status" url:"status"`
+	Address                   *PostV1AccountCompaniesUpdateResponseAddress        `json:"address,omitempty" url:"address,omitempty"`
+	Email                     *string                                             `json:"email,omitempty" url:"email,omitempty"`
+	Phone                     *string                                             `json:"phone,omitempty" url:"phone,omitempty"`
+	Iban                      *string                                             `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName                  *string                                             `json:"bankName,omitempty" url:"bankName,omitempty"`
+	PeppolID                  *string                                             `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                             `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                             `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                             `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                             `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                             `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                             `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *PostV1AccountCompaniesUpdateResponseAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *PostV1AccountCompaniesUpdateResponseVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	FiscalYearEndMonth        *int64                                              `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	TimeZone                  string                                              `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                  `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                             `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                             `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                             `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                                `json:"auditRequired" url:"auditRequired"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3794,6 +4863,20 @@ func (p *PostV1AccountCompaniesUpdateResponse) GetCountryCode() string {
 		return ""
 	}
 	return p.CountryCode
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetChartTemplate() string {
+	if p == nil {
+		return ""
+	}
+	return p.ChartTemplate
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetCountryChartTemplate() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryChartTemplate
 }
 
 func (p *PostV1AccountCompaniesUpdateResponse) GetBaseCurrency() string {
@@ -3873,6 +4956,97 @@ func (p *PostV1AccountCompaniesUpdateResponse) GetLogoFileID() *string {
 	return p.LogoFileID
 }
 
+func (p *PostV1AccountCompaniesUpdateResponse) GetLegalForm() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LegalForm
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetRegistryName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RegistryName
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetIncorporatedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IncorporatedOn
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetShareCapital() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShareCapital
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetAccountsKeptBy() *PostV1AccountCompaniesUpdateResponseAccountsKeptBy {
+	if p == nil {
+		return nil
+	}
+	return p.AccountsKeptBy
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetVatPeriod() *PostV1AccountCompaniesUpdateResponseVatPeriod {
+	if p == nil {
+		return nil
+	}
+	return p.VatPeriod
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetFiscalYearEndMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.FiscalYearEndMonth
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetTimeZone() string {
+	if p == nil {
+		return ""
+	}
+	return p.TimeZone
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetFilingOptions() map[string]*string {
+	if p == nil {
+		return nil
+	}
+	return p.FilingOptions
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetBookkeeperName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BookkeeperName
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetAuditorName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuditorName
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetAuditorRegistrationNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AuditorRegistrationNumber
+}
+
+func (p *PostV1AccountCompaniesUpdateResponse) GetAuditRequired() bool {
+	if p == nil {
+		return false
+	}
+	return p.AuditRequired
+}
+
 func (p *PostV1AccountCompaniesUpdateResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
@@ -3941,6 +5115,20 @@ func (p *PostV1AccountCompaniesUpdateResponse) SetIsSandbox(isSandbox bool) {
 func (p *PostV1AccountCompaniesUpdateResponse) SetCountryCode(countryCode string) {
 	p.CountryCode = countryCode
 	p.require(postV1AccountCompaniesUpdateResponseFieldCountryCode)
+}
+
+// SetChartTemplate sets the ChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetChartTemplate(chartTemplate string) {
+	p.ChartTemplate = chartTemplate
+	p.require(postV1AccountCompaniesUpdateResponseFieldChartTemplate)
+}
+
+// SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetCountryChartTemplate(countryChartTemplate string) {
+	p.CountryChartTemplate = countryChartTemplate
+	p.require(postV1AccountCompaniesUpdateResponseFieldCountryChartTemplate)
 }
 
 // SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
@@ -4020,6 +5208,97 @@ func (p *PostV1AccountCompaniesUpdateResponse) SetLogoFileID(logoFileID *string)
 	p.require(postV1AccountCompaniesUpdateResponseFieldLogoFileID)
 }
 
+// SetLegalForm sets the LegalForm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetLegalForm(legalForm *string) {
+	p.LegalForm = legalForm
+	p.require(postV1AccountCompaniesUpdateResponseFieldLegalForm)
+}
+
+// SetRegistryName sets the RegistryName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetRegistryName(registryName *string) {
+	p.RegistryName = registryName
+	p.require(postV1AccountCompaniesUpdateResponseFieldRegistryName)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetIncorporatedOn(incorporatedOn *string) {
+	p.IncorporatedOn = incorporatedOn
+	p.require(postV1AccountCompaniesUpdateResponseFieldIncorporatedOn)
+}
+
+// SetShareCapital sets the ShareCapital field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetShareCapital(shareCapital *string) {
+	p.ShareCapital = shareCapital
+	p.require(postV1AccountCompaniesUpdateResponseFieldShareCapital)
+}
+
+// SetAccountsKeptBy sets the AccountsKeptBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetAccountsKeptBy(accountsKeptBy *PostV1AccountCompaniesUpdateResponseAccountsKeptBy) {
+	p.AccountsKeptBy = accountsKeptBy
+	p.require(postV1AccountCompaniesUpdateResponseFieldAccountsKeptBy)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetVatPeriod(vatPeriod *PostV1AccountCompaniesUpdateResponseVatPeriod) {
+	p.VatPeriod = vatPeriod
+	p.require(postV1AccountCompaniesUpdateResponseFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	p.FiscalYearEndMonth = fiscalYearEndMonth
+	p.require(postV1AccountCompaniesUpdateResponseFieldFiscalYearEndMonth)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetTimeZone(timeZone string) {
+	p.TimeZone = timeZone
+	p.require(postV1AccountCompaniesUpdateResponseFieldTimeZone)
+}
+
+// SetFilingOptions sets the FilingOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetFilingOptions(filingOptions map[string]*string) {
+	p.FilingOptions = filingOptions
+	p.require(postV1AccountCompaniesUpdateResponseFieldFilingOptions)
+}
+
+// SetBookkeeperName sets the BookkeeperName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetBookkeeperName(bookkeeperName *string) {
+	p.BookkeeperName = bookkeeperName
+	p.require(postV1AccountCompaniesUpdateResponseFieldBookkeeperName)
+}
+
+// SetAuditorName sets the AuditorName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetAuditorName(auditorName *string) {
+	p.AuditorName = auditorName
+	p.require(postV1AccountCompaniesUpdateResponseFieldAuditorName)
+}
+
+// SetAuditorRegistrationNumber sets the AuditorRegistrationNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetAuditorRegistrationNumber(auditorRegistrationNumber *string) {
+	p.AuditorRegistrationNumber = auditorRegistrationNumber
+	p.require(postV1AccountCompaniesUpdateResponseFieldAuditorRegistrationNumber)
+}
+
+// SetAuditRequired sets the AuditRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountCompaniesUpdateResponse) SetAuditRequired(auditRequired bool) {
+	p.AuditRequired = auditRequired
+	p.require(postV1AccountCompaniesUpdateResponseFieldAuditRequired)
+}
+
 func (p *PostV1AccountCompaniesUpdateResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1AccountCompaniesUpdateResponse
 	var value unmarshaler
@@ -4060,6 +5339,28 @@ func (p *PostV1AccountCompaniesUpdateResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AccountCompaniesUpdateResponseAccountsKeptBy string
+
+const (
+	PostV1AccountCompaniesUpdateResponseAccountsKeptByCompany  PostV1AccountCompaniesUpdateResponseAccountsKeptBy = "company"
+	PostV1AccountCompaniesUpdateResponseAccountsKeptByExternal PostV1AccountCompaniesUpdateResponseAccountsKeptBy = "external"
+)
+
+func NewPostV1AccountCompaniesUpdateResponseAccountsKeptByFromString(s string) (PostV1AccountCompaniesUpdateResponseAccountsKeptBy, error) {
+	switch s {
+	case "company":
+		return PostV1AccountCompaniesUpdateResponseAccountsKeptByCompany, nil
+	case "external":
+		return PostV1AccountCompaniesUpdateResponseAccountsKeptByExternal, nil
+	}
+	var t PostV1AccountCompaniesUpdateResponseAccountsKeptBy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesUpdateResponseAccountsKeptBy) Ptr() *PostV1AccountCompaniesUpdateResponseAccountsKeptBy {
+	return &p
 }
 
 var (
@@ -4216,6 +5517,37 @@ func NewPostV1AccountCompaniesUpdateResponseStatusFromString(s string) (PostV1Ac
 }
 
 func (p PostV1AccountCompaniesUpdateResponseStatus) Ptr() *PostV1AccountCompaniesUpdateResponseStatus {
+	return &p
+}
+
+type PostV1AccountCompaniesUpdateResponseVatPeriod string
+
+const (
+	PostV1AccountCompaniesUpdateResponseVatPeriodMonthly    PostV1AccountCompaniesUpdateResponseVatPeriod = "monthly"
+	PostV1AccountCompaniesUpdateResponseVatPeriodBimonthly  PostV1AccountCompaniesUpdateResponseVatPeriod = "bimonthly"
+	PostV1AccountCompaniesUpdateResponseVatPeriodQuarterly  PostV1AccountCompaniesUpdateResponseVatPeriod = "quarterly"
+	PostV1AccountCompaniesUpdateResponseVatPeriodSemiannual PostV1AccountCompaniesUpdateResponseVatPeriod = "semiannual"
+	PostV1AccountCompaniesUpdateResponseVatPeriodAnnual     PostV1AccountCompaniesUpdateResponseVatPeriod = "annual"
+)
+
+func NewPostV1AccountCompaniesUpdateResponseVatPeriodFromString(s string) (PostV1AccountCompaniesUpdateResponseVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return PostV1AccountCompaniesUpdateResponseVatPeriodMonthly, nil
+	case "bimonthly":
+		return PostV1AccountCompaniesUpdateResponseVatPeriodBimonthly, nil
+	case "quarterly":
+		return PostV1AccountCompaniesUpdateResponseVatPeriodQuarterly, nil
+	case "semiannual":
+		return PostV1AccountCompaniesUpdateResponseVatPeriodSemiannual, nil
+	case "annual":
+		return PostV1AccountCompaniesUpdateResponseVatPeriodAnnual, nil
+	}
+	var t PostV1AccountCompaniesUpdateResponseVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AccountCompaniesUpdateResponseVatPeriod) Ptr() *PostV1AccountCompaniesUpdateResponseVatPeriod {
 	return &p
 }
 
@@ -4486,19 +5818,19 @@ func (p *PostV1AccountDeleteResponse) String() string {
 type PostV1AccountEmailChangeRequestRequestLocale string
 
 const (
-	PostV1AccountEmailChangeRequestRequestLocaleLt PostV1AccountEmailChangeRequestRequestLocale = "lt"
 	PostV1AccountEmailChangeRequestRequestLocaleEn PostV1AccountEmailChangeRequestRequestLocale = "en"
-	PostV1AccountEmailChangeRequestRequestLocaleRu PostV1AccountEmailChangeRequestRequestLocale = "ru"
+	PostV1AccountEmailChangeRequestRequestLocaleLt PostV1AccountEmailChangeRequestRequestLocale = "lt"
+	PostV1AccountEmailChangeRequestRequestLocaleDe PostV1AccountEmailChangeRequestRequestLocale = "de"
 )
 
 func NewPostV1AccountEmailChangeRequestRequestLocaleFromString(s string) (PostV1AccountEmailChangeRequestRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1AccountEmailChangeRequestRequestLocaleLt, nil
 	case "en":
 		return PostV1AccountEmailChangeRequestRequestLocaleEn, nil
-	case "ru":
-		return PostV1AccountEmailChangeRequestRequestLocaleRu, nil
+	case "lt":
+		return PostV1AccountEmailChangeRequestRequestLocaleLt, nil
+	case "de":
+		return PostV1AccountEmailChangeRequestRequestLocaleDe, nil
 	}
 	var t PostV1AccountEmailChangeRequestRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -5577,19 +6909,25 @@ func (p *PostV1AccountExportResponseMembershipsItem) String() string {
 }
 
 var (
-	postV1AccountExportResponseSessionsItemFieldID        = big.NewInt(1 << 0)
-	postV1AccountExportResponseSessionsItemFieldCompanyID = big.NewInt(1 << 1)
-	postV1AccountExportResponseSessionsItemFieldCreatedAt = big.NewInt(1 << 2)
-	postV1AccountExportResponseSessionsItemFieldExpiresAt = big.NewInt(1 << 3)
-	postV1AccountExportResponseSessionsItemFieldCurrent   = big.NewInt(1 << 4)
+	postV1AccountExportResponseSessionsItemFieldID         = big.NewInt(1 << 0)
+	postV1AccountExportResponseSessionsItemFieldCompanyID  = big.NewInt(1 << 1)
+	postV1AccountExportResponseSessionsItemFieldIPAddress  = big.NewInt(1 << 2)
+	postV1AccountExportResponseSessionsItemFieldUserAgent  = big.NewInt(1 << 3)
+	postV1AccountExportResponseSessionsItemFieldLastSeenAt = big.NewInt(1 << 4)
+	postV1AccountExportResponseSessionsItemFieldCreatedAt  = big.NewInt(1 << 5)
+	postV1AccountExportResponseSessionsItemFieldExpiresAt  = big.NewInt(1 << 6)
+	postV1AccountExportResponseSessionsItemFieldCurrent    = big.NewInt(1 << 7)
 )
 
 type PostV1AccountExportResponseSessionsItem struct {
-	ID        string  `json:"id" url:"id"`
-	CompanyID *string `json:"companyId,omitempty" url:"companyId,omitempty"`
-	CreatedAt string  `json:"createdAt" url:"createdAt"`
-	ExpiresAt string  `json:"expiresAt" url:"expiresAt"`
-	Current   bool    `json:"current" url:"current"`
+	ID         string  `json:"id" url:"id"`
+	CompanyID  *string `json:"companyId,omitempty" url:"companyId,omitempty"`
+	IPAddress  *string `json:"ipAddress,omitempty" url:"ipAddress,omitempty"`
+	UserAgent  *string `json:"userAgent,omitempty" url:"userAgent,omitempty"`
+	LastSeenAt *string `json:"lastSeenAt,omitempty" url:"lastSeenAt,omitempty"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+	ExpiresAt  string  `json:"expiresAt" url:"expiresAt"`
+	Current    bool    `json:"current" url:"current"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5610,6 +6948,27 @@ func (p *PostV1AccountExportResponseSessionsItem) GetCompanyID() *string {
 		return nil
 	}
 	return p.CompanyID
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetIPAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IPAddress
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetUserAgent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.UserAgent
+}
+
+func (p *PostV1AccountExportResponseSessionsItem) GetLastSeenAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastSeenAt
 }
 
 func (p *PostV1AccountExportResponseSessionsItem) GetCreatedAt() string {
@@ -5659,6 +7018,27 @@ func (p *PostV1AccountExportResponseSessionsItem) SetID(id string) {
 func (p *PostV1AccountExportResponseSessionsItem) SetCompanyID(companyID *string) {
 	p.CompanyID = companyID
 	p.require(postV1AccountExportResponseSessionsItemFieldCompanyID)
+}
+
+// SetIPAddress sets the IPAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetIPAddress(ipAddress *string) {
+	p.IPAddress = ipAddress
+	p.require(postV1AccountExportResponseSessionsItemFieldIPAddress)
+}
+
+// SetUserAgent sets the UserAgent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetUserAgent(userAgent *string) {
+	p.UserAgent = userAgent
+	p.require(postV1AccountExportResponseSessionsItemFieldUserAgent)
+}
+
+// SetLastSeenAt sets the LastSeenAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountExportResponseSessionsItem) SetLastSeenAt(lastSeenAt *string) {
+	p.LastSeenAt = lastSeenAt
+	p.require(postV1AccountExportResponseSessionsItemFieldLastSeenAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5891,19 +7271,19 @@ func (p *PostV1AccountExportResponseUser) String() string {
 type PostV1AccountInvitesAcceptRequestLocale string
 
 const (
-	PostV1AccountInvitesAcceptRequestLocaleLt PostV1AccountInvitesAcceptRequestLocale = "lt"
 	PostV1AccountInvitesAcceptRequestLocaleEn PostV1AccountInvitesAcceptRequestLocale = "en"
-	PostV1AccountInvitesAcceptRequestLocaleRu PostV1AccountInvitesAcceptRequestLocale = "ru"
+	PostV1AccountInvitesAcceptRequestLocaleLt PostV1AccountInvitesAcceptRequestLocale = "lt"
+	PostV1AccountInvitesAcceptRequestLocaleDe PostV1AccountInvitesAcceptRequestLocale = "de"
 )
 
 func NewPostV1AccountInvitesAcceptRequestLocaleFromString(s string) (PostV1AccountInvitesAcceptRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1AccountInvitesAcceptRequestLocaleLt, nil
 	case "en":
 		return PostV1AccountInvitesAcceptRequestLocaleEn, nil
-	case "ru":
-		return PostV1AccountInvitesAcceptRequestLocaleRu, nil
+	case "lt":
+		return PostV1AccountInvitesAcceptRequestLocaleLt, nil
+	case "de":
+		return PostV1AccountInvitesAcceptRequestLocaleDe, nil
 	}
 	var t PostV1AccountInvitesAcceptRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -6164,19 +7544,19 @@ func (p *PostV1AccountInvitesAcceptResponseUser) String() string {
 type PostV1AccountInvitesCreateRequestLocale string
 
 const (
-	PostV1AccountInvitesCreateRequestLocaleLt PostV1AccountInvitesCreateRequestLocale = "lt"
 	PostV1AccountInvitesCreateRequestLocaleEn PostV1AccountInvitesCreateRequestLocale = "en"
-	PostV1AccountInvitesCreateRequestLocaleRu PostV1AccountInvitesCreateRequestLocale = "ru"
+	PostV1AccountInvitesCreateRequestLocaleLt PostV1AccountInvitesCreateRequestLocale = "lt"
+	PostV1AccountInvitesCreateRequestLocaleDe PostV1AccountInvitesCreateRequestLocale = "de"
 )
 
 func NewPostV1AccountInvitesCreateRequestLocaleFromString(s string) (PostV1AccountInvitesCreateRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1AccountInvitesCreateRequestLocaleLt, nil
 	case "en":
 		return PostV1AccountInvitesCreateRequestLocaleEn, nil
-	case "ru":
-		return PostV1AccountInvitesCreateRequestLocaleRu, nil
+	case "lt":
+		return PostV1AccountInvitesCreateRequestLocaleLt, nil
+	case "de":
+		return PostV1AccountInvitesCreateRequestLocaleDe, nil
 	}
 	var t PostV1AccountInvitesCreateRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -6222,8 +7602,7 @@ var (
 	postV1AccountInvitesCreateResponseFieldEmail     = big.NewInt(1 << 1)
 	postV1AccountInvitesCreateResponseFieldRole      = big.NewInt(1 << 2)
 	postV1AccountInvitesCreateResponseFieldExpiresAt = big.NewInt(1 << 3)
-	postV1AccountInvitesCreateResponseFieldInviteURL = big.NewInt(1 << 4)
-	postV1AccountInvitesCreateResponseFieldEmailSent = big.NewInt(1 << 5)
+	postV1AccountInvitesCreateResponseFieldEmailSent = big.NewInt(1 << 4)
 )
 
 type PostV1AccountInvitesCreateResponse struct {
@@ -6231,7 +7610,6 @@ type PostV1AccountInvitesCreateResponse struct {
 	Email     string `json:"email" url:"email"`
 	Role      string `json:"role" url:"role"`
 	ExpiresAt string `json:"expiresAt" url:"expiresAt"`
-	InviteURL string `json:"inviteUrl" url:"inviteUrl"`
 	EmailSent bool   `json:"emailSent" url:"emailSent"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -6267,13 +7645,6 @@ func (p *PostV1AccountInvitesCreateResponse) GetExpiresAt() string {
 		return ""
 	}
 	return p.ExpiresAt
-}
-
-func (p *PostV1AccountInvitesCreateResponse) GetInviteURL() string {
-	if p == nil {
-		return ""
-	}
-	return p.InviteURL
 }
 
 func (p *PostV1AccountInvitesCreateResponse) GetEmailSent() bool {
@@ -6323,13 +7694,6 @@ func (p *PostV1AccountInvitesCreateResponse) SetRole(role string) {
 func (p *PostV1AccountInvitesCreateResponse) SetExpiresAt(expiresAt string) {
 	p.ExpiresAt = expiresAt
 	p.require(postV1AccountInvitesCreateResponseFieldExpiresAt)
-}
-
-// SetInviteURL sets the InviteURL field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1AccountInvitesCreateResponse) SetInviteURL(inviteURL string) {
-	p.InviteURL = inviteURL
-	p.require(postV1AccountInvitesCreateResponseFieldInviteURL)
 }
 
 // SetEmailSent sets the EmailSent field and marks it as non-optional;
@@ -6864,19 +8228,19 @@ func (p *PostV1AccountInvitesRevokeResponse) String() string {
 type PostV1AccountLocaleSetRequestLocale string
 
 const (
-	PostV1AccountLocaleSetRequestLocaleLt PostV1AccountLocaleSetRequestLocale = "lt"
 	PostV1AccountLocaleSetRequestLocaleEn PostV1AccountLocaleSetRequestLocale = "en"
-	PostV1AccountLocaleSetRequestLocaleRu PostV1AccountLocaleSetRequestLocale = "ru"
+	PostV1AccountLocaleSetRequestLocaleLt PostV1AccountLocaleSetRequestLocale = "lt"
+	PostV1AccountLocaleSetRequestLocaleDe PostV1AccountLocaleSetRequestLocale = "de"
 )
 
 func NewPostV1AccountLocaleSetRequestLocaleFromString(s string) (PostV1AccountLocaleSetRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1AccountLocaleSetRequestLocaleLt, nil
 	case "en":
 		return PostV1AccountLocaleSetRequestLocaleEn, nil
-	case "ru":
-		return PostV1AccountLocaleSetRequestLocaleRu, nil
+	case "lt":
+		return PostV1AccountLocaleSetRequestLocaleLt, nil
+	case "de":
+		return PostV1AccountLocaleSetRequestLocaleDe, nil
 	}
 	var t PostV1AccountLocaleSetRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7275,19 +8639,19 @@ func (p *PostV1AccountLoginLinkConsumeResponseUser) String() string {
 type PostV1AccountLoginLinkRequestRequestLocale string
 
 const (
-	PostV1AccountLoginLinkRequestRequestLocaleLt PostV1AccountLoginLinkRequestRequestLocale = "lt"
 	PostV1AccountLoginLinkRequestRequestLocaleEn PostV1AccountLoginLinkRequestRequestLocale = "en"
-	PostV1AccountLoginLinkRequestRequestLocaleRu PostV1AccountLoginLinkRequestRequestLocale = "ru"
+	PostV1AccountLoginLinkRequestRequestLocaleLt PostV1AccountLoginLinkRequestRequestLocale = "lt"
+	PostV1AccountLoginLinkRequestRequestLocaleDe PostV1AccountLoginLinkRequestRequestLocale = "de"
 )
 
 func NewPostV1AccountLoginLinkRequestRequestLocaleFromString(s string) (PostV1AccountLoginLinkRequestRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1AccountLoginLinkRequestRequestLocaleLt, nil
 	case "en":
 		return PostV1AccountLoginLinkRequestRequestLocaleEn, nil
-	case "ru":
-		return PostV1AccountLoginLinkRequestRequestLocaleRu, nil
+	case "lt":
+		return PostV1AccountLoginLinkRequestRequestLocaleLt, nil
+	case "de":
+		return PostV1AccountLoginLinkRequestRequestLocaleDe, nil
 	}
 	var t PostV1AccountLoginLinkRequestRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7469,17 +8833,19 @@ var (
 	postV1AccountMeResponseFieldUser            = big.NewInt(1 << 0)
 	postV1AccountMeResponseFieldLocale          = big.NewInt(1 << 1)
 	postV1AccountMeResponseFieldActiveCompanyID = big.NewInt(1 << 2)
-	postV1AccountMeResponseFieldRole            = big.NewInt(1 << 3)
-	postV1AccountMeResponseFieldBilling         = big.NewInt(1 << 4)
-	postV1AccountMeResponseFieldReferralPoints  = big.NewInt(1 << 5)
-	postV1AccountMeResponseFieldConsent         = big.NewInt(1 << 6)
-	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 7)
+	postV1AccountMeResponseFieldTimeZone        = big.NewInt(1 << 3)
+	postV1AccountMeResponseFieldRole            = big.NewInt(1 << 4)
+	postV1AccountMeResponseFieldBilling         = big.NewInt(1 << 5)
+	postV1AccountMeResponseFieldReferralPoints  = big.NewInt(1 << 6)
+	postV1AccountMeResponseFieldConsent         = big.NewInt(1 << 7)
+	postV1AccountMeResponseFieldCompanies       = big.NewInt(1 << 8)
 )
 
 type PostV1AccountMeResponse struct {
 	User            *PostV1AccountMeResponseUser            `json:"user" url:"user"`
 	Locale          string                                  `json:"locale" url:"locale"`
 	ActiveCompanyID *string                                 `json:"activeCompanyId,omitempty" url:"activeCompanyId,omitempty"`
+	TimeZone        string                                  `json:"timeZone" url:"timeZone"`
 	Role            *string                                 `json:"role,omitempty" url:"role,omitempty"`
 	Billing         *PostV1AccountMeResponseBilling         `json:"billing" url:"billing"`
 	ReferralPoints  int64                                   `json:"referralPoints" url:"referralPoints"`
@@ -7512,6 +8878,13 @@ func (p *PostV1AccountMeResponse) GetActiveCompanyID() *string {
 		return nil
 	}
 	return p.ActiveCompanyID
+}
+
+func (p *PostV1AccountMeResponse) GetTimeZone() string {
+	if p == nil {
+		return ""
+	}
+	return p.TimeZone
 }
 
 func (p *PostV1AccountMeResponse) GetRole() *string {
@@ -7582,6 +8955,13 @@ func (p *PostV1AccountMeResponse) SetLocale(locale string) {
 func (p *PostV1AccountMeResponse) SetActiveCompanyID(activeCompanyID *string) {
 	p.ActiveCompanyID = activeCompanyID
 	p.require(postV1AccountMeResponseFieldActiveCompanyID)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponse) SetTimeZone(timeZone string) {
+	p.TimeZone = timeZone
+	p.require(postV1AccountMeResponseFieldTimeZone)
 }
 
 // SetRole sets the Role field and marks it as non-optional;
@@ -7666,6 +9046,9 @@ var (
 	postV1AccountMeResponseBillingFieldPlan         = big.NewInt(1 << 1)
 	postV1AccountMeResponseBillingFieldBalanceCents = big.NewInt(1 << 2)
 	postV1AccountMeResponseBillingFieldTrialEndsAt  = big.NewInt(1 << 3)
+	postV1AccountMeResponseBillingFieldPayerUserID  = big.NewInt(1 << 4)
+	postV1AccountMeResponseBillingFieldPayerEmail   = big.NewInt(1 << 5)
+	postV1AccountMeResponseBillingFieldIsPayer      = big.NewInt(1 << 6)
 )
 
 type PostV1AccountMeResponseBilling struct {
@@ -7673,6 +9056,9 @@ type PostV1AccountMeResponseBilling struct {
 	Plan         string                               `json:"plan" url:"plan"`
 	BalanceCents int64                                `json:"balanceCents" url:"balanceCents"`
 	TrialEndsAt  *string                              `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	PayerUserID  string                               `json:"payerUserId" url:"payerUserId"`
+	PayerEmail   string                               `json:"payerEmail" url:"payerEmail"`
+	IsPayer      bool                                 `json:"isPayer" url:"isPayer"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7707,6 +9093,27 @@ func (p *PostV1AccountMeResponseBilling) GetTrialEndsAt() *string {
 		return nil
 	}
 	return p.TrialEndsAt
+}
+
+func (p *PostV1AccountMeResponseBilling) GetPayerUserID() string {
+	if p == nil {
+		return ""
+	}
+	return p.PayerUserID
+}
+
+func (p *PostV1AccountMeResponseBilling) GetPayerEmail() string {
+	if p == nil {
+		return ""
+	}
+	return p.PayerEmail
+}
+
+func (p *PostV1AccountMeResponseBilling) GetIsPayer() bool {
+	if p == nil {
+		return false
+	}
+	return p.IsPayer
 }
 
 func (p *PostV1AccountMeResponseBilling) GetExtraProperties() map[string]interface{} {
@@ -7749,6 +9156,27 @@ func (p *PostV1AccountMeResponseBilling) SetBalanceCents(balanceCents int64) {
 func (p *PostV1AccountMeResponseBilling) SetTrialEndsAt(trialEndsAt *string) {
 	p.TrialEndsAt = trialEndsAt
 	p.require(postV1AccountMeResponseBillingFieldTrialEndsAt)
+}
+
+// SetPayerUserID sets the PayerUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetPayerUserID(payerUserID string) {
+	p.PayerUserID = payerUserID
+	p.require(postV1AccountMeResponseBillingFieldPayerUserID)
+}
+
+// SetPayerEmail sets the PayerEmail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetPayerEmail(payerEmail string) {
+	p.PayerEmail = payerEmail
+	p.require(postV1AccountMeResponseBillingFieldPayerEmail)
+}
+
+// SetIsPayer sets the IsPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMeResponseBilling) SetIsPayer(isPayer bool) {
+	p.IsPayer = isPayer
+	p.require(postV1AccountMeResponseBillingFieldIsPayer)
 }
 
 func (p *PostV1AccountMeResponseBilling) UnmarshalJSON(data []byte) error {
@@ -8831,6 +10259,122 @@ func (p *PostV1AccountMembersSetRoleResponse) String() string {
 }
 
 var (
+	postV1AccountMembersTransferOwnershipResponseFieldOwnerUserID       = big.NewInt(1 << 0)
+	postV1AccountMembersTransferOwnershipResponseFieldPreviousOwnerRole = big.NewInt(1 << 1)
+	postV1AccountMembersTransferOwnershipResponseFieldPayerUserID       = big.NewInt(1 << 2)
+)
+
+type PostV1AccountMembersTransferOwnershipResponse struct {
+	OwnerUserID       string  `json:"ownerUserId" url:"ownerUserId"`
+	PreviousOwnerRole string  `json:"previousOwnerRole" url:"previousOwnerRole"`
+	PayerUserID       *string `json:"payerUserId,omitempty" url:"payerUserId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) GetOwnerUserID() string {
+	if p == nil {
+		return ""
+	}
+	return p.OwnerUserID
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) GetPreviousOwnerRole() string {
+	if p == nil {
+		return ""
+	}
+	return p.PreviousOwnerRole
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) GetPayerUserID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PayerUserID
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetOwnerUserID sets the OwnerUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMembersTransferOwnershipResponse) SetOwnerUserID(ownerUserID string) {
+	p.OwnerUserID = ownerUserID
+	p.require(postV1AccountMembersTransferOwnershipResponseFieldOwnerUserID)
+}
+
+// SetPreviousOwnerRole sets the PreviousOwnerRole field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMembersTransferOwnershipResponse) SetPreviousOwnerRole(previousOwnerRole string) {
+	p.PreviousOwnerRole = previousOwnerRole
+	p.require(postV1AccountMembersTransferOwnershipResponseFieldPreviousOwnerRole)
+}
+
+// SetPayerUserID sets the PayerUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountMembersTransferOwnershipResponse) SetPayerUserID(payerUserID *string) {
+	p.PayerUserID = payerUserID
+	p.require(postV1AccountMembersTransferOwnershipResponseFieldPayerUserID)
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountMembersTransferOwnershipResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountMembersTransferOwnershipResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountMembersTransferOwnershipResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountMembersTransferOwnershipResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1AccountProfileUpdateResponseFieldID    = big.NewInt(1 << 0)
 	postV1AccountProfileUpdateResponseFieldEmail = big.NewInt(1 << 1)
 	postV1AccountProfileUpdateResponseFieldName  = big.NewInt(1 << 2)
@@ -8947,11 +10491,144 @@ func (p *PostV1AccountProfileUpdateResponse) String() string {
 }
 
 var (
+	postV1AccountReferralConvertResponseFieldPoints       = big.NewInt(1 << 0)
+	postV1AccountReferralConvertResponseFieldAmountCents  = big.NewInt(1 << 1)
+	postV1AccountReferralConvertResponseFieldPointsLeft   = big.NewInt(1 << 2)
+	postV1AccountReferralConvertResponseFieldBalanceCents = big.NewInt(1 << 3)
+)
+
+type PostV1AccountReferralConvertResponse struct {
+	Points       int64 `json:"points" url:"points"`
+	AmountCents  int64 `json:"amountCents" url:"amountCents"`
+	PointsLeft   int64 `json:"pointsLeft" url:"pointsLeft"`
+	BalanceCents int64 `json:"balanceCents" url:"balanceCents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountReferralConvertResponse) GetPoints() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Points
+}
+
+func (p *PostV1AccountReferralConvertResponse) GetAmountCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.AmountCents
+}
+
+func (p *PostV1AccountReferralConvertResponse) GetPointsLeft() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PointsLeft
+}
+
+func (p *PostV1AccountReferralConvertResponse) GetBalanceCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.BalanceCents
+}
+
+func (p *PostV1AccountReferralConvertResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountReferralConvertResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPoints sets the Points field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralConvertResponse) SetPoints(points int64) {
+	p.Points = points
+	p.require(postV1AccountReferralConvertResponseFieldPoints)
+}
+
+// SetAmountCents sets the AmountCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralConvertResponse) SetAmountCents(amountCents int64) {
+	p.AmountCents = amountCents
+	p.require(postV1AccountReferralConvertResponseFieldAmountCents)
+}
+
+// SetPointsLeft sets the PointsLeft field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralConvertResponse) SetPointsLeft(pointsLeft int64) {
+	p.PointsLeft = pointsLeft
+	p.require(postV1AccountReferralConvertResponseFieldPointsLeft)
+}
+
+// SetBalanceCents sets the BalanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralConvertResponse) SetBalanceCents(balanceCents int64) {
+	p.BalanceCents = balanceCents
+	p.require(postV1AccountReferralConvertResponseFieldBalanceCents)
+}
+
+func (p *PostV1AccountReferralConvertResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountReferralConvertResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountReferralConvertResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountReferralConvertResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountReferralConvertResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountReferralConvertResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1AccountReferralGetResponseFieldCode          = big.NewInt(1 << 0)
 	postV1AccountReferralGetResponseFieldLink          = big.NewInt(1 << 1)
 	postV1AccountReferralGetResponseFieldPoints        = big.NewInt(1 << 2)
 	postV1AccountReferralGetResponseFieldReferredCount = big.NewInt(1 << 3)
-	postV1AccountReferralGetResponseFieldHistory       = big.NewInt(1 << 4)
+	postV1AccountReferralGetResponseFieldRates         = big.NewInt(1 << 4)
+	postV1AccountReferralGetResponseFieldHistory       = big.NewInt(1 << 5)
 )
 
 type PostV1AccountReferralGetResponse struct {
@@ -8959,6 +10636,7 @@ type PostV1AccountReferralGetResponse struct {
 	Link          string                                         `json:"link" url:"link"`
 	Points        int64                                          `json:"points" url:"points"`
 	ReferredCount int64                                          `json:"referredCount" url:"referredCount"`
+	Rates         *PostV1AccountReferralGetResponseRates         `json:"rates" url:"rates"`
 	History       []*PostV1AccountReferralGetResponseHistoryItem `json:"history" url:"history"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -8994,6 +10672,13 @@ func (p *PostV1AccountReferralGetResponse) GetReferredCount() int64 {
 		return 0
 	}
 	return p.ReferredCount
+}
+
+func (p *PostV1AccountReferralGetResponse) GetRates() *PostV1AccountReferralGetResponseRates {
+	if p == nil {
+		return nil
+	}
+	return p.Rates
 }
 
 func (p *PostV1AccountReferralGetResponse) GetHistory() []*PostV1AccountReferralGetResponseHistoryItem {
@@ -9043,6 +10728,13 @@ func (p *PostV1AccountReferralGetResponse) SetPoints(points int64) {
 func (p *PostV1AccountReferralGetResponse) SetReferredCount(referredCount int64) {
 	p.ReferredCount = referredCount
 	p.require(postV1AccountReferralGetResponseFieldReferredCount)
+}
+
+// SetRates sets the Rates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponse) SetRates(rates *PostV1AccountReferralGetResponseRates) {
+	p.Rates = rates
+	p.require(postV1AccountReferralGetResponseFieldRates)
 }
 
 // SetHistory sets the History field and marks it as non-optional;
@@ -9211,6 +10903,106 @@ func (p *PostV1AccountReferralGetResponseHistoryItem) String() string {
 }
 
 var (
+	postV1AccountReferralGetResponseRatesFieldPerEur     = big.NewInt(1 << 0)
+	postV1AccountReferralGetResponseRatesFieldPointCents = big.NewInt(1 << 1)
+)
+
+type PostV1AccountReferralGetResponseRates struct {
+	PerEur     int64 `json:"perEur" url:"perEur"`
+	PointCents int64 `json:"pointCents" url:"pointCents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AccountReferralGetResponseRates) GetPerEur() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PerEur
+}
+
+func (p *PostV1AccountReferralGetResponseRates) GetPointCents() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PointCents
+}
+
+func (p *PostV1AccountReferralGetResponseRates) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AccountReferralGetResponseRates) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPerEur sets the PerEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponseRates) SetPerEur(perEur int64) {
+	p.PerEur = perEur
+	p.require(postV1AccountReferralGetResponseRatesFieldPerEur)
+}
+
+// SetPointCents sets the PointCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountReferralGetResponseRates) SetPointCents(pointCents int64) {
+	p.PointCents = pointCents
+	p.require(postV1AccountReferralGetResponseRatesFieldPointCents)
+}
+
+func (p *PostV1AccountReferralGetResponseRates) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AccountReferralGetResponseRates
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AccountReferralGetResponseRates(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AccountReferralGetResponseRates) MarshalJSON() ([]byte, error) {
+	type embed PostV1AccountReferralGetResponseRates
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AccountReferralGetResponseRates) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1AccountSessionsListResponseFieldRows = big.NewInt(1 << 0)
 )
 
@@ -9295,19 +11087,25 @@ func (p *PostV1AccountSessionsListResponse) String() string {
 }
 
 var (
-	postV1AccountSessionsListResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	postV1AccountSessionsListResponseRowsItemFieldCompanyID = big.NewInt(1 << 1)
-	postV1AccountSessionsListResponseRowsItemFieldCreatedAt = big.NewInt(1 << 2)
-	postV1AccountSessionsListResponseRowsItemFieldExpiresAt = big.NewInt(1 << 3)
-	postV1AccountSessionsListResponseRowsItemFieldCurrent   = big.NewInt(1 << 4)
+	postV1AccountSessionsListResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	postV1AccountSessionsListResponseRowsItemFieldCompanyID  = big.NewInt(1 << 1)
+	postV1AccountSessionsListResponseRowsItemFieldIPAddress  = big.NewInt(1 << 2)
+	postV1AccountSessionsListResponseRowsItemFieldUserAgent  = big.NewInt(1 << 3)
+	postV1AccountSessionsListResponseRowsItemFieldLastSeenAt = big.NewInt(1 << 4)
+	postV1AccountSessionsListResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 5)
+	postV1AccountSessionsListResponseRowsItemFieldExpiresAt  = big.NewInt(1 << 6)
+	postV1AccountSessionsListResponseRowsItemFieldCurrent    = big.NewInt(1 << 7)
 )
 
 type PostV1AccountSessionsListResponseRowsItem struct {
-	ID        string  `json:"id" url:"id"`
-	CompanyID *string `json:"companyId,omitempty" url:"companyId,omitempty"`
-	CreatedAt string  `json:"createdAt" url:"createdAt"`
-	ExpiresAt string  `json:"expiresAt" url:"expiresAt"`
-	Current   bool    `json:"current" url:"current"`
+	ID         string  `json:"id" url:"id"`
+	CompanyID  *string `json:"companyId,omitempty" url:"companyId,omitempty"`
+	IPAddress  *string `json:"ipAddress,omitempty" url:"ipAddress,omitempty"`
+	UserAgent  *string `json:"userAgent,omitempty" url:"userAgent,omitempty"`
+	LastSeenAt *string `json:"lastSeenAt,omitempty" url:"lastSeenAt,omitempty"`
+	CreatedAt  string  `json:"createdAt" url:"createdAt"`
+	ExpiresAt  string  `json:"expiresAt" url:"expiresAt"`
+	Current    bool    `json:"current" url:"current"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9328,6 +11126,27 @@ func (p *PostV1AccountSessionsListResponseRowsItem) GetCompanyID() *string {
 		return nil
 	}
 	return p.CompanyID
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetIPAddress() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IPAddress
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetUserAgent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.UserAgent
+}
+
+func (p *PostV1AccountSessionsListResponseRowsItem) GetLastSeenAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LastSeenAt
 }
 
 func (p *PostV1AccountSessionsListResponseRowsItem) GetCreatedAt() string {
@@ -9377,6 +11196,27 @@ func (p *PostV1AccountSessionsListResponseRowsItem) SetID(id string) {
 func (p *PostV1AccountSessionsListResponseRowsItem) SetCompanyID(companyID *string) {
 	p.CompanyID = companyID
 	p.require(postV1AccountSessionsListResponseRowsItemFieldCompanyID)
+}
+
+// SetIPAddress sets the IPAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetIPAddress(ipAddress *string) {
+	p.IPAddress = ipAddress
+	p.require(postV1AccountSessionsListResponseRowsItemFieldIPAddress)
+}
+
+// SetUserAgent sets the UserAgent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetUserAgent(userAgent *string) {
+	p.UserAgent = userAgent
+	p.require(postV1AccountSessionsListResponseRowsItemFieldUserAgent)
+}
+
+// SetLastSeenAt sets the LastSeenAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AccountSessionsListResponseRowsItem) SetLastSeenAt(lastSeenAt *string) {
+	p.LastSeenAt = lastSeenAt
+	p.require(postV1AccountSessionsListResponseRowsItemFieldLastSeenAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

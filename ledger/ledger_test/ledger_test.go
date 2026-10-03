@@ -179,6 +179,30 @@ func TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock(
 	VerifyRequestCount(t, "TestLedgerPostV1LedgerAccountsApplyTemplateWithWireMock", "POST", "/v1/ledger/accounts/apply-template", nil, 1)
 }
 
+func TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1LedgerAccountsSwitchChartRequest{}
+	_, invocationErr := client.Ledger.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerMoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountryWithWireMock", "POST", "/v1/ledger/accounts/switch-chart", nil, 1)
+}
+
 func TestLedgerPostV1LedgerPeriodsListWithWireMock(
 	t *testing.T,
 ) {
@@ -672,4 +696,186 @@ func TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestLedgerPostV1LedgerJournalTransactionsCreateWithWireMock", "POST", "/v1/ledger/journal/transactions/create", nil, 1)
+}
+
+func TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1LedgerStatementRowsSchemesRequest{}
+	_, invocationErr := client.Ledger.NationalStatementLayoutsAvailableToTheCompany(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerNationalStatementLayoutsAvailableToTheCompanyWithWireMock", "POST", "/v1/ledger/statement-rows/schemes", nil, 1)
+}
+
+func TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1LedgerStatementRowsListRequest{
+		Scheme: "scheme",
+	}
+	_, invocationErr := client.Ledger.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerAccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriodWithWireMock", "POST", "/v1/ledger/statement-rows/list", nil, 1)
+}
+
+func TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1LedgerStatementRowsSetRequest{
+		Scheme:      "scheme",
+		AccountCode: "accountCode",
+	}
+	_, invocationErr := client.Ledger.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerMapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayoutWithWireMock", "POST", "/v1/ledger/statement-rows/set", nil, 1)
+}
+
+func TestLedgerOfficersOfTheCompanyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1OfficersListRequest{}
+	_, invocationErr := client.Ledger.OfficersOfTheCompany(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerOfficersOfTheCompanyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerOfficersOfTheCompanyWithWireMock", "POST", "/v1/officers/list", nil, 1)
+}
+
+func TestLedgerRecordAnOfficerOfTheCompanyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1OfficersCreateRequest{
+		Name: "name",
+		Role: nordlet.PostV1OfficersCreateRequestRoleDirector,
+	}
+	_, invocationErr := client.Ledger.RecordAnOfficerOfTheCompany(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerRecordAnOfficerOfTheCompanyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerRecordAnOfficerOfTheCompanyWithWireMock", "POST", "/v1/officers/create", nil, 1)
+}
+
+func TestLedgerChangeARecordedOfficerWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1OfficersUpdateRequest{
+		ID:   "id",
+		Name: "name",
+		Role: nordlet.PostV1OfficersUpdateRequestRoleDirector,
+	}
+	_, invocationErr := client.Ledger.ChangeARecordedOfficer(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerChangeARecordedOfficerWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerChangeARecordedOfficerWithWireMock", "POST", "/v1/officers/update", nil, 1)
+}
+
+func TestLedgerRemoveARecordedOfficerWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1OfficersDeleteRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Ledger.RemoveARecordedOfficer(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerRemoveARecordedOfficerWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerRemoveARecordedOfficerWithWireMock", "POST", "/v1/officers/delete", nil, 1)
 }

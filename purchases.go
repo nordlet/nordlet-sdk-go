@@ -10,33 +10,43 @@ import (
 )
 
 var (
-	postV1PurchasesInvoicesCreateRequestFieldPartnerID         = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesCreateRequestFieldType              = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesCreateRequestFieldDocumentNumber    = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesCreateRequestFieldDocumentDate      = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesCreateRequestFieldDueDate           = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesCreateRequestFieldCurrency          = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesCreateRequestFieldCreditedInvoiceID = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesCreateRequestFieldPurchaseOrderID   = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesCreateRequestFieldOperationTypeID   = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesCreateRequestFieldPartnerID                    = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesCreateRequestFieldType                         = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesCreateRequestFieldDocumentNumber               = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesCreateRequestFieldDocumentDate                 = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesCreateRequestFieldDueDate                      = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesCreateRequestFieldCurrency                     = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesCreateRequestFieldCreditedInvoiceID            = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesCreateRequestFieldPurchaseOrderID              = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesCreateRequestFieldOperationTypeID              = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesCreateRequestFieldNotes                        = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesCreateRequestFieldIntrastatTransportMode       = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesCreateRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesCreateRequestFieldIntrastatRegion              = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesCreateRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesCreateRequestFieldEinvoiceNumber               = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesCreateRequestFieldDocumentRef                  = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesCreateRequestFieldLines                        = big.NewInt(1 << 16)
 )
 
 type PostV1PurchasesInvoicesCreateRequest struct {
-	PartnerID         string                                           `json:"partnerId" url:"-"`
-	Type              *PostV1PurchasesInvoicesCreateRequestType        `json:"type,omitempty" url:"-"`
-	DocumentNumber    string                                           `json:"documentNumber" url:"-"`
-	DocumentDate      string                                           `json:"documentDate" url:"-"`
-	DueDate           *string                                          `json:"dueDate,omitempty" url:"-"`
-	Currency          *string                                          `json:"currency,omitempty" url:"-"`
-	CreditedInvoiceID *string                                          `json:"creditedInvoiceId,omitempty" url:"-"`
-	PurchaseOrderID   *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
-	OperationTypeID   *string                                          `json:"operationTypeId,omitempty" url:"-"`
-	Notes             *string                                          `json:"notes,omitempty" url:"-"`
-	DocumentRef       *string                                          `json:"documentRef,omitempty" url:"-"`
-	Lines             []*PostV1PurchasesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
+	PartnerID                    string                                           `json:"partnerId" url:"-"`
+	Type                         *PostV1PurchasesInvoicesCreateRequestType        `json:"type,omitempty" url:"-"`
+	DocumentNumber               string                                           `json:"documentNumber" url:"-"`
+	DocumentDate                 string                                           `json:"documentDate" url:"-"`
+	DueDate                      *string                                          `json:"dueDate,omitempty" url:"-"`
+	Currency                     *string                                          `json:"currency,omitempty" url:"-"`
+	CreditedInvoiceID            *string                                          `json:"creditedInvoiceId,omitempty" url:"-"`
+	PurchaseOrderID              *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
+	OperationTypeID              *string                                          `json:"operationTypeId,omitempty" url:"-"`
+	Notes                        *string                                          `json:"notes,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                          `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                          `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                          `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                          `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	EinvoiceNumber               *string                                          `json:"einvoiceNumber,omitempty" url:"-"`
+	DocumentRef                  *string                                          `json:"documentRef,omitempty" url:"-"`
+	Lines                        []*PostV1PurchasesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -117,6 +127,41 @@ func (p *PostV1PurchasesInvoicesCreateRequest) SetOperationTypeID(operationTypeI
 func (p *PostV1PurchasesInvoicesCreateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesCreateRequestFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesCreateRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesCreateRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesCreateRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesCreateRequestFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateRequest) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesCreateRequestFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
@@ -449,29 +494,39 @@ func (p *PostV1PurchasesInvoicesRegisterRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PurchasesInvoicesUpdateRequestFieldID              = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesUpdateRequestFieldPartnerID       = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesUpdateRequestFieldDocumentNumber  = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesUpdateRequestFieldDocumentDate    = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesUpdateRequestFieldDueDate         = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesUpdateRequestFieldCurrency        = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesUpdateRequestFieldPurchaseOrderID = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesUpdateRequestFieldOperationTypeID = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesUpdateRequestFieldNotes           = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesUpdateRequestFieldLines           = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesUpdateRequestFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesUpdateRequestFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesUpdateRequestFieldDocumentNumber               = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesUpdateRequestFieldDocumentDate                 = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesUpdateRequestFieldDueDate                      = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesUpdateRequestFieldCurrency                     = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesUpdateRequestFieldPurchaseOrderID              = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesUpdateRequestFieldOperationTypeID              = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesUpdateRequestFieldNotes                        = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesUpdateRequestFieldIntrastatTransportMode       = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesUpdateRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesUpdateRequestFieldIntrastatRegion              = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesUpdateRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesUpdateRequestFieldEinvoiceNumber               = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesUpdateRequestFieldLines                        = big.NewInt(1 << 14)
 )
 
 type PostV1PurchasesInvoicesUpdateRequest struct {
-	ID              string                                           `json:"id" url:"-"`
-	PartnerID       *string                                          `json:"partnerId,omitempty" url:"-"`
-	DocumentNumber  *string                                          `json:"documentNumber,omitempty" url:"-"`
-	DocumentDate    *string                                          `json:"documentDate,omitempty" url:"-"`
-	DueDate         *string                                          `json:"dueDate,omitempty" url:"-"`
-	Currency        *string                                          `json:"currency,omitempty" url:"-"`
-	PurchaseOrderID *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
-	OperationTypeID *string                                          `json:"operationTypeId,omitempty" url:"-"`
-	Notes           *string                                          `json:"notes,omitempty" url:"-"`
-	Lines           []*PostV1PurchasesInvoicesUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
+	ID                           string                                           `json:"id" url:"-"`
+	PartnerID                    *string                                          `json:"partnerId,omitempty" url:"-"`
+	DocumentNumber               *string                                          `json:"documentNumber,omitempty" url:"-"`
+	DocumentDate                 *string                                          `json:"documentDate,omitempty" url:"-"`
+	DueDate                      *string                                          `json:"dueDate,omitempty" url:"-"`
+	Currency                     *string                                          `json:"currency,omitempty" url:"-"`
+	PurchaseOrderID              *string                                          `json:"purchaseOrderId,omitempty" url:"-"`
+	OperationTypeID              *string                                          `json:"operationTypeId,omitempty" url:"-"`
+	Notes                        *string                                          `json:"notes,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                          `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                          `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                          `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                          `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	EinvoiceNumber               *string                                          `json:"einvoiceNumber,omitempty" url:"-"`
+	Lines                        []*PostV1PurchasesInvoicesUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -545,6 +600,41 @@ func (p *PostV1PurchasesInvoicesUpdateRequest) SetOperationTypeID(operationTypeI
 func (p *PostV1PurchasesInvoicesUpdateRequest) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesUpdateRequestFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateRequest) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesUpdateRequestFieldEinvoiceNumber)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -1792,55 +1882,65 @@ func (p PostV1PurchasesInvoicesCreateRequestType) Ptr() *PostV1PurchasesInvoices
 }
 
 var (
-	postV1PurchasesInvoicesCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesCreateResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesCreateResponseFieldType                 = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesCreateResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesCreateResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesCreateResponseFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesCreateResponseFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesCreateResponseFieldDueDate              = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesCreateResponseFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesCreateResponseFieldCurrency             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesCreateResponseFieldNetTotal             = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesCreateResponseFieldVatTotal             = big.NewInt(1 << 11)
-	postV1PurchasesInvoicesCreateResponseFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1PurchasesInvoicesCreateResponseFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1PurchasesInvoicesCreateResponseFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1PurchasesInvoicesCreateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1PurchasesInvoicesCreateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesCreateResponseFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 21)
-	postV1PurchasesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesCreateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesCreateResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesCreateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesCreateResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesCreateResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesCreateResponseFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesCreateResponseFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesCreateResponseFieldDueDate                      = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesCreateResponseFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesCreateResponseFieldCurrency                     = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesCreateResponseFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesCreateResponseFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesCreateResponseFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesCreateResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesCreateResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesCreateResponseFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesCreateResponseFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1PurchasesInvoicesCreateResponseFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesCreateResponseFieldNotes                        = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesCreateResponseFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesCreateResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesCreateResponseFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesCreateResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesCreateResponseFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1PurchasesInvoicesCreateResponseFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1PurchasesInvoicesCreateResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1PurchasesInvoicesCreateResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+	postV1PurchasesInvoicesCreateResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type PostV1PurchasesInvoicesCreateResponse struct {
-	ID                   string                                             `json:"id" url:"id"`
-	PartnerID            string                                             `json:"partnerId" url:"partnerId"`
-	Type                 PostV1PurchasesInvoicesCreateResponseType          `json:"type" url:"type"`
-	Status               PostV1PurchasesInvoicesCreateResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1PurchasesInvoicesCreateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                             `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                             `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                            `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                            `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                             `json:"currency" url:"currency"`
-	NetTotal             string                                             `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                             `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                             `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                             `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                             `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1PurchasesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
+	ID                           string                                             `json:"id" url:"id"`
+	PartnerID                    string                                             `json:"partnerId" url:"partnerId"`
+	Type                         PostV1PurchasesInvoicesCreateResponseType          `json:"type" url:"type"`
+	Status                       PostV1PurchasesInvoicesCreateResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1PurchasesInvoicesCreateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                             `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                             `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                            `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                            `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                             `json:"currency" url:"currency"`
+	NetTotal                     string                                             `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                             `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                             `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                             `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                            `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                            `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                            `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                            `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                            `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                             `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1PurchasesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1980,6 +2080,41 @@ func (p *PostV1PurchasesInvoicesCreateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1PurchasesInvoicesCreateResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1PurchasesInvoicesCreateResponse) GetDocumentRef() *string {
@@ -2155,6 +2290,41 @@ func (p *PostV1PurchasesInvoicesCreateResponse) SetOperationTypeID(operationType
 func (p *PostV1PurchasesInvoicesCreateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesCreateResponseFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesCreateResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesCreateResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesCreateResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesCreateResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesCreateResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesCreateResponseFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
@@ -2705,55 +2875,65 @@ func (p *PostV1PurchasesInvoicesDeleteResponse) String() string {
 }
 
 var (
-	postV1PurchasesInvoicesGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesGetResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesGetResponseFieldType                 = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesGetResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesGetResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesGetResponseFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesGetResponseFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesGetResponseFieldDueDate              = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesGetResponseFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesGetResponseFieldCurrency             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesGetResponseFieldNetTotal             = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesGetResponseFieldVatTotal             = big.NewInt(1 << 11)
-	postV1PurchasesInvoicesGetResponseFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1PurchasesInvoicesGetResponseFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1PurchasesInvoicesGetResponseFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1PurchasesInvoicesGetResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1PurchasesInvoicesGetResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesGetResponseFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 21)
-	postV1PurchasesInvoicesGetResponseFieldLines                = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesGetResponseFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesGetResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesGetResponseFieldType                         = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesGetResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesGetResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesGetResponseFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesGetResponseFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesGetResponseFieldDueDate                      = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesGetResponseFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesGetResponseFieldCurrency                     = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesGetResponseFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesGetResponseFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesGetResponseFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesGetResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesGetResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesGetResponseFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesGetResponseFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1PurchasesInvoicesGetResponseFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesGetResponseFieldNotes                        = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesGetResponseFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesGetResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesGetResponseFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesGetResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesGetResponseFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1PurchasesInvoicesGetResponseFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1PurchasesInvoicesGetResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1PurchasesInvoicesGetResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+	postV1PurchasesInvoicesGetResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type PostV1PurchasesInvoicesGetResponse struct {
-	ID                   string                                          `json:"id" url:"id"`
-	PartnerID            string                                          `json:"partnerId" url:"partnerId"`
-	Type                 PostV1PurchasesInvoicesGetResponseType          `json:"type" url:"type"`
-	Status               PostV1PurchasesInvoicesGetResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1PurchasesInvoicesGetResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                          `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                          `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                         `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                         `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                          `json:"currency" url:"currency"`
-	NetTotal             string                                          `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                          `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                          `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                          `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                         `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                         `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                         `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                          `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                          `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1PurchasesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
+	ID                           string                                          `json:"id" url:"id"`
+	PartnerID                    string                                          `json:"partnerId" url:"partnerId"`
+	Type                         PostV1PurchasesInvoicesGetResponseType          `json:"type" url:"type"`
+	Status                       PostV1PurchasesInvoicesGetResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1PurchasesInvoicesGetResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                          `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                          `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                         `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                         `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                          `json:"currency" url:"currency"`
+	NetTotal                     string                                          `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                          `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                          `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                          `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                         `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                         `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                         `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                         `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                         `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                         `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                         `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                         `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                         `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                          `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1PurchasesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2893,6 +3073,41 @@ func (p *PostV1PurchasesInvoicesGetResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1PurchasesInvoicesGetResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1PurchasesInvoicesGetResponse) GetDocumentRef() *string {
@@ -3068,6 +3283,41 @@ func (p *PostV1PurchasesInvoicesGetResponse) SetOperationTypeID(operationTypeID 
 func (p *PostV1PurchasesInvoicesGetResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesGetResponseFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesGetResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesGetResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesGetResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesGetResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesGetResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesGetResponseFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
@@ -4120,53 +4370,63 @@ func (p *PostV1PurchasesInvoicesListResponse) String() string {
 }
 
 var (
-	postV1PurchasesInvoicesListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesListResponseRowsItemFieldPartnerID            = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesListResponseRowsItemFieldType                 = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesListResponseRowsItemFieldStatus               = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesListResponseRowsItemFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesListResponseRowsItemFieldDueDate              = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesListResponseRowsItemFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesListResponseRowsItemFieldCurrency             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesListResponseRowsItemFieldVatTotal             = big.NewInt(1 << 11)
-	postV1PurchasesInvoicesListResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1PurchasesInvoicesListResponseRowsItemFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1PurchasesInvoicesListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1PurchasesInvoicesListResponseRowsItemFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1PurchasesInvoicesListResponseRowsItemFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesListResponseRowsItemFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesListResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesListResponseRowsItemFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesListResponseRowsItemFieldType                         = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesListResponseRowsItemFieldStatus                       = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesListResponseRowsItemFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDueDate                      = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesListResponseRowsItemFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesListResponseRowsItemFieldCurrency                     = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesListResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesListResponseRowsItemFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesListResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesListResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesListResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesListResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesListResponseRowsItemFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1PurchasesInvoicesListResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesListResponseRowsItemFieldNotes                        = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesListResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1PurchasesInvoicesListResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1PurchasesInvoicesListResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1PurchasesInvoicesListResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 26)
 )
 
 type PostV1PurchasesInvoicesListResponseRowsItem struct {
-	ID                   string                                                   `json:"id" url:"id"`
-	PartnerID            string                                                   `json:"partnerId" url:"partnerId"`
-	Type                 PostV1PurchasesInvoicesListResponseRowsItemType          `json:"type" url:"type"`
-	Status               PostV1PurchasesInvoicesListResponseRowsItemStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1PurchasesInvoicesListResponseRowsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                                   `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                                   `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                                  `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                                  `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                                   `json:"currency" url:"currency"`
-	NetTotal             string                                                   `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                                   `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                                   `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                                   `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                                  `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                                   `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                                   `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                                   `json:"id" url:"id"`
+	PartnerID                    string                                                   `json:"partnerId" url:"partnerId"`
+	Type                         PostV1PurchasesInvoicesListResponseRowsItemType          `json:"type" url:"type"`
+	Status                       PostV1PurchasesInvoicesListResponseRowsItemStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1PurchasesInvoicesListResponseRowsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                                   `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                                   `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                                  `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                                  `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                                   `json:"currency" url:"currency"`
+	NetTotal                     string                                                   `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                                   `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                                   `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                                   `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                                  `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                                  `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                                  `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                                  `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                                  `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                                  `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                                   `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4306,6 +4566,41 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) GetDocumentRef() *string {
@@ -4474,6 +4769,41 @@ func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetOperationTypeID(operati
 func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesListResponseRowsItem) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesListResponseRowsItemFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
@@ -5009,55 +5339,65 @@ func (p PostV1PurchasesInvoicesMatchResponseStatus) Ptr() *PostV1PurchasesInvoic
 }
 
 var (
-	postV1PurchasesInvoicesRegisterResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesRegisterResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesRegisterResponseFieldType                 = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesRegisterResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesRegisterResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesRegisterResponseFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesRegisterResponseFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesRegisterResponseFieldDueDate              = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesRegisterResponseFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesRegisterResponseFieldCurrency             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesRegisterResponseFieldNetTotal             = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesRegisterResponseFieldVatTotal             = big.NewInt(1 << 11)
-	postV1PurchasesInvoicesRegisterResponseFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1PurchasesInvoicesRegisterResponseFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1PurchasesInvoicesRegisterResponseFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1PurchasesInvoicesRegisterResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1PurchasesInvoicesRegisterResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesRegisterResponseFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesRegisterResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesRegisterResponseFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt            = big.NewInt(1 << 21)
-	postV1PurchasesInvoicesRegisterResponseFieldLines                = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesRegisterResponseFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesRegisterResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesRegisterResponseFieldType                         = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesRegisterResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesRegisterResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesRegisterResponseFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesRegisterResponseFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesRegisterResponseFieldDueDate                      = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesRegisterResponseFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesRegisterResponseFieldCurrency                     = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesRegisterResponseFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesRegisterResponseFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesRegisterResponseFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesRegisterResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesRegisterResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesRegisterResponseFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesRegisterResponseFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1PurchasesInvoicesRegisterResponseFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesRegisterResponseFieldNotes                        = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesRegisterResponseFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesRegisterResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesRegisterResponseFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesRegisterResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesRegisterResponseFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1PurchasesInvoicesRegisterResponseFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1PurchasesInvoicesRegisterResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1PurchasesInvoicesRegisterResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+	postV1PurchasesInvoicesRegisterResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type PostV1PurchasesInvoicesRegisterResponse struct {
-	ID                   string                                               `json:"id" url:"id"`
-	PartnerID            string                                               `json:"partnerId" url:"partnerId"`
-	Type                 PostV1PurchasesInvoicesRegisterResponseType          `json:"type" url:"type"`
-	Status               PostV1PurchasesInvoicesRegisterResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1PurchasesInvoicesRegisterResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                               `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                               `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                              `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                               `json:"currency" url:"currency"`
-	NetTotal             string                                               `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                               `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                               `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                               `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                              `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1PurchasesInvoicesRegisterResponseLinesItem  `json:"lines" url:"lines"`
+	ID                           string                                               `json:"id" url:"id"`
+	PartnerID                    string                                               `json:"partnerId" url:"partnerId"`
+	Type                         PostV1PurchasesInvoicesRegisterResponseType          `json:"type" url:"type"`
+	Status                       PostV1PurchasesInvoicesRegisterResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1PurchasesInvoicesRegisterResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                               `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                               `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                              `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                               `json:"currency" url:"currency"`
+	NetTotal                     string                                               `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                               `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                               `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                               `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                              `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                              `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                              `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                              `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                              `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                              `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                               `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1PurchasesInvoicesRegisterResponseLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5197,6 +5537,41 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1PurchasesInvoicesRegisterResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1PurchasesInvoicesRegisterResponse) GetDocumentRef() *string {
@@ -5372,6 +5747,41 @@ func (p *PostV1PurchasesInvoicesRegisterResponse) SetOperationTypeID(operationTy
 func (p *PostV1PurchasesInvoicesRegisterResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesRegisterResponseFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesRegisterResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesRegisterResponseFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
@@ -6144,55 +6554,65 @@ func (p *PostV1PurchasesInvoicesUpdateRequestLinesItemQuantity) Accept(visitor P
 }
 
 var (
-	postV1PurchasesInvoicesUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PurchasesInvoicesUpdateResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1PurchasesInvoicesUpdateResponseFieldType                 = big.NewInt(1 << 2)
-	postV1PurchasesInvoicesUpdateResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PurchasesInvoicesUpdateResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1PurchasesInvoicesUpdateResponseFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1PurchasesInvoicesUpdateResponseFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1PurchasesInvoicesUpdateResponseFieldDueDate              = big.NewInt(1 << 7)
-	postV1PurchasesInvoicesUpdateResponseFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1PurchasesInvoicesUpdateResponseFieldCurrency             = big.NewInt(1 << 9)
-	postV1PurchasesInvoicesUpdateResponseFieldNetTotal             = big.NewInt(1 << 10)
-	postV1PurchasesInvoicesUpdateResponseFieldVatTotal             = big.NewInt(1 << 11)
-	postV1PurchasesInvoicesUpdateResponseFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1PurchasesInvoicesUpdateResponseFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1PurchasesInvoicesUpdateResponseFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1PurchasesInvoicesUpdateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1PurchasesInvoicesUpdateResponseFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1PurchasesInvoicesUpdateResponseFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1PurchasesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1PurchasesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 21)
-	postV1PurchasesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesUpdateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1PurchasesInvoicesUpdateResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1PurchasesInvoicesUpdateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1PurchasesInvoicesUpdateResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1PurchasesInvoicesUpdateResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1PurchasesInvoicesUpdateResponseFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1PurchasesInvoicesUpdateResponseFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1PurchasesInvoicesUpdateResponseFieldDueDate                      = big.NewInt(1 << 7)
+	postV1PurchasesInvoicesUpdateResponseFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1PurchasesInvoicesUpdateResponseFieldCurrency                     = big.NewInt(1 << 9)
+	postV1PurchasesInvoicesUpdateResponseFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1PurchasesInvoicesUpdateResponseFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1PurchasesInvoicesUpdateResponseFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1PurchasesInvoicesUpdateResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1PurchasesInvoicesUpdateResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1PurchasesInvoicesUpdateResponseFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1PurchasesInvoicesUpdateResponseFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1PurchasesInvoicesUpdateResponseFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1PurchasesInvoicesUpdateResponseFieldNotes                        = big.NewInt(1 << 18)
+	postV1PurchasesInvoicesUpdateResponseFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1PurchasesInvoicesUpdateResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1PurchasesInvoicesUpdateResponseFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1PurchasesInvoicesUpdateResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1PurchasesInvoicesUpdateResponseFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1PurchasesInvoicesUpdateResponseFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1PurchasesInvoicesUpdateResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1PurchasesInvoicesUpdateResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+	postV1PurchasesInvoicesUpdateResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type PostV1PurchasesInvoicesUpdateResponse struct {
-	ID                   string                                             `json:"id" url:"id"`
-	PartnerID            string                                             `json:"partnerId" url:"partnerId"`
-	Type                 PostV1PurchasesInvoicesUpdateResponseType          `json:"type" url:"type"`
-	Status               PostV1PurchasesInvoicesUpdateResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1PurchasesInvoicesUpdateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                             `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                             `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                            `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                            `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                             `json:"currency" url:"currency"`
-	NetTotal             string                                             `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                             `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                             `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                             `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                             `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                             `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1PurchasesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
+	ID                           string                                             `json:"id" url:"id"`
+	PartnerID                    string                                             `json:"partnerId" url:"partnerId"`
+	Type                         PostV1PurchasesInvoicesUpdateResponseType          `json:"type" url:"type"`
+	Status                       PostV1PurchasesInvoicesUpdateResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1PurchasesInvoicesUpdateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                             `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                             `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                            `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                            `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                             `json:"currency" url:"currency"`
+	NetTotal                     string                                             `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                             `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                             `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                             `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                            `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                            `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                            `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                            `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                            `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                            `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                            `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                            `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                             `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1PurchasesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6332,6 +6752,41 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1PurchasesInvoicesUpdateResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1PurchasesInvoicesUpdateResponse) GetDocumentRef() *string {
@@ -6507,6 +6962,41 @@ func (p *PostV1PurchasesInvoicesUpdateResponse) SetOperationTypeID(operationType
 func (p *PostV1PurchasesInvoicesUpdateResponse) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1PurchasesInvoicesUpdateResponseFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PurchasesInvoicesUpdateResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1PurchasesInvoicesUpdateResponseFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;

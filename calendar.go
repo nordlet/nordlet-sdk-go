@@ -10,6 +10,98 @@ import (
 )
 
 var (
+	postV1CalendarDownloadRequestFieldKey = big.NewInt(1 << 0)
+)
+
+type PostV1CalendarDownloadRequest struct {
+	Key string `json:"key" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CalendarDownloadRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadRequest) SetKey(key string) {
+	p.Key = key
+	p.require(postV1CalendarDownloadRequestFieldKey)
+}
+
+func (p *PostV1CalendarDownloadRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarDownloadRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CalendarDownloadRequest(body)
+	return nil
+}
+
+func (p *PostV1CalendarDownloadRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarDownloadRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1CalendarSubmitRequestFieldKey = big.NewInt(1 << 0)
+)
+
+type PostV1CalendarSubmitRequest struct {
+	Key string `json:"key" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1CalendarSubmitRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitRequest) SetKey(key string) {
+	p.Key = key
+	p.require(postV1CalendarSubmitRequestFieldKey)
+}
+
+func (p *PostV1CalendarSubmitRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarSubmitRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1CalendarSubmitRequest(body)
+	return nil
+}
+
+func (p *PostV1CalendarSubmitRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarSubmitRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1CalendarCreateRequestFieldTitle   = big.NewInt(1 << 0)
 	postV1CalendarCreateRequestFieldDueDate = big.NewInt(1 << 1)
 	postV1CalendarCreateRequestFieldNotes   = big.NewInt(1 << 2)
@@ -321,29 +413,37 @@ func (p *PostV1CalendarUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1CalendarCreateResponseFieldKey     = big.NewInt(1 << 0)
-	postV1CalendarCreateResponseFieldID      = big.NewInt(1 << 1)
-	postV1CalendarCreateResponseFieldKind    = big.NewInt(1 << 2)
-	postV1CalendarCreateResponseFieldRuleKey = big.NewInt(1 << 3)
-	postV1CalendarCreateResponseFieldPeriod  = big.NewInt(1 << 4)
-	postV1CalendarCreateResponseFieldTitle   = big.NewInt(1 << 5)
-	postV1CalendarCreateResponseFieldDueDate = big.NewInt(1 << 6)
-	postV1CalendarCreateResponseFieldNotes   = big.NewInt(1 << 7)
-	postV1CalendarCreateResponseFieldDone    = big.NewInt(1 << 8)
-	postV1CalendarCreateResponseFieldHref    = big.NewInt(1 << 9)
+	postV1CalendarCreateResponseFieldKey         = big.NewInt(1 << 0)
+	postV1CalendarCreateResponseFieldID          = big.NewInt(1 << 1)
+	postV1CalendarCreateResponseFieldKind        = big.NewInt(1 << 2)
+	postV1CalendarCreateResponseFieldRuleKey     = big.NewInt(1 << 3)
+	postV1CalendarCreateResponseFieldPeriod      = big.NewInt(1 << 4)
+	postV1CalendarCreateResponseFieldTitle       = big.NewInt(1 << 5)
+	postV1CalendarCreateResponseFieldDueDate     = big.NewInt(1 << 6)
+	postV1CalendarCreateResponseFieldNotes       = big.NewInt(1 << 7)
+	postV1CalendarCreateResponseFieldDone        = big.NewInt(1 << 8)
+	postV1CalendarCreateResponseFieldHref        = big.NewInt(1 << 9)
+	postV1CalendarCreateResponseFieldSubmission  = big.NewInt(1 << 10)
+	postV1CalendarCreateResponseFieldCanSubmit   = big.NewInt(1 << 11)
+	postV1CalendarCreateResponseFieldCanDownload = big.NewInt(1 << 12)
+	postV1CalendarCreateResponseFieldAutomated   = big.NewInt(1 << 13)
 )
 
 type PostV1CalendarCreateResponse struct {
-	Key     string                           `json:"key" url:"key"`
-	ID      *string                          `json:"id,omitempty" url:"id,omitempty"`
-	Kind    PostV1CalendarCreateResponseKind `json:"kind" url:"kind"`
-	RuleKey *string                          `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period  *string                          `json:"period,omitempty" url:"period,omitempty"`
-	Title   string                           `json:"title" url:"title"`
-	DueDate string                           `json:"dueDate" url:"dueDate"`
-	Notes   *string                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Done    bool                             `json:"done" url:"done"`
-	Href    *string                          `json:"href,omitempty" url:"href,omitempty"`
+	Key         string                                  `json:"key" url:"key"`
+	ID          *string                                 `json:"id,omitempty" url:"id,omitempty"`
+	Kind        PostV1CalendarCreateResponseKind        `json:"kind" url:"kind"`
+	RuleKey     *string                                 `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period      *string                                 `json:"period,omitempty" url:"period,omitempty"`
+	Title       string                                  `json:"title" url:"title"`
+	DueDate     string                                  `json:"dueDate" url:"dueDate"`
+	Notes       *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	Done        bool                                    `json:"done" url:"done"`
+	Href        *string                                 `json:"href,omitempty" url:"href,omitempty"`
+	Submission  *PostV1CalendarCreateResponseSubmission `json:"submission,omitempty" url:"submission,omitempty"`
+	CanSubmit   bool                                    `json:"canSubmit" url:"canSubmit"`
+	CanDownload bool                                    `json:"canDownload" url:"canDownload"`
+	Automated   bool                                    `json:"automated" url:"automated"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -420,6 +520,34 @@ func (p *PostV1CalendarCreateResponse) GetHref() *string {
 		return nil
 	}
 	return p.Href
+}
+
+func (p *PostV1CalendarCreateResponse) GetSubmission() *PostV1CalendarCreateResponseSubmission {
+	if p == nil {
+		return nil
+	}
+	return p.Submission
+}
+
+func (p *PostV1CalendarCreateResponse) GetCanSubmit() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanSubmit
+}
+
+func (p *PostV1CalendarCreateResponse) GetCanDownload() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanDownload
+}
+
+func (p *PostV1CalendarCreateResponse) GetAutomated() bool {
+	if p == nil {
+		return false
+	}
+	return p.Automated
 }
 
 func (p *PostV1CalendarCreateResponse) GetExtraProperties() map[string]interface{} {
@@ -506,6 +634,34 @@ func (p *PostV1CalendarCreateResponse) SetHref(href *string) {
 	p.require(postV1CalendarCreateResponseFieldHref)
 }
 
+// SetSubmission sets the Submission field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponse) SetSubmission(submission *PostV1CalendarCreateResponseSubmission) {
+	p.Submission = submission
+	p.require(postV1CalendarCreateResponseFieldSubmission)
+}
+
+// SetCanSubmit sets the CanSubmit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponse) SetCanSubmit(canSubmit bool) {
+	p.CanSubmit = canSubmit
+	p.require(postV1CalendarCreateResponseFieldCanSubmit)
+}
+
+// SetCanDownload sets the CanDownload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponse) SetCanDownload(canDownload bool) {
+	p.CanDownload = canDownload
+	p.require(postV1CalendarCreateResponseFieldCanDownload)
+}
+
+// SetAutomated sets the Automated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponse) SetAutomated(automated bool) {
+	p.Automated = automated
+	p.require(postV1CalendarCreateResponseFieldAutomated)
+}
+
 func (p *PostV1CalendarCreateResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CalendarCreateResponse
 	var value unmarshaler
@@ -567,6 +723,550 @@ func NewPostV1CalendarCreateResponseKindFromString(s string) (PostV1CalendarCrea
 }
 
 func (p PostV1CalendarCreateResponseKind) Ptr() *PostV1CalendarCreateResponseKind {
+	return &p
+}
+
+var (
+	postV1CalendarCreateResponseSubmissionFieldID                     = big.NewInt(1 << 0)
+	postV1CalendarCreateResponseSubmissionFieldObligation             = big.NewInt(1 << 1)
+	postV1CalendarCreateResponseSubmissionFieldPeriodYear             = big.NewInt(1 << 2)
+	postV1CalendarCreateResponseSubmissionFieldPeriodMonth            = big.NewInt(1 << 3)
+	postV1CalendarCreateResponseSubmissionFieldVariant                = big.NewInt(1 << 4)
+	postV1CalendarCreateResponseSubmissionFieldStatus                 = big.NewInt(1 << 5)
+	postV1CalendarCreateResponseSubmissionFieldFileName               = big.NewInt(1 << 6)
+	postV1CalendarCreateResponseSubmissionFieldFileID                 = big.NewInt(1 << 7)
+	postV1CalendarCreateResponseSubmissionFieldExternalRef            = big.NewInt(1 << 8)
+	postV1CalendarCreateResponseSubmissionFieldMessage                = big.NewInt(1 << 9)
+	postV1CalendarCreateResponseSubmissionFieldRuleKey                = big.NewInt(1 << 10)
+	postV1CalendarCreateResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
+	postV1CalendarCreateResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
+	postV1CalendarCreateResponseSubmissionFieldOrigin                 = big.NewInt(1 << 13)
+	postV1CalendarCreateResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 14)
+	postV1CalendarCreateResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 15)
+	postV1CalendarCreateResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 16)
+	postV1CalendarCreateResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 17)
+	postV1CalendarCreateResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 18)
+	postV1CalendarCreateResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 19)
+	postV1CalendarCreateResponseSubmissionFieldAttempts               = big.NewInt(1 << 20)
+	postV1CalendarCreateResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 21)
+	postV1CalendarCreateResponseSubmissionFieldSentSha256             = big.NewInt(1 << 22)
+	postV1CalendarCreateResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 23)
+	postV1CalendarCreateResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 24)
+	postV1CalendarCreateResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 25)
+	postV1CalendarCreateResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 26)
+	postV1CalendarCreateResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 27)
+)
+
+type PostV1CalendarCreateResponseSubmission struct {
+	ID                     string                                       `json:"id" url:"id"`
+	Obligation             string                                       `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                        `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                       `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                      `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 PostV1CalendarCreateResponseSubmissionStatus `json:"status" url:"status"`
+	FileName               string                                       `json:"fileName" url:"fileName"`
+	FileID                 *string                                      `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                      `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                      `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                      `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                      `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                      `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Origin                 string                                       `json:"origin" url:"origin"`
+	TransportSystem        *string                                      `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	SubmittedAt            *string                                      `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *string                                      `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *string                                      `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *string                                      `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *string                                      `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                        `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                      `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              string                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt              string                                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetObligation() string {
+	if p == nil {
+		return ""
+	}
+	return p.Obligation
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetStatus() PostV1CalendarCreateResponseSubmissionStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetFileID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileID
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetExternalRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalRef
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetRuleKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RuleKey
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetPeriod() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Period
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetDocumentKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentKey
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetOrigin() string {
+	if p == nil {
+		return ""
+	}
+	return p.Origin
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetTransportSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransportSystem
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetSubmittedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AcceptedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetRejectedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RejectedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetNextCheckAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCheckAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetAttempts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Attempts
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetDeliveryError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DeliveryError
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetSentSha256() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SentSha256
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetCertificateFingerprint() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateFingerprint
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetSubmittedByActorType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorType
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetSubmittedByActorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorID
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetID(id string) {
+	p.ID = id
+	p.require(postV1CalendarCreateResponseSubmissionFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetObligation(obligation string) {
+	p.Obligation = obligation
+	p.require(postV1CalendarCreateResponseSubmissionFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1CalendarCreateResponseSubmissionFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1CalendarCreateResponseSubmissionFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarCreateResponseSubmissionFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetStatus(status PostV1CalendarCreateResponseSubmissionStatus) {
+	p.Status = status
+	p.require(postV1CalendarCreateResponseSubmissionFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarCreateResponseSubmissionFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetFileID(fileID *string) {
+	p.FileID = fileID
+	p.require(postV1CalendarCreateResponseSubmissionFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetExternalRef(externalRef *string) {
+	p.ExternalRef = externalRef
+	p.require(postV1CalendarCreateResponseSubmissionFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1CalendarCreateResponseSubmissionFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetRuleKey(ruleKey *string) {
+	p.RuleKey = ruleKey
+	p.require(postV1CalendarCreateResponseSubmissionFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetPeriod(period *string) {
+	p.Period = period
+	p.require(postV1CalendarCreateResponseSubmissionFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetDocumentKey(documentKey *string) {
+	p.DocumentKey = documentKey
+	p.require(postV1CalendarCreateResponseSubmissionFieldDocumentKey)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetOrigin(origin string) {
+	p.Origin = origin
+	p.require(postV1CalendarCreateResponseSubmissionFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetTransportSystem(transportSystem *string) {
+	p.TransportSystem = transportSystem
+	p.require(postV1CalendarCreateResponseSubmissionFieldTransportSystem)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetSubmittedAt(submittedAt *string) {
+	p.SubmittedAt = submittedAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetAcceptedAt(acceptedAt *string) {
+	p.AcceptedAt = acceptedAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetRejectedAt(rejectedAt *string) {
+	p.RejectedAt = rejectedAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetNextCheckAt(nextCheckAt *string) {
+	p.NextCheckAt = nextCheckAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetAttempts(attempts int64) {
+	p.Attempts = attempts
+	p.require(postV1CalendarCreateResponseSubmissionFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetDeliveryError(deliveryError *string) {
+	p.DeliveryError = deliveryError
+	p.require(postV1CalendarCreateResponseSubmissionFieldDeliveryError)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetSentSha256(sentSha256 *string) {
+	p.SentSha256 = sentSha256
+	p.require(postV1CalendarCreateResponseSubmissionFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetCertificateFingerprint(certificateFingerprint *string) {
+	p.CertificateFingerprint = certificateFingerprint
+	p.require(postV1CalendarCreateResponseSubmissionFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetSubmittedByActorType(submittedByActorType *string) {
+	p.SubmittedByActorType = submittedByActorType
+	p.require(postV1CalendarCreateResponseSubmissionFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetSubmittedByActorID(submittedByActorID *string) {
+	p.SubmittedByActorID = submittedByActorID
+	p.require(postV1CalendarCreateResponseSubmissionFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarCreateResponseSubmission) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1CalendarCreateResponseSubmissionFieldUpdatedAt)
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarCreateResponseSubmission
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarCreateResponseSubmission(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarCreateResponseSubmission
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarCreateResponseSubmission) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CalendarCreateResponseSubmissionStatus string
+
+const (
+	PostV1CalendarCreateResponseSubmissionStatusGenerated PostV1CalendarCreateResponseSubmissionStatus = "generated"
+	PostV1CalendarCreateResponseSubmissionStatusSubmitted PostV1CalendarCreateResponseSubmissionStatus = "submitted"
+	PostV1CalendarCreateResponseSubmissionStatusAccepted  PostV1CalendarCreateResponseSubmissionStatus = "accepted"
+	PostV1CalendarCreateResponseSubmissionStatusRejected  PostV1CalendarCreateResponseSubmissionStatus = "rejected"
+)
+
+func NewPostV1CalendarCreateResponseSubmissionStatusFromString(s string) (PostV1CalendarCreateResponseSubmissionStatus, error) {
+	switch s {
+	case "generated":
+		return PostV1CalendarCreateResponseSubmissionStatusGenerated, nil
+	case "submitted":
+		return PostV1CalendarCreateResponseSubmissionStatusSubmitted, nil
+	case "accepted":
+		return PostV1CalendarCreateResponseSubmissionStatusAccepted, nil
+	case "rejected":
+		return PostV1CalendarCreateResponseSubmissionStatusRejected, nil
+	}
+	var t PostV1CalendarCreateResponseSubmissionStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CalendarCreateResponseSubmissionStatus) Ptr() *PostV1CalendarCreateResponseSubmissionStatus {
 	return &p
 }
 
@@ -655,29 +1355,201 @@ func (p *PostV1CalendarDeleteResponse) String() string {
 }
 
 var (
-	postV1CalendarGetResponseFieldKey     = big.NewInt(1 << 0)
-	postV1CalendarGetResponseFieldID      = big.NewInt(1 << 1)
-	postV1CalendarGetResponseFieldKind    = big.NewInt(1 << 2)
-	postV1CalendarGetResponseFieldRuleKey = big.NewInt(1 << 3)
-	postV1CalendarGetResponseFieldPeriod  = big.NewInt(1 << 4)
-	postV1CalendarGetResponseFieldTitle   = big.NewInt(1 << 5)
-	postV1CalendarGetResponseFieldDueDate = big.NewInt(1 << 6)
-	postV1CalendarGetResponseFieldNotes   = big.NewInt(1 << 7)
-	postV1CalendarGetResponseFieldDone    = big.NewInt(1 << 8)
-	postV1CalendarGetResponseFieldHref    = big.NewInt(1 << 9)
+	postV1CalendarDownloadResponseFieldKey      = big.NewInt(1 << 0)
+	postV1CalendarDownloadResponseFieldFileName = big.NewInt(1 << 1)
+	postV1CalendarDownloadResponseFieldMimeType = big.NewInt(1 << 2)
+	postV1CalendarDownloadResponseFieldVariant  = big.NewInt(1 << 3)
+	postV1CalendarDownloadResponseFieldContent  = big.NewInt(1 << 4)
+	postV1CalendarDownloadResponseFieldWarnings = big.NewInt(1 << 5)
+)
+
+type PostV1CalendarDownloadResponse struct {
+	Key      string   `json:"key" url:"key"`
+	FileName string   `json:"fileName" url:"fileName"`
+	MimeType string   `json:"mimeType" url:"mimeType"`
+	Variant  *string  `json:"variant,omitempty" url:"variant,omitempty"`
+	Content  string   `json:"content" url:"content"`
+	Warnings []string `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarDownloadResponse) GetKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.Key
+}
+
+func (p *PostV1CalendarDownloadResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarDownloadResponse) GetMimeType() string {
+	if p == nil {
+		return ""
+	}
+	return p.MimeType
+}
+
+func (p *PostV1CalendarDownloadResponse) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarDownloadResponse) GetContent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Content
+}
+
+func (p *PostV1CalendarDownloadResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1CalendarDownloadResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarDownloadResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetKey(key string) {
+	p.Key = key
+	p.require(postV1CalendarDownloadResponseFieldKey)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarDownloadResponseFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetMimeType(mimeType string) {
+	p.MimeType = mimeType
+	p.require(postV1CalendarDownloadResponseFieldMimeType)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarDownloadResponseFieldVariant)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetContent(content string) {
+	p.Content = content
+	p.require(postV1CalendarDownloadResponseFieldContent)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarDownloadResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1CalendarDownloadResponseFieldWarnings)
+}
+
+func (p *PostV1CalendarDownloadResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarDownloadResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarDownloadResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarDownloadResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarDownloadResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarDownloadResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1CalendarGetResponseFieldKey         = big.NewInt(1 << 0)
+	postV1CalendarGetResponseFieldID          = big.NewInt(1 << 1)
+	postV1CalendarGetResponseFieldKind        = big.NewInt(1 << 2)
+	postV1CalendarGetResponseFieldRuleKey     = big.NewInt(1 << 3)
+	postV1CalendarGetResponseFieldPeriod      = big.NewInt(1 << 4)
+	postV1CalendarGetResponseFieldTitle       = big.NewInt(1 << 5)
+	postV1CalendarGetResponseFieldDueDate     = big.NewInt(1 << 6)
+	postV1CalendarGetResponseFieldNotes       = big.NewInt(1 << 7)
+	postV1CalendarGetResponseFieldDone        = big.NewInt(1 << 8)
+	postV1CalendarGetResponseFieldHref        = big.NewInt(1 << 9)
+	postV1CalendarGetResponseFieldSubmission  = big.NewInt(1 << 10)
+	postV1CalendarGetResponseFieldCanSubmit   = big.NewInt(1 << 11)
+	postV1CalendarGetResponseFieldCanDownload = big.NewInt(1 << 12)
+	postV1CalendarGetResponseFieldAutomated   = big.NewInt(1 << 13)
 )
 
 type PostV1CalendarGetResponse struct {
-	Key     string                        `json:"key" url:"key"`
-	ID      *string                       `json:"id,omitempty" url:"id,omitempty"`
-	Kind    PostV1CalendarGetResponseKind `json:"kind" url:"kind"`
-	RuleKey *string                       `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period  *string                       `json:"period,omitempty" url:"period,omitempty"`
-	Title   string                        `json:"title" url:"title"`
-	DueDate string                        `json:"dueDate" url:"dueDate"`
-	Notes   *string                       `json:"notes,omitempty" url:"notes,omitempty"`
-	Done    bool                          `json:"done" url:"done"`
-	Href    *string                       `json:"href,omitempty" url:"href,omitempty"`
+	Key         string                               `json:"key" url:"key"`
+	ID          *string                              `json:"id,omitempty" url:"id,omitempty"`
+	Kind        PostV1CalendarGetResponseKind        `json:"kind" url:"kind"`
+	RuleKey     *string                              `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period      *string                              `json:"period,omitempty" url:"period,omitempty"`
+	Title       string                               `json:"title" url:"title"`
+	DueDate     string                               `json:"dueDate" url:"dueDate"`
+	Notes       *string                              `json:"notes,omitempty" url:"notes,omitempty"`
+	Done        bool                                 `json:"done" url:"done"`
+	Href        *string                              `json:"href,omitempty" url:"href,omitempty"`
+	Submission  *PostV1CalendarGetResponseSubmission `json:"submission,omitempty" url:"submission,omitempty"`
+	CanSubmit   bool                                 `json:"canSubmit" url:"canSubmit"`
+	CanDownload bool                                 `json:"canDownload" url:"canDownload"`
+	Automated   bool                                 `json:"automated" url:"automated"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -754,6 +1626,34 @@ func (p *PostV1CalendarGetResponse) GetHref() *string {
 		return nil
 	}
 	return p.Href
+}
+
+func (p *PostV1CalendarGetResponse) GetSubmission() *PostV1CalendarGetResponseSubmission {
+	if p == nil {
+		return nil
+	}
+	return p.Submission
+}
+
+func (p *PostV1CalendarGetResponse) GetCanSubmit() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanSubmit
+}
+
+func (p *PostV1CalendarGetResponse) GetCanDownload() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanDownload
+}
+
+func (p *PostV1CalendarGetResponse) GetAutomated() bool {
+	if p == nil {
+		return false
+	}
+	return p.Automated
 }
 
 func (p *PostV1CalendarGetResponse) GetExtraProperties() map[string]interface{} {
@@ -840,6 +1740,34 @@ func (p *PostV1CalendarGetResponse) SetHref(href *string) {
 	p.require(postV1CalendarGetResponseFieldHref)
 }
 
+// SetSubmission sets the Submission field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponse) SetSubmission(submission *PostV1CalendarGetResponseSubmission) {
+	p.Submission = submission
+	p.require(postV1CalendarGetResponseFieldSubmission)
+}
+
+// SetCanSubmit sets the CanSubmit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponse) SetCanSubmit(canSubmit bool) {
+	p.CanSubmit = canSubmit
+	p.require(postV1CalendarGetResponseFieldCanSubmit)
+}
+
+// SetCanDownload sets the CanDownload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponse) SetCanDownload(canDownload bool) {
+	p.CanDownload = canDownload
+	p.require(postV1CalendarGetResponseFieldCanDownload)
+}
+
+// SetAutomated sets the Automated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponse) SetAutomated(automated bool) {
+	p.Automated = automated
+	p.require(postV1CalendarGetResponseFieldAutomated)
+}
+
 func (p *PostV1CalendarGetResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CalendarGetResponse
 	var value unmarshaler
@@ -901,6 +1829,550 @@ func NewPostV1CalendarGetResponseKindFromString(s string) (PostV1CalendarGetResp
 }
 
 func (p PostV1CalendarGetResponseKind) Ptr() *PostV1CalendarGetResponseKind {
+	return &p
+}
+
+var (
+	postV1CalendarGetResponseSubmissionFieldID                     = big.NewInt(1 << 0)
+	postV1CalendarGetResponseSubmissionFieldObligation             = big.NewInt(1 << 1)
+	postV1CalendarGetResponseSubmissionFieldPeriodYear             = big.NewInt(1 << 2)
+	postV1CalendarGetResponseSubmissionFieldPeriodMonth            = big.NewInt(1 << 3)
+	postV1CalendarGetResponseSubmissionFieldVariant                = big.NewInt(1 << 4)
+	postV1CalendarGetResponseSubmissionFieldStatus                 = big.NewInt(1 << 5)
+	postV1CalendarGetResponseSubmissionFieldFileName               = big.NewInt(1 << 6)
+	postV1CalendarGetResponseSubmissionFieldFileID                 = big.NewInt(1 << 7)
+	postV1CalendarGetResponseSubmissionFieldExternalRef            = big.NewInt(1 << 8)
+	postV1CalendarGetResponseSubmissionFieldMessage                = big.NewInt(1 << 9)
+	postV1CalendarGetResponseSubmissionFieldRuleKey                = big.NewInt(1 << 10)
+	postV1CalendarGetResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
+	postV1CalendarGetResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
+	postV1CalendarGetResponseSubmissionFieldOrigin                 = big.NewInt(1 << 13)
+	postV1CalendarGetResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 14)
+	postV1CalendarGetResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 15)
+	postV1CalendarGetResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 16)
+	postV1CalendarGetResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 17)
+	postV1CalendarGetResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 18)
+	postV1CalendarGetResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 19)
+	postV1CalendarGetResponseSubmissionFieldAttempts               = big.NewInt(1 << 20)
+	postV1CalendarGetResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 21)
+	postV1CalendarGetResponseSubmissionFieldSentSha256             = big.NewInt(1 << 22)
+	postV1CalendarGetResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 23)
+	postV1CalendarGetResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 24)
+	postV1CalendarGetResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 25)
+	postV1CalendarGetResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 26)
+	postV1CalendarGetResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 27)
+)
+
+type PostV1CalendarGetResponseSubmission struct {
+	ID                     string                                    `json:"id" url:"id"`
+	Obligation             string                                    `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                     `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                    `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                   `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 PostV1CalendarGetResponseSubmissionStatus `json:"status" url:"status"`
+	FileName               string                                    `json:"fileName" url:"fileName"`
+	FileID                 *string                                   `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                   `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                   `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                   `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                   `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                   `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Origin                 string                                    `json:"origin" url:"origin"`
+	TransportSystem        *string                                   `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	SubmittedAt            *string                                   `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *string                                   `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *string                                   `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *string                                   `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *string                                   `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                     `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                   `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	SentSha256             *string                                   `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                   `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                   `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                   `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              string                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt              string                                    `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetObligation() string {
+	if p == nil {
+		return ""
+	}
+	return p.Obligation
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetStatus() PostV1CalendarGetResponseSubmissionStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetFileID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileID
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetExternalRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalRef
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetRuleKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RuleKey
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetPeriod() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Period
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetDocumentKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentKey
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetOrigin() string {
+	if p == nil {
+		return ""
+	}
+	return p.Origin
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetTransportSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransportSystem
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetSubmittedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AcceptedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetRejectedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RejectedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetNextCheckAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCheckAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetAttempts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Attempts
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetDeliveryError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DeliveryError
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetSentSha256() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SentSha256
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetCertificateFingerprint() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateFingerprint
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetSubmittedByActorType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorType
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetSubmittedByActorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorID
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1CalendarGetResponseSubmission) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarGetResponseSubmission) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetID(id string) {
+	p.ID = id
+	p.require(postV1CalendarGetResponseSubmissionFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetObligation(obligation string) {
+	p.Obligation = obligation
+	p.require(postV1CalendarGetResponseSubmissionFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1CalendarGetResponseSubmissionFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1CalendarGetResponseSubmissionFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarGetResponseSubmissionFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetStatus(status PostV1CalendarGetResponseSubmissionStatus) {
+	p.Status = status
+	p.require(postV1CalendarGetResponseSubmissionFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarGetResponseSubmissionFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetFileID(fileID *string) {
+	p.FileID = fileID
+	p.require(postV1CalendarGetResponseSubmissionFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetExternalRef(externalRef *string) {
+	p.ExternalRef = externalRef
+	p.require(postV1CalendarGetResponseSubmissionFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1CalendarGetResponseSubmissionFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetRuleKey(ruleKey *string) {
+	p.RuleKey = ruleKey
+	p.require(postV1CalendarGetResponseSubmissionFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetPeriod(period *string) {
+	p.Period = period
+	p.require(postV1CalendarGetResponseSubmissionFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetDocumentKey(documentKey *string) {
+	p.DocumentKey = documentKey
+	p.require(postV1CalendarGetResponseSubmissionFieldDocumentKey)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetOrigin(origin string) {
+	p.Origin = origin
+	p.require(postV1CalendarGetResponseSubmissionFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetTransportSystem(transportSystem *string) {
+	p.TransportSystem = transportSystem
+	p.require(postV1CalendarGetResponseSubmissionFieldTransportSystem)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetSubmittedAt(submittedAt *string) {
+	p.SubmittedAt = submittedAt
+	p.require(postV1CalendarGetResponseSubmissionFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetAcceptedAt(acceptedAt *string) {
+	p.AcceptedAt = acceptedAt
+	p.require(postV1CalendarGetResponseSubmissionFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetRejectedAt(rejectedAt *string) {
+	p.RejectedAt = rejectedAt
+	p.require(postV1CalendarGetResponseSubmissionFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1CalendarGetResponseSubmissionFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetNextCheckAt(nextCheckAt *string) {
+	p.NextCheckAt = nextCheckAt
+	p.require(postV1CalendarGetResponseSubmissionFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetAttempts(attempts int64) {
+	p.Attempts = attempts
+	p.require(postV1CalendarGetResponseSubmissionFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetDeliveryError(deliveryError *string) {
+	p.DeliveryError = deliveryError
+	p.require(postV1CalendarGetResponseSubmissionFieldDeliveryError)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetSentSha256(sentSha256 *string) {
+	p.SentSha256 = sentSha256
+	p.require(postV1CalendarGetResponseSubmissionFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetCertificateFingerprint(certificateFingerprint *string) {
+	p.CertificateFingerprint = certificateFingerprint
+	p.require(postV1CalendarGetResponseSubmissionFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetSubmittedByActorType(submittedByActorType *string) {
+	p.SubmittedByActorType = submittedByActorType
+	p.require(postV1CalendarGetResponseSubmissionFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetSubmittedByActorID(submittedByActorID *string) {
+	p.SubmittedByActorID = submittedByActorID
+	p.require(postV1CalendarGetResponseSubmissionFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CalendarGetResponseSubmissionFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarGetResponseSubmission) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1CalendarGetResponseSubmissionFieldUpdatedAt)
+}
+
+func (p *PostV1CalendarGetResponseSubmission) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarGetResponseSubmission
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarGetResponseSubmission(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarGetResponseSubmission) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarGetResponseSubmission
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarGetResponseSubmission) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CalendarGetResponseSubmissionStatus string
+
+const (
+	PostV1CalendarGetResponseSubmissionStatusGenerated PostV1CalendarGetResponseSubmissionStatus = "generated"
+	PostV1CalendarGetResponseSubmissionStatusSubmitted PostV1CalendarGetResponseSubmissionStatus = "submitted"
+	PostV1CalendarGetResponseSubmissionStatusAccepted  PostV1CalendarGetResponseSubmissionStatus = "accepted"
+	PostV1CalendarGetResponseSubmissionStatusRejected  PostV1CalendarGetResponseSubmissionStatus = "rejected"
+)
+
+func NewPostV1CalendarGetResponseSubmissionStatusFromString(s string) (PostV1CalendarGetResponseSubmissionStatus, error) {
+	switch s {
+	case "generated":
+		return PostV1CalendarGetResponseSubmissionStatusGenerated, nil
+	case "submitted":
+		return PostV1CalendarGetResponseSubmissionStatusSubmitted, nil
+	case "accepted":
+		return PostV1CalendarGetResponseSubmissionStatusAccepted, nil
+	case "rejected":
+		return PostV1CalendarGetResponseSubmissionStatusRejected, nil
+	}
+	var t PostV1CalendarGetResponseSubmissionStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CalendarGetResponseSubmissionStatus) Ptr() *PostV1CalendarGetResponseSubmissionStatus {
 	return &p
 }
 
@@ -989,29 +2461,37 @@ func (p *PostV1CalendarListResponse) String() string {
 }
 
 var (
-	postV1CalendarListResponseRowsItemFieldKey     = big.NewInt(1 << 0)
-	postV1CalendarListResponseRowsItemFieldID      = big.NewInt(1 << 1)
-	postV1CalendarListResponseRowsItemFieldKind    = big.NewInt(1 << 2)
-	postV1CalendarListResponseRowsItemFieldRuleKey = big.NewInt(1 << 3)
-	postV1CalendarListResponseRowsItemFieldPeriod  = big.NewInt(1 << 4)
-	postV1CalendarListResponseRowsItemFieldTitle   = big.NewInt(1 << 5)
-	postV1CalendarListResponseRowsItemFieldDueDate = big.NewInt(1 << 6)
-	postV1CalendarListResponseRowsItemFieldNotes   = big.NewInt(1 << 7)
-	postV1CalendarListResponseRowsItemFieldDone    = big.NewInt(1 << 8)
-	postV1CalendarListResponseRowsItemFieldHref    = big.NewInt(1 << 9)
+	postV1CalendarListResponseRowsItemFieldKey         = big.NewInt(1 << 0)
+	postV1CalendarListResponseRowsItemFieldID          = big.NewInt(1 << 1)
+	postV1CalendarListResponseRowsItemFieldKind        = big.NewInt(1 << 2)
+	postV1CalendarListResponseRowsItemFieldRuleKey     = big.NewInt(1 << 3)
+	postV1CalendarListResponseRowsItemFieldPeriod      = big.NewInt(1 << 4)
+	postV1CalendarListResponseRowsItemFieldTitle       = big.NewInt(1 << 5)
+	postV1CalendarListResponseRowsItemFieldDueDate     = big.NewInt(1 << 6)
+	postV1CalendarListResponseRowsItemFieldNotes       = big.NewInt(1 << 7)
+	postV1CalendarListResponseRowsItemFieldDone        = big.NewInt(1 << 8)
+	postV1CalendarListResponseRowsItemFieldHref        = big.NewInt(1 << 9)
+	postV1CalendarListResponseRowsItemFieldSubmission  = big.NewInt(1 << 10)
+	postV1CalendarListResponseRowsItemFieldCanSubmit   = big.NewInt(1 << 11)
+	postV1CalendarListResponseRowsItemFieldCanDownload = big.NewInt(1 << 12)
+	postV1CalendarListResponseRowsItemFieldAutomated   = big.NewInt(1 << 13)
 )
 
 type PostV1CalendarListResponseRowsItem struct {
-	Key     string                                 `json:"key" url:"key"`
-	ID      *string                                `json:"id,omitempty" url:"id,omitempty"`
-	Kind    PostV1CalendarListResponseRowsItemKind `json:"kind" url:"kind"`
-	RuleKey *string                                `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period  *string                                `json:"period,omitempty" url:"period,omitempty"`
-	Title   string                                 `json:"title" url:"title"`
-	DueDate string                                 `json:"dueDate" url:"dueDate"`
-	Notes   *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	Done    bool                                   `json:"done" url:"done"`
-	Href    *string                                `json:"href,omitempty" url:"href,omitempty"`
+	Key         string                                        `json:"key" url:"key"`
+	ID          *string                                       `json:"id,omitempty" url:"id,omitempty"`
+	Kind        PostV1CalendarListResponseRowsItemKind        `json:"kind" url:"kind"`
+	RuleKey     *string                                       `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period      *string                                       `json:"period,omitempty" url:"period,omitempty"`
+	Title       string                                        `json:"title" url:"title"`
+	DueDate     string                                        `json:"dueDate" url:"dueDate"`
+	Notes       *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	Done        bool                                          `json:"done" url:"done"`
+	Href        *string                                       `json:"href,omitempty" url:"href,omitempty"`
+	Submission  *PostV1CalendarListResponseRowsItemSubmission `json:"submission,omitempty" url:"submission,omitempty"`
+	CanSubmit   bool                                          `json:"canSubmit" url:"canSubmit"`
+	CanDownload bool                                          `json:"canDownload" url:"canDownload"`
+	Automated   bool                                          `json:"automated" url:"automated"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1088,6 +2568,34 @@ func (p *PostV1CalendarListResponseRowsItem) GetHref() *string {
 		return nil
 	}
 	return p.Href
+}
+
+func (p *PostV1CalendarListResponseRowsItem) GetSubmission() *PostV1CalendarListResponseRowsItemSubmission {
+	if p == nil {
+		return nil
+	}
+	return p.Submission
+}
+
+func (p *PostV1CalendarListResponseRowsItem) GetCanSubmit() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanSubmit
+}
+
+func (p *PostV1CalendarListResponseRowsItem) GetCanDownload() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanDownload
+}
+
+func (p *PostV1CalendarListResponseRowsItem) GetAutomated() bool {
+	if p == nil {
+		return false
+	}
+	return p.Automated
 }
 
 func (p *PostV1CalendarListResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -1174,6 +2682,34 @@ func (p *PostV1CalendarListResponseRowsItem) SetHref(href *string) {
 	p.require(postV1CalendarListResponseRowsItemFieldHref)
 }
 
+// SetSubmission sets the Submission field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItem) SetSubmission(submission *PostV1CalendarListResponseRowsItemSubmission) {
+	p.Submission = submission
+	p.require(postV1CalendarListResponseRowsItemFieldSubmission)
+}
+
+// SetCanSubmit sets the CanSubmit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItem) SetCanSubmit(canSubmit bool) {
+	p.CanSubmit = canSubmit
+	p.require(postV1CalendarListResponseRowsItemFieldCanSubmit)
+}
+
+// SetCanDownload sets the CanDownload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItem) SetCanDownload(canDownload bool) {
+	p.CanDownload = canDownload
+	p.require(postV1CalendarListResponseRowsItemFieldCanDownload)
+}
+
+// SetAutomated sets the Automated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItem) SetAutomated(automated bool) {
+	p.Automated = automated
+	p.require(postV1CalendarListResponseRowsItemFieldAutomated)
+}
+
 func (p *PostV1CalendarListResponseRowsItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CalendarListResponseRowsItem
 	var value unmarshaler
@@ -1239,29 +2775,1125 @@ func (p PostV1CalendarListResponseRowsItemKind) Ptr() *PostV1CalendarListRespons
 }
 
 var (
-	postV1CalendarUpdateResponseFieldKey     = big.NewInt(1 << 0)
-	postV1CalendarUpdateResponseFieldID      = big.NewInt(1 << 1)
-	postV1CalendarUpdateResponseFieldKind    = big.NewInt(1 << 2)
-	postV1CalendarUpdateResponseFieldRuleKey = big.NewInt(1 << 3)
-	postV1CalendarUpdateResponseFieldPeriod  = big.NewInt(1 << 4)
-	postV1CalendarUpdateResponseFieldTitle   = big.NewInt(1 << 5)
-	postV1CalendarUpdateResponseFieldDueDate = big.NewInt(1 << 6)
-	postV1CalendarUpdateResponseFieldNotes   = big.NewInt(1 << 7)
-	postV1CalendarUpdateResponseFieldDone    = big.NewInt(1 << 8)
-	postV1CalendarUpdateResponseFieldHref    = big.NewInt(1 << 9)
+	postV1CalendarListResponseRowsItemSubmissionFieldID                     = big.NewInt(1 << 0)
+	postV1CalendarListResponseRowsItemSubmissionFieldObligation             = big.NewInt(1 << 1)
+	postV1CalendarListResponseRowsItemSubmissionFieldPeriodYear             = big.NewInt(1 << 2)
+	postV1CalendarListResponseRowsItemSubmissionFieldPeriodMonth            = big.NewInt(1 << 3)
+	postV1CalendarListResponseRowsItemSubmissionFieldVariant                = big.NewInt(1 << 4)
+	postV1CalendarListResponseRowsItemSubmissionFieldStatus                 = big.NewInt(1 << 5)
+	postV1CalendarListResponseRowsItemSubmissionFieldFileName               = big.NewInt(1 << 6)
+	postV1CalendarListResponseRowsItemSubmissionFieldFileID                 = big.NewInt(1 << 7)
+	postV1CalendarListResponseRowsItemSubmissionFieldExternalRef            = big.NewInt(1 << 8)
+	postV1CalendarListResponseRowsItemSubmissionFieldMessage                = big.NewInt(1 << 9)
+	postV1CalendarListResponseRowsItemSubmissionFieldRuleKey                = big.NewInt(1 << 10)
+	postV1CalendarListResponseRowsItemSubmissionFieldPeriod                 = big.NewInt(1 << 11)
+	postV1CalendarListResponseRowsItemSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
+	postV1CalendarListResponseRowsItemSubmissionFieldOrigin                 = big.NewInt(1 << 13)
+	postV1CalendarListResponseRowsItemSubmissionFieldTransportSystem        = big.NewInt(1 << 14)
+	postV1CalendarListResponseRowsItemSubmissionFieldSubmittedAt            = big.NewInt(1 << 15)
+	postV1CalendarListResponseRowsItemSubmissionFieldAcceptedAt             = big.NewInt(1 << 16)
+	postV1CalendarListResponseRowsItemSubmissionFieldRejectedAt             = big.NewInt(1 << 17)
+	postV1CalendarListResponseRowsItemSubmissionFieldCheckedAt              = big.NewInt(1 << 18)
+	postV1CalendarListResponseRowsItemSubmissionFieldNextCheckAt            = big.NewInt(1 << 19)
+	postV1CalendarListResponseRowsItemSubmissionFieldAttempts               = big.NewInt(1 << 20)
+	postV1CalendarListResponseRowsItemSubmissionFieldDeliveryError          = big.NewInt(1 << 21)
+	postV1CalendarListResponseRowsItemSubmissionFieldSentSha256             = big.NewInt(1 << 22)
+	postV1CalendarListResponseRowsItemSubmissionFieldCertificateFingerprint = big.NewInt(1 << 23)
+	postV1CalendarListResponseRowsItemSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 24)
+	postV1CalendarListResponseRowsItemSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 25)
+	postV1CalendarListResponseRowsItemSubmissionFieldCreatedAt              = big.NewInt(1 << 26)
+	postV1CalendarListResponseRowsItemSubmissionFieldUpdatedAt              = big.NewInt(1 << 27)
+)
+
+type PostV1CalendarListResponseRowsItemSubmission struct {
+	ID                     string                                             `json:"id" url:"id"`
+	Obligation             string                                             `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                              `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                            `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 PostV1CalendarListResponseRowsItemSubmissionStatus `json:"status" url:"status"`
+	FileName               string                                             `json:"fileName" url:"fileName"`
+	FileID                 *string                                            `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                            `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                            `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Origin                 string                                             `json:"origin" url:"origin"`
+	TransportSystem        *string                                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	SubmittedAt            *string                                            `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *string                                            `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *string                                            `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *string                                            `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *string                                            `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                              `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              string                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt              string                                             `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetObligation() string {
+	if p == nil {
+		return ""
+	}
+	return p.Obligation
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetStatus() PostV1CalendarListResponseRowsItemSubmissionStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetFileID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileID
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetExternalRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalRef
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetRuleKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RuleKey
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetPeriod() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Period
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetDocumentKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentKey
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetOrigin() string {
+	if p == nil {
+		return ""
+	}
+	return p.Origin
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetTransportSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransportSystem
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetSubmittedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AcceptedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetRejectedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RejectedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetNextCheckAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCheckAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetAttempts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Attempts
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetDeliveryError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DeliveryError
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetSentSha256() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SentSha256
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetCertificateFingerprint() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateFingerprint
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetSubmittedByActorType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorType
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetSubmittedByActorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorID
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetID(id string) {
+	p.ID = id
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetObligation(obligation string) {
+	p.Obligation = obligation
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetStatus(status PostV1CalendarListResponseRowsItemSubmissionStatus) {
+	p.Status = status
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetFileID(fileID *string) {
+	p.FileID = fileID
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetExternalRef(externalRef *string) {
+	p.ExternalRef = externalRef
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetRuleKey(ruleKey *string) {
+	p.RuleKey = ruleKey
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetPeriod(period *string) {
+	p.Period = period
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetDocumentKey(documentKey *string) {
+	p.DocumentKey = documentKey
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldDocumentKey)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetOrigin(origin string) {
+	p.Origin = origin
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetTransportSystem(transportSystem *string) {
+	p.TransportSystem = transportSystem
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldTransportSystem)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetSubmittedAt(submittedAt *string) {
+	p.SubmittedAt = submittedAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetAcceptedAt(acceptedAt *string) {
+	p.AcceptedAt = acceptedAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetRejectedAt(rejectedAt *string) {
+	p.RejectedAt = rejectedAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetNextCheckAt(nextCheckAt *string) {
+	p.NextCheckAt = nextCheckAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetAttempts(attempts int64) {
+	p.Attempts = attempts
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetDeliveryError(deliveryError *string) {
+	p.DeliveryError = deliveryError
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldDeliveryError)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetSentSha256(sentSha256 *string) {
+	p.SentSha256 = sentSha256
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetCertificateFingerprint(certificateFingerprint *string) {
+	p.CertificateFingerprint = certificateFingerprint
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetSubmittedByActorType(submittedByActorType *string) {
+	p.SubmittedByActorType = submittedByActorType
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetSubmittedByActorID(submittedByActorID *string) {
+	p.SubmittedByActorID = submittedByActorID
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarListResponseRowsItemSubmission) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1CalendarListResponseRowsItemSubmissionFieldUpdatedAt)
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarListResponseRowsItemSubmission
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarListResponseRowsItemSubmission(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarListResponseRowsItemSubmission
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarListResponseRowsItemSubmission) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CalendarListResponseRowsItemSubmissionStatus string
+
+const (
+	PostV1CalendarListResponseRowsItemSubmissionStatusGenerated PostV1CalendarListResponseRowsItemSubmissionStatus = "generated"
+	PostV1CalendarListResponseRowsItemSubmissionStatusSubmitted PostV1CalendarListResponseRowsItemSubmissionStatus = "submitted"
+	PostV1CalendarListResponseRowsItemSubmissionStatusAccepted  PostV1CalendarListResponseRowsItemSubmissionStatus = "accepted"
+	PostV1CalendarListResponseRowsItemSubmissionStatusRejected  PostV1CalendarListResponseRowsItemSubmissionStatus = "rejected"
+)
+
+func NewPostV1CalendarListResponseRowsItemSubmissionStatusFromString(s string) (PostV1CalendarListResponseRowsItemSubmissionStatus, error) {
+	switch s {
+	case "generated":
+		return PostV1CalendarListResponseRowsItemSubmissionStatusGenerated, nil
+	case "submitted":
+		return PostV1CalendarListResponseRowsItemSubmissionStatusSubmitted, nil
+	case "accepted":
+		return PostV1CalendarListResponseRowsItemSubmissionStatusAccepted, nil
+	case "rejected":
+		return PostV1CalendarListResponseRowsItemSubmissionStatusRejected, nil
+	}
+	var t PostV1CalendarListResponseRowsItemSubmissionStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CalendarListResponseRowsItemSubmissionStatus) Ptr() *PostV1CalendarListResponseRowsItemSubmissionStatus {
+	return &p
+}
+
+var (
+	postV1CalendarSubmitResponseFieldID                     = big.NewInt(1 << 0)
+	postV1CalendarSubmitResponseFieldObligation             = big.NewInt(1 << 1)
+	postV1CalendarSubmitResponseFieldPeriodYear             = big.NewInt(1 << 2)
+	postV1CalendarSubmitResponseFieldPeriodMonth            = big.NewInt(1 << 3)
+	postV1CalendarSubmitResponseFieldVariant                = big.NewInt(1 << 4)
+	postV1CalendarSubmitResponseFieldStatus                 = big.NewInt(1 << 5)
+	postV1CalendarSubmitResponseFieldFileName               = big.NewInt(1 << 6)
+	postV1CalendarSubmitResponseFieldFileID                 = big.NewInt(1 << 7)
+	postV1CalendarSubmitResponseFieldExternalRef            = big.NewInt(1 << 8)
+	postV1CalendarSubmitResponseFieldMessage                = big.NewInt(1 << 9)
+	postV1CalendarSubmitResponseFieldRuleKey                = big.NewInt(1 << 10)
+	postV1CalendarSubmitResponseFieldPeriod                 = big.NewInt(1 << 11)
+	postV1CalendarSubmitResponseFieldDocumentKey            = big.NewInt(1 << 12)
+	postV1CalendarSubmitResponseFieldOrigin                 = big.NewInt(1 << 13)
+	postV1CalendarSubmitResponseFieldTransportSystem        = big.NewInt(1 << 14)
+	postV1CalendarSubmitResponseFieldSubmittedAt            = big.NewInt(1 << 15)
+	postV1CalendarSubmitResponseFieldAcceptedAt             = big.NewInt(1 << 16)
+	postV1CalendarSubmitResponseFieldRejectedAt             = big.NewInt(1 << 17)
+	postV1CalendarSubmitResponseFieldCheckedAt              = big.NewInt(1 << 18)
+	postV1CalendarSubmitResponseFieldNextCheckAt            = big.NewInt(1 << 19)
+	postV1CalendarSubmitResponseFieldAttempts               = big.NewInt(1 << 20)
+	postV1CalendarSubmitResponseFieldDeliveryError          = big.NewInt(1 << 21)
+	postV1CalendarSubmitResponseFieldSentSha256             = big.NewInt(1 << 22)
+	postV1CalendarSubmitResponseFieldCertificateFingerprint = big.NewInt(1 << 23)
+	postV1CalendarSubmitResponseFieldSubmittedByActorType   = big.NewInt(1 << 24)
+	postV1CalendarSubmitResponseFieldSubmittedByActorID     = big.NewInt(1 << 25)
+	postV1CalendarSubmitResponseFieldCreatedAt              = big.NewInt(1 << 26)
+	postV1CalendarSubmitResponseFieldUpdatedAt              = big.NewInt(1 << 27)
+)
+
+type PostV1CalendarSubmitResponse struct {
+	ID                     string                             `json:"id" url:"id"`
+	Obligation             string                             `json:"obligation" url:"obligation"`
+	PeriodYear             int64                              `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                            `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 PostV1CalendarSubmitResponseStatus `json:"status" url:"status"`
+	FileName               string                             `json:"fileName" url:"fileName"`
+	FileID                 *string                            `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                            `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                            `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Origin                 string                             `json:"origin" url:"origin"`
+	TransportSystem        *string                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	SubmittedAt            *string                            `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *string                            `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *string                            `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *string                            `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *string                            `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                              `json:"attempts" url:"attempts"`
+	DeliveryError          *string                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	SentSha256             *string                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              string                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt              string                             `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarSubmitResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CalendarSubmitResponse) GetObligation() string {
+	if p == nil {
+		return ""
+	}
+	return p.Obligation
+}
+
+func (p *PostV1CalendarSubmitResponse) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1CalendarSubmitResponse) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1CalendarSubmitResponse) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarSubmitResponse) GetStatus() PostV1CalendarSubmitResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1CalendarSubmitResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarSubmitResponse) GetFileID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileID
+}
+
+func (p *PostV1CalendarSubmitResponse) GetExternalRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalRef
+}
+
+func (p *PostV1CalendarSubmitResponse) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1CalendarSubmitResponse) GetRuleKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RuleKey
+}
+
+func (p *PostV1CalendarSubmitResponse) GetPeriod() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Period
+}
+
+func (p *PostV1CalendarSubmitResponse) GetDocumentKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentKey
+}
+
+func (p *PostV1CalendarSubmitResponse) GetOrigin() string {
+	if p == nil {
+		return ""
+	}
+	return p.Origin
+}
+
+func (p *PostV1CalendarSubmitResponse) GetTransportSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransportSystem
+}
+
+func (p *PostV1CalendarSubmitResponse) GetSubmittedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AcceptedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetRejectedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RejectedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetNextCheckAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCheckAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetAttempts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Attempts
+}
+
+func (p *PostV1CalendarSubmitResponse) GetDeliveryError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DeliveryError
+}
+
+func (p *PostV1CalendarSubmitResponse) GetSentSha256() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SentSha256
+}
+
+func (p *PostV1CalendarSubmitResponse) GetCertificateFingerprint() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateFingerprint
+}
+
+func (p *PostV1CalendarSubmitResponse) GetSubmittedByActorType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorType
+}
+
+func (p *PostV1CalendarSubmitResponse) GetSubmittedByActorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorID
+}
+
+func (p *PostV1CalendarSubmitResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1CalendarSubmitResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarSubmitResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1CalendarSubmitResponseFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetObligation(obligation string) {
+	p.Obligation = obligation
+	p.require(postV1CalendarSubmitResponseFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1CalendarSubmitResponseFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1CalendarSubmitResponseFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarSubmitResponseFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetStatus(status PostV1CalendarSubmitResponseStatus) {
+	p.Status = status
+	p.require(postV1CalendarSubmitResponseFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarSubmitResponseFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetFileID(fileID *string) {
+	p.FileID = fileID
+	p.require(postV1CalendarSubmitResponseFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetExternalRef(externalRef *string) {
+	p.ExternalRef = externalRef
+	p.require(postV1CalendarSubmitResponseFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1CalendarSubmitResponseFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetRuleKey(ruleKey *string) {
+	p.RuleKey = ruleKey
+	p.require(postV1CalendarSubmitResponseFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetPeriod(period *string) {
+	p.Period = period
+	p.require(postV1CalendarSubmitResponseFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetDocumentKey(documentKey *string) {
+	p.DocumentKey = documentKey
+	p.require(postV1CalendarSubmitResponseFieldDocumentKey)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetOrigin(origin string) {
+	p.Origin = origin
+	p.require(postV1CalendarSubmitResponseFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetTransportSystem(transportSystem *string) {
+	p.TransportSystem = transportSystem
+	p.require(postV1CalendarSubmitResponseFieldTransportSystem)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetSubmittedAt(submittedAt *string) {
+	p.SubmittedAt = submittedAt
+	p.require(postV1CalendarSubmitResponseFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetAcceptedAt(acceptedAt *string) {
+	p.AcceptedAt = acceptedAt
+	p.require(postV1CalendarSubmitResponseFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetRejectedAt(rejectedAt *string) {
+	p.RejectedAt = rejectedAt
+	p.require(postV1CalendarSubmitResponseFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1CalendarSubmitResponseFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetNextCheckAt(nextCheckAt *string) {
+	p.NextCheckAt = nextCheckAt
+	p.require(postV1CalendarSubmitResponseFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetAttempts(attempts int64) {
+	p.Attempts = attempts
+	p.require(postV1CalendarSubmitResponseFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetDeliveryError(deliveryError *string) {
+	p.DeliveryError = deliveryError
+	p.require(postV1CalendarSubmitResponseFieldDeliveryError)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetSentSha256(sentSha256 *string) {
+	p.SentSha256 = sentSha256
+	p.require(postV1CalendarSubmitResponseFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetCertificateFingerprint(certificateFingerprint *string) {
+	p.CertificateFingerprint = certificateFingerprint
+	p.require(postV1CalendarSubmitResponseFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetSubmittedByActorType(submittedByActorType *string) {
+	p.SubmittedByActorType = submittedByActorType
+	p.require(postV1CalendarSubmitResponseFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetSubmittedByActorID(submittedByActorID *string) {
+	p.SubmittedByActorID = submittedByActorID
+	p.require(postV1CalendarSubmitResponseFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CalendarSubmitResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarSubmitResponse) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1CalendarSubmitResponseFieldUpdatedAt)
+}
+
+func (p *PostV1CalendarSubmitResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarSubmitResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarSubmitResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarSubmitResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarSubmitResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarSubmitResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CalendarSubmitResponseStatus string
+
+const (
+	PostV1CalendarSubmitResponseStatusGenerated PostV1CalendarSubmitResponseStatus = "generated"
+	PostV1CalendarSubmitResponseStatusSubmitted PostV1CalendarSubmitResponseStatus = "submitted"
+	PostV1CalendarSubmitResponseStatusAccepted  PostV1CalendarSubmitResponseStatus = "accepted"
+	PostV1CalendarSubmitResponseStatusRejected  PostV1CalendarSubmitResponseStatus = "rejected"
+)
+
+func NewPostV1CalendarSubmitResponseStatusFromString(s string) (PostV1CalendarSubmitResponseStatus, error) {
+	switch s {
+	case "generated":
+		return PostV1CalendarSubmitResponseStatusGenerated, nil
+	case "submitted":
+		return PostV1CalendarSubmitResponseStatusSubmitted, nil
+	case "accepted":
+		return PostV1CalendarSubmitResponseStatusAccepted, nil
+	case "rejected":
+		return PostV1CalendarSubmitResponseStatusRejected, nil
+	}
+	var t PostV1CalendarSubmitResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CalendarSubmitResponseStatus) Ptr() *PostV1CalendarSubmitResponseStatus {
+	return &p
+}
+
+var (
+	postV1CalendarUpdateResponseFieldKey         = big.NewInt(1 << 0)
+	postV1CalendarUpdateResponseFieldID          = big.NewInt(1 << 1)
+	postV1CalendarUpdateResponseFieldKind        = big.NewInt(1 << 2)
+	postV1CalendarUpdateResponseFieldRuleKey     = big.NewInt(1 << 3)
+	postV1CalendarUpdateResponseFieldPeriod      = big.NewInt(1 << 4)
+	postV1CalendarUpdateResponseFieldTitle       = big.NewInt(1 << 5)
+	postV1CalendarUpdateResponseFieldDueDate     = big.NewInt(1 << 6)
+	postV1CalendarUpdateResponseFieldNotes       = big.NewInt(1 << 7)
+	postV1CalendarUpdateResponseFieldDone        = big.NewInt(1 << 8)
+	postV1CalendarUpdateResponseFieldHref        = big.NewInt(1 << 9)
+	postV1CalendarUpdateResponseFieldSubmission  = big.NewInt(1 << 10)
+	postV1CalendarUpdateResponseFieldCanSubmit   = big.NewInt(1 << 11)
+	postV1CalendarUpdateResponseFieldCanDownload = big.NewInt(1 << 12)
+	postV1CalendarUpdateResponseFieldAutomated   = big.NewInt(1 << 13)
 )
 
 type PostV1CalendarUpdateResponse struct {
-	Key     string                           `json:"key" url:"key"`
-	ID      *string                          `json:"id,omitempty" url:"id,omitempty"`
-	Kind    PostV1CalendarUpdateResponseKind `json:"kind" url:"kind"`
-	RuleKey *string                          `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period  *string                          `json:"period,omitempty" url:"period,omitempty"`
-	Title   string                           `json:"title" url:"title"`
-	DueDate string                           `json:"dueDate" url:"dueDate"`
-	Notes   *string                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Done    bool                             `json:"done" url:"done"`
-	Href    *string                          `json:"href,omitempty" url:"href,omitempty"`
+	Key         string                                  `json:"key" url:"key"`
+	ID          *string                                 `json:"id,omitempty" url:"id,omitempty"`
+	Kind        PostV1CalendarUpdateResponseKind        `json:"kind" url:"kind"`
+	RuleKey     *string                                 `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period      *string                                 `json:"period,omitempty" url:"period,omitempty"`
+	Title       string                                  `json:"title" url:"title"`
+	DueDate     string                                  `json:"dueDate" url:"dueDate"`
+	Notes       *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
+	Done        bool                                    `json:"done" url:"done"`
+	Href        *string                                 `json:"href,omitempty" url:"href,omitempty"`
+	Submission  *PostV1CalendarUpdateResponseSubmission `json:"submission,omitempty" url:"submission,omitempty"`
+	CanSubmit   bool                                    `json:"canSubmit" url:"canSubmit"`
+	CanDownload bool                                    `json:"canDownload" url:"canDownload"`
+	Automated   bool                                    `json:"automated" url:"automated"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1338,6 +3970,34 @@ func (p *PostV1CalendarUpdateResponse) GetHref() *string {
 		return nil
 	}
 	return p.Href
+}
+
+func (p *PostV1CalendarUpdateResponse) GetSubmission() *PostV1CalendarUpdateResponseSubmission {
+	if p == nil {
+		return nil
+	}
+	return p.Submission
+}
+
+func (p *PostV1CalendarUpdateResponse) GetCanSubmit() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanSubmit
+}
+
+func (p *PostV1CalendarUpdateResponse) GetCanDownload() bool {
+	if p == nil {
+		return false
+	}
+	return p.CanDownload
+}
+
+func (p *PostV1CalendarUpdateResponse) GetAutomated() bool {
+	if p == nil {
+		return false
+	}
+	return p.Automated
 }
 
 func (p *PostV1CalendarUpdateResponse) GetExtraProperties() map[string]interface{} {
@@ -1424,6 +4084,34 @@ func (p *PostV1CalendarUpdateResponse) SetHref(href *string) {
 	p.require(postV1CalendarUpdateResponseFieldHref)
 }
 
+// SetSubmission sets the Submission field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponse) SetSubmission(submission *PostV1CalendarUpdateResponseSubmission) {
+	p.Submission = submission
+	p.require(postV1CalendarUpdateResponseFieldSubmission)
+}
+
+// SetCanSubmit sets the CanSubmit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponse) SetCanSubmit(canSubmit bool) {
+	p.CanSubmit = canSubmit
+	p.require(postV1CalendarUpdateResponseFieldCanSubmit)
+}
+
+// SetCanDownload sets the CanDownload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponse) SetCanDownload(canDownload bool) {
+	p.CanDownload = canDownload
+	p.require(postV1CalendarUpdateResponseFieldCanDownload)
+}
+
+// SetAutomated sets the Automated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponse) SetAutomated(automated bool) {
+	p.Automated = automated
+	p.require(postV1CalendarUpdateResponseFieldAutomated)
+}
+
 func (p *PostV1CalendarUpdateResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler PostV1CalendarUpdateResponse
 	var value unmarshaler
@@ -1485,5 +4173,549 @@ func NewPostV1CalendarUpdateResponseKindFromString(s string) (PostV1CalendarUpda
 }
 
 func (p PostV1CalendarUpdateResponseKind) Ptr() *PostV1CalendarUpdateResponseKind {
+	return &p
+}
+
+var (
+	postV1CalendarUpdateResponseSubmissionFieldID                     = big.NewInt(1 << 0)
+	postV1CalendarUpdateResponseSubmissionFieldObligation             = big.NewInt(1 << 1)
+	postV1CalendarUpdateResponseSubmissionFieldPeriodYear             = big.NewInt(1 << 2)
+	postV1CalendarUpdateResponseSubmissionFieldPeriodMonth            = big.NewInt(1 << 3)
+	postV1CalendarUpdateResponseSubmissionFieldVariant                = big.NewInt(1 << 4)
+	postV1CalendarUpdateResponseSubmissionFieldStatus                 = big.NewInt(1 << 5)
+	postV1CalendarUpdateResponseSubmissionFieldFileName               = big.NewInt(1 << 6)
+	postV1CalendarUpdateResponseSubmissionFieldFileID                 = big.NewInt(1 << 7)
+	postV1CalendarUpdateResponseSubmissionFieldExternalRef            = big.NewInt(1 << 8)
+	postV1CalendarUpdateResponseSubmissionFieldMessage                = big.NewInt(1 << 9)
+	postV1CalendarUpdateResponseSubmissionFieldRuleKey                = big.NewInt(1 << 10)
+	postV1CalendarUpdateResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
+	postV1CalendarUpdateResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
+	postV1CalendarUpdateResponseSubmissionFieldOrigin                 = big.NewInt(1 << 13)
+	postV1CalendarUpdateResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 14)
+	postV1CalendarUpdateResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 15)
+	postV1CalendarUpdateResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 16)
+	postV1CalendarUpdateResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 17)
+	postV1CalendarUpdateResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 18)
+	postV1CalendarUpdateResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 19)
+	postV1CalendarUpdateResponseSubmissionFieldAttempts               = big.NewInt(1 << 20)
+	postV1CalendarUpdateResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 21)
+	postV1CalendarUpdateResponseSubmissionFieldSentSha256             = big.NewInt(1 << 22)
+	postV1CalendarUpdateResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 23)
+	postV1CalendarUpdateResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 24)
+	postV1CalendarUpdateResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 25)
+	postV1CalendarUpdateResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 26)
+	postV1CalendarUpdateResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 27)
+)
+
+type PostV1CalendarUpdateResponseSubmission struct {
+	ID                     string                                       `json:"id" url:"id"`
+	Obligation             string                                       `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                        `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                       `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                      `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 PostV1CalendarUpdateResponseSubmissionStatus `json:"status" url:"status"`
+	FileName               string                                       `json:"fileName" url:"fileName"`
+	FileID                 *string                                      `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                      `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                      `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                      `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                      `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                      `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Origin                 string                                       `json:"origin" url:"origin"`
+	TransportSystem        *string                                      `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	SubmittedAt            *string                                      `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *string                                      `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *string                                      `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *string                                      `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *string                                      `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                        `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                      `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              string                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt              string                                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetObligation() string {
+	if p == nil {
+		return ""
+	}
+	return p.Obligation
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetPeriodYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PeriodYear
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetPeriodMonth() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.PeriodMonth
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetVariant() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Variant
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetStatus() PostV1CalendarUpdateResponseSubmissionStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetFileID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FileID
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetExternalRef() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalRef
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetMessage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Message
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetRuleKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RuleKey
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetPeriod() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Period
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetDocumentKey() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DocumentKey
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetOrigin() string {
+	if p == nil {
+		return ""
+	}
+	return p.Origin
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetTransportSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransportSystem
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetSubmittedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetAcceptedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AcceptedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetRejectedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RejectedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetNextCheckAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NextCheckAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetAttempts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Attempts
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetDeliveryError() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DeliveryError
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetSentSha256() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SentSha256
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetCertificateFingerprint() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CertificateFingerprint
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetSubmittedByActorType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorType
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetSubmittedByActorID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SubmittedByActorID
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetUpdatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.UpdatedAt
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetID(id string) {
+	p.ID = id
+	p.require(postV1CalendarUpdateResponseSubmissionFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetObligation(obligation string) {
+	p.Obligation = obligation
+	p.require(postV1CalendarUpdateResponseSubmissionFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetPeriodYear(periodYear int64) {
+	p.PeriodYear = periodYear
+	p.require(postV1CalendarUpdateResponseSubmissionFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetPeriodMonth(periodMonth *int64) {
+	p.PeriodMonth = periodMonth
+	p.require(postV1CalendarUpdateResponseSubmissionFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetVariant(variant *string) {
+	p.Variant = variant
+	p.require(postV1CalendarUpdateResponseSubmissionFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetStatus(status PostV1CalendarUpdateResponseSubmissionStatus) {
+	p.Status = status
+	p.require(postV1CalendarUpdateResponseSubmissionFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1CalendarUpdateResponseSubmissionFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetFileID(fileID *string) {
+	p.FileID = fileID
+	p.require(postV1CalendarUpdateResponseSubmissionFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetExternalRef(externalRef *string) {
+	p.ExternalRef = externalRef
+	p.require(postV1CalendarUpdateResponseSubmissionFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetMessage(message *string) {
+	p.Message = message
+	p.require(postV1CalendarUpdateResponseSubmissionFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetRuleKey(ruleKey *string) {
+	p.RuleKey = ruleKey
+	p.require(postV1CalendarUpdateResponseSubmissionFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetPeriod(period *string) {
+	p.Period = period
+	p.require(postV1CalendarUpdateResponseSubmissionFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetDocumentKey(documentKey *string) {
+	p.DocumentKey = documentKey
+	p.require(postV1CalendarUpdateResponseSubmissionFieldDocumentKey)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetOrigin(origin string) {
+	p.Origin = origin
+	p.require(postV1CalendarUpdateResponseSubmissionFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetTransportSystem(transportSystem *string) {
+	p.TransportSystem = transportSystem
+	p.require(postV1CalendarUpdateResponseSubmissionFieldTransportSystem)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetSubmittedAt(submittedAt *string) {
+	p.SubmittedAt = submittedAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetAcceptedAt(acceptedAt *string) {
+	p.AcceptedAt = acceptedAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetRejectedAt(rejectedAt *string) {
+	p.RejectedAt = rejectedAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetCheckedAt(checkedAt *string) {
+	p.CheckedAt = checkedAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetNextCheckAt(nextCheckAt *string) {
+	p.NextCheckAt = nextCheckAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetAttempts(attempts int64) {
+	p.Attempts = attempts
+	p.require(postV1CalendarUpdateResponseSubmissionFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetDeliveryError(deliveryError *string) {
+	p.DeliveryError = deliveryError
+	p.require(postV1CalendarUpdateResponseSubmissionFieldDeliveryError)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetSentSha256(sentSha256 *string) {
+	p.SentSha256 = sentSha256
+	p.require(postV1CalendarUpdateResponseSubmissionFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetCertificateFingerprint(certificateFingerprint *string) {
+	p.CertificateFingerprint = certificateFingerprint
+	p.require(postV1CalendarUpdateResponseSubmissionFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetSubmittedByActorType(submittedByActorType *string) {
+	p.SubmittedByActorType = submittedByActorType
+	p.require(postV1CalendarUpdateResponseSubmissionFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetSubmittedByActorID(submittedByActorID *string) {
+	p.SubmittedByActorID = submittedByActorID
+	p.require(postV1CalendarUpdateResponseSubmissionFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CalendarUpdateResponseSubmission) SetUpdatedAt(updatedAt string) {
+	p.UpdatedAt = updatedAt
+	p.require(postV1CalendarUpdateResponseSubmissionFieldUpdatedAt)
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1CalendarUpdateResponseSubmission
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1CalendarUpdateResponseSubmission(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) MarshalJSON() ([]byte, error) {
+	type embed PostV1CalendarUpdateResponseSubmission
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1CalendarUpdateResponseSubmission) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1CalendarUpdateResponseSubmissionStatus string
+
+const (
+	PostV1CalendarUpdateResponseSubmissionStatusGenerated PostV1CalendarUpdateResponseSubmissionStatus = "generated"
+	PostV1CalendarUpdateResponseSubmissionStatusSubmitted PostV1CalendarUpdateResponseSubmissionStatus = "submitted"
+	PostV1CalendarUpdateResponseSubmissionStatusAccepted  PostV1CalendarUpdateResponseSubmissionStatus = "accepted"
+	PostV1CalendarUpdateResponseSubmissionStatusRejected  PostV1CalendarUpdateResponseSubmissionStatus = "rejected"
+)
+
+func NewPostV1CalendarUpdateResponseSubmissionStatusFromString(s string) (PostV1CalendarUpdateResponseSubmissionStatus, error) {
+	switch s {
+	case "generated":
+		return PostV1CalendarUpdateResponseSubmissionStatusGenerated, nil
+	case "submitted":
+		return PostV1CalendarUpdateResponseSubmissionStatusSubmitted, nil
+	case "accepted":
+		return PostV1CalendarUpdateResponseSubmissionStatusAccepted, nil
+	case "rejected":
+		return PostV1CalendarUpdateResponseSubmissionStatusRejected, nil
+	}
+	var t PostV1CalendarUpdateResponseSubmissionStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1CalendarUpdateResponseSubmissionStatus) Ptr() *PostV1CalendarUpdateResponseSubmissionStatus {
 	return &p
 }

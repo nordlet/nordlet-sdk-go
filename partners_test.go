@@ -71745,13 +71745,6 @@ func TestEnumPostV1PartnersDebtRemindersListRequestSortItemDir(t *testing.T) {
 }
 
 func TestEnumPostV1PartnersDebtRemindersPreviewResponseRowsItemLocale(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("lt")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale("lt"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_en", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("en")
@@ -71759,11 +71752,18 @@ func TestEnumPostV1PartnersDebtRemindersPreviewResponseRowsItemLocale(t *testing
 		assert.Equal(t, PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale("en"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_ru", func(t *testing.T) {
+	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("ru")
+		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("lt")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale("ru"), val, "enum value should match expected wire value")
+		assert.Equal(t, PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale("lt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_de", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("de")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1PartnersDebtRemindersPreviewResponseRowsItemLocale("de"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -71772,7 +71772,7 @@ func TestEnumPostV1PartnersDebtRemindersPreviewResponseRowsItemLocale(t *testing
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("lt")
+		val, err := NewPostV1PartnersDebtRemindersPreviewResponseRowsItemLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

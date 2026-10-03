@@ -130,6 +130,22 @@ func (c *Client) PostV1AccountMembersSetRole(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1AccountMembersTransferOwnership(
+	ctx context.Context,
+	request *nordlet.PostV1AccountMembersTransferOwnershipRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountMembersTransferOwnershipResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountMembersTransferOwnership(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1AccountMembersRemove(
 	ctx context.Context,
 	request *nordlet.PostV1AccountMembersRemoveRequest,
@@ -386,6 +402,22 @@ func (c *Client) PostV1AccountAPIKeysList(
 	return response.Body, nil
 }
 
+func (c *Client) IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+	ctx context.Context,
+	request *nordlet.PostV1AccountAPIKeysRotateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountAPIKeysRotateResponse, error) {
+	response, err := c.WithRawResponse.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1AccountAPIKeysRevoke(
 	ctx context.Context,
 	request *nordlet.PostV1AccountAPIKeysRevokeRequest,
@@ -537,6 +569,22 @@ func (c *Client) PostV1AccountReferralGet(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1AccountReferralGetResponse, error) {
 	response, err := c.WithRawResponse.PostV1AccountReferralGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PostV1AccountReferralConvert(
+	ctx context.Context,
+	request *nordlet.PostV1AccountReferralConvertRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AccountReferralConvertResponse, error) {
+	response, err := c.WithRawResponse.PostV1AccountReferralConvert(
 		ctx,
 		request,
 		opts...,

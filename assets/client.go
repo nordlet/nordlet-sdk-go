@@ -82,6 +82,39 @@ func (c *Client) PostV1AssetsAssetsCreate(
 	return response.Body, nil
 }
 
+func (c *Client) PostV1AssetsAssetsUpdate(
+	ctx context.Context,
+	request *nordlet.PostV1AssetsAssetsUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AssetsAssetsUpdateResponse, error) {
+	response, err := c.WithRawResponse.PostV1AssetsAssetsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Record the input VAT facts of a capital good that the annual VAT return needs for the adjustment of the deduction over the adjustment period (Article 187 of the VAT Directive, § 15a UStG): the input VAT on the acquisition, the date of first use, the share of use for deductible turnover at first use, whether it is land or a building (ten-year period instead of five), and every later year in which the share changed or the good was sold or withdrawn. Allowed also after depreciation has been posted.
+func (c *Client) PostV1AssetsAssetsInputVat(
+	ctx context.Context,
+	request *nordlet.PostV1AssetsAssetsInputVatRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1AssetsAssetsInputVatResponse, error) {
+	response, err := c.WithRawResponse.PostV1AssetsAssetsInputVat(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1AssetsAssetsGet(
 	ctx context.Context,
 	request *nordlet.PostV1AssetsAssetsGetRequest,

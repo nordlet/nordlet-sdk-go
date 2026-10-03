@@ -441,6 +441,87 @@ func TestReportsPostV1ReportsStockShortageWithWireMock(
 	VerifyRequestCount(t, "TestReportsPostV1ReportsStockShortageWithWireMock", "POST", "/v1/reports/stock-shortage", nil, 1)
 }
 
+func TestReportsPostV1ReportsSieWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReportsSieRequest{
+		FromDate: "fromDate",
+		ToDate:   "toDate",
+	}
+	_, invocationErr := client.Reports.PostV1ReportsSie(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsPostV1ReportsSieWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsPostV1ReportsSieWithWireMock", "POST", "/v1/reports/sie", nil, 1)
+}
+
+func TestReportsPostV1ReportsDatevWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReportsDatevRequest{
+		FromDate: "fromDate",
+		ToDate:   "toDate",
+	}
+	_, invocationErr := client.Reports.PostV1ReportsDatev(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsPostV1ReportsDatevWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsPostV1ReportsDatevWithWireMock", "POST", "/v1/reports/datev", nil, 1)
+}
+
+func TestReportsPostV1ReportsFecWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1ReportsFecRequest{
+		FromDate: "fromDate",
+		ToDate:   "toDate",
+	}
+	_, invocationErr := client.Reports.PostV1ReportsFec(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsPostV1ReportsFecWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsPostV1ReportsFecWithWireMock", "POST", "/v1/reports/fec", nil, 1)
+}
+
 func TestReportsPostV1ReportsEuPurchasesWithWireMock(
 	t *testing.T,
 ) {

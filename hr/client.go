@@ -130,6 +130,23 @@ func (c *Client) PostV1HrEmployeesGet(
 	return response.Body, nil
 }
 
+// Attributes a filing of the company country needs about a person that the shared employee record does not carry, such as the sex and place of birth an Italian income certificate asks for. Their values are kept in the payrollOptions of the employee.
+func (c *Client) ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+	ctx context.Context,
+	request *nordlet.PostV1HrEmployeesFieldsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1HrEmployeesFieldsResponse, error) {
+	response, err := c.WithRawResponse.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1HrEmployeesList(
 	ctx context.Context,
 	request *nordlet.PostV1HrEmployeesListRequest,

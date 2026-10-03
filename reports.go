@@ -303,6 +303,79 @@ func (p *PostV1ReportsCostCentersRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1ReportsDatevRequestFieldFromDate         = big.NewInt(1 << 0)
+	postV1ReportsDatevRequestFieldToDate           = big.NewInt(1 << 1)
+	postV1ReportsDatevRequestFieldConsultantNumber = big.NewInt(1 << 2)
+	postV1ReportsDatevRequestFieldClientNumber     = big.NewInt(1 << 3)
+)
+
+type PostV1ReportsDatevRequest struct {
+	FromDate         string  `json:"fromDate" url:"-"`
+	ToDate           string  `json:"toDate" url:"-"`
+	ConsultantNumber *string `json:"consultantNumber,omitempty" url:"-"`
+	ClientNumber     *string `json:"clientNumber,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReportsDatevRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevRequest) SetFromDate(fromDate string) {
+	p.FromDate = fromDate
+	p.require(postV1ReportsDatevRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevRequest) SetToDate(toDate string) {
+	p.ToDate = toDate
+	p.require(postV1ReportsDatevRequestFieldToDate)
+}
+
+// SetConsultantNumber sets the ConsultantNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevRequest) SetConsultantNumber(consultantNumber *string) {
+	p.ConsultantNumber = consultantNumber
+	p.require(postV1ReportsDatevRequestFieldConsultantNumber)
+}
+
+// SetClientNumber sets the ClientNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevRequest) SetClientNumber(clientNumber *string) {
+	p.ClientNumber = clientNumber
+	p.require(postV1ReportsDatevRequestFieldClientNumber)
+}
+
+func (p *PostV1ReportsDatevRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsDatevRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReportsDatevRequest(body)
+	return nil
+}
+
+func (p *PostV1ReportsDatevRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsDatevRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1ReportsDebtAgingRequestFieldSide = big.NewInt(1 << 0)
 	postV1ReportsDebtAgingRequestFieldAsOf = big.NewInt(1 << 1)
 )
@@ -403,6 +476,61 @@ func (p *PostV1ReportsEuPurchasesRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1ReportsEuPurchasesRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1ReportsEuPurchasesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ReportsFecRequestFieldFromDate = big.NewInt(1 << 0)
+	postV1ReportsFecRequestFieldToDate   = big.NewInt(1 << 1)
+)
+
+type PostV1ReportsFecRequest struct {
+	FromDate string `json:"fromDate" url:"-"`
+	ToDate   string `json:"toDate" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReportsFecRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecRequest) SetFromDate(fromDate string) {
+	p.FromDate = fromDate
+	p.require(postV1ReportsFecRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecRequest) SetToDate(toDate string) {
+	p.ToDate = toDate
+	p.require(postV1ReportsFecRequestFieldToDate)
+}
+
+func (p *PostV1ReportsFecRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsFecRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReportsFecRequest(body)
+	return nil
+}
+
+func (p *PostV1ReportsFecRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsFecRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1021,6 +1149,70 @@ func (p *PostV1ReportsPosSalesRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1ReportsPosSalesRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1ReportsPosSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1ReportsSieRequestFieldFromDate            = big.NewInt(1 << 0)
+	postV1ReportsSieRequestFieldToDate              = big.NewInt(1 << 1)
+	postV1ReportsSieRequestFieldIncludeTransactions = big.NewInt(1 << 2)
+)
+
+type PostV1ReportsSieRequest struct {
+	FromDate            string `json:"fromDate" url:"-"`
+	ToDate              string `json:"toDate" url:"-"`
+	IncludeTransactions *bool  `json:"includeTransactions,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1ReportsSieRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieRequest) SetFromDate(fromDate string) {
+	p.FromDate = fromDate
+	p.require(postV1ReportsSieRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieRequest) SetToDate(toDate string) {
+	p.ToDate = toDate
+	p.require(postV1ReportsSieRequestFieldToDate)
+}
+
+// SetIncludeTransactions sets the IncludeTransactions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieRequest) SetIncludeTransactions(includeTransactions *bool) {
+	p.IncludeTransactions = includeTransactions
+	p.require(postV1ReportsSieRequestFieldIncludeTransactions)
+}
+
+func (p *PostV1ReportsSieRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsSieRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1ReportsSieRequest(body)
+	return nil
+}
+
+func (p *PostV1ReportsSieRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsSieRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -3776,6 +3968,186 @@ func (p *PostV1ReportsCostCentersResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1ReportsDatevResponseFieldFileName    = big.NewInt(1 << 0)
+	postV1ReportsDatevResponseFieldContentType = big.NewInt(1 << 1)
+	postV1ReportsDatevResponseFieldData        = big.NewInt(1 << 2)
+	postV1ReportsDatevResponseFieldBookings    = big.NewInt(1 << 3)
+	postV1ReportsDatevResponseFieldSource      = big.NewInt(1 << 4)
+	postV1ReportsDatevResponseFieldWarnings    = big.NewInt(1 << 5)
+	postV1ReportsDatevResponseFieldNotes       = big.NewInt(1 << 6)
+)
+
+type PostV1ReportsDatevResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Bookings    int64    `json:"bookings" url:"bookings"`
+	Source      string   `json:"source" url:"source"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+	Notes       []string `json:"notes" url:"notes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReportsDatevResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1ReportsDatevResponse) GetContentType() string {
+	if p == nil {
+		return ""
+	}
+	return p.ContentType
+}
+
+func (p *PostV1ReportsDatevResponse) GetData() string {
+	if p == nil {
+		return ""
+	}
+	return p.Data
+}
+
+func (p *PostV1ReportsDatevResponse) GetBookings() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Bookings
+}
+
+func (p *PostV1ReportsDatevResponse) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1ReportsDatevResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1ReportsDatevResponse) GetNotes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ReportsDatevResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReportsDatevResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1ReportsDatevResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetContentType(contentType string) {
+	p.ContentType = contentType
+	p.require(postV1ReportsDatevResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetData(data string) {
+	p.Data = data
+	p.require(postV1ReportsDatevResponseFieldData)
+}
+
+// SetBookings sets the Bookings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetBookings(bookings int64) {
+	p.Bookings = bookings
+	p.require(postV1ReportsDatevResponseFieldBookings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetSource(source string) {
+	p.Source = source
+	p.require(postV1ReportsDatevResponseFieldSource)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1ReportsDatevResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsDatevResponse) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1ReportsDatevResponseFieldNotes)
+}
+
+func (p *PostV1ReportsDatevResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsDatevResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReportsDatevResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReportsDatevResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsDatevResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReportsDatevResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
 type PostV1ReportsDebtAgingRequestSide string
 
 const (
@@ -4476,6 +4848,186 @@ func (p *PostV1ReportsEuPurchasesResponseTotals) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1ReportsEuPurchasesResponseTotals) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReportsFecResponseFieldFileName    = big.NewInt(1 << 0)
+	postV1ReportsFecResponseFieldContentType = big.NewInt(1 << 1)
+	postV1ReportsFecResponseFieldData        = big.NewInt(1 << 2)
+	postV1ReportsFecResponseFieldRows        = big.NewInt(1 << 3)
+	postV1ReportsFecResponseFieldSource      = big.NewInt(1 << 4)
+	postV1ReportsFecResponseFieldWarnings    = big.NewInt(1 << 5)
+	postV1ReportsFecResponseFieldNotes       = big.NewInt(1 << 6)
+)
+
+type PostV1ReportsFecResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Rows        int64    `json:"rows" url:"rows"`
+	Source      string   `json:"source" url:"source"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+	Notes       []string `json:"notes" url:"notes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReportsFecResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1ReportsFecResponse) GetContentType() string {
+	if p == nil {
+		return ""
+	}
+	return p.ContentType
+}
+
+func (p *PostV1ReportsFecResponse) GetData() string {
+	if p == nil {
+		return ""
+	}
+	return p.Data
+}
+
+func (p *PostV1ReportsFecResponse) GetRows() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Rows
+}
+
+func (p *PostV1ReportsFecResponse) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1ReportsFecResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1ReportsFecResponse) GetNotes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ReportsFecResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReportsFecResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1ReportsFecResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetContentType(contentType string) {
+	p.ContentType = contentType
+	p.require(postV1ReportsFecResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetData(data string) {
+	p.Data = data
+	p.require(postV1ReportsFecResponseFieldData)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetRows(rows int64) {
+	p.Rows = rows
+	p.require(postV1ReportsFecResponseFieldRows)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetSource(source string) {
+	p.Source = source
+	p.require(postV1ReportsFecResponseFieldSource)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1ReportsFecResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsFecResponse) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1ReportsFecResponseFieldNotes)
+}
+
+func (p *PostV1ReportsFecResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsFecResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReportsFecResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReportsFecResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsFecResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReportsFecResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -10859,6 +11411,202 @@ func (p *PostV1ReportsPosSalesResponseTotals) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1ReportsPosSalesResponseTotals) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1ReportsSieResponseFieldFileName    = big.NewInt(1 << 0)
+	postV1ReportsSieResponseFieldContentType = big.NewInt(1 << 1)
+	postV1ReportsSieResponseFieldData        = big.NewInt(1 << 2)
+	postV1ReportsSieResponseFieldAccounts    = big.NewInt(1 << 3)
+	postV1ReportsSieResponseFieldVouchers    = big.NewInt(1 << 4)
+	postV1ReportsSieResponseFieldSource      = big.NewInt(1 << 5)
+	postV1ReportsSieResponseFieldWarnings    = big.NewInt(1 << 6)
+	postV1ReportsSieResponseFieldNotes       = big.NewInt(1 << 7)
+)
+
+type PostV1ReportsSieResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Accounts    int64    `json:"accounts" url:"accounts"`
+	Vouchers    int64    `json:"vouchers" url:"vouchers"`
+	Source      string   `json:"source" url:"source"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+	Notes       []string `json:"notes" url:"notes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1ReportsSieResponse) GetFileName() string {
+	if p == nil {
+		return ""
+	}
+	return p.FileName
+}
+
+func (p *PostV1ReportsSieResponse) GetContentType() string {
+	if p == nil {
+		return ""
+	}
+	return p.ContentType
+}
+
+func (p *PostV1ReportsSieResponse) GetData() string {
+	if p == nil {
+		return ""
+	}
+	return p.Data
+}
+
+func (p *PostV1ReportsSieResponse) GetAccounts() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Accounts
+}
+
+func (p *PostV1ReportsSieResponse) GetVouchers() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Vouchers
+}
+
+func (p *PostV1ReportsSieResponse) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1ReportsSieResponse) GetWarnings() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
+}
+
+func (p *PostV1ReportsSieResponse) GetNotes() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1ReportsSieResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1ReportsSieResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetFileName(fileName string) {
+	p.FileName = fileName
+	p.require(postV1ReportsSieResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetContentType(contentType string) {
+	p.ContentType = contentType
+	p.require(postV1ReportsSieResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetData(data string) {
+	p.Data = data
+	p.require(postV1ReportsSieResponseFieldData)
+}
+
+// SetAccounts sets the Accounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetAccounts(accounts int64) {
+	p.Accounts = accounts
+	p.require(postV1ReportsSieResponseFieldAccounts)
+}
+
+// SetVouchers sets the Vouchers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetVouchers(vouchers int64) {
+	p.Vouchers = vouchers
+	p.require(postV1ReportsSieResponseFieldVouchers)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetSource(source string) {
+	p.Source = source
+	p.require(postV1ReportsSieResponseFieldSource)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetWarnings(warnings []string) {
+	p.Warnings = warnings
+	p.require(postV1ReportsSieResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1ReportsSieResponse) SetNotes(notes []string) {
+	p.Notes = notes
+	p.require(postV1ReportsSieResponseFieldNotes)
+}
+
+func (p *PostV1ReportsSieResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1ReportsSieResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1ReportsSieResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1ReportsSieResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1ReportsSieResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1ReportsSieResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}

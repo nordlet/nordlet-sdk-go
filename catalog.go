@@ -12008,16 +12008,19 @@ func (p *PostV1CatalogUnitsListResponseRowsItem) String() string {
 type PostV1CatalogUnitsOptionsRequestLocale string
 
 const (
-	PostV1CatalogUnitsOptionsRequestLocaleLt PostV1CatalogUnitsOptionsRequestLocale = "lt"
 	PostV1CatalogUnitsOptionsRequestLocaleEn PostV1CatalogUnitsOptionsRequestLocale = "en"
+	PostV1CatalogUnitsOptionsRequestLocaleLt PostV1CatalogUnitsOptionsRequestLocale = "lt"
+	PostV1CatalogUnitsOptionsRequestLocaleDe PostV1CatalogUnitsOptionsRequestLocale = "de"
 )
 
 func NewPostV1CatalogUnitsOptionsRequestLocaleFromString(s string) (PostV1CatalogUnitsOptionsRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1CatalogUnitsOptionsRequestLocaleLt, nil
 	case "en":
 		return PostV1CatalogUnitsOptionsRequestLocaleEn, nil
+	case "lt":
+		return PostV1CatalogUnitsOptionsRequestLocaleLt, nil
+	case "de":
+		return PostV1CatalogUnitsOptionsRequestLocaleDe, nil
 	}
 	var t PostV1CatalogUnitsOptionsRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

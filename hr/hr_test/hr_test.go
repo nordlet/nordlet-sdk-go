@@ -232,6 +232,30 @@ func TestHrPostV1HrEmployeesGetWithWireMock(
 	VerifyRequestCount(t, "TestHrPostV1HrEmployeesGetWithWireMock", "POST", "/v1/hr/employees/get", nil, 1)
 }
 
+func TestHrExtraEmployeeDetailsTheCountryOfTheCompanyAsksForWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1HrEmployeesFieldsRequest{}
+	_, invocationErr := client.Hr.ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrExtraEmployeeDetailsTheCountryOfTheCompanyAsksForWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrExtraEmployeeDetailsTheCountryOfTheCompanyAsksForWithWireMock", "POST", "/v1/hr/employees/fields", nil, 1)
+}
+
 func TestHrPostV1HrEmployeesListWithWireMock(
 	t *testing.T,
 ) {

@@ -228,6 +228,32 @@ func TestAccountPostV1AccountMembersSetRoleWithWireMock(
 	VerifyRequestCount(t, "TestAccountPostV1AccountMembersSetRoleWithWireMock", "POST", "/v1/account/members/set-role", nil, 1)
 }
 
+func TestAccountPostV1AccountMembersTransferOwnershipWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountMembersTransferOwnershipRequest{
+		UserID: "userId",
+	}
+	_, invocationErr := client.Account.PostV1AccountMembersTransferOwnership(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountMembersTransferOwnershipWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountMembersTransferOwnershipWithWireMock", "POST", "/v1/account/members/transfer-ownership", nil, 1)
+}
+
 func TestAccountPostV1AccountMembersRemoveWithWireMock(
 	t *testing.T,
 ) {
@@ -395,7 +421,7 @@ func TestAccountPostV1AccountLocaleSetWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &nordlet.PostV1AccountLocaleSetRequest{
-		Locale: nordlet.PostV1AccountLocaleSetRequestLocaleLt,
+		Locale: nordlet.PostV1AccountLocaleSetRequestLocaleEn,
 	}
 	_, invocationErr := client.Account.PostV1AccountLocaleSet(
 		context.TODO(),
@@ -635,6 +661,32 @@ func TestAccountPostV1AccountAPIKeysListWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestAccountPostV1AccountAPIKeysListWithWireMock", "POST", "/v1/account/api-keys/list", nil, 1)
+}
+
+func TestAccountIssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlapWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountAPIKeysRotateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Account.IssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlap(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountIssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlapWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountIssueAReplacementForAnAPIKeyAndSetTheOldOneToStopWorkingAfterAShortOverlapWithWireMock", "POST", "/v1/account/api-keys/rotate", nil, 1)
 }
 
 func TestAccountPostV1AccountAPIKeysRevokeWithWireMock(
@@ -886,6 +938,32 @@ func TestAccountPostV1AccountReferralGetWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestAccountPostV1AccountReferralGetWithWireMock", "POST", "/v1/account/referral/get", nil, 1)
+}
+
+func TestAccountPostV1AccountReferralConvertWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AccountReferralConvertRequest{
+		Points: int64(1000000),
+	}
+	_, invocationErr := client.Account.PostV1AccountReferralConvert(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountPostV1AccountReferralConvertWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountPostV1AccountReferralConvertWithWireMock", "POST", "/v1/account/referral/convert", nil, 1)
 }
 
 func TestAccountPostV1AccountTableSettingsGetWithWireMock(

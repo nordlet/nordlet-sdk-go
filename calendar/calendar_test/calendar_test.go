@@ -127,6 +127,58 @@ func TestCalendarPostV1CalendarGetWithWireMock(
 	VerifyRequestCount(t, "TestCalendarPostV1CalendarGetWithWireMock", "POST", "/v1/calendar/get", nil, 1)
 }
 
+func TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CalendarSubmitRequest{
+		Key: "key",
+	}
+	_, invocationErr := client.Calendar.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCalendarGenerateTheFilingForADeadlineAndSendItToTheAdministrationWithWireMock", "POST", "/v1/calendar/submit", nil, 1)
+}
+
+func TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1CalendarDownloadRequest{
+		Key: "key",
+	}
+	_, invocationErr := client.Calendar.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCalendarGenerateTheFileOfADeadlineForTheCompanyToSendItselfWithWireMock", "POST", "/v1/calendar/download", nil, 1)
+}
+
 func TestCalendarPostV1CalendarCreateWithWireMock(
 	t *testing.T,
 ) {

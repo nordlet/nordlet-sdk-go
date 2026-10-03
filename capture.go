@@ -2059,55 +2059,65 @@ func (p PostV1CaptureDocumentsConfirmResponseCaptureStatus) Ptr() *PostV1Capture
 }
 
 var (
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldID                   = big.NewInt(1 << 0)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPartnerID            = big.NewInt(1 << 1)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldType                 = big.NewInt(1 << 2)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldStatus               = big.NewInt(1 << 3)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentNumber       = big.NewInt(1 << 5)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentDate         = big.NewInt(1 << 6)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDueDate              = big.NewInt(1 << 7)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldRegistrationDate     = big.NewInt(1 << 8)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCurrency             = big.NewInt(1 << 9)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldNetTotal             = big.NewInt(1 << 10)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldVatTotal             = big.NewInt(1 << 11)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldGrossTotal           = big.NewInt(1 << 12)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaidAmount           = big.NewInt(1 << 13)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldJournalTransactionID = big.NewInt(1 << 14)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID    = big.NewInt(1 << 15)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID      = big.NewInt(1 << 16)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID      = big.NewInt(1 << 17)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                = big.NewInt(1 << 18)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef          = big.NewInt(1 << 19)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt            = big.NewInt(1 << 20)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt            = big.NewInt(1 << 21)
-	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                = big.NewInt(1 << 22)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldID                           = big.NewInt(1 << 0)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldType                         = big.NewInt(1 << 2)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldStatus                       = big.NewInt(1 << 3)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentNumber               = big.NewInt(1 << 5)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentDate                 = big.NewInt(1 << 6)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDueDate                      = big.NewInt(1 << 7)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldRegistrationDate             = big.NewInt(1 << 8)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldCurrency                     = big.NewInt(1 << 9)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldNetTotal                     = big.NewInt(1 << 10)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldVatTotal                     = big.NewInt(1 << 11)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldGrossTotal                   = big.NewInt(1 << 12)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldPaidAmount                   = big.NewInt(1 << 13)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldJournalTransactionID         = big.NewInt(1 << 14)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldOperationTypeID              = big.NewInt(1 << 17)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes                        = big.NewInt(1 << 18)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatRegion              = big.NewInt(1 << 21)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldDocumentRef                  = big.NewInt(1 << 24)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldCreatedAt                    = big.NewInt(1 << 25)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldUpdatedAt                    = big.NewInt(1 << 26)
+	postV1CaptureDocumentsConfirmResponseInvoiceFieldLines                        = big.NewInt(1 << 27)
 )
 
 type PostV1CaptureDocumentsConfirmResponseInvoice struct {
-	ID                   string                                                    `json:"id" url:"id"`
-	PartnerID            string                                                    `json:"partnerId" url:"partnerId"`
-	Type                 PostV1CaptureDocumentsConfirmResponseInvoiceType          `json:"type" url:"type"`
-	Status               PostV1CaptureDocumentsConfirmResponseInvoiceStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	DocumentNumber       string                                                    `json:"documentNumber" url:"documentNumber"`
-	DocumentDate         string                                                    `json:"documentDate" url:"documentDate"`
-	DueDate              *string                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	RegistrationDate     *string                                                   `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
-	Currency             string                                                    `json:"currency" url:"currency"`
-	NetTotal             string                                                    `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                                    `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                                    `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                                    `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	CreditedInvoiceID    *string                                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	PurchaseOrderID      *string                                                   `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
-	OperationTypeID      *string                                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	Notes                *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	CreatedAt            string                                                    `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                                    `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem  `json:"lines" url:"lines"`
+	ID                           string                                                    `json:"id" url:"id"`
+	PartnerID                    string                                                    `json:"partnerId" url:"partnerId"`
+	Type                         PostV1CaptureDocumentsConfirmResponseInvoiceType          `json:"type" url:"type"`
+	Status                       PostV1CaptureDocumentsConfirmResponseInvoiceStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1CaptureDocumentsConfirmResponseInvoicePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                                    `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 string                                                    `json:"documentDate" url:"documentDate"`
+	DueDate                      *string                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	RegistrationDate             *string                                                   `json:"registrationDate,omitempty" url:"registrationDate,omitempty"`
+	Currency                     string                                                    `json:"currency" url:"currency"`
+	NetTotal                     string                                                    `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                                    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                                    `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                                    `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                                   `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                                   `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                                   `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    string                                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                                    `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1CaptureDocumentsConfirmResponseInvoiceLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2247,6 +2257,41 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetNotes() *string {
 		return nil
 	}
 	return p.Notes
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
+}
+
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
 }
 
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) GetDocumentRef() *string {
@@ -2422,6 +2467,41 @@ func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetOperationTypeID(operat
 func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetNotes(notes *string) {
 	p.Notes = notes
 	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1CaptureDocumentsConfirmResponseInvoice) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1CaptureDocumentsConfirmResponseInvoiceFieldEinvoiceNumber)
 }
 
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;

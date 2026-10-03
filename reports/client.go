@@ -258,6 +258,57 @@ func (c *Client) PostV1ReportsStockShortage(
 	return response.Body, nil
 }
 
+// Export the ledger of one financial year as an SIE file (the Swedish standard accounting interchange format, specification 4B). The file carries the chart of accounts, the opening and closing balance of every balance sheet account and the turnover of every result account for the year and the year before it, and, when asked for, every posted voucher of the year with its lines. Cost centres travel as dimension 1 and projects as dimension 6. Services that build a Swedish annual report read this file.
+func (c *Client) PostV1ReportsSie(
+	ctx context.Context,
+	request *nordlet.PostV1ReportsSieRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReportsSieResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReportsSie(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Export the posted ledger of a period as a DATEV Buchungsstapel file (DATEV format, category 21, version 700). Every transaction becomes one or more bookings of an amount between an account and a contra account; a transaction with more than two lines is split into pairs whose totals match it. The file is semicolon separated and written in the Windows-1252 character set DATEV expects.
+func (c *Client) PostV1ReportsDatev(
+	ctx context.Context,
+	request *nordlet.PostV1ReportsDatevRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReportsDatevResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReportsDatev(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Export the posted ledger of a period as a French FEC file (fichier des écritures comptables, order of 29 July 2013). One line per journal entry line, with the eighteen fields the order names, in their order, after a header line. Tab separated, UTF-8, comma as the decimal separator.
+func (c *Client) PostV1ReportsFec(
+	ctx context.Context,
+	request *nordlet.PostV1ReportsFecRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1ReportsFecResponse, error) {
+	response, err := c.WithRawResponse.PostV1ReportsFec(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1ReportsEuPurchases(
 	ctx context.Context,
 	request *nordlet.PostV1ReportsEuPurchasesRequest,

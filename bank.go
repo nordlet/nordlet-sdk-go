@@ -2968,6 +2968,70 @@ func (p *PostV1BankFeedsConnectionsDeleteRequest) MarshalJSON() ([]byte, error) 
 }
 
 var (
+	postV1BankSettlementsCommissionRequestFieldLineID            = big.NewInt(1 << 0)
+	postV1BankSettlementsCommissionRequestFieldCommissionPercent = big.NewInt(1 << 1)
+	postV1BankSettlementsCommissionRequestFieldCommissionAmount  = big.NewInt(1 << 2)
+)
+
+type PostV1BankSettlementsCommissionRequest struct {
+	LineID            string  `json:"lineId" url:"-"`
+	CommissionPercent *string `json:"commissionPercent,omitempty" url:"-"`
+	CommissionAmount  *string `json:"commissionAmount,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1BankSettlementsCommissionRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetLineID sets the LineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionRequest) SetLineID(lineID string) {
+	p.LineID = lineID
+	p.require(postV1BankSettlementsCommissionRequestFieldLineID)
+}
+
+// SetCommissionPercent sets the CommissionPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionRequest) SetCommissionPercent(commissionPercent *string) {
+	p.CommissionPercent = commissionPercent
+	p.require(postV1BankSettlementsCommissionRequestFieldCommissionPercent)
+}
+
+// SetCommissionAmount sets the CommissionAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionRequest) SetCommissionAmount(commissionAmount *string) {
+	p.CommissionAmount = commissionAmount
+	p.require(postV1BankSettlementsCommissionRequestFieldCommissionAmount)
+}
+
+func (p *PostV1BankSettlementsCommissionRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsCommissionRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsCommissionRequest(body)
+	return nil
+}
+
+func (p *PostV1BankSettlementsCommissionRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsCommissionRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1BankAccountsCreateResponseFieldID          = big.NewInt(1 << 0)
 	postV1BankAccountsCreateResponseFieldName        = big.NewInt(1 << 1)
 	postV1BankAccountsCreateResponseFieldIban        = big.NewInt(1 << 2)
@@ -14434,6 +14498,339 @@ func (p *PostV1BankPaymentsExportResponse) String() string {
 }
 
 var (
+	postV1BankSettlementsCommissionResponseFieldID                = big.NewInt(1 << 0)
+	postV1BankSettlementsCommissionResponseFieldExternalID        = big.NewInt(1 << 1)
+	postV1BankSettlementsCommissionResponseFieldCategory          = big.NewInt(1 << 2)
+	postV1BankSettlementsCommissionResponseFieldDate              = big.NewInt(1 << 3)
+	postV1BankSettlementsCommissionResponseFieldGross             = big.NewInt(1 << 4)
+	postV1BankSettlementsCommissionResponseFieldFee               = big.NewInt(1 << 5)
+	postV1BankSettlementsCommissionResponseFieldNet               = big.NewInt(1 << 6)
+	postV1BankSettlementsCommissionResponseFieldDescription       = big.NewInt(1 << 7)
+	postV1BankSettlementsCommissionResponseFieldSourceID          = big.NewInt(1 << 8)
+	postV1BankSettlementsCommissionResponseFieldChargeID          = big.NewInt(1 << 9)
+	postV1BankSettlementsCommissionResponseFieldCommissionPercent = big.NewInt(1 << 10)
+	postV1BankSettlementsCommissionResponseFieldCommissionAmount  = big.NewInt(1 << 11)
+	postV1BankSettlementsCommissionResponseFieldReference         = big.NewInt(1 << 12)
+	postV1BankSettlementsCommissionResponseFieldMatchedInvoiceID  = big.NewInt(1 << 13)
+	postV1BankSettlementsCommissionResponseFieldMatchStatus       = big.NewInt(1 << 14)
+)
+
+type PostV1BankSettlementsCommissionResponse struct {
+	ID                string                                             `json:"id" url:"id"`
+	ExternalID        string                                             `json:"externalId" url:"externalId"`
+	Category          string                                             `json:"category" url:"category"`
+	Date              string                                             `json:"date" url:"date"`
+	Gross             string                                             `json:"gross" url:"gross"`
+	Fee               string                                             `json:"fee" url:"fee"`
+	Net               string                                             `json:"net" url:"net"`
+	Description       *string                                            `json:"description,omitempty" url:"description,omitempty"`
+	SourceID          *string                                            `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID          *string                                            `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent *string                                            `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount  *string                                            `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference         *string                                            `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID  *string                                            `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus       PostV1BankSettlementsCommissionResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetExternalID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ExternalID
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetCategory() string {
+	if p == nil {
+		return ""
+	}
+	return p.Category
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.Date
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetGross() string {
+	if p == nil {
+		return ""
+	}
+	return p.Gross
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetFee() string {
+	if p == nil {
+		return ""
+	}
+	return p.Fee
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetNet() string {
+	if p == nil {
+		return ""
+	}
+	return p.Net
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetDescription() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Description
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetSourceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SourceID
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetChargeID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ChargeID
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetCommissionPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionPercent
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetCommissionAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionAmount
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetReference() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Reference
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetMatchedInvoiceID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.MatchedInvoiceID
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetMatchStatus() PostV1BankSettlementsCommissionResponseMatchStatus {
+	if p == nil {
+		return ""
+	}
+	return p.MatchStatus
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1BankSettlementsCommissionResponseFieldID)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetExternalID(externalID string) {
+	p.ExternalID = externalID
+	p.require(postV1BankSettlementsCommissionResponseFieldExternalID)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetCategory(category string) {
+	p.Category = category
+	p.require(postV1BankSettlementsCommissionResponseFieldCategory)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetDate(date string) {
+	p.Date = date
+	p.require(postV1BankSettlementsCommissionResponseFieldDate)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetGross(gross string) {
+	p.Gross = gross
+	p.require(postV1BankSettlementsCommissionResponseFieldGross)
+}
+
+// SetFee sets the Fee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetFee(fee string) {
+	p.Fee = fee
+	p.require(postV1BankSettlementsCommissionResponseFieldFee)
+}
+
+// SetNet sets the Net field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetNet(net string) {
+	p.Net = net
+	p.require(postV1BankSettlementsCommissionResponseFieldNet)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetDescription(description *string) {
+	p.Description = description
+	p.require(postV1BankSettlementsCommissionResponseFieldDescription)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetSourceID(sourceID *string) {
+	p.SourceID = sourceID
+	p.require(postV1BankSettlementsCommissionResponseFieldSourceID)
+}
+
+// SetChargeID sets the ChargeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetChargeID(chargeID *string) {
+	p.ChargeID = chargeID
+	p.require(postV1BankSettlementsCommissionResponseFieldChargeID)
+}
+
+// SetCommissionPercent sets the CommissionPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetCommissionPercent(commissionPercent *string) {
+	p.CommissionPercent = commissionPercent
+	p.require(postV1BankSettlementsCommissionResponseFieldCommissionPercent)
+}
+
+// SetCommissionAmount sets the CommissionAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetCommissionAmount(commissionAmount *string) {
+	p.CommissionAmount = commissionAmount
+	p.require(postV1BankSettlementsCommissionResponseFieldCommissionAmount)
+}
+
+// SetReference sets the Reference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetReference(reference *string) {
+	p.Reference = reference
+	p.require(postV1BankSettlementsCommissionResponseFieldReference)
+}
+
+// SetMatchedInvoiceID sets the MatchedInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetMatchedInvoiceID(matchedInvoiceID *string) {
+	p.MatchedInvoiceID = matchedInvoiceID
+	p.require(postV1BankSettlementsCommissionResponseFieldMatchedInvoiceID)
+}
+
+// SetMatchStatus sets the MatchStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsCommissionResponse) SetMatchStatus(matchStatus PostV1BankSettlementsCommissionResponseMatchStatus) {
+	p.MatchStatus = matchStatus
+	p.require(postV1BankSettlementsCommissionResponseFieldMatchStatus)
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1BankSettlementsCommissionResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1BankSettlementsCommissionResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1BankSettlementsCommissionResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1BankSettlementsCommissionResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1BankSettlementsCommissionResponseMatchStatus string
+
+const (
+	PostV1BankSettlementsCommissionResponseMatchStatusUnmatched PostV1BankSettlementsCommissionResponseMatchStatus = "unmatched"
+	PostV1BankSettlementsCommissionResponseMatchStatusMatched   PostV1BankSettlementsCommissionResponseMatchStatus = "matched"
+	PostV1BankSettlementsCommissionResponseMatchStatusManual    PostV1BankSettlementsCommissionResponseMatchStatus = "manual"
+)
+
+func NewPostV1BankSettlementsCommissionResponseMatchStatusFromString(s string) (PostV1BankSettlementsCommissionResponseMatchStatus, error) {
+	switch s {
+	case "unmatched":
+		return PostV1BankSettlementsCommissionResponseMatchStatusUnmatched, nil
+	case "matched":
+		return PostV1BankSettlementsCommissionResponseMatchStatusMatched, nil
+	case "manual":
+		return PostV1BankSettlementsCommissionResponseMatchStatusManual, nil
+	}
+	var t PostV1BankSettlementsCommissionResponseMatchStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1BankSettlementsCommissionResponseMatchStatus) Ptr() *PostV1BankSettlementsCommissionResponseMatchStatus {
+	return &p
+}
+
+var (
 	postV1BankSettlementsGetResponseFieldID                   = big.NewInt(1 << 0)
 	postV1BankSettlementsGetResponseFieldBankAccountID        = big.NewInt(1 << 1)
 	postV1BankSettlementsGetResponseFieldProvider             = big.NewInt(1 << 2)
@@ -14443,15 +14840,16 @@ var (
 	postV1BankSettlementsGetResponseFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsGetResponseFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsGetResponseFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsGetResponseFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsGetResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsGetResponseFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsGetResponseFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsGetResponseFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsGetResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsGetResponseFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsGetResponseFieldUpdatedAt            = big.NewInt(1 << 16)
-	postV1BankSettlementsGetResponseFieldLines                = big.NewInt(1 << 17)
+	postV1BankSettlementsGetResponseFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsGetResponseFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsGetResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsGetResponseFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsGetResponseFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsGetResponseFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsGetResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsGetResponseFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsGetResponseFieldUpdatedAt            = big.NewInt(1 << 17)
+	postV1BankSettlementsGetResponseFieldLines                = big.NewInt(1 << 18)
 )
 
 type PostV1BankSettlementsGetResponse struct {
@@ -14464,6 +14862,7 @@ type PostV1BankSettlementsGetResponse struct {
 	GrossTotal           string                                       `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                       `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                       `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                      `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsGetResponseStatus       `json:"status" url:"status"`
 	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                      `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -14542,6 +14941,13 @@ func (p *PostV1BankSettlementsGetResponse) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsGetResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsGetResponse) GetStatus() PostV1BankSettlementsGetResponseStatus {
@@ -14684,6 +15090,13 @@ func (p *PostV1BankSettlementsGetResponse) SetNetTotal(netTotal string) {
 	p.require(postV1BankSettlementsGetResponseFieldNetTotal)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsGetResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsGetResponseFieldFxRate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1BankSettlementsGetResponse) SetStatus(status PostV1BankSettlementsGetResponseStatus) {
@@ -14790,35 +15203,39 @@ func (p *PostV1BankSettlementsGetResponse) String() string {
 }
 
 var (
-	postV1BankSettlementsGetResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	postV1BankSettlementsGetResponseLinesItemFieldExternalID       = big.NewInt(1 << 1)
-	postV1BankSettlementsGetResponseLinesItemFieldCategory         = big.NewInt(1 << 2)
-	postV1BankSettlementsGetResponseLinesItemFieldDate             = big.NewInt(1 << 3)
-	postV1BankSettlementsGetResponseLinesItemFieldGross            = big.NewInt(1 << 4)
-	postV1BankSettlementsGetResponseLinesItemFieldFee              = big.NewInt(1 << 5)
-	postV1BankSettlementsGetResponseLinesItemFieldNet              = big.NewInt(1 << 6)
-	postV1BankSettlementsGetResponseLinesItemFieldDescription      = big.NewInt(1 << 7)
-	postV1BankSettlementsGetResponseLinesItemFieldSourceID         = big.NewInt(1 << 8)
-	postV1BankSettlementsGetResponseLinesItemFieldChargeID         = big.NewInt(1 << 9)
-	postV1BankSettlementsGetResponseLinesItemFieldReference        = big.NewInt(1 << 10)
-	postV1BankSettlementsGetResponseLinesItemFieldMatchedInvoiceID = big.NewInt(1 << 11)
-	postV1BankSettlementsGetResponseLinesItemFieldMatchStatus      = big.NewInt(1 << 12)
+	postV1BankSettlementsGetResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	postV1BankSettlementsGetResponseLinesItemFieldExternalID        = big.NewInt(1 << 1)
+	postV1BankSettlementsGetResponseLinesItemFieldCategory          = big.NewInt(1 << 2)
+	postV1BankSettlementsGetResponseLinesItemFieldDate              = big.NewInt(1 << 3)
+	postV1BankSettlementsGetResponseLinesItemFieldGross             = big.NewInt(1 << 4)
+	postV1BankSettlementsGetResponseLinesItemFieldFee               = big.NewInt(1 << 5)
+	postV1BankSettlementsGetResponseLinesItemFieldNet               = big.NewInt(1 << 6)
+	postV1BankSettlementsGetResponseLinesItemFieldDescription       = big.NewInt(1 << 7)
+	postV1BankSettlementsGetResponseLinesItemFieldSourceID          = big.NewInt(1 << 8)
+	postV1BankSettlementsGetResponseLinesItemFieldChargeID          = big.NewInt(1 << 9)
+	postV1BankSettlementsGetResponseLinesItemFieldCommissionPercent = big.NewInt(1 << 10)
+	postV1BankSettlementsGetResponseLinesItemFieldCommissionAmount  = big.NewInt(1 << 11)
+	postV1BankSettlementsGetResponseLinesItemFieldReference         = big.NewInt(1 << 12)
+	postV1BankSettlementsGetResponseLinesItemFieldMatchedInvoiceID  = big.NewInt(1 << 13)
+	postV1BankSettlementsGetResponseLinesItemFieldMatchStatus       = big.NewInt(1 << 14)
 )
 
 type PostV1BankSettlementsGetResponseLinesItem struct {
-	ID               string                                               `json:"id" url:"id"`
-	ExternalID       string                                               `json:"externalId" url:"externalId"`
-	Category         string                                               `json:"category" url:"category"`
-	Date             string                                               `json:"date" url:"date"`
-	Gross            string                                               `json:"gross" url:"gross"`
-	Fee              string                                               `json:"fee" url:"fee"`
-	Net              string                                               `json:"net" url:"net"`
-	Description      *string                                              `json:"description,omitempty" url:"description,omitempty"`
-	SourceID         *string                                              `json:"sourceId,omitempty" url:"sourceId,omitempty"`
-	ChargeID         *string                                              `json:"chargeId,omitempty" url:"chargeId,omitempty"`
-	Reference        *string                                              `json:"reference,omitempty" url:"reference,omitempty"`
-	MatchedInvoiceID *string                                              `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
-	MatchStatus      PostV1BankSettlementsGetResponseLinesItemMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ID                string                                               `json:"id" url:"id"`
+	ExternalID        string                                               `json:"externalId" url:"externalId"`
+	Category          string                                               `json:"category" url:"category"`
+	Date              string                                               `json:"date" url:"date"`
+	Gross             string                                               `json:"gross" url:"gross"`
+	Fee               string                                               `json:"fee" url:"fee"`
+	Net               string                                               `json:"net" url:"net"`
+	Description       *string                                              `json:"description,omitempty" url:"description,omitempty"`
+	SourceID          *string                                              `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID          *string                                              `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent *string                                              `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount  *string                                              `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference         *string                                              `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID  *string                                              `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus       PostV1BankSettlementsGetResponseLinesItemMatchStatus `json:"matchStatus" url:"matchStatus"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14895,6 +15312,20 @@ func (p *PostV1BankSettlementsGetResponseLinesItem) GetChargeID() *string {
 		return nil
 	}
 	return p.ChargeID
+}
+
+func (p *PostV1BankSettlementsGetResponseLinesItem) GetCommissionPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionPercent
+}
+
+func (p *PostV1BankSettlementsGetResponseLinesItem) GetCommissionAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionAmount
 }
 
 func (p *PostV1BankSettlementsGetResponseLinesItem) GetReference() *string {
@@ -15000,6 +15431,20 @@ func (p *PostV1BankSettlementsGetResponseLinesItem) SetSourceID(sourceID *string
 func (p *PostV1BankSettlementsGetResponseLinesItem) SetChargeID(chargeID *string) {
 	p.ChargeID = chargeID
 	p.require(postV1BankSettlementsGetResponseLinesItemFieldChargeID)
+}
+
+// SetCommissionPercent sets the CommissionPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsGetResponseLinesItem) SetCommissionPercent(commissionPercent *string) {
+	p.CommissionPercent = commissionPercent
+	p.require(postV1BankSettlementsGetResponseLinesItemFieldCommissionPercent)
+}
+
+// SetCommissionAmount sets the CommissionAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsGetResponseLinesItem) SetCommissionAmount(commissionAmount *string) {
+	p.CommissionAmount = commissionAmount
+	p.require(postV1BankSettlementsGetResponseLinesItemFieldCommissionAmount)
 }
 
 // SetReference sets the Reference field and marks it as non-optional;
@@ -15337,14 +15782,15 @@ var (
 	postV1BankSettlementsImportResponseBatchesItemFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsImportResponseBatchesItemFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsImportResponseBatchesItemFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsImportResponseBatchesItemFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsImportResponseBatchesItemFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsImportResponseBatchesItemFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsImportResponseBatchesItemFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsImportResponseBatchesItemFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsImportResponseBatchesItemFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsImportResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsImportResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsImportResponseBatchesItemFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsImportResponseBatchesItemFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsImportResponseBatchesItemFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsImportResponseBatchesItemFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsImportResponseBatchesItemFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsImportResponseBatchesItemFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsImportResponseBatchesItemFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsImportResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsImportResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 17)
 )
 
 type PostV1BankSettlementsImportResponseBatchesItem struct {
@@ -15357,6 +15803,7 @@ type PostV1BankSettlementsImportResponseBatchesItem struct {
 	GrossTotal           string                                               `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                               `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                               `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                              `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsImportResponseBatchesItemStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                              `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -15434,6 +15881,13 @@ func (p *PostV1BankSettlementsImportResponseBatchesItem) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsImportResponseBatchesItem) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsImportResponseBatchesItem) GetStatus() PostV1BankSettlementsImportResponseBatchesItemStatus {
@@ -15567,6 +16021,13 @@ func (p *PostV1BankSettlementsImportResponseBatchesItem) SetFeeTotal(feeTotal st
 func (p *PostV1BankSettlementsImportResponseBatchesItem) SetNetTotal(netTotal string) {
 	p.NetTotal = netTotal
 	p.require(postV1BankSettlementsImportResponseBatchesItemFieldNetTotal)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsImportResponseBatchesItem) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsImportResponseBatchesItemFieldFxRate)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -15721,14 +16182,15 @@ var (
 	postV1BankSettlementsLinkResponseFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsLinkResponseFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsLinkResponseFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsLinkResponseFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsLinkResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsLinkResponseFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsLinkResponseFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsLinkResponseFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsLinkResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsLinkResponseFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsLinkResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsLinkResponseFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsLinkResponseFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsLinkResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsLinkResponseFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsLinkResponseFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsLinkResponseFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsLinkResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsLinkResponseFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsLinkResponseFieldUpdatedAt            = big.NewInt(1 << 17)
 )
 
 type PostV1BankSettlementsLinkResponse struct {
@@ -15741,6 +16203,7 @@ type PostV1BankSettlementsLinkResponse struct {
 	GrossTotal           string                                  `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                  `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                  `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                 `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsLinkResponseStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                 `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -15818,6 +16281,13 @@ func (p *PostV1BankSettlementsLinkResponse) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsLinkResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsLinkResponse) GetStatus() PostV1BankSettlementsLinkResponseStatus {
@@ -15951,6 +16421,13 @@ func (p *PostV1BankSettlementsLinkResponse) SetFeeTotal(feeTotal string) {
 func (p *PostV1BankSettlementsLinkResponse) SetNetTotal(netTotal string) {
 	p.NetTotal = netTotal
 	p.require(postV1BankSettlementsLinkResponseFieldNetTotal)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsLinkResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsLinkResponseFieldFxRate)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -16669,14 +17146,15 @@ var (
 	postV1BankSettlementsListResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsListResponseRowsItemFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsListResponseRowsItemFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsListResponseRowsItemFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsListResponseRowsItemFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsListResponseRowsItemFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsListResponseRowsItemFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsListResponseRowsItemFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsListResponseRowsItemFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsListResponseRowsItemFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsListResponseRowsItemFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsListResponseRowsItemFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsListResponseRowsItemFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 17)
 )
 
 type PostV1BankSettlementsListResponseRowsItem struct {
@@ -16689,6 +17167,7 @@ type PostV1BankSettlementsListResponseRowsItem struct {
 	GrossTotal           string                                          `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                          `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                          `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                         `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsListResponseRowsItemStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                         `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -16766,6 +17245,13 @@ func (p *PostV1BankSettlementsListResponseRowsItem) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsListResponseRowsItem) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsListResponseRowsItem) GetStatus() PostV1BankSettlementsListResponseRowsItemStatus {
@@ -16901,6 +17387,13 @@ func (p *PostV1BankSettlementsListResponseRowsItem) SetNetTotal(netTotal string)
 	p.require(postV1BankSettlementsListResponseRowsItemFieldNetTotal)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsListResponseRowsItem) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsListResponseRowsItemFieldFxRate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1BankSettlementsListResponseRowsItem) SetStatus(status PostV1BankSettlementsListResponseRowsItemStatus) {
@@ -17022,35 +17515,39 @@ func (p PostV1BankSettlementsListResponseRowsItemStatus) Ptr() *PostV1BankSettle
 }
 
 var (
-	postV1BankSettlementsMatchResponseFieldID               = big.NewInt(1 << 0)
-	postV1BankSettlementsMatchResponseFieldExternalID       = big.NewInt(1 << 1)
-	postV1BankSettlementsMatchResponseFieldCategory         = big.NewInt(1 << 2)
-	postV1BankSettlementsMatchResponseFieldDate             = big.NewInt(1 << 3)
-	postV1BankSettlementsMatchResponseFieldGross            = big.NewInt(1 << 4)
-	postV1BankSettlementsMatchResponseFieldFee              = big.NewInt(1 << 5)
-	postV1BankSettlementsMatchResponseFieldNet              = big.NewInt(1 << 6)
-	postV1BankSettlementsMatchResponseFieldDescription      = big.NewInt(1 << 7)
-	postV1BankSettlementsMatchResponseFieldSourceID         = big.NewInt(1 << 8)
-	postV1BankSettlementsMatchResponseFieldChargeID         = big.NewInt(1 << 9)
-	postV1BankSettlementsMatchResponseFieldReference        = big.NewInt(1 << 10)
-	postV1BankSettlementsMatchResponseFieldMatchedInvoiceID = big.NewInt(1 << 11)
-	postV1BankSettlementsMatchResponseFieldMatchStatus      = big.NewInt(1 << 12)
+	postV1BankSettlementsMatchResponseFieldID                = big.NewInt(1 << 0)
+	postV1BankSettlementsMatchResponseFieldExternalID        = big.NewInt(1 << 1)
+	postV1BankSettlementsMatchResponseFieldCategory          = big.NewInt(1 << 2)
+	postV1BankSettlementsMatchResponseFieldDate              = big.NewInt(1 << 3)
+	postV1BankSettlementsMatchResponseFieldGross             = big.NewInt(1 << 4)
+	postV1BankSettlementsMatchResponseFieldFee               = big.NewInt(1 << 5)
+	postV1BankSettlementsMatchResponseFieldNet               = big.NewInt(1 << 6)
+	postV1BankSettlementsMatchResponseFieldDescription       = big.NewInt(1 << 7)
+	postV1BankSettlementsMatchResponseFieldSourceID          = big.NewInt(1 << 8)
+	postV1BankSettlementsMatchResponseFieldChargeID          = big.NewInt(1 << 9)
+	postV1BankSettlementsMatchResponseFieldCommissionPercent = big.NewInt(1 << 10)
+	postV1BankSettlementsMatchResponseFieldCommissionAmount  = big.NewInt(1 << 11)
+	postV1BankSettlementsMatchResponseFieldReference         = big.NewInt(1 << 12)
+	postV1BankSettlementsMatchResponseFieldMatchedInvoiceID  = big.NewInt(1 << 13)
+	postV1BankSettlementsMatchResponseFieldMatchStatus       = big.NewInt(1 << 14)
 )
 
 type PostV1BankSettlementsMatchResponse struct {
-	ID               string                                        `json:"id" url:"id"`
-	ExternalID       string                                        `json:"externalId" url:"externalId"`
-	Category         string                                        `json:"category" url:"category"`
-	Date             string                                        `json:"date" url:"date"`
-	Gross            string                                        `json:"gross" url:"gross"`
-	Fee              string                                        `json:"fee" url:"fee"`
-	Net              string                                        `json:"net" url:"net"`
-	Description      *string                                       `json:"description,omitempty" url:"description,omitempty"`
-	SourceID         *string                                       `json:"sourceId,omitempty" url:"sourceId,omitempty"`
-	ChargeID         *string                                       `json:"chargeId,omitempty" url:"chargeId,omitempty"`
-	Reference        *string                                       `json:"reference,omitempty" url:"reference,omitempty"`
-	MatchedInvoiceID *string                                       `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
-	MatchStatus      PostV1BankSettlementsMatchResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ID                string                                        `json:"id" url:"id"`
+	ExternalID        string                                        `json:"externalId" url:"externalId"`
+	Category          string                                        `json:"category" url:"category"`
+	Date              string                                        `json:"date" url:"date"`
+	Gross             string                                        `json:"gross" url:"gross"`
+	Fee               string                                        `json:"fee" url:"fee"`
+	Net               string                                        `json:"net" url:"net"`
+	Description       *string                                       `json:"description,omitempty" url:"description,omitempty"`
+	SourceID          *string                                       `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID          *string                                       `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent *string                                       `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount  *string                                       `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference         *string                                       `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID  *string                                       `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus       PostV1BankSettlementsMatchResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17127,6 +17624,20 @@ func (p *PostV1BankSettlementsMatchResponse) GetChargeID() *string {
 		return nil
 	}
 	return p.ChargeID
+}
+
+func (p *PostV1BankSettlementsMatchResponse) GetCommissionPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionPercent
+}
+
+func (p *PostV1BankSettlementsMatchResponse) GetCommissionAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CommissionAmount
 }
 
 func (p *PostV1BankSettlementsMatchResponse) GetReference() *string {
@@ -17234,6 +17745,20 @@ func (p *PostV1BankSettlementsMatchResponse) SetChargeID(chargeID *string) {
 	p.require(postV1BankSettlementsMatchResponseFieldChargeID)
 }
 
+// SetCommissionPercent sets the CommissionPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsMatchResponse) SetCommissionPercent(commissionPercent *string) {
+	p.CommissionPercent = commissionPercent
+	p.require(postV1BankSettlementsMatchResponseFieldCommissionPercent)
+}
+
+// SetCommissionAmount sets the CommissionAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsMatchResponse) SetCommissionAmount(commissionAmount *string) {
+	p.CommissionAmount = commissionAmount
+	p.require(postV1BankSettlementsMatchResponseFieldCommissionAmount)
+}
+
 // SetReference sets the Reference field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1BankSettlementsMatchResponse) SetReference(reference *string) {
@@ -17332,16 +17857,17 @@ var (
 	postV1BankSettlementsPostResponseFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsPostResponseFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsPostResponseFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsPostResponseFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsPostResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsPostResponseFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsPostResponseFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsPostResponseFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsPostResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsPostResponseFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsPostResponseFieldUpdatedAt            = big.NewInt(1 << 16)
-	postV1BankSettlementsPostResponseFieldWarnings             = big.NewInt(1 << 17)
-	postV1BankSettlementsPostResponseFieldSummary              = big.NewInt(1 << 18)
+	postV1BankSettlementsPostResponseFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsPostResponseFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsPostResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsPostResponseFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsPostResponseFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsPostResponseFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsPostResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsPostResponseFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsPostResponseFieldUpdatedAt            = big.NewInt(1 << 17)
+	postV1BankSettlementsPostResponseFieldWarnings             = big.NewInt(1 << 18)
+	postV1BankSettlementsPostResponseFieldSummary              = big.NewInt(1 << 19)
 )
 
 type PostV1BankSettlementsPostResponse struct {
@@ -17354,6 +17880,7 @@ type PostV1BankSettlementsPostResponse struct {
 	GrossTotal           string                                    `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                    `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                    `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                   `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsPostResponseStatus   `json:"status" url:"status"`
 	JournalTransactionID *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                   `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -17433,6 +17960,13 @@ func (p *PostV1BankSettlementsPostResponse) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsPostResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsPostResponse) GetStatus() PostV1BankSettlementsPostResponseStatus {
@@ -17582,6 +18116,13 @@ func (p *PostV1BankSettlementsPostResponse) SetNetTotal(netTotal string) {
 	p.require(postV1BankSettlementsPostResponseFieldNetTotal)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsPostResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsPostResponseFieldFxRate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1BankSettlementsPostResponse) SetStatus(status PostV1BankSettlementsPostResponseStatus) {
@@ -17717,19 +18258,23 @@ func (p PostV1BankSettlementsPostResponseStatus) Ptr() *PostV1BankSettlementsPos
 }
 
 var (
-	postV1BankSettlementsPostResponseSummaryFieldReceivableApplied = big.NewInt(1 << 0)
-	postV1BankSettlementsPostResponseSummaryFieldCommissionAmount  = big.NewInt(1 << 1)
-	postV1BankSettlementsPostResponseSummaryFieldSellerAmount      = big.NewInt(1 << 2)
-	postV1BankSettlementsPostResponseSummaryFieldFeeAmount         = big.NewInt(1 << 3)
-	postV1BankSettlementsPostResponseSummaryFieldSuspenseAmount    = big.NewInt(1 << 4)
+	postV1BankSettlementsPostResponseSummaryFieldReceivableApplied  = big.NewInt(1 << 0)
+	postV1BankSettlementsPostResponseSummaryFieldCommissionAmount   = big.NewInt(1 << 1)
+	postV1BankSettlementsPostResponseSummaryFieldSellerAmount       = big.NewInt(1 << 2)
+	postV1BankSettlementsPostResponseSummaryFieldFeeAmount          = big.NewInt(1 << 3)
+	postV1BankSettlementsPostResponseSummaryFieldSuspenseAmount     = big.NewInt(1 << 4)
+	postV1BankSettlementsPostResponseSummaryFieldFxRate             = big.NewInt(1 << 5)
+	postV1BankSettlementsPostResponseSummaryFieldExchangeDifference = big.NewInt(1 << 6)
 )
 
 type PostV1BankSettlementsPostResponseSummary struct {
-	ReceivableApplied string `json:"receivableApplied" url:"receivableApplied"`
-	CommissionAmount  string `json:"commissionAmount" url:"commissionAmount"`
-	SellerAmount      string `json:"sellerAmount" url:"sellerAmount"`
-	FeeAmount         string `json:"feeAmount" url:"feeAmount"`
-	SuspenseAmount    string `json:"suspenseAmount" url:"suspenseAmount"`
+	ReceivableApplied  string `json:"receivableApplied" url:"receivableApplied"`
+	CommissionAmount   string `json:"commissionAmount" url:"commissionAmount"`
+	SellerAmount       string `json:"sellerAmount" url:"sellerAmount"`
+	FeeAmount          string `json:"feeAmount" url:"feeAmount"`
+	SuspenseAmount     string `json:"suspenseAmount" url:"suspenseAmount"`
+	FxRate             string `json:"fxRate" url:"fxRate"`
+	ExchangeDifference string `json:"exchangeDifference" url:"exchangeDifference"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17771,6 +18316,20 @@ func (p *PostV1BankSettlementsPostResponseSummary) GetSuspenseAmount() string {
 		return ""
 	}
 	return p.SuspenseAmount
+}
+
+func (p *PostV1BankSettlementsPostResponseSummary) GetFxRate() string {
+	if p == nil {
+		return ""
+	}
+	return p.FxRate
+}
+
+func (p *PostV1BankSettlementsPostResponseSummary) GetExchangeDifference() string {
+	if p == nil {
+		return ""
+	}
+	return p.ExchangeDifference
 }
 
 func (p *PostV1BankSettlementsPostResponseSummary) GetExtraProperties() map[string]interface{} {
@@ -17820,6 +18379,20 @@ func (p *PostV1BankSettlementsPostResponseSummary) SetFeeAmount(feeAmount string
 func (p *PostV1BankSettlementsPostResponseSummary) SetSuspenseAmount(suspenseAmount string) {
 	p.SuspenseAmount = suspenseAmount
 	p.require(postV1BankSettlementsPostResponseSummaryFieldSuspenseAmount)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsPostResponseSummary) SetFxRate(fxRate string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsPostResponseSummaryFieldFxRate)
+}
+
+// SetExchangeDifference sets the ExchangeDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsPostResponseSummary) SetExchangeDifference(exchangeDifference string) {
+	p.ExchangeDifference = exchangeDifference
+	p.require(postV1BankSettlementsPostResponseSummaryFieldExchangeDifference)
 }
 
 func (p *PostV1BankSettlementsPostResponseSummary) UnmarshalJSON(data []byte) error {
@@ -17874,14 +18447,15 @@ var (
 	postV1BankSettlementsUnlinkResponseFieldGrossTotal           = big.NewInt(1 << 6)
 	postV1BankSettlementsUnlinkResponseFieldFeeTotal             = big.NewInt(1 << 7)
 	postV1BankSettlementsUnlinkResponseFieldNetTotal             = big.NewInt(1 << 8)
-	postV1BankSettlementsUnlinkResponseFieldStatus               = big.NewInt(1 << 9)
-	postV1BankSettlementsUnlinkResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1BankSettlementsUnlinkResponseFieldBankTransactionID    = big.NewInt(1 << 11)
-	postV1BankSettlementsUnlinkResponseFieldLineCount            = big.NewInt(1 << 12)
-	postV1BankSettlementsUnlinkResponseFieldMatchedCount         = big.NewInt(1 << 13)
-	postV1BankSettlementsUnlinkResponseFieldUnmatchedCount       = big.NewInt(1 << 14)
-	postV1BankSettlementsUnlinkResponseFieldCreatedAt            = big.NewInt(1 << 15)
-	postV1BankSettlementsUnlinkResponseFieldUpdatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsUnlinkResponseFieldFxRate               = big.NewInt(1 << 9)
+	postV1BankSettlementsUnlinkResponseFieldStatus               = big.NewInt(1 << 10)
+	postV1BankSettlementsUnlinkResponseFieldJournalTransactionID = big.NewInt(1 << 11)
+	postV1BankSettlementsUnlinkResponseFieldBankTransactionID    = big.NewInt(1 << 12)
+	postV1BankSettlementsUnlinkResponseFieldLineCount            = big.NewInt(1 << 13)
+	postV1BankSettlementsUnlinkResponseFieldMatchedCount         = big.NewInt(1 << 14)
+	postV1BankSettlementsUnlinkResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
+	postV1BankSettlementsUnlinkResponseFieldCreatedAt            = big.NewInt(1 << 16)
+	postV1BankSettlementsUnlinkResponseFieldUpdatedAt            = big.NewInt(1 << 17)
 )
 
 type PostV1BankSettlementsUnlinkResponse struct {
@@ -17894,6 +18468,7 @@ type PostV1BankSettlementsUnlinkResponse struct {
 	GrossTotal           string                                    `json:"grossTotal" url:"grossTotal"`
 	FeeTotal             string                                    `json:"feeTotal" url:"feeTotal"`
 	NetTotal             string                                    `json:"netTotal" url:"netTotal"`
+	FxRate               *string                                   `json:"fxRate,omitempty" url:"fxRate,omitempty"`
 	Status               PostV1BankSettlementsUnlinkResponseStatus `json:"status" url:"status"`
 	JournalTransactionID *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	BankTransactionID    *string                                   `json:"bankTransactionId,omitempty" url:"bankTransactionId,omitempty"`
@@ -17971,6 +18546,13 @@ func (p *PostV1BankSettlementsUnlinkResponse) GetNetTotal() string {
 		return ""
 	}
 	return p.NetTotal
+}
+
+func (p *PostV1BankSettlementsUnlinkResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
 }
 
 func (p *PostV1BankSettlementsUnlinkResponse) GetStatus() PostV1BankSettlementsUnlinkResponseStatus {
@@ -18104,6 +18686,13 @@ func (p *PostV1BankSettlementsUnlinkResponse) SetFeeTotal(feeTotal string) {
 func (p *PostV1BankSettlementsUnlinkResponse) SetNetTotal(netTotal string) {
 	p.NetTotal = netTotal
 	p.require(postV1BankSettlementsUnlinkResponseFieldNetTotal)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1BankSettlementsUnlinkResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1BankSettlementsUnlinkResponseFieldFxRate)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;

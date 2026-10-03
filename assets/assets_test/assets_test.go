@@ -160,6 +160,66 @@ func TestAssetsPostV1AssetsAssetsCreateWithWireMock(
 	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsCreateWithWireMock", "POST", "/v1/assets/assets/create", nil, 1)
 }
 
+func TestAssetsPostV1AssetsAssetsUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AssetsAssetsUpdateRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Assets.PostV1AssetsAssetsUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsUpdateWithWireMock", "POST", "/v1/assets/assets/update", nil, 1)
+}
+
+func TestAssetsPostV1AssetsAssetsInputVatWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1AssetsAssetsInputVatRequest{
+		ID:                 "id",
+		InputVatRealEstate: true,
+		InputVatUseChanges: []*nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
+			&nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem{
+				Year:    int64(1000000),
+				Percent: "percent",
+				Reason:  nordlet.PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange,
+			},
+		},
+	}
+	_, invocationErr := client.Assets.PostV1AssetsAssetsInputVat(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAssetsPostV1AssetsAssetsInputVatWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAssetsPostV1AssetsAssetsInputVatWithWireMock", "POST", "/v1/assets/assets/input-vat", nil, 1)
+}
+
 func TestAssetsPostV1AssetsAssetsGetWithWireMock(
 	t *testing.T,
 ) {

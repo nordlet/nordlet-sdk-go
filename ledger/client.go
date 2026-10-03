@@ -98,6 +98,23 @@ func (c *Client) PostV1LedgerAccountsApplyTemplate(
 	return response.Body, nil
 }
 
+// Replaces the seeded chart with the chart template of the company country (the Romanian general chart for a company registered in Romania, the Lithuanian standard chart otherwise) and switches the posting defaults with it. Answers 409 when the company already uses that chart, has journal entries, holds accounts created by hand, or has settings that name an account the new chart does not have.
+func (c *Client) MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+	ctx context.Context,
+	request *nordlet.PostV1LedgerAccountsSwitchChartRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LedgerAccountsSwitchChartResponse, error) {
+	response, err := c.WithRawResponse.MoveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1LedgerPeriodsList(
 	ctx context.Context,
 	request *nordlet.PostV1LedgerPeriodsListRequest,
@@ -392,6 +409,121 @@ func (c *Client) PostV1LedgerJournalTransactionsCreate(
 	opts ...option.RequestOption,
 ) (*nordlet.PostV1LedgerJournalTransactionsCreateResponse, error) {
 	response, err := c.WithRawResponse.PostV1LedgerJournalTransactionsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// The rows or codes of each return or registry deposit of the company country that are filled from account balances. Accounts fall into a row by the layout defaults for the standard chart of accounts unless mapped under Settings → Statement rows.
+func (c *Client) NationalStatementLayoutsAvailableToTheCompany(
+	ctx context.Context,
+	request *nordlet.PostV1LedgerStatementRowsSchemesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LedgerStatementRowsSchemesResponse, error) {
+	response, err := c.WithRawResponse.NationalStatementLayoutsAvailableToTheCompany(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+	ctx context.Context,
+	request *nordlet.PostV1LedgerStatementRowsListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LedgerStatementRowsListResponse, error) {
+	response, err := c.WithRawResponse.AccountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// A mapping on a code prefix covers every account whose code starts with it; the longest matching prefix wins. An empty rowCode removes the mapping so the layout default applies again.
+func (c *Client) MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+	ctx context.Context,
+	request *nordlet.PostV1LedgerStatementRowsSetRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1LedgerStatementRowsSetResponse, error) {
+	response, err := c.WithRawResponse.MapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Directors, board members, the company secretary, representatives and liquidators, with their personal identifier, appointment and resignation dates and whether they sign the annual accounts. Annual returns and registry deposits are built from this register.
+func (c *Client) OfficersOfTheCompany(
+	ctx context.Context,
+	request *nordlet.PostV1OfficersListRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OfficersListResponse, error) {
+	response, err := c.WithRawResponse.OfficersOfTheCompany(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) RecordAnOfficerOfTheCompany(
+	ctx context.Context,
+	request *nordlet.PostV1OfficersCreateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OfficersCreateResponse, error) {
+	response, err := c.WithRawResponse.RecordAnOfficerOfTheCompany(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ChangeARecordedOfficer(
+	ctx context.Context,
+	request *nordlet.PostV1OfficersUpdateRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OfficersUpdateResponse, error) {
+	response, err := c.WithRawResponse.ChangeARecordedOfficer(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) RemoveARecordedOfficer(
+	ctx context.Context,
+	request *nordlet.PostV1OfficersDeleteRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1OfficersDeleteResponse, error) {
+	response, err := c.WithRawResponse.RemoveARecordedOfficer(
 		ctx,
 		request,
 		opts...,

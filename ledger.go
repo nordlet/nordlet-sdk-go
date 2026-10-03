@@ -9,6 +9,291 @@ import (
 	big "math/big"
 )
 
+var (
+	postV1LedgerStatementRowsListRequestFieldScheme   = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListRequestFieldFromDate = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListRequestFieldToDate   = big.NewInt(1 << 2)
+)
+
+type PostV1LedgerStatementRowsListRequest struct {
+	Scheme   string  `json:"scheme" url:"-"`
+	FromDate *string `json:"fromDate,omitempty" url:"-"`
+	ToDate   *string `json:"toDate,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LedgerStatementRowsListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListRequest) SetScheme(scheme string) {
+	p.Scheme = scheme
+	p.require(postV1LedgerStatementRowsListRequestFieldScheme)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListRequest) SetFromDate(fromDate *string) {
+	p.FromDate = fromDate
+	p.require(postV1LedgerStatementRowsListRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListRequest) SetToDate(toDate *string) {
+	p.ToDate = toDate
+	p.require(postV1LedgerStatementRowsListRequestFieldToDate)
+}
+
+func (p *PostV1LedgerStatementRowsListRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListRequest(body)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1OfficersUpdateRequestFieldID            = big.NewInt(1 << 0)
+	postV1OfficersUpdateRequestFieldName          = big.NewInt(1 << 1)
+	postV1OfficersUpdateRequestFieldRole          = big.NewInt(1 << 2)
+	postV1OfficersUpdateRequestFieldPersonalCode  = big.NewInt(1 << 3)
+	postV1OfficersUpdateRequestFieldBirthDate     = big.NewInt(1 << 4)
+	postV1OfficersUpdateRequestFieldAppointedOn   = big.NewInt(1 << 5)
+	postV1OfficersUpdateRequestFieldPowerNotary   = big.NewInt(1 << 6)
+	postV1OfficersUpdateRequestFieldResignedOn    = big.NewInt(1 << 7)
+	postV1OfficersUpdateRequestFieldSignsAccounts = big.NewInt(1 << 8)
+)
+
+type PostV1OfficersUpdateRequest struct {
+	ID            string                          `json:"id" url:"-"`
+	Name          string                          `json:"name" url:"-"`
+	Role          PostV1OfficersUpdateRequestRole `json:"role" url:"-"`
+	PersonalCode  *string                         `json:"personalCode,omitempty" url:"-"`
+	BirthDate     *string                         `json:"birthDate,omitempty" url:"-"`
+	AppointedOn   *string                         `json:"appointedOn,omitempty" url:"-"`
+	PowerNotary   *string                         `json:"powerNotary,omitempty" url:"-"`
+	ResignedOn    *string                         `json:"resignedOn,omitempty" url:"-"`
+	SignsAccounts *bool                           `json:"signsAccounts,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1OfficersUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersUpdateRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1OfficersUpdateRequestFieldName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetRole(role PostV1OfficersUpdateRequestRole) {
+	p.Role = role
+	p.require(postV1OfficersUpdateRequestFieldRole)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1OfficersUpdateRequestFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1OfficersUpdateRequestFieldBirthDate)
+}
+
+// SetAppointedOn sets the AppointedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetAppointedOn(appointedOn *string) {
+	p.AppointedOn = appointedOn
+	p.require(postV1OfficersUpdateRequestFieldAppointedOn)
+}
+
+// SetPowerNotary sets the PowerNotary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetPowerNotary(powerNotary *string) {
+	p.PowerNotary = powerNotary
+	p.require(postV1OfficersUpdateRequestFieldPowerNotary)
+}
+
+// SetResignedOn sets the ResignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetResignedOn(resignedOn *string) {
+	p.ResignedOn = resignedOn
+	p.require(postV1OfficersUpdateRequestFieldResignedOn)
+}
+
+// SetSignsAccounts sets the SignsAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateRequest) SetSignsAccounts(signsAccounts *bool) {
+	p.SignsAccounts = signsAccounts
+	p.require(postV1OfficersUpdateRequestFieldSignsAccounts)
+}
+
+func (p *PostV1OfficersUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1OfficersUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1OfficersUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersUpdateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1LedgerStatementRowsSetRequestFieldScheme      = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsSetRequestFieldAccountCode = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsSetRequestFieldRowCode     = big.NewInt(1 << 2)
+)
+
+type PostV1LedgerStatementRowsSetRequest struct {
+	Scheme      string  `json:"scheme" url:"-"`
+	AccountCode string  `json:"accountCode" url:"-"`
+	RowCode     *string `json:"rowCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LedgerStatementRowsSetRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetRequest) SetScheme(scheme string) {
+	p.Scheme = scheme
+	p.require(postV1LedgerStatementRowsSetRequestFieldScheme)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetRequest) SetAccountCode(accountCode string) {
+	p.AccountCode = accountCode
+	p.require(postV1LedgerStatementRowsSetRequestFieldAccountCode)
+}
+
+// SetRowCode sets the RowCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetRequest) SetRowCode(rowCode *string) {
+	p.RowCode = rowCode
+	p.require(postV1LedgerStatementRowsSetRequestFieldRowCode)
+}
+
+func (p *PostV1LedgerStatementRowsSetRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsSetRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsSetRequest(body)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsSetRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsSetRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostV1LedgerAccountsSwitchChartRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LedgerAccountsSwitchChartRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+type PostV1LedgerStatementRowsSchemesRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1LedgerStatementRowsSchemesRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+type PostV1OfficersListRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1OfficersListRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
 type PostV1LedgerAccountsApplyTemplateRequest struct {
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -32,12 +317,12 @@ var (
 )
 
 type PostV1LedgerAccountsCreateRequest struct {
-	Code         string                                         `json:"code" url:"-"`
-	Name         string                                         `json:"name" url:"-"`
-	Translations *PostV1LedgerAccountsCreateRequestTranslations `json:"translations,omitempty" url:"-"`
-	Type         PostV1LedgerAccountsCreateRequestType          `json:"type" url:"-"`
-	ParentID     *string                                        `json:"parentId,omitempty" url:"-"`
-	IsPostable   *bool                                          `json:"isPostable,omitempty" url:"-"`
+	Code         string                                                         `json:"code" url:"-"`
+	Name         string                                                         `json:"name" url:"-"`
+	Translations map[string]*PostV1LedgerAccountsCreateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
+	Type         PostV1LedgerAccountsCreateRequestType                          `json:"type" url:"-"`
+	ParentID     *string                                                        `json:"parentId,omitempty" url:"-"`
+	IsPostable   *bool                                                          `json:"isPostable,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -66,7 +351,7 @@ func (p *PostV1LedgerAccountsCreateRequest) SetName(name string) {
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequest) SetTranslations(translations *PostV1LedgerAccountsCreateRequestTranslations) {
+func (p *PostV1LedgerAccountsCreateRequest) SetTranslations(translations map[string]*PostV1LedgerAccountsCreateRequestTranslationsValue) {
 	p.Translations = translations
 	p.require(postV1LedgerAccountsCreateRequestFieldTranslations)
 }
@@ -205,11 +490,11 @@ var (
 )
 
 type PostV1LedgerAccountsUpdateRequest struct {
-	ID           string                                         `json:"id" url:"-"`
-	Name         *string                                        `json:"name,omitempty" url:"-"`
-	Translations *PostV1LedgerAccountsUpdateRequestTranslations `json:"translations,omitempty" url:"-"`
-	ParentID     *string                                        `json:"parentId,omitempty" url:"-"`
-	IsPostable   *bool                                          `json:"isPostable,omitempty" url:"-"`
+	ID           string                                                         `json:"id" url:"-"`
+	Name         *string                                                        `json:"name,omitempty" url:"-"`
+	Translations map[string]*PostV1LedgerAccountsUpdateRequestTranslationsValue `json:"translations,omitempty" url:"-"`
+	ParentID     *string                                                        `json:"parentId,omitempty" url:"-"`
+	IsPostable   *bool                                                          `json:"isPostable,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -238,7 +523,7 @@ func (p *PostV1LedgerAccountsUpdateRequest) SetName(name *string) {
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequest) SetTranslations(translations *PostV1LedgerAccountsUpdateRequestTranslations) {
+func (p *PostV1LedgerAccountsUpdateRequest) SetTranslations(translations map[string]*PostV1LedgerAccountsUpdateRequestTranslationsValue) {
 	p.Translations = translations
 	p.require(postV1LedgerAccountsUpdateRequestFieldTranslations)
 }
@@ -940,25 +1225,33 @@ func (p *PostV1LedgerJournalTransactionsListRequest) MarshalJSON() ([]byte, erro
 }
 
 var (
-	postV1LedgerOwnersCreateRequestFieldName                  = big.NewInt(1 << 0)
-	postV1LedgerOwnersCreateRequestFieldCode                  = big.NewInt(1 << 1)
-	postV1LedgerOwnersCreateRequestFieldEquityAccountCode     = big.NewInt(1 << 2)
-	postV1LedgerOwnersCreateRequestFieldSharesQuantity        = big.NewInt(1 << 3)
-	postV1LedgerOwnersCreateRequestFieldSharesAmount          = big.NewInt(1 << 4)
-	postV1LedgerOwnersCreateRequestFieldSharesType            = big.NewInt(1 << 5)
-	postV1LedgerOwnersCreateRequestFieldSharesAcquisitionDate = big.NewInt(1 << 6)
-	postV1LedgerOwnersCreateRequestFieldAddress               = big.NewInt(1 << 7)
+	postV1LedgerOwnersCreateRequestFieldName                         = big.NewInt(1 << 0)
+	postV1LedgerOwnersCreateRequestFieldCode                         = big.NewInt(1 << 1)
+	postV1LedgerOwnersCreateRequestFieldEquityAccountCode            = big.NewInt(1 << 2)
+	postV1LedgerOwnersCreateRequestFieldSharesQuantity               = big.NewInt(1 << 3)
+	postV1LedgerOwnersCreateRequestFieldSharesAmount                 = big.NewInt(1 << 4)
+	postV1LedgerOwnersCreateRequestFieldSharesType                   = big.NewInt(1 << 5)
+	postV1LedgerOwnersCreateRequestFieldSharesAcquisitionDate        = big.NewInt(1 << 6)
+	postV1LedgerOwnersCreateRequestFieldWithholdingTaxPercent        = big.NewInt(1 << 7)
+	postV1LedgerOwnersCreateRequestFieldPartnerLiability             = big.NewInt(1 << 8)
+	postV1LedgerOwnersCreateRequestFieldSpecialBalanceRequired       = big.NewInt(1 << 9)
+	postV1LedgerOwnersCreateRequestFieldSupplementaryBalanceRequired = big.NewInt(1 << 10)
+	postV1LedgerOwnersCreateRequestFieldAddress                      = big.NewInt(1 << 11)
 )
 
 type PostV1LedgerOwnersCreateRequest struct {
-	Name                  string                                     `json:"name" url:"-"`
-	Code                  *string                                    `json:"code,omitempty" url:"-"`
-	EquityAccountCode     *string                                    `json:"equityAccountCode,omitempty" url:"-"`
-	SharesQuantity        *string                                    `json:"sharesQuantity,omitempty" url:"-"`
-	SharesAmount          *string                                    `json:"sharesAmount,omitempty" url:"-"`
-	SharesType            *PostV1LedgerOwnersCreateRequestSharesType `json:"sharesType,omitempty" url:"-"`
-	SharesAcquisitionDate *string                                    `json:"sharesAcquisitionDate,omitempty" url:"-"`
-	Address               *PostV1LedgerOwnersCreateRequestAddress    `json:"address,omitempty" url:"-"`
+	Name                         string                                           `json:"name" url:"-"`
+	Code                         *string                                          `json:"code,omitempty" url:"-"`
+	EquityAccountCode            *string                                          `json:"equityAccountCode,omitempty" url:"-"`
+	SharesQuantity               *string                                          `json:"sharesQuantity,omitempty" url:"-"`
+	SharesAmount                 *string                                          `json:"sharesAmount,omitempty" url:"-"`
+	SharesType                   *PostV1LedgerOwnersCreateRequestSharesType       `json:"sharesType,omitempty" url:"-"`
+	SharesAcquisitionDate        *string                                          `json:"sharesAcquisitionDate,omitempty" url:"-"`
+	WithholdingTaxPercent        *string                                          `json:"withholdingTaxPercent,omitempty" url:"-"`
+	PartnerLiability             *PostV1LedgerOwnersCreateRequestPartnerLiability `json:"partnerLiability,omitempty" url:"-"`
+	SpecialBalanceRequired       *bool                                            `json:"specialBalanceRequired,omitempty" url:"-"`
+	SupplementaryBalanceRequired *bool                                            `json:"supplementaryBalanceRequired,omitempty" url:"-"`
+	Address                      *PostV1LedgerOwnersCreateRequestAddress          `json:"address,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1018,6 +1311,34 @@ func (p *PostV1LedgerOwnersCreateRequest) SetSharesType(sharesType *PostV1Ledger
 func (p *PostV1LedgerOwnersCreateRequest) SetSharesAcquisitionDate(sharesAcquisitionDate *string) {
 	p.SharesAcquisitionDate = sharesAcquisitionDate
 	p.require(postV1LedgerOwnersCreateRequestFieldSharesAcquisitionDate)
+}
+
+// SetWithholdingTaxPercent sets the WithholdingTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateRequest) SetWithholdingTaxPercent(withholdingTaxPercent *string) {
+	p.WithholdingTaxPercent = withholdingTaxPercent
+	p.require(postV1LedgerOwnersCreateRequestFieldWithholdingTaxPercent)
+}
+
+// SetPartnerLiability sets the PartnerLiability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateRequest) SetPartnerLiability(partnerLiability *PostV1LedgerOwnersCreateRequestPartnerLiability) {
+	p.PartnerLiability = partnerLiability
+	p.require(postV1LedgerOwnersCreateRequestFieldPartnerLiability)
+}
+
+// SetSpecialBalanceRequired sets the SpecialBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateRequest) SetSpecialBalanceRequired(specialBalanceRequired *bool) {
+	p.SpecialBalanceRequired = specialBalanceRequired
+	p.require(postV1LedgerOwnersCreateRequestFieldSpecialBalanceRequired)
+}
+
+// SetSupplementaryBalanceRequired sets the SupplementaryBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateRequest) SetSupplementaryBalanceRequired(supplementaryBalanceRequired *bool) {
+	p.SupplementaryBalanceRequired = supplementaryBalanceRequired
+	p.require(postV1LedgerOwnersCreateRequestFieldSupplementaryBalanceRequired)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -1178,27 +1499,35 @@ func (p *PostV1LedgerOwnersListRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1LedgerOwnersUpdateRequestFieldID                    = big.NewInt(1 << 0)
-	postV1LedgerOwnersUpdateRequestFieldName                  = big.NewInt(1 << 1)
-	postV1LedgerOwnersUpdateRequestFieldCode                  = big.NewInt(1 << 2)
-	postV1LedgerOwnersUpdateRequestFieldEquityAccountCode     = big.NewInt(1 << 3)
-	postV1LedgerOwnersUpdateRequestFieldSharesQuantity        = big.NewInt(1 << 4)
-	postV1LedgerOwnersUpdateRequestFieldSharesAmount          = big.NewInt(1 << 5)
-	postV1LedgerOwnersUpdateRequestFieldSharesType            = big.NewInt(1 << 6)
-	postV1LedgerOwnersUpdateRequestFieldSharesAcquisitionDate = big.NewInt(1 << 7)
-	postV1LedgerOwnersUpdateRequestFieldAddress               = big.NewInt(1 << 8)
+	postV1LedgerOwnersUpdateRequestFieldID                           = big.NewInt(1 << 0)
+	postV1LedgerOwnersUpdateRequestFieldName                         = big.NewInt(1 << 1)
+	postV1LedgerOwnersUpdateRequestFieldCode                         = big.NewInt(1 << 2)
+	postV1LedgerOwnersUpdateRequestFieldEquityAccountCode            = big.NewInt(1 << 3)
+	postV1LedgerOwnersUpdateRequestFieldSharesQuantity               = big.NewInt(1 << 4)
+	postV1LedgerOwnersUpdateRequestFieldSharesAmount                 = big.NewInt(1 << 5)
+	postV1LedgerOwnersUpdateRequestFieldSharesType                   = big.NewInt(1 << 6)
+	postV1LedgerOwnersUpdateRequestFieldSharesAcquisitionDate        = big.NewInt(1 << 7)
+	postV1LedgerOwnersUpdateRequestFieldWithholdingTaxPercent        = big.NewInt(1 << 8)
+	postV1LedgerOwnersUpdateRequestFieldPartnerLiability             = big.NewInt(1 << 9)
+	postV1LedgerOwnersUpdateRequestFieldSpecialBalanceRequired       = big.NewInt(1 << 10)
+	postV1LedgerOwnersUpdateRequestFieldSupplementaryBalanceRequired = big.NewInt(1 << 11)
+	postV1LedgerOwnersUpdateRequestFieldAddress                      = big.NewInt(1 << 12)
 )
 
 type PostV1LedgerOwnersUpdateRequest struct {
-	ID                    string                                     `json:"id" url:"-"`
-	Name                  *string                                    `json:"name,omitempty" url:"-"`
-	Code                  *string                                    `json:"code,omitempty" url:"-"`
-	EquityAccountCode     *string                                    `json:"equityAccountCode,omitempty" url:"-"`
-	SharesQuantity        *string                                    `json:"sharesQuantity,omitempty" url:"-"`
-	SharesAmount          *string                                    `json:"sharesAmount,omitempty" url:"-"`
-	SharesType            *PostV1LedgerOwnersUpdateRequestSharesType `json:"sharesType,omitempty" url:"-"`
-	SharesAcquisitionDate *string                                    `json:"sharesAcquisitionDate,omitempty" url:"-"`
-	Address               *PostV1LedgerOwnersUpdateRequestAddress    `json:"address,omitempty" url:"-"`
+	ID                           string                                           `json:"id" url:"-"`
+	Name                         *string                                          `json:"name,omitempty" url:"-"`
+	Code                         *string                                          `json:"code,omitempty" url:"-"`
+	EquityAccountCode            *string                                          `json:"equityAccountCode,omitempty" url:"-"`
+	SharesQuantity               *string                                          `json:"sharesQuantity,omitempty" url:"-"`
+	SharesAmount                 *string                                          `json:"sharesAmount,omitempty" url:"-"`
+	SharesType                   *PostV1LedgerOwnersUpdateRequestSharesType       `json:"sharesType,omitempty" url:"-"`
+	SharesAcquisitionDate        *string                                          `json:"sharesAcquisitionDate,omitempty" url:"-"`
+	WithholdingTaxPercent        *string                                          `json:"withholdingTaxPercent,omitempty" url:"-"`
+	PartnerLiability             *PostV1LedgerOwnersUpdateRequestPartnerLiability `json:"partnerLiability,omitempty" url:"-"`
+	SpecialBalanceRequired       *bool                                            `json:"specialBalanceRequired,omitempty" url:"-"`
+	SupplementaryBalanceRequired *bool                                            `json:"supplementaryBalanceRequired,omitempty" url:"-"`
+	Address                      *PostV1LedgerOwnersUpdateRequestAddress          `json:"address,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1265,6 +1594,34 @@ func (p *PostV1LedgerOwnersUpdateRequest) SetSharesType(sharesType *PostV1Ledger
 func (p *PostV1LedgerOwnersUpdateRequest) SetSharesAcquisitionDate(sharesAcquisitionDate *string) {
 	p.SharesAcquisitionDate = sharesAcquisitionDate
 	p.require(postV1LedgerOwnersUpdateRequestFieldSharesAcquisitionDate)
+}
+
+// SetWithholdingTaxPercent sets the WithholdingTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateRequest) SetWithholdingTaxPercent(withholdingTaxPercent *string) {
+	p.WithholdingTaxPercent = withholdingTaxPercent
+	p.require(postV1LedgerOwnersUpdateRequestFieldWithholdingTaxPercent)
+}
+
+// SetPartnerLiability sets the PartnerLiability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateRequest) SetPartnerLiability(partnerLiability *PostV1LedgerOwnersUpdateRequestPartnerLiability) {
+	p.PartnerLiability = partnerLiability
+	p.require(postV1LedgerOwnersUpdateRequestFieldPartnerLiability)
+}
+
+// SetSpecialBalanceRequired sets the SpecialBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateRequest) SetSpecialBalanceRequired(specialBalanceRequired *bool) {
+	p.SpecialBalanceRequired = specialBalanceRequired
+	p.require(postV1LedgerOwnersUpdateRequestFieldSpecialBalanceRequired)
+}
+
+// SetSupplementaryBalanceRequired sets the SupplementaryBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateRequest) SetSupplementaryBalanceRequired(supplementaryBalanceRequired *bool) {
+	p.SupplementaryBalanceRequired = supplementaryBalanceRequired
+	p.require(postV1LedgerOwnersUpdateRequestFieldSupplementaryBalanceRequired)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -1548,6 +1905,161 @@ func (p *PostV1LedgerPostingRulesUpdateRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1OfficersCreateRequestFieldName          = big.NewInt(1 << 0)
+	postV1OfficersCreateRequestFieldRole          = big.NewInt(1 << 1)
+	postV1OfficersCreateRequestFieldPersonalCode  = big.NewInt(1 << 2)
+	postV1OfficersCreateRequestFieldBirthDate     = big.NewInt(1 << 3)
+	postV1OfficersCreateRequestFieldAppointedOn   = big.NewInt(1 << 4)
+	postV1OfficersCreateRequestFieldPowerNotary   = big.NewInt(1 << 5)
+	postV1OfficersCreateRequestFieldResignedOn    = big.NewInt(1 << 6)
+	postV1OfficersCreateRequestFieldSignsAccounts = big.NewInt(1 << 7)
+)
+
+type PostV1OfficersCreateRequest struct {
+	Name          string                          `json:"name" url:"-"`
+	Role          PostV1OfficersCreateRequestRole `json:"role" url:"-"`
+	PersonalCode  *string                         `json:"personalCode,omitempty" url:"-"`
+	BirthDate     *string                         `json:"birthDate,omitempty" url:"-"`
+	AppointedOn   *string                         `json:"appointedOn,omitempty" url:"-"`
+	PowerNotary   *string                         `json:"powerNotary,omitempty" url:"-"`
+	ResignedOn    *string                         `json:"resignedOn,omitempty" url:"-"`
+	SignsAccounts *bool                           `json:"signsAccounts,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1OfficersCreateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetName(name string) {
+	p.Name = name
+	p.require(postV1OfficersCreateRequestFieldName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetRole(role PostV1OfficersCreateRequestRole) {
+	p.Role = role
+	p.require(postV1OfficersCreateRequestFieldRole)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1OfficersCreateRequestFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1OfficersCreateRequestFieldBirthDate)
+}
+
+// SetAppointedOn sets the AppointedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetAppointedOn(appointedOn *string) {
+	p.AppointedOn = appointedOn
+	p.require(postV1OfficersCreateRequestFieldAppointedOn)
+}
+
+// SetPowerNotary sets the PowerNotary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetPowerNotary(powerNotary *string) {
+	p.PowerNotary = powerNotary
+	p.require(postV1OfficersCreateRequestFieldPowerNotary)
+}
+
+// SetResignedOn sets the ResignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetResignedOn(resignedOn *string) {
+	p.ResignedOn = resignedOn
+	p.require(postV1OfficersCreateRequestFieldResignedOn)
+}
+
+// SetSignsAccounts sets the SignsAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateRequest) SetSignsAccounts(signsAccounts *bool) {
+	p.SignsAccounts = signsAccounts
+	p.require(postV1OfficersCreateRequestFieldSignsAccounts)
+}
+
+func (p *PostV1OfficersCreateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersCreateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1OfficersCreateRequest(body)
+	return nil
+}
+
+func (p *PostV1OfficersCreateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersCreateRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1OfficersDeleteRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1OfficersDeleteRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1OfficersDeleteRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersDeleteRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersDeleteRequestFieldID)
+}
+
+func (p *PostV1OfficersDeleteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersDeleteRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1OfficersDeleteRequest(body)
+	return nil
+}
+
+func (p *PostV1OfficersDeleteRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersDeleteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1LedgerAccountsApplyTemplateResponseFieldAccounts = big.NewInt(1 << 0)
 )
 
@@ -1632,126 +2144,10 @@ func (p *PostV1LedgerAccountsApplyTemplateResponse) String() string {
 }
 
 var (
-	postV1LedgerAccountsCreateRequestTranslationsFieldLt = big.NewInt(1 << 0)
-	postV1LedgerAccountsCreateRequestTranslationsFieldEn = big.NewInt(1 << 1)
-	postV1LedgerAccountsCreateRequestTranslationsFieldRu = big.NewInt(1 << 2)
+	postV1LedgerAccountsCreateRequestTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1LedgerAccountsCreateRequestTranslations struct {
-	Lt *PostV1LedgerAccountsCreateRequestTranslationsLt `json:"lt,omitempty" url:"lt,omitempty"`
-	En *PostV1LedgerAccountsCreateRequestTranslationsEn `json:"en,omitempty" url:"en,omitempty"`
-	Ru *PostV1LedgerAccountsCreateRequestTranslationsRu `json:"ru,omitempty" url:"ru,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) GetLt() *PostV1LedgerAccountsCreateRequestTranslationsLt {
-	if p == nil {
-		return nil
-	}
-	return p.Lt
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) GetEn() *PostV1LedgerAccountsCreateRequestTranslationsEn {
-	if p == nil {
-		return nil
-	}
-	return p.En
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) GetRu() *PostV1LedgerAccountsCreateRequestTranslationsRu {
-	if p == nil {
-		return nil
-	}
-	return p.Ru
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetLt sets the Lt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslations) SetLt(lt *PostV1LedgerAccountsCreateRequestTranslationsLt) {
-	p.Lt = lt
-	p.require(postV1LedgerAccountsCreateRequestTranslationsFieldLt)
-}
-
-// SetEn sets the En field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslations) SetEn(en *PostV1LedgerAccountsCreateRequestTranslationsEn) {
-	p.En = en
-	p.require(postV1LedgerAccountsCreateRequestTranslationsFieldEn)
-}
-
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslations) SetRu(ru *PostV1LedgerAccountsCreateRequestTranslationsRu) {
-	p.Ru = ru
-	p.require(postV1LedgerAccountsCreateRequestTranslationsFieldRu)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateRequestTranslations
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateRequestTranslations(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateRequestTranslations
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslations) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateRequestTranslationsEnFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateRequestTranslationsEn struct {
+type PostV1LedgerAccountsCreateRequestTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1761,21 +2157,21 @@ type PostV1LedgerAccountsCreateRequestTranslationsEn struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) GetName() string {
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) require(field *big.Int) {
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -1784,18 +2180,18 @@ func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) require(field *big.Int
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) SetName(name string) {
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1LedgerAccountsCreateRequestTranslationsEnFieldName)
+	p.require(postV1LedgerAccountsCreateRequestTranslationsValueFieldName)
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateRequestTranslationsEn
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsCreateRequestTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsCreateRequestTranslationsEn(value)
+	*p = PostV1LedgerAccountsCreateRequestTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -1805,8 +2201,8 @@ func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) UnmarshalJSON(data []b
 	return nil
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateRequestTranslationsEn
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsCreateRequestTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -1816,175 +2212,7 @@ func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) MarshalJSON() ([]byte,
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsCreateRequestTranslationsEn) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateRequestTranslationsLtFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateRequestTranslationsLt struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsCreateRequestTranslationsLtFieldName)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateRequestTranslationsLt
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateRequestTranslationsLt(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateRequestTranslationsLt
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsLt) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateRequestTranslationsRuFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateRequestTranslationsRu struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsCreateRequestTranslationsRuFieldName)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateRequestTranslationsRu
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateRequestTranslationsRu(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateRequestTranslationsRu
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateRequestTranslationsRu) String() string {
+func (p *PostV1LedgerAccountsCreateRequestTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2042,14 +2270,14 @@ var (
 )
 
 type PostV1LedgerAccountsCreateResponse struct {
-	ID           string                                          `json:"id" url:"id"`
-	Code         string                                          `json:"code" url:"code"`
-	Name         string                                          `json:"name" url:"name"`
-	Translations *PostV1LedgerAccountsCreateResponseTranslations `json:"translations,omitempty" url:"translations,omitempty"`
-	Type         PostV1LedgerAccountsCreateResponseType          `json:"type" url:"type"`
-	ParentID     *string                                         `json:"parentId,omitempty" url:"parentId,omitempty"`
-	IsPostable   bool                                            `json:"isPostable" url:"isPostable"`
-	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
+	ID           string                                                          `json:"id" url:"id"`
+	Code         string                                                          `json:"code" url:"code"`
+	Name         string                                                          `json:"name" url:"name"`
+	Translations map[string]*PostV1LedgerAccountsCreateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+	Type         PostV1LedgerAccountsCreateResponseType                          `json:"type" url:"type"`
+	ParentID     *string                                                         `json:"parentId,omitempty" url:"parentId,omitempty"`
+	IsPostable   bool                                                            `json:"isPostable" url:"isPostable"`
+	CreatedAt    string                                                          `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2079,7 +2307,7 @@ func (p *PostV1LedgerAccountsCreateResponse) GetName() string {
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsCreateResponse) GetTranslations() *PostV1LedgerAccountsCreateResponseTranslations {
+func (p *PostV1LedgerAccountsCreateResponse) GetTranslations() map[string]*PostV1LedgerAccountsCreateResponseTranslationsValue {
 	if p == nil {
 		return nil
 	}
@@ -2151,7 +2379,7 @@ func (p *PostV1LedgerAccountsCreateResponse) SetName(name string) {
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponse) SetTranslations(translations *PostV1LedgerAccountsCreateResponseTranslations) {
+func (p *PostV1LedgerAccountsCreateResponse) SetTranslations(translations map[string]*PostV1LedgerAccountsCreateResponseTranslationsValue) {
 	p.Translations = translations
 	p.require(postV1LedgerAccountsCreateResponseFieldTranslations)
 }
@@ -2227,126 +2455,10 @@ func (p *PostV1LedgerAccountsCreateResponse) String() string {
 }
 
 var (
-	postV1LedgerAccountsCreateResponseTranslationsFieldLt = big.NewInt(1 << 0)
-	postV1LedgerAccountsCreateResponseTranslationsFieldEn = big.NewInt(1 << 1)
-	postV1LedgerAccountsCreateResponseTranslationsFieldRu = big.NewInt(1 << 2)
+	postV1LedgerAccountsCreateResponseTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1LedgerAccountsCreateResponseTranslations struct {
-	Lt *PostV1LedgerAccountsCreateResponseTranslationsLt `json:"lt,omitempty" url:"lt,omitempty"`
-	En *PostV1LedgerAccountsCreateResponseTranslationsEn `json:"en,omitempty" url:"en,omitempty"`
-	Ru *PostV1LedgerAccountsCreateResponseTranslationsRu `json:"ru,omitempty" url:"ru,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) GetLt() *PostV1LedgerAccountsCreateResponseTranslationsLt {
-	if p == nil {
-		return nil
-	}
-	return p.Lt
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) GetEn() *PostV1LedgerAccountsCreateResponseTranslationsEn {
-	if p == nil {
-		return nil
-	}
-	return p.En
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) GetRu() *PostV1LedgerAccountsCreateResponseTranslationsRu {
-	if p == nil {
-		return nil
-	}
-	return p.Ru
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetLt sets the Lt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslations) SetLt(lt *PostV1LedgerAccountsCreateResponseTranslationsLt) {
-	p.Lt = lt
-	p.require(postV1LedgerAccountsCreateResponseTranslationsFieldLt)
-}
-
-// SetEn sets the En field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslations) SetEn(en *PostV1LedgerAccountsCreateResponseTranslationsEn) {
-	p.En = en
-	p.require(postV1LedgerAccountsCreateResponseTranslationsFieldEn)
-}
-
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslations) SetRu(ru *PostV1LedgerAccountsCreateResponseTranslationsRu) {
-	p.Ru = ru
-	p.require(postV1LedgerAccountsCreateResponseTranslationsFieldRu)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateResponseTranslations
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateResponseTranslations(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateResponseTranslations
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslations) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateResponseTranslationsEnFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateResponseTranslationsEn struct {
+type PostV1LedgerAccountsCreateResponseTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2356,21 +2468,21 @@ type PostV1LedgerAccountsCreateResponseTranslationsEn struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) GetName() string {
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) require(field *big.Int) {
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -2379,18 +2491,18 @@ func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) require(field *big.In
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) SetName(name string) {
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1LedgerAccountsCreateResponseTranslationsEnFieldName)
+	p.require(postV1LedgerAccountsCreateResponseTranslationsValueFieldName)
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateResponseTranslationsEn
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsCreateResponseTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsCreateResponseTranslationsEn(value)
+	*p = PostV1LedgerAccountsCreateResponseTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -2400,8 +2512,8 @@ func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) UnmarshalJSON(data []
 	return nil
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateResponseTranslationsEn
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsCreateResponseTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -2411,175 +2523,7 @@ func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) MarshalJSON() ([]byte
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsCreateResponseTranslationsEn) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateResponseTranslationsLtFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateResponseTranslationsLt struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsCreateResponseTranslationsLtFieldName)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateResponseTranslationsLt
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateResponseTranslationsLt(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateResponseTranslationsLt
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsLt) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsCreateResponseTranslationsRuFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsCreateResponseTranslationsRu struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsCreateResponseTranslationsRuFieldName)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsCreateResponseTranslationsRu
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsCreateResponseTranslationsRu(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsCreateResponseTranslationsRu
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsCreateResponseTranslationsRu) String() string {
+func (p *PostV1LedgerAccountsCreateResponseTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -3223,14 +3167,14 @@ var (
 )
 
 type PostV1LedgerAccountsListResponseRowsItem struct {
-	ID           string                                                `json:"id" url:"id"`
-	Code         string                                                `json:"code" url:"code"`
-	Name         string                                                `json:"name" url:"name"`
-	Translations *PostV1LedgerAccountsListResponseRowsItemTranslations `json:"translations,omitempty" url:"translations,omitempty"`
-	Type         PostV1LedgerAccountsListResponseRowsItemType          `json:"type" url:"type"`
-	ParentID     *string                                               `json:"parentId,omitempty" url:"parentId,omitempty"`
-	IsPostable   bool                                                  `json:"isPostable" url:"isPostable"`
-	CreatedAt    string                                                `json:"createdAt" url:"createdAt"`
+	ID           string                                                                `json:"id" url:"id"`
+	Code         string                                                                `json:"code" url:"code"`
+	Name         string                                                                `json:"name" url:"name"`
+	Translations map[string]*PostV1LedgerAccountsListResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+	Type         PostV1LedgerAccountsListResponseRowsItemType                          `json:"type" url:"type"`
+	ParentID     *string                                                               `json:"parentId,omitempty" url:"parentId,omitempty"`
+	IsPostable   bool                                                                  `json:"isPostable" url:"isPostable"`
+	CreatedAt    string                                                                `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3260,7 +3204,7 @@ func (p *PostV1LedgerAccountsListResponseRowsItem) GetName() string {
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItem) GetTranslations() *PostV1LedgerAccountsListResponseRowsItemTranslations {
+func (p *PostV1LedgerAccountsListResponseRowsItem) GetTranslations() map[string]*PostV1LedgerAccountsListResponseRowsItemTranslationsValue {
 	if p == nil {
 		return nil
 	}
@@ -3332,7 +3276,7 @@ func (p *PostV1LedgerAccountsListResponseRowsItem) SetName(name string) {
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItem) SetTranslations(translations *PostV1LedgerAccountsListResponseRowsItemTranslations) {
+func (p *PostV1LedgerAccountsListResponseRowsItem) SetTranslations(translations map[string]*PostV1LedgerAccountsListResponseRowsItemTranslationsValue) {
 	p.Translations = translations
 	p.require(postV1LedgerAccountsListResponseRowsItemFieldTranslations)
 }
@@ -3408,126 +3352,10 @@ func (p *PostV1LedgerAccountsListResponseRowsItem) String() string {
 }
 
 var (
-	postV1LedgerAccountsListResponseRowsItemTranslationsFieldLt = big.NewInt(1 << 0)
-	postV1LedgerAccountsListResponseRowsItemTranslationsFieldEn = big.NewInt(1 << 1)
-	postV1LedgerAccountsListResponseRowsItemTranslationsFieldRu = big.NewInt(1 << 2)
+	postV1LedgerAccountsListResponseRowsItemTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1LedgerAccountsListResponseRowsItemTranslations struct {
-	Lt *PostV1LedgerAccountsListResponseRowsItemTranslationsLt `json:"lt,omitempty" url:"lt,omitempty"`
-	En *PostV1LedgerAccountsListResponseRowsItemTranslationsEn `json:"en,omitempty" url:"en,omitempty"`
-	Ru *PostV1LedgerAccountsListResponseRowsItemTranslationsRu `json:"ru,omitempty" url:"ru,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) GetLt() *PostV1LedgerAccountsListResponseRowsItemTranslationsLt {
-	if p == nil {
-		return nil
-	}
-	return p.Lt
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) GetEn() *PostV1LedgerAccountsListResponseRowsItemTranslationsEn {
-	if p == nil {
-		return nil
-	}
-	return p.En
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) GetRu() *PostV1LedgerAccountsListResponseRowsItemTranslationsRu {
-	if p == nil {
-		return nil
-	}
-	return p.Ru
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetLt sets the Lt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) SetLt(lt *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) {
-	p.Lt = lt
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsFieldLt)
-}
-
-// SetEn sets the En field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) SetEn(en *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) {
-	p.En = en
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsFieldEn)
-}
-
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) SetRu(ru *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) {
-	p.Ru = ru
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsFieldRu)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsListResponseRowsItemTranslations
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsListResponseRowsItemTranslations(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsListResponseRowsItemTranslations
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslations) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsListResponseRowsItemTranslationsEnFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsListResponseRowsItemTranslationsEn struct {
+type PostV1LedgerAccountsListResponseRowsItemTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3537,21 +3365,21 @@ type PostV1LedgerAccountsListResponseRowsItemTranslationsEn struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) GetName() string {
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) require(field *big.Int) {
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -3560,18 +3388,18 @@ func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) require(field *
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) SetName(name string) {
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsEnFieldName)
+	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsValueFieldName)
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsListResponseRowsItemTranslationsEn
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsListResponseRowsItemTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsListResponseRowsItemTranslationsEn(value)
+	*p = PostV1LedgerAccountsListResponseRowsItemTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -3581,8 +3409,8 @@ func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) UnmarshalJSON(d
 	return nil
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsListResponseRowsItemTranslationsEn
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsListResponseRowsItemTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -3592,175 +3420,7 @@ func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) MarshalJSON() (
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsEn) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsListResponseRowsItemTranslationsLtFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsListResponseRowsItemTranslationsLt struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsLtFieldName)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsListResponseRowsItemTranslationsLt
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsListResponseRowsItemTranslationsLt(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsListResponseRowsItemTranslationsLt
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsLt) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsListResponseRowsItemTranslationsRuFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsListResponseRowsItemTranslationsRu struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsListResponseRowsItemTranslationsRuFieldName)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsListResponseRowsItemTranslationsRu
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsListResponseRowsItemTranslationsRu(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsListResponseRowsItemTranslationsRu
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsRu) String() string {
+func (p *PostV1LedgerAccountsListResponseRowsItemTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -3807,15 +3467,13 @@ func (p PostV1LedgerAccountsListResponseRowsItemType) Ptr() *PostV1LedgerAccount
 }
 
 var (
-	postV1LedgerAccountsUpdateRequestTranslationsFieldLt = big.NewInt(1 << 0)
-	postV1LedgerAccountsUpdateRequestTranslationsFieldEn = big.NewInt(1 << 1)
-	postV1LedgerAccountsUpdateRequestTranslationsFieldRu = big.NewInt(1 << 2)
+	postV1LedgerAccountsSwitchChartResponseFieldChartTemplate = big.NewInt(1 << 0)
+	postV1LedgerAccountsSwitchChartResponseFieldAccounts      = big.NewInt(1 << 1)
 )
 
-type PostV1LedgerAccountsUpdateRequestTranslations struct {
-	Lt *PostV1LedgerAccountsUpdateRequestTranslationsLt `json:"lt,omitempty" url:"lt,omitempty"`
-	En *PostV1LedgerAccountsUpdateRequestTranslationsEn `json:"en,omitempty" url:"en,omitempty"`
-	Ru *PostV1LedgerAccountsUpdateRequestTranslationsRu `json:"ru,omitempty" url:"ru,omitempty"`
+type PostV1LedgerAccountsSwitchChartResponse struct {
+	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
+	Accounts      int64  `json:"accounts" url:"accounts"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3824,69 +3482,55 @@ type PostV1LedgerAccountsUpdateRequestTranslations struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) GetLt() *PostV1LedgerAccountsUpdateRequestTranslationsLt {
+func (p *PostV1LedgerAccountsSwitchChartResponse) GetChartTemplate() string {
 	if p == nil {
-		return nil
+		return ""
 	}
-	return p.Lt
+	return p.ChartTemplate
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) GetEn() *PostV1LedgerAccountsUpdateRequestTranslationsEn {
+func (p *PostV1LedgerAccountsSwitchChartResponse) GetAccounts() int64 {
 	if p == nil {
-		return nil
+		return 0
 	}
-	return p.En
+	return p.Accounts
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) GetRu() *PostV1LedgerAccountsUpdateRequestTranslationsRu {
-	if p == nil {
-		return nil
-	}
-	return p.Ru
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsSwitchChartResponse) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) require(field *big.Int) {
+func (p *PostV1LedgerAccountsSwitchChartResponse) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
-// SetLt sets the Lt field and marks it as non-optional;
+// SetChartTemplate sets the ChartTemplate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) SetLt(lt *PostV1LedgerAccountsUpdateRequestTranslationsLt) {
-	p.Lt = lt
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsFieldLt)
+func (p *PostV1LedgerAccountsSwitchChartResponse) SetChartTemplate(chartTemplate string) {
+	p.ChartTemplate = chartTemplate
+	p.require(postV1LedgerAccountsSwitchChartResponseFieldChartTemplate)
 }
 
-// SetEn sets the En field and marks it as non-optional;
+// SetAccounts sets the Accounts field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) SetEn(en *PostV1LedgerAccountsUpdateRequestTranslationsEn) {
-	p.En = en
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsFieldEn)
+func (p *PostV1LedgerAccountsSwitchChartResponse) SetAccounts(accounts int64) {
+	p.Accounts = accounts
+	p.require(postV1LedgerAccountsSwitchChartResponseFieldAccounts)
 }
 
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) SetRu(ru *PostV1LedgerAccountsUpdateRequestTranslationsRu) {
-	p.Ru = ru
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsFieldRu)
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateRequestTranslations
+func (p *PostV1LedgerAccountsSwitchChartResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsSwitchChartResponse
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsUpdateRequestTranslations(value)
+	*p = PostV1LedgerAccountsSwitchChartResponse(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -3896,8 +3540,8 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslations) UnmarshalJSON(data []byt
 	return nil
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateRequestTranslations
+func (p *PostV1LedgerAccountsSwitchChartResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsSwitchChartResponse
 	var marshaler = struct {
 		embed
 	}{
@@ -3907,7 +3551,7 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslations) MarshalJSON() ([]byte, e
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslations) String() string {
+func (p *PostV1LedgerAccountsSwitchChartResponse) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -3923,10 +3567,10 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslations) String() string {
 }
 
 var (
-	postV1LedgerAccountsUpdateRequestTranslationsEnFieldName = big.NewInt(1 << 0)
+	postV1LedgerAccountsUpdateRequestTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1LedgerAccountsUpdateRequestTranslationsEn struct {
+type PostV1LedgerAccountsUpdateRequestTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3936,21 +3580,21 @@ type PostV1LedgerAccountsUpdateRequestTranslationsEn struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) GetName() string {
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) require(field *big.Int) {
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -3959,18 +3603,18 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) require(field *big.Int
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) SetName(name string) {
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsEnFieldName)
+	p.require(postV1LedgerAccountsUpdateRequestTranslationsValueFieldName)
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateRequestTranslationsEn
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsUpdateRequestTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsUpdateRequestTranslationsEn(value)
+	*p = PostV1LedgerAccountsUpdateRequestTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -3980,8 +3624,8 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) UnmarshalJSON(data []b
 	return nil
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateRequestTranslationsEn
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsUpdateRequestTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -3991,175 +3635,7 @@ func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) MarshalJSON() ([]byte,
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsEn) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsUpdateRequestTranslationsLtFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsUpdateRequestTranslationsLt struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsLtFieldName)
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateRequestTranslationsLt
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsUpdateRequestTranslationsLt(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateRequestTranslationsLt
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsLt) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsUpdateRequestTranslationsRuFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsUpdateRequestTranslationsRu struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsUpdateRequestTranslationsRuFieldName)
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateRequestTranslationsRu
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsUpdateRequestTranslationsRu(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateRequestTranslationsRu
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsUpdateRequestTranslationsRu) String() string {
+func (p *PostV1LedgerAccountsUpdateRequestTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -4186,14 +3662,14 @@ var (
 )
 
 type PostV1LedgerAccountsUpdateResponse struct {
-	ID           string                                          `json:"id" url:"id"`
-	Code         string                                          `json:"code" url:"code"`
-	Name         string                                          `json:"name" url:"name"`
-	Translations *PostV1LedgerAccountsUpdateResponseTranslations `json:"translations,omitempty" url:"translations,omitempty"`
-	Type         PostV1LedgerAccountsUpdateResponseType          `json:"type" url:"type"`
-	ParentID     *string                                         `json:"parentId,omitempty" url:"parentId,omitempty"`
-	IsPostable   bool                                            `json:"isPostable" url:"isPostable"`
-	CreatedAt    string                                          `json:"createdAt" url:"createdAt"`
+	ID           string                                                          `json:"id" url:"id"`
+	Code         string                                                          `json:"code" url:"code"`
+	Name         string                                                          `json:"name" url:"name"`
+	Translations map[string]*PostV1LedgerAccountsUpdateResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
+	Type         PostV1LedgerAccountsUpdateResponseType                          `json:"type" url:"type"`
+	ParentID     *string                                                         `json:"parentId,omitempty" url:"parentId,omitempty"`
+	IsPostable   bool                                                            `json:"isPostable" url:"isPostable"`
+	CreatedAt    string                                                          `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4223,7 +3699,7 @@ func (p *PostV1LedgerAccountsUpdateResponse) GetName() string {
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsUpdateResponse) GetTranslations() *PostV1LedgerAccountsUpdateResponseTranslations {
+func (p *PostV1LedgerAccountsUpdateResponse) GetTranslations() map[string]*PostV1LedgerAccountsUpdateResponseTranslationsValue {
 	if p == nil {
 		return nil
 	}
@@ -4295,7 +3771,7 @@ func (p *PostV1LedgerAccountsUpdateResponse) SetName(name string) {
 
 // SetTranslations sets the Translations field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponse) SetTranslations(translations *PostV1LedgerAccountsUpdateResponseTranslations) {
+func (p *PostV1LedgerAccountsUpdateResponse) SetTranslations(translations map[string]*PostV1LedgerAccountsUpdateResponseTranslationsValue) {
 	p.Translations = translations
 	p.require(postV1LedgerAccountsUpdateResponseFieldTranslations)
 }
@@ -4371,126 +3847,10 @@ func (p *PostV1LedgerAccountsUpdateResponse) String() string {
 }
 
 var (
-	postV1LedgerAccountsUpdateResponseTranslationsFieldLt = big.NewInt(1 << 0)
-	postV1LedgerAccountsUpdateResponseTranslationsFieldEn = big.NewInt(1 << 1)
-	postV1LedgerAccountsUpdateResponseTranslationsFieldRu = big.NewInt(1 << 2)
+	postV1LedgerAccountsUpdateResponseTranslationsValueFieldName = big.NewInt(1 << 0)
 )
 
-type PostV1LedgerAccountsUpdateResponseTranslations struct {
-	Lt *PostV1LedgerAccountsUpdateResponseTranslationsLt `json:"lt,omitempty" url:"lt,omitempty"`
-	En *PostV1LedgerAccountsUpdateResponseTranslationsEn `json:"en,omitempty" url:"en,omitempty"`
-	Ru *PostV1LedgerAccountsUpdateResponseTranslationsRu `json:"ru,omitempty" url:"ru,omitempty"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) GetLt() *PostV1LedgerAccountsUpdateResponseTranslationsLt {
-	if p == nil {
-		return nil
-	}
-	return p.Lt
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) GetEn() *PostV1LedgerAccountsUpdateResponseTranslationsEn {
-	if p == nil {
-		return nil
-	}
-	return p.En
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) GetRu() *PostV1LedgerAccountsUpdateResponseTranslationsRu {
-	if p == nil {
-		return nil
-	}
-	return p.Ru
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetLt sets the Lt field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) SetLt(lt *PostV1LedgerAccountsUpdateResponseTranslationsLt) {
-	p.Lt = lt
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsFieldLt)
-}
-
-// SetEn sets the En field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) SetEn(en *PostV1LedgerAccountsUpdateResponseTranslationsEn) {
-	p.En = en
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsFieldEn)
-}
-
-// SetRu sets the Ru field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) SetRu(ru *PostV1LedgerAccountsUpdateResponseTranslationsRu) {
-	p.Ru = ru
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsFieldRu)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateResponseTranslations
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsUpdateResponseTranslations(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateResponseTranslations
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslations) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsUpdateResponseTranslationsEnFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsUpdateResponseTranslationsEn struct {
+type PostV1LedgerAccountsUpdateResponseTranslationsValue struct {
 	Name string `json:"name" url:"name"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -4500,21 +3860,21 @@ type PostV1LedgerAccountsUpdateResponseTranslationsEn struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) GetName() string {
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) GetName() string {
 	if p == nil {
 		return ""
 	}
 	return p.Name
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) GetExtraProperties() map[string]interface{} {
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) GetExtraProperties() map[string]interface{} {
 	if p == nil {
 		return nil
 	}
 	return p.extraProperties
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) require(field *big.Int) {
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) require(field *big.Int) {
 	if p.explicitFields == nil {
 		p.explicitFields = big.NewInt(0)
 	}
@@ -4523,18 +3883,18 @@ func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) require(field *big.In
 
 // SetName sets the Name field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) SetName(name string) {
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) SetName(name string) {
 	p.Name = name
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsEnFieldName)
+	p.require(postV1LedgerAccountsUpdateResponseTranslationsValueFieldName)
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateResponseTranslationsEn
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerAccountsUpdateResponseTranslationsValue
 	var value unmarshaler
 	if err := json.Unmarshal(data, &value); err != nil {
 		return err
 	}
-	*p = PostV1LedgerAccountsUpdateResponseTranslationsEn(value)
+	*p = PostV1LedgerAccountsUpdateResponseTranslationsValue(value)
 	extraProperties, err := internal.ExtractExtraProperties(data, *p)
 	if err != nil {
 		return err
@@ -4544,8 +3904,8 @@ func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) UnmarshalJSON(data []
 	return nil
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateResponseTranslationsEn
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerAccountsUpdateResponseTranslationsValue
 	var marshaler = struct {
 		embed
 	}{
@@ -4555,175 +3915,7 @@ func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) MarshalJSON() ([]byte
 	return json.Marshal(explicitMarshaler)
 }
 
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsEn) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsUpdateResponseTranslationsLtFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsUpdateResponseTranslationsLt struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsLtFieldName)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateResponseTranslationsLt
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsUpdateResponseTranslationsLt(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateResponseTranslationsLt
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsLt) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	if len(p.rawJSON) > 0 {
-		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
-			return value
-		}
-	}
-	if value, err := internal.StringifyJSON(p); err == nil {
-		return value
-	}
-	return fmt.Sprintf("%#v", p)
-}
-
-var (
-	postV1LedgerAccountsUpdateResponseTranslationsRuFieldName = big.NewInt(1 << 0)
-)
-
-type PostV1LedgerAccountsUpdateResponseTranslationsRu struct {
-	Name string `json:"name" url:"name"`
-
-	// Private bitmask of fields set to an explicit value and therefore not to be omitted
-	explicitFields *big.Int `json:"-" url:"-"`
-
-	extraProperties map[string]interface{}
-	rawJSON         json.RawMessage
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) GetName() string {
-	if p == nil {
-		return ""
-	}
-	return p.Name
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) GetExtraProperties() map[string]interface{} {
-	if p == nil {
-		return nil
-	}
-	return p.extraProperties
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) require(field *big.Int) {
-	if p.explicitFields == nil {
-		p.explicitFields = big.NewInt(0)
-	}
-	p.explicitFields.Or(p.explicitFields, field)
-}
-
-// SetName sets the Name field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) SetName(name string) {
-	p.Name = name
-	p.require(postV1LedgerAccountsUpdateResponseTranslationsRuFieldName)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) UnmarshalJSON(data []byte) error {
-	type unmarshaler PostV1LedgerAccountsUpdateResponseTranslationsRu
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
-		return err
-	}
-	*p = PostV1LedgerAccountsUpdateResponseTranslationsRu(value)
-	extraProperties, err := internal.ExtractExtraProperties(data, *p)
-	if err != nil {
-		return err
-	}
-	p.extraProperties = extraProperties
-	p.rawJSON = json.RawMessage(data)
-	return nil
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) MarshalJSON() ([]byte, error) {
-	type embed PostV1LedgerAccountsUpdateResponseTranslationsRu
-	var marshaler = struct {
-		embed
-	}{
-		embed: embed(*p),
-	}
-	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
-	return json.Marshal(explicitMarshaler)
-}
-
-func (p *PostV1LedgerAccountsUpdateResponseTranslationsRu) String() string {
+func (p *PostV1LedgerAccountsUpdateResponseTranslationsValue) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -8773,6 +7965,28 @@ func (p *PostV1LedgerOwnersCreateRequestAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1LedgerOwnersCreateRequestPartnerLiability string
+
+const (
+	PostV1LedgerOwnersCreateRequestPartnerLiabilityGeneral PostV1LedgerOwnersCreateRequestPartnerLiability = "general"
+	PostV1LedgerOwnersCreateRequestPartnerLiabilityLimited PostV1LedgerOwnersCreateRequestPartnerLiability = "limited"
+)
+
+func NewPostV1LedgerOwnersCreateRequestPartnerLiabilityFromString(s string) (PostV1LedgerOwnersCreateRequestPartnerLiability, error) {
+	switch s {
+	case "general":
+		return PostV1LedgerOwnersCreateRequestPartnerLiabilityGeneral, nil
+	case "limited":
+		return PostV1LedgerOwnersCreateRequestPartnerLiabilityLimited, nil
+	}
+	var t PostV1LedgerOwnersCreateRequestPartnerLiability
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerOwnersCreateRequestPartnerLiability) Ptr() *PostV1LedgerOwnersCreateRequestPartnerLiability {
+	return &p
+}
+
 type PostV1LedgerOwnersCreateRequestSharesType string
 
 const (
@@ -8802,29 +8016,37 @@ func (p PostV1LedgerOwnersCreateRequestSharesType) Ptr() *PostV1LedgerOwnersCrea
 }
 
 var (
-	postV1LedgerOwnersCreateResponseFieldID                    = big.NewInt(1 << 0)
-	postV1LedgerOwnersCreateResponseFieldName                  = big.NewInt(1 << 1)
-	postV1LedgerOwnersCreateResponseFieldCode                  = big.NewInt(1 << 2)
-	postV1LedgerOwnersCreateResponseFieldEquityAccountCode     = big.NewInt(1 << 3)
-	postV1LedgerOwnersCreateResponseFieldSharesQuantity        = big.NewInt(1 << 4)
-	postV1LedgerOwnersCreateResponseFieldSharesAmount          = big.NewInt(1 << 5)
-	postV1LedgerOwnersCreateResponseFieldSharesType            = big.NewInt(1 << 6)
-	postV1LedgerOwnersCreateResponseFieldSharesAcquisitionDate = big.NewInt(1 << 7)
-	postV1LedgerOwnersCreateResponseFieldAddress               = big.NewInt(1 << 8)
-	postV1LedgerOwnersCreateResponseFieldCreatedAt             = big.NewInt(1 << 9)
+	postV1LedgerOwnersCreateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1LedgerOwnersCreateResponseFieldName                         = big.NewInt(1 << 1)
+	postV1LedgerOwnersCreateResponseFieldCode                         = big.NewInt(1 << 2)
+	postV1LedgerOwnersCreateResponseFieldEquityAccountCode            = big.NewInt(1 << 3)
+	postV1LedgerOwnersCreateResponseFieldSharesQuantity               = big.NewInt(1 << 4)
+	postV1LedgerOwnersCreateResponseFieldSharesAmount                 = big.NewInt(1 << 5)
+	postV1LedgerOwnersCreateResponseFieldSharesType                   = big.NewInt(1 << 6)
+	postV1LedgerOwnersCreateResponseFieldSharesAcquisitionDate        = big.NewInt(1 << 7)
+	postV1LedgerOwnersCreateResponseFieldWithholdingTaxPercent        = big.NewInt(1 << 8)
+	postV1LedgerOwnersCreateResponseFieldPartnerLiability             = big.NewInt(1 << 9)
+	postV1LedgerOwnersCreateResponseFieldSpecialBalanceRequired       = big.NewInt(1 << 10)
+	postV1LedgerOwnersCreateResponseFieldSupplementaryBalanceRequired = big.NewInt(1 << 11)
+	postV1LedgerOwnersCreateResponseFieldAddress                      = big.NewInt(1 << 12)
+	postV1LedgerOwnersCreateResponseFieldCreatedAt                    = big.NewInt(1 << 13)
 )
 
 type PostV1LedgerOwnersCreateResponse struct {
-	ID                    string                                   `json:"id" url:"id"`
-	Name                  string                                   `json:"name" url:"name"`
-	Code                  *string                                  `json:"code,omitempty" url:"code,omitempty"`
-	EquityAccountCode     string                                   `json:"equityAccountCode" url:"equityAccountCode"`
-	SharesQuantity        *string                                  `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
-	SharesAmount          *string                                  `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
-	SharesType            *string                                  `json:"sharesType,omitempty" url:"sharesType,omitempty"`
-	SharesAcquisitionDate *string                                  `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
-	Address               *PostV1LedgerOwnersCreateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	CreatedAt             string                                   `json:"createdAt" url:"createdAt"`
+	ID                           string                                            `json:"id" url:"id"`
+	Name                         string                                            `json:"name" url:"name"`
+	Code                         *string                                           `json:"code,omitempty" url:"code,omitempty"`
+	EquityAccountCode            string                                            `json:"equityAccountCode" url:"equityAccountCode"`
+	SharesQuantity               *string                                           `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
+	SharesAmount                 *string                                           `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
+	SharesType                   *string                                           `json:"sharesType,omitempty" url:"sharesType,omitempty"`
+	SharesAcquisitionDate        *string                                           `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
+	WithholdingTaxPercent        *string                                           `json:"withholdingTaxPercent,omitempty" url:"withholdingTaxPercent,omitempty"`
+	PartnerLiability             *PostV1LedgerOwnersCreateResponsePartnerLiability `json:"partnerLiability,omitempty" url:"partnerLiability,omitempty"`
+	SpecialBalanceRequired       *bool                                             `json:"specialBalanceRequired,omitempty" url:"specialBalanceRequired,omitempty"`
+	SupplementaryBalanceRequired *bool                                             `json:"supplementaryBalanceRequired,omitempty" url:"supplementaryBalanceRequired,omitempty"`
+	Address                      *PostV1LedgerOwnersCreateResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	CreatedAt                    string                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8887,6 +8109,34 @@ func (p *PostV1LedgerOwnersCreateResponse) GetSharesAcquisitionDate() *string {
 		return nil
 	}
 	return p.SharesAcquisitionDate
+}
+
+func (p *PostV1LedgerOwnersCreateResponse) GetWithholdingTaxPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.WithholdingTaxPercent
+}
+
+func (p *PostV1LedgerOwnersCreateResponse) GetPartnerLiability() *PostV1LedgerOwnersCreateResponsePartnerLiability {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerLiability
+}
+
+func (p *PostV1LedgerOwnersCreateResponse) GetSpecialBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SpecialBalanceRequired
+}
+
+func (p *PostV1LedgerOwnersCreateResponse) GetSupplementaryBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SupplementaryBalanceRequired
 }
 
 func (p *PostV1LedgerOwnersCreateResponse) GetAddress() *PostV1LedgerOwnersCreateResponseAddress {
@@ -8971,6 +8221,34 @@ func (p *PostV1LedgerOwnersCreateResponse) SetSharesType(sharesType *string) {
 func (p *PostV1LedgerOwnersCreateResponse) SetSharesAcquisitionDate(sharesAcquisitionDate *string) {
 	p.SharesAcquisitionDate = sharesAcquisitionDate
 	p.require(postV1LedgerOwnersCreateResponseFieldSharesAcquisitionDate)
+}
+
+// SetWithholdingTaxPercent sets the WithholdingTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateResponse) SetWithholdingTaxPercent(withholdingTaxPercent *string) {
+	p.WithholdingTaxPercent = withholdingTaxPercent
+	p.require(postV1LedgerOwnersCreateResponseFieldWithholdingTaxPercent)
+}
+
+// SetPartnerLiability sets the PartnerLiability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateResponse) SetPartnerLiability(partnerLiability *PostV1LedgerOwnersCreateResponsePartnerLiability) {
+	p.PartnerLiability = partnerLiability
+	p.require(postV1LedgerOwnersCreateResponseFieldPartnerLiability)
+}
+
+// SetSpecialBalanceRequired sets the SpecialBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateResponse) SetSpecialBalanceRequired(specialBalanceRequired *bool) {
+	p.SpecialBalanceRequired = specialBalanceRequired
+	p.require(postV1LedgerOwnersCreateResponseFieldSpecialBalanceRequired)
+}
+
+// SetSupplementaryBalanceRequired sets the SupplementaryBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersCreateResponse) SetSupplementaryBalanceRequired(supplementaryBalanceRequired *bool) {
+	p.SupplementaryBalanceRequired = supplementaryBalanceRequired
+	p.require(postV1LedgerOwnersCreateResponseFieldSupplementaryBalanceRequired)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -9159,6 +8437,28 @@ func (p *PostV1LedgerOwnersCreateResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerOwnersCreateResponsePartnerLiability string
+
+const (
+	PostV1LedgerOwnersCreateResponsePartnerLiabilityGeneral PostV1LedgerOwnersCreateResponsePartnerLiability = "general"
+	PostV1LedgerOwnersCreateResponsePartnerLiabilityLimited PostV1LedgerOwnersCreateResponsePartnerLiability = "limited"
+)
+
+func NewPostV1LedgerOwnersCreateResponsePartnerLiabilityFromString(s string) (PostV1LedgerOwnersCreateResponsePartnerLiability, error) {
+	switch s {
+	case "general":
+		return PostV1LedgerOwnersCreateResponsePartnerLiabilityGeneral, nil
+	case "limited":
+		return PostV1LedgerOwnersCreateResponsePartnerLiabilityLimited, nil
+	}
+	var t PostV1LedgerOwnersCreateResponsePartnerLiability
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerOwnersCreateResponsePartnerLiability) Ptr() *PostV1LedgerOwnersCreateResponsePartnerLiability {
+	return &p
 }
 
 var (
@@ -9848,29 +9148,37 @@ func (p *PostV1LedgerOwnersListResponse) String() string {
 }
 
 var (
-	postV1LedgerOwnersListResponseRowsItemFieldID                    = big.NewInt(1 << 0)
-	postV1LedgerOwnersListResponseRowsItemFieldName                  = big.NewInt(1 << 1)
-	postV1LedgerOwnersListResponseRowsItemFieldCode                  = big.NewInt(1 << 2)
-	postV1LedgerOwnersListResponseRowsItemFieldEquityAccountCode     = big.NewInt(1 << 3)
-	postV1LedgerOwnersListResponseRowsItemFieldSharesQuantity        = big.NewInt(1 << 4)
-	postV1LedgerOwnersListResponseRowsItemFieldSharesAmount          = big.NewInt(1 << 5)
-	postV1LedgerOwnersListResponseRowsItemFieldSharesType            = big.NewInt(1 << 6)
-	postV1LedgerOwnersListResponseRowsItemFieldSharesAcquisitionDate = big.NewInt(1 << 7)
-	postV1LedgerOwnersListResponseRowsItemFieldAddress               = big.NewInt(1 << 8)
-	postV1LedgerOwnersListResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 9)
+	postV1LedgerOwnersListResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	postV1LedgerOwnersListResponseRowsItemFieldName                         = big.NewInt(1 << 1)
+	postV1LedgerOwnersListResponseRowsItemFieldCode                         = big.NewInt(1 << 2)
+	postV1LedgerOwnersListResponseRowsItemFieldEquityAccountCode            = big.NewInt(1 << 3)
+	postV1LedgerOwnersListResponseRowsItemFieldSharesQuantity               = big.NewInt(1 << 4)
+	postV1LedgerOwnersListResponseRowsItemFieldSharesAmount                 = big.NewInt(1 << 5)
+	postV1LedgerOwnersListResponseRowsItemFieldSharesType                   = big.NewInt(1 << 6)
+	postV1LedgerOwnersListResponseRowsItemFieldSharesAcquisitionDate        = big.NewInt(1 << 7)
+	postV1LedgerOwnersListResponseRowsItemFieldWithholdingTaxPercent        = big.NewInt(1 << 8)
+	postV1LedgerOwnersListResponseRowsItemFieldPartnerLiability             = big.NewInt(1 << 9)
+	postV1LedgerOwnersListResponseRowsItemFieldSpecialBalanceRequired       = big.NewInt(1 << 10)
+	postV1LedgerOwnersListResponseRowsItemFieldSupplementaryBalanceRequired = big.NewInt(1 << 11)
+	postV1LedgerOwnersListResponseRowsItemFieldAddress                      = big.NewInt(1 << 12)
+	postV1LedgerOwnersListResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 13)
 )
 
 type PostV1LedgerOwnersListResponseRowsItem struct {
-	ID                    string                                         `json:"id" url:"id"`
-	Name                  string                                         `json:"name" url:"name"`
-	Code                  *string                                        `json:"code,omitempty" url:"code,omitempty"`
-	EquityAccountCode     string                                         `json:"equityAccountCode" url:"equityAccountCode"`
-	SharesQuantity        *string                                        `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
-	SharesAmount          *string                                        `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
-	SharesType            *string                                        `json:"sharesType,omitempty" url:"sharesType,omitempty"`
-	SharesAcquisitionDate *string                                        `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
-	Address               *PostV1LedgerOwnersListResponseRowsItemAddress `json:"address,omitempty" url:"address,omitempty"`
-	CreatedAt             string                                         `json:"createdAt" url:"createdAt"`
+	ID                           string                                                  `json:"id" url:"id"`
+	Name                         string                                                  `json:"name" url:"name"`
+	Code                         *string                                                 `json:"code,omitempty" url:"code,omitempty"`
+	EquityAccountCode            string                                                  `json:"equityAccountCode" url:"equityAccountCode"`
+	SharesQuantity               *string                                                 `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
+	SharesAmount                 *string                                                 `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
+	SharesType                   *string                                                 `json:"sharesType,omitempty" url:"sharesType,omitempty"`
+	SharesAcquisitionDate        *string                                                 `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
+	WithholdingTaxPercent        *string                                                 `json:"withholdingTaxPercent,omitempty" url:"withholdingTaxPercent,omitempty"`
+	PartnerLiability             *PostV1LedgerOwnersListResponseRowsItemPartnerLiability `json:"partnerLiability,omitempty" url:"partnerLiability,omitempty"`
+	SpecialBalanceRequired       *bool                                                   `json:"specialBalanceRequired,omitempty" url:"specialBalanceRequired,omitempty"`
+	SupplementaryBalanceRequired *bool                                                   `json:"supplementaryBalanceRequired,omitempty" url:"supplementaryBalanceRequired,omitempty"`
+	Address                      *PostV1LedgerOwnersListResponseRowsItemAddress          `json:"address,omitempty" url:"address,omitempty"`
+	CreatedAt                    string                                                  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9933,6 +9241,34 @@ func (p *PostV1LedgerOwnersListResponseRowsItem) GetSharesAcquisitionDate() *str
 		return nil
 	}
 	return p.SharesAcquisitionDate
+}
+
+func (p *PostV1LedgerOwnersListResponseRowsItem) GetWithholdingTaxPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.WithholdingTaxPercent
+}
+
+func (p *PostV1LedgerOwnersListResponseRowsItem) GetPartnerLiability() *PostV1LedgerOwnersListResponseRowsItemPartnerLiability {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerLiability
+}
+
+func (p *PostV1LedgerOwnersListResponseRowsItem) GetSpecialBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SpecialBalanceRequired
+}
+
+func (p *PostV1LedgerOwnersListResponseRowsItem) GetSupplementaryBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SupplementaryBalanceRequired
 }
 
 func (p *PostV1LedgerOwnersListResponseRowsItem) GetAddress() *PostV1LedgerOwnersListResponseRowsItemAddress {
@@ -10017,6 +9353,34 @@ func (p *PostV1LedgerOwnersListResponseRowsItem) SetSharesType(sharesType *strin
 func (p *PostV1LedgerOwnersListResponseRowsItem) SetSharesAcquisitionDate(sharesAcquisitionDate *string) {
 	p.SharesAcquisitionDate = sharesAcquisitionDate
 	p.require(postV1LedgerOwnersListResponseRowsItemFieldSharesAcquisitionDate)
+}
+
+// SetWithholdingTaxPercent sets the WithholdingTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListResponseRowsItem) SetWithholdingTaxPercent(withholdingTaxPercent *string) {
+	p.WithholdingTaxPercent = withholdingTaxPercent
+	p.require(postV1LedgerOwnersListResponseRowsItemFieldWithholdingTaxPercent)
+}
+
+// SetPartnerLiability sets the PartnerLiability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListResponseRowsItem) SetPartnerLiability(partnerLiability *PostV1LedgerOwnersListResponseRowsItemPartnerLiability) {
+	p.PartnerLiability = partnerLiability
+	p.require(postV1LedgerOwnersListResponseRowsItemFieldPartnerLiability)
+}
+
+// SetSpecialBalanceRequired sets the SpecialBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListResponseRowsItem) SetSpecialBalanceRequired(specialBalanceRequired *bool) {
+	p.SpecialBalanceRequired = specialBalanceRequired
+	p.require(postV1LedgerOwnersListResponseRowsItemFieldSpecialBalanceRequired)
+}
+
+// SetSupplementaryBalanceRequired sets the SupplementaryBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersListResponseRowsItem) SetSupplementaryBalanceRequired(supplementaryBalanceRequired *bool) {
+	p.SupplementaryBalanceRequired = supplementaryBalanceRequired
+	p.require(postV1LedgerOwnersListResponseRowsItemFieldSupplementaryBalanceRequired)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -10207,6 +9571,28 @@ func (p *PostV1LedgerOwnersListResponseRowsItemAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1LedgerOwnersListResponseRowsItemPartnerLiability string
+
+const (
+	PostV1LedgerOwnersListResponseRowsItemPartnerLiabilityGeneral PostV1LedgerOwnersListResponseRowsItemPartnerLiability = "general"
+	PostV1LedgerOwnersListResponseRowsItemPartnerLiabilityLimited PostV1LedgerOwnersListResponseRowsItemPartnerLiability = "limited"
+)
+
+func NewPostV1LedgerOwnersListResponseRowsItemPartnerLiabilityFromString(s string) (PostV1LedgerOwnersListResponseRowsItemPartnerLiability, error) {
+	switch s {
+	case "general":
+		return PostV1LedgerOwnersListResponseRowsItemPartnerLiabilityGeneral, nil
+	case "limited":
+		return PostV1LedgerOwnersListResponseRowsItemPartnerLiabilityLimited, nil
+	}
+	var t PostV1LedgerOwnersListResponseRowsItemPartnerLiability
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerOwnersListResponseRowsItemPartnerLiability) Ptr() *PostV1LedgerOwnersListResponseRowsItemPartnerLiability {
+	return &p
+}
+
 var (
 	postV1LedgerOwnersUpdateRequestAddressFieldStreet      = big.NewInt(1 << 0)
 	postV1LedgerOwnersUpdateRequestAddressFieldCity        = big.NewInt(1 << 1)
@@ -10339,6 +9725,28 @@ func (p *PostV1LedgerOwnersUpdateRequestAddress) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PostV1LedgerOwnersUpdateRequestPartnerLiability string
+
+const (
+	PostV1LedgerOwnersUpdateRequestPartnerLiabilityGeneral PostV1LedgerOwnersUpdateRequestPartnerLiability = "general"
+	PostV1LedgerOwnersUpdateRequestPartnerLiabilityLimited PostV1LedgerOwnersUpdateRequestPartnerLiability = "limited"
+)
+
+func NewPostV1LedgerOwnersUpdateRequestPartnerLiabilityFromString(s string) (PostV1LedgerOwnersUpdateRequestPartnerLiability, error) {
+	switch s {
+	case "general":
+		return PostV1LedgerOwnersUpdateRequestPartnerLiabilityGeneral, nil
+	case "limited":
+		return PostV1LedgerOwnersUpdateRequestPartnerLiabilityLimited, nil
+	}
+	var t PostV1LedgerOwnersUpdateRequestPartnerLiability
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerOwnersUpdateRequestPartnerLiability) Ptr() *PostV1LedgerOwnersUpdateRequestPartnerLiability {
+	return &p
+}
+
 type PostV1LedgerOwnersUpdateRequestSharesType string
 
 const (
@@ -10368,29 +9776,37 @@ func (p PostV1LedgerOwnersUpdateRequestSharesType) Ptr() *PostV1LedgerOwnersUpda
 }
 
 var (
-	postV1LedgerOwnersUpdateResponseFieldID                    = big.NewInt(1 << 0)
-	postV1LedgerOwnersUpdateResponseFieldName                  = big.NewInt(1 << 1)
-	postV1LedgerOwnersUpdateResponseFieldCode                  = big.NewInt(1 << 2)
-	postV1LedgerOwnersUpdateResponseFieldEquityAccountCode     = big.NewInt(1 << 3)
-	postV1LedgerOwnersUpdateResponseFieldSharesQuantity        = big.NewInt(1 << 4)
-	postV1LedgerOwnersUpdateResponseFieldSharesAmount          = big.NewInt(1 << 5)
-	postV1LedgerOwnersUpdateResponseFieldSharesType            = big.NewInt(1 << 6)
-	postV1LedgerOwnersUpdateResponseFieldSharesAcquisitionDate = big.NewInt(1 << 7)
-	postV1LedgerOwnersUpdateResponseFieldAddress               = big.NewInt(1 << 8)
-	postV1LedgerOwnersUpdateResponseFieldCreatedAt             = big.NewInt(1 << 9)
+	postV1LedgerOwnersUpdateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1LedgerOwnersUpdateResponseFieldName                         = big.NewInt(1 << 1)
+	postV1LedgerOwnersUpdateResponseFieldCode                         = big.NewInt(1 << 2)
+	postV1LedgerOwnersUpdateResponseFieldEquityAccountCode            = big.NewInt(1 << 3)
+	postV1LedgerOwnersUpdateResponseFieldSharesQuantity               = big.NewInt(1 << 4)
+	postV1LedgerOwnersUpdateResponseFieldSharesAmount                 = big.NewInt(1 << 5)
+	postV1LedgerOwnersUpdateResponseFieldSharesType                   = big.NewInt(1 << 6)
+	postV1LedgerOwnersUpdateResponseFieldSharesAcquisitionDate        = big.NewInt(1 << 7)
+	postV1LedgerOwnersUpdateResponseFieldWithholdingTaxPercent        = big.NewInt(1 << 8)
+	postV1LedgerOwnersUpdateResponseFieldPartnerLiability             = big.NewInt(1 << 9)
+	postV1LedgerOwnersUpdateResponseFieldSpecialBalanceRequired       = big.NewInt(1 << 10)
+	postV1LedgerOwnersUpdateResponseFieldSupplementaryBalanceRequired = big.NewInt(1 << 11)
+	postV1LedgerOwnersUpdateResponseFieldAddress                      = big.NewInt(1 << 12)
+	postV1LedgerOwnersUpdateResponseFieldCreatedAt                    = big.NewInt(1 << 13)
 )
 
 type PostV1LedgerOwnersUpdateResponse struct {
-	ID                    string                                   `json:"id" url:"id"`
-	Name                  string                                   `json:"name" url:"name"`
-	Code                  *string                                  `json:"code,omitempty" url:"code,omitempty"`
-	EquityAccountCode     string                                   `json:"equityAccountCode" url:"equityAccountCode"`
-	SharesQuantity        *string                                  `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
-	SharesAmount          *string                                  `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
-	SharesType            *string                                  `json:"sharesType,omitempty" url:"sharesType,omitempty"`
-	SharesAcquisitionDate *string                                  `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
-	Address               *PostV1LedgerOwnersUpdateResponseAddress `json:"address,omitempty" url:"address,omitempty"`
-	CreatedAt             string                                   `json:"createdAt" url:"createdAt"`
+	ID                           string                                            `json:"id" url:"id"`
+	Name                         string                                            `json:"name" url:"name"`
+	Code                         *string                                           `json:"code,omitempty" url:"code,omitempty"`
+	EquityAccountCode            string                                            `json:"equityAccountCode" url:"equityAccountCode"`
+	SharesQuantity               *string                                           `json:"sharesQuantity,omitempty" url:"sharesQuantity,omitempty"`
+	SharesAmount                 *string                                           `json:"sharesAmount,omitempty" url:"sharesAmount,omitempty"`
+	SharesType                   *string                                           `json:"sharesType,omitempty" url:"sharesType,omitempty"`
+	SharesAcquisitionDate        *string                                           `json:"sharesAcquisitionDate,omitempty" url:"sharesAcquisitionDate,omitempty"`
+	WithholdingTaxPercent        *string                                           `json:"withholdingTaxPercent,omitempty" url:"withholdingTaxPercent,omitempty"`
+	PartnerLiability             *PostV1LedgerOwnersUpdateResponsePartnerLiability `json:"partnerLiability,omitempty" url:"partnerLiability,omitempty"`
+	SpecialBalanceRequired       *bool                                             `json:"specialBalanceRequired,omitempty" url:"specialBalanceRequired,omitempty"`
+	SupplementaryBalanceRequired *bool                                             `json:"supplementaryBalanceRequired,omitempty" url:"supplementaryBalanceRequired,omitempty"`
+	Address                      *PostV1LedgerOwnersUpdateResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
+	CreatedAt                    string                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10453,6 +9869,34 @@ func (p *PostV1LedgerOwnersUpdateResponse) GetSharesAcquisitionDate() *string {
 		return nil
 	}
 	return p.SharesAcquisitionDate
+}
+
+func (p *PostV1LedgerOwnersUpdateResponse) GetWithholdingTaxPercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.WithholdingTaxPercent
+}
+
+func (p *PostV1LedgerOwnersUpdateResponse) GetPartnerLiability() *PostV1LedgerOwnersUpdateResponsePartnerLiability {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerLiability
+}
+
+func (p *PostV1LedgerOwnersUpdateResponse) GetSpecialBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SpecialBalanceRequired
+}
+
+func (p *PostV1LedgerOwnersUpdateResponse) GetSupplementaryBalanceRequired() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.SupplementaryBalanceRequired
 }
 
 func (p *PostV1LedgerOwnersUpdateResponse) GetAddress() *PostV1LedgerOwnersUpdateResponseAddress {
@@ -10537,6 +9981,34 @@ func (p *PostV1LedgerOwnersUpdateResponse) SetSharesType(sharesType *string) {
 func (p *PostV1LedgerOwnersUpdateResponse) SetSharesAcquisitionDate(sharesAcquisitionDate *string) {
 	p.SharesAcquisitionDate = sharesAcquisitionDate
 	p.require(postV1LedgerOwnersUpdateResponseFieldSharesAcquisitionDate)
+}
+
+// SetWithholdingTaxPercent sets the WithholdingTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateResponse) SetWithholdingTaxPercent(withholdingTaxPercent *string) {
+	p.WithholdingTaxPercent = withholdingTaxPercent
+	p.require(postV1LedgerOwnersUpdateResponseFieldWithholdingTaxPercent)
+}
+
+// SetPartnerLiability sets the PartnerLiability field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateResponse) SetPartnerLiability(partnerLiability *PostV1LedgerOwnersUpdateResponsePartnerLiability) {
+	p.PartnerLiability = partnerLiability
+	p.require(postV1LedgerOwnersUpdateResponseFieldPartnerLiability)
+}
+
+// SetSpecialBalanceRequired sets the SpecialBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateResponse) SetSpecialBalanceRequired(specialBalanceRequired *bool) {
+	p.SpecialBalanceRequired = specialBalanceRequired
+	p.require(postV1LedgerOwnersUpdateResponseFieldSpecialBalanceRequired)
+}
+
+// SetSupplementaryBalanceRequired sets the SupplementaryBalanceRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerOwnersUpdateResponse) SetSupplementaryBalanceRequired(supplementaryBalanceRequired *bool) {
+	p.SupplementaryBalanceRequired = supplementaryBalanceRequired
+	p.require(postV1LedgerOwnersUpdateResponseFieldSupplementaryBalanceRequired)
 }
 
 // SetAddress sets the Address field and marks it as non-optional;
@@ -10725,6 +10197,28 @@ func (p *PostV1LedgerOwnersUpdateResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerOwnersUpdateResponsePartnerLiability string
+
+const (
+	PostV1LedgerOwnersUpdateResponsePartnerLiabilityGeneral PostV1LedgerOwnersUpdateResponsePartnerLiability = "general"
+	PostV1LedgerOwnersUpdateResponsePartnerLiabilityLimited PostV1LedgerOwnersUpdateResponsePartnerLiability = "limited"
+)
+
+func NewPostV1LedgerOwnersUpdateResponsePartnerLiabilityFromString(s string) (PostV1LedgerOwnersUpdateResponsePartnerLiability, error) {
+	switch s {
+	case "general":
+		return PostV1LedgerOwnersUpdateResponsePartnerLiabilityGeneral, nil
+	case "limited":
+		return PostV1LedgerOwnersUpdateResponsePartnerLiabilityLimited, nil
+	}
+	var t PostV1LedgerOwnersUpdateResponsePartnerLiability
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerOwnersUpdateResponsePartnerLiability) Ptr() *PostV1LedgerOwnersUpdateResponsePartnerLiability {
+	return &p
 }
 
 var (
@@ -12419,4 +11913,2284 @@ func (p *PostV1LedgerPostingRulesUpdateResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LedgerStatementRowsListResponseFieldScheme   = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListResponseFieldFromDate = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListResponseFieldToDate   = big.NewInt(1 << 2)
+	postV1LedgerStatementRowsListResponseFieldAccounts = big.NewInt(1 << 3)
+	postV1LedgerStatementRowsListResponseFieldRows     = big.NewInt(1 << 4)
+	postV1LedgerStatementRowsListResponseFieldUnmapped = big.NewInt(1 << 5)
+)
+
+type PostV1LedgerStatementRowsListResponse struct {
+	Scheme   *PostV1LedgerStatementRowsListResponseScheme         `json:"scheme" url:"scheme"`
+	FromDate string                                               `json:"fromDate" url:"fromDate"`
+	ToDate   string                                               `json:"toDate" url:"toDate"`
+	Accounts []*PostV1LedgerStatementRowsListResponseAccountsItem `json:"accounts" url:"accounts"`
+	Rows     []*PostV1LedgerStatementRowsListResponseRowsItem     `json:"rows" url:"rows"`
+	Unmapped []string                                             `json:"unmapped" url:"unmapped"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetScheme() *PostV1LedgerStatementRowsListResponseScheme {
+	if p == nil {
+		return nil
+	}
+	return p.Scheme
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetFromDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.FromDate
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetToDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.ToDate
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetAccounts() []*PostV1LedgerStatementRowsListResponseAccountsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Accounts
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetRows() []*PostV1LedgerStatementRowsListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetUnmapped() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Unmapped
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetScheme(scheme *PostV1LedgerStatementRowsListResponseScheme) {
+	p.Scheme = scheme
+	p.require(postV1LedgerStatementRowsListResponseFieldScheme)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetFromDate(fromDate string) {
+	p.FromDate = fromDate
+	p.require(postV1LedgerStatementRowsListResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetToDate(toDate string) {
+	p.ToDate = toDate
+	p.require(postV1LedgerStatementRowsListResponseFieldToDate)
+}
+
+// SetAccounts sets the Accounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetAccounts(accounts []*PostV1LedgerStatementRowsListResponseAccountsItem) {
+	p.Accounts = accounts
+	p.require(postV1LedgerStatementRowsListResponseFieldAccounts)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetRows(rows []*PostV1LedgerStatementRowsListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LedgerStatementRowsListResponseFieldRows)
+}
+
+// SetUnmapped sets the Unmapped field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponse) SetUnmapped(unmapped []string) {
+	p.Unmapped = unmapped
+	p.require(postV1LedgerStatementRowsListResponseFieldUnmapped)
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LedgerStatementRowsListResponseAccountsItemFieldCode    = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListResponseAccountsItemFieldName    = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListResponseAccountsItemFieldType    = big.NewInt(1 << 2)
+	postV1LedgerStatementRowsListResponseAccountsItemFieldRowCode = big.NewInt(1 << 3)
+	postV1LedgerStatementRowsListResponseAccountsItemFieldSource  = big.NewInt(1 << 4)
+	postV1LedgerStatementRowsListResponseAccountsItemFieldAmount  = big.NewInt(1 << 5)
+)
+
+type PostV1LedgerStatementRowsListResponseAccountsItem struct {
+	Code    string                                                   `json:"code" url:"code"`
+	Name    string                                                   `json:"name" url:"name"`
+	Type    string                                                   `json:"type" url:"type"`
+	RowCode *string                                                  `json:"rowCode,omitempty" url:"rowCode,omitempty"`
+	Source  *PostV1LedgerStatementRowsListResponseAccountsItemSource `json:"source,omitempty" url:"source,omitempty"`
+	Amount  string                                                   `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetType() string {
+	if p == nil {
+		return ""
+	}
+	return p.Type
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetRowCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RowCode
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetSource() *PostV1LedgerStatementRowsListResponseAccountsItemSource {
+	if p == nil {
+		return nil
+	}
+	return p.Source
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetType(type_ string) {
+	p.Type = type_
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldType)
+}
+
+// SetRowCode sets the RowCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetRowCode(rowCode *string) {
+	p.RowCode = rowCode
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldRowCode)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetSource(source *PostV1LedgerStatementRowsListResponseAccountsItemSource) {
+	p.Source = source
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldSource)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1LedgerStatementRowsListResponseAccountsItemFieldAmount)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListResponseAccountsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListResponseAccountsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListResponseAccountsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseAccountsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerStatementRowsListResponseAccountsItemSource string
+
+const (
+	PostV1LedgerStatementRowsListResponseAccountsItemSourceMapping PostV1LedgerStatementRowsListResponseAccountsItemSource = "mapping"
+	PostV1LedgerStatementRowsListResponseAccountsItemSourceDefault PostV1LedgerStatementRowsListResponseAccountsItemSource = "default"
+)
+
+func NewPostV1LedgerStatementRowsListResponseAccountsItemSourceFromString(s string) (PostV1LedgerStatementRowsListResponseAccountsItemSource, error) {
+	switch s {
+	case "mapping":
+		return PostV1LedgerStatementRowsListResponseAccountsItemSourceMapping, nil
+	case "default":
+		return PostV1LedgerStatementRowsListResponseAccountsItemSourceDefault, nil
+	}
+	var t PostV1LedgerStatementRowsListResponseAccountsItemSource
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerStatementRowsListResponseAccountsItemSource) Ptr() *PostV1LedgerStatementRowsListResponseAccountsItemSource {
+	return &p
+}
+
+var (
+	postV1LedgerStatementRowsListResponseRowsItemFieldCode      = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListResponseRowsItemFieldLabel     = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListResponseRowsItemFieldStatement = big.NewInt(1 << 2)
+	postV1LedgerStatementRowsListResponseRowsItemFieldAmount    = big.NewInt(1 << 3)
+)
+
+type PostV1LedgerStatementRowsListResponseRowsItem struct {
+	Code      string                                                 `json:"code" url:"code"`
+	Label     string                                                 `json:"label" url:"label"`
+	Statement PostV1LedgerStatementRowsListResponseRowsItemStatement `json:"statement" url:"statement"`
+	Amount    string                                                 `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) GetStatement() PostV1LedgerStatementRowsListResponseRowsItemStatement {
+	if p == nil {
+		return ""
+	}
+	return p.Statement
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1LedgerStatementRowsListResponseRowsItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1LedgerStatementRowsListResponseRowsItemFieldLabel)
+}
+
+// SetStatement sets the Statement field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) SetStatement(statement PostV1LedgerStatementRowsListResponseRowsItemStatement) {
+	p.Statement = statement
+	p.require(postV1LedgerStatementRowsListResponseRowsItemFieldStatement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1LedgerStatementRowsListResponseRowsItemFieldAmount)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerStatementRowsListResponseRowsItemStatement string
+
+const (
+	PostV1LedgerStatementRowsListResponseRowsItemStatementBalanceSheet    PostV1LedgerStatementRowsListResponseRowsItemStatement = "balance_sheet"
+	PostV1LedgerStatementRowsListResponseRowsItemStatementIncomeStatement PostV1LedgerStatementRowsListResponseRowsItemStatement = "income_statement"
+)
+
+func NewPostV1LedgerStatementRowsListResponseRowsItemStatementFromString(s string) (PostV1LedgerStatementRowsListResponseRowsItemStatement, error) {
+	switch s {
+	case "balance_sheet":
+		return PostV1LedgerStatementRowsListResponseRowsItemStatementBalanceSheet, nil
+	case "income_statement":
+		return PostV1LedgerStatementRowsListResponseRowsItemStatementIncomeStatement, nil
+	}
+	var t PostV1LedgerStatementRowsListResponseRowsItemStatement
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerStatementRowsListResponseRowsItemStatement) Ptr() *PostV1LedgerStatementRowsListResponseRowsItemStatement {
+	return &p
+}
+
+var (
+	postV1LedgerStatementRowsListResponseSchemeFieldKey     = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListResponseSchemeFieldCountry = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListResponseSchemeFieldTitle   = big.NewInt(1 << 2)
+	postV1LedgerStatementRowsListResponseSchemeFieldSource  = big.NewInt(1 << 3)
+	postV1LedgerStatementRowsListResponseSchemeFieldRows    = big.NewInt(1 << 4)
+)
+
+type PostV1LedgerStatementRowsListResponseScheme struct {
+	Key     string                                                 `json:"key" url:"key"`
+	Country string                                                 `json:"country" url:"country"`
+	Title   string                                                 `json:"title" url:"title"`
+	Source  string                                                 `json:"source" url:"source"`
+	Rows    []*PostV1LedgerStatementRowsListResponseSchemeRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.Key
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetCountry() string {
+	if p == nil {
+		return ""
+	}
+	return p.Country
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetTitle() string {
+	if p == nil {
+		return ""
+	}
+	return p.Title
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetRows() []*PostV1LedgerStatementRowsListResponseSchemeRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseScheme) SetKey(key string) {
+	p.Key = key
+	p.require(postV1LedgerStatementRowsListResponseSchemeFieldKey)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseScheme) SetCountry(country string) {
+	p.Country = country
+	p.require(postV1LedgerStatementRowsListResponseSchemeFieldCountry)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseScheme) SetTitle(title string) {
+	p.Title = title
+	p.require(postV1LedgerStatementRowsListResponseSchemeFieldTitle)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseScheme) SetSource(source string) {
+	p.Source = source
+	p.require(postV1LedgerStatementRowsListResponseSchemeFieldSource)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseScheme) SetRows(rows []*PostV1LedgerStatementRowsListResponseSchemeRowsItem) {
+	p.Rows = rows
+	p.require(postV1LedgerStatementRowsListResponseSchemeFieldRows)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListResponseScheme
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListResponseScheme(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListResponseScheme
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseScheme) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LedgerStatementRowsListResponseSchemeRowsItemFieldCode      = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsListResponseSchemeRowsItemFieldLabel     = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsListResponseSchemeRowsItemFieldStatement = big.NewInt(1 << 2)
+)
+
+type PostV1LedgerStatementRowsListResponseSchemeRowsItem struct {
+	Code      string                                                       `json:"code" url:"code"`
+	Label     string                                                       `json:"label" url:"label"`
+	Statement PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement `json:"statement" url:"statement"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) GetStatement() PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement {
+	if p == nil {
+		return ""
+	}
+	return p.Statement
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1LedgerStatementRowsListResponseSchemeRowsItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1LedgerStatementRowsListResponseSchemeRowsItemFieldLabel)
+}
+
+// SetStatement sets the Statement field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) SetStatement(statement PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement) {
+	p.Statement = statement
+	p.require(postV1LedgerStatementRowsListResponseSchemeRowsItemFieldStatement)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsListResponseSchemeRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsListResponseSchemeRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsListResponseSchemeRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsListResponseSchemeRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement string
+
+const (
+	PostV1LedgerStatementRowsListResponseSchemeRowsItemStatementBalanceSheet    PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement = "balance_sheet"
+	PostV1LedgerStatementRowsListResponseSchemeRowsItemStatementIncomeStatement PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement = "income_statement"
+)
+
+func NewPostV1LedgerStatementRowsListResponseSchemeRowsItemStatementFromString(s string) (PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement, error) {
+	switch s {
+	case "balance_sheet":
+		return PostV1LedgerStatementRowsListResponseSchemeRowsItemStatementBalanceSheet, nil
+	case "income_statement":
+		return PostV1LedgerStatementRowsListResponseSchemeRowsItemStatementIncomeStatement, nil
+	}
+	var t PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement) Ptr() *PostV1LedgerStatementRowsListResponseSchemeRowsItemStatement {
+	return &p
+}
+
+var (
+	postV1LedgerStatementRowsSchemesResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1LedgerStatementRowsSchemesResponse struct {
+	Rows []*PostV1LedgerStatementRowsSchemesResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) GetRows() []*PostV1LedgerStatementRowsSchemesResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponse) SetRows(rows []*PostV1LedgerStatementRowsSchemesResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1LedgerStatementRowsSchemesResponseFieldRows)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsSchemesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsSchemesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsSchemesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LedgerStatementRowsSchemesResponseRowsItemFieldKey     = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsSchemesResponseRowsItemFieldCountry = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsSchemesResponseRowsItemFieldTitle   = big.NewInt(1 << 2)
+	postV1LedgerStatementRowsSchemesResponseRowsItemFieldSource  = big.NewInt(1 << 3)
+	postV1LedgerStatementRowsSchemesResponseRowsItemFieldRows    = big.NewInt(1 << 4)
+)
+
+type PostV1LedgerStatementRowsSchemesResponseRowsItem struct {
+	Key     string                                                      `json:"key" url:"key"`
+	Country string                                                      `json:"country" url:"country"`
+	Title   string                                                      `json:"title" url:"title"`
+	Source  string                                                      `json:"source" url:"source"`
+	Rows    []*PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.Key
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetCountry() string {
+	if p == nil {
+		return ""
+	}
+	return p.Country
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetTitle() string {
+	if p == nil {
+		return ""
+	}
+	return p.Title
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetSource() string {
+	if p == nil {
+		return ""
+	}
+	return p.Source
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetRows() []*PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) SetKey(key string) {
+	p.Key = key
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemFieldKey)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) SetCountry(country string) {
+	p.Country = country
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemFieldCountry)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) SetTitle(title string) {
+	p.Title = title
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemFieldTitle)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) SetSource(source string) {
+	p.Source = source
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemFieldSource)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) SetRows(rows []*PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) {
+	p.Rows = rows
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemFieldRows)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsSchemesResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsSchemesResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsSchemesResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldCode      = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldLabel     = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldStatement = big.NewInt(1 << 2)
+)
+
+type PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem struct {
+	Code      string                                                            `json:"code" url:"code"`
+	Label     string                                                            `json:"label" url:"label"`
+	Statement PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement `json:"statement" url:"statement"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) GetLabel() string {
+	if p == nil {
+		return ""
+	}
+	return p.Label
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) GetStatement() PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement {
+	if p == nil {
+		return ""
+	}
+	return p.Statement
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) SetLabel(label string) {
+	p.Label = label
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldLabel)
+}
+
+// SetStatement sets the Statement field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) SetStatement(statement PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement) {
+	p.Statement = statement
+	p.require(postV1LedgerStatementRowsSchemesResponseRowsItemRowsItemFieldStatement)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement string
+
+const (
+	PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatementBalanceSheet    PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement = "balance_sheet"
+	PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatementIncomeStatement PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement = "income_statement"
+)
+
+func NewPostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatementFromString(s string) (PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement, error) {
+	switch s {
+	case "balance_sheet":
+		return PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatementBalanceSheet, nil
+	case "income_statement":
+		return PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatementIncomeStatement, nil
+	}
+	var t PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement) Ptr() *PostV1LedgerStatementRowsSchemesResponseRowsItemRowsItemStatement {
+	return &p
+}
+
+var (
+	postV1LedgerStatementRowsSetResponseFieldScheme      = big.NewInt(1 << 0)
+	postV1LedgerStatementRowsSetResponseFieldAccountCode = big.NewInt(1 << 1)
+	postV1LedgerStatementRowsSetResponseFieldRowCode     = big.NewInt(1 << 2)
+)
+
+type PostV1LedgerStatementRowsSetResponse struct {
+	Scheme      string  `json:"scheme" url:"scheme"`
+	AccountCode string  `json:"accountCode" url:"accountCode"`
+	RowCode     *string `json:"rowCode,omitempty" url:"rowCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) GetScheme() string {
+	if p == nil {
+		return ""
+	}
+	return p.Scheme
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) GetAccountCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.AccountCode
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) GetRowCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RowCode
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetResponse) SetScheme(scheme string) {
+	p.Scheme = scheme
+	p.require(postV1LedgerStatementRowsSetResponseFieldScheme)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetResponse) SetAccountCode(accountCode string) {
+	p.AccountCode = accountCode
+	p.require(postV1LedgerStatementRowsSetResponseFieldAccountCode)
+}
+
+// SetRowCode sets the RowCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1LedgerStatementRowsSetResponse) SetRowCode(rowCode *string) {
+	p.RowCode = rowCode
+	p.require(postV1LedgerStatementRowsSetResponseFieldRowCode)
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1LedgerStatementRowsSetResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1LedgerStatementRowsSetResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1LedgerStatementRowsSetResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1LedgerStatementRowsSetResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1OfficersCreateRequestRole string
+
+const (
+	PostV1OfficersCreateRequestRoleDirector               PostV1OfficersCreateRequestRole = "director"
+	PostV1OfficersCreateRequestRoleManagingDirector       PostV1OfficersCreateRequestRole = "managing_director"
+	PostV1OfficersCreateRequestRoleBoardMember            PostV1OfficersCreateRequestRole = "board_member"
+	PostV1OfficersCreateRequestRoleBoardChair             PostV1OfficersCreateRequestRole = "board_chair"
+	PostV1OfficersCreateRequestRoleSupervisoryBoardMember PostV1OfficersCreateRequestRole = "supervisory_board_member"
+	PostV1OfficersCreateRequestRoleSecretary              PostV1OfficersCreateRequestRole = "secretary"
+	PostV1OfficersCreateRequestRoleRepresentative         PostV1OfficersCreateRequestRole = "representative"
+	PostV1OfficersCreateRequestRoleLiquidator             PostV1OfficersCreateRequestRole = "liquidator"
+)
+
+func NewPostV1OfficersCreateRequestRoleFromString(s string) (PostV1OfficersCreateRequestRole, error) {
+	switch s {
+	case "director":
+		return PostV1OfficersCreateRequestRoleDirector, nil
+	case "managing_director":
+		return PostV1OfficersCreateRequestRoleManagingDirector, nil
+	case "board_member":
+		return PostV1OfficersCreateRequestRoleBoardMember, nil
+	case "board_chair":
+		return PostV1OfficersCreateRequestRoleBoardChair, nil
+	case "supervisory_board_member":
+		return PostV1OfficersCreateRequestRoleSupervisoryBoardMember, nil
+	case "secretary":
+		return PostV1OfficersCreateRequestRoleSecretary, nil
+	case "representative":
+		return PostV1OfficersCreateRequestRoleRepresentative, nil
+	case "liquidator":
+		return PostV1OfficersCreateRequestRoleLiquidator, nil
+	}
+	var t PostV1OfficersCreateRequestRole
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1OfficersCreateRequestRole) Ptr() *PostV1OfficersCreateRequestRole {
+	return &p
+}
+
+var (
+	postV1OfficersCreateResponseFieldID            = big.NewInt(1 << 0)
+	postV1OfficersCreateResponseFieldName          = big.NewInt(1 << 1)
+	postV1OfficersCreateResponseFieldRole          = big.NewInt(1 << 2)
+	postV1OfficersCreateResponseFieldPersonalCode  = big.NewInt(1 << 3)
+	postV1OfficersCreateResponseFieldBirthDate     = big.NewInt(1 << 4)
+	postV1OfficersCreateResponseFieldAppointedOn   = big.NewInt(1 << 5)
+	postV1OfficersCreateResponseFieldPowerNotary   = big.NewInt(1 << 6)
+	postV1OfficersCreateResponseFieldResignedOn    = big.NewInt(1 << 7)
+	postV1OfficersCreateResponseFieldSignsAccounts = big.NewInt(1 << 8)
+)
+
+type PostV1OfficersCreateResponse struct {
+	ID            string                           `json:"id" url:"id"`
+	Name          string                           `json:"name" url:"name"`
+	Role          PostV1OfficersCreateResponseRole `json:"role" url:"role"`
+	PersonalCode  *string                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate     *string                          `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	AppointedOn   *string                          `json:"appointedOn,omitempty" url:"appointedOn,omitempty"`
+	PowerNotary   *string                          `json:"powerNotary,omitempty" url:"powerNotary,omitempty"`
+	ResignedOn    *string                          `json:"resignedOn,omitempty" url:"resignedOn,omitempty"`
+	SignsAccounts bool                             `json:"signsAccounts" url:"signsAccounts"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1OfficersCreateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1OfficersCreateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1OfficersCreateResponse) GetRole() PostV1OfficersCreateResponseRole {
+	if p == nil {
+		return ""
+	}
+	return p.Role
+}
+
+func (p *PostV1OfficersCreateResponse) GetPersonalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PersonalCode
+}
+
+func (p *PostV1OfficersCreateResponse) GetBirthDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BirthDate
+}
+
+func (p *PostV1OfficersCreateResponse) GetAppointedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AppointedOn
+}
+
+func (p *PostV1OfficersCreateResponse) GetPowerNotary() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PowerNotary
+}
+
+func (p *PostV1OfficersCreateResponse) GetResignedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResignedOn
+}
+
+func (p *PostV1OfficersCreateResponse) GetSignsAccounts() bool {
+	if p == nil {
+		return false
+	}
+	return p.SignsAccounts
+}
+
+func (p *PostV1OfficersCreateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1OfficersCreateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersCreateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1OfficersCreateResponseFieldName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetRole(role PostV1OfficersCreateResponseRole) {
+	p.Role = role
+	p.require(postV1OfficersCreateResponseFieldRole)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1OfficersCreateResponseFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1OfficersCreateResponseFieldBirthDate)
+}
+
+// SetAppointedOn sets the AppointedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetAppointedOn(appointedOn *string) {
+	p.AppointedOn = appointedOn
+	p.require(postV1OfficersCreateResponseFieldAppointedOn)
+}
+
+// SetPowerNotary sets the PowerNotary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetPowerNotary(powerNotary *string) {
+	p.PowerNotary = powerNotary
+	p.require(postV1OfficersCreateResponseFieldPowerNotary)
+}
+
+// SetResignedOn sets the ResignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetResignedOn(resignedOn *string) {
+	p.ResignedOn = resignedOn
+	p.require(postV1OfficersCreateResponseFieldResignedOn)
+}
+
+// SetSignsAccounts sets the SignsAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersCreateResponse) SetSignsAccounts(signsAccounts bool) {
+	p.SignsAccounts = signsAccounts
+	p.require(postV1OfficersCreateResponseFieldSignsAccounts)
+}
+
+func (p *PostV1OfficersCreateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersCreateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1OfficersCreateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1OfficersCreateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersCreateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1OfficersCreateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1OfficersCreateResponseRole string
+
+const (
+	PostV1OfficersCreateResponseRoleDirector               PostV1OfficersCreateResponseRole = "director"
+	PostV1OfficersCreateResponseRoleManagingDirector       PostV1OfficersCreateResponseRole = "managing_director"
+	PostV1OfficersCreateResponseRoleBoardMember            PostV1OfficersCreateResponseRole = "board_member"
+	PostV1OfficersCreateResponseRoleBoardChair             PostV1OfficersCreateResponseRole = "board_chair"
+	PostV1OfficersCreateResponseRoleSupervisoryBoardMember PostV1OfficersCreateResponseRole = "supervisory_board_member"
+	PostV1OfficersCreateResponseRoleSecretary              PostV1OfficersCreateResponseRole = "secretary"
+	PostV1OfficersCreateResponseRoleRepresentative         PostV1OfficersCreateResponseRole = "representative"
+	PostV1OfficersCreateResponseRoleLiquidator             PostV1OfficersCreateResponseRole = "liquidator"
+)
+
+func NewPostV1OfficersCreateResponseRoleFromString(s string) (PostV1OfficersCreateResponseRole, error) {
+	switch s {
+	case "director":
+		return PostV1OfficersCreateResponseRoleDirector, nil
+	case "managing_director":
+		return PostV1OfficersCreateResponseRoleManagingDirector, nil
+	case "board_member":
+		return PostV1OfficersCreateResponseRoleBoardMember, nil
+	case "board_chair":
+		return PostV1OfficersCreateResponseRoleBoardChair, nil
+	case "supervisory_board_member":
+		return PostV1OfficersCreateResponseRoleSupervisoryBoardMember, nil
+	case "secretary":
+		return PostV1OfficersCreateResponseRoleSecretary, nil
+	case "representative":
+		return PostV1OfficersCreateResponseRoleRepresentative, nil
+	case "liquidator":
+		return PostV1OfficersCreateResponseRoleLiquidator, nil
+	}
+	var t PostV1OfficersCreateResponseRole
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1OfficersCreateResponseRole) Ptr() *PostV1OfficersCreateResponseRole {
+	return &p
+}
+
+var (
+	postV1OfficersDeleteResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1OfficersDeleteResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1OfficersDeleteResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1OfficersDeleteResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1OfficersDeleteResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersDeleteResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersDeleteResponseFieldID)
+}
+
+func (p *PostV1OfficersDeleteResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersDeleteResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1OfficersDeleteResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1OfficersDeleteResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersDeleteResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1OfficersDeleteResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1OfficersListResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostV1OfficersListResponse struct {
+	Rows []*PostV1OfficersListResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1OfficersListResponse) GetRows() []*PostV1OfficersListResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostV1OfficersListResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1OfficersListResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponse) SetRows(rows []*PostV1OfficersListResponseRowsItem) {
+	p.Rows = rows
+	p.require(postV1OfficersListResponseFieldRows)
+}
+
+func (p *PostV1OfficersListResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersListResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1OfficersListResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1OfficersListResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersListResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1OfficersListResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1OfficersListResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	postV1OfficersListResponseRowsItemFieldName          = big.NewInt(1 << 1)
+	postV1OfficersListResponseRowsItemFieldRole          = big.NewInt(1 << 2)
+	postV1OfficersListResponseRowsItemFieldPersonalCode  = big.NewInt(1 << 3)
+	postV1OfficersListResponseRowsItemFieldBirthDate     = big.NewInt(1 << 4)
+	postV1OfficersListResponseRowsItemFieldAppointedOn   = big.NewInt(1 << 5)
+	postV1OfficersListResponseRowsItemFieldPowerNotary   = big.NewInt(1 << 6)
+	postV1OfficersListResponseRowsItemFieldResignedOn    = big.NewInt(1 << 7)
+	postV1OfficersListResponseRowsItemFieldSignsAccounts = big.NewInt(1 << 8)
+)
+
+type PostV1OfficersListResponseRowsItem struct {
+	ID            string                                 `json:"id" url:"id"`
+	Name          string                                 `json:"name" url:"name"`
+	Role          PostV1OfficersListResponseRowsItemRole `json:"role" url:"role"`
+	PersonalCode  *string                                `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate     *string                                `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	AppointedOn   *string                                `json:"appointedOn,omitempty" url:"appointedOn,omitempty"`
+	PowerNotary   *string                                `json:"powerNotary,omitempty" url:"powerNotary,omitempty"`
+	ResignedOn    *string                                `json:"resignedOn,omitempty" url:"resignedOn,omitempty"`
+	SignsAccounts bool                                   `json:"signsAccounts" url:"signsAccounts"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetRole() PostV1OfficersListResponseRowsItemRole {
+	if p == nil {
+		return ""
+	}
+	return p.Role
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetPersonalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PersonalCode
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetBirthDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BirthDate
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetAppointedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AppointedOn
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetPowerNotary() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PowerNotary
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetResignedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResignedOn
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetSignsAccounts() bool {
+	if p == nil {
+		return false
+	}
+	return p.SignsAccounts
+}
+
+func (p *PostV1OfficersListResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1OfficersListResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersListResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1OfficersListResponseRowsItemFieldName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetRole(role PostV1OfficersListResponseRowsItemRole) {
+	p.Role = role
+	p.require(postV1OfficersListResponseRowsItemFieldRole)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1OfficersListResponseRowsItemFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1OfficersListResponseRowsItemFieldBirthDate)
+}
+
+// SetAppointedOn sets the AppointedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetAppointedOn(appointedOn *string) {
+	p.AppointedOn = appointedOn
+	p.require(postV1OfficersListResponseRowsItemFieldAppointedOn)
+}
+
+// SetPowerNotary sets the PowerNotary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetPowerNotary(powerNotary *string) {
+	p.PowerNotary = powerNotary
+	p.require(postV1OfficersListResponseRowsItemFieldPowerNotary)
+}
+
+// SetResignedOn sets the ResignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetResignedOn(resignedOn *string) {
+	p.ResignedOn = resignedOn
+	p.require(postV1OfficersListResponseRowsItemFieldResignedOn)
+}
+
+// SetSignsAccounts sets the SignsAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersListResponseRowsItem) SetSignsAccounts(signsAccounts bool) {
+	p.SignsAccounts = signsAccounts
+	p.require(postV1OfficersListResponseRowsItemFieldSignsAccounts)
+}
+
+func (p *PostV1OfficersListResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersListResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1OfficersListResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1OfficersListResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersListResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1OfficersListResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1OfficersListResponseRowsItemRole string
+
+const (
+	PostV1OfficersListResponseRowsItemRoleDirector               PostV1OfficersListResponseRowsItemRole = "director"
+	PostV1OfficersListResponseRowsItemRoleManagingDirector       PostV1OfficersListResponseRowsItemRole = "managing_director"
+	PostV1OfficersListResponseRowsItemRoleBoardMember            PostV1OfficersListResponseRowsItemRole = "board_member"
+	PostV1OfficersListResponseRowsItemRoleBoardChair             PostV1OfficersListResponseRowsItemRole = "board_chair"
+	PostV1OfficersListResponseRowsItemRoleSupervisoryBoardMember PostV1OfficersListResponseRowsItemRole = "supervisory_board_member"
+	PostV1OfficersListResponseRowsItemRoleSecretary              PostV1OfficersListResponseRowsItemRole = "secretary"
+	PostV1OfficersListResponseRowsItemRoleRepresentative         PostV1OfficersListResponseRowsItemRole = "representative"
+	PostV1OfficersListResponseRowsItemRoleLiquidator             PostV1OfficersListResponseRowsItemRole = "liquidator"
+)
+
+func NewPostV1OfficersListResponseRowsItemRoleFromString(s string) (PostV1OfficersListResponseRowsItemRole, error) {
+	switch s {
+	case "director":
+		return PostV1OfficersListResponseRowsItemRoleDirector, nil
+	case "managing_director":
+		return PostV1OfficersListResponseRowsItemRoleManagingDirector, nil
+	case "board_member":
+		return PostV1OfficersListResponseRowsItemRoleBoardMember, nil
+	case "board_chair":
+		return PostV1OfficersListResponseRowsItemRoleBoardChair, nil
+	case "supervisory_board_member":
+		return PostV1OfficersListResponseRowsItemRoleSupervisoryBoardMember, nil
+	case "secretary":
+		return PostV1OfficersListResponseRowsItemRoleSecretary, nil
+	case "representative":
+		return PostV1OfficersListResponseRowsItemRoleRepresentative, nil
+	case "liquidator":
+		return PostV1OfficersListResponseRowsItemRoleLiquidator, nil
+	}
+	var t PostV1OfficersListResponseRowsItemRole
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1OfficersListResponseRowsItemRole) Ptr() *PostV1OfficersListResponseRowsItemRole {
+	return &p
+}
+
+type PostV1OfficersUpdateRequestRole string
+
+const (
+	PostV1OfficersUpdateRequestRoleDirector               PostV1OfficersUpdateRequestRole = "director"
+	PostV1OfficersUpdateRequestRoleManagingDirector       PostV1OfficersUpdateRequestRole = "managing_director"
+	PostV1OfficersUpdateRequestRoleBoardMember            PostV1OfficersUpdateRequestRole = "board_member"
+	PostV1OfficersUpdateRequestRoleBoardChair             PostV1OfficersUpdateRequestRole = "board_chair"
+	PostV1OfficersUpdateRequestRoleSupervisoryBoardMember PostV1OfficersUpdateRequestRole = "supervisory_board_member"
+	PostV1OfficersUpdateRequestRoleSecretary              PostV1OfficersUpdateRequestRole = "secretary"
+	PostV1OfficersUpdateRequestRoleRepresentative         PostV1OfficersUpdateRequestRole = "representative"
+	PostV1OfficersUpdateRequestRoleLiquidator             PostV1OfficersUpdateRequestRole = "liquidator"
+)
+
+func NewPostV1OfficersUpdateRequestRoleFromString(s string) (PostV1OfficersUpdateRequestRole, error) {
+	switch s {
+	case "director":
+		return PostV1OfficersUpdateRequestRoleDirector, nil
+	case "managing_director":
+		return PostV1OfficersUpdateRequestRoleManagingDirector, nil
+	case "board_member":
+		return PostV1OfficersUpdateRequestRoleBoardMember, nil
+	case "board_chair":
+		return PostV1OfficersUpdateRequestRoleBoardChair, nil
+	case "supervisory_board_member":
+		return PostV1OfficersUpdateRequestRoleSupervisoryBoardMember, nil
+	case "secretary":
+		return PostV1OfficersUpdateRequestRoleSecretary, nil
+	case "representative":
+		return PostV1OfficersUpdateRequestRoleRepresentative, nil
+	case "liquidator":
+		return PostV1OfficersUpdateRequestRoleLiquidator, nil
+	}
+	var t PostV1OfficersUpdateRequestRole
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1OfficersUpdateRequestRole) Ptr() *PostV1OfficersUpdateRequestRole {
+	return &p
+}
+
+var (
+	postV1OfficersUpdateResponseFieldID            = big.NewInt(1 << 0)
+	postV1OfficersUpdateResponseFieldName          = big.NewInt(1 << 1)
+	postV1OfficersUpdateResponseFieldRole          = big.NewInt(1 << 2)
+	postV1OfficersUpdateResponseFieldPersonalCode  = big.NewInt(1 << 3)
+	postV1OfficersUpdateResponseFieldBirthDate     = big.NewInt(1 << 4)
+	postV1OfficersUpdateResponseFieldAppointedOn   = big.NewInt(1 << 5)
+	postV1OfficersUpdateResponseFieldPowerNotary   = big.NewInt(1 << 6)
+	postV1OfficersUpdateResponseFieldResignedOn    = big.NewInt(1 << 7)
+	postV1OfficersUpdateResponseFieldSignsAccounts = big.NewInt(1 << 8)
+)
+
+type PostV1OfficersUpdateResponse struct {
+	ID            string                           `json:"id" url:"id"`
+	Name          string                           `json:"name" url:"name"`
+	Role          PostV1OfficersUpdateResponseRole `json:"role" url:"role"`
+	PersonalCode  *string                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate     *string                          `json:"birthDate,omitempty" url:"birthDate,omitempty"`
+	AppointedOn   *string                          `json:"appointedOn,omitempty" url:"appointedOn,omitempty"`
+	PowerNotary   *string                          `json:"powerNotary,omitempty" url:"powerNotary,omitempty"`
+	ResignedOn    *string                          `json:"resignedOn,omitempty" url:"resignedOn,omitempty"`
+	SignsAccounts bool                             `json:"signsAccounts" url:"signsAccounts"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1OfficersUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1OfficersUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1OfficersUpdateResponse) GetRole() PostV1OfficersUpdateResponseRole {
+	if p == nil {
+		return ""
+	}
+	return p.Role
+}
+
+func (p *PostV1OfficersUpdateResponse) GetPersonalCode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PersonalCode
+}
+
+func (p *PostV1OfficersUpdateResponse) GetBirthDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BirthDate
+}
+
+func (p *PostV1OfficersUpdateResponse) GetAppointedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AppointedOn
+}
+
+func (p *PostV1OfficersUpdateResponse) GetPowerNotary() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PowerNotary
+}
+
+func (p *PostV1OfficersUpdateResponse) GetResignedOn() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ResignedOn
+}
+
+func (p *PostV1OfficersUpdateResponse) GetSignsAccounts() bool {
+	if p == nil {
+		return false
+	}
+	return p.SignsAccounts
+}
+
+func (p *PostV1OfficersUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1OfficersUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1OfficersUpdateResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1OfficersUpdateResponseFieldName)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetRole(role PostV1OfficersUpdateResponseRole) {
+	p.Role = role
+	p.require(postV1OfficersUpdateResponseFieldRole)
+}
+
+// SetPersonalCode sets the PersonalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetPersonalCode(personalCode *string) {
+	p.PersonalCode = personalCode
+	p.require(postV1OfficersUpdateResponseFieldPersonalCode)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetBirthDate(birthDate *string) {
+	p.BirthDate = birthDate
+	p.require(postV1OfficersUpdateResponseFieldBirthDate)
+}
+
+// SetAppointedOn sets the AppointedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetAppointedOn(appointedOn *string) {
+	p.AppointedOn = appointedOn
+	p.require(postV1OfficersUpdateResponseFieldAppointedOn)
+}
+
+// SetPowerNotary sets the PowerNotary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetPowerNotary(powerNotary *string) {
+	p.PowerNotary = powerNotary
+	p.require(postV1OfficersUpdateResponseFieldPowerNotary)
+}
+
+// SetResignedOn sets the ResignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetResignedOn(resignedOn *string) {
+	p.ResignedOn = resignedOn
+	p.require(postV1OfficersUpdateResponseFieldResignedOn)
+}
+
+// SetSignsAccounts sets the SignsAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1OfficersUpdateResponse) SetSignsAccounts(signsAccounts bool) {
+	p.SignsAccounts = signsAccounts
+	p.require(postV1OfficersUpdateResponseFieldSignsAccounts)
+}
+
+func (p *PostV1OfficersUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1OfficersUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1OfficersUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1OfficersUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1OfficersUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1OfficersUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1OfficersUpdateResponseRole string
+
+const (
+	PostV1OfficersUpdateResponseRoleDirector               PostV1OfficersUpdateResponseRole = "director"
+	PostV1OfficersUpdateResponseRoleManagingDirector       PostV1OfficersUpdateResponseRole = "managing_director"
+	PostV1OfficersUpdateResponseRoleBoardMember            PostV1OfficersUpdateResponseRole = "board_member"
+	PostV1OfficersUpdateResponseRoleBoardChair             PostV1OfficersUpdateResponseRole = "board_chair"
+	PostV1OfficersUpdateResponseRoleSupervisoryBoardMember PostV1OfficersUpdateResponseRole = "supervisory_board_member"
+	PostV1OfficersUpdateResponseRoleSecretary              PostV1OfficersUpdateResponseRole = "secretary"
+	PostV1OfficersUpdateResponseRoleRepresentative         PostV1OfficersUpdateResponseRole = "representative"
+	PostV1OfficersUpdateResponseRoleLiquidator             PostV1OfficersUpdateResponseRole = "liquidator"
+)
+
+func NewPostV1OfficersUpdateResponseRoleFromString(s string) (PostV1OfficersUpdateResponseRole, error) {
+	switch s {
+	case "director":
+		return PostV1OfficersUpdateResponseRoleDirector, nil
+	case "managing_director":
+		return PostV1OfficersUpdateResponseRoleManagingDirector, nil
+	case "board_member":
+		return PostV1OfficersUpdateResponseRoleBoardMember, nil
+	case "board_chair":
+		return PostV1OfficersUpdateResponseRoleBoardChair, nil
+	case "supervisory_board_member":
+		return PostV1OfficersUpdateResponseRoleSupervisoryBoardMember, nil
+	case "secretary":
+		return PostV1OfficersUpdateResponseRoleSecretary, nil
+	case "representative":
+		return PostV1OfficersUpdateResponseRoleRepresentative, nil
+	case "liquidator":
+		return PostV1OfficersUpdateResponseRoleLiquidator, nil
+	}
+	var t PostV1OfficersUpdateResponseRole
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1OfficersUpdateResponseRole) Ptr() *PostV1OfficersUpdateResponseRole {
+	return &p
 }

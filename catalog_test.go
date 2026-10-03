@@ -34554,6 +34554,13 @@ func TestEnumPostV1CatalogItemsUpdateResponseType(t *testing.T) {
 }
 
 func TestEnumPostV1CatalogUnitsOptionsRequestLocale(t *testing.T) {
+	t.Run("NewFromString_en", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("en")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostV1CatalogUnitsOptionsRequestLocale("en"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("lt")
@@ -34561,11 +34568,11 @@ func TestEnumPostV1CatalogUnitsOptionsRequestLocale(t *testing.T) {
 		assert.Equal(t, PostV1CatalogUnitsOptionsRequestLocale("lt"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_en", func(t *testing.T) {
+	t.Run("NewFromString_de", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("en")
+		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, PostV1CatalogUnitsOptionsRequestLocale("en"), val, "enum value should match expected wire value")
+		assert.Equal(t, PostV1CatalogUnitsOptionsRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -34574,7 +34581,7 @@ func TestEnumPostV1CatalogUnitsOptionsRequestLocale(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("lt")
+		val, err := NewPostV1CatalogUnitsOptionsRequestLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

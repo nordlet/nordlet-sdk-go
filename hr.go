@@ -55,6 +55,19 @@ func (p *PostV1HrEmployeesAnonymizeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type PostV1HrEmployeesFieldsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1HrEmployeesFieldsRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
 var (
 	postV1HrContractsCreateRequestFieldEmployeeID   = big.NewInt(1 << 0)
 	postV1HrContractsCreateRequestFieldPositionID   = big.NewInt(1 << 1)
@@ -415,11 +428,12 @@ var (
 	postV1HrEmployeesCreateRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
 	postV1HrEmployeesCreateRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
 	postV1HrEmployeesCreateRequestFieldHireDate             = big.NewInt(1 << 11)
-	postV1HrEmployeesCreateRequestFieldApplyNpd             = big.NewInt(1 << 12)
-	postV1HrEmployeesCreateRequestFieldNpdOverride          = big.NewInt(1 << 13)
+	postV1HrEmployeesCreateRequestFieldApplyAllowance       = big.NewInt(1 << 12)
+	postV1HrEmployeesCreateRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
 	postV1HrEmployeesCreateRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	postV1HrEmployeesCreateRequestFieldNotes                = big.NewInt(1 << 15)
-	postV1HrEmployeesCreateRequestFieldAttributes           = big.NewInt(1 << 16)
+	postV1HrEmployeesCreateRequestFieldPayrollOptions       = big.NewInt(1 << 15)
+	postV1HrEmployeesCreateRequestFieldNotes                = big.NewInt(1 << 16)
+	postV1HrEmployeesCreateRequestFieldAttributes           = big.NewInt(1 << 17)
 )
 
 type PostV1HrEmployeesCreateRequest struct {
@@ -435,9 +449,10 @@ type PostV1HrEmployeesCreateRequest struct {
 	SocialInsuranceNo    *string                                         `json:"socialInsuranceNo,omitempty" url:"-"`
 	SocialInsuranceStart *string                                         `json:"socialInsuranceStart,omitempty" url:"-"`
 	HireDate             *string                                         `json:"hireDate,omitempty" url:"-"`
-	ApplyNpd             *bool                                           `json:"applyNpd,omitempty" url:"-"`
-	NpdOverride          *string                                         `json:"npdOverride,omitempty" url:"-"`
+	ApplyAllowance       *bool                                           `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride    *string                                         `json:"allowanceOverride,omitempty" url:"-"`
 	PensionAccumulation  *bool                                           `json:"pensionAccumulation,omitempty" url:"-"`
+	PayrollOptions       map[string]string                               `json:"payrollOptions,omitempty" url:"-"`
 	Notes                *string                                         `json:"notes,omitempty" url:"-"`
 	Attributes           []*PostV1HrEmployeesCreateRequestAttributesItem `json:"attributes,omitempty" url:"-"`
 
@@ -536,18 +551,18 @@ func (p *PostV1HrEmployeesCreateRequest) SetHireDate(hireDate *string) {
 	p.require(postV1HrEmployeesCreateRequestFieldHireDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetApplyNpd(applyNpd *bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesCreateRequestFieldApplyNpd)
+func (p *PostV1HrEmployeesCreateRequest) SetApplyAllowance(applyAllowance *bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesCreateRequestFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateRequest) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesCreateRequestFieldNpdOverride)
+func (p *PostV1HrEmployeesCreateRequest) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesCreateRequestFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -555,6 +570,13 @@ func (p *PostV1HrEmployeesCreateRequest) SetNpdOverride(npdOverride *string) {
 func (p *PostV1HrEmployeesCreateRequest) SetPensionAccumulation(pensionAccumulation *bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesCreateRequestFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesCreateRequest) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesCreateRequestFieldPayrollOptions)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -1127,14 +1149,15 @@ var (
 	postV1HrEmployeesUpdateRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
 	postV1HrEmployeesUpdateRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
 	postV1HrEmployeesUpdateRequestFieldHireDate             = big.NewInt(1 << 11)
-	postV1HrEmployeesUpdateRequestFieldApplyNpd             = big.NewInt(1 << 12)
-	postV1HrEmployeesUpdateRequestFieldNpdOverride          = big.NewInt(1 << 13)
+	postV1HrEmployeesUpdateRequestFieldApplyAllowance       = big.NewInt(1 << 12)
+	postV1HrEmployeesUpdateRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
 	postV1HrEmployeesUpdateRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	postV1HrEmployeesUpdateRequestFieldNotes                = big.NewInt(1 << 15)
-	postV1HrEmployeesUpdateRequestFieldAttributes           = big.NewInt(1 << 16)
-	postV1HrEmployeesUpdateRequestFieldID                   = big.NewInt(1 << 17)
-	postV1HrEmployeesUpdateRequestFieldTerminationDate      = big.NewInt(1 << 18)
-	postV1HrEmployeesUpdateRequestFieldStatus               = big.NewInt(1 << 19)
+	postV1HrEmployeesUpdateRequestFieldPayrollOptions       = big.NewInt(1 << 15)
+	postV1HrEmployeesUpdateRequestFieldNotes                = big.NewInt(1 << 16)
+	postV1HrEmployeesUpdateRequestFieldAttributes           = big.NewInt(1 << 17)
+	postV1HrEmployeesUpdateRequestFieldID                   = big.NewInt(1 << 18)
+	postV1HrEmployeesUpdateRequestFieldTerminationDate      = big.NewInt(1 << 19)
+	postV1HrEmployeesUpdateRequestFieldStatus               = big.NewInt(1 << 20)
 )
 
 type PostV1HrEmployeesUpdateRequest struct {
@@ -1150,9 +1173,10 @@ type PostV1HrEmployeesUpdateRequest struct {
 	SocialInsuranceNo    *string                                         `json:"socialInsuranceNo,omitempty" url:"-"`
 	SocialInsuranceStart *string                                         `json:"socialInsuranceStart,omitempty" url:"-"`
 	HireDate             *string                                         `json:"hireDate,omitempty" url:"-"`
-	ApplyNpd             *bool                                           `json:"applyNpd,omitempty" url:"-"`
-	NpdOverride          *string                                         `json:"npdOverride,omitempty" url:"-"`
+	ApplyAllowance       *bool                                           `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride    *string                                         `json:"allowanceOverride,omitempty" url:"-"`
 	PensionAccumulation  *bool                                           `json:"pensionAccumulation,omitempty" url:"-"`
+	PayrollOptions       map[string]string                               `json:"payrollOptions,omitempty" url:"-"`
 	Notes                *string                                         `json:"notes,omitempty" url:"-"`
 	Attributes           []*PostV1HrEmployeesUpdateRequestAttributesItem `json:"attributes,omitempty" url:"-"`
 	ID                   string                                          `json:"id" url:"-"`
@@ -1254,18 +1278,18 @@ func (p *PostV1HrEmployeesUpdateRequest) SetHireDate(hireDate *string) {
 	p.require(postV1HrEmployeesUpdateRequestFieldHireDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetApplyNpd(applyNpd *bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesUpdateRequestFieldApplyNpd)
+func (p *PostV1HrEmployeesUpdateRequest) SetApplyAllowance(applyAllowance *bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesUpdateRequestFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateRequest) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesUpdateRequestFieldNpdOverride)
+func (p *PostV1HrEmployeesUpdateRequest) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesUpdateRequestFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -1273,6 +1297,13 @@ func (p *PostV1HrEmployeesUpdateRequest) SetNpdOverride(npdOverride *string) {
 func (p *PostV1HrEmployeesUpdateRequest) SetPensionAccumulation(pensionAccumulation *bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesUpdateRequestFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesUpdateRequest) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesUpdateRequestFieldPayrollOptions)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -4177,13 +4208,14 @@ var (
 	postV1HrEmployeesAnonymizeResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
 	postV1HrEmployeesAnonymizeResponseFieldHireDate             = big.NewInt(1 << 12)
 	postV1HrEmployeesAnonymizeResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesAnonymizeResponseFieldApplyNpd             = big.NewInt(1 << 14)
-	postV1HrEmployeesAnonymizeResponseFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesAnonymizeResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	postV1HrEmployeesAnonymizeResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
 	postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesAnonymizeResponseFieldStatus               = big.NewInt(1 << 17)
-	postV1HrEmployeesAnonymizeResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1HrEmployeesAnonymizeResponseFieldAttributes           = big.NewInt(1 << 19)
-	postV1HrEmployeesAnonymizeResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1HrEmployeesAnonymizeResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	postV1HrEmployeesAnonymizeResponseFieldStatus               = big.NewInt(1 << 18)
+	postV1HrEmployeesAnonymizeResponseFieldNotes                = big.NewInt(1 << 19)
+	postV1HrEmployeesAnonymizeResponseFieldAttributes           = big.NewInt(1 << 20)
+	postV1HrEmployeesAnonymizeResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1HrEmployeesAnonymizeResponse struct {
@@ -4201,9 +4233,10 @@ type PostV1HrEmployeesAnonymizeResponse struct {
 	SocialInsuranceStart *string                                             `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *string                                             `json:"hireDate,omitempty" url:"hireDate,omitempty"`
 	TerminationDate      *string                                             `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyNpd             bool                                                `json:"applyNpd" url:"applyNpd"`
-	NpdOverride          *string                                             `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	ApplyAllowance       bool                                                `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                             `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                                `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                                   `json:"payrollOptions" url:"payrollOptions"`
 	Status               PostV1HrEmployeesAnonymizeResponseStatus            `json:"status" url:"status"`
 	Notes                *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
 	Attributes           []*PostV1HrEmployeesAnonymizeResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
@@ -4314,18 +4347,18 @@ func (p *PostV1HrEmployeesAnonymizeResponse) GetTerminationDate() *string {
 	return p.TerminationDate
 }
 
-func (p *PostV1HrEmployeesAnonymizeResponse) GetApplyNpd() bool {
+func (p *PostV1HrEmployeesAnonymizeResponse) GetApplyAllowance() bool {
 	if p == nil {
 		return false
 	}
-	return p.ApplyNpd
+	return p.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesAnonymizeResponse) GetNpdOverride() *string {
+func (p *PostV1HrEmployeesAnonymizeResponse) GetAllowanceOverride() *string {
 	if p == nil {
 		return nil
 	}
-	return p.NpdOverride
+	return p.AllowanceOverride
 }
 
 func (p *PostV1HrEmployeesAnonymizeResponse) GetPensionAccumulation() bool {
@@ -4333,6 +4366,13 @@ func (p *PostV1HrEmployeesAnonymizeResponse) GetPensionAccumulation() bool {
 		return false
 	}
 	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesAnonymizeResponse) GetPayrollOptions() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.PayrollOptions
 }
 
 func (p *PostV1HrEmployeesAnonymizeResponse) GetStatus() PostV1HrEmployeesAnonymizeResponseStatus {
@@ -4475,18 +4515,18 @@ func (p *PostV1HrEmployeesAnonymizeResponse) SetTerminationDate(terminationDate 
 	p.require(postV1HrEmployeesAnonymizeResponseFieldTerminationDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetApplyNpd(applyNpd bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesAnonymizeResponseFieldApplyNpd)
+func (p *PostV1HrEmployeesAnonymizeResponse) SetApplyAllowance(applyAllowance bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesAnonymizeResponseFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesAnonymizeResponse) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesAnonymizeResponseFieldNpdOverride)
+func (p *PostV1HrEmployeesAnonymizeResponse) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesAnonymizeResponseFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -4494,6 +4534,13 @@ func (p *PostV1HrEmployeesAnonymizeResponse) SetNpdOverride(npdOverride *string)
 func (p *PostV1HrEmployeesAnonymizeResponse) SetPensionAccumulation(pensionAccumulation bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesAnonymizeResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesAnonymizeResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesAnonymizeResponseFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -5299,13 +5346,14 @@ var (
 	postV1HrEmployeesCreateResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
 	postV1HrEmployeesCreateResponseFieldHireDate             = big.NewInt(1 << 12)
 	postV1HrEmployeesCreateResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesCreateResponseFieldApplyNpd             = big.NewInt(1 << 14)
-	postV1HrEmployeesCreateResponseFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesCreateResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	postV1HrEmployeesCreateResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
 	postV1HrEmployeesCreateResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesCreateResponseFieldStatus               = big.NewInt(1 << 17)
-	postV1HrEmployeesCreateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1HrEmployeesCreateResponseFieldAttributes           = big.NewInt(1 << 19)
-	postV1HrEmployeesCreateResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1HrEmployeesCreateResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	postV1HrEmployeesCreateResponseFieldStatus               = big.NewInt(1 << 18)
+	postV1HrEmployeesCreateResponseFieldNotes                = big.NewInt(1 << 19)
+	postV1HrEmployeesCreateResponseFieldAttributes           = big.NewInt(1 << 20)
+	postV1HrEmployeesCreateResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1HrEmployeesCreateResponse struct {
@@ -5323,9 +5371,10 @@ type PostV1HrEmployeesCreateResponse struct {
 	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *string                                          `json:"hireDate,omitempty" url:"hireDate,omitempty"`
 	TerminationDate      *string                                          `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyNpd             bool                                             `json:"applyNpd" url:"applyNpd"`
-	NpdOverride          *string                                          `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	ApplyAllowance       bool                                             `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                          `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                             `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                                `json:"payrollOptions" url:"payrollOptions"`
 	Status               PostV1HrEmployeesCreateResponseStatus            `json:"status" url:"status"`
 	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
 	Attributes           []*PostV1HrEmployeesCreateResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
@@ -5436,18 +5485,18 @@ func (p *PostV1HrEmployeesCreateResponse) GetTerminationDate() *string {
 	return p.TerminationDate
 }
 
-func (p *PostV1HrEmployeesCreateResponse) GetApplyNpd() bool {
+func (p *PostV1HrEmployeesCreateResponse) GetApplyAllowance() bool {
 	if p == nil {
 		return false
 	}
-	return p.ApplyNpd
+	return p.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesCreateResponse) GetNpdOverride() *string {
+func (p *PostV1HrEmployeesCreateResponse) GetAllowanceOverride() *string {
 	if p == nil {
 		return nil
 	}
-	return p.NpdOverride
+	return p.AllowanceOverride
 }
 
 func (p *PostV1HrEmployeesCreateResponse) GetPensionAccumulation() bool {
@@ -5455,6 +5504,13 @@ func (p *PostV1HrEmployeesCreateResponse) GetPensionAccumulation() bool {
 		return false
 	}
 	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesCreateResponse) GetPayrollOptions() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.PayrollOptions
 }
 
 func (p *PostV1HrEmployeesCreateResponse) GetStatus() PostV1HrEmployeesCreateResponseStatus {
@@ -5597,18 +5653,18 @@ func (p *PostV1HrEmployeesCreateResponse) SetTerminationDate(terminationDate *st
 	p.require(postV1HrEmployeesCreateResponseFieldTerminationDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetApplyNpd(applyNpd bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesCreateResponseFieldApplyNpd)
+func (p *PostV1HrEmployeesCreateResponse) SetApplyAllowance(applyAllowance bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesCreateResponseFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesCreateResponse) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesCreateResponseFieldNpdOverride)
+func (p *PostV1HrEmployeesCreateResponse) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesCreateResponseFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -5616,6 +5672,13 @@ func (p *PostV1HrEmployeesCreateResponse) SetNpdOverride(npdOverride *string) {
 func (p *PostV1HrEmployeesCreateResponse) SetPensionAccumulation(pensionAccumulation bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesCreateResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesCreateResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesCreateResponseFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -6027,6 +6090,263 @@ func (p *PostV1HrEmployeesDeleteResponse) String() string {
 }
 
 var (
+	postV1HrEmployeesFieldsResponseFieldCountry = big.NewInt(1 << 0)
+	postV1HrEmployeesFieldsResponseFieldFields  = big.NewInt(1 << 1)
+)
+
+type PostV1HrEmployeesFieldsResponse struct {
+	Country string                                       `json:"country" url:"country"`
+	Fields  []*PostV1HrEmployeesFieldsResponseFieldsItem `json:"fields" url:"fields"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) GetCountry() string {
+	if p == nil {
+		return ""
+	}
+	return p.Country
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) GetFields() []*PostV1HrEmployeesFieldsResponseFieldsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Fields
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponse) SetCountry(country string) {
+	p.Country = country
+	p.require(postV1HrEmployeesFieldsResponseFieldCountry)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponse) SetFields(fields []*PostV1HrEmployeesFieldsResponseFieldsItem) {
+	p.Fields = fields
+	p.require(postV1HrEmployeesFieldsResponseFieldFields)
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesFieldsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesFieldsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesFieldsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1HrEmployeesFieldsResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1HrEmployeesFieldsResponseFieldsItemFieldKey       = big.NewInt(1 << 0)
+	postV1HrEmployeesFieldsResponseFieldsItemFieldKind      = big.NewInt(1 << 1)
+	postV1HrEmployeesFieldsResponseFieldsItemFieldOptions   = big.NewInt(1 << 2)
+	postV1HrEmployeesFieldsResponseFieldsItemFieldMaxLength = big.NewInt(1 << 3)
+)
+
+type PostV1HrEmployeesFieldsResponseFieldsItem struct {
+	Key       string                                        `json:"key" url:"key"`
+	Kind      PostV1HrEmployeesFieldsResponseFieldsItemKind `json:"kind" url:"kind"`
+	Options   []string                                      `json:"options,omitempty" url:"options,omitempty"`
+	MaxLength *int64                                        `json:"maxLength,omitempty" url:"maxLength,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetKey() string {
+	if p == nil {
+		return ""
+	}
+	return p.Key
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetKind() PostV1HrEmployeesFieldsResponseFieldsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetOptions() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Options
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetMaxLength() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.MaxLength
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetKey(key string) {
+	p.Key = key
+	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldKey)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetKind(kind PostV1HrEmployeesFieldsResponseFieldsItemKind) {
+	p.Kind = kind
+	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldKind)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetOptions(options []string) {
+	p.Options = options
+	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldOptions)
+}
+
+// SetMaxLength sets the MaxLength field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) SetMaxLength(maxLength *int64) {
+	p.MaxLength = maxLength
+	p.require(postV1HrEmployeesFieldsResponseFieldsItemFieldMaxLength)
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1HrEmployeesFieldsResponseFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1HrEmployeesFieldsResponseFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1HrEmployeesFieldsResponseFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1HrEmployeesFieldsResponseFieldsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1HrEmployeesFieldsResponseFieldsItemKind string
+
+const (
+	PostV1HrEmployeesFieldsResponseFieldsItemKindText   PostV1HrEmployeesFieldsResponseFieldsItemKind = "text"
+	PostV1HrEmployeesFieldsResponseFieldsItemKindSelect PostV1HrEmployeesFieldsResponseFieldsItemKind = "select"
+	PostV1HrEmployeesFieldsResponseFieldsItemKindDate   PostV1HrEmployeesFieldsResponseFieldsItemKind = "date"
+)
+
+func NewPostV1HrEmployeesFieldsResponseFieldsItemKindFromString(s string) (PostV1HrEmployeesFieldsResponseFieldsItemKind, error) {
+	switch s {
+	case "text":
+		return PostV1HrEmployeesFieldsResponseFieldsItemKindText, nil
+	case "select":
+		return PostV1HrEmployeesFieldsResponseFieldsItemKindSelect, nil
+	case "date":
+		return PostV1HrEmployeesFieldsResponseFieldsItemKindDate, nil
+	}
+	var t PostV1HrEmployeesFieldsResponseFieldsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1HrEmployeesFieldsResponseFieldsItemKind) Ptr() *PostV1HrEmployeesFieldsResponseFieldsItemKind {
+	return &p
+}
+
+var (
 	postV1HrEmployeesGetResponseFieldID                   = big.NewInt(1 << 0)
 	postV1HrEmployeesGetResponseFieldCode                 = big.NewInt(1 << 1)
 	postV1HrEmployeesGetResponseFieldFirstName            = big.NewInt(1 << 2)
@@ -6041,13 +6361,14 @@ var (
 	postV1HrEmployeesGetResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
 	postV1HrEmployeesGetResponseFieldHireDate             = big.NewInt(1 << 12)
 	postV1HrEmployeesGetResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesGetResponseFieldApplyNpd             = big.NewInt(1 << 14)
-	postV1HrEmployeesGetResponseFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesGetResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	postV1HrEmployeesGetResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
 	postV1HrEmployeesGetResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesGetResponseFieldStatus               = big.NewInt(1 << 17)
-	postV1HrEmployeesGetResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1HrEmployeesGetResponseFieldAttributes           = big.NewInt(1 << 19)
-	postV1HrEmployeesGetResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1HrEmployeesGetResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	postV1HrEmployeesGetResponseFieldStatus               = big.NewInt(1 << 18)
+	postV1HrEmployeesGetResponseFieldNotes                = big.NewInt(1 << 19)
+	postV1HrEmployeesGetResponseFieldAttributes           = big.NewInt(1 << 20)
+	postV1HrEmployeesGetResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1HrEmployeesGetResponse struct {
@@ -6065,9 +6386,10 @@ type PostV1HrEmployeesGetResponse struct {
 	SocialInsuranceStart *string                                       `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *string                                       `json:"hireDate,omitempty" url:"hireDate,omitempty"`
 	TerminationDate      *string                                       `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyNpd             bool                                          `json:"applyNpd" url:"applyNpd"`
-	NpdOverride          *string                                       `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	ApplyAllowance       bool                                          `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                       `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                          `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                             `json:"payrollOptions" url:"payrollOptions"`
 	Status               PostV1HrEmployeesGetResponseStatus            `json:"status" url:"status"`
 	Notes                *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
 	Attributes           []*PostV1HrEmployeesGetResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
@@ -6178,18 +6500,18 @@ func (p *PostV1HrEmployeesGetResponse) GetTerminationDate() *string {
 	return p.TerminationDate
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetApplyNpd() bool {
+func (p *PostV1HrEmployeesGetResponse) GetApplyAllowance() bool {
 	if p == nil {
 		return false
 	}
-	return p.ApplyNpd
+	return p.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesGetResponse) GetNpdOverride() *string {
+func (p *PostV1HrEmployeesGetResponse) GetAllowanceOverride() *string {
 	if p == nil {
 		return nil
 	}
-	return p.NpdOverride
+	return p.AllowanceOverride
 }
 
 func (p *PostV1HrEmployeesGetResponse) GetPensionAccumulation() bool {
@@ -6197,6 +6519,13 @@ func (p *PostV1HrEmployeesGetResponse) GetPensionAccumulation() bool {
 		return false
 	}
 	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesGetResponse) GetPayrollOptions() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.PayrollOptions
 }
 
 func (p *PostV1HrEmployeesGetResponse) GetStatus() PostV1HrEmployeesGetResponseStatus {
@@ -6339,18 +6668,18 @@ func (p *PostV1HrEmployeesGetResponse) SetTerminationDate(terminationDate *strin
 	p.require(postV1HrEmployeesGetResponseFieldTerminationDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetApplyNpd(applyNpd bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesGetResponseFieldApplyNpd)
+func (p *PostV1HrEmployeesGetResponse) SetApplyAllowance(applyAllowance bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesGetResponseFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesGetResponse) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesGetResponseFieldNpdOverride)
+func (p *PostV1HrEmployeesGetResponse) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesGetResponseFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -6358,6 +6687,13 @@ func (p *PostV1HrEmployeesGetResponse) SetNpdOverride(npdOverride *string) {
 func (p *PostV1HrEmployeesGetResponse) SetPensionAccumulation(pensionAccumulation bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesGetResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesGetResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesGetResponseFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -7285,13 +7621,14 @@ var (
 	postV1HrEmployeesListResponseRowsItemFieldSocialInsuranceStart = big.NewInt(1 << 11)
 	postV1HrEmployeesListResponseRowsItemFieldHireDate             = big.NewInt(1 << 12)
 	postV1HrEmployeesListResponseRowsItemFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesListResponseRowsItemFieldApplyNpd             = big.NewInt(1 << 14)
-	postV1HrEmployeesListResponseRowsItemFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesListResponseRowsItemFieldApplyAllowance       = big.NewInt(1 << 14)
+	postV1HrEmployeesListResponseRowsItemFieldAllowanceOverride    = big.NewInt(1 << 15)
 	postV1HrEmployeesListResponseRowsItemFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesListResponseRowsItemFieldStatus               = big.NewInt(1 << 17)
-	postV1HrEmployeesListResponseRowsItemFieldNotes                = big.NewInt(1 << 18)
-	postV1HrEmployeesListResponseRowsItemFieldAttributes           = big.NewInt(1 << 19)
-	postV1HrEmployeesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1HrEmployeesListResponseRowsItemFieldPayrollOptions       = big.NewInt(1 << 17)
+	postV1HrEmployeesListResponseRowsItemFieldStatus               = big.NewInt(1 << 18)
+	postV1HrEmployeesListResponseRowsItemFieldNotes                = big.NewInt(1 << 19)
+	postV1HrEmployeesListResponseRowsItemFieldAttributes           = big.NewInt(1 << 20)
+	postV1HrEmployeesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1HrEmployeesListResponseRowsItem struct {
@@ -7309,9 +7646,10 @@ type PostV1HrEmployeesListResponseRowsItem struct {
 	SocialInsuranceStart *string                                                `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *string                                                `json:"hireDate,omitempty" url:"hireDate,omitempty"`
 	TerminationDate      *string                                                `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyNpd             bool                                                   `json:"applyNpd" url:"applyNpd"`
-	NpdOverride          *string                                                `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	ApplyAllowance       bool                                                   `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                                `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                                   `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                                      `json:"payrollOptions" url:"payrollOptions"`
 	Status               PostV1HrEmployeesListResponseRowsItemStatus            `json:"status" url:"status"`
 	Notes                *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
 	Attributes           []*PostV1HrEmployeesListResponseRowsItemAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
@@ -7422,18 +7760,18 @@ func (p *PostV1HrEmployeesListResponseRowsItem) GetTerminationDate() *string {
 	return p.TerminationDate
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetApplyNpd() bool {
+func (p *PostV1HrEmployeesListResponseRowsItem) GetApplyAllowance() bool {
 	if p == nil {
 		return false
 	}
-	return p.ApplyNpd
+	return p.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesListResponseRowsItem) GetNpdOverride() *string {
+func (p *PostV1HrEmployeesListResponseRowsItem) GetAllowanceOverride() *string {
 	if p == nil {
 		return nil
 	}
-	return p.NpdOverride
+	return p.AllowanceOverride
 }
 
 func (p *PostV1HrEmployeesListResponseRowsItem) GetPensionAccumulation() bool {
@@ -7441,6 +7779,13 @@ func (p *PostV1HrEmployeesListResponseRowsItem) GetPensionAccumulation() bool {
 		return false
 	}
 	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesListResponseRowsItem) GetPayrollOptions() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.PayrollOptions
 }
 
 func (p *PostV1HrEmployeesListResponseRowsItem) GetStatus() PostV1HrEmployeesListResponseRowsItemStatus {
@@ -7583,18 +7928,18 @@ func (p *PostV1HrEmployeesListResponseRowsItem) SetTerminationDate(terminationDa
 	p.require(postV1HrEmployeesListResponseRowsItemFieldTerminationDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetApplyNpd(applyNpd bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesListResponseRowsItemFieldApplyNpd)
+func (p *PostV1HrEmployeesListResponseRowsItem) SetApplyAllowance(applyAllowance bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesListResponseRowsItemFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesListResponseRowsItem) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesListResponseRowsItemFieldNpdOverride)
+func (p *PostV1HrEmployeesListResponseRowsItem) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesListResponseRowsItemFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -7602,6 +7947,13 @@ func (p *PostV1HrEmployeesListResponseRowsItem) SetNpdOverride(npdOverride *stri
 func (p *PostV1HrEmployeesListResponseRowsItem) SetPensionAccumulation(pensionAccumulation bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesListResponseRowsItemFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesListResponseRowsItem) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesListResponseRowsItemFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -9691,13 +10043,14 @@ var (
 	postV1HrEmployeesUpdateResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
 	postV1HrEmployeesUpdateResponseFieldHireDate             = big.NewInt(1 << 12)
 	postV1HrEmployeesUpdateResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	postV1HrEmployeesUpdateResponseFieldApplyNpd             = big.NewInt(1 << 14)
-	postV1HrEmployeesUpdateResponseFieldNpdOverride          = big.NewInt(1 << 15)
+	postV1HrEmployeesUpdateResponseFieldApplyAllowance       = big.NewInt(1 << 14)
+	postV1HrEmployeesUpdateResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
 	postV1HrEmployeesUpdateResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	postV1HrEmployeesUpdateResponseFieldStatus               = big.NewInt(1 << 17)
-	postV1HrEmployeesUpdateResponseFieldNotes                = big.NewInt(1 << 18)
-	postV1HrEmployeesUpdateResponseFieldAttributes           = big.NewInt(1 << 19)
-	postV1HrEmployeesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 20)
+	postV1HrEmployeesUpdateResponseFieldPayrollOptions       = big.NewInt(1 << 17)
+	postV1HrEmployeesUpdateResponseFieldStatus               = big.NewInt(1 << 18)
+	postV1HrEmployeesUpdateResponseFieldNotes                = big.NewInt(1 << 19)
+	postV1HrEmployeesUpdateResponseFieldAttributes           = big.NewInt(1 << 20)
+	postV1HrEmployeesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 21)
 )
 
 type PostV1HrEmployeesUpdateResponse struct {
@@ -9715,9 +10068,10 @@ type PostV1HrEmployeesUpdateResponse struct {
 	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *string                                          `json:"hireDate,omitempty" url:"hireDate,omitempty"`
 	TerminationDate      *string                                          `json:"terminationDate,omitempty" url:"terminationDate,omitempty"`
-	ApplyNpd             bool                                             `json:"applyNpd" url:"applyNpd"`
-	NpdOverride          *string                                          `json:"npdOverride,omitempty" url:"npdOverride,omitempty"`
+	ApplyAllowance       bool                                             `json:"applyAllowance" url:"applyAllowance"`
+	AllowanceOverride    *string                                          `json:"allowanceOverride,omitempty" url:"allowanceOverride,omitempty"`
 	PensionAccumulation  bool                                             `json:"pensionAccumulation" url:"pensionAccumulation"`
+	PayrollOptions       map[string]string                                `json:"payrollOptions" url:"payrollOptions"`
 	Status               PostV1HrEmployeesUpdateResponseStatus            `json:"status" url:"status"`
 	Notes                *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
 	Attributes           []*PostV1HrEmployeesUpdateResponseAttributesItem `json:"attributes,omitempty" url:"attributes,omitempty"`
@@ -9828,18 +10182,18 @@ func (p *PostV1HrEmployeesUpdateResponse) GetTerminationDate() *string {
 	return p.TerminationDate
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetApplyNpd() bool {
+func (p *PostV1HrEmployeesUpdateResponse) GetApplyAllowance() bool {
 	if p == nil {
 		return false
 	}
-	return p.ApplyNpd
+	return p.ApplyAllowance
 }
 
-func (p *PostV1HrEmployeesUpdateResponse) GetNpdOverride() *string {
+func (p *PostV1HrEmployeesUpdateResponse) GetAllowanceOverride() *string {
 	if p == nil {
 		return nil
 	}
-	return p.NpdOverride
+	return p.AllowanceOverride
 }
 
 func (p *PostV1HrEmployeesUpdateResponse) GetPensionAccumulation() bool {
@@ -9847,6 +10201,13 @@ func (p *PostV1HrEmployeesUpdateResponse) GetPensionAccumulation() bool {
 		return false
 	}
 	return p.PensionAccumulation
+}
+
+func (p *PostV1HrEmployeesUpdateResponse) GetPayrollOptions() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.PayrollOptions
 }
 
 func (p *PostV1HrEmployeesUpdateResponse) GetStatus() PostV1HrEmployeesUpdateResponseStatus {
@@ -9989,18 +10350,18 @@ func (p *PostV1HrEmployeesUpdateResponse) SetTerminationDate(terminationDate *st
 	p.require(postV1HrEmployeesUpdateResponseFieldTerminationDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetApplyNpd(applyNpd bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1HrEmployeesUpdateResponseFieldApplyNpd)
+func (p *PostV1HrEmployeesUpdateResponse) SetApplyAllowance(applyAllowance bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1HrEmployeesUpdateResponseFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1HrEmployeesUpdateResponse) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1HrEmployeesUpdateResponseFieldNpdOverride)
+func (p *PostV1HrEmployeesUpdateResponse) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1HrEmployeesUpdateResponseFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -10008,6 +10369,13 @@ func (p *PostV1HrEmployeesUpdateResponse) SetNpdOverride(npdOverride *string) {
 func (p *PostV1HrEmployeesUpdateResponse) SetPensionAccumulation(pensionAccumulation bool) {
 	p.PensionAccumulation = pensionAccumulation
 	p.require(postV1HrEmployeesUpdateResponseFieldPensionAccumulation)
+}
+
+// SetPayrollOptions sets the PayrollOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1HrEmployeesUpdateResponse) SetPayrollOptions(payrollOptions map[string]string) {
+	p.PayrollOptions = payrollOptions
+	p.require(postV1HrEmployeesUpdateResponseFieldPayrollOptions)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;

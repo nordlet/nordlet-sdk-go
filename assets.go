@@ -183,6 +183,97 @@ func (p *PostV1AssetsAssetsGetRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postV1AssetsAssetsInputVatRequestFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsInputVatRequestFieldInputVatAmount            = big.NewInt(1 << 1)
+	postV1AssetsAssetsInputVatRequestFieldInputVatFirstUseDate      = big.NewInt(1 << 2)
+	postV1AssetsAssetsInputVatRequestFieldInputVatDeductiblePercent = big.NewInt(1 << 3)
+	postV1AssetsAssetsInputVatRequestFieldInputVatRealEstate        = big.NewInt(1 << 4)
+	postV1AssetsAssetsInputVatRequestFieldInputVatUseChanges        = big.NewInt(1 << 5)
+)
+
+type PostV1AssetsAssetsInputVatRequest struct {
+	ID                        string                                                     `json:"id" url:"-"`
+	InputVatAmount            *string                                                    `json:"inputVatAmount,omitempty" url:"-"`
+	InputVatFirstUseDate      *string                                                    `json:"inputVatFirstUseDate,omitempty" url:"-"`
+	InputVatDeductiblePercent *string                                                    `json:"inputVatDeductiblePercent,omitempty" url:"-"`
+	InputVatRealEstate        bool                                                       `json:"inputVatRealEstate" url:"-"`
+	InputVatUseChanges        []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem `json:"inputVatUseChanges" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AssetsAssetsInputVatRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1AssetsAssetsInputVatRequestFieldID)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequest) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsInputVatRequestFieldInputVatUseChanges)
+}
+
+func (p *PostV1AssetsAssetsInputVatRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsInputVatRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsInputVatRequest(body)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsInputVatRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsInputVatRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	postV1AssetsAssetsListRequestFieldPage     = big.NewInt(1 << 0)
 	postV1AssetsAssetsListRequestFieldPageSize = big.NewInt(1 << 1)
 	postV1AssetsAssetsListRequestFieldSort     = big.NewInt(1 << 2)
@@ -338,6 +429,142 @@ func (p *PostV1AssetsAssetsModernizeRequest) UnmarshalJSON(data []byte) error {
 
 func (p *PostV1AssetsAssetsModernizeRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1AssetsAssetsModernizeRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1AssetsAssetsUpdateRequestFieldGroupID               = big.NewInt(1 << 0)
+	postV1AssetsAssetsUpdateRequestFieldCode                  = big.NewInt(1 << 1)
+	postV1AssetsAssetsUpdateRequestFieldName                  = big.NewInt(1 << 2)
+	postV1AssetsAssetsUpdateRequestFieldAcquisitionDate       = big.NewInt(1 << 3)
+	postV1AssetsAssetsUpdateRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
+	postV1AssetsAssetsUpdateRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
+	postV1AssetsAssetsUpdateRequestFieldSalvageValue          = big.NewInt(1 << 6)
+	postV1AssetsAssetsUpdateRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
+	postV1AssetsAssetsUpdateRequestFieldNotes                 = big.NewInt(1 << 8)
+	postV1AssetsAssetsUpdateRequestFieldDocuments             = big.NewInt(1 << 9)
+	postV1AssetsAssetsUpdateRequestFieldID                    = big.NewInt(1 << 10)
+)
+
+type PostV1AssetsAssetsUpdateRequest struct {
+	GroupID               *string                                         `json:"groupId,omitempty" url:"-"`
+	Code                  *string                                         `json:"code,omitempty" url:"-"`
+	Name                  *string                                         `json:"name,omitempty" url:"-"`
+	AcquisitionDate       *string                                         `json:"acquisitionDate,omitempty" url:"-"`
+	DepreciationStartDate *string                                         `json:"depreciationStartDate,omitempty" url:"-"`
+	AcquisitionCost       *string                                         `json:"acquisitionCost,omitempty" url:"-"`
+	SalvageValue          *string                                         `json:"salvageValue,omitempty" url:"-"`
+	UsefulLifeMonths      *int64                                          `json:"usefulLifeMonths,omitempty" url:"-"`
+	Notes                 *string                                         `json:"notes,omitempty" url:"-"`
+	Documents             []*PostV1AssetsAssetsUpdateRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+	ID                    string                                          `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1AssetsAssetsUpdateRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetGroupID(groupID *string) {
+	p.GroupID = groupID
+	p.require(postV1AssetsAssetsUpdateRequestFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetCode(code *string) {
+	p.Code = code
+	p.require(postV1AssetsAssetsUpdateRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetName(name *string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsUpdateRequestFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetAcquisitionDate(acquisitionDate *string) {
+	p.AcquisitionDate = acquisitionDate
+	p.require(postV1AssetsAssetsUpdateRequestFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetDepreciationStartDate(depreciationStartDate *string) {
+	p.DepreciationStartDate = depreciationStartDate
+	p.require(postV1AssetsAssetsUpdateRequestFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetAcquisitionCost(acquisitionCost *string) {
+	p.AcquisitionCost = acquisitionCost
+	p.require(postV1AssetsAssetsUpdateRequestFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetSalvageValue(salvageValue *string) {
+	p.SalvageValue = salvageValue
+	p.require(postV1AssetsAssetsUpdateRequestFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	p.UsefulLifeMonths = usefulLifeMonths
+	p.require(postV1AssetsAssetsUpdateRequestFieldUsefulLifeMonths)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1AssetsAssetsUpdateRequestFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetDocuments(documents []*PostV1AssetsAssetsUpdateRequestDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsUpdateRequestFieldDocuments)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1AssetsAssetsUpdateRequestFieldID)
+}
+
+func (p *PostV1AssetsAssetsUpdateRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsUpdateRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsUpdateRequest(body)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsUpdateRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsUpdateRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -732,45 +959,55 @@ func (p *PostV1AssetsAssetsCreateRequestDocumentsItem) String() string {
 }
 
 var (
-	postV1AssetsAssetsCreateResponseFieldID                      = big.NewInt(1 << 0)
-	postV1AssetsAssetsCreateResponseFieldGroupID                 = big.NewInt(1 << 1)
-	postV1AssetsAssetsCreateResponseFieldCode                    = big.NewInt(1 << 2)
-	postV1AssetsAssetsCreateResponseFieldName                    = big.NewInt(1 << 3)
-	postV1AssetsAssetsCreateResponseFieldAcquisitionDate         = big.NewInt(1 << 4)
-	postV1AssetsAssetsCreateResponseFieldDepreciationStartDate   = big.NewInt(1 << 5)
-	postV1AssetsAssetsCreateResponseFieldAcquisitionCost         = big.NewInt(1 << 6)
-	postV1AssetsAssetsCreateResponseFieldSalvageValue            = big.NewInt(1 << 7)
-	postV1AssetsAssetsCreateResponseFieldUsefulLifeMonths        = big.NewInt(1 << 8)
-	postV1AssetsAssetsCreateResponseFieldTotalCost               = big.NewInt(1 << 9)
-	postV1AssetsAssetsCreateResponseFieldAccumulatedDepreciation = big.NewInt(1 << 10)
-	postV1AssetsAssetsCreateResponseFieldNetBookValue            = big.NewInt(1 << 11)
-	postV1AssetsAssetsCreateResponseFieldDepreciatedMonths       = big.NewInt(1 << 12)
-	postV1AssetsAssetsCreateResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
-	postV1AssetsAssetsCreateResponseFieldStatus                  = big.NewInt(1 << 14)
-	postV1AssetsAssetsCreateResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsCreateResponseFieldDocuments               = big.NewInt(1 << 16)
-	postV1AssetsAssetsCreateResponseFieldCreatedAt               = big.NewInt(1 << 17)
+	postV1AssetsAssetsCreateResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsCreateResponseFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsCreateResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsCreateResponseFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsCreateResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsCreateResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsCreateResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsCreateResponseFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsCreateResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsCreateResponseFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsCreateResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsCreateResponseFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsCreateResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsCreateResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsCreateResponseFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsCreateResponseFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsCreateResponseFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsCreateResponseFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsCreateResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsCreateResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsCreateResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsCreateResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsCreateResponseFieldCreatedAt                 = big.NewInt(1 << 22)
 )
 
 type PostV1AssetsAssetsCreateResponse struct {
-	ID                      string                                           `json:"id" url:"id"`
-	GroupID                 string                                           `json:"groupId" url:"groupId"`
-	Code                    string                                           `json:"code" url:"code"`
-	Name                    string                                           `json:"name" url:"name"`
-	AcquisitionDate         string                                           `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                           `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                           `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                           `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                            `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                           `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                           `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                           `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                            `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                            `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsCreateResponseStatus           `json:"status" url:"status"`
-	Notes                   *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents               []*PostV1AssetsAssetsCreateResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
-	CreatedAt               string                                           `json:"createdAt" url:"createdAt"`
+	ID                        string                                                    `json:"id" url:"id"`
+	GroupID                   string                                                    `json:"groupId" url:"groupId"`
+	Code                      string                                                    `json:"code" url:"code"`
+	Name                      string                                                    `json:"name" url:"name"`
+	AcquisitionDate           string                                                    `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                    `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                    `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                    `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                    `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                    `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsCreateResponseStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsCreateResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                   `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                   `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                   `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                      `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                    `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -896,6 +1133,41 @@ func (p *PostV1AssetsAssetsCreateResponse) GetDocuments() []*PostV1AssetsAssetsC
 		return nil
 	}
 	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsCreateResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
 }
 
 func (p *PostV1AssetsAssetsCreateResponse) GetCreatedAt() string {
@@ -1036,6 +1308,41 @@ func (p *PostV1AssetsAssetsCreateResponse) SetNotes(notes *string) {
 func (p *PostV1AssetsAssetsCreateResponse) SetDocuments(documents []*PostV1AssetsAssetsCreateResponseDocumentsItem) {
 	p.Documents = documents
 	p.require(postV1AssetsAssetsCreateResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsCreateResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsCreateResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsCreateResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsCreateResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsCreateResponseFieldInputVatUseChanges)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1187,6 +1494,147 @@ func (p *PostV1AssetsAssetsCreateResponseDocumentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsCreateResponseInputVatUseChangesItem struct {
+	Year    int64                                                        `json:"year" url:"year"`
+	Percent string                                                       `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsCreateResponseInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsCreateResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsCreateResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsCreateResponseInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsCreateResponseInputVatUseChangesItemReason {
+	return &p
+}
+
 type PostV1AssetsAssetsCreateResponseStatus string
 
 const (
@@ -1213,45 +1661,55 @@ func (p PostV1AssetsAssetsCreateResponseStatus) Ptr() *PostV1AssetsAssetsCreateR
 }
 
 var (
-	postV1AssetsAssetsGetResponseFieldID                      = big.NewInt(1 << 0)
-	postV1AssetsAssetsGetResponseFieldGroupID                 = big.NewInt(1 << 1)
-	postV1AssetsAssetsGetResponseFieldCode                    = big.NewInt(1 << 2)
-	postV1AssetsAssetsGetResponseFieldName                    = big.NewInt(1 << 3)
-	postV1AssetsAssetsGetResponseFieldAcquisitionDate         = big.NewInt(1 << 4)
-	postV1AssetsAssetsGetResponseFieldDepreciationStartDate   = big.NewInt(1 << 5)
-	postV1AssetsAssetsGetResponseFieldAcquisitionCost         = big.NewInt(1 << 6)
-	postV1AssetsAssetsGetResponseFieldSalvageValue            = big.NewInt(1 << 7)
-	postV1AssetsAssetsGetResponseFieldUsefulLifeMonths        = big.NewInt(1 << 8)
-	postV1AssetsAssetsGetResponseFieldTotalCost               = big.NewInt(1 << 9)
-	postV1AssetsAssetsGetResponseFieldAccumulatedDepreciation = big.NewInt(1 << 10)
-	postV1AssetsAssetsGetResponseFieldNetBookValue            = big.NewInt(1 << 11)
-	postV1AssetsAssetsGetResponseFieldDepreciatedMonths       = big.NewInt(1 << 12)
-	postV1AssetsAssetsGetResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
-	postV1AssetsAssetsGetResponseFieldStatus                  = big.NewInt(1 << 14)
-	postV1AssetsAssetsGetResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsGetResponseFieldDocuments               = big.NewInt(1 << 16)
-	postV1AssetsAssetsGetResponseFieldCreatedAt               = big.NewInt(1 << 17)
+	postV1AssetsAssetsGetResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsGetResponseFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsGetResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsGetResponseFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsGetResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsGetResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsGetResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsGetResponseFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsGetResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsGetResponseFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsGetResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsGetResponseFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsGetResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsGetResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsGetResponseFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsGetResponseFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsGetResponseFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsGetResponseFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsGetResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsGetResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsGetResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsGetResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsGetResponseFieldCreatedAt                 = big.NewInt(1 << 22)
 )
 
 type PostV1AssetsAssetsGetResponse struct {
-	ID                      string                                        `json:"id" url:"id"`
-	GroupID                 string                                        `json:"groupId" url:"groupId"`
-	Code                    string                                        `json:"code" url:"code"`
-	Name                    string                                        `json:"name" url:"name"`
-	AcquisitionDate         string                                        `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                        `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                        `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                        `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                         `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                        `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                        `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                        `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                         `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                         `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsGetResponseStatus           `json:"status" url:"status"`
-	Notes                   *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents               []*PostV1AssetsAssetsGetResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
-	CreatedAt               string                                        `json:"createdAt" url:"createdAt"`
+	ID                        string                                                 `json:"id" url:"id"`
+	GroupID                   string                                                 `json:"groupId" url:"groupId"`
+	Code                      string                                                 `json:"code" url:"code"`
+	Name                      string                                                 `json:"name" url:"name"`
+	AcquisitionDate           string                                                 `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                 `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                 `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                 `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                 `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                 `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsGetResponseStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsGetResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                   `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1377,6 +1835,41 @@ func (p *PostV1AssetsAssetsGetResponse) GetDocuments() []*PostV1AssetsAssetsGetR
 		return nil
 	}
 	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsGetResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
 }
 
 func (p *PostV1AssetsAssetsGetResponse) GetCreatedAt() string {
@@ -1517,6 +2010,41 @@ func (p *PostV1AssetsAssetsGetResponse) SetNotes(notes *string) {
 func (p *PostV1AssetsAssetsGetResponse) SetDocuments(documents []*PostV1AssetsAssetsGetResponseDocumentsItem) {
 	p.Documents = documents
 	p.require(postV1AssetsAssetsGetResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsGetResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsGetResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsGetResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsGetResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsGetResponseInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsGetResponseFieldInputVatUseChanges)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1668,6 +2196,147 @@ func (p *PostV1AssetsAssetsGetResponseDocumentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsGetResponseInputVatUseChangesItem struct {
+	Year    int64                                                     `json:"year" url:"year"`
+	Percent string                                                    `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsGetResponseInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsGetResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsGetResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsGetResponseInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsGetResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsGetResponseInputVatUseChangesItemReason {
+	return &p
+}
+
 type PostV1AssetsAssetsGetResponseStatus string
 
 const (
@@ -1690,6 +2359,849 @@ func NewPostV1AssetsAssetsGetResponseStatusFromString(s string) (PostV1AssetsAss
 }
 
 func (p PostV1AssetsAssetsGetResponseStatus) Ptr() *PostV1AssetsAssetsGetResponseStatus {
+	return &p
+}
+
+var (
+	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem struct {
+	Year    int64                                                         `json:"year" url:"year"`
+	Percent string                                                        `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetReason() PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsInputVatRequestInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonSale       PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsInputVatRequestInputVatUseChangesItemReason {
+	return &p
+}
+
+var (
+	postV1AssetsAssetsInputVatResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsInputVatResponseFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsInputVatResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsInputVatResponseFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsInputVatResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsInputVatResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsInputVatResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsInputVatResponseFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsInputVatResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsInputVatResponseFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsInputVatResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsInputVatResponseFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsInputVatResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsInputVatResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsInputVatResponseFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsInputVatResponseFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsInputVatResponseFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsInputVatResponseFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsInputVatResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsInputVatResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsInputVatResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsInputVatResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsInputVatResponseFieldCreatedAt                 = big.NewInt(1 << 22)
+)
+
+type PostV1AssetsAssetsInputVatResponse struct {
+	ID                        string                                                      `json:"id" url:"id"`
+	GroupID                   string                                                      `json:"groupId" url:"groupId"`
+	Code                      string                                                      `json:"code" url:"code"`
+	Name                      string                                                      `json:"name" url:"name"`
+	AcquisitionDate           string                                                      `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                      `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                      `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                      `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                       `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                      `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                      `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                      `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                       `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                       `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsInputVatResponseStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsInputVatResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                     `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                     `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                     `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                        `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                      `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetGroupID() string {
+	if p == nil {
+		return ""
+	}
+	return p.GroupID
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetAcquisitionDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.AcquisitionDate
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetDepreciationStartDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.DepreciationStartDate
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetAcquisitionCost() string {
+	if p == nil {
+		return ""
+	}
+	return p.AcquisitionCost
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetSalvageValue() string {
+	if p == nil {
+		return ""
+	}
+	return p.SalvageValue
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetUsefulLifeMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.UsefulLifeMonths
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetTotalCost() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalCost
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetAccumulatedDepreciation() string {
+	if p == nil {
+		return ""
+	}
+	return p.AccumulatedDepreciation
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetNetBookValue() string {
+	if p == nil {
+		return ""
+	}
+	return p.NetBookValue
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetDepreciatedMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DepreciatedMonths
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetTotalLifeMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.TotalLifeMonths
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetStatus() PostV1AssetsAssetsInputVatResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetDocuments() []*PostV1AssetsAssetsInputVatResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1AssetsAssetsInputVatResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetGroupID(groupID string) {
+	p.GroupID = groupID
+	p.require(postV1AssetsAssetsInputVatResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1AssetsAssetsInputVatResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsInputVatResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetAcquisitionDate(acquisitionDate string) {
+	p.AcquisitionDate = acquisitionDate
+	p.require(postV1AssetsAssetsInputVatResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetDepreciationStartDate(depreciationStartDate string) {
+	p.DepreciationStartDate = depreciationStartDate
+	p.require(postV1AssetsAssetsInputVatResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetAcquisitionCost(acquisitionCost string) {
+	p.AcquisitionCost = acquisitionCost
+	p.require(postV1AssetsAssetsInputVatResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetSalvageValue(salvageValue string) {
+	p.SalvageValue = salvageValue
+	p.require(postV1AssetsAssetsInputVatResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	p.UsefulLifeMonths = usefulLifeMonths
+	p.require(postV1AssetsAssetsInputVatResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetTotalCost(totalCost string) {
+	p.TotalCost = totalCost
+	p.require(postV1AssetsAssetsInputVatResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	p.AccumulatedDepreciation = accumulatedDepreciation
+	p.require(postV1AssetsAssetsInputVatResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetNetBookValue(netBookValue string) {
+	p.NetBookValue = netBookValue
+	p.require(postV1AssetsAssetsInputVatResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	p.DepreciatedMonths = depreciatedMonths
+	p.require(postV1AssetsAssetsInputVatResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	p.TotalLifeMonths = totalLifeMonths
+	p.require(postV1AssetsAssetsInputVatResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetStatus(status PostV1AssetsAssetsInputVatResponseStatus) {
+	p.Status = status
+	p.require(postV1AssetsAssetsInputVatResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1AssetsAssetsInputVatResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetDocuments(documents []*PostV1AssetsAssetsInputVatResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsInputVatResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsInputVatResponseFieldInputVatUseChanges)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AssetsAssetsInputVatResponseFieldCreatedAt)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsInputVatResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsInputVatResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsInputVatResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsInputVatResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsInputVatResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsInputVatResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsInputVatResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsInputVatResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsInputVatResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsInputVatResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsInputVatResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem struct {
+	Year    int64                                                          `json:"year" url:"year"`
+	Percent string                                                         `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsInputVatResponseInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsInputVatResponseInputVatUseChangesItemReason {
+	return &p
+}
+
+type PostV1AssetsAssetsInputVatResponseStatus string
+
+const (
+	PostV1AssetsAssetsInputVatResponseStatusActive           PostV1AssetsAssetsInputVatResponseStatus = "active"
+	PostV1AssetsAssetsInputVatResponseStatusFullyDepreciated PostV1AssetsAssetsInputVatResponseStatus = "fully_depreciated"
+	PostV1AssetsAssetsInputVatResponseStatusDisposed         PostV1AssetsAssetsInputVatResponseStatus = "disposed"
+)
+
+func NewPostV1AssetsAssetsInputVatResponseStatusFromString(s string) (PostV1AssetsAssetsInputVatResponseStatus, error) {
+	switch s {
+	case "active":
+		return PostV1AssetsAssetsInputVatResponseStatusActive, nil
+	case "fully_depreciated":
+		return PostV1AssetsAssetsInputVatResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return PostV1AssetsAssetsInputVatResponseStatusDisposed, nil
+	}
+	var t PostV1AssetsAssetsInputVatResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsInputVatResponseStatus) Ptr() *PostV1AssetsAssetsInputVatResponseStatus {
 	return &p
 }
 
@@ -2280,45 +3792,55 @@ func (p *PostV1AssetsAssetsListResponse) String() string {
 }
 
 var (
-	postV1AssetsAssetsListResponseRowsItemFieldID                      = big.NewInt(1 << 0)
-	postV1AssetsAssetsListResponseRowsItemFieldGroupID                 = big.NewInt(1 << 1)
-	postV1AssetsAssetsListResponseRowsItemFieldCode                    = big.NewInt(1 << 2)
-	postV1AssetsAssetsListResponseRowsItemFieldName                    = big.NewInt(1 << 3)
-	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionDate         = big.NewInt(1 << 4)
-	postV1AssetsAssetsListResponseRowsItemFieldDepreciationStartDate   = big.NewInt(1 << 5)
-	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionCost         = big.NewInt(1 << 6)
-	postV1AssetsAssetsListResponseRowsItemFieldSalvageValue            = big.NewInt(1 << 7)
-	postV1AssetsAssetsListResponseRowsItemFieldUsefulLifeMonths        = big.NewInt(1 << 8)
-	postV1AssetsAssetsListResponseRowsItemFieldTotalCost               = big.NewInt(1 << 9)
-	postV1AssetsAssetsListResponseRowsItemFieldAccumulatedDepreciation = big.NewInt(1 << 10)
-	postV1AssetsAssetsListResponseRowsItemFieldNetBookValue            = big.NewInt(1 << 11)
-	postV1AssetsAssetsListResponseRowsItemFieldDepreciatedMonths       = big.NewInt(1 << 12)
-	postV1AssetsAssetsListResponseRowsItemFieldTotalLifeMonths         = big.NewInt(1 << 13)
-	postV1AssetsAssetsListResponseRowsItemFieldStatus                  = big.NewInt(1 << 14)
-	postV1AssetsAssetsListResponseRowsItemFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsListResponseRowsItemFieldDocuments               = big.NewInt(1 << 16)
-	postV1AssetsAssetsListResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 17)
+	postV1AssetsAssetsListResponseRowsItemFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsListResponseRowsItemFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsListResponseRowsItemFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsListResponseRowsItemFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsListResponseRowsItemFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsListResponseRowsItemFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsListResponseRowsItemFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsListResponseRowsItemFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsListResponseRowsItemFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsListResponseRowsItemFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsListResponseRowsItemFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsListResponseRowsItemFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsListResponseRowsItemFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsListResponseRowsItemFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsListResponseRowsItemFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsListResponseRowsItemFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsListResponseRowsItemFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsListResponseRowsItemFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsListResponseRowsItemFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsListResponseRowsItemFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsListResponseRowsItemFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsListResponseRowsItemFieldCreatedAt                 = big.NewInt(1 << 22)
 )
 
 type PostV1AssetsAssetsListResponseRowsItem struct {
-	ID                      string                                                 `json:"id" url:"id"`
-	GroupID                 string                                                 `json:"groupId" url:"groupId"`
-	Code                    string                                                 `json:"code" url:"code"`
-	Name                    string                                                 `json:"name" url:"name"`
-	AcquisitionDate         string                                                 `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                                 `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                                 `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                                 `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                                  `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                                 `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                                 `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                                 `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                                  `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                                  `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsListResponseRowsItemStatus           `json:"status" url:"status"`
-	Notes                   *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents               []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
-	CreatedAt               string                                                 `json:"createdAt" url:"createdAt"`
+	ID                        string                                                          `json:"id" url:"id"`
+	GroupID                   string                                                          `json:"groupId" url:"groupId"`
+	Code                      string                                                          `json:"code" url:"code"`
+	Name                      string                                                          `json:"name" url:"name"`
+	AcquisitionDate           string                                                          `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                          `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                          `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                          `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                           `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                          `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                          `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                          `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                           `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                           `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsListResponseRowsItemStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                         `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                         `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                         `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                            `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                          `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2444,6 +3966,41 @@ func (p *PostV1AssetsAssetsListResponseRowsItem) GetDocuments() []*PostV1AssetsA
 		return nil
 	}
 	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItem) GetInputVatUseChanges() []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
 }
 
 func (p *PostV1AssetsAssetsListResponseRowsItem) GetCreatedAt() string {
@@ -2584,6 +4141,41 @@ func (p *PostV1AssetsAssetsListResponseRowsItem) SetNotes(notes *string) {
 func (p *PostV1AssetsAssetsListResponseRowsItem) SetDocuments(documents []*PostV1AssetsAssetsListResponseRowsItemDocumentsItem) {
 	p.Documents = documents
 	p.require(postV1AssetsAssetsListResponseRowsItemFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItem) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsListResponseRowsItemFieldInputVatUseChanges)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -2735,6 +4327,147 @@ func (p *PostV1AssetsAssetsListResponseRowsItemDocumentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem struct {
+	Year    int64                                                              `json:"year" url:"year"`
+	Percent string                                                             `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetReason() PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonSale       PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsListResponseRowsItemInputVatUseChangesItemReason {
+	return &p
+}
+
 type PostV1AssetsAssetsListResponseRowsItemStatus string
 
 const (
@@ -2761,45 +4494,55 @@ func (p PostV1AssetsAssetsListResponseRowsItemStatus) Ptr() *PostV1AssetsAssetsL
 }
 
 var (
-	postV1AssetsAssetsModernizeResponseFieldID                      = big.NewInt(1 << 0)
-	postV1AssetsAssetsModernizeResponseFieldGroupID                 = big.NewInt(1 << 1)
-	postV1AssetsAssetsModernizeResponseFieldCode                    = big.NewInt(1 << 2)
-	postV1AssetsAssetsModernizeResponseFieldName                    = big.NewInt(1 << 3)
-	postV1AssetsAssetsModernizeResponseFieldAcquisitionDate         = big.NewInt(1 << 4)
-	postV1AssetsAssetsModernizeResponseFieldDepreciationStartDate   = big.NewInt(1 << 5)
-	postV1AssetsAssetsModernizeResponseFieldAcquisitionCost         = big.NewInt(1 << 6)
-	postV1AssetsAssetsModernizeResponseFieldSalvageValue            = big.NewInt(1 << 7)
-	postV1AssetsAssetsModernizeResponseFieldUsefulLifeMonths        = big.NewInt(1 << 8)
-	postV1AssetsAssetsModernizeResponseFieldTotalCost               = big.NewInt(1 << 9)
-	postV1AssetsAssetsModernizeResponseFieldAccumulatedDepreciation = big.NewInt(1 << 10)
-	postV1AssetsAssetsModernizeResponseFieldNetBookValue            = big.NewInt(1 << 11)
-	postV1AssetsAssetsModernizeResponseFieldDepreciatedMonths       = big.NewInt(1 << 12)
-	postV1AssetsAssetsModernizeResponseFieldTotalLifeMonths         = big.NewInt(1 << 13)
-	postV1AssetsAssetsModernizeResponseFieldStatus                  = big.NewInt(1 << 14)
-	postV1AssetsAssetsModernizeResponseFieldNotes                   = big.NewInt(1 << 15)
-	postV1AssetsAssetsModernizeResponseFieldDocuments               = big.NewInt(1 << 16)
-	postV1AssetsAssetsModernizeResponseFieldCreatedAt               = big.NewInt(1 << 17)
+	postV1AssetsAssetsModernizeResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsModernizeResponseFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsModernizeResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsModernizeResponseFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsModernizeResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsModernizeResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsModernizeResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsModernizeResponseFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsModernizeResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsModernizeResponseFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsModernizeResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsModernizeResponseFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsModernizeResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsModernizeResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsModernizeResponseFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsModernizeResponseFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsModernizeResponseFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsModernizeResponseFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsModernizeResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsModernizeResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsModernizeResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsModernizeResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsModernizeResponseFieldCreatedAt                 = big.NewInt(1 << 22)
 )
 
 type PostV1AssetsAssetsModernizeResponse struct {
-	ID                      string                                              `json:"id" url:"id"`
-	GroupID                 string                                              `json:"groupId" url:"groupId"`
-	Code                    string                                              `json:"code" url:"code"`
-	Name                    string                                              `json:"name" url:"name"`
-	AcquisitionDate         string                                              `json:"acquisitionDate" url:"acquisitionDate"`
-	DepreciationStartDate   string                                              `json:"depreciationStartDate" url:"depreciationStartDate"`
-	AcquisitionCost         string                                              `json:"acquisitionCost" url:"acquisitionCost"`
-	SalvageValue            string                                              `json:"salvageValue" url:"salvageValue"`
-	UsefulLifeMonths        int64                                               `json:"usefulLifeMonths" url:"usefulLifeMonths"`
-	TotalCost               string                                              `json:"totalCost" url:"totalCost"`
-	AccumulatedDepreciation string                                              `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
-	NetBookValue            string                                              `json:"netBookValue" url:"netBookValue"`
-	DepreciatedMonths       int64                                               `json:"depreciatedMonths" url:"depreciatedMonths"`
-	TotalLifeMonths         int64                                               `json:"totalLifeMonths" url:"totalLifeMonths"`
-	Status                  PostV1AssetsAssetsModernizeResponseStatus           `json:"status" url:"status"`
-	Notes                   *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
-	Documents               []*PostV1AssetsAssetsModernizeResponseDocumentsItem `json:"documents,omitempty" url:"documents,omitempty"`
-	CreatedAt               string                                              `json:"createdAt" url:"createdAt"`
+	ID                        string                                                       `json:"id" url:"id"`
+	GroupID                   string                                                       `json:"groupId" url:"groupId"`
+	Code                      string                                                       `json:"code" url:"code"`
+	Name                      string                                                       `json:"name" url:"name"`
+	AcquisitionDate           string                                                       `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                       `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                       `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                       `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                        `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                       `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                       `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                       `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                        `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                        `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsModernizeResponseStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsModernizeResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                      `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                      `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                      `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                         `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                       `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2925,6 +4668,41 @@ func (p *PostV1AssetsAssetsModernizeResponse) GetDocuments() []*PostV1AssetsAsse
 		return nil
 	}
 	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsModernizeResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
 }
 
 func (p *PostV1AssetsAssetsModernizeResponse) GetCreatedAt() string {
@@ -3065,6 +4843,41 @@ func (p *PostV1AssetsAssetsModernizeResponse) SetNotes(notes *string) {
 func (p *PostV1AssetsAssetsModernizeResponse) SetDocuments(documents []*PostV1AssetsAssetsModernizeResponseDocumentsItem) {
 	p.Documents = documents
 	p.require(postV1AssetsAssetsModernizeResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsModernizeResponseFieldInputVatUseChanges)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3216,6 +5029,147 @@ func (p *PostV1AssetsAssetsModernizeResponseDocumentsItem) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+var (
+	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem struct {
+	Year    int64                                                           `json:"year" url:"year"`
+	Percent string                                                          `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsModernizeResponseInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsModernizeResponseInputVatUseChangesItemReason {
+	return &p
+}
+
 type PostV1AssetsAssetsModernizeResponseStatus string
 
 const (
@@ -3238,6 +5192,808 @@ func NewPostV1AssetsAssetsModernizeResponseStatusFromString(s string) (PostV1Ass
 }
 
 func (p PostV1AssetsAssetsModernizeResponseStatus) Ptr() *PostV1AssetsAssetsModernizeResponseStatus {
+	return &p
+}
+
+var (
+	postV1AssetsAssetsUpdateRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsUpdateRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsUpdateRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsUpdateRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsUpdateRequestDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsUpdateRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsUpdateRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsUpdateRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsUpdateRequestDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsUpdateResponseFieldID                        = big.NewInt(1 << 0)
+	postV1AssetsAssetsUpdateResponseFieldGroupID                   = big.NewInt(1 << 1)
+	postV1AssetsAssetsUpdateResponseFieldCode                      = big.NewInt(1 << 2)
+	postV1AssetsAssetsUpdateResponseFieldName                      = big.NewInt(1 << 3)
+	postV1AssetsAssetsUpdateResponseFieldAcquisitionDate           = big.NewInt(1 << 4)
+	postV1AssetsAssetsUpdateResponseFieldDepreciationStartDate     = big.NewInt(1 << 5)
+	postV1AssetsAssetsUpdateResponseFieldAcquisitionCost           = big.NewInt(1 << 6)
+	postV1AssetsAssetsUpdateResponseFieldSalvageValue              = big.NewInt(1 << 7)
+	postV1AssetsAssetsUpdateResponseFieldUsefulLifeMonths          = big.NewInt(1 << 8)
+	postV1AssetsAssetsUpdateResponseFieldTotalCost                 = big.NewInt(1 << 9)
+	postV1AssetsAssetsUpdateResponseFieldAccumulatedDepreciation   = big.NewInt(1 << 10)
+	postV1AssetsAssetsUpdateResponseFieldNetBookValue              = big.NewInt(1 << 11)
+	postV1AssetsAssetsUpdateResponseFieldDepreciatedMonths         = big.NewInt(1 << 12)
+	postV1AssetsAssetsUpdateResponseFieldTotalLifeMonths           = big.NewInt(1 << 13)
+	postV1AssetsAssetsUpdateResponseFieldStatus                    = big.NewInt(1 << 14)
+	postV1AssetsAssetsUpdateResponseFieldNotes                     = big.NewInt(1 << 15)
+	postV1AssetsAssetsUpdateResponseFieldDocuments                 = big.NewInt(1 << 16)
+	postV1AssetsAssetsUpdateResponseFieldInputVatAmount            = big.NewInt(1 << 17)
+	postV1AssetsAssetsUpdateResponseFieldInputVatFirstUseDate      = big.NewInt(1 << 18)
+	postV1AssetsAssetsUpdateResponseFieldInputVatDeductiblePercent = big.NewInt(1 << 19)
+	postV1AssetsAssetsUpdateResponseFieldInputVatRealEstate        = big.NewInt(1 << 20)
+	postV1AssetsAssetsUpdateResponseFieldInputVatUseChanges        = big.NewInt(1 << 21)
+	postV1AssetsAssetsUpdateResponseFieldCreatedAt                 = big.NewInt(1 << 22)
+)
+
+type PostV1AssetsAssetsUpdateResponse struct {
+	ID                        string                                                    `json:"id" url:"id"`
+	GroupID                   string                                                    `json:"groupId" url:"groupId"`
+	Code                      string                                                    `json:"code" url:"code"`
+	Name                      string                                                    `json:"name" url:"name"`
+	AcquisitionDate           string                                                    `json:"acquisitionDate" url:"acquisitionDate"`
+	DepreciationStartDate     string                                                    `json:"depreciationStartDate" url:"depreciationStartDate"`
+	AcquisitionCost           string                                                    `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue              string                                                    `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths          int64                                                     `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                 string                                                    `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation   string                                                    `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue              string                                                    `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths         int64                                                     `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths           int64                                                     `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                    PostV1AssetsAssetsUpdateResponseStatus                    `json:"status" url:"status"`
+	Notes                     *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                 []*PostV1AssetsAssetsUpdateResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount            *string                                                   `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate      *string                                                   `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty"`
+	InputVatDeductiblePercent *string                                                   `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate        bool                                                      `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges        []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	CreatedAt                 string                                                    `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetGroupID() string {
+	if p == nil {
+		return ""
+	}
+	return p.GroupID
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetAcquisitionDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.AcquisitionDate
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetDepreciationStartDate() string {
+	if p == nil {
+		return ""
+	}
+	return p.DepreciationStartDate
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetAcquisitionCost() string {
+	if p == nil {
+		return ""
+	}
+	return p.AcquisitionCost
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetSalvageValue() string {
+	if p == nil {
+		return ""
+	}
+	return p.SalvageValue
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetUsefulLifeMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.UsefulLifeMonths
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetTotalCost() string {
+	if p == nil {
+		return ""
+	}
+	return p.TotalCost
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetAccumulatedDepreciation() string {
+	if p == nil {
+		return ""
+	}
+	return p.AccumulatedDepreciation
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetNetBookValue() string {
+	if p == nil {
+		return ""
+	}
+	return p.NetBookValue
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetDepreciatedMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.DepreciatedMonths
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetTotalLifeMonths() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.TotalLifeMonths
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetStatus() PostV1AssetsAssetsUpdateResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetNotes() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Notes
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetDocuments() []*PostV1AssetsAssetsUpdateResponseDocumentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Documents
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatAmount() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatAmount
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatFirstUseDate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatFirstUseDate
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatDeductiblePercent() *string {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatDeductiblePercent
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatRealEstate() bool {
+	if p == nil {
+		return false
+	}
+	return p.InputVatRealEstate
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetInputVatUseChanges() []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem {
+	if p == nil {
+		return nil
+	}
+	return p.InputVatUseChanges
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetCreatedAt() string {
+	if p == nil {
+		return ""
+	}
+	return p.CreatedAt
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1AssetsAssetsUpdateResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetGroupID(groupID string) {
+	p.GroupID = groupID
+	p.require(postV1AssetsAssetsUpdateResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetCode(code string) {
+	p.Code = code
+	p.require(postV1AssetsAssetsUpdateResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsUpdateResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetAcquisitionDate(acquisitionDate string) {
+	p.AcquisitionDate = acquisitionDate
+	p.require(postV1AssetsAssetsUpdateResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetDepreciationStartDate(depreciationStartDate string) {
+	p.DepreciationStartDate = depreciationStartDate
+	p.require(postV1AssetsAssetsUpdateResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetAcquisitionCost(acquisitionCost string) {
+	p.AcquisitionCost = acquisitionCost
+	p.require(postV1AssetsAssetsUpdateResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetSalvageValue(salvageValue string) {
+	p.SalvageValue = salvageValue
+	p.require(postV1AssetsAssetsUpdateResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	p.UsefulLifeMonths = usefulLifeMonths
+	p.require(postV1AssetsAssetsUpdateResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetTotalCost(totalCost string) {
+	p.TotalCost = totalCost
+	p.require(postV1AssetsAssetsUpdateResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	p.AccumulatedDepreciation = accumulatedDepreciation
+	p.require(postV1AssetsAssetsUpdateResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetNetBookValue(netBookValue string) {
+	p.NetBookValue = netBookValue
+	p.require(postV1AssetsAssetsUpdateResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	p.DepreciatedMonths = depreciatedMonths
+	p.require(postV1AssetsAssetsUpdateResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	p.TotalLifeMonths = totalLifeMonths
+	p.require(postV1AssetsAssetsUpdateResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetStatus(status PostV1AssetsAssetsUpdateResponseStatus) {
+	p.Status = status
+	p.require(postV1AssetsAssetsUpdateResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetNotes(notes *string) {
+	p.Notes = notes
+	p.require(postV1AssetsAssetsUpdateResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetDocuments(documents []*PostV1AssetsAssetsUpdateResponseDocumentsItem) {
+	p.Documents = documents
+	p.require(postV1AssetsAssetsUpdateResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatAmount(inputVatAmount *string) {
+	p.InputVatAmount = inputVatAmount
+	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *string) {
+	p.InputVatFirstUseDate = inputVatFirstUseDate
+	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	p.InputVatDeductiblePercent = inputVatDeductiblePercent
+	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	p.InputVatRealEstate = inputVatRealEstate
+	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetInputVatUseChanges(inputVatUseChanges []*PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) {
+	p.InputVatUseChanges = inputVatUseChanges
+	p.require(postV1AssetsAssetsUpdateResponseFieldInputVatUseChanges)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponse) SetCreatedAt(createdAt string) {
+	p.CreatedAt = createdAt
+	p.require(postV1AssetsAssetsUpdateResponseFieldCreatedAt)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsUpdateResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsUpdateResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsUpdateResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsUpdateResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	postV1AssetsAssetsUpdateResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type PostV1AssetsAssetsUpdateResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetRef() string {
+	if p == nil {
+		return ""
+	}
+	return p.Ref
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1AssetsAssetsUpdateResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) SetRef(ref string) {
+	p.Ref = ref
+	p.require(postV1AssetsAssetsUpdateResponseDocumentsItemFieldRef)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsUpdateResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsUpdateResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsUpdateResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseDocumentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem struct {
+	Year    int64                                                        `json:"year" url:"year"`
+	Percent string                                                       `json:"percent" url:"percent"`
+	Reason  PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetYear() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Year
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetPercent() string {
+	if p == nil {
+		return ""
+	}
+	return p.Percent
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetReason() PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason {
+	if p == nil {
+		return ""
+	}
+	return p.Reason
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetYear(year int64) {
+	p.Year = year
+	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetPercent(percent string) {
+	p.Percent = percent
+	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) SetReason(reason PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason) {
+	p.Reason = reason
+	p.require(postV1AssetsAssetsUpdateResponseInputVatUseChangesItemFieldReason)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason string
+
+const (
+	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonUseChange  PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "use_change"
+	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonSale       PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "sale"
+	PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonWithdrawal PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewPostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonFromString(s string) (PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason) Ptr() *PostV1AssetsAssetsUpdateResponseInputVatUseChangesItemReason {
+	return &p
+}
+
+type PostV1AssetsAssetsUpdateResponseStatus string
+
+const (
+	PostV1AssetsAssetsUpdateResponseStatusActive           PostV1AssetsAssetsUpdateResponseStatus = "active"
+	PostV1AssetsAssetsUpdateResponseStatusFullyDepreciated PostV1AssetsAssetsUpdateResponseStatus = "fully_depreciated"
+	PostV1AssetsAssetsUpdateResponseStatusDisposed         PostV1AssetsAssetsUpdateResponseStatus = "disposed"
+)
+
+func NewPostV1AssetsAssetsUpdateResponseStatusFromString(s string) (PostV1AssetsAssetsUpdateResponseStatus, error) {
+	switch s {
+	case "active":
+		return PostV1AssetsAssetsUpdateResponseStatusActive, nil
+	case "fully_depreciated":
+		return PostV1AssetsAssetsUpdateResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return PostV1AssetsAssetsUpdateResponseStatusDisposed, nil
+	}
+	var t PostV1AssetsAssetsUpdateResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1AssetsAssetsUpdateResponseStatus) Ptr() *PostV1AssetsAssetsUpdateResponseStatus {
 	return &p
 }
 

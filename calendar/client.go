@@ -66,6 +66,39 @@ func (c *Client) PostV1CalendarGet(
 	return response.Body, nil
 }
 
+func (c *Client) GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+	ctx context.Context,
+	request *nordlet.PostV1CalendarSubmitRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CalendarSubmitResponse, error) {
+	response, err := c.WithRawResponse.GenerateTheFilingForADeadlineAndSendItToTheAdministration(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Builds the file of a deadline whose format Nordlet produces but whose administration takes it only through the company's own account or program. Nothing is sent and no filing is recorded.
+func (c *Client) GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+	ctx context.Context,
+	request *nordlet.PostV1CalendarDownloadRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PostV1CalendarDownloadResponse, error) {
+	response, err := c.WithRawResponse.GenerateTheFileOfADeadlineForTheCompanyToSendItself(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) PostV1CalendarCreate(
 	ctx context.Context,
 	request *nordlet.PostV1CalendarCreateRequest,

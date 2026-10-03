@@ -843,6 +843,32 @@ func TestBankPostV1BankSettlementsMatchWithWireMock(
 	VerifyRequestCount(t, "TestBankPostV1BankSettlementsMatchWithWireMock", "POST", "/v1/bank/settlements/match", nil, 1)
 }
 
+func TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostV1BankSettlementsCommissionRequest{
+		LineID: "lineId",
+	}
+	_, invocationErr := client.Bank.SetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmount(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankSetWhatTheMarketplaceKeepsFromOneSettlementLineAsARateOrAsAnAmountWithWireMock", "POST", "/v1/bank/settlements/commission", nil, 1)
+}
+
 func TestBankPostV1BankSettlementsLinkWithWireMock(
 	t *testing.T,
 ) {

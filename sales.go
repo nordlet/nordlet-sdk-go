@@ -17,10 +17,12 @@ var (
 	postV1DocumentSeriesCreateRequestFieldOperationTypeID = big.NewInt(1 << 4)
 	postV1DocumentSeriesCreateRequestFieldNumberLength    = big.NewInt(1 << 5)
 	postV1DocumentSeriesCreateRequestFieldNextNumber      = big.NewInt(1 << 6)
-	postV1DocumentSeriesCreateRequestFieldWarehouseID     = big.NewInt(1 << 7)
-	postV1DocumentSeriesCreateRequestFieldPrintSeries     = big.NewInt(1 << 8)
-	postV1DocumentSeriesCreateRequestFieldIsDefault       = big.NewInt(1 << 9)
-	postV1DocumentSeriesCreateRequestFieldIsActive        = big.NewInt(1 << 10)
+	postV1DocumentSeriesCreateRequestFieldAllocatedFrom   = big.NewInt(1 << 7)
+	postV1DocumentSeriesCreateRequestFieldAllocatedTo     = big.NewInt(1 << 8)
+	postV1DocumentSeriesCreateRequestFieldWarehouseID     = big.NewInt(1 << 9)
+	postV1DocumentSeriesCreateRequestFieldPrintSeries     = big.NewInt(1 << 10)
+	postV1DocumentSeriesCreateRequestFieldIsDefault       = big.NewInt(1 << 11)
+	postV1DocumentSeriesCreateRequestFieldIsActive        = big.NewInt(1 << 12)
 )
 
 type PostV1DocumentSeriesCreateRequest struct {
@@ -31,6 +33,8 @@ type PostV1DocumentSeriesCreateRequest struct {
 	OperationTypeID *string                                        `json:"operationTypeId,omitempty" url:"-"`
 	NumberLength    *int64                                         `json:"numberLength,omitempty" url:"-"`
 	NextNumber      *int64                                         `json:"nextNumber,omitempty" url:"-"`
+	AllocatedFrom   *int64                                         `json:"allocatedFrom,omitempty" url:"-"`
+	AllocatedTo     *int64                                         `json:"allocatedTo,omitempty" url:"-"`
 	WarehouseID     *string                                        `json:"warehouseId,omitempty" url:"-"`
 	PrintSeries     *bool                                          `json:"printSeries,omitempty" url:"-"`
 	IsDefault       *bool                                          `json:"isDefault,omitempty" url:"-"`
@@ -94,6 +98,20 @@ func (p *PostV1DocumentSeriesCreateRequest) SetNumberLength(numberLength *int64)
 func (p *PostV1DocumentSeriesCreateRequest) SetNextNumber(nextNumber *int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesCreateRequestFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesCreateRequest) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesCreateRequestFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesCreateRequest) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesCreateRequestFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -329,10 +347,12 @@ var (
 	postV1DocumentSeriesUpdateRequestFieldOperationTypeID = big.NewInt(1 << 5)
 	postV1DocumentSeriesUpdateRequestFieldNumberLength    = big.NewInt(1 << 6)
 	postV1DocumentSeriesUpdateRequestFieldNextNumber      = big.NewInt(1 << 7)
-	postV1DocumentSeriesUpdateRequestFieldWarehouseID     = big.NewInt(1 << 8)
-	postV1DocumentSeriesUpdateRequestFieldPrintSeries     = big.NewInt(1 << 9)
-	postV1DocumentSeriesUpdateRequestFieldIsDefault       = big.NewInt(1 << 10)
-	postV1DocumentSeriesUpdateRequestFieldIsActive        = big.NewInt(1 << 11)
+	postV1DocumentSeriesUpdateRequestFieldAllocatedFrom   = big.NewInt(1 << 8)
+	postV1DocumentSeriesUpdateRequestFieldAllocatedTo     = big.NewInt(1 << 9)
+	postV1DocumentSeriesUpdateRequestFieldWarehouseID     = big.NewInt(1 << 10)
+	postV1DocumentSeriesUpdateRequestFieldPrintSeries     = big.NewInt(1 << 11)
+	postV1DocumentSeriesUpdateRequestFieldIsDefault       = big.NewInt(1 << 12)
+	postV1DocumentSeriesUpdateRequestFieldIsActive        = big.NewInt(1 << 13)
 )
 
 type PostV1DocumentSeriesUpdateRequest struct {
@@ -344,6 +364,8 @@ type PostV1DocumentSeriesUpdateRequest struct {
 	OperationTypeID *string                                        `json:"operationTypeId,omitempty" url:"-"`
 	NumberLength    *int64                                         `json:"numberLength,omitempty" url:"-"`
 	NextNumber      *int64                                         `json:"nextNumber,omitempty" url:"-"`
+	AllocatedFrom   *int64                                         `json:"allocatedFrom,omitempty" url:"-"`
+	AllocatedTo     *int64                                         `json:"allocatedTo,omitempty" url:"-"`
 	WarehouseID     *string                                        `json:"warehouseId,omitempty" url:"-"`
 	PrintSeries     *bool                                          `json:"printSeries,omitempty" url:"-"`
 	IsDefault       *bool                                          `json:"isDefault,omitempty" url:"-"`
@@ -414,6 +436,20 @@ func (p *PostV1DocumentSeriesUpdateRequest) SetNumberLength(numberLength *int64)
 func (p *PostV1DocumentSeriesUpdateRequest) SetNextNumber(nextNumber *int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesUpdateRequestFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesUpdateRequest) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesUpdateRequestFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesUpdateRequest) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesUpdateRequestFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -1795,51 +1831,61 @@ func (p *PostV1SalesInvoicesApplyAdvanceRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1SalesInvoicesCreateRequestFieldPartnerID         = big.NewInt(1 << 0)
-	postV1SalesInvoicesCreateRequestFieldType              = big.NewInt(1 << 1)
-	postV1SalesInvoicesCreateRequestFieldCurrency          = big.NewInt(1 << 2)
-	postV1SalesInvoicesCreateRequestFieldIssueDate         = big.NewInt(1 << 3)
-	postV1SalesInvoicesCreateRequestFieldDueDate           = big.NewInt(1 << 4)
-	postV1SalesInvoicesCreateRequestFieldCreditedInvoiceID = big.NewInt(1 << 5)
-	postV1SalesInvoicesCreateRequestFieldVatScheme         = big.NewInt(1 << 6)
-	postV1SalesInvoicesCreateRequestFieldVatCountryCode    = big.NewInt(1 << 7)
-	postV1SalesInvoicesCreateRequestFieldDeemedSupplier    = big.NewInt(1 << 8)
-	postV1SalesInvoicesCreateRequestFieldNotes             = big.NewInt(1 << 9)
-	postV1SalesInvoicesCreateRequestFieldDocumentRef       = big.NewInt(1 << 10)
-	postV1SalesInvoicesCreateRequestFieldOperationTypeID   = big.NewInt(1 << 11)
-	postV1SalesInvoicesCreateRequestFieldDocumentSeriesID  = big.NewInt(1 << 12)
-	postV1SalesInvoicesCreateRequestFieldSeriesLabel       = big.NewInt(1 << 13)
-	postV1SalesInvoicesCreateRequestFieldOrderNumber       = big.NewInt(1 << 14)
-	postV1SalesInvoicesCreateRequestFieldIssuedByName      = big.NewInt(1 << 15)
-	postV1SalesInvoicesCreateRequestFieldIssuedByTitle     = big.NewInt(1 << 16)
-	postV1SalesInvoicesCreateRequestFieldReceivedByName    = big.NewInt(1 << 17)
-	postV1SalesInvoicesCreateRequestFieldReceivedByTitle   = big.NewInt(1 << 18)
-	postV1SalesInvoicesCreateRequestFieldDiscountPercent   = big.NewInt(1 << 19)
-	postV1SalesInvoicesCreateRequestFieldLines             = big.NewInt(1 << 20)
+	postV1SalesInvoicesCreateRequestFieldPartnerID                    = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateRequestFieldType                         = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateRequestFieldCurrency                     = big.NewInt(1 << 2)
+	postV1SalesInvoicesCreateRequestFieldIssueDate                    = big.NewInt(1 << 3)
+	postV1SalesInvoicesCreateRequestFieldDueDate                      = big.NewInt(1 << 4)
+	postV1SalesInvoicesCreateRequestFieldCreditedInvoiceID            = big.NewInt(1 << 5)
+	postV1SalesInvoicesCreateRequestFieldAgreementID                  = big.NewInt(1 << 6)
+	postV1SalesInvoicesCreateRequestFieldVatScheme                    = big.NewInt(1 << 7)
+	postV1SalesInvoicesCreateRequestFieldIntrastatTransportMode       = big.NewInt(1 << 8)
+	postV1SalesInvoicesCreateRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 9)
+	postV1SalesInvoicesCreateRequestFieldIntrastatRegion              = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 11)
+	postV1SalesInvoicesCreateRequestFieldVatCountryCode               = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateRequestFieldDeemedSupplier               = big.NewInt(1 << 13)
+	postV1SalesInvoicesCreateRequestFieldNotes                        = big.NewInt(1 << 14)
+	postV1SalesInvoicesCreateRequestFieldDocumentRef                  = big.NewInt(1 << 15)
+	postV1SalesInvoicesCreateRequestFieldOperationTypeID              = big.NewInt(1 << 16)
+	postV1SalesInvoicesCreateRequestFieldDocumentSeriesID             = big.NewInt(1 << 17)
+	postV1SalesInvoicesCreateRequestFieldSeriesLabel                  = big.NewInt(1 << 18)
+	postV1SalesInvoicesCreateRequestFieldOrderNumber                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesCreateRequestFieldIssuedByName                 = big.NewInt(1 << 20)
+	postV1SalesInvoicesCreateRequestFieldIssuedByTitle                = big.NewInt(1 << 21)
+	postV1SalesInvoicesCreateRequestFieldReceivedByName               = big.NewInt(1 << 22)
+	postV1SalesInvoicesCreateRequestFieldReceivedByTitle              = big.NewInt(1 << 23)
+	postV1SalesInvoicesCreateRequestFieldDiscountPercent              = big.NewInt(1 << 24)
+	postV1SalesInvoicesCreateRequestFieldLines                        = big.NewInt(1 << 25)
 )
 
 type PostV1SalesInvoicesCreateRequest struct {
-	PartnerID         string                                       `json:"partnerId" url:"-"`
-	Type              *PostV1SalesInvoicesCreateRequestType        `json:"type,omitempty" url:"-"`
-	Currency          *string                                      `json:"currency,omitempty" url:"-"`
-	IssueDate         *string                                      `json:"issueDate,omitempty" url:"-"`
-	DueDate           *string                                      `json:"dueDate,omitempty" url:"-"`
-	CreditedInvoiceID *string                                      `json:"creditedInvoiceId,omitempty" url:"-"`
-	VatScheme         *PostV1SalesInvoicesCreateRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
-	VatCountryCode    *string                                      `json:"vatCountryCode,omitempty" url:"-"`
-	DeemedSupplier    *bool                                        `json:"deemedSupplier,omitempty" url:"-"`
-	Notes             *string                                      `json:"notes,omitempty" url:"-"`
-	DocumentRef       *string                                      `json:"documentRef,omitempty" url:"-"`
-	OperationTypeID   *string                                      `json:"operationTypeId,omitempty" url:"-"`
-	DocumentSeriesID  *string                                      `json:"documentSeriesId,omitempty" url:"-"`
-	SeriesLabel       *string                                      `json:"seriesLabel,omitempty" url:"-"`
-	OrderNumber       *string                                      `json:"orderNumber,omitempty" url:"-"`
-	IssuedByName      *string                                      `json:"issuedByName,omitempty" url:"-"`
-	IssuedByTitle     *string                                      `json:"issuedByTitle,omitempty" url:"-"`
-	ReceivedByName    *string                                      `json:"receivedByName,omitempty" url:"-"`
-	ReceivedByTitle   *string                                      `json:"receivedByTitle,omitempty" url:"-"`
-	DiscountPercent   *string                                      `json:"discountPercent,omitempty" url:"-"`
-	Lines             []*PostV1SalesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
+	PartnerID                    string                                       `json:"partnerId" url:"-"`
+	Type                         *PostV1SalesInvoicesCreateRequestType        `json:"type,omitempty" url:"-"`
+	Currency                     *string                                      `json:"currency,omitempty" url:"-"`
+	IssueDate                    *string                                      `json:"issueDate,omitempty" url:"-"`
+	DueDate                      *string                                      `json:"dueDate,omitempty" url:"-"`
+	CreditedInvoiceID            *string                                      `json:"creditedInvoiceId,omitempty" url:"-"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"-"`
+	VatScheme                    *PostV1SalesInvoicesCreateRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                      `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                      `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	VatCountryCode               *string                                      `json:"vatCountryCode,omitempty" url:"-"`
+	DeemedSupplier               *bool                                        `json:"deemedSupplier,omitempty" url:"-"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"-"`
+	DocumentRef                  *string                                      `json:"documentRef,omitempty" url:"-"`
+	OperationTypeID              *string                                      `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID             *string                                      `json:"documentSeriesId,omitempty" url:"-"`
+	SeriesLabel                  *string                                      `json:"seriesLabel,omitempty" url:"-"`
+	OrderNumber                  *string                                      `json:"orderNumber,omitempty" url:"-"`
+	IssuedByName                 *string                                      `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle                *string                                      `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName               *string                                      `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle              *string                                      `json:"receivedByTitle,omitempty" url:"-"`
+	DiscountPercent              *string                                      `json:"discountPercent,omitempty" url:"-"`
+	Lines                        []*PostV1SalesInvoicesCreateRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1894,11 +1940,46 @@ func (p *PostV1SalesInvoicesCreateRequest) SetCreditedInvoiceID(creditedInvoiceI
 	p.require(postV1SalesInvoicesCreateRequestFieldCreditedInvoiceID)
 }
 
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesCreateRequestFieldAgreementID)
+}
+
 // SetVatScheme sets the VatScheme field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesCreateRequest) SetVatScheme(vatScheme *PostV1SalesInvoicesCreateRequestVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesCreateRequestFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesCreateRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesCreateRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesCreateRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesCreateRequestFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -2103,6 +2184,52 @@ func (p *PostV1SalesInvoicesEinvoiceSendRequest) UnmarshalJSON(data []byte) erro
 
 func (p *PostV1SalesInvoicesEinvoiceSendRequest) MarshalJSON() ([]byte, error) {
 	type embed PostV1SalesInvoicesEinvoiceSendRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1SalesInvoicesEinvoiceStatusRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostV1SalesInvoicesEinvoiceStatusRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1SalesInvoicesEinvoiceStatusRequestFieldID)
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesEinvoiceStatusRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesEinvoiceStatusRequest(body)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesEinvoiceStatusRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -2769,47 +2896,57 @@ func (p *PostV1SalesInvoicesUnlockRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1SalesInvoicesUpdateRequestFieldID               = big.NewInt(1 << 0)
-	postV1SalesInvoicesUpdateRequestFieldPartnerID        = big.NewInt(1 << 1)
-	postV1SalesInvoicesUpdateRequestFieldCurrency         = big.NewInt(1 << 2)
-	postV1SalesInvoicesUpdateRequestFieldIssueDate        = big.NewInt(1 << 3)
-	postV1SalesInvoicesUpdateRequestFieldDueDate          = big.NewInt(1 << 4)
-	postV1SalesInvoicesUpdateRequestFieldVatScheme        = big.NewInt(1 << 5)
-	postV1SalesInvoicesUpdateRequestFieldVatCountryCode   = big.NewInt(1 << 6)
-	postV1SalesInvoicesUpdateRequestFieldDeemedSupplier   = big.NewInt(1 << 7)
-	postV1SalesInvoicesUpdateRequestFieldNotes            = big.NewInt(1 << 8)
-	postV1SalesInvoicesUpdateRequestFieldOperationTypeID  = big.NewInt(1 << 9)
-	postV1SalesInvoicesUpdateRequestFieldDocumentSeriesID = big.NewInt(1 << 10)
-	postV1SalesInvoicesUpdateRequestFieldSeriesLabel      = big.NewInt(1 << 11)
-	postV1SalesInvoicesUpdateRequestFieldDiscountPercent  = big.NewInt(1 << 12)
-	postV1SalesInvoicesUpdateRequestFieldOrderNumber      = big.NewInt(1 << 13)
-	postV1SalesInvoicesUpdateRequestFieldIssuedByName     = big.NewInt(1 << 14)
-	postV1SalesInvoicesUpdateRequestFieldIssuedByTitle    = big.NewInt(1 << 15)
-	postV1SalesInvoicesUpdateRequestFieldReceivedByName   = big.NewInt(1 << 16)
-	postV1SalesInvoicesUpdateRequestFieldReceivedByTitle  = big.NewInt(1 << 17)
-	postV1SalesInvoicesUpdateRequestFieldLines            = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateRequestFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateRequestFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateRequestFieldAgreementID                  = big.NewInt(1 << 2)
+	postV1SalesInvoicesUpdateRequestFieldCurrency                     = big.NewInt(1 << 3)
+	postV1SalesInvoicesUpdateRequestFieldIssueDate                    = big.NewInt(1 << 4)
+	postV1SalesInvoicesUpdateRequestFieldDueDate                      = big.NewInt(1 << 5)
+	postV1SalesInvoicesUpdateRequestFieldVatScheme                    = big.NewInt(1 << 6)
+	postV1SalesInvoicesUpdateRequestFieldIntrastatTransportMode       = big.NewInt(1 << 7)
+	postV1SalesInvoicesUpdateRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 8)
+	postV1SalesInvoicesUpdateRequestFieldIntrastatRegion              = big.NewInt(1 << 9)
+	postV1SalesInvoicesUpdateRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 10)
+	postV1SalesInvoicesUpdateRequestFieldVatCountryCode               = big.NewInt(1 << 11)
+	postV1SalesInvoicesUpdateRequestFieldDeemedSupplier               = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateRequestFieldNotes                        = big.NewInt(1 << 13)
+	postV1SalesInvoicesUpdateRequestFieldOperationTypeID              = big.NewInt(1 << 14)
+	postV1SalesInvoicesUpdateRequestFieldDocumentSeriesID             = big.NewInt(1 << 15)
+	postV1SalesInvoicesUpdateRequestFieldSeriesLabel                  = big.NewInt(1 << 16)
+	postV1SalesInvoicesUpdateRequestFieldDiscountPercent              = big.NewInt(1 << 17)
+	postV1SalesInvoicesUpdateRequestFieldOrderNumber                  = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateRequestFieldIssuedByName                 = big.NewInt(1 << 19)
+	postV1SalesInvoicesUpdateRequestFieldIssuedByTitle                = big.NewInt(1 << 20)
+	postV1SalesInvoicesUpdateRequestFieldReceivedByName               = big.NewInt(1 << 21)
+	postV1SalesInvoicesUpdateRequestFieldReceivedByTitle              = big.NewInt(1 << 22)
+	postV1SalesInvoicesUpdateRequestFieldLines                        = big.NewInt(1 << 23)
 )
 
 type PostV1SalesInvoicesUpdateRequest struct {
-	ID               string                                       `json:"id" url:"-"`
-	PartnerID        *string                                      `json:"partnerId,omitempty" url:"-"`
-	Currency         *string                                      `json:"currency,omitempty" url:"-"`
-	IssueDate        *string                                      `json:"issueDate,omitempty" url:"-"`
-	DueDate          *string                                      `json:"dueDate,omitempty" url:"-"`
-	VatScheme        *PostV1SalesInvoicesUpdateRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
-	VatCountryCode   *string                                      `json:"vatCountryCode,omitempty" url:"-"`
-	DeemedSupplier   *bool                                        `json:"deemedSupplier,omitempty" url:"-"`
-	Notes            *string                                      `json:"notes,omitempty" url:"-"`
-	OperationTypeID  *string                                      `json:"operationTypeId,omitempty" url:"-"`
-	DocumentSeriesID *string                                      `json:"documentSeriesId,omitempty" url:"-"`
-	SeriesLabel      *string                                      `json:"seriesLabel,omitempty" url:"-"`
-	DiscountPercent  *string                                      `json:"discountPercent,omitempty" url:"-"`
-	OrderNumber      *string                                      `json:"orderNumber,omitempty" url:"-"`
-	IssuedByName     *string                                      `json:"issuedByName,omitempty" url:"-"`
-	IssuedByTitle    *string                                      `json:"issuedByTitle,omitempty" url:"-"`
-	ReceivedByName   *string                                      `json:"receivedByName,omitempty" url:"-"`
-	ReceivedByTitle  *string                                      `json:"receivedByTitle,omitempty" url:"-"`
-	Lines            []*PostV1SalesInvoicesUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
+	ID                           string                                       `json:"id" url:"-"`
+	PartnerID                    *string                                      `json:"partnerId,omitempty" url:"-"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"-"`
+	Currency                     *string                                      `json:"currency,omitempty" url:"-"`
+	IssueDate                    *string                                      `json:"issueDate,omitempty" url:"-"`
+	DueDate                      *string                                      `json:"dueDate,omitempty" url:"-"`
+	VatScheme                    *PostV1SalesInvoicesUpdateRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                      `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                      `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	VatCountryCode               *string                                      `json:"vatCountryCode,omitempty" url:"-"`
+	DeemedSupplier               *bool                                        `json:"deemedSupplier,omitempty" url:"-"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"-"`
+	OperationTypeID              *string                                      `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID             *string                                      `json:"documentSeriesId,omitempty" url:"-"`
+	SeriesLabel                  *string                                      `json:"seriesLabel,omitempty" url:"-"`
+	DiscountPercent              *string                                      `json:"discountPercent,omitempty" url:"-"`
+	OrderNumber                  *string                                      `json:"orderNumber,omitempty" url:"-"`
+	IssuedByName                 *string                                      `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle                *string                                      `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName               *string                                      `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle              *string                                      `json:"receivedByTitle,omitempty" url:"-"`
+	Lines                        []*PostV1SalesInvoicesUpdateRequestLinesItem `json:"lines,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2834,6 +2971,13 @@ func (p *PostV1SalesInvoicesUpdateRequest) SetID(id string) {
 func (p *PostV1SalesInvoicesUpdateRequest) SetPartnerID(partnerID *string) {
 	p.PartnerID = partnerID
 	p.require(postV1SalesInvoicesUpdateRequestFieldPartnerID)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequest) SetAgreementID(agreementID *string) {
+	p.AgreementID = agreementID
+	p.require(postV1SalesInvoicesUpdateRequestFieldAgreementID)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
@@ -2862,6 +3006,34 @@ func (p *PostV1SalesInvoicesUpdateRequest) SetDueDate(dueDate *string) {
 func (p *PostV1SalesInvoicesUpdateRequest) SetVatScheme(vatScheme *PostV1SalesInvoicesUpdateRequestVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesUpdateRequestFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesUpdateRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesUpdateRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequest) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesUpdateRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesUpdateRequestFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -3628,12 +3800,14 @@ var (
 	postV1DocumentSeriesCreateResponseFieldOperationTypeID = big.NewInt(1 << 5)
 	postV1DocumentSeriesCreateResponseFieldNumberLength    = big.NewInt(1 << 6)
 	postV1DocumentSeriesCreateResponseFieldNextNumber      = big.NewInt(1 << 7)
-	postV1DocumentSeriesCreateResponseFieldWarehouseID     = big.NewInt(1 << 8)
-	postV1DocumentSeriesCreateResponseFieldPrintSeries     = big.NewInt(1 << 9)
-	postV1DocumentSeriesCreateResponseFieldIsDefault       = big.NewInt(1 << 10)
-	postV1DocumentSeriesCreateResponseFieldIsActive        = big.NewInt(1 << 11)
-	postV1DocumentSeriesCreateResponseFieldCreatedAt       = big.NewInt(1 << 12)
-	postV1DocumentSeriesCreateResponseFieldUpdatedAt       = big.NewInt(1 << 13)
+	postV1DocumentSeriesCreateResponseFieldAllocatedFrom   = big.NewInt(1 << 8)
+	postV1DocumentSeriesCreateResponseFieldAllocatedTo     = big.NewInt(1 << 9)
+	postV1DocumentSeriesCreateResponseFieldWarehouseID     = big.NewInt(1 << 10)
+	postV1DocumentSeriesCreateResponseFieldPrintSeries     = big.NewInt(1 << 11)
+	postV1DocumentSeriesCreateResponseFieldIsDefault       = big.NewInt(1 << 12)
+	postV1DocumentSeriesCreateResponseFieldIsActive        = big.NewInt(1 << 13)
+	postV1DocumentSeriesCreateResponseFieldCreatedAt       = big.NewInt(1 << 14)
+	postV1DocumentSeriesCreateResponseFieldUpdatedAt       = big.NewInt(1 << 15)
 )
 
 type PostV1DocumentSeriesCreateResponse struct {
@@ -3645,6 +3819,8 @@ type PostV1DocumentSeriesCreateResponse struct {
 	OperationTypeID *string `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	NumberLength    int64   `json:"numberLength" url:"numberLength"`
 	NextNumber      int64   `json:"nextNumber" url:"nextNumber"`
+	AllocatedFrom   *int64  `json:"allocatedFrom,omitempty" url:"allocatedFrom,omitempty"`
+	AllocatedTo     *int64  `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool    `json:"printSeries" url:"printSeries"`
 	IsDefault       bool    `json:"isDefault" url:"isDefault"`
@@ -3713,6 +3889,20 @@ func (p *PostV1DocumentSeriesCreateResponse) GetNextNumber() int64 {
 		return 0
 	}
 	return p.NextNumber
+}
+
+func (p *PostV1DocumentSeriesCreateResponse) GetAllocatedFrom() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedFrom
+}
+
+func (p *PostV1DocumentSeriesCreateResponse) GetAllocatedTo() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedTo
 }
 
 func (p *PostV1DocumentSeriesCreateResponse) GetWarehouseID() *string {
@@ -3825,6 +4015,20 @@ func (p *PostV1DocumentSeriesCreateResponse) SetNumberLength(numberLength int64)
 func (p *PostV1DocumentSeriesCreateResponse) SetNextNumber(nextNumber int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesCreateResponseFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesCreateResponse) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesCreateResponseFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesCreateResponse) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesCreateResponseFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -4004,12 +4208,14 @@ var (
 	postV1DocumentSeriesGetResponseFieldOperationTypeID = big.NewInt(1 << 5)
 	postV1DocumentSeriesGetResponseFieldNumberLength    = big.NewInt(1 << 6)
 	postV1DocumentSeriesGetResponseFieldNextNumber      = big.NewInt(1 << 7)
-	postV1DocumentSeriesGetResponseFieldWarehouseID     = big.NewInt(1 << 8)
-	postV1DocumentSeriesGetResponseFieldPrintSeries     = big.NewInt(1 << 9)
-	postV1DocumentSeriesGetResponseFieldIsDefault       = big.NewInt(1 << 10)
-	postV1DocumentSeriesGetResponseFieldIsActive        = big.NewInt(1 << 11)
-	postV1DocumentSeriesGetResponseFieldCreatedAt       = big.NewInt(1 << 12)
-	postV1DocumentSeriesGetResponseFieldUpdatedAt       = big.NewInt(1 << 13)
+	postV1DocumentSeriesGetResponseFieldAllocatedFrom   = big.NewInt(1 << 8)
+	postV1DocumentSeriesGetResponseFieldAllocatedTo     = big.NewInt(1 << 9)
+	postV1DocumentSeriesGetResponseFieldWarehouseID     = big.NewInt(1 << 10)
+	postV1DocumentSeriesGetResponseFieldPrintSeries     = big.NewInt(1 << 11)
+	postV1DocumentSeriesGetResponseFieldIsDefault       = big.NewInt(1 << 12)
+	postV1DocumentSeriesGetResponseFieldIsActive        = big.NewInt(1 << 13)
+	postV1DocumentSeriesGetResponseFieldCreatedAt       = big.NewInt(1 << 14)
+	postV1DocumentSeriesGetResponseFieldUpdatedAt       = big.NewInt(1 << 15)
 )
 
 type PostV1DocumentSeriesGetResponse struct {
@@ -4021,6 +4227,8 @@ type PostV1DocumentSeriesGetResponse struct {
 	OperationTypeID *string `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	NumberLength    int64   `json:"numberLength" url:"numberLength"`
 	NextNumber      int64   `json:"nextNumber" url:"nextNumber"`
+	AllocatedFrom   *int64  `json:"allocatedFrom,omitempty" url:"allocatedFrom,omitempty"`
+	AllocatedTo     *int64  `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool    `json:"printSeries" url:"printSeries"`
 	IsDefault       bool    `json:"isDefault" url:"isDefault"`
@@ -4089,6 +4297,20 @@ func (p *PostV1DocumentSeriesGetResponse) GetNextNumber() int64 {
 		return 0
 	}
 	return p.NextNumber
+}
+
+func (p *PostV1DocumentSeriesGetResponse) GetAllocatedFrom() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedFrom
+}
+
+func (p *PostV1DocumentSeriesGetResponse) GetAllocatedTo() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedTo
 }
 
 func (p *PostV1DocumentSeriesGetResponse) GetWarehouseID() *string {
@@ -4201,6 +4423,20 @@ func (p *PostV1DocumentSeriesGetResponse) SetNumberLength(numberLength int64) {
 func (p *PostV1DocumentSeriesGetResponse) SetNextNumber(nextNumber int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesGetResponseFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesGetResponse) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesGetResponseFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesGetResponse) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesGetResponseFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -4882,12 +5118,14 @@ var (
 	postV1DocumentSeriesListResponseRowsItemFieldOperationTypeID = big.NewInt(1 << 5)
 	postV1DocumentSeriesListResponseRowsItemFieldNumberLength    = big.NewInt(1 << 6)
 	postV1DocumentSeriesListResponseRowsItemFieldNextNumber      = big.NewInt(1 << 7)
-	postV1DocumentSeriesListResponseRowsItemFieldWarehouseID     = big.NewInt(1 << 8)
-	postV1DocumentSeriesListResponseRowsItemFieldPrintSeries     = big.NewInt(1 << 9)
-	postV1DocumentSeriesListResponseRowsItemFieldIsDefault       = big.NewInt(1 << 10)
-	postV1DocumentSeriesListResponseRowsItemFieldIsActive        = big.NewInt(1 << 11)
-	postV1DocumentSeriesListResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 12)
-	postV1DocumentSeriesListResponseRowsItemFieldUpdatedAt       = big.NewInt(1 << 13)
+	postV1DocumentSeriesListResponseRowsItemFieldAllocatedFrom   = big.NewInt(1 << 8)
+	postV1DocumentSeriesListResponseRowsItemFieldAllocatedTo     = big.NewInt(1 << 9)
+	postV1DocumentSeriesListResponseRowsItemFieldWarehouseID     = big.NewInt(1 << 10)
+	postV1DocumentSeriesListResponseRowsItemFieldPrintSeries     = big.NewInt(1 << 11)
+	postV1DocumentSeriesListResponseRowsItemFieldIsDefault       = big.NewInt(1 << 12)
+	postV1DocumentSeriesListResponseRowsItemFieldIsActive        = big.NewInt(1 << 13)
+	postV1DocumentSeriesListResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 14)
+	postV1DocumentSeriesListResponseRowsItemFieldUpdatedAt       = big.NewInt(1 << 15)
 )
 
 type PostV1DocumentSeriesListResponseRowsItem struct {
@@ -4899,6 +5137,8 @@ type PostV1DocumentSeriesListResponseRowsItem struct {
 	OperationTypeID *string `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	NumberLength    int64   `json:"numberLength" url:"numberLength"`
 	NextNumber      int64   `json:"nextNumber" url:"nextNumber"`
+	AllocatedFrom   *int64  `json:"allocatedFrom,omitempty" url:"allocatedFrom,omitempty"`
+	AllocatedTo     *int64  `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool    `json:"printSeries" url:"printSeries"`
 	IsDefault       bool    `json:"isDefault" url:"isDefault"`
@@ -4967,6 +5207,20 @@ func (p *PostV1DocumentSeriesListResponseRowsItem) GetNextNumber() int64 {
 		return 0
 	}
 	return p.NextNumber
+}
+
+func (p *PostV1DocumentSeriesListResponseRowsItem) GetAllocatedFrom() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedFrom
+}
+
+func (p *PostV1DocumentSeriesListResponseRowsItem) GetAllocatedTo() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedTo
 }
 
 func (p *PostV1DocumentSeriesListResponseRowsItem) GetWarehouseID() *string {
@@ -5079,6 +5333,20 @@ func (p *PostV1DocumentSeriesListResponseRowsItem) SetNumberLength(numberLength 
 func (p *PostV1DocumentSeriesListResponseRowsItem) SetNextNumber(nextNumber int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesListResponseRowsItemFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesListResponseRowsItem) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesListResponseRowsItemFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesListResponseRowsItem) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesListResponseRowsItemFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -5202,12 +5470,14 @@ var (
 	postV1DocumentSeriesUpdateResponseFieldOperationTypeID = big.NewInt(1 << 5)
 	postV1DocumentSeriesUpdateResponseFieldNumberLength    = big.NewInt(1 << 6)
 	postV1DocumentSeriesUpdateResponseFieldNextNumber      = big.NewInt(1 << 7)
-	postV1DocumentSeriesUpdateResponseFieldWarehouseID     = big.NewInt(1 << 8)
-	postV1DocumentSeriesUpdateResponseFieldPrintSeries     = big.NewInt(1 << 9)
-	postV1DocumentSeriesUpdateResponseFieldIsDefault       = big.NewInt(1 << 10)
-	postV1DocumentSeriesUpdateResponseFieldIsActive        = big.NewInt(1 << 11)
-	postV1DocumentSeriesUpdateResponseFieldCreatedAt       = big.NewInt(1 << 12)
-	postV1DocumentSeriesUpdateResponseFieldUpdatedAt       = big.NewInt(1 << 13)
+	postV1DocumentSeriesUpdateResponseFieldAllocatedFrom   = big.NewInt(1 << 8)
+	postV1DocumentSeriesUpdateResponseFieldAllocatedTo     = big.NewInt(1 << 9)
+	postV1DocumentSeriesUpdateResponseFieldWarehouseID     = big.NewInt(1 << 10)
+	postV1DocumentSeriesUpdateResponseFieldPrintSeries     = big.NewInt(1 << 11)
+	postV1DocumentSeriesUpdateResponseFieldIsDefault       = big.NewInt(1 << 12)
+	postV1DocumentSeriesUpdateResponseFieldIsActive        = big.NewInt(1 << 13)
+	postV1DocumentSeriesUpdateResponseFieldCreatedAt       = big.NewInt(1 << 14)
+	postV1DocumentSeriesUpdateResponseFieldUpdatedAt       = big.NewInt(1 << 15)
 )
 
 type PostV1DocumentSeriesUpdateResponse struct {
@@ -5219,6 +5489,8 @@ type PostV1DocumentSeriesUpdateResponse struct {
 	OperationTypeID *string `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
 	NumberLength    int64   `json:"numberLength" url:"numberLength"`
 	NextNumber      int64   `json:"nextNumber" url:"nextNumber"`
+	AllocatedFrom   *int64  `json:"allocatedFrom,omitempty" url:"allocatedFrom,omitempty"`
+	AllocatedTo     *int64  `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool    `json:"printSeries" url:"printSeries"`
 	IsDefault       bool    `json:"isDefault" url:"isDefault"`
@@ -5287,6 +5559,20 @@ func (p *PostV1DocumentSeriesUpdateResponse) GetNextNumber() int64 {
 		return 0
 	}
 	return p.NextNumber
+}
+
+func (p *PostV1DocumentSeriesUpdateResponse) GetAllocatedFrom() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedFrom
+}
+
+func (p *PostV1DocumentSeriesUpdateResponse) GetAllocatedTo() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.AllocatedTo
 }
 
 func (p *PostV1DocumentSeriesUpdateResponse) GetWarehouseID() *string {
@@ -5399,6 +5685,20 @@ func (p *PostV1DocumentSeriesUpdateResponse) SetNumberLength(numberLength int64)
 func (p *PostV1DocumentSeriesUpdateResponse) SetNextNumber(nextNumber int64) {
 	p.NextNumber = nextNumber
 	p.require(postV1DocumentSeriesUpdateResponseFieldNextNumber)
+}
+
+// SetAllocatedFrom sets the AllocatedFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesUpdateResponse) SetAllocatedFrom(allocatedFrom *int64) {
+	p.AllocatedFrom = allocatedFrom
+	p.require(postV1DocumentSeriesUpdateResponseFieldAllocatedFrom)
+}
+
+// SetAllocatedTo sets the AllocatedTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1DocumentSeriesUpdateResponse) SetAllocatedTo(allocatedTo *int64) {
+	p.AllocatedTo = allocatedTo
+	p.require(postV1DocumentSeriesUpdateResponseFieldAllocatedTo)
 }
 
 // SetWarehouseID sets the WarehouseID field and marks it as non-optional;
@@ -11557,19 +11857,19 @@ func (p PostV1SalesActsListResponseRowsItemType) Ptr() *PostV1SalesActsListRespo
 type PostV1SalesActsPdfRequestLocale string
 
 const (
-	PostV1SalesActsPdfRequestLocaleLt PostV1SalesActsPdfRequestLocale = "lt"
 	PostV1SalesActsPdfRequestLocaleEn PostV1SalesActsPdfRequestLocale = "en"
-	PostV1SalesActsPdfRequestLocaleRu PostV1SalesActsPdfRequestLocale = "ru"
+	PostV1SalesActsPdfRequestLocaleLt PostV1SalesActsPdfRequestLocale = "lt"
+	PostV1SalesActsPdfRequestLocaleDe PostV1SalesActsPdfRequestLocale = "de"
 )
 
 func NewPostV1SalesActsPdfRequestLocaleFromString(s string) (PostV1SalesActsPdfRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1SalesActsPdfRequestLocaleLt, nil
 	case "en":
 		return PostV1SalesActsPdfRequestLocaleEn, nil
-	case "ru":
-		return PostV1SalesActsPdfRequestLocaleRu, nil
+	case "lt":
+		return PostV1SalesActsPdfRequestLocaleLt, nil
+	case "de":
+		return PostV1SalesActsPdfRequestLocaleDe, nil
 	}
 	var t PostV1SalesActsPdfRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12433,89 +12733,115 @@ func (p PostV1SalesActsUpdateResponseType) Ptr() *PostV1SalesActsUpdateResponseT
 }
 
 var (
-	postV1SalesInvoicesApplyAdvanceResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesApplyAdvanceResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesApplyAdvanceResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesApplyAdvanceResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesApplyAdvanceResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesApplyAdvanceResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesApplyAdvanceResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesApplyAdvanceResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesApplyAdvanceResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesApplyAdvanceResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesApplyAdvanceResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesApplyAdvanceResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesApplyAdvanceResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesApplyAdvanceResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesApplyAdvanceResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesApplyAdvanceResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesApplyAdvanceResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesApplyAdvanceResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesApplyAdvanceResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesApplyAdvanceResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesApplyAdvanceResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesApplyAdvanceResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesApplyAdvanceResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesApplyAdvanceResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesApplyAdvanceResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesApplyAdvanceResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesApplyAdvanceResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesApplyAdvanceResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesApplyAdvanceResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesApplyAdvanceResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesApplyAdvanceResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesApplyAdvanceResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesApplyAdvanceResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesApplyAdvanceResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesApplyAdvanceResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesApplyAdvanceResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesApplyAdvanceResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesApplyAdvanceResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesApplyAdvanceResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesApplyAdvanceResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesApplyAdvanceResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesApplyAdvanceResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesApplyAdvanceResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesApplyAdvanceResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesApplyAdvanceResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesApplyAdvanceResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesApplyAdvanceResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesApplyAdvanceResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesApplyAdvanceResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesApplyAdvanceResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesApplyAdvanceResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesApplyAdvanceResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesApplyAdvanceResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesApplyAdvanceResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesApplyAdvanceResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesApplyAdvanceResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesApplyAdvanceResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesApplyAdvanceResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesApplyAdvanceResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesApplyAdvanceResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesApplyAdvanceResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesApplyAdvanceResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesApplyAdvanceResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesApplyAdvanceResponse struct {
-	ID                   string                                               `json:"id" url:"id"`
-	PartnerID            string                                               `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesApplyAdvanceResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesApplyAdvanceResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesApplyAdvanceResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                              `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                               `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                              `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                              `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                               `json:"currency" url:"currency"`
-	NetTotal             string                                               `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                               `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                               `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                               `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesApplyAdvanceResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                              `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                              `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                               `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                              `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                              `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                              `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                              `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                              `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                              `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                              `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesApplyAdvanceResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesApplyAdvanceResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                               `json:"id" url:"id"`
+	PartnerID                    string                                               `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesApplyAdvanceResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesApplyAdvanceResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesApplyAdvanceResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                              `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                               `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                              `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                              `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                               `json:"currency" url:"currency"`
+	FxRate                       *string                                              `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                               `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                               `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                               `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                               `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesApplyAdvanceResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                              `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                              `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                              `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                              `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                              `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                              `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                               `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                              `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                              `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                              `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                              `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                              `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                              `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                              `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                              `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                              `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                              `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                              `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                              `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                              `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                              `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                              `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                               `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesApplyAdvanceResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesApplyAdvanceResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12601,6 +12927,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -12662,6 +12995,34 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetVatScheme() *PostV1SalesInv
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetVatCountryCode() *string {
@@ -12774,6 +13135,62 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) GetCreatedAt() string {
@@ -12895,6 +13312,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetNetTotal(netTotal string) {
@@ -12956,6 +13380,34 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetAgreementID(agreementID *st
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesApplyAdvanceResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -13070,6 +13522,62 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetPayToken(payToken *string) 
 	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesApplyAdvanceResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesApplyAdvanceResponse) SetCreatedAt(createdAt string) {
@@ -13150,19 +13658,20 @@ var (
 	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesApplyAdvanceResponseLinesItem struct {
@@ -13175,6 +13684,7 @@ type PostV1SalesInvoicesApplyAdvanceResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                                      `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                       `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                                      `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                                      `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                                      `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                                      `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                       `json:"lineNet" url:"lineNet"`
@@ -13257,6 +13767,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetVatClassifierCode(
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) GetCostCenterID() *string {
@@ -13425,6 +13942,13 @@ func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetVatRatePercent(vat
 func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesApplyAdvanceResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesApplyAdvanceResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -14806,8 +15330,9 @@ var (
 	postV1SalesInvoicesCreateRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
 	postV1SalesInvoicesCreateRequestLinesItemFieldProjectID              = big.NewInt(1 << 9)
 	postV1SalesInvoicesCreateRequestLinesItemFieldRecognition            = big.NewInt(1 << 10)
-	postV1SalesInvoicesCreateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 11)
-	postV1SalesInvoicesCreateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	postV1SalesInvoicesCreateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 13)
 )
 
 type PostV1SalesInvoicesCreateRequestLinesItem struct {
@@ -14822,6 +15347,7 @@ type PostV1SalesInvoicesCreateRequestLinesItem struct {
 	CostCenterID           *string                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                               `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Recognition            *PostV1SalesInvoicesCreateRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	VatExemptionBasis      *string                                               `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	StandaloneSellingPrice *string                                               `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
 	RefundEstimatePercent  *string                                               `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
@@ -14907,6 +15433,13 @@ func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetRecognition() *PostV1Sale
 		return nil
 	}
 	return p.Recognition
+}
+
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesCreateRequestLinesItem) GetStandaloneSellingPrice() *string {
@@ -15012,6 +15545,13 @@ func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetProjectID(projectID *stri
 func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetRecognition(recognition *PostV1SalesInvoicesCreateRequestLinesItemRecognition) {
 	p.Recognition = recognition
 	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldRecognition)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateRequestLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesCreateRequestLinesItemFieldVatExemptionBasis)
 }
 
 // SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
@@ -15480,89 +16020,115 @@ func (p PostV1SalesInvoicesCreateRequestVatScheme) Ptr() *PostV1SalesInvoicesCre
 }
 
 var (
-	postV1SalesInvoicesCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesCreateResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesCreateResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesCreateResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesCreateResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesCreateResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesCreateResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesCreateResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesCreateResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesCreateResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesCreateResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesCreateResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesCreateResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesCreateResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesCreateResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesCreateResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesCreateResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesCreateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesCreateResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesCreateResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesCreateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesCreateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesCreateResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesCreateResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesCreateResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesCreateResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesCreateResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesCreateResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesCreateResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesCreateResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesCreateResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesCreateResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesCreateResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesCreateResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesCreateResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesCreateResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesCreateResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesCreateResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesCreateResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesCreateResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesCreateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesCreateResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesCreateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesCreateResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesCreateResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesCreateResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesCreateResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesCreateResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesCreateResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesCreateResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesCreateResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesCreateResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesCreateResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesCreateResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesCreateResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesCreateResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesCreateResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesCreateResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesCreateResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesCreateResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesCreateResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesCreateResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesCreateResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesCreateResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesCreateResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesCreateResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesCreateResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesCreateResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesCreateResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesCreateResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesCreateResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesCreateResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesCreateResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesCreateResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesCreateResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesCreateResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesCreateResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesCreateResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesCreateResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesCreateResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesCreateResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesCreateResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesCreateResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesCreateResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesCreateResponse struct {
-	ID                   string                                         `json:"id" url:"id"`
-	PartnerID            string                                         `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesCreateResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesCreateResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesCreateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                        `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                         `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                         `json:"currency" url:"currency"`
-	NetTotal             string                                         `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                         `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                         `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                         `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesCreateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                         `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesCreateResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                         `json:"id" url:"id"`
+	PartnerID                    string                                         `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesCreateResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesCreateResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesCreateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                        `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                         `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                         `json:"currency" url:"currency"`
+	FxRate                       *string                                        `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                         `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                         `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                         `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesCreateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                        `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                        `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                         `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                        `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                        `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                        `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                        `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                        `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                        `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                         `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesCreateResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesCreateResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -15648,6 +16214,13 @@ func (p *PostV1SalesInvoicesCreateResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesCreateResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesCreateResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -15709,6 +16282,34 @@ func (p *PostV1SalesInvoicesCreateResponse) GetVatScheme() *PostV1SalesInvoicesC
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesCreateResponse) GetVatCountryCode() *string {
@@ -15821,6 +16422,62 @@ func (p *PostV1SalesInvoicesCreateResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesCreateResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesCreateResponse) GetCreatedAt() string {
@@ -15942,6 +16599,13 @@ func (p *PostV1SalesInvoicesCreateResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesCreateResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesCreateResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesCreateResponse) SetNetTotal(netTotal string) {
@@ -16003,6 +16667,34 @@ func (p *PostV1SalesInvoicesCreateResponse) SetAgreementID(agreementID *string) 
 func (p *PostV1SalesInvoicesCreateResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesCreateResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesCreateResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesCreateResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesCreateResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesCreateResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesCreateResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -16117,6 +16809,62 @@ func (p *PostV1SalesInvoicesCreateResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesCreateResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesCreateResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesCreateResponse) SetCreatedAt(createdAt string) {
@@ -16197,19 +16945,20 @@ var (
 	postV1SalesInvoicesCreateResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesCreateResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesCreateResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesCreateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesCreateResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesCreateResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesCreateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesCreateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesCreateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesCreateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesCreateResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesCreateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesCreateResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesCreateResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesCreateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesCreateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesCreateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesCreateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesCreateResponseLinesItem struct {
@@ -16222,6 +16971,7 @@ type PostV1SalesInvoicesCreateResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                                `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                                `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
@@ -16304,6 +17054,13 @@ func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetVatClassifierCode() *str
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesCreateResponseLinesItem) GetCostCenterID() *string {
@@ -16472,6 +17229,13 @@ func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetVatRatePercent(vatRatePe
 func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesCreateResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesCreateResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -17926,21 +18690,29 @@ func (p *PostV1SalesInvoicesDeleteResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesEinvoiceSendResponseFieldSent      = big.NewInt(1 << 0)
-	postV1SalesInvoicesEinvoiceSendResponseFieldSystem    = big.NewInt(1 << 1)
-	postV1SalesInvoicesEinvoiceSendResponseFieldFormat    = big.NewInt(1 << 2)
-	postV1SalesInvoicesEinvoiceSendResponseFieldMessageID = big.NewInt(1 << 3)
-	postV1SalesInvoicesEinvoiceSendResponseFieldFileID    = big.NewInt(1 << 4)
-	postV1SalesInvoicesEinvoiceSendResponseFieldWarnings  = big.NewInt(1 << 5)
+	postV1SalesInvoicesEinvoiceSendResponseFieldSent           = big.NewInt(1 << 0)
+	postV1SalesInvoicesEinvoiceSendResponseFieldSystem         = big.NewInt(1 << 1)
+	postV1SalesInvoicesEinvoiceSendResponseFieldFormat         = big.NewInt(1 << 2)
+	postV1SalesInvoicesEinvoiceSendResponseFieldTransport      = big.NewInt(1 << 3)
+	postV1SalesInvoicesEinvoiceSendResponseFieldMessageID      = big.NewInt(1 << 4)
+	postV1SalesInvoicesEinvoiceSendResponseFieldNationalNumber = big.NewInt(1 << 5)
+	postV1SalesInvoicesEinvoiceSendResponseFieldStatus         = big.NewInt(1 << 6)
+	postV1SalesInvoicesEinvoiceSendResponseFieldDetail         = big.NewInt(1 << 7)
+	postV1SalesInvoicesEinvoiceSendResponseFieldFileID         = big.NewInt(1 << 8)
+	postV1SalesInvoicesEinvoiceSendResponseFieldWarnings       = big.NewInt(1 << 9)
 )
 
 type PostV1SalesInvoicesEinvoiceSendResponse struct {
-	Sent      bool     `json:"sent" url:"sent"`
-	System    string   `json:"system" url:"system"`
-	Format    string   `json:"format" url:"format"`
-	MessageID string   `json:"messageId" url:"messageId"`
-	FileID    string   `json:"fileId" url:"fileId"`
-	Warnings  []string `json:"warnings" url:"warnings"`
+	Sent           bool                                             `json:"sent" url:"sent"`
+	System         string                                           `json:"system" url:"system"`
+	Format         string                                           `json:"format" url:"format"`
+	Transport      PostV1SalesInvoicesEinvoiceSendResponseTransport `json:"transport" url:"transport"`
+	MessageID      string                                           `json:"messageId" url:"messageId"`
+	NationalNumber *string                                          `json:"nationalNumber,omitempty" url:"nationalNumber,omitempty"`
+	Status         PostV1SalesInvoicesEinvoiceSendResponseStatus    `json:"status" url:"status"`
+	Detail         *string                                          `json:"detail,omitempty" url:"detail,omitempty"`
+	FileID         string                                           `json:"fileId" url:"fileId"`
+	Warnings       []string                                         `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17970,11 +18742,39 @@ func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetFormat() string {
 	return p.Format
 }
 
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetTransport() PostV1SalesInvoicesEinvoiceSendResponseTransport {
+	if p == nil {
+		return ""
+	}
+	return p.Transport
+}
+
 func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetMessageID() string {
 	if p == nil {
 		return ""
 	}
 	return p.MessageID
+}
+
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetNationalNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NationalNumber
+}
+
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetStatus() PostV1SalesInvoicesEinvoiceSendResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Detail
 }
 
 func (p *PostV1SalesInvoicesEinvoiceSendResponse) GetFileID() string {
@@ -18026,11 +18826,39 @@ func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetFormat(format string) {
 	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldFormat)
 }
 
+// SetTransport sets the Transport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetTransport(transport PostV1SalesInvoicesEinvoiceSendResponseTransport) {
+	p.Transport = transport
+	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldTransport)
+}
+
 // SetMessageID sets the MessageID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetMessageID(messageID string) {
 	p.MessageID = messageID
 	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldMessageID)
+}
+
+// SetNationalNumber sets the NationalNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetNationalNumber(nationalNumber *string) {
+	p.NationalNumber = nationalNumber
+	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldNationalNumber)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetStatus(status PostV1SalesInvoicesEinvoiceSendResponseStatus) {
+	p.Status = status
+	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldStatus)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceSendResponse) SetDetail(detail *string) {
+	p.Detail = detail
+	p.require(postV1SalesInvoicesEinvoiceSendResponseFieldDetail)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
@@ -18087,6 +18915,264 @@ func (p *PostV1SalesInvoicesEinvoiceSendResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesEinvoiceSendResponseStatus string
+
+const (
+	PostV1SalesInvoicesEinvoiceSendResponseStatusSent     PostV1SalesInvoicesEinvoiceSendResponseStatus = "sent"
+	PostV1SalesInvoicesEinvoiceSendResponseStatusAccepted PostV1SalesInvoicesEinvoiceSendResponseStatus = "accepted"
+	PostV1SalesInvoicesEinvoiceSendResponseStatusRejected PostV1SalesInvoicesEinvoiceSendResponseStatus = "rejected"
+)
+
+func NewPostV1SalesInvoicesEinvoiceSendResponseStatusFromString(s string) (PostV1SalesInvoicesEinvoiceSendResponseStatus, error) {
+	switch s {
+	case "sent":
+		return PostV1SalesInvoicesEinvoiceSendResponseStatusSent, nil
+	case "accepted":
+		return PostV1SalesInvoicesEinvoiceSendResponseStatusAccepted, nil
+	case "rejected":
+		return PostV1SalesInvoicesEinvoiceSendResponseStatusRejected, nil
+	}
+	var t PostV1SalesInvoicesEinvoiceSendResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesEinvoiceSendResponseStatus) Ptr() *PostV1SalesInvoicesEinvoiceSendResponseStatus {
+	return &p
+}
+
+type PostV1SalesInvoicesEinvoiceSendResponseTransport string
+
+const (
+	PostV1SalesInvoicesEinvoiceSendResponseTransportBridge PostV1SalesInvoicesEinvoiceSendResponseTransport = "bridge"
+	PostV1SalesInvoicesEinvoiceSendResponseTransportDirect PostV1SalesInvoicesEinvoiceSendResponseTransport = "direct"
+)
+
+func NewPostV1SalesInvoicesEinvoiceSendResponseTransportFromString(s string) (PostV1SalesInvoicesEinvoiceSendResponseTransport, error) {
+	switch s {
+	case "bridge":
+		return PostV1SalesInvoicesEinvoiceSendResponseTransportBridge, nil
+	case "direct":
+		return PostV1SalesInvoicesEinvoiceSendResponseTransportDirect, nil
+	}
+	var t PostV1SalesInvoicesEinvoiceSendResponseTransport
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesEinvoiceSendResponseTransport) Ptr() *PostV1SalesInvoicesEinvoiceSendResponseTransport {
+	return &p
+}
+
+var (
+	postV1SalesInvoicesEinvoiceStatusResponseFieldSystem         = big.NewInt(1 << 0)
+	postV1SalesInvoicesEinvoiceStatusResponseFieldTransport      = big.NewInt(1 << 1)
+	postV1SalesInvoicesEinvoiceStatusResponseFieldMessageID      = big.NewInt(1 << 2)
+	postV1SalesInvoicesEinvoiceStatusResponseFieldNationalNumber = big.NewInt(1 << 3)
+	postV1SalesInvoicesEinvoiceStatusResponseFieldStatus         = big.NewInt(1 << 4)
+	postV1SalesInvoicesEinvoiceStatusResponseFieldDetail         = big.NewInt(1 << 5)
+)
+
+type PostV1SalesInvoicesEinvoiceStatusResponse struct {
+	System         string                                             `json:"system" url:"system"`
+	Transport      PostV1SalesInvoicesEinvoiceStatusResponseTransport `json:"transport" url:"transport"`
+	MessageID      string                                             `json:"messageId" url:"messageId"`
+	NationalNumber *string                                            `json:"nationalNumber,omitempty" url:"nationalNumber,omitempty"`
+	Status         PostV1SalesInvoicesEinvoiceStatusResponseStatus    `json:"status" url:"status"`
+	Detail         *string                                            `json:"detail,omitempty" url:"detail,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetSystem() string {
+	if p == nil {
+		return ""
+	}
+	return p.System
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetTransport() PostV1SalesInvoicesEinvoiceStatusResponseTransport {
+	if p == nil {
+		return ""
+	}
+	return p.Transport
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetMessageID() string {
+	if p == nil {
+		return ""
+	}
+	return p.MessageID
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetNationalNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.NationalNumber
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetStatus() PostV1SalesInvoicesEinvoiceStatusResponseStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Detail
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetSystem sets the System field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetSystem(system string) {
+	p.System = system
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldSystem)
+}
+
+// SetTransport sets the Transport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetTransport(transport PostV1SalesInvoicesEinvoiceStatusResponseTransport) {
+	p.Transport = transport
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldTransport)
+}
+
+// SetMessageID sets the MessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetMessageID(messageID string) {
+	p.MessageID = messageID
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldMessageID)
+}
+
+// SetNationalNumber sets the NationalNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetNationalNumber(nationalNumber *string) {
+	p.NationalNumber = nationalNumber
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldNationalNumber)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetStatus(status PostV1SalesInvoicesEinvoiceStatusResponseStatus) {
+	p.Status = status
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldStatus)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) SetDetail(detail *string) {
+	p.Detail = detail
+	p.require(postV1SalesInvoicesEinvoiceStatusResponseFieldDetail)
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1SalesInvoicesEinvoiceStatusResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1SalesInvoicesEinvoiceStatusResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1SalesInvoicesEinvoiceStatusResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1SalesInvoicesEinvoiceStatusResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1SalesInvoicesEinvoiceStatusResponseStatus string
+
+const (
+	PostV1SalesInvoicesEinvoiceStatusResponseStatusSent     PostV1SalesInvoicesEinvoiceStatusResponseStatus = "sent"
+	PostV1SalesInvoicesEinvoiceStatusResponseStatusAccepted PostV1SalesInvoicesEinvoiceStatusResponseStatus = "accepted"
+	PostV1SalesInvoicesEinvoiceStatusResponseStatusRejected PostV1SalesInvoicesEinvoiceStatusResponseStatus = "rejected"
+)
+
+func NewPostV1SalesInvoicesEinvoiceStatusResponseStatusFromString(s string) (PostV1SalesInvoicesEinvoiceStatusResponseStatus, error) {
+	switch s {
+	case "sent":
+		return PostV1SalesInvoicesEinvoiceStatusResponseStatusSent, nil
+	case "accepted":
+		return PostV1SalesInvoicesEinvoiceStatusResponseStatusAccepted, nil
+	case "rejected":
+		return PostV1SalesInvoicesEinvoiceStatusResponseStatusRejected, nil
+	}
+	var t PostV1SalesInvoicesEinvoiceStatusResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesEinvoiceStatusResponseStatus) Ptr() *PostV1SalesInvoicesEinvoiceStatusResponseStatus {
+	return &p
+}
+
+type PostV1SalesInvoicesEinvoiceStatusResponseTransport string
+
+const (
+	PostV1SalesInvoicesEinvoiceStatusResponseTransportBridge PostV1SalesInvoicesEinvoiceStatusResponseTransport = "bridge"
+	PostV1SalesInvoicesEinvoiceStatusResponseTransportDirect PostV1SalesInvoicesEinvoiceStatusResponseTransport = "direct"
+)
+
+func NewPostV1SalesInvoicesEinvoiceStatusResponseTransportFromString(s string) (PostV1SalesInvoicesEinvoiceStatusResponseTransport, error) {
+	switch s {
+	case "bridge":
+		return PostV1SalesInvoicesEinvoiceStatusResponseTransportBridge, nil
+	case "direct":
+		return PostV1SalesInvoicesEinvoiceStatusResponseTransportDirect, nil
+	}
+	var t PostV1SalesInvoicesEinvoiceStatusResponseTransport
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1SalesInvoicesEinvoiceStatusResponseTransport) Ptr() *PostV1SalesInvoicesEinvoiceStatusResponseTransport {
+	return &p
 }
 
 var (
@@ -18254,89 +19340,115 @@ func (p *PostV1SalesInvoicesEinvoiceXMLResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesGetResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesGetResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesGetResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesGetResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesGetResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesGetResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesGetResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesGetResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesGetResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesGetResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesGetResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesGetResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesGetResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesGetResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesGetResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesGetResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesGetResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesGetResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesGetResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesGetResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesGetResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesGetResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesGetResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesGetResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesGetResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesGetResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesGetResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesGetResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesGetResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesGetResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesGetResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesGetResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesGetResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesGetResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesGetResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesGetResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesGetResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesGetResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesGetResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesGetResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesGetResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesGetResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesGetResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesGetResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesGetResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesGetResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesGetResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesGetResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesGetResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesGetResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesGetResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesGetResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesGetResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesGetResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesGetResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesGetResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesGetResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesGetResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesGetResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesGetResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesGetResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesGetResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesGetResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesGetResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesGetResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesGetResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesGetResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesGetResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesGetResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesGetResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesGetResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesGetResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesGetResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesGetResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesGetResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesGetResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesGetResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesGetResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesGetResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesGetResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesGetResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesGetResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesGetResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesGetResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesGetResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesGetResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesGetResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesGetResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesGetResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesGetResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesGetResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesGetResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesGetResponse struct {
-	ID                   string                                      `json:"id" url:"id"`
-	PartnerID            string                                      `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesGetResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesGetResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesGetResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                     `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                      `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                     `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                     `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                      `json:"currency" url:"currency"`
-	NetTotal             string                                      `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                      `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                      `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                      `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesGetResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                     `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                     `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                      `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                     `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                     `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                     `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                     `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                     `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                     `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                     `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                      `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesGetResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                      `json:"id" url:"id"`
+	PartnerID                    string                                      `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesGetResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesGetResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesGetResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                     `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                      `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                     `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                     `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                      `json:"currency" url:"currency"`
+	FxRate                       *string                                     `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                      `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                      `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                      `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                      `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesGetResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                     `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                     `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                     `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                     `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                      `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                     `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                     `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                     `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                     `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                     `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                     `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                     `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                     `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                     `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                     `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                     `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                     `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                     `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                     `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                      `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                      `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesGetResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesGetResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18422,6 +19534,13 @@ func (p *PostV1SalesInvoicesGetResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesGetResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesGetResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -18483,6 +19602,34 @@ func (p *PostV1SalesInvoicesGetResponse) GetVatScheme() *PostV1SalesInvoicesGetR
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesGetResponse) GetVatCountryCode() *string {
@@ -18595,6 +19742,62 @@ func (p *PostV1SalesInvoicesGetResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesGetResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesGetResponse) GetCreatedAt() string {
@@ -18716,6 +19919,13 @@ func (p *PostV1SalesInvoicesGetResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesGetResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesGetResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesGetResponse) SetNetTotal(netTotal string) {
@@ -18777,6 +19987,34 @@ func (p *PostV1SalesInvoicesGetResponse) SetAgreementID(agreementID *string) {
 func (p *PostV1SalesInvoicesGetResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesGetResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesGetResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesGetResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesGetResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesGetResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesGetResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -18891,6 +20129,62 @@ func (p *PostV1SalesInvoicesGetResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesGetResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesGetResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesGetResponse) SetCreatedAt(createdAt string) {
@@ -18971,19 +20265,20 @@ var (
 	postV1SalesInvoicesGetResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesGetResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesGetResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesGetResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesGetResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesGetResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesGetResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesGetResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesGetResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesGetResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesGetResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesGetResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesGetResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesGetResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesGetResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesGetResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesGetResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesGetResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesGetResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesGetResponseLinesItem struct {
@@ -18996,6 +20291,7 @@ type PostV1SalesInvoicesGetResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                             `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                              `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                             `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                             `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                             `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                             `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                              `json:"lineNet" url:"lineNet"`
@@ -19078,6 +20374,13 @@ func (p *PostV1SalesInvoicesGetResponseLinesItem) GetVatClassifierCode() *string
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesGetResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesGetResponseLinesItem) GetCostCenterID() *string {
@@ -19246,6 +20549,13 @@ func (p *PostV1SalesInvoicesGetResponseLinesItem) SetVatRatePercent(vatRatePerce
 func (p *PostV1SalesInvoicesGetResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesGetResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesGetResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesGetResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -20616,89 +21926,115 @@ func (p PostV1SalesInvoicesGetResponseVatScheme) Ptr() *PostV1SalesInvoicesGetRe
 }
 
 var (
-	postV1SalesInvoicesIssueResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesIssueResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesIssueResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesIssueResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesIssueResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesIssueResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesIssueResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesIssueResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesIssueResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesIssueResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesIssueResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesIssueResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesIssueResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesIssueResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesIssueResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesIssueResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesIssueResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesIssueResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesIssueResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesIssueResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesIssueResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesIssueResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesIssueResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesIssueResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesIssueResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesIssueResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesIssueResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesIssueResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesIssueResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesIssueResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesIssueResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesIssueResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesIssueResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesIssueResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesIssueResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesIssueResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesIssueResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesIssueResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesIssueResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesIssueResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesIssueResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesIssueResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesIssueResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesIssueResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesIssueResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesIssueResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesIssueResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesIssueResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesIssueResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesIssueResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesIssueResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesIssueResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesIssueResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesIssueResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesIssueResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesIssueResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesIssueResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesIssueResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesIssueResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesIssueResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesIssueResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesIssueResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesIssueResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesIssueResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesIssueResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesIssueResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesIssueResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesIssueResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesIssueResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesIssueResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesIssueResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesIssueResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesIssueResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesIssueResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesIssueResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesIssueResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesIssueResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesIssueResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesIssueResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesIssueResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesIssueResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesIssueResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesIssueResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesIssueResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesIssueResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesIssueResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesIssueResponse struct {
-	ID                   string                                        `json:"id" url:"id"`
-	PartnerID            string                                        `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesIssueResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesIssueResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesIssueResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                       `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                        `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                       `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                       `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                       `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                        `json:"currency" url:"currency"`
-	NetTotal             string                                        `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                        `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                        `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                        `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                       `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                       `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                       `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                       `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesIssueResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                       `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                          `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                       `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                       `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                       `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                        `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                       `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                       `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                       `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                       `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                       `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                       `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                       `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                       `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                        `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                        `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesIssueResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesIssueResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                        `json:"id" url:"id"`
+	PartnerID                    string                                        `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesIssueResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesIssueResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesIssueResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                       `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                        `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                       `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                       `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                       `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                        `json:"currency" url:"currency"`
+	FxRate                       *string                                       `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                        `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                        `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                        `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                        `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                       `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                       `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                       `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                       `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesIssueResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                       `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                       `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                       `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                       `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                       `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                          `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                       `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                       `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                       `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                        `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                       `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                       `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                       `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                       `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                       `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                       `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                       `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                       `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                       `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                       `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                       `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                       `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                       `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                       `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                       `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                       `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                        `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                        `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesIssueResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesIssueResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20784,6 +22120,13 @@ func (p *PostV1SalesInvoicesIssueResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesIssueResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesIssueResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -20845,6 +22188,34 @@ func (p *PostV1SalesInvoicesIssueResponse) GetVatScheme() *PostV1SalesInvoicesIs
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesIssueResponse) GetVatCountryCode() *string {
@@ -20957,6 +22328,62 @@ func (p *PostV1SalesInvoicesIssueResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesIssueResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesIssueResponse) GetCreatedAt() string {
@@ -21078,6 +22505,13 @@ func (p *PostV1SalesInvoicesIssueResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesIssueResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesIssueResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesIssueResponse) SetNetTotal(netTotal string) {
@@ -21139,6 +22573,34 @@ func (p *PostV1SalesInvoicesIssueResponse) SetAgreementID(agreementID *string) {
 func (p *PostV1SalesInvoicesIssueResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesIssueResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesIssueResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesIssueResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesIssueResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesIssueResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesIssueResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -21253,6 +22715,62 @@ func (p *PostV1SalesInvoicesIssueResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesIssueResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesIssueResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesIssueResponse) SetCreatedAt(createdAt string) {
@@ -21333,19 +22851,20 @@ var (
 	postV1SalesInvoicesIssueResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesIssueResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesIssueResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesIssueResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesIssueResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesIssueResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesIssueResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesIssueResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesIssueResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesIssueResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesIssueResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesIssueResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesIssueResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesIssueResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesIssueResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesIssueResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesIssueResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesIssueResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesIssueResponseLinesItem struct {
@@ -21358,6 +22877,7 @@ type PostV1SalesInvoicesIssueResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                               `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                               `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                               `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                               `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                `json:"lineNet" url:"lineNet"`
@@ -21440,6 +22960,13 @@ func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetVatClassifierCode() *stri
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesIssueResponseLinesItem) GetCostCenterID() *string {
@@ -21608,6 +23135,13 @@ func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetVatRatePercent(vatRatePer
 func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesIssueResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesIssueResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -23564,85 +25098,111 @@ func (p *PostV1SalesInvoicesListResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesListResponseRowsItemFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesListResponseRowsItemFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesListResponseRowsItemFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesListResponseRowsItemFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesListResponseRowsItemFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesListResponseRowsItemFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesListResponseRowsItemFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesListResponseRowsItemFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesListResponseRowsItemFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesListResponseRowsItemFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesListResponseRowsItemFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesListResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesListResponseRowsItemFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesListResponseRowsItemFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesListResponseRowsItemFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesListResponseRowsItemFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesListResponseRowsItemFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesListResponseRowsItemFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesListResponseRowsItemFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesListResponseRowsItemFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesListResponseRowsItemFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesListResponseRowsItemFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesListResponseRowsItemFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesListResponseRowsItemFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesListResponseRowsItemFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesListResponseRowsItemFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesListResponseRowsItemFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesListResponseRowsItemFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesListResponseRowsItemFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesListResponseRowsItemFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesListResponseRowsItemFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesListResponseRowsItemFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesListResponseRowsItemFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 37)
+	postV1SalesInvoicesListResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesListResponseRowsItemFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesListResponseRowsItemFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesListResponseRowsItemFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesListResponseRowsItemFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesListResponseRowsItemFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesListResponseRowsItemFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesListResponseRowsItemFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesListResponseRowsItemFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesListResponseRowsItemFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesListResponseRowsItemFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesListResponseRowsItemFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesListResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesListResponseRowsItemFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesListResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesListResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesListResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesListResponseRowsItemFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesListResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesListResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesListResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesListResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesListResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesListResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesListResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesListResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesListResponseRowsItemFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesListResponseRowsItemFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesListResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesListResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesListResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesListResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesListResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesListResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesListResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesListResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesListResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesListResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesListResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesListResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesListResponseRowsItemFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesListResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesListResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesListResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 50)
 )
 
 type PostV1SalesInvoicesListResponseRowsItem struct {
-	ID                   string                                               `json:"id" url:"id"`
-	PartnerID            string                                               `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesListResponseRowsItemType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesListResponseRowsItemStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesListResponseRowsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                              `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                               `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                              `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                              `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                               `json:"currency" url:"currency"`
-	NetTotal             string                                               `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                               `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                               `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                               `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesListResponseRowsItemVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                              `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                              `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                               `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                              `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                              `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                              `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                              `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                              `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                              `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                              `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                               `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                               `json:"id" url:"id"`
+	PartnerID                    string                                               `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesListResponseRowsItemType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesListResponseRowsItemStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesListResponseRowsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                              `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                               `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                              `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                              `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                              `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                               `json:"currency" url:"currency"`
+	FxRate                       *string                                              `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                               `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                               `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                               `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                               `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                              `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                              `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                              `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesListResponseRowsItemVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                              `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                              `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                              `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                              `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                              `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                                 `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                              `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                              `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                              `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                               `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                              `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                              `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                              `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                              `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                              `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                              `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                              `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                              `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                              `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                              `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                              `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                              `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                              `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                              `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                              `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                               `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                               `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -23728,6 +25288,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesListResponseRowsItem) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -23789,6 +25356,34 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) GetVatScheme() *PostV1SalesInv
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesListResponseRowsItem) GetVatCountryCode() *string {
@@ -23903,6 +25498,62 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) GetPayToken() *string {
 	return p.PayToken
 }
 
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesListResponseRowsItem) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
+}
+
 func (p *PostV1SalesInvoicesListResponseRowsItem) GetCreatedAt() string {
 	if p == nil {
 		return ""
@@ -24008,6 +25659,13 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesListResponseRowsItemFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesListResponseRowsItem) SetNetTotal(netTotal string) {
@@ -24069,6 +25727,34 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) SetAgreementID(agreementID *st
 func (p *PostV1SalesInvoicesListResponseRowsItem) SetVatScheme(vatScheme *PostV1SalesInvoicesListResponseRowsItemVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesListResponseRowsItemFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -24181,6 +25867,62 @@ func (p *PostV1SalesInvoicesListResponseRowsItem) SetLockedBy(lockedBy *string) 
 func (p *PostV1SalesInvoicesListResponseRowsItem) SetPayToken(payToken *string) {
 	p.PayToken = payToken
 	p.require(postV1SalesInvoicesListResponseRowsItemFieldPayToken)
+}
+
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesListResponseRowsItem) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesListResponseRowsItemFieldEinvoiceCheckedAt)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -24358,89 +26100,115 @@ func (p PostV1SalesInvoicesListResponseRowsItemVatScheme) Ptr() *PostV1SalesInvo
 }
 
 var (
-	postV1SalesInvoicesLockResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesLockResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesLockResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesLockResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesLockResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesLockResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesLockResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesLockResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesLockResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesLockResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesLockResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesLockResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesLockResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesLockResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesLockResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesLockResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesLockResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesLockResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesLockResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesLockResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesLockResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesLockResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesLockResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesLockResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesLockResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesLockResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesLockResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesLockResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesLockResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesLockResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesLockResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesLockResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesLockResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesLockResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesLockResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesLockResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesLockResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesLockResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesLockResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesLockResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesLockResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesLockResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesLockResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesLockResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesLockResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesLockResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesLockResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesLockResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesLockResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesLockResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesLockResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesLockResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesLockResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesLockResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesLockResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesLockResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesLockResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesLockResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesLockResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesLockResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesLockResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesLockResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesLockResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesLockResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesLockResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesLockResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesLockResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesLockResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesLockResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesLockResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesLockResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesLockResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesLockResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesLockResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesLockResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesLockResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesLockResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesLockResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesLockResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesLockResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesLockResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesLockResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesLockResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesLockResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesLockResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesLockResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesLockResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesLockResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesLockResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesLockResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesLockResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesLockResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesLockResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesLockResponse struct {
-	ID                   string                                       `json:"id" url:"id"`
-	PartnerID            string                                       `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesLockResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesLockResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesLockResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                      `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                       `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                      `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                      `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                      `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                       `json:"currency" url:"currency"`
-	NetTotal             string                                       `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                       `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                       `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                       `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                      `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                      `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesLockResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                      `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                         `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                      `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                      `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                      `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                       `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                      `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                      `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                      `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                      `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                      `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                      `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                      `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                      `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                       `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                       `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesLockResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesLockResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                       `json:"id" url:"id"`
+	PartnerID                    string                                       `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesLockResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesLockResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesLockResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                      `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                       `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                      `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                      `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                      `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                       `json:"currency" url:"currency"`
+	FxRate                       *string                                      `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                       `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                       `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                       `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                       `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                      `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                      `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesLockResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                      `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                      `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                      `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                         `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                      `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                      `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                      `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                       `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                      `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                      `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                      `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                      `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                      `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                      `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                      `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                      `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                      `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                      `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                      `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                      `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                      `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                      `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                      `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                      `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                       `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesLockResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesLockResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -24526,6 +26294,13 @@ func (p *PostV1SalesInvoicesLockResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesLockResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesLockResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -24587,6 +26362,34 @@ func (p *PostV1SalesInvoicesLockResponse) GetVatScheme() *PostV1SalesInvoicesLoc
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesLockResponse) GetVatCountryCode() *string {
@@ -24699,6 +26502,62 @@ func (p *PostV1SalesInvoicesLockResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesLockResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesLockResponse) GetCreatedAt() string {
@@ -24820,6 +26679,13 @@ func (p *PostV1SalesInvoicesLockResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesLockResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesLockResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesLockResponse) SetNetTotal(netTotal string) {
@@ -24881,6 +26747,34 @@ func (p *PostV1SalesInvoicesLockResponse) SetAgreementID(agreementID *string) {
 func (p *PostV1SalesInvoicesLockResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesLockResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesLockResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesLockResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesLockResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesLockResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesLockResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -24995,6 +26889,62 @@ func (p *PostV1SalesInvoicesLockResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesLockResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesLockResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesLockResponse) SetCreatedAt(createdAt string) {
@@ -25075,19 +27025,20 @@ var (
 	postV1SalesInvoicesLockResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesLockResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesLockResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesLockResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesLockResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesLockResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesLockResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesLockResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesLockResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesLockResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesLockResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesLockResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesLockResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesLockResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesLockResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesLockResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesLockResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesLockResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesLockResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesLockResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesLockResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesLockResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesLockResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesLockResponseLinesItem struct {
@@ -25100,6 +27051,7 @@ type PostV1SalesInvoicesLockResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                              `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                               `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                              `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                              `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                              `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                              `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                               `json:"lineNet" url:"lineNet"`
@@ -25182,6 +27134,13 @@ func (p *PostV1SalesInvoicesLockResponseLinesItem) GetVatClassifierCode() *strin
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesLockResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesLockResponseLinesItem) GetCostCenterID() *string {
@@ -25350,6 +27309,13 @@ func (p *PostV1SalesInvoicesLockResponseLinesItem) SetVatRatePercent(vatRatePerc
 func (p *PostV1SalesInvoicesLockResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesLockResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesLockResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesLockResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -27009,19 +28975,19 @@ func (p *PostV1SalesInvoicesPaymentSettingsUpdateResponse) String() string {
 type PostV1SalesInvoicesPdfRequestLocale string
 
 const (
-	PostV1SalesInvoicesPdfRequestLocaleLt PostV1SalesInvoicesPdfRequestLocale = "lt"
 	PostV1SalesInvoicesPdfRequestLocaleEn PostV1SalesInvoicesPdfRequestLocale = "en"
-	PostV1SalesInvoicesPdfRequestLocaleRu PostV1SalesInvoicesPdfRequestLocale = "ru"
+	PostV1SalesInvoicesPdfRequestLocaleLt PostV1SalesInvoicesPdfRequestLocale = "lt"
+	PostV1SalesInvoicesPdfRequestLocaleDe PostV1SalesInvoicesPdfRequestLocale = "de"
 )
 
 func NewPostV1SalesInvoicesPdfRequestLocaleFromString(s string) (PostV1SalesInvoicesPdfRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1SalesInvoicesPdfRequestLocaleLt, nil
 	case "en":
 		return PostV1SalesInvoicesPdfRequestLocaleEn, nil
-	case "ru":
-		return PostV1SalesInvoicesPdfRequestLocaleRu, nil
+	case "lt":
+		return PostV1SalesInvoicesPdfRequestLocaleLt, nil
+	case "de":
+		return PostV1SalesInvoicesPdfRequestLocaleDe, nil
 	}
 	var t PostV1SalesInvoicesPdfRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -27430,19 +29396,19 @@ func (p *PostV1SalesInvoicesPeppolXMLResponse) String() string {
 type PostV1SalesInvoicesSendRequestLocale string
 
 const (
-	PostV1SalesInvoicesSendRequestLocaleLt PostV1SalesInvoicesSendRequestLocale = "lt"
 	PostV1SalesInvoicesSendRequestLocaleEn PostV1SalesInvoicesSendRequestLocale = "en"
-	PostV1SalesInvoicesSendRequestLocaleRu PostV1SalesInvoicesSendRequestLocale = "ru"
+	PostV1SalesInvoicesSendRequestLocaleLt PostV1SalesInvoicesSendRequestLocale = "lt"
+	PostV1SalesInvoicesSendRequestLocaleDe PostV1SalesInvoicesSendRequestLocale = "de"
 )
 
 func NewPostV1SalesInvoicesSendRequestLocaleFromString(s string) (PostV1SalesInvoicesSendRequestLocale, error) {
 	switch s {
-	case "lt":
-		return PostV1SalesInvoicesSendRequestLocaleLt, nil
 	case "en":
 		return PostV1SalesInvoicesSendRequestLocaleEn, nil
-	case "ru":
-		return PostV1SalesInvoicesSendRequestLocaleRu, nil
+	case "lt":
+		return PostV1SalesInvoicesSendRequestLocaleLt, nil
+	case "de":
+		return PostV1SalesInvoicesSendRequestLocaleDe, nil
 	}
 	var t PostV1SalesInvoicesSendRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -27553,89 +29519,115 @@ func (p *PostV1SalesInvoicesSendResponse) String() string {
 }
 
 var (
-	postV1SalesInvoicesUnlockResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesUnlockResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesUnlockResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesUnlockResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesUnlockResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesUnlockResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesUnlockResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesUnlockResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesUnlockResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesUnlockResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesUnlockResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesUnlockResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesUnlockResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesUnlockResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesUnlockResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesUnlockResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesUnlockResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesUnlockResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesUnlockResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesUnlockResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesUnlockResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesUnlockResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesUnlockResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesUnlockResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesUnlockResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesUnlockResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesUnlockResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesUnlockResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesUnlockResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesUnlockResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesUnlockResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesUnlockResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesUnlockResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesUnlockResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesUnlockResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesUnlockResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesUnlockResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesUnlockResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesUnlockResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesUnlockResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesUnlockResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesUnlockResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesUnlockResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesUnlockResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesUnlockResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesUnlockResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesUnlockResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesUnlockResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesUnlockResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesUnlockResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesUnlockResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesUnlockResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesUnlockResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesUnlockResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesUnlockResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesUnlockResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesUnlockResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesUnlockResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesUnlockResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesUnlockResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesUnlockResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesUnlockResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesUnlockResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesUnlockResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesUnlockResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesUnlockResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesUnlockResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesUnlockResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesUnlockResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesUnlockResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesUnlockResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesUnlockResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesUnlockResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesUnlockResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesUnlockResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesUnlockResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesUnlockResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesUnlockResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesUnlockResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesUnlockResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesUnlockResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesUnlockResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesUnlockResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesUnlockResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesUnlockResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesUnlockResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesUnlockResponse struct {
-	ID                   string                                         `json:"id" url:"id"`
-	PartnerID            string                                         `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesUnlockResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesUnlockResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesUnlockResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                        `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                         `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                         `json:"currency" url:"currency"`
-	NetTotal             string                                         `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                         `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                         `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                         `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesUnlockResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                         `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesUnlockResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesUnlockResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                         `json:"id" url:"id"`
+	PartnerID                    string                                         `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesUnlockResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesUnlockResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesUnlockResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                        `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                         `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                         `json:"currency" url:"currency"`
+	FxRate                       *string                                        `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                         `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                         `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                         `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesUnlockResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                        `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                        `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                         `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                        `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                        `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                        `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                        `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                        `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                        `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                         `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesUnlockResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesUnlockResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -27721,6 +29713,13 @@ func (p *PostV1SalesInvoicesUnlockResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesUnlockResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesUnlockResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -27782,6 +29781,34 @@ func (p *PostV1SalesInvoicesUnlockResponse) GetVatScheme() *PostV1SalesInvoicesU
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesUnlockResponse) GetVatCountryCode() *string {
@@ -27894,6 +29921,62 @@ func (p *PostV1SalesInvoicesUnlockResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesUnlockResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesUnlockResponse) GetCreatedAt() string {
@@ -28015,6 +30098,13 @@ func (p *PostV1SalesInvoicesUnlockResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesUnlockResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesUnlockResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesUnlockResponse) SetNetTotal(netTotal string) {
@@ -28076,6 +30166,34 @@ func (p *PostV1SalesInvoicesUnlockResponse) SetAgreementID(agreementID *string) 
 func (p *PostV1SalesInvoicesUnlockResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesUnlockResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesUnlockResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesUnlockResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesUnlockResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesUnlockResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesUnlockResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -28190,6 +30308,62 @@ func (p *PostV1SalesInvoicesUnlockResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesUnlockResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesUnlockResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesUnlockResponse) SetCreatedAt(createdAt string) {
@@ -28270,19 +30444,20 @@ var (
 	postV1SalesInvoicesUnlockResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesUnlockResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesUnlockResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesUnlockResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesUnlockResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesUnlockResponseLinesItem struct {
@@ -28295,6 +30470,7 @@ type PostV1SalesInvoicesUnlockResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                                `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                                `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
@@ -28377,6 +30553,13 @@ func (p *PostV1SalesInvoicesUnlockResponseLinesItem) GetVatClassifierCode() *str
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesUnlockResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesUnlockResponseLinesItem) GetCostCenterID() *string {
@@ -28545,6 +30728,13 @@ func (p *PostV1SalesInvoicesUnlockResponseLinesItem) SetVatRatePercent(vatRatePe
 func (p *PostV1SalesInvoicesUnlockResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesUnlockResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUnlockResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesUnlockResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -29926,8 +32116,9 @@ var (
 	postV1SalesInvoicesUpdateRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
 	postV1SalesInvoicesUpdateRequestLinesItemFieldProjectID              = big.NewInt(1 << 9)
 	postV1SalesInvoicesUpdateRequestLinesItemFieldRecognition            = big.NewInt(1 << 10)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 11)
-	postV1SalesInvoicesUpdateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 13)
 )
 
 type PostV1SalesInvoicesUpdateRequestLinesItem struct {
@@ -29942,6 +32133,7 @@ type PostV1SalesInvoicesUpdateRequestLinesItem struct {
 	CostCenterID           *string                                               `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                               `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Recognition            *PostV1SalesInvoicesUpdateRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	VatExemptionBasis      *string                                               `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	StandaloneSellingPrice *string                                               `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
 	RefundEstimatePercent  *string                                               `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
@@ -30027,6 +32219,13 @@ func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetRecognition() *PostV1Sale
 		return nil
 	}
 	return p.Recognition
+}
+
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesUpdateRequestLinesItem) GetStandaloneSellingPrice() *string {
@@ -30132,6 +32331,13 @@ func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetProjectID(projectID *stri
 func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetRecognition(recognition *PostV1SalesInvoicesUpdateRequestLinesItemRecognition) {
 	p.Recognition = recognition
 	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldRecognition)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateRequestLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesUpdateRequestLinesItemFieldVatExemptionBasis)
 }
 
 // SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
@@ -30572,89 +32778,115 @@ func (p PostV1SalesInvoicesUpdateRequestVatScheme) Ptr() *PostV1SalesInvoicesUpd
 }
 
 var (
-	postV1SalesInvoicesUpdateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1SalesInvoicesUpdateResponseFieldPartnerID            = big.NewInt(1 << 1)
-	postV1SalesInvoicesUpdateResponseFieldType                 = big.NewInt(1 << 2)
-	postV1SalesInvoicesUpdateResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1SalesInvoicesUpdateResponseFieldPaymentStatus        = big.NewInt(1 << 4)
-	postV1SalesInvoicesUpdateResponseFieldSeries               = big.NewInt(1 << 5)
-	postV1SalesInvoicesUpdateResponseFieldNumber               = big.NewInt(1 << 6)
-	postV1SalesInvoicesUpdateResponseFieldFullNumber           = big.NewInt(1 << 7)
-	postV1SalesInvoicesUpdateResponseFieldIssueDate            = big.NewInt(1 << 8)
-	postV1SalesInvoicesUpdateResponseFieldDueDate              = big.NewInt(1 << 9)
-	postV1SalesInvoicesUpdateResponseFieldCurrency             = big.NewInt(1 << 10)
-	postV1SalesInvoicesUpdateResponseFieldNetTotal             = big.NewInt(1 << 11)
-	postV1SalesInvoicesUpdateResponseFieldVatTotal             = big.NewInt(1 << 12)
-	postV1SalesInvoicesUpdateResponseFieldGrossTotal           = big.NewInt(1 << 13)
-	postV1SalesInvoicesUpdateResponseFieldPaidAmount           = big.NewInt(1 << 14)
-	postV1SalesInvoicesUpdateResponseFieldJournalTransactionID = big.NewInt(1 << 15)
-	postV1SalesInvoicesUpdateResponseFieldAppliedToInvoiceID   = big.NewInt(1 << 16)
-	postV1SalesInvoicesUpdateResponseFieldCreditedInvoiceID    = big.NewInt(1 << 17)
-	postV1SalesInvoicesUpdateResponseFieldAgreementID          = big.NewInt(1 << 18)
-	postV1SalesInvoicesUpdateResponseFieldVatScheme            = big.NewInt(1 << 19)
-	postV1SalesInvoicesUpdateResponseFieldVatCountryCode       = big.NewInt(1 << 20)
-	postV1SalesInvoicesUpdateResponseFieldDeemedSupplier       = big.NewInt(1 << 21)
-	postV1SalesInvoicesUpdateResponseFieldNotes                = big.NewInt(1 << 22)
-	postV1SalesInvoicesUpdateResponseFieldDocumentRef          = big.NewInt(1 << 23)
-	postV1SalesInvoicesUpdateResponseFieldOperationTypeID      = big.NewInt(1 << 24)
-	postV1SalesInvoicesUpdateResponseFieldDocumentSeriesID     = big.NewInt(1 << 25)
-	postV1SalesInvoicesUpdateResponseFieldSeriesLabel          = big.NewInt(1 << 26)
-	postV1SalesInvoicesUpdateResponseFieldDiscountPercent      = big.NewInt(1 << 27)
-	postV1SalesInvoicesUpdateResponseFieldOrderNumber          = big.NewInt(1 << 28)
-	postV1SalesInvoicesUpdateResponseFieldIssuedByName         = big.NewInt(1 << 29)
-	postV1SalesInvoicesUpdateResponseFieldIssuedByTitle        = big.NewInt(1 << 30)
-	postV1SalesInvoicesUpdateResponseFieldReceivedByName       = big.NewInt(1 << 31)
-	postV1SalesInvoicesUpdateResponseFieldReceivedByTitle      = big.NewInt(1 << 32)
-	postV1SalesInvoicesUpdateResponseFieldLockedAt             = big.NewInt(1 << 33)
-	postV1SalesInvoicesUpdateResponseFieldLockedBy             = big.NewInt(1 << 34)
-	postV1SalesInvoicesUpdateResponseFieldPayToken             = big.NewInt(1 << 35)
-	postV1SalesInvoicesUpdateResponseFieldCreatedAt            = big.NewInt(1 << 36)
-	postV1SalesInvoicesUpdateResponseFieldUpdatedAt            = big.NewInt(1 << 37)
-	postV1SalesInvoicesUpdateResponseFieldLines                = big.NewInt(1 << 38)
-	postV1SalesInvoicesUpdateResponseFieldVatEvidence          = big.NewInt(1 << 39)
+	postV1SalesInvoicesUpdateResponseFieldID                           = big.NewInt(1 << 0)
+	postV1SalesInvoicesUpdateResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	postV1SalesInvoicesUpdateResponseFieldType                         = big.NewInt(1 << 2)
+	postV1SalesInvoicesUpdateResponseFieldStatus                       = big.NewInt(1 << 3)
+	postV1SalesInvoicesUpdateResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	postV1SalesInvoicesUpdateResponseFieldSeries                       = big.NewInt(1 << 5)
+	postV1SalesInvoicesUpdateResponseFieldNumber                       = big.NewInt(1 << 6)
+	postV1SalesInvoicesUpdateResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	postV1SalesInvoicesUpdateResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	postV1SalesInvoicesUpdateResponseFieldDueDate                      = big.NewInt(1 << 9)
+	postV1SalesInvoicesUpdateResponseFieldCurrency                     = big.NewInt(1 << 10)
+	postV1SalesInvoicesUpdateResponseFieldFxRate                       = big.NewInt(1 << 11)
+	postV1SalesInvoicesUpdateResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	postV1SalesInvoicesUpdateResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	postV1SalesInvoicesUpdateResponseFieldPaidAmount                   = big.NewInt(1 << 15)
+	postV1SalesInvoicesUpdateResponseFieldJournalTransactionID         = big.NewInt(1 << 16)
+	postV1SalesInvoicesUpdateResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 17)
+	postV1SalesInvoicesUpdateResponseFieldCreditedInvoiceID            = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateResponseFieldAgreementID                  = big.NewInt(1 << 19)
+	postV1SalesInvoicesUpdateResponseFieldVatScheme                    = big.NewInt(1 << 20)
+	postV1SalesInvoicesUpdateResponseFieldIntrastatTransportMode       = big.NewInt(1 << 21)
+	postV1SalesInvoicesUpdateResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 22)
+	postV1SalesInvoicesUpdateResponseFieldIntrastatRegion              = big.NewInt(1 << 23)
+	postV1SalesInvoicesUpdateResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 24)
+	postV1SalesInvoicesUpdateResponseFieldVatCountryCode               = big.NewInt(1 << 25)
+	postV1SalesInvoicesUpdateResponseFieldDeemedSupplier               = big.NewInt(1 << 26)
+	postV1SalesInvoicesUpdateResponseFieldNotes                        = big.NewInt(1 << 27)
+	postV1SalesInvoicesUpdateResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	postV1SalesInvoicesUpdateResponseFieldOperationTypeID              = big.NewInt(1 << 29)
+	postV1SalesInvoicesUpdateResponseFieldDocumentSeriesID             = big.NewInt(1 << 30)
+	postV1SalesInvoicesUpdateResponseFieldSeriesLabel                  = big.NewInt(1 << 31)
+	postV1SalesInvoicesUpdateResponseFieldDiscountPercent              = big.NewInt(1 << 32)
+	postV1SalesInvoicesUpdateResponseFieldOrderNumber                  = big.NewInt(1 << 33)
+	postV1SalesInvoicesUpdateResponseFieldIssuedByName                 = big.NewInt(1 << 34)
+	postV1SalesInvoicesUpdateResponseFieldIssuedByTitle                = big.NewInt(1 << 35)
+	postV1SalesInvoicesUpdateResponseFieldReceivedByName               = big.NewInt(1 << 36)
+	postV1SalesInvoicesUpdateResponseFieldReceivedByTitle              = big.NewInt(1 << 37)
+	postV1SalesInvoicesUpdateResponseFieldLockedAt                     = big.NewInt(1 << 38)
+	postV1SalesInvoicesUpdateResponseFieldLockedBy                     = big.NewInt(1 << 39)
+	postV1SalesInvoicesUpdateResponseFieldPayToken                     = big.NewInt(1 << 40)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceSystem               = big.NewInt(1 << 41)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceTransport            = big.NewInt(1 << 42)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceMessageID            = big.NewInt(1 << 43)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceNumber               = big.NewInt(1 << 44)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceStatus               = big.NewInt(1 << 45)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceDetail               = big.NewInt(1 << 46)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceSentAt               = big.NewInt(1 << 47)
+	postV1SalesInvoicesUpdateResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 48)
+	postV1SalesInvoicesUpdateResponseFieldCreatedAt                    = big.NewInt(1 << 49)
+	postV1SalesInvoicesUpdateResponseFieldUpdatedAt                    = big.NewInt(1 << 50)
+	postV1SalesInvoicesUpdateResponseFieldLines                        = big.NewInt(1 << 51)
+	postV1SalesInvoicesUpdateResponseFieldVatEvidence                  = big.NewInt(1 << 52)
 )
 
 type PostV1SalesInvoicesUpdateResponse struct {
-	ID                   string                                         `json:"id" url:"id"`
-	PartnerID            string                                         `json:"partnerId" url:"partnerId"`
-	Type                 PostV1SalesInvoicesUpdateResponseType          `json:"type" url:"type"`
-	Status               PostV1SalesInvoicesUpdateResponseStatus        `json:"status" url:"status"`
-	PaymentStatus        PostV1SalesInvoicesUpdateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series               *string                                        `json:"series,omitempty" url:"series,omitempty"`
-	Number               *int64                                         `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber           *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate            *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
-	DueDate              *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
-	Currency             string                                         `json:"currency" url:"currency"`
-	NetTotal             string                                         `json:"netTotal" url:"netTotal"`
-	VatTotal             string                                         `json:"vatTotal" url:"vatTotal"`
-	GrossTotal           string                                         `json:"grossTotal" url:"grossTotal"`
-	PaidAmount           string                                         `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	AppliedToInvoiceID   *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID    *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	AgreementID          *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme            *PostV1SalesInvoicesUpdateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	VatCountryCode       *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier       bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef          *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID      *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID     *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel          *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent      string                                         `json:"discountPercent" url:"discountPercent"`
-	OrderNumber          *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName         *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle        *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName       *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle      *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	LockedAt             *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy             *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken             *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
-	CreatedAt            string                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt            string                                         `json:"updatedAt" url:"updatedAt"`
-	Lines                []*PostV1SalesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence          *PostV1SalesInvoicesUpdateResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	ID                           string                                         `json:"id" url:"id"`
+	PartnerID                    string                                         `json:"partnerId" url:"partnerId"`
+	Type                         PostV1SalesInvoicesUpdateResponseType          `json:"type" url:"type"`
+	Status                       PostV1SalesInvoicesUpdateResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                PostV1SalesInvoicesUpdateResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                        `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                         `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *string                                        `json:"issueDate,omitempty" url:"issueDate,omitempty"`
+	DueDate                      *string                                        `json:"dueDate,omitempty" url:"dueDate,omitempty"`
+	Currency                     string                                         `json:"currency" url:"currency"`
+	FxRate                       *string                                        `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                         `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                         `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                         `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *PostV1SalesInvoicesUpdateResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                        `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                        `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                         `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	LockedAt                     *string                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
+	EinvoiceSystem               *string                                        `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                        `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                        `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                        `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *string                                        `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *string                                        `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	CreatedAt                    string                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    string                                         `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*PostV1SalesInvoicesUpdateResponseLinesItem  `json:"lines" url:"lines"`
+	VatEvidence                  *PostV1SalesInvoicesUpdateResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -30740,6 +32972,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) GetCurrency() string {
 	return p.Currency
 }
 
+func (p *PostV1SalesInvoicesUpdateResponse) GetFxRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.FxRate
+}
+
 func (p *PostV1SalesInvoicesUpdateResponse) GetNetTotal() string {
 	if p == nil {
 		return ""
@@ -30801,6 +33040,34 @@ func (p *PostV1SalesInvoicesUpdateResponse) GetVatScheme() *PostV1SalesInvoicesU
 		return nil
 	}
 	return p.VatScheme
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetIntrastatTransportMode() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatTransportMode
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetIntrastatDeliveryTerms() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatDeliveryTerms
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetIntrastatRegion() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatRegion
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetIntrastatNatureOfTransaction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.IntrastatNatureOfTransaction
 }
 
 func (p *PostV1SalesInvoicesUpdateResponse) GetVatCountryCode() *string {
@@ -30913,6 +33180,62 @@ func (p *PostV1SalesInvoicesUpdateResponse) GetPayToken() *string {
 		return nil
 	}
 	return p.PayToken
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceSystem() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSystem
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceTransport() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceTransport
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceMessageID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceMessageID
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceNumber() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceNumber
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceStatus() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceStatus
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceDetail() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceDetail
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceSentAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceSentAt
+}
+
+func (p *PostV1SalesInvoicesUpdateResponse) GetEinvoiceCheckedAt() *string {
+	if p == nil {
+		return nil
+	}
+	return p.EinvoiceCheckedAt
 }
 
 func (p *PostV1SalesInvoicesUpdateResponse) GetCreatedAt() string {
@@ -31034,6 +33357,13 @@ func (p *PostV1SalesInvoicesUpdateResponse) SetCurrency(currency string) {
 	p.require(postV1SalesInvoicesUpdateResponseFieldCurrency)
 }
 
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetFxRate(fxRate *string) {
+	p.FxRate = fxRate
+	p.require(postV1SalesInvoicesUpdateResponseFieldFxRate)
+}
+
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesUpdateResponse) SetNetTotal(netTotal string) {
@@ -31095,6 +33425,34 @@ func (p *PostV1SalesInvoicesUpdateResponse) SetAgreementID(agreementID *string) 
 func (p *PostV1SalesInvoicesUpdateResponse) SetVatScheme(vatScheme *PostV1SalesInvoicesUpdateResponseVatScheme) {
 	p.VatScheme = vatScheme
 	p.require(postV1SalesInvoicesUpdateResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	p.IntrastatTransportMode = intrastatTransportMode
+	p.require(postV1SalesInvoicesUpdateResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	p.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	p.require(postV1SalesInvoicesUpdateResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetIntrastatRegion(intrastatRegion *string) {
+	p.IntrastatRegion = intrastatRegion
+	p.require(postV1SalesInvoicesUpdateResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	p.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	p.require(postV1SalesInvoicesUpdateResponseFieldIntrastatNatureOfTransaction)
 }
 
 // SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
@@ -31209,6 +33567,62 @@ func (p *PostV1SalesInvoicesUpdateResponse) SetPayToken(payToken *string) {
 	p.require(postV1SalesInvoicesUpdateResponseFieldPayToken)
 }
 
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	p.EinvoiceSystem = einvoiceSystem
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	p.EinvoiceTransport = einvoiceTransport
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	p.EinvoiceMessageID = einvoiceMessageID
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	p.EinvoiceNumber = einvoiceNumber
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	p.EinvoiceStatus = einvoiceStatus
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	p.EinvoiceDetail = einvoiceDetail
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceSentAt(einvoiceSentAt *string) {
+	p.EinvoiceSentAt = einvoiceSentAt
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *string) {
+	p.EinvoiceCheckedAt = einvoiceCheckedAt
+	p.require(postV1SalesInvoicesUpdateResponseFieldEinvoiceCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1SalesInvoicesUpdateResponse) SetCreatedAt(createdAt string) {
@@ -31289,19 +33703,20 @@ var (
 	postV1SalesInvoicesUpdateResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
 	postV1SalesInvoicesUpdateResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
 	postV1SalesInvoicesUpdateResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 9)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldProjectID              = big.NewInt(1 << 10)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineNet                = big.NewInt(1 << 11)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineVat                = big.NewInt(1 << 12)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldLineGross              = big.NewInt(1 << 13)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 14)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 15)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 16)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 17)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 18)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 19)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 20)
-	postV1SalesInvoicesUpdateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 21)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
+	postV1SalesInvoicesUpdateResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
 )
 
 type PostV1SalesInvoicesUpdateResponseLinesItem struct {
@@ -31314,6 +33729,7 @@ type PostV1SalesInvoicesUpdateResponseLinesItem struct {
 	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                                `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                                `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
@@ -31396,6 +33812,13 @@ func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetVatClassifierCode() *str
 		return nil
 	}
 	return p.VatClassifierCode
+}
+
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetVatExemptionBasis() *string {
+	if p == nil {
+		return nil
+	}
+	return p.VatExemptionBasis
 }
 
 func (p *PostV1SalesInvoicesUpdateResponseLinesItem) GetCostCenterID() *string {
@@ -31564,6 +33987,13 @@ func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetVatRatePercent(vatRatePe
 func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
 	p.VatClassifierCode = vatClassifierCode
 	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1SalesInvoicesUpdateResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	p.VatExemptionBasis = vatExemptionBasis
+	p.require(postV1SalesInvoicesUpdateResponseLinesItemFieldVatExemptionBasis)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;

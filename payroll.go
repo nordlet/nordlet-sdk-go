@@ -12,19 +12,23 @@ import (
 var (
 	postV1PayrollCalcRequestFieldTaxableBase         = big.NewInt(1 << 0)
 	postV1PayrollCalcRequestFieldDate                = big.NewInt(1 << 1)
-	postV1PayrollCalcRequestFieldApplyNpd            = big.NewInt(1 << 2)
-	postV1PayrollCalcRequestFieldNpdOverride         = big.NewInt(1 << 3)
+	postV1PayrollCalcRequestFieldApplyAllowance      = big.NewInt(1 << 2)
+	postV1PayrollCalcRequestFieldAllowanceOverride   = big.NewInt(1 << 3)
 	postV1PayrollCalcRequestFieldPensionAccumulation = big.NewInt(1 << 4)
 	postV1PayrollCalcRequestFieldFixedTerm           = big.NewInt(1 << 5)
+	postV1PayrollCalcRequestFieldBenefitInKind       = big.NewInt(1 << 6)
+	postV1PayrollCalcRequestFieldOptions             = big.NewInt(1 << 7)
 )
 
 type PostV1PayrollCalcRequest struct {
-	TaxableBase         string  `json:"taxableBase" url:"-"`
-	Date                string  `json:"date" url:"-"`
-	ApplyNpd            *bool   `json:"applyNpd,omitempty" url:"-"`
-	NpdOverride         *string `json:"npdOverride,omitempty" url:"-"`
-	PensionAccumulation *bool   `json:"pensionAccumulation,omitempty" url:"-"`
-	FixedTerm           *bool   `json:"fixedTerm,omitempty" url:"-"`
+	TaxableBase         string            `json:"taxableBase" url:"-"`
+	Date                string            `json:"date" url:"-"`
+	ApplyAllowance      *bool             `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride   *string           `json:"allowanceOverride,omitempty" url:"-"`
+	PensionAccumulation *bool             `json:"pensionAccumulation,omitempty" url:"-"`
+	FixedTerm           *bool             `json:"fixedTerm,omitempty" url:"-"`
+	BenefitInKind       *string           `json:"benefitInKind,omitempty" url:"-"`
+	Options             map[string]string `json:"options,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -51,18 +55,18 @@ func (p *PostV1PayrollCalcRequest) SetDate(date string) {
 	p.require(postV1PayrollCalcRequestFieldDate)
 }
 
-// SetApplyNpd sets the ApplyNpd field and marks it as non-optional;
+// SetApplyAllowance sets the ApplyAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcRequest) SetApplyNpd(applyNpd *bool) {
-	p.ApplyNpd = applyNpd
-	p.require(postV1PayrollCalcRequestFieldApplyNpd)
+func (p *PostV1PayrollCalcRequest) SetApplyAllowance(applyAllowance *bool) {
+	p.ApplyAllowance = applyAllowance
+	p.require(postV1PayrollCalcRequestFieldApplyAllowance)
 }
 
-// SetNpdOverride sets the NpdOverride field and marks it as non-optional;
+// SetAllowanceOverride sets the AllowanceOverride field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcRequest) SetNpdOverride(npdOverride *string) {
-	p.NpdOverride = npdOverride
-	p.require(postV1PayrollCalcRequestFieldNpdOverride)
+func (p *PostV1PayrollCalcRequest) SetAllowanceOverride(allowanceOverride *string) {
+	p.AllowanceOverride = allowanceOverride
+	p.require(postV1PayrollCalcRequestFieldAllowanceOverride)
 }
 
 // SetPensionAccumulation sets the PensionAccumulation field and marks it as non-optional;
@@ -77,6 +81,20 @@ func (p *PostV1PayrollCalcRequest) SetPensionAccumulation(pensionAccumulation *b
 func (p *PostV1PayrollCalcRequest) SetFixedTerm(fixedTerm *bool) {
 	p.FixedTerm = fixedTerm
 	p.require(postV1PayrollCalcRequestFieldFixedTerm)
+}
+
+// SetBenefitInKind sets the BenefitInKind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcRequest) SetBenefitInKind(benefitInKind *string) {
+	p.BenefitInKind = benefitInKind
+	p.require(postV1PayrollCalcRequestFieldBenefitInKind)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcRequest) SetOptions(options map[string]string) {
+	p.Options = options
+	p.require(postV1PayrollCalcRequestFieldOptions)
 }
 
 func (p *PostV1PayrollCalcRequest) UnmarshalJSON(data []byte) error {
@@ -233,23 +251,25 @@ func (p *PostV1PayrollPaymentsExportRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PayrollRunsApproveRequestFieldID                   = big.NewInt(1 << 0)
-	postV1PayrollRunsApproveRequestFieldWageAccountCode      = big.NewInt(1 << 1)
-	postV1PayrollRunsApproveRequestFieldEmployerAccountCode  = big.NewInt(1 << 2)
-	postV1PayrollRunsApproveRequestFieldPayableAccountCode   = big.NewInt(1 << 3)
-	postV1PayrollRunsApproveRequestFieldGpmAccountCode       = big.NewInt(1 << 4)
-	postV1PayrollRunsApproveRequestFieldSodraAccountCode     = big.NewInt(1 << 5)
-	postV1PayrollRunsApproveRequestFieldDeductionAccountCode = big.NewInt(1 << 6)
+	postV1PayrollRunsApproveRequestFieldID                        = big.NewInt(1 << 0)
+	postV1PayrollRunsApproveRequestFieldWageAccountCode           = big.NewInt(1 << 1)
+	postV1PayrollRunsApproveRequestFieldEmployerAccountCode       = big.NewInt(1 << 2)
+	postV1PayrollRunsApproveRequestFieldPayableAccountCode        = big.NewInt(1 << 3)
+	postV1PayrollRunsApproveRequestFieldGpmAccountCode            = big.NewInt(1 << 4)
+	postV1PayrollRunsApproveRequestFieldSodraAccountCode          = big.NewInt(1 << 5)
+	postV1PayrollRunsApproveRequestFieldEmployerSocialAccountCode = big.NewInt(1 << 6)
+	postV1PayrollRunsApproveRequestFieldDeductionAccountCode      = big.NewInt(1 << 7)
 )
 
 type PostV1PayrollRunsApproveRequest struct {
-	ID                   string  `json:"id" url:"-"`
-	WageAccountCode      *string `json:"wageAccountCode,omitempty" url:"-"`
-	EmployerAccountCode  *string `json:"employerAccountCode,omitempty" url:"-"`
-	PayableAccountCode   *string `json:"payableAccountCode,omitempty" url:"-"`
-	GpmAccountCode       *string `json:"gpmAccountCode,omitempty" url:"-"`
-	SodraAccountCode     *string `json:"sodraAccountCode,omitempty" url:"-"`
-	DeductionAccountCode *string `json:"deductionAccountCode,omitempty" url:"-"`
+	ID                        string  `json:"id" url:"-"`
+	WageAccountCode           *string `json:"wageAccountCode,omitempty" url:"-"`
+	EmployerAccountCode       *string `json:"employerAccountCode,omitempty" url:"-"`
+	PayableAccountCode        *string `json:"payableAccountCode,omitempty" url:"-"`
+	GpmAccountCode            *string `json:"gpmAccountCode,omitempty" url:"-"`
+	SodraAccountCode          *string `json:"sodraAccountCode,omitempty" url:"-"`
+	EmployerSocialAccountCode *string `json:"employerSocialAccountCode,omitempty" url:"-"`
+	DeductionAccountCode      *string `json:"deductionAccountCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -302,6 +322,13 @@ func (p *PostV1PayrollRunsApproveRequest) SetGpmAccountCode(gpmAccountCode *stri
 func (p *PostV1PayrollRunsApproveRequest) SetSodraAccountCode(sodraAccountCode *string) {
 	p.SodraAccountCode = sodraAccountCode
 	p.require(postV1PayrollRunsApproveRequestFieldSodraAccountCode)
+}
+
+// SetEmployerSocialAccountCode sets the EmployerSocialAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveRequest) SetEmployerSocialAccountCode(employerSocialAccountCode *string) {
+	p.EmployerSocialAccountCode = employerSocialAccountCode
+	p.require(postV1PayrollRunsApproveRequestFieldEmployerSocialAccountCode)
 }
 
 // SetDeductionAccountCode sets the DeductionAccountCode field and marks it as non-optional;
@@ -379,19 +406,21 @@ func (p *PostV1PayrollRunsCancelRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	postV1PayrollRunsCreateRequestFieldYear          = big.NewInt(1 << 0)
-	postV1PayrollRunsCreateRequestFieldMonth         = big.NewInt(1 << 1)
-	postV1PayrollRunsCreateRequestFieldIncludeNatura = big.NewInt(1 << 2)
-	postV1PayrollRunsCreateRequestFieldLines         = big.NewInt(1 << 3)
-	postV1PayrollRunsCreateRequestFieldNotes         = big.NewInt(1 << 4)
+	postV1PayrollRunsCreateRequestFieldYear           = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateRequestFieldMonth          = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateRequestFieldIncludeNatura  = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateRequestFieldGrossOverrides = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateRequestFieldLines          = big.NewInt(1 << 4)
+	postV1PayrollRunsCreateRequestFieldNotes          = big.NewInt(1 << 5)
 )
 
 type PostV1PayrollRunsCreateRequest struct {
-	Year          int64                                      `json:"year" url:"-"`
-	Month         int64                                      `json:"month" url:"-"`
-	IncludeNatura *bool                                      `json:"includeNatura,omitempty" url:"-"`
-	Lines         []*PostV1PayrollRunsCreateRequestLinesItem `json:"lines,omitempty" url:"-"`
-	Notes         *string                                    `json:"notes,omitempty" url:"-"`
+	Year           int64                                               `json:"year" url:"-"`
+	Month          int64                                               `json:"month" url:"-"`
+	IncludeNatura  *bool                                               `json:"includeNatura,omitempty" url:"-"`
+	GrossOverrides []*PostV1PayrollRunsCreateRequestGrossOverridesItem `json:"grossOverrides,omitempty" url:"-"`
+	Lines          []*PostV1PayrollRunsCreateRequestLinesItem          `json:"lines,omitempty" url:"-"`
+	Notes          *string                                             `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -423,6 +452,13 @@ func (p *PostV1PayrollRunsCreateRequest) SetMonth(month int64) {
 func (p *PostV1PayrollRunsCreateRequest) SetIncludeNatura(includeNatura *bool) {
 	p.IncludeNatura = includeNatura
 	p.require(postV1PayrollRunsCreateRequestFieldIncludeNatura)
+}
+
+// SetGrossOverrides sets the GrossOverrides field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateRequest) SetGrossOverrides(grossOverrides []*PostV1PayrollRunsCreateRequestGrossOverridesItem) {
+	p.GrossOverrides = grossOverrides
+	p.require(postV1PayrollRunsCreateRequestFieldGrossOverrides)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -667,19 +703,105 @@ func (p *PostV1PayrollSchedulesListRequest) require(field *big.Int) {
 }
 
 var (
-	postV1PayrollCalcResponseFieldNpd           = big.NewInt(1 << 0)
-	postV1PayrollCalcResponseFieldGpm           = big.NewInt(1 << 1)
-	postV1PayrollCalcResponseFieldSodraEmployee = big.NewInt(1 << 2)
-	postV1PayrollCalcResponseFieldSodraEmployer = big.NewInt(1 << 3)
-	postV1PayrollCalcResponseFieldNet           = big.NewInt(1 << 4)
+	postV1PayrollLinesAttendanceRequestFieldID                    = big.NewInt(1 << 0)
+	postV1PayrollLinesAttendanceRequestFieldDaysWorked            = big.NewInt(1 << 1)
+	postV1PayrollLinesAttendanceRequestFieldHoursWorked           = big.NewInt(1 << 2)
+	postV1PayrollLinesAttendanceRequestFieldRegisteredDays        = big.NewInt(1 << 3)
+	postV1PayrollLinesAttendanceRequestFieldAverageHourlyEarnings = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollLinesAttendanceRequest struct {
+	ID                    string  `json:"id" url:"-"`
+	DaysWorked            *string `json:"daysWorked,omitempty" url:"-"`
+	HoursWorked           *string `json:"hoursWorked,omitempty" url:"-"`
+	RegisteredDays        *string `json:"registeredDays,omitempty" url:"-"`
+	AverageHourlyEarnings *string `json:"averageHourlyEarnings,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostV1PayrollLinesAttendanceRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceRequest) SetID(id string) {
+	p.ID = id
+	p.require(postV1PayrollLinesAttendanceRequestFieldID)
+}
+
+// SetDaysWorked sets the DaysWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceRequest) SetDaysWorked(daysWorked *string) {
+	p.DaysWorked = daysWorked
+	p.require(postV1PayrollLinesAttendanceRequestFieldDaysWorked)
+}
+
+// SetHoursWorked sets the HoursWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceRequest) SetHoursWorked(hoursWorked *string) {
+	p.HoursWorked = hoursWorked
+	p.require(postV1PayrollLinesAttendanceRequestFieldHoursWorked)
+}
+
+// SetRegisteredDays sets the RegisteredDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceRequest) SetRegisteredDays(registeredDays *string) {
+	p.RegisteredDays = registeredDays
+	p.require(postV1PayrollLinesAttendanceRequestFieldRegisteredDays)
+}
+
+// SetAverageHourlyEarnings sets the AverageHourlyEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceRequest) SetAverageHourlyEarnings(averageHourlyEarnings *string) {
+	p.AverageHourlyEarnings = averageHourlyEarnings
+	p.require(postV1PayrollLinesAttendanceRequestFieldAverageHourlyEarnings)
+}
+
+func (p *PostV1PayrollLinesAttendanceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollLinesAttendanceRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostV1PayrollLinesAttendanceRequest(body)
+	return nil
+}
+
+func (p *PostV1PayrollLinesAttendanceRequest) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollLinesAttendanceRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postV1PayrollCalcResponseFieldCountryCode           = big.NewInt(1 << 0)
+	postV1PayrollCalcResponseFieldTaxAllowance          = big.NewInt(1 << 1)
+	postV1PayrollCalcResponseFieldIncomeTax             = big.NewInt(1 << 2)
+	postV1PayrollCalcResponseFieldEmployeeContributions = big.NewInt(1 << 3)
+	postV1PayrollCalcResponseFieldEmployerContributions = big.NewInt(1 << 4)
+	postV1PayrollCalcResponseFieldComponents            = big.NewInt(1 << 5)
+	postV1PayrollCalcResponseFieldNet                   = big.NewInt(1 << 6)
 )
 
 type PostV1PayrollCalcResponse struct {
-	Npd           string `json:"npd" url:"npd"`
-	Gpm           string `json:"gpm" url:"gpm"`
-	SodraEmployee string `json:"sodraEmployee" url:"sodraEmployee"`
-	SodraEmployer string `json:"sodraEmployer" url:"sodraEmployer"`
-	Net           string `json:"net" url:"net"`
+	CountryCode           string                                     `json:"countryCode" url:"countryCode"`
+	TaxAllowance          string                                     `json:"taxAllowance" url:"taxAllowance"`
+	IncomeTax             string                                     `json:"incomeTax" url:"incomeTax"`
+	EmployeeContributions string                                     `json:"employeeContributions" url:"employeeContributions"`
+	EmployerContributions string                                     `json:"employerContributions" url:"employerContributions"`
+	Components            []*PostV1PayrollCalcResponseComponentsItem `json:"components" url:"components"`
+	Net                   string                                     `json:"net" url:"net"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -688,32 +810,46 @@ type PostV1PayrollCalcResponse struct {
 	rawJSON         json.RawMessage
 }
 
-func (p *PostV1PayrollCalcResponse) GetNpd() string {
+func (p *PostV1PayrollCalcResponse) GetCountryCode() string {
 	if p == nil {
 		return ""
 	}
-	return p.Npd
+	return p.CountryCode
 }
 
-func (p *PostV1PayrollCalcResponse) GetGpm() string {
+func (p *PostV1PayrollCalcResponse) GetTaxAllowance() string {
 	if p == nil {
 		return ""
 	}
-	return p.Gpm
+	return p.TaxAllowance
 }
 
-func (p *PostV1PayrollCalcResponse) GetSodraEmployee() string {
+func (p *PostV1PayrollCalcResponse) GetIncomeTax() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployee
+	return p.IncomeTax
 }
 
-func (p *PostV1PayrollCalcResponse) GetSodraEmployer() string {
+func (p *PostV1PayrollCalcResponse) GetEmployeeContributions() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployer
+	return p.EmployeeContributions
+}
+
+func (p *PostV1PayrollCalcResponse) GetEmployerContributions() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployerContributions
+}
+
+func (p *PostV1PayrollCalcResponse) GetComponents() []*PostV1PayrollCalcResponseComponentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Components
 }
 
 func (p *PostV1PayrollCalcResponse) GetNet() string {
@@ -737,32 +873,46 @@ func (p *PostV1PayrollCalcResponse) require(field *big.Int) {
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
-// SetNpd sets the Npd field and marks it as non-optional;
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcResponse) SetNpd(npd string) {
-	p.Npd = npd
-	p.require(postV1PayrollCalcResponseFieldNpd)
+func (p *PostV1PayrollCalcResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1PayrollCalcResponseFieldCountryCode)
 }
 
-// SetGpm sets the Gpm field and marks it as non-optional;
+// SetTaxAllowance sets the TaxAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcResponse) SetGpm(gpm string) {
-	p.Gpm = gpm
-	p.require(postV1PayrollCalcResponseFieldGpm)
+func (p *PostV1PayrollCalcResponse) SetTaxAllowance(taxAllowance string) {
+	p.TaxAllowance = taxAllowance
+	p.require(postV1PayrollCalcResponseFieldTaxAllowance)
 }
 
-// SetSodraEmployee sets the SodraEmployee field and marks it as non-optional;
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcResponse) SetSodraEmployee(sodraEmployee string) {
-	p.SodraEmployee = sodraEmployee
-	p.require(postV1PayrollCalcResponseFieldSodraEmployee)
+func (p *PostV1PayrollCalcResponse) SetIncomeTax(incomeTax string) {
+	p.IncomeTax = incomeTax
+	p.require(postV1PayrollCalcResponseFieldIncomeTax)
 }
 
-// SetSodraEmployer sets the SodraEmployer field and marks it as non-optional;
+// SetEmployeeContributions sets the EmployeeContributions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollCalcResponse) SetSodraEmployer(sodraEmployer string) {
-	p.SodraEmployer = sodraEmployer
-	p.require(postV1PayrollCalcResponseFieldSodraEmployer)
+func (p *PostV1PayrollCalcResponse) SetEmployeeContributions(employeeContributions string) {
+	p.EmployeeContributions = employeeContributions
+	p.require(postV1PayrollCalcResponseFieldEmployeeContributions)
+}
+
+// SetEmployerContributions sets the EmployerContributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponse) SetEmployerContributions(employerContributions string) {
+	p.EmployerContributions = employerContributions
+	p.require(postV1PayrollCalcResponseFieldEmployerContributions)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponse) SetComponents(components []*PostV1PayrollCalcResponseComponentsItem) {
+	p.Components = components
+	p.require(postV1PayrollCalcResponseFieldComponents)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
@@ -812,6 +962,185 @@ func (p *PostV1PayrollCalcResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollCalcResponseComponentsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollCalcResponseComponentsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollCalcResponseComponentsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollCalcResponseComponentsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollCalcResponseComponentsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollCalcResponseComponentsItem struct {
+	Code   string                                      `json:"code" url:"code"`
+	Kind   PostV1PayrollCalcResponseComponentsItemKind `json:"kind" url:"kind"`
+	Amount string                                      `json:"amount" url:"amount"`
+	Rate   *string                                     `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                     `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetKind() PostV1PayrollCalcResponseComponentsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponseComponentsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollCalcResponseComponentsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponseComponentsItem) SetKind(kind PostV1PayrollCalcResponseComponentsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollCalcResponseComponentsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponseComponentsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollCalcResponseComponentsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponseComponentsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollCalcResponseComponentsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollCalcResponseComponentsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollCalcResponseComponentsItemFieldBase)
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollCalcResponseComponentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollCalcResponseComponentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollCalcResponseComponentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollCalcResponseComponentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollCalcResponseComponentsItemKind string
+
+const (
+	PostV1PayrollCalcResponseComponentsItemKindAllowance            PostV1PayrollCalcResponseComponentsItemKind = "allowance"
+	PostV1PayrollCalcResponseComponentsItemKindEmployeeTax          PostV1PayrollCalcResponseComponentsItemKind = "employee_tax"
+	PostV1PayrollCalcResponseComponentsItemKindEmployeeContribution PostV1PayrollCalcResponseComponentsItemKind = "employee_contribution"
+	PostV1PayrollCalcResponseComponentsItemKindEmployerContribution PostV1PayrollCalcResponseComponentsItemKind = "employer_contribution"
+	PostV1PayrollCalcResponseComponentsItemKindEmployerPayment      PostV1PayrollCalcResponseComponentsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollCalcResponseComponentsItemKindFromString(s string) (PostV1PayrollCalcResponseComponentsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollCalcResponseComponentsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollCalcResponseComponentsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollCalcResponseComponentsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollCalcResponseComponentsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollCalcResponseComponentsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollCalcResponseComponentsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollCalcResponseComponentsItemKind) Ptr() *PostV1PayrollCalcResponseComponentsItemKind {
+	return &p
 }
 
 var (
@@ -1131,6 +1460,773 @@ func (p *PostV1PayrollDepartmentsListResponseRowsItem) String() string {
 }
 
 var (
+	postV1PayrollLinesAttendanceResponseFieldID                    = big.NewInt(1 << 0)
+	postV1PayrollLinesAttendanceResponseFieldEmployeeID            = big.NewInt(1 << 1)
+	postV1PayrollLinesAttendanceResponseFieldContractID            = big.NewInt(1 << 2)
+	postV1PayrollLinesAttendanceResponseFieldEmployeeName          = big.NewInt(1 << 3)
+	postV1PayrollLinesAttendanceResponseFieldGross                 = big.NewInt(1 << 4)
+	postV1PayrollLinesAttendanceResponseFieldNatura                = big.NewInt(1 << 5)
+	postV1PayrollLinesAttendanceResponseFieldAdditions             = big.NewInt(1 << 6)
+	postV1PayrollLinesAttendanceResponseFieldDeductions            = big.NewInt(1 << 7)
+	postV1PayrollLinesAttendanceResponseFieldTaxableBase           = big.NewInt(1 << 8)
+	postV1PayrollLinesAttendanceResponseFieldTaxAllowance          = big.NewInt(1 << 9)
+	postV1PayrollLinesAttendanceResponseFieldIncomeTax             = big.NewInt(1 << 10)
+	postV1PayrollLinesAttendanceResponseFieldEmployeeContributions = big.NewInt(1 << 11)
+	postV1PayrollLinesAttendanceResponseFieldEmployerContributions = big.NewInt(1 << 12)
+	postV1PayrollLinesAttendanceResponseFieldComponents            = big.NewInt(1 << 13)
+	postV1PayrollLinesAttendanceResponseFieldNet                   = big.NewInt(1 << 14)
+	postV1PayrollLinesAttendanceResponseFieldDaysWorked            = big.NewInt(1 << 15)
+	postV1PayrollLinesAttendanceResponseFieldHoursWorked           = big.NewInt(1 << 16)
+	postV1PayrollLinesAttendanceResponseFieldRegisteredDays        = big.NewInt(1 << 17)
+	postV1PayrollLinesAttendanceResponseFieldAverageHourlyEarnings = big.NewInt(1 << 18)
+)
+
+type PostV1PayrollLinesAttendanceResponse struct {
+	ID                    string                                                `json:"id" url:"id"`
+	EmployeeID            string                                                `json:"employeeId" url:"employeeId"`
+	ContractID            *string                                               `json:"contractId,omitempty" url:"contractId,omitempty"`
+	EmployeeName          string                                                `json:"employeeName" url:"employeeName"`
+	Gross                 string                                                `json:"gross" url:"gross"`
+	Natura                string                                                `json:"natura" url:"natura"`
+	Additions             []*PostV1PayrollLinesAttendanceResponseAdditionsItem  `json:"additions" url:"additions"`
+	Deductions            []*PostV1PayrollLinesAttendanceResponseDeductionsItem `json:"deductions" url:"deductions"`
+	TaxableBase           string                                                `json:"taxableBase" url:"taxableBase"`
+	TaxAllowance          string                                                `json:"taxAllowance" url:"taxAllowance"`
+	IncomeTax             string                                                `json:"incomeTax" url:"incomeTax"`
+	EmployeeContributions string                                                `json:"employeeContributions" url:"employeeContributions"`
+	EmployerContributions string                                                `json:"employerContributions" url:"employerContributions"`
+	Components            []*PostV1PayrollLinesAttendanceResponseComponentsItem `json:"components" url:"components"`
+	Net                   string                                                `json:"net" url:"net"`
+	DaysWorked            *string                                               `json:"daysWorked,omitempty" url:"daysWorked,omitempty"`
+	HoursWorked           *string                                               `json:"hoursWorked,omitempty" url:"hoursWorked,omitempty"`
+	RegisteredDays        *string                                               `json:"registeredDays,omitempty" url:"registeredDays,omitempty"`
+	AverageHourlyEarnings *string                                               `json:"averageHourlyEarnings,omitempty" url:"averageHourlyEarnings,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetEmployeeID() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetContractID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ContractID
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetEmployeeName() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployeeName
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetGross() string {
+	if p == nil {
+		return ""
+	}
+	return p.Gross
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetNatura() string {
+	if p == nil {
+		return ""
+	}
+	return p.Natura
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetAdditions() []*PostV1PayrollLinesAttendanceResponseAdditionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Additions
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetDeductions() []*PostV1PayrollLinesAttendanceResponseDeductionsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Deductions
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetTaxableBase() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxableBase
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetTaxAllowance() string {
+	if p == nil {
+		return ""
+	}
+	return p.TaxAllowance
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetIncomeTax() string {
+	if p == nil {
+		return ""
+	}
+	return p.IncomeTax
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetEmployeeContributions() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployeeContributions
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetEmployerContributions() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployerContributions
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetComponents() []*PostV1PayrollLinesAttendanceResponseComponentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Components
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetNet() string {
+	if p == nil {
+		return ""
+	}
+	return p.Net
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetDaysWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DaysWorked
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetHoursWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HoursWorked
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetRegisteredDays() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RegisteredDays
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetAverageHourlyEarnings() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AverageHourlyEarnings
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetID(id string) {
+	p.ID = id
+	p.require(postV1PayrollLinesAttendanceResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetEmployeeID(employeeID string) {
+	p.EmployeeID = employeeID
+	p.require(postV1PayrollLinesAttendanceResponseFieldEmployeeID)
+}
+
+// SetContractID sets the ContractID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetContractID(contractID *string) {
+	p.ContractID = contractID
+	p.require(postV1PayrollLinesAttendanceResponseFieldContractID)
+}
+
+// SetEmployeeName sets the EmployeeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetEmployeeName(employeeName string) {
+	p.EmployeeName = employeeName
+	p.require(postV1PayrollLinesAttendanceResponseFieldEmployeeName)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetGross(gross string) {
+	p.Gross = gross
+	p.require(postV1PayrollLinesAttendanceResponseFieldGross)
+}
+
+// SetNatura sets the Natura field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetNatura(natura string) {
+	p.Natura = natura
+	p.require(postV1PayrollLinesAttendanceResponseFieldNatura)
+}
+
+// SetAdditions sets the Additions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetAdditions(additions []*PostV1PayrollLinesAttendanceResponseAdditionsItem) {
+	p.Additions = additions
+	p.require(postV1PayrollLinesAttendanceResponseFieldAdditions)
+}
+
+// SetDeductions sets the Deductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetDeductions(deductions []*PostV1PayrollLinesAttendanceResponseDeductionsItem) {
+	p.Deductions = deductions
+	p.require(postV1PayrollLinesAttendanceResponseFieldDeductions)
+}
+
+// SetTaxableBase sets the TaxableBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetTaxableBase(taxableBase string) {
+	p.TaxableBase = taxableBase
+	p.require(postV1PayrollLinesAttendanceResponseFieldTaxableBase)
+}
+
+// SetTaxAllowance sets the TaxAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetTaxAllowance(taxAllowance string) {
+	p.TaxAllowance = taxAllowance
+	p.require(postV1PayrollLinesAttendanceResponseFieldTaxAllowance)
+}
+
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetIncomeTax(incomeTax string) {
+	p.IncomeTax = incomeTax
+	p.require(postV1PayrollLinesAttendanceResponseFieldIncomeTax)
+}
+
+// SetEmployeeContributions sets the EmployeeContributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetEmployeeContributions(employeeContributions string) {
+	p.EmployeeContributions = employeeContributions
+	p.require(postV1PayrollLinesAttendanceResponseFieldEmployeeContributions)
+}
+
+// SetEmployerContributions sets the EmployerContributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetEmployerContributions(employerContributions string) {
+	p.EmployerContributions = employerContributions
+	p.require(postV1PayrollLinesAttendanceResponseFieldEmployerContributions)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetComponents(components []*PostV1PayrollLinesAttendanceResponseComponentsItem) {
+	p.Components = components
+	p.require(postV1PayrollLinesAttendanceResponseFieldComponents)
+}
+
+// SetNet sets the Net field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetNet(net string) {
+	p.Net = net
+	p.require(postV1PayrollLinesAttendanceResponseFieldNet)
+}
+
+// SetDaysWorked sets the DaysWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetDaysWorked(daysWorked *string) {
+	p.DaysWorked = daysWorked
+	p.require(postV1PayrollLinesAttendanceResponseFieldDaysWorked)
+}
+
+// SetHoursWorked sets the HoursWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetHoursWorked(hoursWorked *string) {
+	p.HoursWorked = hoursWorked
+	p.require(postV1PayrollLinesAttendanceResponseFieldHoursWorked)
+}
+
+// SetRegisteredDays sets the RegisteredDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetRegisteredDays(registeredDays *string) {
+	p.RegisteredDays = registeredDays
+	p.require(postV1PayrollLinesAttendanceResponseFieldRegisteredDays)
+}
+
+// SetAverageHourlyEarnings sets the AverageHourlyEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponse) SetAverageHourlyEarnings(averageHourlyEarnings *string) {
+	p.AverageHourlyEarnings = averageHourlyEarnings
+	p.require(postV1PayrollLinesAttendanceResponseFieldAverageHourlyEarnings)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollLinesAttendanceResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollLinesAttendanceResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollLinesAttendanceResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollLinesAttendanceResponseAdditionsItemFieldName    = big.NewInt(1 << 0)
+	postV1PayrollLinesAttendanceResponseAdditionsItemFieldAmount  = big.NewInt(1 << 1)
+	postV1PayrollLinesAttendanceResponseAdditionsItemFieldTaxable = big.NewInt(1 << 2)
+)
+
+type PostV1PayrollLinesAttendanceResponseAdditionsItem struct {
+	Name    string `json:"name" url:"name"`
+	Amount  string `json:"amount" url:"amount"`
+	Taxable bool   `json:"taxable" url:"taxable"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) GetTaxable() bool {
+	if p == nil {
+		return false
+	}
+	return p.Taxable
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1PayrollLinesAttendanceResponseAdditionsItemFieldName)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollLinesAttendanceResponseAdditionsItemFieldAmount)
+}
+
+// SetTaxable sets the Taxable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) SetTaxable(taxable bool) {
+	p.Taxable = taxable
+	p.require(postV1PayrollLinesAttendanceResponseAdditionsItemFieldTaxable)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollLinesAttendanceResponseAdditionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollLinesAttendanceResponseAdditionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollLinesAttendanceResponseAdditionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseAdditionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollLinesAttendanceResponseComponentsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollLinesAttendanceResponseComponentsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollLinesAttendanceResponseComponentsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollLinesAttendanceResponseComponentsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollLinesAttendanceResponseComponentsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollLinesAttendanceResponseComponentsItem struct {
+	Code   string                                                 `json:"code" url:"code"`
+	Kind   PostV1PayrollLinesAttendanceResponseComponentsItemKind `json:"kind" url:"kind"`
+	Amount string                                                 `json:"amount" url:"amount"`
+	Rate   *string                                                `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetKind() PostV1PayrollLinesAttendanceResponseComponentsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollLinesAttendanceResponseComponentsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) SetKind(kind PostV1PayrollLinesAttendanceResponseComponentsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollLinesAttendanceResponseComponentsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollLinesAttendanceResponseComponentsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollLinesAttendanceResponseComponentsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollLinesAttendanceResponseComponentsItemFieldBase)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollLinesAttendanceResponseComponentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollLinesAttendanceResponseComponentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollLinesAttendanceResponseComponentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseComponentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollLinesAttendanceResponseComponentsItemKind string
+
+const (
+	PostV1PayrollLinesAttendanceResponseComponentsItemKindAllowance            PostV1PayrollLinesAttendanceResponseComponentsItemKind = "allowance"
+	PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployeeTax          PostV1PayrollLinesAttendanceResponseComponentsItemKind = "employee_tax"
+	PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployeeContribution PostV1PayrollLinesAttendanceResponseComponentsItemKind = "employee_contribution"
+	PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployerContribution PostV1PayrollLinesAttendanceResponseComponentsItemKind = "employer_contribution"
+	PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployerPayment      PostV1PayrollLinesAttendanceResponseComponentsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollLinesAttendanceResponseComponentsItemKindFromString(s string) (PostV1PayrollLinesAttendanceResponseComponentsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollLinesAttendanceResponseComponentsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollLinesAttendanceResponseComponentsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollLinesAttendanceResponseComponentsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollLinesAttendanceResponseComponentsItemKind) Ptr() *PostV1PayrollLinesAttendanceResponseComponentsItemKind {
+	return &p
+}
+
+var (
+	postV1PayrollLinesAttendanceResponseDeductionsItemFieldName   = big.NewInt(1 << 0)
+	postV1PayrollLinesAttendanceResponseDeductionsItemFieldAmount = big.NewInt(1 << 1)
+)
+
+type PostV1PayrollLinesAttendanceResponseDeductionsItem struct {
+	Name   string `json:"name" url:"name"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) SetName(name string) {
+	p.Name = name
+	p.require(postV1PayrollLinesAttendanceResponseDeductionsItemFieldName)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollLinesAttendanceResponseDeductionsItemFieldAmount)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollLinesAttendanceResponseDeductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollLinesAttendanceResponseDeductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollLinesAttendanceResponseDeductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollLinesAttendanceResponseDeductionsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	postV1PayrollPaymentsExportResponseFieldMessageID        = big.NewInt(1 << 0)
 	postV1PayrollPaymentsExportResponseFieldFileName         = big.NewInt(1 << 1)
 	postV1PayrollPaymentsExportResponseFieldTransactionCount = big.NewInt(1 << 2)
@@ -1279,37 +2375,41 @@ func (p *PostV1PayrollPaymentsExportResponse) String() string {
 }
 
 var (
-	postV1PayrollRunsApproveResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PayrollRunsApproveResponseFieldYear                 = big.NewInt(1 << 1)
-	postV1PayrollRunsApproveResponseFieldMonth                = big.NewInt(1 << 2)
-	postV1PayrollRunsApproveResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PayrollRunsApproveResponseFieldGrossTotal           = big.NewInt(1 << 4)
-	postV1PayrollRunsApproveResponseFieldNpdTotal             = big.NewInt(1 << 5)
-	postV1PayrollRunsApproveResponseFieldGpmTotal             = big.NewInt(1 << 6)
-	postV1PayrollRunsApproveResponseFieldSodraEmployeeTotal   = big.NewInt(1 << 7)
-	postV1PayrollRunsApproveResponseFieldSodraEmployerTotal   = big.NewInt(1 << 8)
-	postV1PayrollRunsApproveResponseFieldNetTotal             = big.NewInt(1 << 9)
-	postV1PayrollRunsApproveResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1PayrollRunsApproveResponseFieldNotes                = big.NewInt(1 << 11)
-	postV1PayrollRunsApproveResponseFieldCreatedAt            = big.NewInt(1 << 12)
-	postV1PayrollRunsApproveResponseFieldApprovedAt           = big.NewInt(1 << 13)
+	postV1PayrollRunsApproveResponseFieldID                         = big.NewInt(1 << 0)
+	postV1PayrollRunsApproveResponseFieldYear                       = big.NewInt(1 << 1)
+	postV1PayrollRunsApproveResponseFieldMonth                      = big.NewInt(1 << 2)
+	postV1PayrollRunsApproveResponseFieldCountryCode                = big.NewInt(1 << 3)
+	postV1PayrollRunsApproveResponseFieldStatus                     = big.NewInt(1 << 4)
+	postV1PayrollRunsApproveResponseFieldGrossTotal                 = big.NewInt(1 << 5)
+	postV1PayrollRunsApproveResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
+	postV1PayrollRunsApproveResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
+	postV1PayrollRunsApproveResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
+	postV1PayrollRunsApproveResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
+	postV1PayrollRunsApproveResponseFieldComponentTotals            = big.NewInt(1 << 10)
+	postV1PayrollRunsApproveResponseFieldNetTotal                   = big.NewInt(1 << 11)
+	postV1PayrollRunsApproveResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
+	postV1PayrollRunsApproveResponseFieldNotes                      = big.NewInt(1 << 13)
+	postV1PayrollRunsApproveResponseFieldCreatedAt                  = big.NewInt(1 << 14)
+	postV1PayrollRunsApproveResponseFieldApprovedAt                 = big.NewInt(1 << 15)
 )
 
 type PostV1PayrollRunsApproveResponse struct {
-	ID                   string                                 `json:"id" url:"id"`
-	Year                 int64                                  `json:"year" url:"year"`
-	Month                int64                                  `json:"month" url:"month"`
-	Status               PostV1PayrollRunsApproveResponseStatus `json:"status" url:"status"`
-	GrossTotal           string                                 `json:"grossTotal" url:"grossTotal"`
-	NpdTotal             string                                 `json:"npdTotal" url:"npdTotal"`
-	GpmTotal             string                                 `json:"gpmTotal" url:"gpmTotal"`
-	SodraEmployeeTotal   string                                 `json:"sodraEmployeeTotal" url:"sodraEmployeeTotal"`
-	SodraEmployerTotal   string                                 `json:"sodraEmployerTotal" url:"sodraEmployerTotal"`
-	NetTotal             string                                 `json:"netTotal" url:"netTotal"`
-	JournalTransactionID *string                                `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                 `json:"createdAt" url:"createdAt"`
-	ApprovedAt           *string                                `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ID                         string                                                 `json:"id" url:"id"`
+	Year                       int64                                                  `json:"year" url:"year"`
+	Month                      int64                                                  `json:"month" url:"month"`
+	CountryCode                string                                                 `json:"countryCode" url:"countryCode"`
+	Status                     PostV1PayrollRunsApproveResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                 string                                                 `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal          string                                                 `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal             string                                                 `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal string                                                 `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal string                                                 `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals            []*PostV1PayrollRunsApproveResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                   string                                                 `json:"netTotal" url:"netTotal"`
+	JournalTransactionID       *string                                                `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                      *string                                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt                  string                                                 `json:"createdAt" url:"createdAt"`
+	ApprovedAt                 *string                                                `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1339,6 +2439,13 @@ func (p *PostV1PayrollRunsApproveResponse) GetMonth() int64 {
 	return p.Month
 }
 
+func (p *PostV1PayrollRunsApproveResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
 func (p *PostV1PayrollRunsApproveResponse) GetStatus() PostV1PayrollRunsApproveResponseStatus {
 	if p == nil {
 		return ""
@@ -1353,32 +2460,39 @@ func (p *PostV1PayrollRunsApproveResponse) GetGrossTotal() string {
 	return p.GrossTotal
 }
 
-func (p *PostV1PayrollRunsApproveResponse) GetNpdTotal() string {
+func (p *PostV1PayrollRunsApproveResponse) GetTaxAllowanceTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.NpdTotal
+	return p.TaxAllowanceTotal
 }
 
-func (p *PostV1PayrollRunsApproveResponse) GetGpmTotal() string {
+func (p *PostV1PayrollRunsApproveResponse) GetIncomeTaxTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.GpmTotal
+	return p.IncomeTaxTotal
 }
 
-func (p *PostV1PayrollRunsApproveResponse) GetSodraEmployeeTotal() string {
+func (p *PostV1PayrollRunsApproveResponse) GetEmployeeContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployeeTotal
+	return p.EmployeeContributionsTotal
 }
 
-func (p *PostV1PayrollRunsApproveResponse) GetSodraEmployerTotal() string {
+func (p *PostV1PayrollRunsApproveResponse) GetEmployerContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployerTotal
+	return p.EmployerContributionsTotal
+}
+
+func (p *PostV1PayrollRunsApproveResponse) GetComponentTotals() []*PostV1PayrollRunsApproveResponseComponentTotalsItem {
+	if p == nil {
+		return nil
+	}
+	return p.ComponentTotals
 }
 
 func (p *PostV1PayrollRunsApproveResponse) GetNetTotal() string {
@@ -1451,6 +2565,13 @@ func (p *PostV1PayrollRunsApproveResponse) SetMonth(month int64) {
 	p.require(postV1PayrollRunsApproveResponseFieldMonth)
 }
 
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1PayrollRunsApproveResponseFieldCountryCode)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PayrollRunsApproveResponse) SetStatus(status PostV1PayrollRunsApproveResponseStatus) {
@@ -1465,32 +2586,39 @@ func (p *PostV1PayrollRunsApproveResponse) SetGrossTotal(grossTotal string) {
 	p.require(postV1PayrollRunsApproveResponseFieldGrossTotal)
 }
 
-// SetNpdTotal sets the NpdTotal field and marks it as non-optional;
+// SetTaxAllowanceTotal sets the TaxAllowanceTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsApproveResponse) SetNpdTotal(npdTotal string) {
-	p.NpdTotal = npdTotal
-	p.require(postV1PayrollRunsApproveResponseFieldNpdTotal)
+func (p *PostV1PayrollRunsApproveResponse) SetTaxAllowanceTotal(taxAllowanceTotal string) {
+	p.TaxAllowanceTotal = taxAllowanceTotal
+	p.require(postV1PayrollRunsApproveResponseFieldTaxAllowanceTotal)
 }
 
-// SetGpmTotal sets the GpmTotal field and marks it as non-optional;
+// SetIncomeTaxTotal sets the IncomeTaxTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsApproveResponse) SetGpmTotal(gpmTotal string) {
-	p.GpmTotal = gpmTotal
-	p.require(postV1PayrollRunsApproveResponseFieldGpmTotal)
+func (p *PostV1PayrollRunsApproveResponse) SetIncomeTaxTotal(incomeTaxTotal string) {
+	p.IncomeTaxTotal = incomeTaxTotal
+	p.require(postV1PayrollRunsApproveResponseFieldIncomeTaxTotal)
 }
 
-// SetSodraEmployeeTotal sets the SodraEmployeeTotal field and marks it as non-optional;
+// SetEmployeeContributionsTotal sets the EmployeeContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsApproveResponse) SetSodraEmployeeTotal(sodraEmployeeTotal string) {
-	p.SodraEmployeeTotal = sodraEmployeeTotal
-	p.require(postV1PayrollRunsApproveResponseFieldSodraEmployeeTotal)
+func (p *PostV1PayrollRunsApproveResponse) SetEmployeeContributionsTotal(employeeContributionsTotal string) {
+	p.EmployeeContributionsTotal = employeeContributionsTotal
+	p.require(postV1PayrollRunsApproveResponseFieldEmployeeContributionsTotal)
 }
 
-// SetSodraEmployerTotal sets the SodraEmployerTotal field and marks it as non-optional;
+// SetEmployerContributionsTotal sets the EmployerContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsApproveResponse) SetSodraEmployerTotal(sodraEmployerTotal string) {
-	p.SodraEmployerTotal = sodraEmployerTotal
-	p.require(postV1PayrollRunsApproveResponseFieldSodraEmployerTotal)
+func (p *PostV1PayrollRunsApproveResponse) SetEmployerContributionsTotal(employerContributionsTotal string) {
+	p.EmployerContributionsTotal = employerContributionsTotal
+	p.require(postV1PayrollRunsApproveResponseFieldEmployerContributionsTotal)
+}
+
+// SetComponentTotals sets the ComponentTotals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponse) SetComponentTotals(componentTotals []*PostV1PayrollRunsApproveResponseComponentTotalsItem) {
+	p.ComponentTotals = componentTotals
+	p.require(postV1PayrollRunsApproveResponseFieldComponentTotals)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
@@ -1568,6 +2696,185 @@ func (p *PostV1PayrollRunsApproveResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollRunsApproveResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsApproveResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsApproveResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsApproveResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsApproveResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsApproveResponseComponentTotalsItem struct {
+	Code   string                                                  `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsApproveResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount string                                                  `json:"amount" url:"amount"`
+	Rate   *string                                                 `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                 `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetKind() PostV1PayrollRunsApproveResponseComponentTotalsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsApproveResponseComponentTotalsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) SetKind(kind PostV1PayrollRunsApproveResponseComponentTotalsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsApproveResponseComponentTotalsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsApproveResponseComponentTotalsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsApproveResponseComponentTotalsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsApproveResponseComponentTotalsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsApproveResponseComponentTotalsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsApproveResponseComponentTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsApproveResponseComponentTotalsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsApproveResponseComponentTotalsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsApproveResponseComponentTotalsItemKind string
+
+const (
+	PostV1PayrollRunsApproveResponseComponentTotalsItemKindAllowance            PostV1PayrollRunsApproveResponseComponentTotalsItemKind = "allowance"
+	PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployeeTax          PostV1PayrollRunsApproveResponseComponentTotalsItemKind = "employee_tax"
+	PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployeeContribution PostV1PayrollRunsApproveResponseComponentTotalsItemKind = "employee_contribution"
+	PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployerContribution PostV1PayrollRunsApproveResponseComponentTotalsItemKind = "employer_contribution"
+	PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployerPayment      PostV1PayrollRunsApproveResponseComponentTotalsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsApproveResponseComponentTotalsItemKindFromString(s string) (PostV1PayrollRunsApproveResponseComponentTotalsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsApproveResponseComponentTotalsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsApproveResponseComponentTotalsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsApproveResponseComponentTotalsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsApproveResponseComponentTotalsItemKind) Ptr() *PostV1PayrollRunsApproveResponseComponentTotalsItemKind {
+	return &p
 }
 
 type PostV1PayrollRunsApproveResponseStatus string
@@ -1662,6 +2969,106 @@ func (p *PostV1PayrollRunsCancelResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PostV1PayrollRunsCancelResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollRunsCreateRequestGrossOverridesItemFieldEmployeeID = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateRequestGrossOverridesItemFieldGross      = big.NewInt(1 << 1)
+)
+
+type PostV1PayrollRunsCreateRequestGrossOverridesItem struct {
+	EmployeeID string `json:"employeeId" url:"employeeId"`
+	Gross      string `json:"gross" url:"gross"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) GetEmployeeID() string {
+	if p == nil {
+		return ""
+	}
+	return p.EmployeeID
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) GetGross() string {
+	if p == nil {
+		return ""
+	}
+	return p.Gross
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) SetEmployeeID(employeeID string) {
+	p.EmployeeID = employeeID
+	p.require(postV1PayrollRunsCreateRequestGrossOverridesItemFieldEmployeeID)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) SetGross(gross string) {
+	p.Gross = gross
+	p.require(postV1PayrollRunsCreateRequestGrossOverridesItemFieldGross)
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsCreateRequestGrossOverridesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsCreateRequestGrossOverridesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsCreateRequestGrossOverridesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsCreateRequestGrossOverridesItem) String() string {
 	if p == nil {
 		return "<nil>"
 	}
@@ -2025,39 +3432,43 @@ func (p *PostV1PayrollRunsCreateRequestLinesItemDeductionsItem) String() string 
 }
 
 var (
-	postV1PayrollRunsCreateResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PayrollRunsCreateResponseFieldYear                 = big.NewInt(1 << 1)
-	postV1PayrollRunsCreateResponseFieldMonth                = big.NewInt(1 << 2)
-	postV1PayrollRunsCreateResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PayrollRunsCreateResponseFieldGrossTotal           = big.NewInt(1 << 4)
-	postV1PayrollRunsCreateResponseFieldNpdTotal             = big.NewInt(1 << 5)
-	postV1PayrollRunsCreateResponseFieldGpmTotal             = big.NewInt(1 << 6)
-	postV1PayrollRunsCreateResponseFieldSodraEmployeeTotal   = big.NewInt(1 << 7)
-	postV1PayrollRunsCreateResponseFieldSodraEmployerTotal   = big.NewInt(1 << 8)
-	postV1PayrollRunsCreateResponseFieldNetTotal             = big.NewInt(1 << 9)
-	postV1PayrollRunsCreateResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1PayrollRunsCreateResponseFieldNotes                = big.NewInt(1 << 11)
-	postV1PayrollRunsCreateResponseFieldCreatedAt            = big.NewInt(1 << 12)
-	postV1PayrollRunsCreateResponseFieldApprovedAt           = big.NewInt(1 << 13)
-	postV1PayrollRunsCreateResponseFieldLines                = big.NewInt(1 << 14)
+	postV1PayrollRunsCreateResponseFieldID                         = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateResponseFieldYear                       = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateResponseFieldMonth                      = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateResponseFieldCountryCode                = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateResponseFieldStatus                     = big.NewInt(1 << 4)
+	postV1PayrollRunsCreateResponseFieldGrossTotal                 = big.NewInt(1 << 5)
+	postV1PayrollRunsCreateResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
+	postV1PayrollRunsCreateResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
+	postV1PayrollRunsCreateResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
+	postV1PayrollRunsCreateResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
+	postV1PayrollRunsCreateResponseFieldComponentTotals            = big.NewInt(1 << 10)
+	postV1PayrollRunsCreateResponseFieldNetTotal                   = big.NewInt(1 << 11)
+	postV1PayrollRunsCreateResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
+	postV1PayrollRunsCreateResponseFieldNotes                      = big.NewInt(1 << 13)
+	postV1PayrollRunsCreateResponseFieldCreatedAt                  = big.NewInt(1 << 14)
+	postV1PayrollRunsCreateResponseFieldApprovedAt                 = big.NewInt(1 << 15)
+	postV1PayrollRunsCreateResponseFieldLines                      = big.NewInt(1 << 16)
 )
 
 type PostV1PayrollRunsCreateResponse struct {
-	ID                   string                                      `json:"id" url:"id"`
-	Year                 int64                                       `json:"year" url:"year"`
-	Month                int64                                       `json:"month" url:"month"`
-	Status               PostV1PayrollRunsCreateResponseStatus       `json:"status" url:"status"`
-	GrossTotal           string                                      `json:"grossTotal" url:"grossTotal"`
-	NpdTotal             string                                      `json:"npdTotal" url:"npdTotal"`
-	GpmTotal             string                                      `json:"gpmTotal" url:"gpmTotal"`
-	SodraEmployeeTotal   string                                      `json:"sodraEmployeeTotal" url:"sodraEmployeeTotal"`
-	SodraEmployerTotal   string                                      `json:"sodraEmployerTotal" url:"sodraEmployerTotal"`
-	NetTotal             string                                      `json:"netTotal" url:"netTotal"`
-	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                      `json:"createdAt" url:"createdAt"`
-	ApprovedAt           *string                                     `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
-	Lines                []*PostV1PayrollRunsCreateResponseLinesItem `json:"lines" url:"lines"`
+	ID                         string                                                `json:"id" url:"id"`
+	Year                       int64                                                 `json:"year" url:"year"`
+	Month                      int64                                                 `json:"month" url:"month"`
+	CountryCode                string                                                `json:"countryCode" url:"countryCode"`
+	Status                     PostV1PayrollRunsCreateResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                 string                                                `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal          string                                                `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal             string                                                `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal string                                                `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal string                                                `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals            []*PostV1PayrollRunsCreateResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                   string                                                `json:"netTotal" url:"netTotal"`
+	JournalTransactionID       *string                                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                      *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt                  string                                                `json:"createdAt" url:"createdAt"`
+	ApprovedAt                 *string                                               `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	Lines                      []*PostV1PayrollRunsCreateResponseLinesItem           `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2087,6 +3498,13 @@ func (p *PostV1PayrollRunsCreateResponse) GetMonth() int64 {
 	return p.Month
 }
 
+func (p *PostV1PayrollRunsCreateResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
 func (p *PostV1PayrollRunsCreateResponse) GetStatus() PostV1PayrollRunsCreateResponseStatus {
 	if p == nil {
 		return ""
@@ -2101,32 +3519,39 @@ func (p *PostV1PayrollRunsCreateResponse) GetGrossTotal() string {
 	return p.GrossTotal
 }
 
-func (p *PostV1PayrollRunsCreateResponse) GetNpdTotal() string {
+func (p *PostV1PayrollRunsCreateResponse) GetTaxAllowanceTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.NpdTotal
+	return p.TaxAllowanceTotal
 }
 
-func (p *PostV1PayrollRunsCreateResponse) GetGpmTotal() string {
+func (p *PostV1PayrollRunsCreateResponse) GetIncomeTaxTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.GpmTotal
+	return p.IncomeTaxTotal
 }
 
-func (p *PostV1PayrollRunsCreateResponse) GetSodraEmployeeTotal() string {
+func (p *PostV1PayrollRunsCreateResponse) GetEmployeeContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployeeTotal
+	return p.EmployeeContributionsTotal
 }
 
-func (p *PostV1PayrollRunsCreateResponse) GetSodraEmployerTotal() string {
+func (p *PostV1PayrollRunsCreateResponse) GetEmployerContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployerTotal
+	return p.EmployerContributionsTotal
+}
+
+func (p *PostV1PayrollRunsCreateResponse) GetComponentTotals() []*PostV1PayrollRunsCreateResponseComponentTotalsItem {
+	if p == nil {
+		return nil
+	}
+	return p.ComponentTotals
 }
 
 func (p *PostV1PayrollRunsCreateResponse) GetNetTotal() string {
@@ -2206,6 +3631,13 @@ func (p *PostV1PayrollRunsCreateResponse) SetMonth(month int64) {
 	p.require(postV1PayrollRunsCreateResponseFieldMonth)
 }
 
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1PayrollRunsCreateResponseFieldCountryCode)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PayrollRunsCreateResponse) SetStatus(status PostV1PayrollRunsCreateResponseStatus) {
@@ -2220,32 +3652,39 @@ func (p *PostV1PayrollRunsCreateResponse) SetGrossTotal(grossTotal string) {
 	p.require(postV1PayrollRunsCreateResponseFieldGrossTotal)
 }
 
-// SetNpdTotal sets the NpdTotal field and marks it as non-optional;
+// SetTaxAllowanceTotal sets the TaxAllowanceTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponse) SetNpdTotal(npdTotal string) {
-	p.NpdTotal = npdTotal
-	p.require(postV1PayrollRunsCreateResponseFieldNpdTotal)
+func (p *PostV1PayrollRunsCreateResponse) SetTaxAllowanceTotal(taxAllowanceTotal string) {
+	p.TaxAllowanceTotal = taxAllowanceTotal
+	p.require(postV1PayrollRunsCreateResponseFieldTaxAllowanceTotal)
 }
 
-// SetGpmTotal sets the GpmTotal field and marks it as non-optional;
+// SetIncomeTaxTotal sets the IncomeTaxTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponse) SetGpmTotal(gpmTotal string) {
-	p.GpmTotal = gpmTotal
-	p.require(postV1PayrollRunsCreateResponseFieldGpmTotal)
+func (p *PostV1PayrollRunsCreateResponse) SetIncomeTaxTotal(incomeTaxTotal string) {
+	p.IncomeTaxTotal = incomeTaxTotal
+	p.require(postV1PayrollRunsCreateResponseFieldIncomeTaxTotal)
 }
 
-// SetSodraEmployeeTotal sets the SodraEmployeeTotal field and marks it as non-optional;
+// SetEmployeeContributionsTotal sets the EmployeeContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponse) SetSodraEmployeeTotal(sodraEmployeeTotal string) {
-	p.SodraEmployeeTotal = sodraEmployeeTotal
-	p.require(postV1PayrollRunsCreateResponseFieldSodraEmployeeTotal)
+func (p *PostV1PayrollRunsCreateResponse) SetEmployeeContributionsTotal(employeeContributionsTotal string) {
+	p.EmployeeContributionsTotal = employeeContributionsTotal
+	p.require(postV1PayrollRunsCreateResponseFieldEmployeeContributionsTotal)
 }
 
-// SetSodraEmployerTotal sets the SodraEmployerTotal field and marks it as non-optional;
+// SetEmployerContributionsTotal sets the EmployerContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponse) SetSodraEmployerTotal(sodraEmployerTotal string) {
-	p.SodraEmployerTotal = sodraEmployerTotal
-	p.require(postV1PayrollRunsCreateResponseFieldSodraEmployerTotal)
+func (p *PostV1PayrollRunsCreateResponse) SetEmployerContributionsTotal(employerContributionsTotal string) {
+	p.EmployerContributionsTotal = employerContributionsTotal
+	p.require(postV1PayrollRunsCreateResponseFieldEmployerContributionsTotal)
+}
+
+// SetComponentTotals sets the ComponentTotals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponse) SetComponentTotals(componentTotals []*PostV1PayrollRunsCreateResponseComponentTotalsItem) {
+	p.ComponentTotals = componentTotals
+	p.require(postV1PayrollRunsCreateResponseFieldComponentTotals)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
@@ -2333,37 +3772,226 @@ func (p *PostV1PayrollRunsCreateResponse) String() string {
 }
 
 var (
-	postV1PayrollRunsCreateResponseLinesItemFieldID            = big.NewInt(1 << 0)
-	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeID    = big.NewInt(1 << 1)
-	postV1PayrollRunsCreateResponseLinesItemFieldContractID    = big.NewInt(1 << 2)
-	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeName  = big.NewInt(1 << 3)
-	postV1PayrollRunsCreateResponseLinesItemFieldGross         = big.NewInt(1 << 4)
-	postV1PayrollRunsCreateResponseLinesItemFieldNatura        = big.NewInt(1 << 5)
-	postV1PayrollRunsCreateResponseLinesItemFieldAdditions     = big.NewInt(1 << 6)
-	postV1PayrollRunsCreateResponseLinesItemFieldDeductions    = big.NewInt(1 << 7)
-	postV1PayrollRunsCreateResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 8)
-	postV1PayrollRunsCreateResponseLinesItemFieldNpd           = big.NewInt(1 << 9)
-	postV1PayrollRunsCreateResponseLinesItemFieldGpm           = big.NewInt(1 << 10)
-	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 11)
-	postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 12)
-	postV1PayrollRunsCreateResponseLinesItemFieldNet           = big.NewInt(1 << 13)
+	postV1PayrollRunsCreateResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsCreateResponseComponentTotalsItem struct {
+	Code   string                                                 `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsCreateResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount string                                                 `json:"amount" url:"amount"`
+	Rate   *string                                                `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetKind() PostV1PayrollRunsCreateResponseComponentTotalsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsCreateResponseComponentTotalsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) SetKind(kind PostV1PayrollRunsCreateResponseComponentTotalsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsCreateResponseComponentTotalsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsCreateResponseComponentTotalsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsCreateResponseComponentTotalsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsCreateResponseComponentTotalsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsCreateResponseComponentTotalsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsCreateResponseComponentTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsCreateResponseComponentTotalsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsCreateResponseComponentTotalsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsCreateResponseComponentTotalsItemKind string
+
+const (
+	PostV1PayrollRunsCreateResponseComponentTotalsItemKindAllowance            PostV1PayrollRunsCreateResponseComponentTotalsItemKind = "allowance"
+	PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployeeTax          PostV1PayrollRunsCreateResponseComponentTotalsItemKind = "employee_tax"
+	PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployeeContribution PostV1PayrollRunsCreateResponseComponentTotalsItemKind = "employee_contribution"
+	PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployerContribution PostV1PayrollRunsCreateResponseComponentTotalsItemKind = "employer_contribution"
+	PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployerPayment      PostV1PayrollRunsCreateResponseComponentTotalsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsCreateResponseComponentTotalsItemKindFromString(s string) (PostV1PayrollRunsCreateResponseComponentTotalsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsCreateResponseComponentTotalsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsCreateResponseComponentTotalsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsCreateResponseComponentTotalsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsCreateResponseComponentTotalsItemKind) Ptr() *PostV1PayrollRunsCreateResponseComponentTotalsItemKind {
+	return &p
+}
+
+var (
+	postV1PayrollRunsCreateResponseLinesItemFieldID                    = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeID            = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateResponseLinesItemFieldContractID            = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeName          = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateResponseLinesItemFieldGross                 = big.NewInt(1 << 4)
+	postV1PayrollRunsCreateResponseLinesItemFieldNatura                = big.NewInt(1 << 5)
+	postV1PayrollRunsCreateResponseLinesItemFieldAdditions             = big.NewInt(1 << 6)
+	postV1PayrollRunsCreateResponseLinesItemFieldDeductions            = big.NewInt(1 << 7)
+	postV1PayrollRunsCreateResponseLinesItemFieldTaxableBase           = big.NewInt(1 << 8)
+	postV1PayrollRunsCreateResponseLinesItemFieldTaxAllowance          = big.NewInt(1 << 9)
+	postV1PayrollRunsCreateResponseLinesItemFieldIncomeTax             = big.NewInt(1 << 10)
+	postV1PayrollRunsCreateResponseLinesItemFieldEmployeeContributions = big.NewInt(1 << 11)
+	postV1PayrollRunsCreateResponseLinesItemFieldEmployerContributions = big.NewInt(1 << 12)
+	postV1PayrollRunsCreateResponseLinesItemFieldComponents            = big.NewInt(1 << 13)
+	postV1PayrollRunsCreateResponseLinesItemFieldNet                   = big.NewInt(1 << 14)
+	postV1PayrollRunsCreateResponseLinesItemFieldDaysWorked            = big.NewInt(1 << 15)
+	postV1PayrollRunsCreateResponseLinesItemFieldHoursWorked           = big.NewInt(1 << 16)
+	postV1PayrollRunsCreateResponseLinesItemFieldRegisteredDays        = big.NewInt(1 << 17)
+	postV1PayrollRunsCreateResponseLinesItemFieldAverageHourlyEarnings = big.NewInt(1 << 18)
 )
 
 type PostV1PayrollRunsCreateResponseLinesItem struct {
-	ID            string                                                    `json:"id" url:"id"`
-	EmployeeID    string                                                    `json:"employeeId" url:"employeeId"`
-	ContractID    *string                                                   `json:"contractId,omitempty" url:"contractId,omitempty"`
-	EmployeeName  string                                                    `json:"employeeName" url:"employeeName"`
-	Gross         string                                                    `json:"gross" url:"gross"`
-	Natura        string                                                    `json:"natura" url:"natura"`
-	Additions     []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
-	Deductions    []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
-	TaxableBase   string                                                    `json:"taxableBase" url:"taxableBase"`
-	Npd           string                                                    `json:"npd" url:"npd"`
-	Gpm           string                                                    `json:"gpm" url:"gpm"`
-	SodraEmployee string                                                    `json:"sodraEmployee" url:"sodraEmployee"`
-	SodraEmployer string                                                    `json:"sodraEmployer" url:"sodraEmployer"`
-	Net           string                                                    `json:"net" url:"net"`
+	ID                    string                                                    `json:"id" url:"id"`
+	EmployeeID            string                                                    `json:"employeeId" url:"employeeId"`
+	ContractID            *string                                                   `json:"contractId,omitempty" url:"contractId,omitempty"`
+	EmployeeName          string                                                    `json:"employeeName" url:"employeeName"`
+	Gross                 string                                                    `json:"gross" url:"gross"`
+	Natura                string                                                    `json:"natura" url:"natura"`
+	Additions             []*PostV1PayrollRunsCreateResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
+	Deductions            []*PostV1PayrollRunsCreateResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
+	TaxableBase           string                                                    `json:"taxableBase" url:"taxableBase"`
+	TaxAllowance          string                                                    `json:"taxAllowance" url:"taxAllowance"`
+	IncomeTax             string                                                    `json:"incomeTax" url:"incomeTax"`
+	EmployeeContributions string                                                    `json:"employeeContributions" url:"employeeContributions"`
+	EmployerContributions string                                                    `json:"employerContributions" url:"employerContributions"`
+	Components            []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem `json:"components" url:"components"`
+	Net                   string                                                    `json:"net" url:"net"`
+	DaysWorked            *string                                                   `json:"daysWorked,omitempty" url:"daysWorked,omitempty"`
+	HoursWorked           *string                                                   `json:"hoursWorked,omitempty" url:"hoursWorked,omitempty"`
+	RegisteredDays        *string                                                   `json:"registeredDays,omitempty" url:"registeredDays,omitempty"`
+	AverageHourlyEarnings *string                                                   `json:"averageHourlyEarnings,omitempty" url:"averageHourlyEarnings,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2435,32 +4063,39 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) GetTaxableBase() string {
 	return p.TaxableBase
 }
 
-func (p *PostV1PayrollRunsCreateResponseLinesItem) GetNpd() string {
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetTaxAllowance() string {
 	if p == nil {
 		return ""
 	}
-	return p.Npd
+	return p.TaxAllowance
 }
 
-func (p *PostV1PayrollRunsCreateResponseLinesItem) GetGpm() string {
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetIncomeTax() string {
 	if p == nil {
 		return ""
 	}
-	return p.Gpm
+	return p.IncomeTax
 }
 
-func (p *PostV1PayrollRunsCreateResponseLinesItem) GetSodraEmployee() string {
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetEmployeeContributions() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployee
+	return p.EmployeeContributions
 }
 
-func (p *PostV1PayrollRunsCreateResponseLinesItem) GetSodraEmployer() string {
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetEmployerContributions() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployer
+	return p.EmployerContributions
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetComponents() []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Components
 }
 
 func (p *PostV1PayrollRunsCreateResponseLinesItem) GetNet() string {
@@ -2468,6 +4103,34 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) GetNet() string {
 		return ""
 	}
 	return p.Net
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetDaysWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DaysWorked
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetHoursWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HoursWorked
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetRegisteredDays() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RegisteredDays
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItem) GetAverageHourlyEarnings() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AverageHourlyEarnings
 }
 
 func (p *PostV1PayrollRunsCreateResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -2547,32 +4210,39 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) SetTaxableBase(taxableBase st
 	p.require(postV1PayrollRunsCreateResponseLinesItemFieldTaxableBase)
 }
 
-// SetNpd sets the Npd field and marks it as non-optional;
+// SetTaxAllowance sets the TaxAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponseLinesItem) SetNpd(npd string) {
-	p.Npd = npd
-	p.require(postV1PayrollRunsCreateResponseLinesItemFieldNpd)
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetTaxAllowance(taxAllowance string) {
+	p.TaxAllowance = taxAllowance
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldTaxAllowance)
 }
 
-// SetGpm sets the Gpm field and marks it as non-optional;
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponseLinesItem) SetGpm(gpm string) {
-	p.Gpm = gpm
-	p.require(postV1PayrollRunsCreateResponseLinesItemFieldGpm)
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetIncomeTax(incomeTax string) {
+	p.IncomeTax = incomeTax
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldIncomeTax)
 }
 
-// SetSodraEmployee sets the SodraEmployee field and marks it as non-optional;
+// SetEmployeeContributions sets the EmployeeContributions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponseLinesItem) SetSodraEmployee(sodraEmployee string) {
-	p.SodraEmployee = sodraEmployee
-	p.require(postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployee)
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetEmployeeContributions(employeeContributions string) {
+	p.EmployeeContributions = employeeContributions
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldEmployeeContributions)
 }
 
-// SetSodraEmployer sets the SodraEmployer field and marks it as non-optional;
+// SetEmployerContributions sets the EmployerContributions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsCreateResponseLinesItem) SetSodraEmployer(sodraEmployer string) {
-	p.SodraEmployer = sodraEmployer
-	p.require(postV1PayrollRunsCreateResponseLinesItemFieldSodraEmployer)
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetEmployerContributions(employerContributions string) {
+	p.EmployerContributions = employerContributions
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldEmployerContributions)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetComponents(components []*PostV1PayrollRunsCreateResponseLinesItemComponentsItem) {
+	p.Components = components
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldComponents)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
@@ -2580,6 +4250,34 @@ func (p *PostV1PayrollRunsCreateResponseLinesItem) SetSodraEmployer(sodraEmploye
 func (p *PostV1PayrollRunsCreateResponseLinesItem) SetNet(net string) {
 	p.Net = net
 	p.require(postV1PayrollRunsCreateResponseLinesItemFieldNet)
+}
+
+// SetDaysWorked sets the DaysWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetDaysWorked(daysWorked *string) {
+	p.DaysWorked = daysWorked
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldDaysWorked)
+}
+
+// SetHoursWorked sets the HoursWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetHoursWorked(hoursWorked *string) {
+	p.HoursWorked = hoursWorked
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldHoursWorked)
+}
+
+// SetRegisteredDays sets the RegisteredDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetRegisteredDays(registeredDays *string) {
+	p.RegisteredDays = registeredDays
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldRegisteredDays)
+}
+
+// SetAverageHourlyEarnings sets the AverageHourlyEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItem) SetAverageHourlyEarnings(averageHourlyEarnings *string) {
+	p.AverageHourlyEarnings = averageHourlyEarnings
+	p.require(postV1PayrollRunsCreateResponseLinesItemFieldAverageHourlyEarnings)
 }
 
 func (p *PostV1PayrollRunsCreateResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -2741,6 +4439,185 @@ func (p *PostV1PayrollRunsCreateResponseLinesItemAdditionsItem) String() string 
 }
 
 var (
+	postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsCreateResponseLinesItemComponentsItem struct {
+	Code   string                                                     `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
+	Amount string                                                     `json:"amount" url:"amount"`
+	Rate   *string                                                    `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                    `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetKind() PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) SetKind(kind PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsCreateResponseLinesItemComponentsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsCreateResponseLinesItemComponentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsCreateResponseLinesItemComponentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsCreateResponseLinesItemComponentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind string
+
+const (
+	PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindAllowance            PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind = "allowance"
+	PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployeeTax          PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind = "employee_tax"
+	PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployeeContribution PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind = "employee_contribution"
+	PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployerContribution PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind = "employer_contribution"
+	PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployerPayment      PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsCreateResponseLinesItemComponentsItemKindFromString(s string) (PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsCreateResponseLinesItemComponentsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind) Ptr() *PostV1PayrollRunsCreateResponseLinesItemComponentsItemKind {
+	return &p
+}
+
+var (
 	postV1PayrollRunsCreateResponseLinesItemDeductionsItemFieldName   = big.NewInt(1 << 0)
 	postV1PayrollRunsCreateResponseLinesItemDeductionsItemFieldAmount = big.NewInt(1 << 1)
 )
@@ -2863,39 +4740,43 @@ func (p PostV1PayrollRunsCreateResponseStatus) Ptr() *PostV1PayrollRunsCreateRes
 }
 
 var (
-	postV1PayrollRunsGetResponseFieldID                   = big.NewInt(1 << 0)
-	postV1PayrollRunsGetResponseFieldYear                 = big.NewInt(1 << 1)
-	postV1PayrollRunsGetResponseFieldMonth                = big.NewInt(1 << 2)
-	postV1PayrollRunsGetResponseFieldStatus               = big.NewInt(1 << 3)
-	postV1PayrollRunsGetResponseFieldGrossTotal           = big.NewInt(1 << 4)
-	postV1PayrollRunsGetResponseFieldNpdTotal             = big.NewInt(1 << 5)
-	postV1PayrollRunsGetResponseFieldGpmTotal             = big.NewInt(1 << 6)
-	postV1PayrollRunsGetResponseFieldSodraEmployeeTotal   = big.NewInt(1 << 7)
-	postV1PayrollRunsGetResponseFieldSodraEmployerTotal   = big.NewInt(1 << 8)
-	postV1PayrollRunsGetResponseFieldNetTotal             = big.NewInt(1 << 9)
-	postV1PayrollRunsGetResponseFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1PayrollRunsGetResponseFieldNotes                = big.NewInt(1 << 11)
-	postV1PayrollRunsGetResponseFieldCreatedAt            = big.NewInt(1 << 12)
-	postV1PayrollRunsGetResponseFieldApprovedAt           = big.NewInt(1 << 13)
-	postV1PayrollRunsGetResponseFieldLines                = big.NewInt(1 << 14)
+	postV1PayrollRunsGetResponseFieldID                         = big.NewInt(1 << 0)
+	postV1PayrollRunsGetResponseFieldYear                       = big.NewInt(1 << 1)
+	postV1PayrollRunsGetResponseFieldMonth                      = big.NewInt(1 << 2)
+	postV1PayrollRunsGetResponseFieldCountryCode                = big.NewInt(1 << 3)
+	postV1PayrollRunsGetResponseFieldStatus                     = big.NewInt(1 << 4)
+	postV1PayrollRunsGetResponseFieldGrossTotal                 = big.NewInt(1 << 5)
+	postV1PayrollRunsGetResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
+	postV1PayrollRunsGetResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
+	postV1PayrollRunsGetResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
+	postV1PayrollRunsGetResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
+	postV1PayrollRunsGetResponseFieldComponentTotals            = big.NewInt(1 << 10)
+	postV1PayrollRunsGetResponseFieldNetTotal                   = big.NewInt(1 << 11)
+	postV1PayrollRunsGetResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
+	postV1PayrollRunsGetResponseFieldNotes                      = big.NewInt(1 << 13)
+	postV1PayrollRunsGetResponseFieldCreatedAt                  = big.NewInt(1 << 14)
+	postV1PayrollRunsGetResponseFieldApprovedAt                 = big.NewInt(1 << 15)
+	postV1PayrollRunsGetResponseFieldLines                      = big.NewInt(1 << 16)
 )
 
 type PostV1PayrollRunsGetResponse struct {
-	ID                   string                                   `json:"id" url:"id"`
-	Year                 int64                                    `json:"year" url:"year"`
-	Month                int64                                    `json:"month" url:"month"`
-	Status               PostV1PayrollRunsGetResponseStatus       `json:"status" url:"status"`
-	GrossTotal           string                                   `json:"grossTotal" url:"grossTotal"`
-	NpdTotal             string                                   `json:"npdTotal" url:"npdTotal"`
-	GpmTotal             string                                   `json:"gpmTotal" url:"gpmTotal"`
-	SodraEmployeeTotal   string                                   `json:"sodraEmployeeTotal" url:"sodraEmployeeTotal"`
-	SodraEmployerTotal   string                                   `json:"sodraEmployerTotal" url:"sodraEmployerTotal"`
-	NetTotal             string                                   `json:"netTotal" url:"netTotal"`
-	JournalTransactionID *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                   `json:"createdAt" url:"createdAt"`
-	ApprovedAt           *string                                  `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
-	Lines                []*PostV1PayrollRunsGetResponseLinesItem `json:"lines" url:"lines"`
+	ID                         string                                             `json:"id" url:"id"`
+	Year                       int64                                              `json:"year" url:"year"`
+	Month                      int64                                              `json:"month" url:"month"`
+	CountryCode                string                                             `json:"countryCode" url:"countryCode"`
+	Status                     PostV1PayrollRunsGetResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                 string                                             `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal          string                                             `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal             string                                             `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal string                                             `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal string                                             `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals            []*PostV1PayrollRunsGetResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                   string                                             `json:"netTotal" url:"netTotal"`
+	JournalTransactionID       *string                                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                      *string                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt                  string                                             `json:"createdAt" url:"createdAt"`
+	ApprovedAt                 *string                                            `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	Lines                      []*PostV1PayrollRunsGetResponseLinesItem           `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2925,6 +4806,13 @@ func (p *PostV1PayrollRunsGetResponse) GetMonth() int64 {
 	return p.Month
 }
 
+func (p *PostV1PayrollRunsGetResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
 func (p *PostV1PayrollRunsGetResponse) GetStatus() PostV1PayrollRunsGetResponseStatus {
 	if p == nil {
 		return ""
@@ -2939,32 +4827,39 @@ func (p *PostV1PayrollRunsGetResponse) GetGrossTotal() string {
 	return p.GrossTotal
 }
 
-func (p *PostV1PayrollRunsGetResponse) GetNpdTotal() string {
+func (p *PostV1PayrollRunsGetResponse) GetTaxAllowanceTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.NpdTotal
+	return p.TaxAllowanceTotal
 }
 
-func (p *PostV1PayrollRunsGetResponse) GetGpmTotal() string {
+func (p *PostV1PayrollRunsGetResponse) GetIncomeTaxTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.GpmTotal
+	return p.IncomeTaxTotal
 }
 
-func (p *PostV1PayrollRunsGetResponse) GetSodraEmployeeTotal() string {
+func (p *PostV1PayrollRunsGetResponse) GetEmployeeContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployeeTotal
+	return p.EmployeeContributionsTotal
 }
 
-func (p *PostV1PayrollRunsGetResponse) GetSodraEmployerTotal() string {
+func (p *PostV1PayrollRunsGetResponse) GetEmployerContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployerTotal
+	return p.EmployerContributionsTotal
+}
+
+func (p *PostV1PayrollRunsGetResponse) GetComponentTotals() []*PostV1PayrollRunsGetResponseComponentTotalsItem {
+	if p == nil {
+		return nil
+	}
+	return p.ComponentTotals
 }
 
 func (p *PostV1PayrollRunsGetResponse) GetNetTotal() string {
@@ -3044,6 +4939,13 @@ func (p *PostV1PayrollRunsGetResponse) SetMonth(month int64) {
 	p.require(postV1PayrollRunsGetResponseFieldMonth)
 }
 
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1PayrollRunsGetResponseFieldCountryCode)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PayrollRunsGetResponse) SetStatus(status PostV1PayrollRunsGetResponseStatus) {
@@ -3058,32 +4960,39 @@ func (p *PostV1PayrollRunsGetResponse) SetGrossTotal(grossTotal string) {
 	p.require(postV1PayrollRunsGetResponseFieldGrossTotal)
 }
 
-// SetNpdTotal sets the NpdTotal field and marks it as non-optional;
+// SetTaxAllowanceTotal sets the TaxAllowanceTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponse) SetNpdTotal(npdTotal string) {
-	p.NpdTotal = npdTotal
-	p.require(postV1PayrollRunsGetResponseFieldNpdTotal)
+func (p *PostV1PayrollRunsGetResponse) SetTaxAllowanceTotal(taxAllowanceTotal string) {
+	p.TaxAllowanceTotal = taxAllowanceTotal
+	p.require(postV1PayrollRunsGetResponseFieldTaxAllowanceTotal)
 }
 
-// SetGpmTotal sets the GpmTotal field and marks it as non-optional;
+// SetIncomeTaxTotal sets the IncomeTaxTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponse) SetGpmTotal(gpmTotal string) {
-	p.GpmTotal = gpmTotal
-	p.require(postV1PayrollRunsGetResponseFieldGpmTotal)
+func (p *PostV1PayrollRunsGetResponse) SetIncomeTaxTotal(incomeTaxTotal string) {
+	p.IncomeTaxTotal = incomeTaxTotal
+	p.require(postV1PayrollRunsGetResponseFieldIncomeTaxTotal)
 }
 
-// SetSodraEmployeeTotal sets the SodraEmployeeTotal field and marks it as non-optional;
+// SetEmployeeContributionsTotal sets the EmployeeContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponse) SetSodraEmployeeTotal(sodraEmployeeTotal string) {
-	p.SodraEmployeeTotal = sodraEmployeeTotal
-	p.require(postV1PayrollRunsGetResponseFieldSodraEmployeeTotal)
+func (p *PostV1PayrollRunsGetResponse) SetEmployeeContributionsTotal(employeeContributionsTotal string) {
+	p.EmployeeContributionsTotal = employeeContributionsTotal
+	p.require(postV1PayrollRunsGetResponseFieldEmployeeContributionsTotal)
 }
 
-// SetSodraEmployerTotal sets the SodraEmployerTotal field and marks it as non-optional;
+// SetEmployerContributionsTotal sets the EmployerContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponse) SetSodraEmployerTotal(sodraEmployerTotal string) {
-	p.SodraEmployerTotal = sodraEmployerTotal
-	p.require(postV1PayrollRunsGetResponseFieldSodraEmployerTotal)
+func (p *PostV1PayrollRunsGetResponse) SetEmployerContributionsTotal(employerContributionsTotal string) {
+	p.EmployerContributionsTotal = employerContributionsTotal
+	p.require(postV1PayrollRunsGetResponseFieldEmployerContributionsTotal)
+}
+
+// SetComponentTotals sets the ComponentTotals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponse) SetComponentTotals(componentTotals []*PostV1PayrollRunsGetResponseComponentTotalsItem) {
+	p.ComponentTotals = componentTotals
+	p.require(postV1PayrollRunsGetResponseFieldComponentTotals)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
@@ -3171,37 +5080,226 @@ func (p *PostV1PayrollRunsGetResponse) String() string {
 }
 
 var (
-	postV1PayrollRunsGetResponseLinesItemFieldID            = big.NewInt(1 << 0)
-	postV1PayrollRunsGetResponseLinesItemFieldEmployeeID    = big.NewInt(1 << 1)
-	postV1PayrollRunsGetResponseLinesItemFieldContractID    = big.NewInt(1 << 2)
-	postV1PayrollRunsGetResponseLinesItemFieldEmployeeName  = big.NewInt(1 << 3)
-	postV1PayrollRunsGetResponseLinesItemFieldGross         = big.NewInt(1 << 4)
-	postV1PayrollRunsGetResponseLinesItemFieldNatura        = big.NewInt(1 << 5)
-	postV1PayrollRunsGetResponseLinesItemFieldAdditions     = big.NewInt(1 << 6)
-	postV1PayrollRunsGetResponseLinesItemFieldDeductions    = big.NewInt(1 << 7)
-	postV1PayrollRunsGetResponseLinesItemFieldTaxableBase   = big.NewInt(1 << 8)
-	postV1PayrollRunsGetResponseLinesItemFieldNpd           = big.NewInt(1 << 9)
-	postV1PayrollRunsGetResponseLinesItemFieldGpm           = big.NewInt(1 << 10)
-	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployee = big.NewInt(1 << 11)
-	postV1PayrollRunsGetResponseLinesItemFieldSodraEmployer = big.NewInt(1 << 12)
-	postV1PayrollRunsGetResponseLinesItemFieldNet           = big.NewInt(1 << 13)
+	postV1PayrollRunsGetResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsGetResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsGetResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsGetResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsGetResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsGetResponseComponentTotalsItem struct {
+	Code   string                                              `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsGetResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount string                                              `json:"amount" url:"amount"`
+	Rate   *string                                             `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                             `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetKind() PostV1PayrollRunsGetResponseComponentTotalsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsGetResponseComponentTotalsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) SetKind(kind PostV1PayrollRunsGetResponseComponentTotalsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsGetResponseComponentTotalsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsGetResponseComponentTotalsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsGetResponseComponentTotalsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsGetResponseComponentTotalsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsGetResponseComponentTotalsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsGetResponseComponentTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsGetResponseComponentTotalsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsGetResponseComponentTotalsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsGetResponseComponentTotalsItemKind string
+
+const (
+	PostV1PayrollRunsGetResponseComponentTotalsItemKindAllowance            PostV1PayrollRunsGetResponseComponentTotalsItemKind = "allowance"
+	PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployeeTax          PostV1PayrollRunsGetResponseComponentTotalsItemKind = "employee_tax"
+	PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployeeContribution PostV1PayrollRunsGetResponseComponentTotalsItemKind = "employee_contribution"
+	PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployerContribution PostV1PayrollRunsGetResponseComponentTotalsItemKind = "employer_contribution"
+	PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployerPayment      PostV1PayrollRunsGetResponseComponentTotalsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsGetResponseComponentTotalsItemKindFromString(s string) (PostV1PayrollRunsGetResponseComponentTotalsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsGetResponseComponentTotalsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsGetResponseComponentTotalsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsGetResponseComponentTotalsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsGetResponseComponentTotalsItemKind) Ptr() *PostV1PayrollRunsGetResponseComponentTotalsItemKind {
+	return &p
+}
+
+var (
+	postV1PayrollRunsGetResponseLinesItemFieldID                    = big.NewInt(1 << 0)
+	postV1PayrollRunsGetResponseLinesItemFieldEmployeeID            = big.NewInt(1 << 1)
+	postV1PayrollRunsGetResponseLinesItemFieldContractID            = big.NewInt(1 << 2)
+	postV1PayrollRunsGetResponseLinesItemFieldEmployeeName          = big.NewInt(1 << 3)
+	postV1PayrollRunsGetResponseLinesItemFieldGross                 = big.NewInt(1 << 4)
+	postV1PayrollRunsGetResponseLinesItemFieldNatura                = big.NewInt(1 << 5)
+	postV1PayrollRunsGetResponseLinesItemFieldAdditions             = big.NewInt(1 << 6)
+	postV1PayrollRunsGetResponseLinesItemFieldDeductions            = big.NewInt(1 << 7)
+	postV1PayrollRunsGetResponseLinesItemFieldTaxableBase           = big.NewInt(1 << 8)
+	postV1PayrollRunsGetResponseLinesItemFieldTaxAllowance          = big.NewInt(1 << 9)
+	postV1PayrollRunsGetResponseLinesItemFieldIncomeTax             = big.NewInt(1 << 10)
+	postV1PayrollRunsGetResponseLinesItemFieldEmployeeContributions = big.NewInt(1 << 11)
+	postV1PayrollRunsGetResponseLinesItemFieldEmployerContributions = big.NewInt(1 << 12)
+	postV1PayrollRunsGetResponseLinesItemFieldComponents            = big.NewInt(1 << 13)
+	postV1PayrollRunsGetResponseLinesItemFieldNet                   = big.NewInt(1 << 14)
+	postV1PayrollRunsGetResponseLinesItemFieldDaysWorked            = big.NewInt(1 << 15)
+	postV1PayrollRunsGetResponseLinesItemFieldHoursWorked           = big.NewInt(1 << 16)
+	postV1PayrollRunsGetResponseLinesItemFieldRegisteredDays        = big.NewInt(1 << 17)
+	postV1PayrollRunsGetResponseLinesItemFieldAverageHourlyEarnings = big.NewInt(1 << 18)
 )
 
 type PostV1PayrollRunsGetResponseLinesItem struct {
-	ID            string                                                 `json:"id" url:"id"`
-	EmployeeID    string                                                 `json:"employeeId" url:"employeeId"`
-	ContractID    *string                                                `json:"contractId,omitempty" url:"contractId,omitempty"`
-	EmployeeName  string                                                 `json:"employeeName" url:"employeeName"`
-	Gross         string                                                 `json:"gross" url:"gross"`
-	Natura        string                                                 `json:"natura" url:"natura"`
-	Additions     []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
-	Deductions    []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
-	TaxableBase   string                                                 `json:"taxableBase" url:"taxableBase"`
-	Npd           string                                                 `json:"npd" url:"npd"`
-	Gpm           string                                                 `json:"gpm" url:"gpm"`
-	SodraEmployee string                                                 `json:"sodraEmployee" url:"sodraEmployee"`
-	SodraEmployer string                                                 `json:"sodraEmployer" url:"sodraEmployer"`
-	Net           string                                                 `json:"net" url:"net"`
+	ID                    string                                                 `json:"id" url:"id"`
+	EmployeeID            string                                                 `json:"employeeId" url:"employeeId"`
+	ContractID            *string                                                `json:"contractId,omitempty" url:"contractId,omitempty"`
+	EmployeeName          string                                                 `json:"employeeName" url:"employeeName"`
+	Gross                 string                                                 `json:"gross" url:"gross"`
+	Natura                string                                                 `json:"natura" url:"natura"`
+	Additions             []*PostV1PayrollRunsGetResponseLinesItemAdditionsItem  `json:"additions" url:"additions"`
+	Deductions            []*PostV1PayrollRunsGetResponseLinesItemDeductionsItem `json:"deductions" url:"deductions"`
+	TaxableBase           string                                                 `json:"taxableBase" url:"taxableBase"`
+	TaxAllowance          string                                                 `json:"taxAllowance" url:"taxAllowance"`
+	IncomeTax             string                                                 `json:"incomeTax" url:"incomeTax"`
+	EmployeeContributions string                                                 `json:"employeeContributions" url:"employeeContributions"`
+	EmployerContributions string                                                 `json:"employerContributions" url:"employerContributions"`
+	Components            []*PostV1PayrollRunsGetResponseLinesItemComponentsItem `json:"components" url:"components"`
+	Net                   string                                                 `json:"net" url:"net"`
+	DaysWorked            *string                                                `json:"daysWorked,omitempty" url:"daysWorked,omitempty"`
+	HoursWorked           *string                                                `json:"hoursWorked,omitempty" url:"hoursWorked,omitempty"`
+	RegisteredDays        *string                                                `json:"registeredDays,omitempty" url:"registeredDays,omitempty"`
+	AverageHourlyEarnings *string                                                `json:"averageHourlyEarnings,omitempty" url:"averageHourlyEarnings,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3273,32 +5371,39 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) GetTaxableBase() string {
 	return p.TaxableBase
 }
 
-func (p *PostV1PayrollRunsGetResponseLinesItem) GetNpd() string {
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetTaxAllowance() string {
 	if p == nil {
 		return ""
 	}
-	return p.Npd
+	return p.TaxAllowance
 }
 
-func (p *PostV1PayrollRunsGetResponseLinesItem) GetGpm() string {
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetIncomeTax() string {
 	if p == nil {
 		return ""
 	}
-	return p.Gpm
+	return p.IncomeTax
 }
 
-func (p *PostV1PayrollRunsGetResponseLinesItem) GetSodraEmployee() string {
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetEmployeeContributions() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployee
+	return p.EmployeeContributions
 }
 
-func (p *PostV1PayrollRunsGetResponseLinesItem) GetSodraEmployer() string {
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetEmployerContributions() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployer
+	return p.EmployerContributions
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetComponents() []*PostV1PayrollRunsGetResponseLinesItemComponentsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Components
 }
 
 func (p *PostV1PayrollRunsGetResponseLinesItem) GetNet() string {
@@ -3306,6 +5411,34 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) GetNet() string {
 		return ""
 	}
 	return p.Net
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetDaysWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DaysWorked
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetHoursWorked() *string {
+	if p == nil {
+		return nil
+	}
+	return p.HoursWorked
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetRegisteredDays() *string {
+	if p == nil {
+		return nil
+	}
+	return p.RegisteredDays
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItem) GetAverageHourlyEarnings() *string {
+	if p == nil {
+		return nil
+	}
+	return p.AverageHourlyEarnings
 }
 
 func (p *PostV1PayrollRunsGetResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -3385,32 +5518,39 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) SetTaxableBase(taxableBase strin
 	p.require(postV1PayrollRunsGetResponseLinesItemFieldTaxableBase)
 }
 
-// SetNpd sets the Npd field and marks it as non-optional;
+// SetTaxAllowance sets the TaxAllowance field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponseLinesItem) SetNpd(npd string) {
-	p.Npd = npd
-	p.require(postV1PayrollRunsGetResponseLinesItemFieldNpd)
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetTaxAllowance(taxAllowance string) {
+	p.TaxAllowance = taxAllowance
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldTaxAllowance)
 }
 
-// SetGpm sets the Gpm field and marks it as non-optional;
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponseLinesItem) SetGpm(gpm string) {
-	p.Gpm = gpm
-	p.require(postV1PayrollRunsGetResponseLinesItemFieldGpm)
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetIncomeTax(incomeTax string) {
+	p.IncomeTax = incomeTax
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldIncomeTax)
 }
 
-// SetSodraEmployee sets the SodraEmployee field and marks it as non-optional;
+// SetEmployeeContributions sets the EmployeeContributions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponseLinesItem) SetSodraEmployee(sodraEmployee string) {
-	p.SodraEmployee = sodraEmployee
-	p.require(postV1PayrollRunsGetResponseLinesItemFieldSodraEmployee)
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetEmployeeContributions(employeeContributions string) {
+	p.EmployeeContributions = employeeContributions
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldEmployeeContributions)
 }
 
-// SetSodraEmployer sets the SodraEmployer field and marks it as non-optional;
+// SetEmployerContributions sets the EmployerContributions field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsGetResponseLinesItem) SetSodraEmployer(sodraEmployer string) {
-	p.SodraEmployer = sodraEmployer
-	p.require(postV1PayrollRunsGetResponseLinesItemFieldSodraEmployer)
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetEmployerContributions(employerContributions string) {
+	p.EmployerContributions = employerContributions
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldEmployerContributions)
+}
+
+// SetComponents sets the Components field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetComponents(components []*PostV1PayrollRunsGetResponseLinesItemComponentsItem) {
+	p.Components = components
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldComponents)
 }
 
 // SetNet sets the Net field and marks it as non-optional;
@@ -3418,6 +5558,34 @@ func (p *PostV1PayrollRunsGetResponseLinesItem) SetSodraEmployer(sodraEmployer s
 func (p *PostV1PayrollRunsGetResponseLinesItem) SetNet(net string) {
 	p.Net = net
 	p.require(postV1PayrollRunsGetResponseLinesItemFieldNet)
+}
+
+// SetDaysWorked sets the DaysWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetDaysWorked(daysWorked *string) {
+	p.DaysWorked = daysWorked
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldDaysWorked)
+}
+
+// SetHoursWorked sets the HoursWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetHoursWorked(hoursWorked *string) {
+	p.HoursWorked = hoursWorked
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldHoursWorked)
+}
+
+// SetRegisteredDays sets the RegisteredDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetRegisteredDays(registeredDays *string) {
+	p.RegisteredDays = registeredDays
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldRegisteredDays)
+}
+
+// SetAverageHourlyEarnings sets the AverageHourlyEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItem) SetAverageHourlyEarnings(averageHourlyEarnings *string) {
+	p.AverageHourlyEarnings = averageHourlyEarnings
+	p.require(postV1PayrollRunsGetResponseLinesItemFieldAverageHourlyEarnings)
 }
 
 func (p *PostV1PayrollRunsGetResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -3576,6 +5744,185 @@ func (p *PostV1PayrollRunsGetResponseLinesItemAdditionsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollRunsGetResponseLinesItemComponentsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsGetResponseLinesItemComponentsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsGetResponseLinesItemComponentsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsGetResponseLinesItemComponentsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsGetResponseLinesItemComponentsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsGetResponseLinesItemComponentsItem struct {
+	Code   string                                                  `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsGetResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
+	Amount string                                                  `json:"amount" url:"amount"`
+	Rate   *string                                                 `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                 `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetKind() PostV1PayrollRunsGetResponseLinesItemComponentsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsGetResponseLinesItemComponentsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) SetKind(kind PostV1PayrollRunsGetResponseLinesItemComponentsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsGetResponseLinesItemComponentsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsGetResponseLinesItemComponentsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsGetResponseLinesItemComponentsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsGetResponseLinesItemComponentsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsGetResponseLinesItemComponentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsGetResponseLinesItemComponentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsGetResponseLinesItemComponentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsGetResponseLinesItemComponentsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsGetResponseLinesItemComponentsItemKind string
+
+const (
+	PostV1PayrollRunsGetResponseLinesItemComponentsItemKindAllowance            PostV1PayrollRunsGetResponseLinesItemComponentsItemKind = "allowance"
+	PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployeeTax          PostV1PayrollRunsGetResponseLinesItemComponentsItemKind = "employee_tax"
+	PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployeeContribution PostV1PayrollRunsGetResponseLinesItemComponentsItemKind = "employee_contribution"
+	PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployerContribution PostV1PayrollRunsGetResponseLinesItemComponentsItemKind = "employer_contribution"
+	PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployerPayment      PostV1PayrollRunsGetResponseLinesItemComponentsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsGetResponseLinesItemComponentsItemKindFromString(s string) (PostV1PayrollRunsGetResponseLinesItemComponentsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsGetResponseLinesItemComponentsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsGetResponseLinesItemComponentsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsGetResponseLinesItemComponentsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsGetResponseLinesItemComponentsItemKind) Ptr() *PostV1PayrollRunsGetResponseLinesItemComponentsItemKind {
+	return &p
 }
 
 var (
@@ -4287,37 +6634,41 @@ func (p *PostV1PayrollRunsListResponse) String() string {
 }
 
 var (
-	postV1PayrollRunsListResponseRowsItemFieldID                   = big.NewInt(1 << 0)
-	postV1PayrollRunsListResponseRowsItemFieldYear                 = big.NewInt(1 << 1)
-	postV1PayrollRunsListResponseRowsItemFieldMonth                = big.NewInt(1 << 2)
-	postV1PayrollRunsListResponseRowsItemFieldStatus               = big.NewInt(1 << 3)
-	postV1PayrollRunsListResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 4)
-	postV1PayrollRunsListResponseRowsItemFieldNpdTotal             = big.NewInt(1 << 5)
-	postV1PayrollRunsListResponseRowsItemFieldGpmTotal             = big.NewInt(1 << 6)
-	postV1PayrollRunsListResponseRowsItemFieldSodraEmployeeTotal   = big.NewInt(1 << 7)
-	postV1PayrollRunsListResponseRowsItemFieldSodraEmployerTotal   = big.NewInt(1 << 8)
-	postV1PayrollRunsListResponseRowsItemFieldNetTotal             = big.NewInt(1 << 9)
-	postV1PayrollRunsListResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 10)
-	postV1PayrollRunsListResponseRowsItemFieldNotes                = big.NewInt(1 << 11)
-	postV1PayrollRunsListResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 12)
-	postV1PayrollRunsListResponseRowsItemFieldApprovedAt           = big.NewInt(1 << 13)
+	postV1PayrollRunsListResponseRowsItemFieldID                         = big.NewInt(1 << 0)
+	postV1PayrollRunsListResponseRowsItemFieldYear                       = big.NewInt(1 << 1)
+	postV1PayrollRunsListResponseRowsItemFieldMonth                      = big.NewInt(1 << 2)
+	postV1PayrollRunsListResponseRowsItemFieldCountryCode                = big.NewInt(1 << 3)
+	postV1PayrollRunsListResponseRowsItemFieldStatus                     = big.NewInt(1 << 4)
+	postV1PayrollRunsListResponseRowsItemFieldGrossTotal                 = big.NewInt(1 << 5)
+	postV1PayrollRunsListResponseRowsItemFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
+	postV1PayrollRunsListResponseRowsItemFieldIncomeTaxTotal             = big.NewInt(1 << 7)
+	postV1PayrollRunsListResponseRowsItemFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
+	postV1PayrollRunsListResponseRowsItemFieldEmployerContributionsTotal = big.NewInt(1 << 9)
+	postV1PayrollRunsListResponseRowsItemFieldComponentTotals            = big.NewInt(1 << 10)
+	postV1PayrollRunsListResponseRowsItemFieldNetTotal                   = big.NewInt(1 << 11)
+	postV1PayrollRunsListResponseRowsItemFieldJournalTransactionID       = big.NewInt(1 << 12)
+	postV1PayrollRunsListResponseRowsItemFieldNotes                      = big.NewInt(1 << 13)
+	postV1PayrollRunsListResponseRowsItemFieldCreatedAt                  = big.NewInt(1 << 14)
+	postV1PayrollRunsListResponseRowsItemFieldApprovedAt                 = big.NewInt(1 << 15)
 )
 
 type PostV1PayrollRunsListResponseRowsItem struct {
-	ID                   string                                      `json:"id" url:"id"`
-	Year                 int64                                       `json:"year" url:"year"`
-	Month                int64                                       `json:"month" url:"month"`
-	Status               PostV1PayrollRunsListResponseRowsItemStatus `json:"status" url:"status"`
-	GrossTotal           string                                      `json:"grossTotal" url:"grossTotal"`
-	NpdTotal             string                                      `json:"npdTotal" url:"npdTotal"`
-	GpmTotal             string                                      `json:"gpmTotal" url:"gpmTotal"`
-	SodraEmployeeTotal   string                                      `json:"sodraEmployeeTotal" url:"sodraEmployeeTotal"`
-	SodraEmployerTotal   string                                      `json:"sodraEmployerTotal" url:"sodraEmployerTotal"`
-	NetTotal             string                                      `json:"netTotal" url:"netTotal"`
-	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt            string                                      `json:"createdAt" url:"createdAt"`
-	ApprovedAt           *string                                     `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ID                         string                                                      `json:"id" url:"id"`
+	Year                       int64                                                       `json:"year" url:"year"`
+	Month                      int64                                                       `json:"month" url:"month"`
+	CountryCode                string                                                      `json:"countryCode" url:"countryCode"`
+	Status                     PostV1PayrollRunsListResponseRowsItemStatus                 `json:"status" url:"status"`
+	GrossTotal                 string                                                      `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal          string                                                      `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal             string                                                      `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal string                                                      `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal string                                                      `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals            []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                   string                                                      `json:"netTotal" url:"netTotal"`
+	JournalTransactionID       *string                                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                      *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt                  string                                                      `json:"createdAt" url:"createdAt"`
+	ApprovedAt                 *string                                                     `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4347,6 +6698,13 @@ func (p *PostV1PayrollRunsListResponseRowsItem) GetMonth() int64 {
 	return p.Month
 }
 
+func (p *PostV1PayrollRunsListResponseRowsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
 func (p *PostV1PayrollRunsListResponseRowsItem) GetStatus() PostV1PayrollRunsListResponseRowsItemStatus {
 	if p == nil {
 		return ""
@@ -4361,32 +6719,39 @@ func (p *PostV1PayrollRunsListResponseRowsItem) GetGrossTotal() string {
 	return p.GrossTotal
 }
 
-func (p *PostV1PayrollRunsListResponseRowsItem) GetNpdTotal() string {
+func (p *PostV1PayrollRunsListResponseRowsItem) GetTaxAllowanceTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.NpdTotal
+	return p.TaxAllowanceTotal
 }
 
-func (p *PostV1PayrollRunsListResponseRowsItem) GetGpmTotal() string {
+func (p *PostV1PayrollRunsListResponseRowsItem) GetIncomeTaxTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.GpmTotal
+	return p.IncomeTaxTotal
 }
 
-func (p *PostV1PayrollRunsListResponseRowsItem) GetSodraEmployeeTotal() string {
+func (p *PostV1PayrollRunsListResponseRowsItem) GetEmployeeContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployeeTotal
+	return p.EmployeeContributionsTotal
 }
 
-func (p *PostV1PayrollRunsListResponseRowsItem) GetSodraEmployerTotal() string {
+func (p *PostV1PayrollRunsListResponseRowsItem) GetEmployerContributionsTotal() string {
 	if p == nil {
 		return ""
 	}
-	return p.SodraEmployerTotal
+	return p.EmployerContributionsTotal
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItem) GetComponentTotals() []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem {
+	if p == nil {
+		return nil
+	}
+	return p.ComponentTotals
 }
 
 func (p *PostV1PayrollRunsListResponseRowsItem) GetNetTotal() string {
@@ -4459,6 +6824,13 @@ func (p *PostV1PayrollRunsListResponseRowsItem) SetMonth(month int64) {
 	p.require(postV1PayrollRunsListResponseRowsItemFieldMonth)
 }
 
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(postV1PayrollRunsListResponseRowsItemFieldCountryCode)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PostV1PayrollRunsListResponseRowsItem) SetStatus(status PostV1PayrollRunsListResponseRowsItemStatus) {
@@ -4473,32 +6845,39 @@ func (p *PostV1PayrollRunsListResponseRowsItem) SetGrossTotal(grossTotal string)
 	p.require(postV1PayrollRunsListResponseRowsItemFieldGrossTotal)
 }
 
-// SetNpdTotal sets the NpdTotal field and marks it as non-optional;
+// SetTaxAllowanceTotal sets the TaxAllowanceTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsListResponseRowsItem) SetNpdTotal(npdTotal string) {
-	p.NpdTotal = npdTotal
-	p.require(postV1PayrollRunsListResponseRowsItemFieldNpdTotal)
+func (p *PostV1PayrollRunsListResponseRowsItem) SetTaxAllowanceTotal(taxAllowanceTotal string) {
+	p.TaxAllowanceTotal = taxAllowanceTotal
+	p.require(postV1PayrollRunsListResponseRowsItemFieldTaxAllowanceTotal)
 }
 
-// SetGpmTotal sets the GpmTotal field and marks it as non-optional;
+// SetIncomeTaxTotal sets the IncomeTaxTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsListResponseRowsItem) SetGpmTotal(gpmTotal string) {
-	p.GpmTotal = gpmTotal
-	p.require(postV1PayrollRunsListResponseRowsItemFieldGpmTotal)
+func (p *PostV1PayrollRunsListResponseRowsItem) SetIncomeTaxTotal(incomeTaxTotal string) {
+	p.IncomeTaxTotal = incomeTaxTotal
+	p.require(postV1PayrollRunsListResponseRowsItemFieldIncomeTaxTotal)
 }
 
-// SetSodraEmployeeTotal sets the SodraEmployeeTotal field and marks it as non-optional;
+// SetEmployeeContributionsTotal sets the EmployeeContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsListResponseRowsItem) SetSodraEmployeeTotal(sodraEmployeeTotal string) {
-	p.SodraEmployeeTotal = sodraEmployeeTotal
-	p.require(postV1PayrollRunsListResponseRowsItemFieldSodraEmployeeTotal)
+func (p *PostV1PayrollRunsListResponseRowsItem) SetEmployeeContributionsTotal(employeeContributionsTotal string) {
+	p.EmployeeContributionsTotal = employeeContributionsTotal
+	p.require(postV1PayrollRunsListResponseRowsItemFieldEmployeeContributionsTotal)
 }
 
-// SetSodraEmployerTotal sets the SodraEmployerTotal field and marks it as non-optional;
+// SetEmployerContributionsTotal sets the EmployerContributionsTotal field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PostV1PayrollRunsListResponseRowsItem) SetSodraEmployerTotal(sodraEmployerTotal string) {
-	p.SodraEmployerTotal = sodraEmployerTotal
-	p.require(postV1PayrollRunsListResponseRowsItemFieldSodraEmployerTotal)
+func (p *PostV1PayrollRunsListResponseRowsItem) SetEmployerContributionsTotal(employerContributionsTotal string) {
+	p.EmployerContributionsTotal = employerContributionsTotal
+	p.require(postV1PayrollRunsListResponseRowsItemFieldEmployerContributionsTotal)
+}
+
+// SetComponentTotals sets the ComponentTotals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItem) SetComponentTotals(componentTotals []*PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) {
+	p.ComponentTotals = componentTotals
+	p.require(postV1PayrollRunsListResponseRowsItemFieldComponentTotals)
 }
 
 // SetNetTotal sets the NetTotal field and marks it as non-optional;
@@ -4576,6 +6955,185 @@ func (p *PostV1PayrollRunsListResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
+	postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
+	postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
+	postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
+	postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type PostV1PayrollRunsListResponseRowsItemComponentTotalsItem struct {
+	Code   string                                                       `json:"code" url:"code"`
+	Kind   PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount string                                                       `json:"amount" url:"amount"`
+	Rate   *string                                                      `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                                      `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetKind() PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind {
+	if p == nil {
+		return ""
+	}
+	return p.Kind
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.Amount
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetRate() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Rate
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetBase() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Base
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) SetCode(code string) {
+	p.Code = code
+	p.require(postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) SetKind(kind PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind) {
+	p.Kind = kind
+	p.require(postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) SetAmount(amount string) {
+	p.Amount = amount
+	p.require(postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) SetRate(rate *string) {
+	p.Rate = rate
+	p.require(postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) SetBase(base *string) {
+	p.Base = base
+	p.require(postV1PayrollRunsListResponseRowsItemComponentTotalsItemFieldBase)
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostV1PayrollRunsListResponseRowsItemComponentTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed PostV1PayrollRunsListResponseRowsItemComponentTotalsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostV1PayrollRunsListResponseRowsItemComponentTotalsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind string
+
+const (
+	PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindAllowance            PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind = "allowance"
+	PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployeeTax          PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind = "employee_tax"
+	PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployeeContribution PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind = "employee_contribution"
+	PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployerContribution PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind = "employer_contribution"
+	PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployerPayment      PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind = "employer_payment"
+)
+
+func NewPostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindFromString(s string) (PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind, error) {
+	switch s {
+	case "allowance":
+		return PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindAllowance, nil
+	case "employee_tax":
+		return PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKindEmployerPayment, nil
+	}
+	var t PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind) Ptr() *PostV1PayrollRunsListResponseRowsItemComponentTotalsItemKind {
+	return &p
 }
 
 type PostV1PayrollRunsListResponseRowsItemStatus string

@@ -296,6 +296,50 @@ func (r *RawClient) PostV1HrEmployeesGet(
 	}, nil
 }
 
+func (r *RawClient) ExtraEmployeeDetailsTheCountryOfTheCompanyAsksFor(
+	ctx context.Context,
+	request *nordlet.PostV1HrEmployeesFieldsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.PostV1HrEmployeesFieldsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/hr/employees/fields"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.PostV1HrEmployeesFieldsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.PostV1HrEmployeesFieldsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) PostV1HrEmployeesList(
 	ctx context.Context,
 	request *nordlet.PostV1HrEmployeesListRequest,
